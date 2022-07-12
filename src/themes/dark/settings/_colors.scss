@@ -1,0 +1,14 @@
+@use 'sass:color';
+
+$brand: #1976d2 !default;
+$text: hsl(color.hue($brand) 15% 85%) !default;
+$surface: hsl(color.hue($brand) 10% 10%) !default;
+$shadow: hsl(color.hue($brand) 50% 3%) !default;
+
+// color map
+$colors: (
+	scheme: dark,
+	text: color-darken-map($text, 'text', $scale: 15%),
+	surface: color-lighten-map($surface, 'surface', $scale: 5%),
+	shadow: $shadow,
+) !default;

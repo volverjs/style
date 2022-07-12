@@ -1,0 +1,23 @@
+$vv-text: (
+	font-family: var(--font-sans),
+	font-weight: var(--font-normal),
+	font-size: var(--text-base),
+	line-height: var(--leading-normal),
+	border-left: none,
+	padding-left: var(--spacing-0),
+	margin-bottom: var(--spacing-0),
+	modifier: (
+		headline: (
+			font-family: var(--font-serif),
+			font-weight: var(--font-semibold),
+			line-height: var(--leading-none),
+			margin-bottom: var(--spacing-sm),
+		),
+		quote: (
+			font-family: var(--font-serif),
+			line-height: var(--leading-none),
+			border-left: var(--spacing-xs) solid var(--color-surface-3),
+			padding-left: var(--spacing-sm),
+		),
+	),
+) !default;

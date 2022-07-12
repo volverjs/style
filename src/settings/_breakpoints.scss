@@ -1,0 +1,12 @@
+$breakpoints: (
+	xxs: 0,
+	xs: 360px,
+	sm: 576px,
+	md: 992px,
+	lg: 1024px,
+	xl: 1280px,
+	xxl: 1440px,
+) !default;
+
+@include assert-ascending($breakpoints, '$breakpoints');
+@include assert-starts-at-zero($breakpoints, '$breakpoints');

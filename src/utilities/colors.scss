@@ -1,0 +1,25 @@
+@import '../context';
+
+// background
+@include spread-map-into-utilities(
+	$colors,
+	$class: 'bg',
+	$attribute: 'background-color',
+	$prop: 'color'
+);
+
+// color
+@include spread-map-into-utilities(
+	$colors,
+	$class: 'text',
+	$attribute: 'color',
+	$prop: 'color'
+);
+
+// decoration
+@include spread-map-into-utilities(
+	$colors,
+	$class: 'decoration',
+	$attribute: 'text-decoration-color',
+	$prop: 'color'
+);

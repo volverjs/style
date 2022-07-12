@@ -1,0 +1,54 @@
+$vv-button: (
+	background: var(--color-white),
+	border-color: var(--color-gray-lighten-4),
+	border-radius: 0.5ch,
+	border-style: solid,
+	border-width: var(--spacing-2),
+	color: var(--color-text),
+	font-family: var(--font-sans),
+	font-size: var(--text-xs),
+	font-weight: var(--font-semibold),
+	gap: 1ch,
+	line-height: var(--leading-normal),
+	padding-block: 0.75ch,
+	padding-inline: 1.75ch,
+	text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+	state: (
+		focus-visible: (
+			outline-offset: var(--spacing-4),
+			outline: var(--spacing-px) solid currentcolor,
+		),
+		hover: (
+			background: var(--color-gray-lighten-5),
+		),
+		active: (
+			background: var(--color-gray-lighten-4),
+		),
+		disabled: (
+			opacity: 0.5,
+			cursor: not-allowed,
+		),
+	),
+	element: (
+		icon: (
+			block-size: 2ch,
+			inline-size: 2ch,
+			stroke: currentcolor,
+		),
+	),
+	modifier: (
+		brand: (
+			color: var(--color-brand),
+			border-color: var(--color-brand),
+			state: (
+				hover: (
+					color: var(--color-white),
+					background: var(--color-brand),
+				),
+				active: (
+					background: var(--color-brand-darken-1),
+				),
+			),
+		),
+	),
+) !default;

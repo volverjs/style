@@ -1,0 +1,236 @@
+@use 'sass:map';
+@import '../context';
+
+// font-family
+@include spread-map-into-utilities(
+	$map: $font-family,
+	$class: 'font',
+	$attribute: 'font-family',
+	$prop: 'font'
+);
+
+// font-weight
+@include spread-map-into-utilities(
+	$map: $font-weight,
+	$class: 'font',
+	$attribute: 'font-weight',
+	$prop: 'font'
+);
+
+// font-size
+@include spread-map-into-utilities(
+	$map: map.merge($font-size, $font-size-dynamic),
+	$class: 'text',
+	$attribute: 'font-size',
+	$prop: 'text',
+	$deep: false
+);
+
+// font-style
+:where(.italic) {
+	font-style: italic;
+}
+
+:where(.non-italic) {
+	font-style: normal;
+}
+
+// font-smoothing
+:where(.antialiased) {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+:where(.subpixel-antialiased) {
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
+}
+
+// line-height
+@include spread-map-into-utilities(
+	$map: $line-height,
+	$class: 'leading',
+	$attribute: 'line-height',
+	$prop: 'leading'
+);
+
+// letter-spacing
+@include spread-map-into-utilities(
+	$map: $letter-spacing,
+	$class: 'tracking',
+	$attribute: 'letter-spacing',
+	$prop: 'tracking'
+);
+
+// font-variant-numeric
+@include spread-map-into-utilities(
+	$map: (
+		normal-nums: normal,
+		ordinal: ordinal,
+		slashed-zero: slashed-zero,
+		lining-nums: lining-nums,
+		oldstyle-nums: oldstyle-nums,
+		proportional-nums: proportional-nums,
+		tabular-nums: tabular-nums,
+		diagonal-fractions: diagonal-fractions,
+		stacked-fractions: stacked-fractions,
+	),
+	$attribute: 'font-variant-numeric'
+);
+
+// list-style-type
+@include spread-map-into-utilities(
+	$map: (
+		none,
+		disc,
+		decimal,
+	),
+	$class: 'list',
+	$attribute: 'list-style-type'
+);
+
+// list-style-position
+@include spread-map-into-utilities(
+	$map: (
+		inside,
+		outside,
+	),
+	$class: 'list',
+	$attribute: 'list-style-position'
+);
+
+// text-align
+@include spread-map-into-utilities(
+	$map: (
+		left,
+		center,
+		right,
+		justify,
+		start,
+		end,
+	),
+	$class: 'text',
+	$attribute: 'text-align'
+);
+
+// text-decorator-line
+@include spread-map-into-utilities(
+	$map: (
+		underline: underline,
+		overline: overline,
+		line-through: line-through,
+		no-underline: none,
+	),
+	$attribute: 'text-decoration-line'
+);
+
+// text-decorator-style
+@include spread-map-into-utilities(
+	$map: (
+		solid,
+		double,
+		dotted,
+		dashed,
+		wavy,
+	),
+	$class: 'decoration',
+	$attribute: 'text-decoration-style'
+);
+
+// text-decorator-thickness
+@include spread-map-into-utilities(
+	$map: (
+		auto: auto,
+		from-font: from-font,
+		0: 0px,
+		1: 1px,
+		2: 2px,
+		4: 4px,
+		8: 8px,
+	),
+	$class: 'decoration',
+	$attribute: 'text-decoration-thickness'
+);
+
+// text-underline-offset
+@include spread-map-into-utilities(
+	$map: (
+		auto: auto,
+		0: 0px,
+		1: 1px,
+		2: 2px,
+		4: 4px,
+		8: 8px,
+	),
+	$class: 'underline-offset',
+	$attribute: 'text-underline-offset'
+);
+
+// text-transform
+@include spread-map-into-utilities(
+	$map: (
+		uppercase: uppercase,
+		lowercase: lowercase,
+		capitalize: capitalize,
+		normal-case: none,
+	),
+	$attribute: 'text-transform'
+);
+
+// text-overflow
+:where(.truncate) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+:where(.text-ellipsis) {
+	text-overflow: ellipsis;
+}
+
+:where(.text-clip) {
+	text-overflow: clip;
+}
+
+// word break
+:where(.break-normal) {
+	overflow-wrap: normal;
+	word-break: normal;
+}
+
+:where(.break-words) {
+	overflow-wrap: break-word;
+}
+
+:where(.break-all) {
+	word-break: break-all;
+}
+
+// vertical align
+@include spread-map-into-utilities(
+	$map: (
+		baseline,
+		top,
+		middle,
+		bottom,
+		text-top,
+		text-bottom,
+		sub,
+		super,
+	),
+	$class: 'align',
+	$attribute: 'vertical-align'
+);
+
+// white-space
+@include spread-map-into-utilities(
+	$map: (
+		normal,
+		nowrap,
+		pre,
+		pre-line,
+		pre-wrap,
+	),
+	$class: 'whitespace',
+	$attribute: 'white-space'
+);

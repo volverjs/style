@@ -1,0 +1,19 @@
+:where(:host, :root, .theme-dark) {
+	accent-color: var(--color-brand);
+	background: var(--color-surface);
+	caret-color: var(--color-brand);
+	color-scheme: var(--color-scheme);
+	color: var(--color-text);
+	scrollbar-color: var(--color-brand);
+	font-family: var(--font-sans);
+}
+
+:where(.revert *) {
+	all: revert;
+	accent-color: initial;
+	background-color: initial;
+	caret-color: initial;
+	color: initial;
+	scrollbar-color: initial;
+	font-family: initial;
+}

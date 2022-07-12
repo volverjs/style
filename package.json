@@ -1,0 +1,65 @@
+{
+  "name": "@volverjs/style",
+  "version": "1.0.0",
+  "description": "@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well.",
+  "main": "dist/style.css",
+  "engines": {
+    "node": ">= 10.x"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --base=./"
+  },
+  "files": [
+    "src/*",
+    "dist/*"
+  ],
+  "exports": {
+    ".": {
+      "style": "./dist/style.css",
+      "sass": "./src/style.scss"
+    },
+    "./reset": {
+      "style": "./dist/reset.css",
+      "sass": "./src/reset.scss"
+    },
+    "./props": {
+      "style": "./dist/props.css",
+      "sass": "./src/props/index.scss"
+    },
+    "./utilities": {
+      "style": "./dist/utilities.css",
+      "sass": "./src/utilities/index.scss"
+    },
+    "./theme-dark": {
+      "style": "./dist/theme-dark.css",
+      "sass": "./src/themes/dark/style.scss"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/volverjs/style"
+  },
+  "keywords": [
+    "css",
+    "design-system",
+    "volverjs"
+  ],
+  "author": "24/Consulting",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volverjs/style/issues"
+  },
+  "homepage": "https://github.com/volverjs/style#readme",
+  "devDependencies": {
+    "eslint-config-prettier": "^8.5.0",
+    "postcss-preset-env": "^7.7.2",
+    "sass": "^1.53.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard-scss": "^4.0.0",
+    "vite": "^2.9.12",
+    "vite-plugin-eslint": "^1.6.1",
+    "vite-plugin-handlebars": "^1.6.0",
+    "vite-plugin-stylelint": "^2.2.3"
+  }
+}

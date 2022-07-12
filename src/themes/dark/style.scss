@@ -1,0 +1,9 @@
+// props
+@import 'props';
+
+// components
+@import 'components';
+
+:where(.theme-dark) {
+	color-scheme: dark;
+}

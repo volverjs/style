@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet" href="./src/style.scss">
+    <link rel="stylesheet" href="./src/themes/dark/style.scss">
+</head>
+
+<body>
+</body>
+{{> header}}
+
+{{> colors}}
+
+<div class="theme-dark">
+    {{> colors}}
+</div>
+
+{{> buttons}}
+
+<div class="theme-dark">
+    {{> buttons}}
+</div>
+
+
+<div class="flex">
+    <div class="flex grow p-32">
+        {{> main}}
+    </div>
+    <div class="flex grow p-32 revert">
+        {{> main}}
+    </div>
+</div>
+
+</html>

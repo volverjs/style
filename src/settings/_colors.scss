@@ -1,0 +1,32 @@
+@use 'sass:color';
+
+// color variables
+$black: #000 !default;
+$white: #fff !default;
+$brand: #1976d2 !default;
+$accent: #9c27b0 !default;
+$positive: #21ba45 !default;
+$negative: #c10015 !default;
+$info: #31ccec !default;
+$warning: #f2c037 !default;
+$gray: hsl(color.hue($brand) 15% 50%) !default;
+$text: hsl(color.hue($brand) 15% 10%) !default;
+$surface: hsl(color.hue($brand) 10% 90%) !default;
+$shadow: hsl(color.hue($brand) 50% 20%) !default;
+
+// colors map
+$colors: (
+	scheme: light,
+	black: $black,
+	white: $white,
+	brand: color-shades-map($brand, 'brand'),
+	accent: color-shades-map($accent, 'accent'),
+	positive: color-shades-map($positive, 'positive'),
+	negative: color-shades-map($negative, 'negative'),
+	info: color-shades-map($info, 'info'),
+	warning: color-shades-map($warning, 'warning'),
+	gray: color-shades-map($gray, 'gray', $scale: 15%),
+	text: color-lighten-map($text, 'text', $scale: 15%),
+	surface: color-darken-map($surface, 'surface', $scale: 5%),
+	shadow: $shadow,
+) !default;

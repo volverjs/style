@@ -1,0 +1,278 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+
+// Check ascending order
+// Used to ensure the breakpoints are ordered ascending.
+@mixin assert-ascending($map, $map-name) {
+	$prev-key: null;
+	$prev-num: null;
+	@each $key, $num in $map {
+		@if not $prev-num or unit($num) == '%' {
+			// Do nothing
+		} @else if not comparable($prev-num, $num) {
+			@warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		} @else if $prev-num >= $num {
+			@warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		}
+
+		$prev-key: $key;
+		$prev-num: $num;
+	}
+}
+
+// Starts at zero
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
+	$values: map.values($map);
+	$first-value: list.nth($values, 1);
+	@if $first-value != 0 {
+		@warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+	}
+}
+
+// Transform a map into a list of custom props
+@mixin spread-map-into-props($map: (), $prefix: '', $old-key: '') {
+	@each $key, $value in $map {
+		$name: meta.inspect($key);
+		@if meta.inspect($name) == meta.inspect($old-key) {
+			$name: $prefix;
+		} @else if $prefix != '' and meta.inspect($prefix) != meta.inspect($key)
+		{
+			$name: $prefix + '-' + $key;
+		}
+		@if type-of($value) == 'map' {
+			@include spread-map-into-props($value, $name, $key);
+		} @else {
+			#{'--' + $name}: #{$value};
+		}
+	}
+}
+
+// Transform a map into a list of utilities
+@mixin spread-map-into-utilities(
+	$map: (),
+	$class: '',
+	$attribute: '',
+	$prop: '',
+	$name: '',
+	$deep: true
+) {
+	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
+	{
+		@each $key, $value in $map {
+			@if $name != '' and meta.inspect($key) != meta.inspect($name) {
+				$key: #{$name}-#{meta.inspect($key)};
+			}
+			@if type-of($value) == 'map' and $deep {
+				@include spread-map-into-utilities(
+					$value,
+					$class,
+					$attribute,
+					$prop,
+					$key
+				);
+			} @else {
+				$default: null;
+				$class-name: meta.inspect($key);
+
+				@if $class != '' {
+					$class-name: $class + '-' + $class-name;
+				}
+
+				// check if value is not a map (spacing-dynamic)
+				@if type-of($value) != 'map' {
+					$default: $value;
+				}
+
+				// check if map is a list
+				@if type-of($map) == 'list' and (not $default or $default == '')
+				{
+					$default: $key;
+				}
+
+				:where(.#{$class-name}) {
+					@if $default {
+						@if $prop != '' {
+							#{$attribute}: var(--#{$prop}-#{$key}, $default);
+						} @else {
+							#{$attribute}: $default;
+						}
+					} @else if $prop != '' {
+						#{$attribute}: var(--#{$prop}-#{$key});
+					}
+				}
+			}
+		}
+	}
+}
+
+// Transform a map into a list of modifiers
+@mixin spread-map-into-modifiers(
+	$map: (),
+	$prefix: '',
+	$key: 'modifier',
+	$block: null
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $modifier, $value in map.get($map, $key) {
+			$selector: $block + $block + '--' + $modifier;
+
+			// map props and attributes
+			:where(#{$selector}) {
+				@include spread-map-into-attrs(
+					$original: $map,
+					$map: $value,
+					$prefix: $prefix,
+					$variant: #{$key}-#{$modifier},
+					$deep: true,
+					$ignore: (
+						'state',
+					)
+				);
+			}
+
+			// map states
+			@if map.get($value, 'state') {
+				@include spread-map-into-states(
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'state',
+					$block: $selector
+				);
+			}
+		}
+	}
+}
+
+// Transform a map into a list of states
+@mixin spread-map-into-states(
+	$map: (),
+	$prefix: '',
+	$key: 'state',
+	$block: null
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $state, $value in map.get($map, $key) {
+			@if list.index(
+				(
+					active,
+					focus,
+					hover,
+					focus-within,
+					target,
+					visited,
+					focus-visible,
+					disabled
+				),
+				$state
+			)
+			{
+				$selector: $block + $block + '--' + $state;
+
+				@if $state == 'disabled' {
+					$selector: ':where(' +
+						$selector +
+						', ' +
+						$block +
+						'[disabled]' +
+						')';
+				} @else if $state == 'focus-visible' {
+					$selector: ':where(' +
+						$selector +
+						', ' +
+						$block +
+						':not(:active):not([disabled]):not([tabindex="-1"])' +
+						':' +
+						$state +
+						')';
+				} @else {
+					$selector: ':where(' +
+						$selector +
+						', ' +
+						$block +
+						':not([disabled]):' +
+						$state +
+						')';
+				}
+
+				#{$selector} {
+					@include spread-map-into-attrs(
+						$original: $map,
+						$map: $value,
+						$prefix: $prefix,
+						$variant: #{$key}-#{$state},
+						$deep: true
+					);
+				}
+			}
+		}
+	}
+}
+
+@mixin spread-map-into-attrs(
+	$original: (),
+	$map: (),
+	$prefix: '',
+	$variant: '',
+	$postfix: '',
+	$deep: false,
+	$ignore: ()
+) {
+	@if type-of($map) == 'map' and $prefix != '' {
+		@each $key, $value in $map {
+			@if not list.index($ignore, $key) {
+				@if type-of($value) == 'map' and $deep {
+					$original: map.get($original, $key);
+
+					@if not $original {
+						$original: ();
+					}
+
+					@if $postfix != '' {
+						$key: #{$postfix}-#{$key};
+					}
+					@include spread-map-into-attrs(
+						$original: $original,
+						$map: $value,
+						$prefix: $prefix,
+						$variant: $variant,
+						$postfix: $key,
+						$deep: true
+					);
+				} @else {
+					$prop-to-replace: --#{$prefix};
+					$prop-to-replace-with: --#{$prefix};
+
+					// add variant
+					@if $variant != '' {
+						$prop-to-replace-with: #{$prop-to-replace-with}-#{$variant};
+					}
+
+					// add postfix
+					@if $postfix != '' {
+						$prop-to-replace: #{$prop-to-replace}-#{$postfix};
+						$prop-to-replace-with: #{$prop-to-replace-with}-#{$postfix};
+					}
+
+					// add key
+					$prop-to-replace: #{$prop-to-replace}-#{$key};
+					$prop-to-replace-with: #{$prop-to-replace-with}-#{$key};
+
+					@if map.get($original, $key) {
+						#{$prop-to-replace}: var(#{$prop-to-replace-with});
+					} @else {
+						#{$key}: var(#{$prop-to-replace-with});
+					}
+				}
+			}
+		}
+	}
+}

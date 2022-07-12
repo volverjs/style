@@ -1,0 +1,23 @@
+$vv-button: (
+	border-color: var(--color-gray-darken-3),
+	background: var(--color-gray-darken-4),
+	color: var(--color-gray-lighten-5),
+	text-shadow: 0 1px 0 var(--color-gray-darken-5),
+	state: (
+		hover: (
+			background: var(--color-gray-darken-3),
+		),
+		active: (
+			background: var(--color-gray-darken-2),
+		),
+	),
+	modifier: (
+		brand: (
+			border-color: var(--color-brand-lighten-3),
+			color: var(--color-brand-lighten-5),
+		),
+		active: (
+			background: var(--color-brand),
+		),
+	),
+) !default;

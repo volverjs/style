@@ -1,0 +1,68 @@
+@use 'sass:map';
+@import '../context';
+
+@each $prefix, $prop in (m: margin, p: padding, n: margin) {
+	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+		$var: null;
+		$default: null;
+
+		// check if value is not a map (spacing-dynamic)
+		@if type-of($value) != 'map' {
+			$default: $value;
+		}
+
+		// negative margin
+		@if $prefix == 'n' {
+			$var: calc(-1 * var(--spacing-#{$size}, #{$default}));
+		} @else {
+			$var: var(--spacing-#{$size}, #{$default});
+		}
+
+		// all
+		:where(.#{$prefix}-#{$size}) {
+			#{$prop}: #{$var};
+		}
+
+		// horizontal
+		:where(.#{$prefix}x-#{$size}) {
+			#{$prop}-left: #{$var};
+			#{$prop}-right: #{$var};
+		}
+
+		// vertical
+		:where(.#{$prefix}y-#{$size}) {
+			#{$prop}-top: #{$var};
+			#{$prop}-bottom: #{$var};
+		}
+
+		// sides
+		@each $direction-prefix,
+			$direction in(t: top, r: right, b: bottom, l: left)
+		{
+			:where(.#{$prefix}#{$direction-prefix}-#{$size}) {
+				#{$prop}-#{$direction}: #{$var};
+			}
+		}
+	}
+}
+
+// auto
+:where(.m-auto) {
+	margin: auto;
+}
+
+:where(.mx-auto) {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+:where(.my-auto) {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+@each $direction-prefix, $direction in(t: top, r: right, b: bottom, l: left) {
+	:where(.m#{$direction-prefix}-auto) {
+		margin-#{$direction}: auto;
+	}
+}
