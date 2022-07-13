@@ -1,11 +1,9 @@
+@use 'sass:map';
+@import '../context';
+
 // display
 @include spread-map-into-utilities(
 	$map: (
-		block,
-		inline-block,
-		inline,
-		flex,
-		inline-flex,
 		table,
 		inline-table,
 		table-caption,
@@ -17,19 +15,168 @@
 		table-row-group,
 		table-row,
 		flow-root,
-		grid,
-		inline-grid,
 		contents,
 		list-item,
+	),
+	$attribute: display
+);
+
+@include spread-map-into-utilities(
+	$map: (
+		block,
+		inline-block,
+		inline,
+		flex,
+		inline-flex,
+		grid,
+		inline-grid,
 		none,
 	),
-	$attribute: 'display'
+	$attribute: display,
+	$breakpoints: $breakpoints
 );
+
+// aspect
+@include spread-map-into-utilities(
+	$map: $aspect-ratio,
+	$class: aspect,
+	$attribute: aspect-ratio,
+	$prop: aspect
+);
+
+// container
+:where(.container) {
+	width: 100%;
+
+	@each $breakpoint, $value in $breakpoints {
+		@if $value > 0 {
+			@include media-breakpoint-up($breakpoint) {
+				max-width: $value;
+			}
+		}
+	}
+}
+
+// columns
+@include spread-map-into-utilities(
+	$map: (
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9,
+		10,
+		11,
+		12,
+	),
+	$class: columns,
+	$attribute: columns,
+	$breakpoints: $breakpoints
+);
+
+// object-fit
+@include spread-map-into-utilities(
+	$map: (
+		fill,
+		contain,
+		cover,
+		none,
+		scale-down,
+	),
+	$class: object,
+	$attribute: object-fit
+);
+
+// object-position
+@include spread-map-into-utilities(
+	$map: (
+		bottom: bottom,
+		center: center,
+		left: left,
+		left-bottom: left bottom,
+		left-top: left top,
+		right: right,
+		right-bottom: right bottom,
+		right-top: right top,
+		top: top,
+	),
+	$class: object,
+	$attribute: object-position
+);
+
+// overflow
+@each $prefix in (x, y) {
+	@each $overflow in (auto, hidden, clip, visible, scroll) {
+		:where(.#{$prefix}-#{$overflow}) {
+			overflow-#{$prefix}: #{$overflow};
+		}
+	}
+}
+
+// position
+@include spread-map-into-utilities(
+	$map: (
+		static,
+		fixed,
+		absolute,
+		relative,
+		sticky,
+	),
+	$attribute: position,
+	$breakpoints: $breakpoints
+);
+
+// visibility
+@include spread-map-into-utilities(
+	$map: (
+		visible: visible,
+		invisible: hidden,
+	),
+	$attribute: visibility,
+	$breakpoints: $breakpoints
+);
+
+// top / right / bottom / left
+@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+	// check if value is not a map (spacing-dynamic)
+	$var: var(--spacing-#{$size});
+	@if type-of($value) != 'map' {
+		$var: var(--spacing-#{$size}, #{$value});
+	}
+
+	// all
+	:where(.inset-#{$size}) {
+		inset: #{$var};
+	}
+
+	// horizontal
+	:where(.inset-x-#{$size}) {
+		left: #{$var};
+		right: #{$var};
+	}
+
+	// vertical
+	:where(.inset-y-#{$size}) {
+		top: #{$var};
+		bottom: #{$var};
+	}
+
+	// sides
+	@each $direction in(top, right, bottom, left) {
+		:where(.#{$direction}-#{$size}) {
+			#{$direction}: #{$var};
+		}
+	}
+}
 
 // z-index
 @include spread-map-into-utilities(
-	$map: $zindex,
-	$class: 'z',
-	$attribute: 'z-index',
-	$prop: 'z'
+	$map: $z-index,
+	$class: z,
+	$attribute: z-index,
+	$prop: z
 );

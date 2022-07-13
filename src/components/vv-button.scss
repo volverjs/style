@@ -3,10 +3,11 @@
 $name: 'vv-button';
 $map: $vv-button;
 $block: '.' + $name;
+$props: true;
 
 // custom props
 :where(:root, :host) {
-	@include spread-map-into-props($map: $map, $prefix: $name);
+	@include spread-map-into-props($map: $map, $prefix: $name, $deep: $props);
 }
 
 // block
@@ -24,6 +25,10 @@ $block: '.' + $name;
 		user-select: none;
 
 		@include spread-map-into-attrs($map: $vv-button, $prefix: $name);
+
+		@media (--motion-not-ok) {
+			transition: none;
+		}
 	}
 
 	/* input file */
@@ -50,7 +55,8 @@ $block: '.' + $name;
 	$map: $map,
 	$prefix: $name,
 	$key: 'state',
-	$block: $block
+	$block: $block,
+	$props: $props
 );
 
 // modifiers
@@ -58,5 +64,6 @@ $block: '.' + $name;
 	$map: $map,
 	$prefix: $name,
 	$key: 'modifier',
-	$block: $block
+	$block: $block,
+	$props: $props
 );

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well.",
   "main": "dist/style.css",
+  "style": "dist/style.css",
   "engines": {
     "node": ">= 10.x"
   },
@@ -15,26 +16,51 @@
     "dist/*"
   ],
   "exports": {
-    ".": {
-      "style": "./dist/style.css",
-      "sass": "./src/style.scss"
-    },
-    "./reset": {
-      "style": "./dist/reset.css",
-      "sass": "./src/reset.scss"
-    },
-    "./props": {
-      "style": "./dist/props.css",
-      "sass": "./src/props/index.scss"
-    },
-    "./utilities": {
-      "style": "./dist/utilities.css",
-      "sass": "./src/utilities/index.scss"
-    },
-    "./theme-dark": {
-      "style": "./dist/theme-dark.css",
-      "sass": "./src/themes/dark/style.scss"
-    }
+    ".": "./dist/style.css",
+    "./props": "./dist/props.css",
+    "./props/borders": "./dist/borders.css",
+    "./props/colors": "./dist/colors.css",
+    "./props/layout": "./dist/layout.css",
+    "./props/sizing": "./dist/sizing.css",
+    "./props/spacing": "./dist/spacing.css",
+    "./props/typography": "./dist/typography.css",
+    "./reset": "./dist/reset.css",
+    "./theme/dark": "./dist/theme/dark.css",
+    "./utilities": "./dist/utilities.css",
+    "./utilities/backgrounds": "./dist/utilities/backgrounds.css",
+    "./utilities/borders": "./dist/utilities/borders.css",
+    "./utilities/colors": "./dist/utilities/colors.css",
+    "./utilities/flexbox": "./dist/utilities/flexbox.css",
+    "./utilities/layout": "./dist/utilities/layout.css",
+    "./utilities/sizing": "./dist/utilities/sizing.css",
+    "./utilities/spacing": "./dist/utilities/spacing.css",
+    "./utilities/typography": "./dist/utilities/typography.css",
+    "./components": "./dist/components.css",
+    "./components/vv-button": "./dist/components/vv-button.css",
+    "./components/vv-text": "./dist/components/vv-text.css",
+    "./scss": "./src/style.scss",
+    "./scss/props": "./src/props/index.scss",
+    "./scss/props/borders": "./src/props/borders.scss",
+    "./scss/props/colors": "./src/props/colors.scss",
+    "./scss/props/layout": "./src/props/layout.scss",
+    "./scss/props/media": "./src/props/media.scss",
+    "./scss/props/sizing": "./src/props/sizing.scss",
+    "./scss/props/spacing": "./src/props/spacing.scss",
+    "./scss/props/typography": "./src/props/typography.scss",
+    "./scss/reset": "./src/reset.scss",
+    "./scss/theme-dark": "./src/themes/dark/style.scss",
+    "./scss/utilities": "./src/utilities/index.scss",
+    "./scss/utilities/backgrounds": "./src/utilities/backgrounds.scss",
+    "./scss/utilities/borders": "./src/utilities/borders.scss",
+    "./scss/utilities/colors": "./src/utilities/colors.scss",
+    "./scss/utilities/flexbox": "./src/utilities/flexbox.scss",
+    "./scss/utilities/layout": "./src/utilities/layout.scss",
+    "./scss/utilities/sizing": "./src/utilities/sizing.scss",
+    "./scss/utilities/spacing": "./src/utilities/spacing.scss",
+    "./scss/utilities/typography": "./src/utilities/typography.scss",
+    "./scss/components": "./src/components/index.scss",
+    "./scss/components/vv-button": "./src/components/vv-button.scss",
+    "./scss/components/vv-text": "./src/components/vv-text.scss"
   },
   "repository": {
     "type": "git",

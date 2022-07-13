@@ -2,16 +2,16 @@
 
 :where(:host, :root) {
 	// font-family
-	@include spread-map-into-props($font-family, $prefix: 'font');
+	@include spread-map-into-props($font-family, $prefix: font);
 
 	// font-weight
-	@include spread-map-into-props($font-weight, $prefix: 'font');
+	@include spread-map-into-props($font-weight, $prefix: font);
 
 	// line-height
-	@include spread-map-into-props($line-height, $prefix: 'leading');
+	@include spread-map-into-props($line-height, $prefix: leading);
 
 	// letter-spacing
-	@include spread-map-into-props($letter-spacing, $prefix: 'tracking');
+	@include spread-map-into-props($letter-spacing, $prefix: tracking);
 
 	// font-size
 	@each $size, $value in $font-size {

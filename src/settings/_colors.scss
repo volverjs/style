@@ -1,6 +1,8 @@
 @use 'sass:color';
 
 // color variables
+$scheme: light !default;
+$transparent: transparent !default;
 $black: #000 !default;
 $white: #fff !default;
 $brand: #1976d2 !default;
@@ -16,7 +18,8 @@ $shadow: hsl(color.hue($brand) 50% 20%) !default;
 
 // colors map
 $colors: (
-	scheme: light,
+	scheme: $scheme,
+	transparent: $transparent,
 	black: $black,
 	white: $white,
 	brand: color-shades-map($brand, 'brand'),

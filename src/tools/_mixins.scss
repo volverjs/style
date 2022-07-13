@@ -33,17 +33,22 @@
 }
 
 // Transform a map into a list of custom props
-@mixin spread-map-into-props($map: (), $prefix: '', $old-key: '') {
+@mixin spread-map-into-props($map: (), $prefix: '', $old-key: '', $deep: true) {
 	@each $key, $value in $map {
 		$name: meta.inspect($key);
-		@if meta.inspect($name) == meta.inspect($old-key) {
+		@if $name == meta.inspect($old-key) {
 			$name: $prefix;
 		} @else if $prefix != '' and meta.inspect($prefix) != meta.inspect($key)
 		{
 			$name: $prefix + '-' + $key;
 		}
+
+		// fix name
+		$name: str-replace($name, '\\/', '-');
 		@if type-of($value) == 'map' {
-			@include spread-map-into-props($value, $name, $key);
+			@if $deep {
+				@include spread-map-into-props($value, $name, $key);
+			}
 		} @else {
 			#{'--' + $name}: #{$value};
 		}
@@ -57,7 +62,10 @@
 	$attribute: '',
 	$prop: '',
 	$name: '',
-	$deep: true
+	$deep: true,
+	$breakpoints: (
+		xxs: 0,
+	)
 ) {
 	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
 	{
@@ -75,11 +83,25 @@
 				);
 			} @else {
 				$default: null;
-				$class-name: meta.inspect($key);
+				$class-name: $class;
+				$key: meta.inspect($key);
+				$var: $prop;
 
-				@if $class != '' {
-					$class-name: $class + '-' + $class-name;
+				// fix class name
+				@if $class-name != $key and $prop != $key {
+					@if $class-name != '' {
+						$class-name: $class-name + '-';
+					}
+
+					$class-name: $class-name + $key;
 				}
+
+				// fix variable name
+				@if $var != '' and $var != $key {
+					$var: $var + '-' + $key;
+				}
+
+				$var: str-replace($var, '\\/', '-');
 
 				// check if value is not a map (spacing-dynamic)
 				@if type-of($value) != 'map' {
@@ -92,15 +114,28 @@
 					$default: $key;
 				}
 
-				:where(.#{$class-name}) {
-					@if $default {
-						@if $prop != '' {
-							#{$attribute}: var(--#{$prop}-#{$key}, $default);
-						} @else {
-							#{$attribute}: $default;
+				@each $breakpoint, $breakpoint-value in $breakpoints {
+					$prefix: '';
+					@if $breakpoint-value > 0 {
+						$prefix: $breakpoint + '\\:';
+					}
+					:where(.#{$prefix}#{$class-name}) {
+						@include media-breakpoint-up($breakpoint) {
+							@if type-of($attribute) != 'list' {
+								$attribute: ($attribute);
+							}
+							@each $attr in $attribute {
+								@if $default {
+									@if $var != '' {
+										#{$attr}: var(--#{$var}, $default);
+									} @else {
+										#{$attr}: $default;
+									}
+								} @else if $var != '' {
+									#{$attr}: var(--#{$var});
+								}
+							}
 						}
-					} @else if $prop != '' {
-						#{$attribute}: var(--#{$prop}-#{$key});
 					}
 				}
 			}
@@ -113,7 +148,8 @@
 	$map: (),
 	$prefix: '',
 	$key: 'modifier',
-	$block: null
+	$block: null,
+	$props: true
 ) {
 	@if not $block {
 		$block: &;
@@ -132,7 +168,8 @@
 					$deep: true,
 					$ignore: (
 						'state',
-					)
+					),
+					$props: $props
 				);
 			}
 
@@ -142,7 +179,8 @@
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$modifier},
 					$key: 'state',
-					$block: $selector
+					$block: $selector,
+					$props: $props
 				);
 			}
 		}
@@ -154,7 +192,8 @@
 	$map: (),
 	$prefix: '',
 	$key: 'state',
-	$block: null
+	$block: null,
+	$props: true
 ) {
 	@if not $block {
 		$block: &;
@@ -209,7 +248,8 @@
 						$map: $value,
 						$prefix: $prefix,
 						$variant: #{$key}-#{$state},
-						$deep: true
+						$deep: true,
+						$props: $props
 					);
 				}
 			}
@@ -224,7 +264,8 @@
 	$variant: '',
 	$postfix: '',
 	$deep: false,
-	$ignore: ()
+	$ignore: (),
+	$props: true
 ) {
 	@if type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
@@ -245,31 +286,36 @@
 						$prefix: $prefix,
 						$variant: $variant,
 						$postfix: $key,
-						$deep: true
+						$deep: true,
+						$props: $props
 					);
-				} @else {
-					$prop-to-replace: --#{$prefix};
-					$prop-to-replace-with: --#{$prefix};
+				} @else if type-of($value) != 'map' {
+					@if $props {
+						$prop-to-replace: --#{$prefix};
+						$prop-to-replace-with: --#{$prefix};
 
-					// add variant
-					@if $variant != '' {
-						$prop-to-replace-with: #{$prop-to-replace-with}-#{$variant};
-					}
+						// add variant
+						@if $variant != '' {
+							$prop-to-replace-with: #{$prop-to-replace-with}-#{$variant};
+						}
 
-					// add postfix
-					@if $postfix != '' {
-						$prop-to-replace: #{$prop-to-replace}-#{$postfix};
-						$prop-to-replace-with: #{$prop-to-replace-with}-#{$postfix};
-					}
+						// add postfix
+						@if $postfix != '' {
+							$prop-to-replace: #{$prop-to-replace}-#{$postfix};
+							$prop-to-replace-with: #{$prop-to-replace-with}-#{$postfix};
+						}
 
-					// add key
-					$prop-to-replace: #{$prop-to-replace}-#{$key};
-					$prop-to-replace-with: #{$prop-to-replace-with}-#{$key};
+						// add key
+						$prop-to-replace: #{$prop-to-replace}-#{$key};
+						$prop-to-replace-with: #{$prop-to-replace-with}-#{$key};
 
-					@if map.get($original, $key) {
-						#{$prop-to-replace}: var(#{$prop-to-replace-with});
+						@if map.get($original, $key) {
+							#{$prop-to-replace}: var(#{$prop-to-replace-with});
+						} @else {
+							#{$key}: var(#{$prop-to-replace-with});
+						}
 					} @else {
-						#{$key}: var(#{$prop-to-replace-with});
+						#{$key}: #{$value};
 					}
 				}
 			}

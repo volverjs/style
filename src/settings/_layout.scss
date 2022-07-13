@@ -1,4 +1,15 @@
-$zindex: (
+// aspect-ratio
+$aspect-ratio: (
+	auto: auto,
+	square: '1/1',
+	photo: '3/2',
+	tv: '4/3',
+	wide: '16/9',
+	ultrawide: '21/9',
+) !default;
+
+// z-index
+$z-index: (
 	dropdown: 1000,
 	sticky: 1020,
 	fixed: 1030,

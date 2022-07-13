@@ -1,0 +1,6 @@
+@import '../context';
+
+:where(:host, :root) {
+	@include spread-map-into-props($border-radius, $prefix: rounded);
+	@include spread-map-into-props($border-width, $prefix: border);
+}

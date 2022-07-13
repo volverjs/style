@@ -13,6 +13,8 @@ $vv-button: (
 	padding-block: 0.75ch,
 	padding-inline: 1.75ch,
 	text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+	transition: all 0.2s ease-in-out,
+	will-change: all,
 	state: (
 		focus-visible: (
 			outline-offset: var(--spacing-4),
