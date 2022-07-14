@@ -39,6 +39,7 @@
     "./components/vv-button": "./dist/components/vv-button.css",
     "./components/vv-text": "./dist/components/vv-text.css",
     "./scss": "./src/style.scss",
+    "./scss/context": "./src/context.scss",
     "./scss/props": "./src/props/index.scss",
     "./scss/props/borders": "./src/props/borders.scss",
     "./scss/props/colors": "./src/props/colors.scss",

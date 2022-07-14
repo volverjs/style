@@ -1,35 +1,35 @@
 @use 'sass:color';
 
 // color variables
-$scheme: light !default;
-$transparent: transparent !default;
-$black: #000 !default;
-$white: #fff !default;
-$brand: #1976d2 !default;
-$accent: #9c27b0 !default;
-$positive: #21ba45 !default;
-$negative: #c10015 !default;
-$info: #31ccec !default;
-$warning: #f2c037 !default;
-$gray: hsl(color.hue($brand) 15% 50%) !default;
-$text: hsl(color.hue($brand) 15% 10%) !default;
-$surface: hsl(color.hue($brand) 10% 90%) !default;
-$shadow: hsl(color.hue($brand) 50% 20%) !default;
+$color-scheme: light !default;
+$color-transparent: transparent !default;
+$color-black: #000 !default;
+$color-white: #fff !default;
+$color-brand: #1976d2 !default;
+$color-accent: #9c27b0 !default;
+$color-positive: #21ba45 !default;
+$color-negative: #c10015 !default;
+$color-info: #31ccec !default;
+$color-warning: #f2c037 !default;
+$color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
+$color-text: hsl(color.hue($color-brand) 15% 10%) !default;
+$color-surface: hsl(color.hue($color-brand) 10% 90%) !default;
+$color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
 
 // colors map
 $colors: (
-	scheme: $scheme,
-	transparent: $transparent,
-	black: $black,
-	white: $white,
-	brand: color-shades-map($brand, 'brand'),
-	accent: color-shades-map($accent, 'accent'),
-	positive: color-shades-map($positive, 'positive'),
-	negative: color-shades-map($negative, 'negative'),
-	info: color-shades-map($info, 'info'),
-	warning: color-shades-map($warning, 'warning'),
-	gray: color-shades-map($gray, 'gray', $scale: 15%),
-	text: color-lighten-map($text, 'text', $scale: 15%),
-	surface: color-darken-map($surface, 'surface', $scale: 5%),
-	shadow: $shadow,
+	scheme: $color-scheme,
+	transparent: $color-transparent,
+	black: $color-black,
+	white: $color-white,
+	brand: color-shades-map($color-brand, 'brand'),
+	accent: color-shades-map($color-accent, 'accent'),
+	positive: color-shades-map($color-positive, 'positive'),
+	negative: color-shades-map($color-negative, 'negative'),
+	info: color-shades-map($color-info, 'info'),
+	warning: color-shades-map($color-warning, 'warning'),
+	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
+	text: color-lighten-map($color-text, 'text', $scale: 15%),
+	surface: color-darken-map($color-surface, 'surface', $scale: 5%),
+	shadow: $color-shadow,
 ) !default;
