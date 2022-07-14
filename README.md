@@ -1,13 +1,22 @@
 <div align="center">
   
-![volver](src/assets/logo.svg)
+[![volverjs](src/assets/volverjs.svg)](https://github.com/volverjs)
 
-## @volver/style
+## @volverjs/style
 
 `colors` `gradients` `shadows` `aspect ratios` `typography`  
 `easings` `animations` `sizes` `borders` `z-indexes` `media-queries`
 
 <br>
+
+### proudly powered by
+
+<br>
+
+[![24/Consulting](src/assets/24consulting.svg)](https://24consulting.it)
+
+<br>
+
 </div>
 
 ## Install
@@ -119,7 +128,7 @@ $vv-button: map-merge-deep(
 	)
 );
 
-// import volver style
+// import volverjs style
 @import '@volverjs/style/scss';
 ```
 
