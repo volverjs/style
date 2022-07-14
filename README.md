@@ -98,25 +98,29 @@ Root attributes style the component, submaps _state_, _element_, and _modifier_ 
 @import '@volverjs/style/scss/context';
 
 // override vv-button map
-$vv-button: map-merge-deep($vv-button, (
-    // change default button background
-    background: #ddd;
-    state: (
-        hover: (
-            // change default button background on hover
-            background: #aaa;
-        )
-    ),
-    modifier: (
-        // add a custom modifier
-        my-error: (
-            background: red;
-        )
-    )
-));
+$vv-button: map-merge-deep(
+	$vv-button,
+	(
+		// change default button background
+		background: #ddd,
+		state: (
+			hover: (
+				// change default button background on hover
+				background: #aaa,
+			),
+		),
+		modifier: (
+			// add a custom modifier
+			my-error:
+				(
+					background: red,
+				)
+		)
+	)
+);
 
 // import volver style
-@import '@volverjs/style/scss'
+@import '@volverjs/style/scss';
 ```
 
 ```html
