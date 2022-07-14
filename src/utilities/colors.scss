@@ -1,25 +1,33 @@
 @import '../context';
 
-// background
+// background-color
 @include spread-map-into-utilities(
-	$colors,
-	$class: 'bg',
-	$attribute: 'background-color',
-	$prop: 'color'
+	$map: $colors,
+	$class: bg,
+	$attribute: background-color,
+	$prop: color
 );
 
 // color
 @include spread-map-into-utilities(
-	$colors,
-	$class: 'text',
-	$attribute: 'color',
-	$prop: 'color'
+	$map: $colors,
+	$class: text,
+	$attribute: color,
+	$prop: color
 );
 
-// decoration
+// text-decoration-color
 @include spread-map-into-utilities(
-	$colors,
-	$class: 'decoration',
-	$attribute: 'text-decoration-color',
-	$prop: 'color'
+	$map: $colors,
+	$class: decoration,
+	$attribute: text-decoration-color,
+	$prop: color
+);
+
+// border-color
+@include spread-map-into-utilities(
+	$map: $colors,
+	$class: border,
+	$attribute: border-color,
+	$prop: color
 );

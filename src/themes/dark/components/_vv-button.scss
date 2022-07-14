@@ -1,5 +1,10 @@
 @import '../context';
 
+$name: 'vv-button';
+$map: $vv-button;
+$block: '.' + $name;
+$props: true;
+
 :where(.theme-dark) {
-	@include spread-map-into-props($vv-button, 'vv-button');
+	@include spread-map-into-props($map: $map, $prefix: $name, $deep: $props);
 }

@@ -1,0 +1,86 @@
+@use 'sass:map';
+@import '../context';
+
+// border-radius
+@include spread-map-into-utilities(
+	$map: $border-radius,
+	$class: rounded,
+	$attribute: border-radius,
+	$prop: rounded
+);
+
+@each $x-key, $x-value in (t: top, b: bottom) {
+	@include spread-map-into-utilities(
+		$map: $border-radius,
+		$class: rounded- + $x-key,
+		$attribute: (
+			border- + $x-value + -left-radius,
+			border- + $x-value + -right-radius,
+		),
+		$prop: rounded
+	);
+
+	@each $y-key, $y-value in (r: right, l: left) {
+		@include spread-map-into-utilities(
+			$map: $border-radius,
+			$class: rounded- + $x-key + $y-key,
+			$attribute: (
+				border- + $x-value + '-' + $y-value + -radius,
+			),
+			$prop: rounded
+		);
+	}
+}
+
+// border-width
+@include spread-map-into-utilities(
+	$map: $border-width,
+	$class: border,
+	$attribute: border-width,
+	$prop: border
+);
+
+@include spread-map-into-utilities(
+	$map: $border-radius,
+	$class: border-x,
+	$attribute: (
+		border-right-width,
+		border-left-width,
+	),
+	$prop: border
+);
+
+@include spread-map-into-utilities(
+	$map: $border-radius,
+	$class: border-y,
+	$attribute: (
+		border-top-width,
+		border-bottom-width,
+	),
+	$prop: border
+);
+
+@each $key, $value in (t: top, r: right, b: bottom, l: left) {
+	@include spread-map-into-utilities(
+		$map: $border-radius,
+		$class: border- + $key,
+		$attribute: (
+			border- + $key + -width,
+		),
+		$prop: border
+	);
+}
+
+// border-style
+@include spread-map-into-utilities(
+	$map: (
+		solid,
+		dashed,
+		dotted,
+		double,
+		hidden,
+		none,
+	),
+	$class: border,
+	$attribute: border-style
+);

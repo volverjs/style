@@ -4,25 +4,25 @@
 // font-family
 @include spread-map-into-utilities(
 	$map: $font-family,
-	$class: 'font',
-	$attribute: 'font-family',
-	$prop: 'font'
+	$class: font,
+	$attribute: font-family,
+	$prop: font
 );
 
 // font-weight
 @include spread-map-into-utilities(
 	$map: $font-weight,
-	$class: 'font',
-	$attribute: 'font-weight',
-	$prop: 'font'
+	$class: font,
+	$attribute: font-weight,
+	$prop: font
 );
 
 // font-size
 @include spread-map-into-utilities(
 	$map: map.merge($font-size, $font-size-dynamic),
-	$class: 'text',
-	$attribute: 'font-size',
-	$prop: 'text',
+	$class: text,
+	$attribute: font-size,
+	$prop: text,
 	$deep: false
 );
 
@@ -49,17 +49,17 @@
 // line-height
 @include spread-map-into-utilities(
 	$map: $line-height,
-	$class: 'leading',
-	$attribute: 'line-height',
-	$prop: 'leading'
+	$class: leading,
+	$attribute: line-height,
+	$prop: leading
 );
 
 // letter-spacing
 @include spread-map-into-utilities(
 	$map: $letter-spacing,
-	$class: 'tracking',
-	$attribute: 'letter-spacing',
-	$prop: 'tracking'
+	$class: tracking,
+	$attribute: letter-spacing,
+	$prop: tracking
 );
 
 // font-variant-numeric
@@ -75,7 +75,7 @@
 		diagonal-fractions: diagonal-fractions,
 		stacked-fractions: stacked-fractions,
 	),
-	$attribute: 'font-variant-numeric'
+	$attribute: font-variant-numeric
 );
 
 // list-style-type
@@ -85,8 +85,8 @@
 		disc,
 		decimal,
 	),
-	$class: 'list',
-	$attribute: 'list-style-type'
+	$class: list,
+	$attribute: list-style-type
 );
 
 // list-style-position
@@ -95,8 +95,8 @@
 		inside,
 		outside,
 	),
-	$class: 'list',
-	$attribute: 'list-style-position'
+	$class: list,
+	$attribute: list-style-position
 );
 
 // text-align
@@ -109,8 +109,8 @@
 		start,
 		end,
 	),
-	$class: 'text',
-	$attribute: 'text-align'
+	$class: text,
+	$attribute: text-align
 );
 
 // text-decorator-line
@@ -121,7 +121,7 @@
 		line-through: line-through,
 		no-underline: none,
 	),
-	$attribute: 'text-decoration-line'
+	$attribute: text-decoration-line
 );
 
 // text-decorator-style
@@ -133,8 +133,8 @@
 		dashed,
 		wavy,
 	),
-	$class: 'decoration',
-	$attribute: 'text-decoration-style'
+	$class: decoration,
+	$attribute: text-decoration-style
 );
 
 // text-decorator-thickness
@@ -148,8 +148,8 @@
 		4: 4px,
 		8: 8px,
 	),
-	$class: 'decoration',
-	$attribute: 'text-decoration-thickness'
+	$class: decoration,
+	$attribute: text-decoration-thickness
 );
 
 // text-underline-offset
@@ -162,8 +162,8 @@
 		4: 4px,
 		8: 8px,
 	),
-	$class: 'underline-offset',
-	$attribute: 'text-underline-offset'
+	$class: underline-offset,
+	$attribute: text-underline-offset
 );
 
 // text-transform
@@ -174,7 +174,7 @@
 		capitalize: capitalize,
 		normal-case: none,
 	),
-	$attribute: 'text-transform'
+	$attribute: text-transform
 );
 
 // text-overflow
@@ -218,8 +218,8 @@
 		sub,
 		super,
 	),
-	$class: 'align',
-	$attribute: 'vertical-align'
+	$class: align,
+	$attribute: vertical-align
 );
 
 // white-space
@@ -231,6 +231,6 @@
 		pre-line,
 		pre-wrap,
 	),
-	$class: 'whitespace',
-	$attribute: 'white-space'
+	$class: whitespace,
+	$attribute: white-space
 );

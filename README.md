@@ -1,8 +1,8 @@
 <div align="center">
   
-![24/Consulting](https://www.24consulting.it/favicon.svg)
+![volver](src/assets/logo.svg)
 
-## Volver Style
+## @volver/style
 
 `colors` `gradients` `shadows` `aspect ratios` `typography`  
 `easings` `animations` `sizes` `borders` `z-indexes` `media-queries`

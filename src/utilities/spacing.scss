@@ -3,19 +3,16 @@
 
 @each $prefix, $prop in (m: margin, p: padding, n: margin) {
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
-		$var: null;
-		$default: null;
+		$var: var(--spacing-#{$size});
 
 		// check if value is not a map (spacing-dynamic)
 		@if type-of($value) != 'map' {
-			$default: $value;
+			$var: var(--spacing-#{$size}, #{$value});
 		}
 
 		// negative margin
 		@if $prefix == 'n' {
-			$var: calc(-1 * var(--spacing-#{$size}, #{$default}));
-		} @else {
-			$var: var(--spacing-#{$size}, #{$default});
+			$var: calc(-1 * #{$var});
 		}
 
 		// all

@@ -1,4 +1,5 @@
 @use 'sass:map';
+@import '../context';
 
 // flex direction
 @include spread-map-into-utilities(
@@ -8,8 +9,8 @@
 		col: column,
 		col-reverse: column-reverse,
 	),
-	$class: 'flex',
-	$attribute: 'flex-direction'
+	$class: flex,
+	$attribute: flex-direction
 );
 
 // flex wrap
@@ -19,8 +20,8 @@
 		wrap-reverse,
 		nowrap,
 	),
-	$class: 'flex',
-	$attribute: 'flex-wrap'
+	$class: flex,
+	$attribute: flex-wrap
 );
 
 // flex
@@ -31,8 +32,8 @@
 		initial: 0 1 auto,
 		none: none,
 	),
-	$class: 'flex',
-	$attribute: 'flex'
+	$class: flex,
+	$attribute: flex
 );
 
 // flex grow
@@ -63,8 +64,8 @@
 		last: 9999,
 		none: 0,
 	),
-	$class: 'order',
-	$attribute: 'order'
+	$class: order,
+	$attribute: order
 );
 
 // gap

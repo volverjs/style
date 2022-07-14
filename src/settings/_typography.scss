@@ -1,10 +1,13 @@
+// font-variables
+$font-family-sans: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"' !default;
+$font-family-serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif' !default;
+$font-family-mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' !default;
+
 // font-family
 $font-family: (
-	sans:
-		'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-	serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif',
-	mono:
-		'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+	sans: $font-family-sans,
+	serif: $font-family-serif,
+	mono: $font-family-mono,
 ) !default;
 
 // font-size static
@@ -52,12 +55,12 @@ $font-size-dynamic: (
 		sm: 24,
 		lg: 30,
 	),
-	2xl: (
+	xxl: (
 		xxs: 24,
 		sm: 30,
 		lg: 36,
 	),
-	3xl: (
+	xxxl: (
 		xxs: 30,
 		sm: 36,
 		lg: 48,

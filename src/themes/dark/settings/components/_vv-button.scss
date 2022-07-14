@@ -15,9 +15,11 @@ $vv-button: (
 		brand: (
 			border-color: var(--color-brand-lighten-3),
 			color: var(--color-brand-lighten-5),
-		),
-		active: (
-			background: var(--color-brand),
+			state: (
+				active: (
+					background: var(--color-brand),
+				),
+			),
 		),
 	),
 ) !default;
