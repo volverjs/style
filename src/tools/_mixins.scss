@@ -119,6 +119,7 @@
 					@if $breakpoint-value > 0 {
 						$prefix: $breakpoint + '\\:';
 					}
+					%#{$prefix}#{$class-name},
 					:where(.#{$prefix}#{$class-name}) {
 						@include media-breakpoint-up($breakpoint) {
 							@if type-of($attribute) != 'list' {

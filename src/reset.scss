@@ -76,3 +76,13 @@
 :where([draggable='true']) {
 	-webkit-user-drag: element;
 }
+
+:where(.revert *) {
+	all: revert;
+	accent-color: initial;
+	background-color: initial;
+	caret-color: initial;
+	color: initial;
+	scrollbar-color: initial;
+	font-family: initial;
+}

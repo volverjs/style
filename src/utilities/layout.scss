@@ -149,17 +149,20 @@
 	}
 
 	// all
+	%inset-#{$size},
 	:where(.inset-#{$size}) {
 		inset: #{$var};
 	}
 
 	// horizontal
+	%inset-x-#{$size},
 	:where(.inset-x-#{$size}) {
 		left: #{$var};
 		right: #{$var};
 	}
 
 	// vertical
+	%inset-y-#{$size},
 	:where(.inset-y-#{$size}) {
 		top: #{$var};
 		bottom: #{$var};
@@ -167,6 +170,7 @@
 
 	// sides
 	@each $direction in(top, right, bottom, left) {
+		%#{$direction}-#{$size},
 		:where(.#{$direction}-#{$size}) {
 			#{$direction}: #{$var};
 		}

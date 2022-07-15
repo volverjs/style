@@ -10,6 +10,7 @@
 			$var: var(--spacing-#{$size}, #{$value});
 		}
 
+		%#{$dimension}-#{$size},
 		:where(.#{$dimension}-#{$size}) {
 			#{$attr}: #{$var};
 		}
@@ -46,6 +47,7 @@
 
 @each $breakpoint, $breakpoint-value in $breakpoints {
 	@if $breakpoint-value > 0 {
+		%max-w-screen-#{$breakpoint},
 		:where(.max-w-screen-#{$breakpoint}) {
 			max-width: $breakpoint-value;
 		}

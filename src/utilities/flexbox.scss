@@ -39,6 +39,7 @@
 // flex grow
 @each $prefix, $prop in (grow: flex-grow, shrink: flex-shrink) {
 	@each $value, $postfix in (1: '', 0: '-0') {
+		%#{$prefix}#{$postfix},
 		:where(.#{$prefix}#{$postfix}) {
 			#{$prop}: #{$value};
 		}
@@ -80,16 +81,19 @@
 	$var: var(--spacing-#{$size}, #{$default});
 
 	// all
+	%gap-#{$size},
 	:where(.gap-#{$size}) {
 		gap: #{$var};
 	}
 
 	// horizontal
+	%gap-x-#{$size},
 	:where(.gap-x-#{$size}) {
 		column-gap: #{$var};
 	}
 
 	// vertical
+	%gap-y-#{$size},
 	:where(.gap-y-#{$size}) {
 		row-gap: #{$var};
 	}

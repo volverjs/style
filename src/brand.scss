@@ -8,12 +8,45 @@
 	font-family: var(--font-sans);
 }
 
-:where(.revert *) {
-	all: revert;
-	accent-color: initial;
-	background-color: initial;
-	caret-color: initial;
-	color: initial;
-	scrollbar-color: initial;
-	font-family: initial;
+:where(ul) {
+	@extend %list-disc;
+	@extend %list-inside;
+}
+
+:where(ol) {
+	@extend %list-decimal;
+	@extend %list-inside;
+}
+
+:where(b, strong, th) {
+	@extend %font-bold;
+}
+
+:where(em, i, cite, dfn, var) {
+	@extend %italic;
+}
+
+:where(cite, dfn, var) {
+	@extend %font-serif;
+}
+
+:where(del, s) {
+	@extend %line-through;
+}
+
+:where(ins, u, cite, a) {
+	@extend %underline;
+}
+
+:where(abbr) {
+	@extend %underline;
+	@extend %decoration-dotted;
+}
+
+:where(code) {
+	@extend %font-mono;
+}
+
+:where(button, input[type='button'], input[type='submit'], input[type='reset']) {
+	@extend %vv-button;
 }

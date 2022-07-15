@@ -99,7 +99,7 @@ $font-sans: 'Open Sans', sans-serif;
 
 ## Deep override
 
-All components are written throw SCSS maps.
+All components are written through SCSS maps.
 Root attributes style the component, submaps _state_, _element_, and _modifier_ generates BEM selectors.
 
 ```scss

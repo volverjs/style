@@ -16,17 +16,20 @@
 		}
 
 		// all
+		%#{$prefix}#{$size},
 		:where(.#{$prefix}-#{$size}) {
 			#{$prop}: #{$var};
 		}
 
 		// horizontal
+		%#{$prefix}x-#{$size},
 		:where(.#{$prefix}x-#{$size}) {
 			#{$prop}-left: #{$var};
 			#{$prop}-right: #{$var};
 		}
 
 		// vertical
+		%#{$prefix}y-#{$size},
 		:where(.#{$prefix}y-#{$size}) {
 			#{$prop}-top: #{$var};
 			#{$prop}-bottom: #{$var};
@@ -36,6 +39,7 @@
 		@each $direction-prefix,
 			$direction in(t: top, r: right, b: bottom, l: left)
 		{
+			%#{$prefix}#{$direction-prefix}-#{$size},
 			:where(.#{$prefix}#{$direction-prefix}-#{$size}) {
 				#{$prop}-#{$direction}: #{$var};
 			}
@@ -44,21 +48,25 @@
 }
 
 // auto
+%m-auto,
 :where(.m-auto) {
 	margin: auto;
 }
 
+%mx-auto,
 :where(.mx-auto) {
 	margin-left: auto;
 	margin-right: auto;
 }
 
+%my-auto,
 :where(.my-auto) {
 	margin-top: auto;
 	margin-bottom: auto;
 }
 
 @each $direction-prefix, $direction in(t: top, r: right, b: bottom, l: left) {
+	%m#{$direction-prefix}-auto,
 	:where(.m#{$direction-prefix}-auto) {
 		margin-#{$direction}: auto;
 	}
