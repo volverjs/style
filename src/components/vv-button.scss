@@ -1,73 +1,69 @@
+@use 'sass:map';
 @import '../context';
 
-$name: 'vv-button';
-$map: $vv-button;
-$block: '.' + $name;
-$props: true;
+$component-name: map.get($components-names, vv-button);
+$component-map: $vv-button;
+$component-selector: '.' + $component-name;
 
-// custom props
-:where(:root, :host) {
-	@include spread-map-into-props($map: $map, $prefix: $name, $deep: $props);
-}
-
-// block
-%#{$name} {
-	-webkit-tap-highlight-color: transparent;
-	-webkit-touch-callout: none;
-	align-items: center;
-	cursor: pointer;
-	display: inline-flex;
-	justify-content: center;
-	text-align: center;
-	touch-action: manipulation;
-	user-select: none;
-
-	@include spread-map-into-attrs($map: $vv-button, $prefix: $name);
-
-	@media (--motion-not-ok) {
-		transition: none;
-	}
-}
-
-:where(#{$block}) {
-	&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
-	&::file-selector-button {
-		@extend %#{$name};
-	}
-
-	/* input file */
-	&::file-selector-button {
-		margin-inline-end: var(--vv-button-gap);
-	}
-
-	/* icons */
-	& > :where(svg, [data-icon]) {
-		fill: none;
-		flex-shrink: 0;
-		stroke-linecap: round;
-		stroke-linejoin: round;
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents,
+	$custom-block: true
+) {
+	// custom block
+	%#{$component-name} {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		align-items: center;
+		cursor: pointer;
+		display: inline-flex;
+		justify-content: center;
+		text-align: center;
+		touch-action: manipulation;
+		user-select: none;
 
 		@include spread-map-into-attrs(
-			$map: map-get-deep($vv-button, 'element', 'icon'),
-			$prefix: #{$name}-element-icon
+			$map: $component-map,
+			$prefix: $component-name,
+			$props: $use-custom-props-for-components
 		);
+
+		@media (--motion-not-ok) {
+			transition: none;
+		}
+	}
+
+	@include wrap-with-where(
+		$selector: $component-selector,
+		$enabled: $zero-specificity-for-compoenents
+	) {
+		&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
+		&::file-selector-button {
+			@extend %#{$component-name};
+		}
+
+		// input file
+		&::file-selector-button {
+			margin-inline-end: var(
+				--vv-button-gap,
+				map.get($component-map, 'gap')
+			);
+		}
+
+		// icons
+		& > :where(svg, [data-icon]) {
+			fill: none;
+			flex-shrink: 0;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+
+			@include spread-map-into-attrs(
+				$map: map.get($component-map, 'element', 'icon'),
+				$prefix: #{$component-name}-element-icon,
+				$props: $use-custom-props-for-components
+			);
+		}
 	}
 }
-
-// states
-@include spread-map-into-states(
-	$map: $map,
-	$prefix: $name,
-	$key: 'state',
-	$block: $block,
-	$props: $props
-);
-
-// modifiers
-@include spread-map-into-modifiers(
-	$map: $map,
-	$prefix: $name,
-	$key: 'modifier',
-	$block: $block,
-	$props: $props
-);

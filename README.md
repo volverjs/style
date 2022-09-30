@@ -4,8 +4,9 @@
 
 ## @volverjs/style
 
-`colors` `gradients` `shadows` `aspect ratios` `typography`  
+`backgrounds` `border` `colors` `aspect ratios` `typography`  
 `easings` `animations` `sizes` `borders` `z-indexes` `media-queries`
+`layout` `spacing` `flexbox` `grid` `custom properties` `scss`
 
 <br>
 
@@ -103,11 +104,12 @@ All components are written through SCSS maps.
 Root attributes style the component, submaps _state_, _element_, and _modifier_ generates BEM selectors.
 
 ```scss
+@use 'sass:map';
 // import volverjs default settings, functions and mixins
 @import '@volverjs/style/scss/context';
 
 // override vv-button map
-$vv-button: map-merge-deep(
+$vv-button: map.deep-merge(
 	$vv-button,
 	(
 		// change default button background

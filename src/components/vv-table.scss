@@ -1,0 +1,36 @@
+@use 'sass:map';
+@import '../context';
+
+$component-name: map.get($components-names, vv-table);
+$component-map: $vv-table;
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents
+) {
+	:where(tr) {
+		@include spread-map-into-attrs(
+			$map: map.get($component-map, 'element', 'tr'),
+			$prefix: #{$component-name}-element-tr,
+			$props: $use-custom-props-for-components
+		);
+	}
+
+	:where(th) {
+		@include spread-map-into-attrs(
+			$map: map.get($component-map, 'element', 'th'),
+			$prefix: #{$component-name}-element-th,
+			$props: $use-custom-props-for-components
+		);
+	}
+
+	:where(td) {
+		@include spread-map-into-attrs(
+			$map: map.get($component-map, 'element', 'td'),
+			$prefix: #{$component-name}-element-td,
+			$props: $use-custom-props-for-components
+		);
+	}
+}

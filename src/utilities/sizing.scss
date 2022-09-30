@@ -2,7 +2,9 @@
 @import '../context';
 
 // width / height / max-width / max-height
-@each $dimension, $attr in(w: width, h: height, max-h: max-height) {
+@each $dimension,
+	$attr in(w: width, h: height, max-w: max-width, max-h: max-height)
+{
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
 		// check if value is not a map (spacing-dynamic)
 		$var: var(--spacing-#{$size});
@@ -21,7 +23,7 @@
 	$map: $width,
 	$class: w,
 	$attribute: width,
-	$breakpoints: $breakpoints,
+	$bps: $breakpoints,
 	$prop: w
 );
 
@@ -29,7 +31,7 @@
 	$map: $height,
 	$class: h,
 	$attribute: height,
-	$breakpoints: $breakpoints,
+	$bps: $breakpoints,
 	$prop: h
 );
 

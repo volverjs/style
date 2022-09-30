@@ -24,15 +24,13 @@
 		// horizontal
 		%#{$prefix}x-#{$size},
 		:where(.#{$prefix}x-#{$size}) {
-			#{$prop}-left: #{$var};
-			#{$prop}-right: #{$var};
+			#{$prop}-inline: #{$var};
 		}
 
 		// vertical
 		%#{$prefix}y-#{$size},
 		:where(.#{$prefix}y-#{$size}) {
-			#{$prop}-top: #{$var};
-			#{$prop}-bottom: #{$var};
+			#{$prop}-block: #{$var};
 		}
 
 		// sides
@@ -55,14 +53,12 @@
 
 %mx-auto,
 :where(.mx-auto) {
-	margin-left: auto;
-	margin-right: auto;
+	margin-inline: auto;
 }
 
 %my-auto,
 :where(.my-auto) {
-	margin-top: auto;
-	margin-bottom: auto;
+	margin-block: auto;
 }
 
 @each $direction-prefix, $direction in(t: top, r: right, b: bottom, l: left) {

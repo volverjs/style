@@ -131,7 +131,7 @@
 }
 
 // justify and align self
-@each $class, $attribute in (justify-self: justify-self, self: align-selft) {
+@each $class, $attribute in (justify-self: justify-self, self: align-self) {
 	@include spread-map-into-utilities(
 		$map: (
 			auto: auto,

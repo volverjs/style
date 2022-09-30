@@ -7,14 +7,15 @@ $color-black: #000 !default;
 $color-white: #fff !default;
 $color-brand: #1976d2 !default;
 $color-accent: #9c27b0 !default;
-$color-positive: #21ba45 !default;
-$color-negative: #c10015 !default;
+$color-success: #21ba45 !default;
+$color-danger: #c10015 !default;
 $color-info: #31ccec !default;
 $color-warning: #f2c037 !default;
 $color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
-$color-text: hsl(color.hue($color-brand) 15% 10%) !default;
-$color-surface: hsl(color.hue($color-brand) 10% 90%) !default;
+$color-word: hsl(color.hue($color-brand) 15% 10%) !default;
+$color-surface: hsl(color.hue($color-brand) 10% 98%) !default;
 $color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
+$color-alpha: hsla(0deg 0% 0% / 0%) !default;
 
 // colors map
 $colors: (
@@ -24,12 +25,13 @@ $colors: (
 	white: $color-white,
 	brand: color-shades-map($color-brand, 'brand'),
 	accent: color-shades-map($color-accent, 'accent'),
-	positive: color-shades-map($color-positive, 'positive'),
-	negative: color-shades-map($color-negative, 'negative'),
+	success: color-shades-map($color-success, 'success'),
+	danger: color-shades-map($color-danger, 'danger'),
 	info: color-shades-map($color-info, 'info'),
 	warning: color-shades-map($color-warning, 'warning'),
 	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
-	text: color-lighten-map($color-text, 'text', $scale: 15%),
-	surface: color-darken-map($color-surface, 'surface', $scale: 5%),
+	word: color-lighten-map($color-word, 'word', $scale: 15%),
+	surface: color-darken-map($color-surface, 'surface', $scale: 2%),
 	shadow: $color-shadow,
+	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
 ) !default;

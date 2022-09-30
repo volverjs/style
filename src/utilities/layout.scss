@@ -1,41 +1,6 @@
 @use 'sass:map';
 @import '../context';
 
-// display
-@include spread-map-into-utilities(
-	$map: (
-		table,
-		inline-table,
-		table-caption,
-		table-cell,
-		table-column,
-		table-column-group,
-		table-footer-group,
-		table-header-group,
-		table-row-group,
-		table-row,
-		flow-root,
-		contents,
-		list-item,
-	),
-	$attribute: display
-);
-
-@include spread-map-into-utilities(
-	$map: (
-		block,
-		inline-block,
-		inline,
-		flex,
-		inline-flex,
-		grid,
-		inline-grid,
-		none,
-	),
-	$attribute: display,
-	$breakpoints: $breakpoints
-);
-
 // aspect
 @include spread-map-into-utilities(
 	$map: $aspect-ratio,
@@ -74,8 +39,87 @@
 		12,
 	),
 	$class: columns,
-	$attribute: columns,
-	$breakpoints: $breakpoints
+	$attribute: column-count,
+	$bps: $breakpoints
+);
+
+// break-after
+@include spread-map-into-utilities(
+	$map: (
+		auto,
+		avoid,
+		all,
+		avoid-page,
+		page,
+		left,
+		right,
+		column,
+	),
+	$class: break-after,
+	$attribute: break-after
+);
+
+// break-before
+@include spread-map-into-utilities(
+	$map: (
+		auto,
+		avoid,
+		all,
+		avoid-page,
+		page,
+		left,
+		right,
+		column,
+	),
+	$class: break-before,
+	$attribute: break-before
+);
+
+// break-inside
+@include spread-map-into-utilities(
+	$map: (
+		auto,
+		avoid,
+		avoid-page,
+		avoid-column,
+	),
+	$class: break-inside,
+	$attribute: break-inside
+);
+
+// display
+@include spread-map-into-utilities(
+	$map: (
+		table,
+		inline-table,
+		table-caption,
+		table-cell,
+		table-column,
+		table-column-group,
+		table-footer-group,
+		table-header-group,
+		table-row-group,
+		table-row,
+		flow-root,
+		contents,
+		list-item,
+	),
+	$attribute: display
+);
+
+@include spread-map-into-utilities(
+	$map: (
+		block,
+		inline-block,
+		inline,
+		flex,
+		inline-flex,
+		grid,
+		inline-grid,
+		none,
+	),
+	$attribute: display,
+	$bps: $breakpoints
 );
 
 // object-fit
@@ -111,7 +155,7 @@
 // overflow
 @each $prefix in (x, y) {
 	@each $overflow in (auto, hidden, clip, visible, scroll) {
-		:where(.#{$prefix}-#{$overflow}) {
+		:where(.overflow-#{$prefix}-#{$overflow}) {
 			overflow-#{$prefix}: #{$overflow};
 		}
 	}
@@ -127,7 +171,7 @@
 		sticky,
 	),
 	$attribute: position,
-	$breakpoints: $breakpoints
+	$bps: $breakpoints
 );
 
 // visibility
@@ -137,7 +181,7 @@
 		invisible: hidden,
 	),
 	$attribute: visibility,
-	$breakpoints: $breakpoints
+	$bps: $breakpoints
 );
 
 // top / right / bottom / left
@@ -157,15 +201,13 @@
 	// horizontal
 	%inset-x-#{$size},
 	:where(.inset-x-#{$size}) {
-		left: #{$var};
-		right: #{$var};
+		inset-inline: #{$var};
 	}
 
 	// vertical
 	%inset-y-#{$size},
 	:where(.inset-y-#{$size}) {
-		top: #{$var};
-		bottom: #{$var};
+		inset-block: #{$var};
 	}
 
 	// sides

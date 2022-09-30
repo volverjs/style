@@ -12,13 +12,23 @@ $font-family: (
 
 // font-size static
 $font-size: (
+	smaller: smaller,
+	larger: larger,
+	6: 0.375rem,
+	8: 0.5rem,
+	10: 0.625rem,
 	12: 0.75rem,
 	14: 0.875rem,
 	16: 1rem,
 	18: 1.125rem,
 	20: 1.25rem,
+	22: 1.375rem,
 	24: 1.5rem,
+	26: 1.625rem,
+	28: 1.75rem,
 	30: 1.875rem,
+	32: 2rem,
+	34: 2.125rem,
 	36: 2.25rem,
 	48: 3rem,
 	60: 3.75rem,
@@ -31,39 +41,29 @@ $font-size: (
 // could be a static reference or a custom value
 $font-size-dynamic: (
 	xs: (
+		xxs: 10,
+		sm: 12,
+		lg: 14,
+	),
+	sm: (
 		xxs: 12,
 		sm: 14,
 		lg: 16,
 	),
-	sm: (
+	md: (
 		xxs: 14,
 		sm: 16,
 		lg: 18,
 	),
-	base: (
+	lg: (
 		xxs: 16,
 		sm: 18,
 		lg: 20,
 	),
-	lg: (
+	xl: (
 		xxs: 18,
 		sm: 20,
-		lg: 24,
-	),
-	xl: (
-		xxs: 20,
-		sm: 24,
-		lg: 30,
-	),
-	xxl: (
-		xxs: 24,
-		sm: 30,
-		lg: 36,
-	),
-	xxxl: (
-		xxs: 30,
-		sm: 36,
-		lg: 48,
+		lg: 22,
 	),
 ) !default;
 

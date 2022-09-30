@@ -1,3 +1,7 @@
+// configuration
+@import 'config';
+
+// utilities and custom props
 @import 'borders';
 @import 'breakpoints';
 @import 'colors';
@@ -9,3 +13,4 @@
 // components
 @import 'components/vv-text';
 @import 'components/vv-button';
+@import 'components/vv-table';

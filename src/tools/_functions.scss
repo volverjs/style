@@ -2,46 +2,6 @@
 @use 'sass:color';
 @use 'sass:string';
 
-@function map-get-deep($map, $keys...) {
-	@each $key in $keys {
-		$map: map.get($map, $key);
-	}
-	@return $map;
-}
-
-@function map-merge-deep($parent-map, $child-map) {
-	$result: $parent-map;
-	@each $key, $value in $child-map {
-		@if (not map-has-key($result, $key)) or
-			(type-of(map-get($result, $key)) != type-of($value)) or
-			(
-				not
-					(
-						type-of(map-get($result, $key)) ==
-							map and
-							type-of($value) ==
-							map
-					)
-			)
-		{
-			$result: map.merge(
-				$result,
-				(
-					$key: $value,
-				)
-			);
-		} @else {
-			$result: map.merge(
-				$result,
-				(
-					$key: map-merge-deep(map.get($result, $key), $value),
-				)
-			);
-		}
-	}
-	@return $result;
-}
-
 @function hsla-map($color, $name) {
 	@return (
 		hue: color.hue($color),
@@ -54,15 +14,24 @@
 
 @function alpha-color($name, $alpha) {
 	@return hsla(
-		var(--color-#{$name}-hue),
-		var(--color-#{$name}-saturation),
-		var(--color-#{$name}-lightness),
-		#{$alpha}
+		var(--color-#{$name}-hue) var(--color-#{$name}-saturation)
+			var(--color-#{$name}-lightness) / #{$alpha}
 	);
 }
 
 @function hex-to-rgb($hex) {
 	@return red($hex), green($hex), blue($hex);
+}
+
+@function color-alpha-map($color, $name, $steps: 9, $scale: 10%) {
+	$result: hsla-map($color, $name);
+	@for $index from 1 to ($steps + 1) {
+		$result: map.merge(
+			$result,
+			(#{$index}: alpha-color($name, $index * $scale))
+		);
+	}
+	@return $result;
 }
 
 @function color-shades-map($color, $name, $steps: 5, $scale: 10%) {

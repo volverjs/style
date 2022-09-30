@@ -1,23 +1,9 @@
+@use 'sass:map';
 @import '../context';
 
-$name: 'vv-text';
-$map: $vv-text;
-$block: '.' + $name;
-
-// custom props
-:where(:root, :host) {
-	@include spread-map-into-props($map: $map, $prefix: $name);
-}
-
-:where(#{$block}) {
-	// block
-	@include spread-map-into-attrs($map: $map, $prefix: $name);
-}
-
-// modifiers
-@include spread-map-into-modifiers(
-	$map,
-	$prefix: $name,
-	$key: 'modifier',
-	$block: $block
+@include spread-map-into-bem(
+	$map: $vv-text,
+	$block: map.get($components-names, vv-text),
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents
 );

@@ -41,7 +41,7 @@
 );
 
 @include spread-map-into-utilities(
-	$map: $border-radius,
+	$map: $border-width,
 	$class: border-x,
 	$attribute: (
 		border-right-width,
@@ -51,7 +51,7 @@
 );
 
 @include spread-map-into-utilities(
-	$map: $border-radius,
+	$map: $border-width,
 	$class: border-y,
 	$attribute: (
 		border-top-width,
@@ -62,10 +62,10 @@
 
 @each $key, $value in (t: top, r: right, b: bottom, l: left) {
 	@include spread-map-into-utilities(
-		$map: $border-radius,
+		$map: $border-width,
 		$class: border- + $key,
 		$attribute: (
-			border- + $key + -width,
+			border- + $value + -width,
 		),
 		$prop: border
 	);
