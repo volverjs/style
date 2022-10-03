@@ -176,6 +176,7 @@
 					$ignore: (
 						'state',
 						'breakpoint',
+						'element',
 					),
 					$props: $props
 				);
@@ -212,6 +213,18 @@
 					$zero-specificity: $zero-specificity
 				);
 			}
+
+			// map elements
+			@if map.get($value, 'element') {
+				@include spread-map-into-elements(
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'element',
+					$block: $selector + ' ' + $block,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
 		}
 	}
 }
@@ -234,7 +247,6 @@
 
 			%#{$prefix + '__' + $element} {
 				@include spread-map-into-attrs(
-					$original: $map,
 					$map: $value,
 					$prefix: $prefix,
 					$variant: #{$key}-#{$element},

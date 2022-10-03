@@ -168,21 +168,21 @@
 			Disabled
 		</button>
 	</div>
-	<div class='mb-24'>
+	<div class='mb-24 flex gap-4 items-center'>
 		<button type='button' class='vv-button vv-button--rounded'>
-			Rounded
+			<span class='vv-button__label'>Rounded</span>
 		</button>
 		<button
 			type='button'
 			class='vv-button vv-button--rounded vv-button--primary'
 		>
-			Rounded Primary
+			<span class='vv-button__label'>Rounded Primary</span>
 		</button>
 		<button
 			type='button'
 			class='vv-button vv-button--rounded vv-button--secondary'
 		>
-			Rounded Secondary
+			<span class='vv-button__label'>Rounded Secondary</span>
 		</button>
 		<button type='button' class='vv-button vv-button--rounded'>
 			<span class='iconify' data-icon='akar-icons:heart'></span>
@@ -207,7 +207,7 @@
 	</div>
 	<div class='mb-24 flex gap-4'>
 		<a href='#' role='button' class='vv-button'>
-			Link
+			<span class='vv-button__label'>Link</span>
 		</a>
 		<a
 			href='javascript:;'
@@ -215,15 +215,41 @@
 			aria-disabled='true'
 			class='vv-button disabled'
 		>
-			Link Disabled
+			<span class='vv-button__label'>Link Disabled</span>
 		</a>
 		<button type='button' class='vv-button'>
 			<span class='iconify' data-icon='akar-icons:heart'></span>
-			Icon left
+			<span class='vv-button__label'>Icon Left</span>
 		</button>
-		<button type='button' class='vv-button'>
-			Icon right
+		<button type='button' class='vv-button vv-button--reverse'>
 			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<span class='vv-button__label'>Icon Right</span>
+		</button>
+	</div>
+	<div class='mb-24 flex gap-4'>
+		<button type='button' class='vv-button'>
+			<span role='status' class='vv-badge vv-badge--white'>14</span>
+			<span class='vv-button__label'>Badge left</span>
+		</button>
+		<button type='button' class='vv-button vv-button--reverse'>
+			<span role='status' class='vv-badge vv-badge--warning'>42</span>
+			<span class='vv-button__label'>Badge Right</span>
+		</button>
+	</div>
+	<div class='mb-24 flex gap-4'>
+		<button
+			type='button'
+			class='vv-button vv-button--ghost vv-button--column'
+		>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<span class='vv-button__label'>Top Icon</span>
+		</button>
+		<button
+			type='button'
+			class='vv-button vv-button--ghost vv-button--column vv-button--reverse'
+		>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<span class='vv-button__label'>Bottom Icon</span>
 		</button>
 	</div>
 </section>

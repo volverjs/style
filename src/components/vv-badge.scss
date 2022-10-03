@@ -1,0 +1,9 @@
+@use 'sass:map';
+@import '../context';
+
+@include spread-map-into-bem(
+	$map: $vv-badge,
+	$block: map.get($components-names, vv-badge),
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents
+);

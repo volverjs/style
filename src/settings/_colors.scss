@@ -21,8 +21,8 @@ $color-alpha: hsla(0deg 0% 0% / 0%) !default;
 $colors: (
 	scheme: $color-scheme,
 	transparent: $color-transparent,
-	black: $color-black,
-	white: $color-white,
+	black: hsla-map($color-black, 'black'),
+	white: hsla-map($color-white, 'white'),
 	brand: color-shades-map($color-brand, 'brand'),
 	accent: color-shades-map($color-accent, 'accent'),
 	success: color-shades-map($color-success, 'success'),

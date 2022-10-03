@@ -10,7 +10,10 @@ $component-map: $vv-table;
 	$props: $use-custom-props-for-components,
 	$zero-specificity: $zero-specificity-for-compoenents
 ) {
-	:where(tr) {
+	@include wrap-with-where(
+		$selector: 'tr',
+		$enabled: $zero-specificity-for-compoenents
+	) {
 		@include spread-map-into-attrs(
 			$map: map.get($component-map, 'element', 'tr'),
 			$prefix: #{$component-name}-element-tr,
@@ -18,7 +21,10 @@ $component-map: $vv-table;
 		);
 	}
 
-	:where(th) {
+	@include wrap-with-where(
+		$selector: 'th',
+		$enabled: $zero-specificity-for-compoenents
+	) {
 		@include spread-map-into-attrs(
 			$map: map.get($component-map, 'element', 'th'),
 			$prefix: #{$component-name}-element-th,
@@ -26,7 +32,10 @@ $component-map: $vv-table;
 		);
 	}
 
-	:where(td) {
+	@include wrap-with-where(
+		$selector: 'td',
+		$enabled: $zero-specificity-for-compoenents
+	) {
 		@include spread-map-into-attrs(
 			$map: map.get($component-map, 'element', 'td'),
 			$prefix: #{$component-name}-element-td,

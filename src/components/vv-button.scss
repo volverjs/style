@@ -66,4 +66,23 @@ $component-selector: '.' + $component-name;
 			);
 		}
 	}
+
+	// icon in modifier
+	@if map.get($component-map, 'modifier') {
+		@each $modifier, $modifier-map in map.get($component-map, 'modifier') {
+			@if map.get($modifier-map, 'element', 'icon') {
+				@include wrap-with-where(
+					$selector: $component-selector + '--' + $modifier +
+						' > :where(svg, [data-icon])',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					@include spread-map-into-attrs(
+						$map: map.get($modifier-map, 'element', 'icon'),
+						$prefix: #{$component-name}-modifier-#{$modifier}-element-icon,
+						$props: $use-custom-props-for-components
+					);
+				}
+			}
+		}
+	}
 }

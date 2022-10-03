@@ -1,4 +1,5 @@
 $vv-button: (
+	position: relative,
 	background: var(--color-brand),
 	border-radius: 0.5ch,
 	border-width: var(--spacing-2),
@@ -14,6 +15,7 @@ $vv-button: (
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
 	transition: all 0.2s ease-in-out,
 	will-change: all,
+	min-width: 0,
 	state: (
 		focus-visible: (
 			outline-offset: var(--spacing-4),
@@ -34,10 +36,16 @@ $vv-button: (
 	),
 	element: (
 		icon: (
-			block-size: 2ch,
-			inline-size: 2ch,
+			block-size: 1.1em,
+			inline-size: 1.1em,
 			margin: 0,
 			stroke: currentcolor,
+		),
+		label: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			min-width: 0,
+			overflow: hidden,
 		),
 	),
 	modifier: (
@@ -181,6 +189,18 @@ $vv-button: (
 		block: (
 			display: block,
 			width: 100%,
+			max-width: auto,
+		),
+		reverse: (
+			element: (
+				label: (
+					order: -1,
+				),
+			),
+		),
+		column: (
+			flex-direction: column,
+			gap: 0.2em,
 		),
 	),
 ) !default;
