@@ -164,7 +164,7 @@
 	}
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $modifier, $value in map.get($map, $key) {
-			$selector: $block + $block + '--' + $modifier;
+			$selector: $block + '--' + $modifier;
 
 			%#{$prefix + '--' + $modifier} {
 				@include spread-map-into-attrs(
@@ -195,7 +195,7 @@
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$modifier},
 					$key: 'state',
-					$block: $selector,
+					$block: $selector + $block,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -294,6 +294,7 @@
 	@if not $block {
 		$block: &;
 	}
+
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $state, $value in map.get($map, $key) {
 			@if list.index(
@@ -311,7 +312,6 @@
 			)
 			{
 				$selector: $block +
-					$block +
 					'--' +
 					$state +
 					', ' +
@@ -477,7 +477,7 @@
 	$elements-key: 'element',
 	$modifiers-key: 'modifier',
 	$states-key: 'state',
-	$breakpoints-key: 'state',
+	$breakpoints-key: 'breakpoint',
 	$props: true,
 	$zero-specificity: true,
 	$custom-block: false,
@@ -540,20 +540,6 @@
 			}
 		}
 
-		// modifiers
-		@if not $custom-modifiers {
-			@if map.has-key($map, $modifiers-key) {
-				@include spread-map-into-modifiers(
-					$map: $map,
-					$prefix: $block,
-					$key: $modifiers-key,
-					$block: $selector,
-					$props: $props,
-					$zero-specificity: $zero-specificity
-				);
-			}
-		}
-
 		// states
 		@if not $custom-states {
 			@if map.has-key($map, $states-key) {
@@ -568,13 +554,27 @@
 			}
 		}
 
-		// breakpoints
-		@if not $custom-breakpoints {
-			@if map.has-key($map, $states-key) {
-				@include spread-map-into-states(
+		// modifiers
+		@if not $custom-modifiers {
+			@if map.has-key($map, $modifiers-key) {
+				@include spread-map-into-modifiers(
 					$map: $map,
 					$prefix: $block,
-					$key: $states-key,
+					$key: $modifiers-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+
+		// breakpoints
+		@if not $custom-breakpoints {
+			@if map.has-key($map, $breakpoints-key) {
+				@include spread-map-into-breakpoints(
+					$map: $map,
+					$prefix: $block,
+					$key: $breakpoints-key,
 					$block: $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
