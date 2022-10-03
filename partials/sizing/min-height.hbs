@@ -1,7 +1,7 @@
-<section id='layout__container' class='mb-32'>
-	<h1 class='text-20 text-word-2 mb-8'>Container</h1>
-	<h2 class='font-light text-word-3 mb-24'>A component for fixing an element's
-		width to the current breakpoint.
+<section id='sizing__min-height' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Min-Height</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for setting the minimum
+		height of an element.
 	</h2>
 
 	<div class='max-h-288 overflow-y-auto mb-32'>
@@ -12,9 +12,6 @@
 						Class
 					</th>
 					<th>
-						Breakpoint
-					</th>
-					<th>
 						Properties
 					</th>
 				</tr>
@@ -22,121 +19,86 @@
 			<tbody class='align-baseline'>
 				<tr>
 					<td
-						rowspan='8'
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						container
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						None
+						min-h-0
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 100%;
+						min-height: 0px;
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						xs
+						min-h-full
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 360px;
+						min-height: 100%;
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						sm
+						min-h-screen
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 576px;
+						min-height: 100vh;
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						md
+						min-h-min
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 992px;
+						min-height: min-content;
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						lg
+						min-h-max
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 1024px;
+						min-height: max-content;
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						xl
+						min-h-fit
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 1280px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						xxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1440px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						xxxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1536px;
+						min-height: fit-content;
 					</td>
 				</tr>
 			</tbody>

@@ -1,89 +1,226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>@volverjs/style</title>
+		<meta
+			name="description"
+			content="@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well." />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<link rel="stylesheet" href="/src/style.scss" />
+		<link rel="stylesheet" href="/src/themes/dark/style.scss" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
+	</head>
 
-<head>
-    <meta charset="utf-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@volverjs/style</title>
-    <meta name="description"
-        content="@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light dark">
-    <link rel="stylesheet" href="/src/style.scss">
-    <link rel="stylesheet" href="/src/themes/dark/style.scss">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
-</head>
+	<head>
+		<meta charset="utf-8" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>@volverjs/style</title>
+		<meta
+			name="description"
+			content="@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well." />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="light dark" />
+		<link rel="stylesheet" href="/src/style.scss" />
+		<link rel="stylesheet" href="/src/themes/dark/style.scss" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
+	</head>
 
-<style>
-    html {
-        --font-sans: 'Open Sans', sans-serif;
-        height: 100%;
-    }
+	<style>
+		html {
+			--font-sans: 'Open Sans', sans-serif;
+			height: 100%;
+		}
 
-    body {
-        height: 100%;
-    }
-</style>
+		body {
+			height: 100%;
+		}
+	</style>
 
-<body>
+	<body>
+		<main class="h-full">
+			<div class="bg-surface-1 h-full">
+				<div class="container h-full flex flex-col px-16 mx-auto">
+					{{> nav}}
 
-    <main class="h-full">
-        <div class="bg-surface-1 h-full">
-            <div class="container h-full flex flex-col px-16 mx-auto">
-                {{> nav}}
+					<div
+						class="flex flex-col flex-1 justify-center items-center text-center">
+						<img
+							src="./src/assets/volverjs.svg"
+							alt="Volver"
+							class="w-256 mb-24" />
+						<h1 class="text-22 text-word font-semibold mb-16">
+							@volverjs/style
+						</h1>
+						<h2
+							class="font-light leading-normal max-w-320 text-word-3">
+							@volverjs/style is a lightweight responsive CSS
+							utility library to accompany
+							<a href="javascript:;" class="font-normal"
+								>@volverjs/ui</a
+							>
+							and static webpages as well.
+						</h2>
+					</div>
+					<div
+						class="border-t border-alpha-1 border-solid text-word-3 text-14 text-center mt-16 p-16">
+						proudly powered by
+						<a
+							href="https://24consulting.it"
+							target="_blank"
+							class="font-semibold"
+							>24/Consulting</a
+						>
+					</div>
+				</div>
+			</div>
 
-                <div class="flex flex-col flex-1 justify-center items-center text-center">
-                    <img src="./src/assets/volverjs.svg" alt="Volver" class="w-256 mb-24" />
-                    <h1 class="text-22 text-word font-semibold mb-16">
-                        @volverjs/style
-                    </h1>
-                    <h2 class="font-light leading-normal max-w-320 text-word-3">
-                        @volverjs/style is a lightweight responsive
-                        CSS
-                        utility library
-                        to
-                        accompany
-                        <a href="javascript:;" class="font-normal">@volverjs/ui</a> and static
-                        webpages as well.
-                    </h2>
-                </div>
-                <div class="border-t border-alpha-1 border-solid text-word-3 text-14 text-center mt-16 p-16">
-                    proudly powered by <a href="https://24consulting.it" target="_blank"
-                        class="font-semibold">24/Consulting</a>
-                </div>
-            </div>
-        </div>
+			<article id="components" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Components
+						</h1>
 
-        <article id="components" class="bg-surface py-32 mx-auto">
-            <div class="container px-16 mx-auto">
-                <div class="md:w-1/2 mx-auto">
-                    <h1 class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">Components</h1>
+						{{> components/vv-button }}
+					</div>
+				</div>
+			</article>
 
-                    {{> components/vv-button }}
+			<article id="layout" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Layout
+						</h1>
 
-                </div>
-            </div>
-        </article>
+						{{> layout/aspect-ratio }} {{> layout/container }}
+					</div>
+				</div>
+			</article>
 
-        <article id="layout" class="bg-surface py-32 mx-auto">
-            <div class="container px-16 mx-auto">
-                <div class="md:w-1/2 mx-auto">
-                    <h1 class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">Layout</h1>
+			<article id="layout" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Layout
+						</h1>
 
-                    {{> layout/aspect-ratio }}
+						{{> layout/aspect-ratio }} {{> layout/container }} {{>
+						layout/columns }} {{> layout/break-after }} {{>
+						layout/break-before }} {{> layout/break-inside }} {{>
+						layout/display }} {{> layout/object-fit }} {{>
+						layout/object-position }} {{> layout/overflow }} {{>
+						layout/position }} {{> layout/visibility }} {{>
+						layout/top-right-bottom-left }} {{> layout/z-index }}
+					</div>
+				</div>
+			</article>
 
-                    {{> layout/container }}
-                </div>
-            </div>
-        </article>
-    </main>
+			<article id="flexbox-grid" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Flexbox & Grid
+						</h1>
 
+						{{> layout/aspect-ratio }}
+					</div>
+				</div>
+			</article>
 
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-</body>
+			<article id="spacing" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Spacing
+						</h1>
 
+						{{> spacing/padding }} {{> spacing/margin }}
+					</div>
+				</div>
+			</article>
+
+			<article id="sizing" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Sizing
+						</h1>
+
+						{{> sizing/width }} {{> sizing/min-width }} {{>
+						sizing/max-width }} {{> sizing/height }} {{>
+						sizing/min-height }} {{> sizing/max-height }}
+					</div>
+				</div>
+			</article>
+
+			<article id="typography" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Typography
+						</h1>
+
+						{{> typography/font-family }}
+						<!-- {{> typography/font-size }} -->
+						{{> typography/font-smoothing }} {{>
+						typography/font-style }} {{> typography/font-weight }}
+						{{> typography/font-variant-numeric }} {{>
+						typography/letter-spacing }} {{> typography/line-height
+						}} {{> typography/list-style-type }} {{>
+						typography/list-style-position }} {{>
+						typography/text-align }} {{>
+						typography/text-decoration-line }} {{>
+						typography/text-decoration-style }} {{>
+						typography/text-decoration-thickness }} {{>
+						typography/text-overflow }} {{>
+						typography/text-transform }} {{>
+						typography/text-underline-offset }} {{>
+						typography/vertical-align }} {{> typography/whitespace
+						}} {{> typography/word-break }}
+					</div>
+				</div>
+			</article>
+
+			<article id="backgrounds" class="bg-surface py-32 mx-auto">
+				<div class="container px-16 mx-auto">
+					<div class="md:w-1/2 mx-auto">
+						<h1
+							class="text-22 font-bold border-b border-alpha-1 mb-32 pb-6">
+							Backgrounds
+						</h1>
+
+						{{> backgrounds/background-attachment }} {{>
+						backgrounds/background-clip }} {{>
+						backgrounds/background-origin }} {{>
+						backgrounds/background-position }} {{>
+						backgrounds/background-repeat }} {{>
+						backgrounds/background-size }} {{>
+						backgrounds/background-image }}
+					</div>
+				</div>
+			</article>
+		</main>
+		<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+	</body>
 </html>
