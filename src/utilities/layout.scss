@@ -153,8 +153,12 @@
 );
 
 // overflow
-@each $prefix in (x, y) {
-	@each $overflow in (auto, hidden, clip, visible, scroll) {
+@each $overflow in (auto, hidden, clip, visible, scroll) {
+	:where(.overflow-#{$overflow}) {
+		overflow: #{$overflow};
+	}
+
+	@each $prefix in (x, y) {
 		:where(.overflow-#{$prefix}-#{$overflow}) {
 			overflow-#{$prefix}: #{$overflow};
 		}
