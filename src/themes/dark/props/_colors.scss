@@ -4,7 +4,7 @@
 	@include spread-map-into-props($colors, 'color');
 }
 
-@media (--os-dark) {
+@media (prefers-color-scheme: dark) {
 	:root:not(.theme-light) {
 		@include theme-dark-colors;
 	}

@@ -30,7 +30,7 @@ $component-selector: '.' + $component-name;
 			$props: $use-custom-props-for-components
 		);
 
-		@media (--motion-not-ok) {
+		@media (prefers-reduced-motion: reduce) {
 			transition: none;
 		}
 	}

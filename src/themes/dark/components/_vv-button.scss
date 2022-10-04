@@ -12,7 +12,7 @@ $props: true;
 	);
 }
 
-@media (--os-dark) {
+@media (prefers-color-scheme: dark) {
 	:root:not(.theme-light) {
 		@include theme-dark-vv-button;
 	}
