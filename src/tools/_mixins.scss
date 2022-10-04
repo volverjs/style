@@ -184,7 +184,7 @@
 
 			// map props and attributes
 			@include wrap-with-where(
-				$selector: $selector,
+				$selector: $selector + $block,
 				$enabled: $zero-specificity
 			) {
 				@extend %#{$prefix + '--' + $modifier};

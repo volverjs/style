@@ -10,6 +10,7 @@ $vv-button-group: (
 		vertical: (
 			display: inline-flex,
 			flex-direction: column,
+			align-items: normal,
 		),
 		compact: (
 			gap: 0,

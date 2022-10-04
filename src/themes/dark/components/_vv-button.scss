@@ -4,10 +4,20 @@ $component-name: 'vv-button';
 $component-map: $vv-button;
 $props: true;
 
-:where(.theme-dark) {
+@mixin theme-dark-vv-button {
 	@include spread-map-into-props(
 		$map: $component-map,
 		$prefix: $component-name,
 		$deep: $props
 	);
+}
+
+@media (--os-dark) {
+	:root:not(.theme-light) {
+		@include theme-dark-vv-button;
+	}
+}
+
+:where(.theme-dark) {
+	@include theme-dark-vv-button;
 }
