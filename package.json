@@ -25,6 +25,7 @@
     "./components/vv-button": "./dist/components/vv-button",
     "./components/vv-table": "./dist/components/vv-table",
     "./components/vv-text": "./dist/components/vv-text",
+    "./export": "./dist/export",
     "./preflight": "./dist/preflight",
     "./props/borders": "./dist/props/borders",
     "./props/colors": "./dist/props/colors",
@@ -79,5 +80,8 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-handlebars": "^1.6.0",
     "vite-plugin-stylelint": "^3.0.7"
+  },
+  "dependencies": {
+    "icss-utils": "^5.1.0"
   }
 }

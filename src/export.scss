@@ -1,0 +1,22 @@
+// context
+@import 'context';
+
+:export {
+	// colors
+	@each $key, $value in $colors {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					#{'colors.' + $key}-#{$subKey}: $subValue;
+				}
+			}
+		} @else {
+			#{'colors.' + $key}: $value;
+		}
+	}
+
+	// breakpoints
+	@each $key, $value in $breakpoints {
+		#{'breakpoints.' + $key}: $value;
+	}
+}

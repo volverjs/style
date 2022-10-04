@@ -12,5 +12,7 @@ module.exports = {
 		'scss/operator-no-newline-after': null,
 		// brokes calc with css var es. calc(10px + var(--zero)) == calc(10px + 0) is an error
 		'length-zero-no-unit': null,
+		// conflict with :export
+		'selector-pseudo-class-no-unknown': null,
 	},
 }

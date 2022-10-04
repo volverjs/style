@@ -66,60 +66,63 @@
 	$bps: (
 		xxs: 0,
 	),
+	$prefix: '',
 	$zero-specificity: $zero-specificity-for-utilities
 ) {
 	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
 	{
-		@each $key, $value in $map {
-			@if $name != '' and meta.inspect($key) != meta.inspect($name) {
-				$key: #{$name}-#{meta.inspect($key)};
+		@each $breakpoint, $breakpoint-value in $bps {
+			@if $breakpoint-value > 0 {
+				$prefix: $breakpoint + '\\:';
 			}
-			@if type-of($value) == 'map' and $deep {
-				@include spread-map-into-utilities(
-					$value,
-					$class,
-					$attribute,
-					$prop,
-					$key
-				);
-			} @else {
-				$default: null;
-				$class-name: $class;
-				$key: meta.inspect($key);
-				$var: $prop;
+			@each $key, $value in $map {
+				@if $name != '' and meta.inspect($key) != meta.inspect($name) {
+					$key: #{$name}-#{meta.inspect($key)};
+				}
+				@if type-of($value) == 'map' and $deep {
+					@include spread-map-into-utilities(
+						$value,
+						$class,
+						$attribute,
+						$prop,
+						$key,
+						$prefix
+					);
+				} @else {
+					$default: null;
+					$class-name: $class;
+					$key: meta.inspect($key);
+					$var: $prop;
 
-				// fix class name
-				@if $class-name != $key and $prop != $key {
-					@if $class-name != '' {
-						$class-name: $class-name + '-';
+					// fix class name
+					@if $class-name != $key and $prop != $key {
+						@if $class-name != '' {
+							$class-name: $class-name + '-';
+						}
+
+						$class-name: $class-name + $key;
 					}
 
-					$class-name: $class-name + $key;
-				}
-
-				// fix variable name
-				@if $var != '' and $var != $key {
-					$var: $var + '-' + $key;
-				}
-
-				$var: str-replace($var, '\\/', '-');
-
-				// check if value is not a map (spacing-dynamic)
-				@if type-of($value) != 'map' {
-					$default: $value;
-				}
-
-				// check if map is a list
-				@if type-of($map) == 'list' and (not $default or $default == '')
-				{
-					$default: $key;
-				}
-
-				@each $breakpoint, $breakpoint-value in $bps {
-					$prefix: '';
-					@if $breakpoint-value > 0 {
-						$prefix: $breakpoint + '\\:';
+					// fix variable name
+					@if $var != '' and $var != $key {
+						$var: $var + '-' + $key;
 					}
+
+					$var: str-replace($var, '\\/', '-');
+
+					// check if value is not a map (spacing-dynamic)
+					@if type-of($value) != 'map' {
+						$default: $value;
+					}
+
+					// check if map is a list
+					@if type-of($map) ==
+						'list' and
+						(not $default or $default == '')
+					{
+						$default: $key;
+					}
+
 					%#{$prefix}#{$class-name} {
 						@include media-breakpoint-up($breakpoint) {
 							@if type-of($attribute) != 'list' {
