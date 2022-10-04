@@ -20,6 +20,7 @@
   "exports": {
     ".": "./dist/style",
     "./components": "./dist/components",
+    "./components/vv-badge": "./dist/components/vv-badge",
     "./components/vv-button-group": "./dist/components/vv-button-group",
     "./components/vv-button": "./dist/components/vv-button",
     "./components/vv-table": "./dist/components/vv-table",

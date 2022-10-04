@@ -1,12 +1,8 @@
 import fs from 'fs'
 import glob from 'glob'
-import path from 'node:path'
-import { URL } from 'node:url' // in Browser, the URL in native accessible on window
 import Promise from 'promise'
 import { build } from 'vite'
 import stylelint from 'vite-plugin-stylelint'
-
-const __root = new URL('..', import.meta.url).pathname
 
 // load package.json and reset exports
 const packageJson = JSON.parse(fs.readFileSync('./package.json'))
@@ -39,10 +35,11 @@ glob('./src/**/!(_*).scss', async (err, files) => {
 				plugins: [stylelint()],
 				configFile: false,
 				build: {
+					emptyOutDir: false,
 					rollupOptions: {
-						input: path.resolve(__root, input),
+						input,
 						output: {
-							dir: path.resolve(__root, `./dist/${dir}`),
+							dir: `dist/${dir}`,
 							assetFileNames: `${name}[extname]`,
 						},
 					},
