@@ -19,4 +19,9 @@
 	@each $key, $value in $breakpoints {
 		#{'breakpoints.' + $key}: $value;
 	}
+
+	// columns
+	@each $index in $columns {
+		#{'columns.' + $index}: $index;
+	}
 }

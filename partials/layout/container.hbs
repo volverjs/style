@@ -22,7 +22,7 @@
 			<tbody class='align-baseline'>
 				<tr>
 					<td
-						rowspan='8'
+						rowspan='9'
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
@@ -32,7 +32,7 @@
 						translate='no'
 						class='font-mono text-word-4 whitespace-nowrap'
 					>
-						None
+						none
 					</td>
 					<td
 						translate='no'
@@ -41,104 +41,22 @@
 						width: 100%;
 					</td>
 				</tr>
+				{{#each breakpoints}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-word-4 whitespace-nowrap'
 					>
-						xs
+						{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						width: 360px;
+					width: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						sm
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 576px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						md
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 992px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						lg
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1024px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						xl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1280px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						xxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1440px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-word-4 whitespace-nowrap'
-					>
-						xxxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						width: 1536px;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>
