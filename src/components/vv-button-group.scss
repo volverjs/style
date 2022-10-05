@@ -14,78 +14,101 @@ $button-component-selector: '.' + $button-component-name;
 	$zero-specificity: $zero-specificity-for-compoenents
 );
 
-#{$component-selector + '--block'} {
-	#{$button-component-selector} {
-		&:not([disabled], [tabindex='-1']) {
-			@include wrap-with-where(
-				$selector: '&.active, &' + $button-component-selector +
-					'--active, &:active',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				z-index: 1;
+// if has block modifier
+@if map.get($component-map, 'modifier', 'block') {
+	#{$component-selector + '--block'} {
+		#{$button-component-selector} {
+			&:not([disabled], [tabindex='-1']) {
+				@include wrap-with-where(
+					$selector: '&.active, &' + $button-component-selector +
+						'--active, &:active',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					z-index: 1;
+				}
 			}
 		}
-	}
 
-	@include wrap-with-where(
-		$selector: $button-component-selector,
-		$enabled: $zero-specificity-for-compoenents
-	) {
-		flex: 1;
+		@include wrap-with-where(
+			$selector: $button-component-selector,
+			$enabled: $zero-specificity-for-compoenents
+		) {
+			flex: 1;
+		}
 	}
 }
 
-#{$component-selector + '--compact'} {
-	&#{$component-selector + '--vertical'} {
-		#{$button-component-selector} {
-			@include wrap-with-where(
-				$selector: '&:not(:last-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				border-bottom-right-radius: 0;
-				border-bottom-left-radius: 0;
-			}
+// if has compact modifier
+@if map.get($component-map, 'modifier', 'compact') {
+	#{$component-selector + '--compact'} {
+		// if has vertical modifier
+		@if map.get($component-map, 'modifier', 'vertical') {
+			&#{$component-selector + '--vertical'} {
+				#{$button-component-selector} {
+					// clear top border-radius for first child
+					@include wrap-with-where(
+						$selector: '&:not(:first-child)',
+						$enabled: $zero-specificity-for-compoenents
+					) {
+						border-top-right-radius: 0;
+						border-top-left-radius: 0;
+					}
 
-			@include wrap-with-where(
-				$selector: '&:not(:first-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				border-top-right-radius: 0;
-				border-top-left-radius: 0;
-			}
+					// clear bottom border-radius for last child
+					@include wrap-with-where(
+						$selector: '&:not(:last-child)',
+						$enabled: $zero-specificity-for-compoenents
+					) {
+						border-bottom-right-radius: 0;
+						border-bottom-left-radius: 0;
+					}
 
-			@include wrap-with-where(
-				$selector: '&:not(:last-child, :last-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				margin-block: calc(map.get($vv-button, 'border-width') * -1);
+					// clear margin for inner children
+					@if map.get($vv-button, 'border-width') {
+						@include wrap-with-where(
+							$selector: '&:not(:last-child, :last-child)',
+							$enabled: $zero-specificity-for-compoenents
+						) {
+							margin-block: calc(
+								map.get($vv-button, 'border-width') * -1
+							);
+						}
+					}
+				}
 			}
 		}
-	}
 
-	&:not(#{$component-selector + '--vertical'}) {
-		#{$button-component-selector} {
-			@include wrap-with-where(
-				$selector: '&:not(:last-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				border-top-right-radius: 0;
-				border-bottom-right-radius: 0;
-			}
+		&:not(#{$component-selector + '--vertical'}) {
+			#{$button-component-selector} {
+				// clear left border-radius for first child
+				@include wrap-with-where(
+					$selector: '&:not(:first-child)',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
 
-			@include wrap-with-where(
-				$selector: '&:not(:first-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				border-top-left-radius: 0;
-				border-bottom-left-radius: 0;
-			}
+				// clear right border-radius for first child
+				@include wrap-with-where(
+					$selector: '&:not(:last-child)',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+				}
 
-			@include wrap-with-where(
-				$selector: '&:not(:last-child, :last-child)',
-				$enabled: $zero-specificity-for-compoenents
-			) {
-				margin-inline: calc(map.get($vv-button, 'border-width') * -1);
+				// clear margin for inner children
+				@if map.get($vv-button, 'border-width') {
+					@include wrap-with-where(
+						$selector: '&:not(:last-child, :last-child)',
+						$enabled: $zero-specificity-for-compoenents
+					) {
+						margin-inline: calc(
+							map.get($vv-button, 'border-width') * -1
+						);
+					}
+				}
 			}
 		}
 	}

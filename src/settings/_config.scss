@@ -12,9 +12,11 @@ $components-prefix: vv !default;
 
 // components names
 $components-names: (
-	vv-button: $components-prefix + -button,
-	vv-text: $components-prefix + -text,
-	vv-table: $components-prefix + -table,
-	vv-button-group: $components-prefix + -button-group,
 	vv-badge: $components-prefix + -badge,
+	vv-button: $components-prefix + -button,
+	vv-button-group: $components-prefix + -button-group,
+	vv-input-radio: $components-prefix + -input-radio,
+	vv-input-radio-group: $components-prefix + -input-radio-group,
+	vv-table: $components-prefix + -table,
+	vv-text: $components-prefix + -text,
 ) !default;

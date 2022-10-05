@@ -45,12 +45,15 @@
 
 		// fix name
 		$name: str-replace($name, '\\/', '-');
-		@if type-of($value) == 'map' {
-			@if $deep {
-				@include spread-map-into-props($value, $name, $key);
+
+		@if string.slice(meta.inspect($key), 1, 1) != '_' {
+			@if type-of($value) == 'map' {
+				@if $deep {
+					@include spread-map-into-props($value, $name, $key);
+				}
+			} @else {
+				#{'--' + $name}: #{$value};
 			}
-		} @else {
-			#{'--' + $name}: #{$value};
 		}
 	}
 }
@@ -220,10 +223,12 @@
 			// map elements
 			@if map.get($value, 'element') {
 				@include spread-map-into-elements(
+					$original: $map,
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$modifier},
 					$key: 'element',
-					$block: $selector + ' ' + $block,
+					$block: $block,
+					$modifier: $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -234,19 +239,41 @@
 
 // Transform a map into a list of BEM elements
 @mixin spread-map-into-elements(
+	$original: (),
 	$map: (),
 	$prefix: '',
 	$key: 'element',
 	$block: null,
+	$modifier: null,
 	$props: true,
 	$zero-specificity: true
 ) {
 	@if not $block {
 		$block: &;
 	}
+
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $element, $value in map.get($map, $key) {
 			$selector: $block + '__' + $element;
+
+			@if $modifier {
+				$selector: $modifier + ' ' + $selector;
+			}
+
+			// alias
+			$alias: map.get($value, '_alias');
+
+			@if not $alias {
+				$alias: map.get($original, $key, $element, '_alias');
+			}
+
+			@if $alias {
+				@if $modifier {
+					$alias: $modifier + ' ' + $alias;
+				} @else {
+					$alias: $block + ' ' + $alias;
+				}
+			}
 
 			%#{$prefix + '__' + $element} {
 				@include spread-map-into-attrs(
@@ -264,7 +291,7 @@
 
 			// map props and attributes
 			@include wrap-with-where(
-				$selector: $selector,
+				$selector: list-join(($selector, $alias)),
 				$enabled: $zero-specificity
 			) {
 				@extend %#{$prefix + '__' + $element};
@@ -277,6 +304,7 @@
 					$prefix: #{$prefix}-#{$key}-#{$element},
 					$key: 'state',
 					$block: $selector,
+					$alias: $alias,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -288,7 +316,7 @@
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$element},
 					$key: 'breakpoint',
-					$block: $selector,
+					$block: list-join(($selector, $alias)),
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -303,6 +331,7 @@
 	$prefix: '',
 	$key: 'state',
 	$block: null,
+	$alias: null,
 	$props: true,
 	$zero-specificity: true
 ) {
@@ -321,34 +350,64 @@
 					target,
 					visited,
 					focus-visible,
-					disabled
+					disabled,
+					checked,
+					readonly,
+					empty
 				),
 				$state
 			)
 			{
-				$selector: $block +
-					'--' +
-					$state +
-					', ' +
-					$block +
-					'.' +
-					$state;
+				$selector: list-join(
+					($block + '--' + $state, $block + '.' + $state)
+				);
+
+				@if $alias {
+					$selector: list-join(($selector, $alias + '.' + $state));
+				}
 
 				@if $state == 'disabled' {
-					$selector: $selector + ', ' + $block + '[disabled]';
+					$selector: list-join(($selector, $block + '[disabled]'));
+					@if $alias {
+						$selector: list-join(
+							($selector, $alias + '[disabled]')
+						);
+					}
+				} @else if $state == 'readonly' {
+					$selector: list-join(($selector, $block + '[readonly]'));
+					@if $alias {
+						$selector: list-join(
+							($selector, $alias + '[readonly]')
+						);
+					}
 				} @else if $state == 'focus-visible' {
-					$selector: $selector +
-						', ' +
-						$block +
-						':not(:active):not([disabled]):not([tabindex="-1"])' +
-						':' +
-						$state;
+					$selector: list-join(
+						(
+							$selector,
+							$block +
+								':not(:active):not([disabled]):not([tabindex="-1"]):' +
+								$state
+						)
+					);
+					@if $alias {
+						$selector: list-join(
+							(
+								$selector,
+								$alias +
+									':not(:active):not([disabled]):not([tabindex="-1"]):' +
+									$state
+							)
+						);
+					}
 				} @else {
-					$selector: $selector +
-						', ' +
-						$block +
-						':not([disabled]):' +
-						$state;
+					$selector: list-join(
+						($selector, $block + ':not([disabled]):' + $state)
+					);
+					@if $alias {
+						$selector: list-join(
+							($selector, $alias + ':not([disabled]):' + $state)
+						);
+					}
 				}
 
 				%#{$prefix + '--' + $state} {
@@ -432,16 +491,53 @@
 					@if $postfix != '' {
 						$key: #{$postfix}-#{$key};
 					}
-					@include spread-map-into-attrs(
-						$original: $original,
-						$map: $value,
-						$prefix: $prefix,
-						$variant: $variant,
-						$postfix: $key,
-						$deep: true,
-						$props: $props
-					);
-				} @else if type-of($value) != 'map' {
+
+					@if $key == 'pseudo' {
+						@each $pseudo-class, $pseudo-map in $value {
+							@if type-of($pseudo-map) == 'map' {
+								@if list.index((before, after), $pseudo-class) {
+									$original: map.get(
+										$original,
+										$pseudo-class
+									);
+									$key: #{$key}-#{$pseudo-class};
+
+									&::#{$pseudo-class} {
+										@if not $original {
+											content: '';
+
+											$original: ();
+										}
+
+										@include spread-map-into-attrs(
+											$original: $original,
+											$map: $pseudo-map,
+											$prefix: $prefix,
+											$variant: $variant,
+											$postfix: $key,
+											$deep: true,
+											$props: $props
+										);
+									}
+								}
+							}
+						}
+					} @else {
+						@include spread-map-into-attrs(
+							$original: $original,
+							$map: $value,
+							$prefix: $prefix,
+							$variant: $variant,
+							$postfix: $key,
+							$deep: true,
+							$props: $props
+						);
+					}
+				} @else if
+					type-of($value) !=
+					'map' and
+					(string.slice(meta.inspect($key), 1, 1) != '_')
+				{
 					@if $props {
 						$prop-to-replace: --#{$prefix};
 						$prop-to-replace-with: --#{$prefix};
@@ -543,7 +639,7 @@
 
 		// elements
 		@if not $custom-elements {
-			@if map.has-key($map, $modifiers-key) {
+			@if map.has-key($map, $elements-key) {
 				@include spread-map-into-elements(
 					$map: $map,
 					$prefix: $block,

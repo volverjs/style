@@ -45,43 +45,12 @@ $component-selector: '.' + $component-name;
 		}
 
 		// input file
-		&::file-selector-button {
-			margin-inline-end: var(
-				--vv-button-gap,
-				map.get($component-map, 'gap')
-			);
-		}
-
-		// icons
-		& > :where(svg, [data-icon]) {
-			fill: none;
-			flex-shrink: 0;
-			stroke-linecap: round;
-			stroke-linejoin: round;
-
-			@include spread-map-into-attrs(
-				$map: map.get($component-map, 'element', 'icon'),
-				$prefix: #{$component-name}-element-icon,
-				$props: $use-custom-props-for-components
-			);
-		}
-	}
-
-	// icon in modifier
-	@if map.get($component-map, 'modifier') {
-		@each $modifier, $modifier-map in map.get($component-map, 'modifier') {
-			@if map.get($modifier-map, 'element', 'icon') {
-				@include wrap-with-where(
-					$selector: $component-selector + '--' + $modifier +
-						' > :where(svg, [data-icon])',
-					$enabled: $zero-specificity-for-compoenents
-				) {
-					@include spread-map-into-attrs(
-						$map: map.get($modifier-map, 'element', 'icon'),
-						$prefix: #{$component-name}-modifier-#{$modifier}-element-icon,
-						$props: $use-custom-props-for-components
-					);
-				}
+		@if map.get($component-map, 'gap') {
+			&::file-selector-button {
+				margin-inline-end: var(
+					--vv-button-gap,
+					map.get($component-map, 'gap')
+				);
 			}
 		}
 	}

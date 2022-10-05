@@ -1,0 +1,59 @@
+$vv-input-radio: (
+	display: inline-flex,
+	flex-wrap: nowrap,
+	align-items: center,
+	cursor: pointer,
+	margin: 0 var(--spacing-sm) var(--spacing-sm) 0,
+	state: (
+		disabled: (
+			color: var(--color-word-4),
+			cursor: not-allowed,
+		),
+		readonly: (
+			cursor: default,
+			pointer-events: none,
+		),
+	),
+	element: (
+		input: (
+			_alias: "> input[type='radio']",
+			border: 2px solid var(--color-word),
+			width: var(--spacing-20),
+			height: var(--spacing-20),
+			border-radius: 50%,
+			margin-right: var(--spacing-xs),
+			background: transparent,
+			cursor: pointer,
+			position: relative,
+			pseudo: (
+				after: (
+					position: absolute,
+					width: 70%,
+					height: 70%,
+					background: var(--color-word),
+					inset: 50% 50%,
+					border-radius: 50%,
+					transform: translate(-50%, -50%) scale(0),
+					will-change: transform,
+					transition: transform 0.2s ease-in-out,
+				),
+			),
+			state: (
+				checked: (
+					pseudo: (
+						after: (
+							transform: translate(-50%, -50%) scale(1),
+						),
+					),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+				disabled: (
+					border-color: var(--color-word-4),
+				),
+			),
+		),
+	),
+) !default;

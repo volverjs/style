@@ -2,6 +2,7 @@
 @use 'sass:map';
 @use 'sass:color';
 @use 'sass:string';
+@use 'sass:list';
 
 @function hsla-map($color, $name) {
 	@return (
@@ -117,4 +118,20 @@
 	}
 
 	@return $string;
+}
+
+@function list-join($list, $glue: ', ') {
+	$result: null;
+
+	@for $i from 1 through length($list) {
+		$e: list.nth($list, $i);
+
+		@if $result and $e {
+			$result: $result + $glue + $e;
+		} @else if $e {
+			$result: $e;
+		}
+	}
+
+	@return $result;
 }

@@ -1,0 +1,19 @@
+$vv-input-radio-group: (
+	display: inline-flex,
+	flex-wrap: wrap,
+	element: (
+		legend: (
+			_alias: '> legend',
+			display: block,
+			font-size: var(--text-xs),
+			color: var(--color-word-3),
+			margin-bottom: var(--spacing-xs),
+		),
+	),
+	modifier: (
+		vertical: (
+			display: flex,
+			flex-direction: column,
+		),
+	),
+) !default;

@@ -36,10 +36,15 @@ $vv-button: (
 	),
 	element: (
 		icon: (
+			_alias: '> :where(svg, [data-icon])',
 			block-size: 1.1em,
 			inline-size: 1.1em,
 			margin: 0,
 			stroke: currentcolor,
+			fill: none,
+			flex-shrink: 0,
+			stroke-linecap: round,
+			stroke-linejoin: round,
 		),
 		label: (
 			white-space: nowrap,
