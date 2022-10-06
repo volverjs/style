@@ -1,0 +1,88 @@
+$vv-input-text: (
+	display: flex,
+	flex: 1,
+	flex-direction: column,
+	margin-bottom: var(--spacing-md),
+	element: (
+		label: (
+			_alias: '> label',
+			display: block,
+			font-size: var(--text-xs),
+			color: var(--color-word-3),
+			margin-bottom: var(--spacing-xs),
+		),
+		input: (
+			_alias: '> input',
+			display: block,
+			flex: 1,
+			border-width: 0 0 var(--spacing-1) 0,
+			border-style: solid,
+			border-color: var(--color-word-5),
+			background-color: var(--color-surface-1),
+			padding: var(--spacing-sm),
+			will-change: background-color,
+			transition: background-color 0.2s ease-in-out,
+			state: (
+				hover: (
+					background: var(--color-surface-2),
+				),
+			),
+			pseudo: (
+				placeholder: (
+					color: var(--color-word-4),
+				),
+			),
+		),
+		hint: (
+			_alias: '> small',
+			font-size: var(--text-12),
+			color: var(--color-word-4),
+			margin-top: var(--spacing-8),
+		),
+		focus-line: (
+			margin-top: calc(var(--spacing-2) * -1),
+			height: var(--spacing-2),
+			background: var(--color-brand),
+			transform: scaleX(0),
+			transform-origin: left,
+			will-change: transform,
+			transition: transform 0.2s ease-in-out,
+		),
+	),
+	state: (
+		focus-visible: (
+			element: (
+				focus-line: (
+					transform: scaleX(1),
+				),
+				active: (
+					transform: scaleX(1),
+				),
+			),
+		),
+	),
+	modifier: (
+		valid: (
+			element: (
+				focus-line: (
+					background: var(--color-success),
+					transform: scaleX(1),
+				),
+				hint: (
+					color: var(--color-success),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				focus-line: (
+					background: var(--color-danger),
+					transform: scaleX(1),
+				),
+				hint: (
+					color: var(--color-danger),
+				),
+			),
+		),
+	),
+) !default;

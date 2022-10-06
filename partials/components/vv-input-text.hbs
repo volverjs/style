@@ -1,0 +1,50 @@
+<section id='component__vv-input-text' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-input-text</h1>
+	<h2 class='font-light text-word-3 mb-24'>Text fields allow users to input
+		custom text entries with a keyboard. Various options can be shown with
+		the field to communicate the input requirements.
+	</h2>
+	<div>
+		<div class='vv-input-text'>
+			<label for='textfield'>Text field</label>
+			<input
+				id='textfield'
+				type='text'
+				name='textfield'
+				placeholder='Placeholder text'
+				aria-describedby='textfield-hint'
+			/>
+			<div class='vv-input-text__focus-line'></div>
+			<small id='textfield-hint' class='vv-input-text__hint'>Please fill
+				the input above.</small>
+		</div>
+		<div class='vv-input-text vv-input-text--valid'>
+			<label for='textfield-success'>Valid text field</label>
+			<input
+				id='textfield-success'
+				type='text'
+				name='textfield-success'
+				placeholder='Placeholder text'
+				aria-describedby='textfield-success-hint'
+				aria-invalid='false'
+			/>
+			<div class='vv-input-text__focus-line'></div>
+			<small id='textfield-success-hint' class='vv-input-text__hint'>The
+				input above is successful.</small>
+		</div>
+		<div class='vv-input-text vv-input-text--invalid'>
+			<label for='textfield-invalid'>Invalid text field</label>
+			<input
+				id='textfield-invalid'
+				type='text'
+				name='textfield-invalid'
+				placeholder='Placeholder text'
+				aria-describedby='textfield-invalid-hint'
+				aria-invalid='true'
+			/>
+			<div class='vv-input-text__focus-line'></div>
+			<small id='textfield-invalid-hint' class='vv-input-text__hint'>There
+				was an error with the input above.</small>
+		</div>
+	</div>
+</section>

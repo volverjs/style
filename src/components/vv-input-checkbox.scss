@@ -3,7 +3,7 @@
 
 $component-name: map.get($components-names, vv-input-checkbox);
 $component-map: $vv-input-checkbox;
-$component-selector: '.' + $component-name;
+$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -13,7 +13,7 @@ $component-selector: '.' + $component-name;
 );
 
 @include wrap-with-where(
-	$selector: $component-selector + ':has(> input[type="checkbox"]:disabled)',
+	$selector: '#{$component-selector}:has(> input[type="checkbox"]:disabled)',
 	$enabled: $zero-specificity-for-compoenents
 ) {
 	@extend %#{$component-name}--disabled !optional;

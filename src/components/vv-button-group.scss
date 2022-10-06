@@ -3,7 +3,7 @@
 
 $component-name: map.get($components-names, vv-button-group);
 $component-map: $vv-button-group;
-$component-selector: '.' + $component-name;
+$component-selector: '.#{ $component-name}';
 $button-component-name: map.get($components-names, vv-button);
 $button-component-selector: '.' + $button-component-name;
 
@@ -20,8 +20,8 @@ $button-component-selector: '.' + $button-component-name;
 		#{$button-component-selector} {
 			&:not([disabled], [tabindex='-1']) {
 				@include wrap-with-where(
-					$selector: '&.active, &' + $button-component-selector +
-						'--active, &:active',
+					$selector:
+						'&.active, &#{$button-component-selector}--active, &:active',
 					$enabled: $zero-specificity-for-compoenents
 				) {
 					z-index: 1;

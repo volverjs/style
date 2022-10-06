@@ -3,7 +3,7 @@
 
 $component-name: map.get($components-names, vv-badge);
 $component-map: $vv-badge;
-$component-selector: '.' + $component-name;
+$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,

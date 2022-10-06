@@ -1,8 +1,8 @@
 @use 'sass:map';
 @import '../context';
 
-$component-name: map.get($components-names, vv-input-radio);
-$component-map: $vv-input-radio;
+$component-name: map.get($components-names, vv-input-text);
+$component-map: $vv-input-text;
 $component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
@@ -13,8 +13,9 @@ $component-selector: '.#{ $component-name}';
 );
 
 @include wrap-with-where(
-	$selector: '#{$component-selector}:has(> input[type="radio"]:disabled)',
+	$selector:
+		'#{$component-selector} > input:focus-visible ~ #{$component-selector}__focus-line',
 	$enabled: $zero-specificity-for-compoenents
 ) {
-	@extend %#{$component-name}--disabled !optional;
+	@extend %#{$component-name}-state-focus-visible__focus-line !optional;
 }

@@ -3,7 +3,7 @@
 
 $component-name: map.get($components-names, vv-input-checkbox-group);
 $component-map: $vv-input-checkbox-group;
-$component-selector: '.' + $component-name;
+$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,

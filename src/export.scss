@@ -35,8 +35,6 @@
 	// spacing & spacing-dynamic
 	// @each $size, $value in map.merge($spacing, $spacing-dynamic) {
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
-		@debug $size;
-
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {

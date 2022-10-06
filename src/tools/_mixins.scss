@@ -423,6 +423,9 @@
 						$map: $value,
 						$prefix: $prefix,
 						$variant: #{$key}-#{$state},
+						$ignore: (
+							'element',
+						),
 						$deep: true,
 						$props: $props
 					);
@@ -432,6 +435,20 @@
 					$enabled: $zero-specificity
 				) {
 					@extend %#{$prefix + '--' + $state};
+				}
+
+				// map elements
+				@if map.get($value, 'element') {
+					@include spread-map-into-elements(
+						$original: $map,
+						$map: $value,
+						$prefix: #{$prefix}-#{$key}-#{$state},
+						$key: 'element',
+						$block: $block,
+						$modifier: $selector,
+						$props: $props,
+						$zero-specificity: $zero-specificity
+					);
 				}
 			}
 		}
@@ -502,7 +519,11 @@
 					@if $key == 'pseudo' {
 						@each $pseudo-class, $pseudo-map in $value {
 							@if type-of($pseudo-map) == 'map' {
-								@if list.index((before, after), $pseudo-class) {
+								@if list.index(
+									(before, after, placeholder),
+									$pseudo-class
+								)
+								{
 									$original: map.get(
 										$original,
 										$pseudo-class
