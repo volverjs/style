@@ -399,6 +399,13 @@
 							)
 						);
 					}
+				} @else if $state == 'checked' {
+					$selector: list-join(($selector, $block + ':' + $state));
+					@if $alias {
+						$selector: list-join(
+							($selector, $alias + ':' + $state)
+						);
+					}
 				} @else {
 					$selector: list-join(
 						($selector, $block + ':not([disabled]):' + $state)
@@ -504,7 +511,14 @@
 
 									&::#{$pseudo-class} {
 										@if not $original {
-											content: '';
+											@if not
+												map.has-key(
+													$pseudo-map,
+													'content'
+												)
+											{
+												content: '';
+											}
 
 											$original: ();
 										}
@@ -538,7 +552,7 @@
 					'map' and
 					(string.slice(meta.inspect($key), 1, 1) != '_')
 				{
-					@if $props {
+					@if $props and $key != 'content' {
 						$prop-to-replace: --#{$prefix};
 						$prop-to-replace-with: --#{$prefix};
 

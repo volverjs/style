@@ -207,5 +207,8 @@ $vv-button: (
 			flex-direction: column,
 			gap: 0.2em,
 		),
+		full-bleed: (
+			min-width: 20ch,
+		),
 	),
 ) !default;

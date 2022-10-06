@@ -1,6 +1,3 @@
-// configuration
-@import 'config';
-
 // utilities and custom props
 @import 'borders';
 @import 'breakpoints';
@@ -14,6 +11,8 @@
 @import 'components/vv-badge';
 @import 'components/vv-button';
 @import 'components/vv-button-group';
+@import 'components/vv-input-checkbox';
+@import 'components/vv-input-checkbox-group';
 @import 'components/vv-input-radio';
 @import 'components/vv-input-radio-group';
 @import 'components/vv-table';

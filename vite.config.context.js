@@ -7,7 +7,7 @@ const icssExports = extractICSS(
 ).icssExports
 
 export default Object.keys(icssExports).reduce((accumulator, key) => {
-	const splittedKey = key.split('.')
+	const splittedKey = key.split('__')
 	const value = icssExports[key]
 
 	let current = accumulator

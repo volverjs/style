@@ -1,5 +1,8 @@
 @use 'sass:meta';
 
+// configuration
+@import 'config';
+
 // tools (mixins, functions, recipes)
 @import 'tools';
 

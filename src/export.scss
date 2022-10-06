@@ -7,21 +7,21 @@
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'colors.' + $key}-#{$subKey}: $subValue;
+					#{'colors__' + $key}-#{$subKey}: $subValue;
 				}
 			}
 		} @else {
-			#{'colors.' + $key}: $value;
+			#{'colors__' + $key}: $value;
 		}
 	}
 
 	// breakpoints
 	@each $key, $value in $breakpoints {
-		#{'breakpoints.' + $key}: $value;
+		#{'breakpoints__' + $key}: $value;
 	}
 
 	// columns
 	@each $index in $columns {
-		#{'columns.' + $index}: $index;
+		#{'columns__' + $index}: $index;
 	}
 }

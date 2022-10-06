@@ -1,0 +1,99 @@
+$vv-input-checkbox: (
+	display: inline-flex,
+	flex-wrap: nowrap,
+	align-items: center,
+	cursor: pointer,
+	user-select: none,
+	margin: 0 var(--spacing-sm) var(--spacing-sm) 0,
+	state: (
+		disabled: (
+			opacity: 0.3,
+			cursor: not-allowed,
+		),
+		readonly: (
+			cursor: default,
+			pointer-events: none,
+		),
+	),
+	element: (
+		input: (
+			_alias: "> input[type='checkbox']",
+			border: var(--spacing-2) solid var(--color-word),
+			width: var(--spacing-20),
+			height: var(--spacing-20),
+			margin-right: var(--spacing-xs),
+			background-position: center,
+			background-size: 0.8em auto,
+			background-repeat: no-repeat,
+			cursor: pointer,
+			position: relative,
+			state: (
+				checked: (
+					background-image:
+						url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E"),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+	),
+	modifier: (
+		partial: (
+			element: (
+				input: (
+					state: (
+						checked: (
+							background-image:
+								url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E"),
+						),
+					),
+				),
+			),
+		),
+		switch: (
+			element: (
+				input: (
+					border: 0,
+					width: var(--spacing-44),
+					height: var(--spacing-24),
+					border-radius: var(--spacing-12),
+					background-color: var(--color-word-5),
+					position: relative,
+					will-change: background-color,
+					transition: background-color 0.2s ease-in-out,
+					pseudo: (
+						after: (
+							width: var(--spacing-20),
+							height: var(--spacing-20),
+							border-radius: 50%,
+							position: absolute,
+							inset: var(--spacing-2) 0 0 var(--spacing-2),
+							background: var(--color-white),
+							will-change: transform,
+							transition: transform 0.2s ease-in-out,
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--color-word-4),
+						),
+						active: (
+							background-color: var(--color-word-3),
+						),
+						checked: (
+							background-image: none,
+							background-color: var(--color-brand),
+							pseudo: (
+								after: (
+									transform: translateX(100%),
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+) !default;
