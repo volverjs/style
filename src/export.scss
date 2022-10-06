@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 // context
 @import 'context';
 
@@ -15,6 +17,11 @@
 		}
 	}
 
+	// aspect-ratio
+	@each $key, $value in $aspect-ratio {
+		#{'aspect-ratio__' + $key}: $value;
+	}
+
 	// breakpoints
 	@each $key, $value in $breakpoints {
 		#{'breakpoints__' + $key}: $value;
@@ -23,5 +30,21 @@
 	// columns
 	@each $index in $columns {
 		#{'columns__' + $index}: $index;
+	}
+
+	// spacing & spacing-dynamic
+	// @each $size, $value in map.merge($spacing, $spacing-dynamic) {
+	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+		@debug $size;
+
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					#{'spacers__' + $size}-#{$subKey}: $subValue;
+				}
+			}
+		} @else {
+			#{'spacers__' + $size}: $value;
+		}
 	}
 }
