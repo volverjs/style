@@ -52,8 +52,6 @@
 
 	// font-size & font-size-dynamic
 	@each $size, $value in map.merge($font-size, $font-size-dynamic) {
-		@debug $size;
-
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {

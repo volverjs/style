@@ -134,6 +134,40 @@
 					<th>
 						Class
 					</th>
+					<th class="w-1/2 ">
+						Result
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each colors}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='w-1/2 bg-{{@key}} font-mono text-info whitespace-nowrap'
+					>
+					</td>
+				</tr>
+			
+				{{/each}}
+				
+			</tbody>
+		</table>
+	</div>
+
+	{{!-- <div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
 					<th>
 						Properties
 					</th>
@@ -352,5 +386,5 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
+	</div> --}}
 </section>
