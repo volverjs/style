@@ -4,6 +4,8 @@
 		border radius of an element.
 	</h2>
 
+	{{> spacer-helpers/border-radius }}
+	
 	<div class='max-h-288 overflow-y-auto mb-32'>
 		<table class='vv-table'>
 			<thead class='sticky z-sticky top-0 bg-surface'>
@@ -20,161 +22,73 @@
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						rounded-none
+						rounded-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						border-radius: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-wrap'
-					>
-						rounded-{sm | rounded | md | lg | xl | xxl | xxxl |
-						full}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-wrap'
-					>
-						border-radius: {0.125rem | 0.25rem | 0.375rem | 0.5rem |
-						0.75rem | 1rem | 1.5rem | 9999px};
+						border-radius: {spacer-value};
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						rounded-{t|b}-none
+						rounded-{t|b}-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						border-{top|bottom}-left-radius: 0px;
-						border-{top|bottom}-right-radius: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-wrap'
-					>
-						rounded-{t|b}-{sm | rounded | md | lg | xl | xxl | xxxl
-						| full}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-wrap'
-					>
-						<p>border-{top|bottom}-left-radius: {0.125rem | 0.25rem
-							| 0.375rem | 0.5rem | 0.75rem | 1rem | 1.5rem |
-							9999px};</p>
-						<p>border-{top|bottom}-right-radius: {0.125rem | 0.25rem
-							| 0.375rem | 0.5rem | 0.75rem | 1rem | 1.5rem |
-							9999px};</p>
+						<div>border-{top|bottom}-left-radius: {spacer-value};</div>
+						<div>border-{top|bottom}-right-radius: {spacer-value};</div>
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						rounded-{r|l}-none
+						rounded-{r|l}-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						border-top-{right|left}-radius: 0px;
-						border-bottom-{right|left}-radius: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-wrap'
-					>
-						rounded-{r|l}-{sm | rounded | md | lg | xl | xxl | xxxl
-						| full}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-wrap'
-					>
-						<p>border-top-{right|left}-radius: {0.125rem | 0.25rem |
-							0.375rem | 0.5rem | 0.75rem | 1rem | 1.5rem |
-							9999px};</p>
-						<p>border-bottom-{right|left}-radius: {0.125rem |
-							0.25rem | 0.375rem | 0.5rem | 0.75rem | 1rem |
-							1.5rem | 9999px};</p>
+						<div>border-top-{right|left}-radius: {spacer-value};</div>
+						<div>border-bottom-{right|left}-radius: {spacer-value};</div>
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						rounded-t{r|l}-none
+						rounded-t{r|l}-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						border-top-{right|left}-radius: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-wrap'
-					>
-						rounded-t{r|l}-{sm | rounded | md | lg | xl | xxl | xxxl
-						| full}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-wrap'
-					>
-						border-top-{right|left}-radius: {0.125rem | 0.25rem |
-						0.375rem | 0.5rem | 0.75rem | 1rem | 1.5rem | 9999px};
+						border-top-{right|left}-radius: {spacer-value};
 					</td>
 				</tr>
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						rounded-b{r|l}-none
+						rounded-b{r|l}-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						border-bottom-{right|left}-radius: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-wrap'
-					>
-						rounded-b{r|l}-{sm | rounded | md | lg | xl | xxl | xxxl
-						| full}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-wrap'
-					>
-						border-bottom-{right|left}-radius: {0.125rem | 0.25rem |
-						0.375rem | 0.5rem | 0.75rem | 1rem | 1.5rem | 9999px};
+						border-bottom-{right|left}-radius: {spacer-value};
 					</td>
 				</tr>
 			</tbody>

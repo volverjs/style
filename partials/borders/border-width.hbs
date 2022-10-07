@@ -4,6 +4,8 @@
 		of an element's borders.
 	</h2>
 
+	{{> spacer-helpers/border-width }}
+
 	<div class='max-h-288 overflow-y-auto mb-32'>
 		<table class='vv-table'>
 			<thead class='sticky z-sticky top-0 bg-surface'>
@@ -22,13 +24,13 @@
 						translate='no'
 						class='font-mono text-accent whitespace-wrap'
 					>
-						border-{0|border|2|4|8}
+						border-{spacer-size}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-wrap'
 					>
-						border-width: {0px | 1px | 2px | 4px | 8px }
+						border-width: {spacer-value}
 					</td>
 				</tr>
 				<tr>
@@ -36,14 +38,14 @@
 						translate='no'
 						class='font-mono text-accent whitespace-wrap'
 					>
-						border-x-{0|border|2|4|8}
+						border-x-{spacer-size}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-wrap'
 					>
-						<p>border-left-width: {0px | 1px | 2px | 4px | 8px }</p>
-						<p>border-right-width: {0px | 1px | 2px | 4px | 8px }</p>
+						<div>border-left-width: {spacer-value}</div>
+						<div>border-right-width: {spacer-value}</div>
 					</td>
 				</tr>
 				<tr>
@@ -51,14 +53,14 @@
 						translate='no'
 						class='font-mono text-accent whitespace-wrap'
 					>
-						border-y-{0|border|2|4|8}
+						border-y-{spacer-size}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-wrap'
 					>
-						<p>border-top-width: {0px | 1px | 2px | 4px | 8px }</p>
-						<p>border-bottom-width: {0px | 1px | 2px | 4px | 8px }</p>
+						<div>border-top-width: {spacer-value}</div>
+						<div>border-bottom-width: {spacer-value}</div>
 					</td>
 				</tr>
 			</tbody>

@@ -4,6 +4,8 @@
 		element's padding.
 	</h2>
 
+	{{> spacer-helpers/spacers }}
+
 	<div class='max-h-288 overflow-y-auto mb-32'>
 		<table class='vv-table'>
 			<thead class='sticky z-sticky top-0 bg-surface'>
@@ -20,28 +22,45 @@
 				<tr>
 					<td
 						translate='no'
-						class='font-mono text-accent whitespace-wrap'
+						class='font-mono text-accent whitespace-nowrap'
 					>
-						p{x|y|t|r|b|l|}-{0|px|1|2|4|6|8|10|12 -
-						14|16|20|22|24|26|28|32|34|36|38 -
-						40|44|48|56|64|80|96|100|112|128|144
-						|150|160|176|192|208|224|240|256|288 -
-						300|320|384|xs|sm|md|lg|xl}
+						p{t|r|b|l|}-{spacer-size}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-wrap'
+						class='font-mono text-info whitespace-nowrap'
 					>
-						padding-{top|right|bottom|left}: {0 | 1px | 0.0625rem |
-						0.125rem | 0.25rem | 0.375rem | 0.5rem | 0.625rem |
-						0.75rem | 0.875rem | 1rem | 1.25rem | 1.375rem | 1.5rem
-						| 1.625rem | 1.75rem | 2rem | 2.125rem | 2.25rem |
-						2.375rem | 2.5rem | 2.75rem | 3rem | 3.5rem | 4rem |
-						5rem | 6rem | 6.25rem | 7rem | 8rem | 9rem | 9.375rem |
-						10rem | 11rem | 12rem | 13rem | 14rem | 15rem | 16rem |
-						18rem | 18.75rem | 20rem | 24rem | {xs-breakpoint-value}
-						| {sm-breakpoint-value} | {md-breakpoint-value}
-						{lg-breakpoint-value} | {xl-breakpoint-value} };
+						padding-{top|right|bottom|left}: {spacer-value};
+					</td>
+				</tr>
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						p-x-{spacer-size}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+						<p>padding-left: {spacer-value};</p>
+						<p>padding-right: {spacer-value};</p>
+					</td>
+				</tr>
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						p-y-{spacer-size}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+						<p>padding-top: {spacer-value};</p>
+						<p>padding-bottom: {spacer-value};</p>
 					</td>
 				</tr>
 			</tbody>

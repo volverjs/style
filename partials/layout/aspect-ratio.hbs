@@ -17,96 +17,28 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each aspect-ratio}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						aspect-auto
+						{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						aspect-ratio: auto;
+					aspect-ratio: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						aspect-square
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap0'
-					>
-						aspect-ratio: 1 / 1;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						aspect-photo
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						aspect-ratio: 3 / 2;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						aspect-tv
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						aspect-ratio: 4 / 3;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						aspect-wide
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						aspect-ratio: 16 / 9;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						aspect-ultrawide
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						aspect-ratio: 21 / 9;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>
 
 	<div class='relative rounded-md bg-surface-1 p-16 border border-alpha-2'>
-		<div class='absolute inset-0 bg-grid mix-blend-difference'></div>
+		<div class='absolute inset-0 bg-grid mix-blend-plus-lighter'></div>
 		<div class='relative gap-10 columns-2 md:columns-3'>
 			<div
 				class='aspect-square break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'

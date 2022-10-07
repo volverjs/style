@@ -1,4 +1,6 @@
 @use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
 
 // context
 @import 'context';
@@ -19,7 +21,10 @@
 
 	// aspect-ratio
 	@each $key, $value in $aspect-ratio {
-		#{'aspect-ratio__' + $key}: $value;
+		$name: meta.inspect($value);
+		$name: str-replace($name, '"', '');
+
+		#{'aspect-ratio__' + $key}: $name;
 	}
 
 	// breakpoints
@@ -33,7 +38,6 @@
 	}
 
 	// spacing & spacing-dynamic
-	// @each $size, $value in map.merge($spacing, $spacing-dynamic) {
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
@@ -44,5 +48,46 @@
 		} @else {
 			#{'spacers__' + $size}: $value;
 		}
+	}
+
+	// font-size & font-size-dynamic
+	@each $size, $value in map.merge($font-size, $font-size-dynamic) {
+		@debug $size;
+
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					#{'font-size__' + $size}-#{$subKey}: $subValue;
+				}
+			}
+		} @else {
+			#{'font-size__' + $size}: $value;
+		}
+	}
+
+	// width spacer
+	@each $key, $value in $width {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '/');
+
+		#{'width-spacer__' + $name}: $value;
+	}
+
+	// height spacer
+	@each $key, $value in $height {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '/');
+
+		#{'height-spacer__' + $name}: $value;
+	}
+
+	// border radius
+	@each $key, $value in $border-radius {
+		#{'border-radius-spacer__' + $key}: $value;
+	}
+
+	// border width
+	@each $key, $value in $border-width {
+		#{'border-width-spacer__' + $key}: $value;
 	}
 }
