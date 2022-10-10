@@ -17,90 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each min-height}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						min-h-0
+						min-h-{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						min-height: 0px;
+						min-height: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						min-h-full
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						min-height: 100%;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						min-h-screen
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						min-height: 100vh;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						min-h-min
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						min-height: min-content;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						min-h-max
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						min-height: max-content;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						min-h-fit
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						min-height: fit-content;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

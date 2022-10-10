@@ -62,7 +62,7 @@
 }
 
 /* revert for bug in Chromium browsers
-   - fix for the content editable attribute will work properly.
+	- fix for the content editable attribute will work properly.
    - webkit-user-select: auto; added for Safari in case of using user-select:none on wrapper element */
 :where([contenteditable]:not([contenteditable='false'])) {
 	-moz-user-modify: read-write;

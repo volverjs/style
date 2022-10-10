@@ -18,91 +18,53 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each line-height}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						leading-none
+						leading-{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						line-height: 1;
+					line-height: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						leading-tight
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						line-height: 1.25;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						leading-snug
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						line-height: 1.375;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						leading-normal
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						line-height: 1.5;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						leading-relaxed
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						line-height: 1.625;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						leading-loose
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						line-height: 2;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
+	</div>
+
+	<div
+		class='container h-full grid rounded-md bg-surface-1 p-24'
+		style='grid-template-columns: repeat(2, minmax(0, 1fr));'
+	>
+		<div class='leading-none border-b border-alpha-1 mb-24 pb-24'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
+		<div class='leading-tight border-b border-alpha-1 mb-24 pb-24'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
+		<div class='leading-snug border-b border-alpha-1 mb-24 pb-24'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
+		<div class='leading-normal border-b border-alpha-1 mb-24 pb-24'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
+		<div class='leading-relaxed'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
+		<div class='leading-loose'>
+			<p>First line</p>
+			<p>Second line</p>
+		</div>
 	</div>
 </section>

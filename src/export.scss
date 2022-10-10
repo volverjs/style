@@ -6,12 +6,22 @@
 @import 'context';
 
 :export {
+	/* CUSTOMIZATION
+    ============================================================== */
 	// colors
 	@each $key, $value in $colors {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'colors__' + $key}-#{$subKey}: $subValue;
+					@if not
+						str-index($subKey, 'hue') and not
+						str-index($subKey, 'saturation') and not
+						str-index($subKey, 'lightness') and not
+						str-index($subKey, 'surface') and not
+						str-index($subKey, #{$key})
+					{
+						#{'colors__' + $key}-#{$subKey}: $subValue;
+					}
 				}
 			}
 		} @else {
@@ -19,6 +29,8 @@
 		}
 	}
 
+	/* LAYOUT
+    ============================================================== */
 	// aspect-ratio
 	@each $key, $value in $aspect-ratio {
 		$name: meta.inspect($value);
@@ -37,6 +49,16 @@
 		#{'columns__' + $index}: $index;
 	}
 
+	// z-index
+	@each $key, $value in $z-index {
+		$measure: meta.inspect($value);
+		$measure: str-replace($measure, '"', '');
+
+		#{'z-index__' + $key}: $measure;
+	}
+
+	/* SPACING
+    ============================================================== */
 	// spacing & spacing-dynamic
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
 		@if type-of($value) == 'map' {
@@ -87,5 +109,54 @@
 	// border width
 	@each $key, $value in $border-width {
 		#{'border-width-spacer__' + $key}: $value;
+	}
+
+	/* SIZING
+    ============================================================== */
+	// min width
+	@each $key, $value in $min-width {
+		#{'min-width__' + $key}: $value;
+	}
+
+	// min height
+	@each $key, $value in $min-height {
+		#{'min-height__' + $key}: $value;
+	}
+
+	// max width
+	@each $key, $value in $max-width {
+		#{'max-width__' + $key}: $value;
+	}
+
+	// max height
+	@each $key, $value in $max-height {
+		#{'max-height__' + $key}: $value;
+	}
+
+	// max height
+	@each $key, $value in $max-height {
+		#{'max-height__' + $key}: $value;
+	}
+
+	/* TYPOGRAPHY
+    ============================================================== */
+	// font-family
+	@each $key, $value in $font-family {
+		#{'font-family__' + $key}: $value;
+	}
+
+	// font-weight
+	@each $key, $value in $font-weight {
+		#{'font-weight__' + $key}: $value;
+	}
+
+	// line-height
+	@each $key, $value in $line-height {
+		#{'line-height__' + $key}: $value;
+	}
+
+	// letter-spacing
+	@each $key, $value in $letter-spacing {
+		#{'letter-spacing__' + $key}: $value;
 	}
 }

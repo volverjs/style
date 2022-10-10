@@ -1,7 +1,7 @@
-<section id='sizing__min-width' class='mb-32'>
-	<h1 class='text-20 text-word-2 mb-8'>Min-Width</h1>
-	<h2 class='font-light text-word-3 mb-24'>Utilities for setting the minimum
-		width of an element.
+<section id='typography__text-color' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Text Color</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling the text
+		color of an element.
 	</h2>
 
 	<div class='max-h-288 overflow-y-auto mb-32'>
@@ -12,28 +12,30 @@
 						Class
 					</th>
 					<th>
-						Properties
+						Example
 					</th>
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
-				{{#each min-width}}
+				{{#each colors}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						min-w-{{@key}}
+						text-{{@key}}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-nowrap'
+						class='w-1/2 text-{{@key}} font-mono whitespace-nowrap'
 					>
-						min-width: {{this}};
+					Lorem ipsum dolor sit amet.
 					</td>
 				</tr>
 				{{/each}}
 			</tbody>
 		</table>
 	</div>
+
+	
 </section>

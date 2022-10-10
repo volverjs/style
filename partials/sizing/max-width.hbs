@@ -17,216 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each max-width}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						max-w-0
+						max-w-{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						max-width: 0px;
+						max-width: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-none
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: none;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-full
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 100%;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-min
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: min-content;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-max
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: max-content;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-fit
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: fit-content;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-prose
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 65ch;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-xxs
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 0;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-xs
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 360px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-sm
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 576px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-md
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 992px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-lg
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 1024px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-xl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 1280px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-xxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 1440px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						max-w-screen-xxxl
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						max-width: 1536px;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

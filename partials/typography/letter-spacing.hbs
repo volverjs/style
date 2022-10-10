@@ -17,91 +17,47 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each letter-spacing}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						tracking-tighter
+						tracking-{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						letter-spacing: -0.05em;
+					letter-spacing: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						tracking-tight
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						letter-spacing: -0.025em;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						tracking-normal
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						letter-spacing: 0em;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						tracking-wide
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						letter-spacing: 0.025em;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						tracking-wider
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						letter-spacing: 0.05em;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						tracking-widest
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						letter-spacing: 0.1em;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
+	</div>
+
+	<div
+		class='container h-full grid rounded-md bg-surface-1 p-24'
+		style='grid-template-columns: repeat(2, minmax(0, 1fr));'
+	>
+		<div class='border-b border-alpha-1 mb-24 pb-24'>
+			<p class='tracking-tighter'>Volverjs</p>
+		</div>
+		<div class='border-b border-alpha-1 mb-24 pb-24'>
+			<p class='tracking-tight'>Volverjs</p>
+		</div>
+		<div class='border-b border-alpha-1 mb-24 pb-24'>
+			<p class='tracking-normal'>Volverjs</p>
+		</div>
+		<div class='border-b border-alpha-1 mb-24 pb-24'>
+			<p class='tracking-wide'>Volverjs</p>
+		</div>
+		<div>
+			<p class='tracking-wider'>Volverjs</p>
+		</div>
+		<div>
+			<p class='tracking-widest'>Volverjs</p>
+		</div>
 	</div>
 </section>
