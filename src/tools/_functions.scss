@@ -120,7 +120,7 @@
 	@return $string;
 }
 
-@function list-join($list, $glue: ', ') {
+@function list-to-string($list, $glue: ', ') {
 	$result: null;
 
 	@for $i from 1 through length($list) {

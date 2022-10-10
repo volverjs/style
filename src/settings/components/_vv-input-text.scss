@@ -1,72 +1,127 @@
+@use 'sass:map';
+
 $vv-input-text: (
+	--vv-input-padding-top: var(--spacing-sm),
+	--vv-input-padding-right: var(--spacing-sm),
+	--vv-input-padding-bottom: var(--spacing-sm),
+	--vv-input-padding-left: var(--spacing-sm),
 	display: flex,
 	flex: 1,
 	flex-direction: column,
 	margin-bottom: var(--spacing-md),
+	position: relative,
 	element: (
 		label: (
-			_alias: '> label',
+			_alias: 'label',
 			display: block,
 			font-size: var(--text-xs),
 			color: var(--color-word-3),
 			margin-bottom: var(--spacing-xs),
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
+			max-width: 100%,
 		),
-		input: (
-			_alias: '> input',
-			display: block,
+		wrapper: (
+			position: relative,
+			display: flex,
+			align-items: center,
 			flex: 1,
-			border-width: 0 0 var(--spacing-1) 0,
-			border-style: solid,
-			border-color: var(--color-word-5),
+			overflow: hidden,
 			background-color: var(--color-surface-1),
-			padding: var(--spacing-sm),
 			will-change: background-color,
 			transition: background-color 0.2s ease-in-out,
-			state: (
-				hover: (
-					background: var(--color-surface-2),
+			pseudo: (
+				before: (
+					position: absolute,
+					height: var(--spacing-1),
+					inset: auto 0 0 0,
+					background: var(--color-word-5),
+				),
+				after: (
+					position: absolute,
+					height: var(--spacing-2),
+					inset: auto 0 0 0,
+					background: var(--color-brand),
+					transform: scaleX(0),
+					transform-origin: left,
+					will-change: transform,
+					transition: transform 0.2s ease-in-out,
 				),
 			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-3),
+				),
+				focus-within: (
+					background-color: var(--color-surface-2),
+					pseudo: (
+						after: (
+							transform: scaleX(1),
+						),
+					),
+				),
+			),
+		),
+		icon: (
+			_alias: ':where(svg, [data-icon])',
+			margin: var(--spacing-sm),
+			position: absolute,
+			pointer-events: none,
+		),
+		icon-right: (
+			_alias: 'input + :where(svg, [data-icon])',
+			right: 0,
+		),
+		input: (
+			_alias: 'input',
+			display: block,
+			flex: 1,
+			[padding]: var(--vv-input-padding-top) var(--vv-input-padding-right)
+				var(--vv-input-padding-bottom) var(--vv-input-padding-left),
 			pseudo: (
 				placeholder: (
 					color: var(--color-word-4),
 				),
 			),
-		),
-		hint: (
-			_alias: '> small',
-			font-size: var(--text-12),
-			color: var(--color-word-4),
-			margin-top: var(--spacing-8),
-		),
-		focus-line: (
-			margin-top: calc(var(--spacing-2) * -1),
-			height: var(--spacing-2),
-			background: var(--color-brand),
-			transform: scaleX(0),
-			transform-origin: left,
-			will-change: transform,
-			transition: transform 0.2s ease-in-out,
-		),
-	),
-	state: (
-		focus-visible: (
-			element: (
-				focus-line: (
-					transform: scaleX(1),
+			state: (
+				disabled: (
+					cursor: not-allowed,
 				),
-				active: (
-					transform: scaleX(1),
+				readonly: (
+					cursor: text,
 				),
 			),
 		),
+		hint: (
+			_alias: 'small',
+			display: block,
+			font-size: var(--text-12),
+			color: var(--color-word-4),
+			padding-top: var(--spacing-8),
+			padding-inline: var(--spacing-xs),
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
+			max-width: 100%,
+		),
 	),
 	modifier: (
+		icon-left: (
+			--vv-input-padding-left: calc(var(--spacing-sm) * 2 + 1em),
+		),
+		icon-right: (
+			--vv-input-padding-right: calc(var(--spacing-sm) * 2 + 1em),
+		),
 		valid: (
 			element: (
-				focus-line: (
-					background: var(--color-success),
-					transform: scaleX(1),
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--color-success),
+							transform: scaleX(1),
+						),
+					),
 				),
 				hint: (
 					color: var(--color-success),
@@ -75,14 +130,146 @@ $vv-input-text: (
 		),
 		invalid: (
 			element: (
-				focus-line: (
-					background: var(--color-danger),
-					transform: scaleX(1),
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--color-danger),
+							transform: scaleX(1),
+						),
+					),
 				),
 				hint: (
 					color: var(--color-danger),
+				),
+				icon-right: (
+					color: var(--color-danger),
+				),
+			),
+		),
+		loading: (
+			element: (
+				wrapper: (
+					pseudo: (
+						before: (
+							height: 2px,
+							background: var(--color-brand-lighten-5),
+						),
+						after: (
+							animation: progress 2.2s infinite,
+						),
+					),
+				),
+			),
+		),
+		floating: (
+			[margin-left]: var(--vv-input-padding-left),
+			[margin-right]: var(--vv-input-padding-right),
+			element: (
+				wrapper: (
+					[margin-left]: calc(var(--vv-input-padding-left) * -1),
+					[margin-right]: calc(var(--vv-input-padding-right) * -1),
+				),
+				hint: (
+					[margin-left]: calc(var(--vv-input-padding-left) * -1),
+					[margin-right]: calc(var(--vv-input-padding-right) * -1),
+				),
+				label: (
+					position: absolute,
+					z-index: 1,
+					pointer-events: none,
+					font-size: inherit,
+					[padding-top]: var(--vv-input-padding-top),
+					[padding-bottom]: var(--vv-input-padding-bottom),
+					padding-inline: 0,
+					margin: 0,
+					will-change: 'transform',
+					transform-origin: left,
+					transition: all 0.2s ease-in-out,
+				),
+				input: (
+					pseudo: (
+						placeholder: (
+							opacity: 0,
+						),
+					),
+				),
+			),
+			state: (
+				focus-within: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+				dirty: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+	state: (
+		disabled: (
+			opacity: 0.5,
+		),
+		readonly: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							opacity: 0,
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
 				),
 			),
 		),
 	),
 ) !default;
+
+@keyframes progress {
+	0% {
+		transform: scaleX(0);
+	}
+
+	50% {
+		transform: scaleX(1);
+		transform-origin: left;
+	}
+
+	51% {
+		transform: scaleX(1);
+		transform-origin: center right;
+	}
+
+	100% {
+		transform: scaleX(0);
+		transform-origin: center right;
+	}
+}

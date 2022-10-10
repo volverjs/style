@@ -2,6 +2,7 @@
 @use 'sass:list';
 @use 'sass:string';
 @use 'sass:meta';
+@use 'sass:selector';
 
 // Check ascending order
 // Used to ensure the breakpoints are ordered ascending.
@@ -196,13 +197,29 @@
 				@extend %#{$prefix + '--' + $modifier};
 			}
 
+			// map elements
+			@if map.get($value, 'element') {
+				@include spread-map-into-elements(
+					$original: $map,
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'element',
+					$block: $block,
+					$modifier: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+
 			// map states
 			@if map.get($value, 'state') {
 				@include spread-map-into-states(
+					$original: $map,
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$modifier},
 					$key: 'state',
-					$block: $selector + $block,
+					$block: $block,
+					$modifier: $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -215,20 +232,6 @@
 					$prefix: #{$prefix}-#{$key}-#{$modifier},
 					$key: 'breakpoint',
 					$block: $selector,
-					$props: $props,
-					$zero-specificity: $zero-specificity
-				);
-			}
-
-			// map elements
-			@if map.get($value, 'element') {
-				@include spread-map-into-elements(
-					$original: $map,
-					$map: $value,
-					$prefix: #{$prefix}-#{$key}-#{$modifier},
-					$key: 'element',
-					$block: $block,
-					$modifier: $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -257,7 +260,15 @@
 			$selector: $block + '__' + $element;
 
 			@if $modifier {
-				$selector: $modifier + ' ' + $selector;
+				$selectors: ();
+				@each $item in selector.parse($modifier) {
+					$selectors: list.join(
+						$selectors,
+						selector.nest($item, $selector)
+					);
+				}
+
+				$selector: list-to-string($selectors);
 			}
 
 			// alias
@@ -269,7 +280,15 @@
 
 			@if $alias {
 				@if $modifier {
-					$alias: $modifier + ' ' + $alias;
+					$aliases: ();
+					@each $item in selector.parse($modifier) {
+						$aliases: list.join(
+							$aliases,
+							selector.nest($item, $alias)
+						);
+					}
+
+					$alias: list-to-string($aliases);
 				} @else {
 					$alias: $block + ' ' + $alias;
 				}
@@ -289,15 +308,15 @@
 				);
 			}
 
-			// map props and attributes
+			// attributes
 			@include wrap-with-where(
-				$selector: list-join(($selector, $alias)),
+				$selector: list-to-string(($selector, $alias)),
 				$enabled: $zero-specificity
 			) {
 				@extend %#{$prefix + '__' + $element};
 			}
 
-			// map states
+			// states
 			@if map.get($value, 'state') {
 				@include spread-map-into-states(
 					$map: $value,
@@ -310,13 +329,13 @@
 				);
 			}
 
-			// map breakpoints
+			// breakpoints
 			@if map.get($value, 'breakpoint') {
 				@include spread-map-into-breakpoints(
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$element},
 					$key: 'breakpoint',
-					$block: list-join(($selector, $alias)),
+					$block: list-to-string(($selector, $alias)),
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -327,16 +346,22 @@
 
 // Transform a map into a list of states
 @mixin spread-map-into-states(
+	$original: null,
 	$map: (),
 	$prefix: '',
 	$key: 'state',
 	$block: null,
+	$modifier: '',
 	$alias: null,
 	$props: true,
 	$zero-specificity: true
 ) {
+	@if not $original {
+		$original: $map;
+	}
+
 	@if not $block {
-		$block: &;
+		$blocks: &;
 	}
 
 	@if type-of(map.get($map, $key)) == 'map' {
@@ -353,73 +378,101 @@
 					disabled,
 					checked,
 					readonly,
-					empty
+					empty,
+					placeholder-shown,
+					dirty,
+					valid,
+					invalid
 				),
 				$state
 			)
 			{
-				$selector: list-join(
-					($block + '--' + $state, $block + '.' + $state)
-				);
+				$selectors: ();
 
-				@if $alias {
-					$selector: list-join(($selector, $alias + '.' + $state));
-				}
-
-				@if $state == 'disabled' {
-					$selector: list-join(($selector, $block + '[disabled]'));
-					@if $alias {
-						$selector: list-join(
-							($selector, $alias + '[disabled]')
-						);
-					}
-				} @else if $state == 'readonly' {
-					$selector: list-join(($selector, $block + '[readonly]'));
-					@if $alias {
-						$selector: list-join(
-							($selector, $alias + '[readonly]')
-						);
-					}
-				} @else if $state == 'focus-visible' {
-					$selector: list-join(
+				@each $block-item in selector.parse($block) {
+					$selectors: list.join(
+						$selectors,
 						(
-							$selector,
-							$block +
-								':not(:active):not([disabled]):not([tabindex="-1"]):' +
-								$state
+							'#{$modifier}#{$block-item}--#{$state}',
+							'#{$modifier}#{$block-item}.#{$state}'
 						)
 					);
+
 					@if $alias {
-						$selector: list-join(
-							(
-								$selector,
-								$alias +
-									':not(:active):not([disabled]):not([tabindex="-1"]):' +
-									$state
-							)
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$alias}.#{$state}'
 						);
 					}
-				} @else if $state == 'checked' {
-					$selector: list-join(($selector, $block + ':' + $state));
-					@if $alias {
-						$selector: list-join(
-							($selector, $alias + ':' + $state)
+
+					@if $state == 'dirty' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not(:has(input:placeholder-shown))'
 						);
-					}
-				} @else {
-					$selector: list-join(
-						($selector, $block + ':not([disabled]):' + $state)
-					);
-					@if $alias {
-						$selector: list-join(
-							($selector, $alias + ':not([disabled]):' + $state)
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not(:has(input:placeholder-shown))'
+							);
+						}
+					} @else if $state == 'disabled' or $state == 'readonly' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[#{$state}]'
 						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[#{$state}]'
+							);
+						}
+					} @else if $state == 'focus-visible' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+							);
+						}
+					} @else if $state == 'checked' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:#{$state}'
+							);
+						}
+					} @else {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not([disabled]):#{$state}'
+							);
+						}
 					}
 				}
+
+				$selector: list-to-string($selectors);
 
 				%#{$prefix + '--' + $state} {
 					@include spread-map-into-attrs(
-						$original: $map,
+						$original: $original,
 						$map: $value,
 						$prefix: $prefix,
 						$variant: #{$key}-#{$state},
@@ -440,7 +493,7 @@
 				// map elements
 				@if map.get($value, 'element') {
 					@include spread-map-into-elements(
-						$original: $map,
+						$original: $original,
 						$map: $value,
 						$prefix: #{$prefix}-#{$key}-#{$state},
 						$key: 'element',
@@ -517,20 +570,20 @@
 					}
 
 					@if $key == 'pseudo' {
-						@each $pseudo-class, $pseudo-map in $value {
+						@each $pseudo-element, $pseudo-map in $value {
 							@if type-of($pseudo-map) == 'map' {
 								@if list.index(
 									(before, after, placeholder),
-									$pseudo-class
+									$pseudo-element
 								)
 								{
 									$original: map.get(
 										$original,
-										$pseudo-class
+										$pseudo-element
 									);
-									$key: #{$key}-#{$pseudo-class};
+									$key: pseudo-#{$pseudo-element};
 
-									&::#{$pseudo-class} {
+									&::#{$pseudo-element} {
 										@if not $original {
 											@if not
 												map.has-key(
@@ -573,7 +626,12 @@
 					'map' and
 					(string.slice(meta.inspect($key), 1, 1) != '_')
 				{
-					@if $props and $key != 'content' {
+					@if $props and
+						$key !=
+						'content' and
+						(string.slice(meta.inspect($key), 1, 2) != '--') and
+						(string.slice(meta.inspect($key), 1, 1) != '[')
+					{
 						$prop-to-replace: --#{$prefix};
 						$prop-to-replace-with: --#{$prefix};
 
@@ -598,6 +656,14 @@
 							#{$key}: var(#{$prop-to-replace-with});
 						}
 					} @else {
+						@if string.slice(meta.inspect($key), 1, 1) == '[' {
+							$key: string.slice(
+								meta.inspect($key),
+								2,
+								string.length(meta.inspect($key)) - 1
+							);
+						}
+
 						#{$key}: #{$value};
 					}
 				}
