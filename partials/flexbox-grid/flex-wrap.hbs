@@ -16,48 +16,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each flex-wrap}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						flex-wrap
+						flex-{{this}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						flex-wrap: wrap;
+					flex-wrap: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						flex-wrap-reverse
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						flex-wrap: wrap-reverse;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						flex-nowrap
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						flex-wrap: nowrap;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

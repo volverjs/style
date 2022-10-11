@@ -6,8 +6,8 @@
 @import 'context';
 
 :export {
-	/* CUSTOMIZATION
-    ============================================================== */
+	// ============================================================== */
+	// #region CUSTOMIZATION
 	// colors
 	@each $key, $value in $colors {
 		@if type-of($value) == 'map' {
@@ -28,8 +28,10 @@
 		}
 	}
 
-	/* LAYOUT
-    ============================================================== */
+	// #endregion
+
+	// ==============================================================
+	// #region LAYOUT
 	// aspect-ratio
 	@each $key, $value in $aspect-ratio {
 		$name: meta.inspect($value);
@@ -91,8 +93,49 @@
 		#{'z-index__' + $key}: $measure;
 	}
 
-	/* SPACING
-    ============================================================== */
+	// #endregion
+
+	// ==============================================================
+	// #region FLEXBOX
+	// flex-direction
+	@each $key, $value in $flex-direction {
+		#{'flex-direction__' + $key}: $value;
+	}
+
+	// flex-wrap
+	@each $index in $flex-wrap {
+		#{'flex-wrap__' + $index}: $index;
+	}
+
+	// flex
+	@each $key, $value in $flex {
+		#{'flex__' + $key}: $value;
+	}
+
+	// order
+	@each $key, $value in $order {
+		#{'order__' + $key}: $value;
+	}
+
+	// justify-align-content
+	@each $key, $value in $justify-align-content {
+		#{'justify-align-content__' + $key}: $value;
+	}
+
+	// justify-align-items
+	@each $key, $value in $justify-align-items {
+		#{'justify-align-items__' + $key}: $value;
+	}
+
+	// justify-align-self
+	@each $key, $value in $justify-align-self {
+		#{'justify-align-self__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region SPACING
 	// spacing & spacing-dynamic
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
 		@if type-of($value) == 'map' {
@@ -145,8 +188,10 @@
 		#{'border-width-spacer__' + $key}: $value;
 	}
 
-	/* SIZING
-    ============================================================== */
+	// #endregion
+
+	// ============================================================== */
+	// #region SIZING
 	// min width
 	@each $key, $value in $min-width {
 		#{'min-width__' + $key}: $value;
@@ -172,8 +217,10 @@
 		#{'max-height__' + $key}: $value;
 	}
 
-	/* TYPOGRAPHY
-    ============================================================== */
+	// #endregion
+
+	// ============================================================== */
+	// #region TYPOGRAPHY
 	// font-family
 	@each $key, $value in $font-family {
 		#{'font-family__' + $key}: $value;
@@ -239,8 +286,10 @@
 		#{'white-space__' + $index}: $index;
 	}
 
-	/* BACKGROUND
-    ============================================================== */
+	// #endregion
+
+	// ============================================================== */
+	// #region BACKGROUND
 	// background-attachment
 	@each $index in $background-attachment {
 		#{'background-attachment__' + $index}: $index;
@@ -271,17 +320,23 @@
 		#{'background-size__' + $index}: $index;
 	}
 
-	/* BORDER 
-    ============================================================== */
+	// #endregion
+
+	// ============================================================== */
+	// #region BORDER
 	// border-style
 	@each $index in $border-style {
 		#{'border-style__' + $index}: $index;
 	}
 
-	/* EFFECTS 
-    ============================================================== */
+	// #endregion
+
+	// ============================================================== */
+	// #region EFFECTS
 	// blend-mode
 	@each $index in $blend-mode {
 		#{'blend-mode__' + $index}: $index;
 	}
+
+	// #endregion
 }

@@ -3,38 +3,20 @@
 
 // flex direction
 @include spread-map-into-utilities(
-	$map: (
-		row: row,
-		row-reverse: row-reverse,
-		col: column,
-		col-reverse: column-reverse,
-	),
+	$map: $flex-direction,
 	$class: flex,
 	$attribute: flex-direction
 );
 
 // flex wrap
 @include spread-map-into-utilities(
-	$map: (
-		wrap,
-		wrap-reverse,
-		nowrap,
-	),
+	$map: $flex-wrap,
 	$class: flex,
 	$attribute: flex-wrap
 );
 
 // flex
-@include spread-map-into-utilities(
-	$map: (
-		1: 1 1 0%,
-		auto: 1 1 auto,
-		initial: 0 1 auto,
-		none: none,
-	),
-	$class: flex,
-	$attribute: flex
-);
+@include spread-map-into-utilities($map: $flex, $class: flex, $attribute: flex);
 
 // flex grow
 @each $prefix, $prop in (grow: flex-grow, shrink: flex-shrink) {
@@ -48,23 +30,7 @@
 
 // order
 @include spread-map-into-utilities(
-	$map: (
-		1: 1,
-		2: 2,
-		3: 3,
-		4: 4,
-		5: 5,
-		6: 6,
-		7: 7,
-		8: 8,
-		9: 9,
-		10: 10,
-		11: 11,
-		12: 12,
-		first: -9999,
-		last: 9999,
-		none: 0,
-	),
+	$map: $order,
 	$class: order,
 	$attribute: order
 );
@@ -102,14 +68,7 @@
 // justify and align content
 @each $class, $attribute in (justify: justify-content, content: align-content) {
 	@include spread-map-into-utilities(
-		$map: (
-			start: flex-start,
-			end: flex-end,
-			center: center,
-			between: space-between,
-			around: space-around,
-			evenly: space-evenly,
-		),
+		$map: $justify-align-content,
 		$class: $class,
 		$attribute: $attribute
 	);
@@ -118,13 +77,7 @@
 // justify and align items
 @each $class, $attribute in (justify-items: justify-items, items: align-items) {
 	@include spread-map-into-utilities(
-		$map: (
-			start: flex-start,
-			end: flex-end,
-			center: center,
-			baseline: baseline,
-			stretch: stretch,
-		),
+		$map: $justify-align-items,
 		$class: $class,
 		$attribute: $attribute
 	);
@@ -133,14 +86,7 @@
 // justify and align self
 @each $class, $attribute in (justify-self: justify-self, self: align-self) {
 	@include spread-map-into-utilities(
-		$map: (
-			auto: auto,
-			start: flex-start,
-			end: flex-end,
-			center: center,
-			baseline: baseline,
-			stretch: stretch,
-		),
+		$map: $justify-align-self,
 		$class: $class,
 		$attribute: $attribute
 	);
