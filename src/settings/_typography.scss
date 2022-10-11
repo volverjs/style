@@ -113,6 +113,12 @@ $font-variant-numeric: (
 	stacked-fractions: stacked-fractions,
 ) !default;
 
+// list-style-type
+$list-style-type: (none, disc, decimal) !default;
+
+// list-style-position
+$list-style-position: (inside, outside) !default;
+
 // text-align
 $text-align: (left, center, right, justify, start, end) !default;
 

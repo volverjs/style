@@ -38,6 +38,35 @@ $break-before: (
 // break-inside
 $break-inside: (auto, avoid, avoid-page, avoid-column) !default;
 
+// display-without-breakpoints
+$display-without-breakpoints: (
+	table,
+	inline-table,
+	table-caption,
+	table-cell,
+	table-column,
+	table-column-group,
+	table-footer-group,
+	table-header-group,
+	table-row-group,
+	table-row,
+	flow-root,
+	contents,
+	list-item
+) !default;
+
+// display-with-breakpoints
+$display-with-breakpoints: (
+	block,
+	inline-block,
+	inline,
+	flex,
+	inline-flex,
+	grid,
+	inline-grid,
+	none
+) !default;
+
 // object-fit
 $object-fit: (fill, contain, cover, none, scale-down) !default;
 

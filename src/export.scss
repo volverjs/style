@@ -65,6 +65,16 @@
 		#{'break-inside__' + $index}: $index;
 	}
 
+	// display-without-breakpoints
+	@each $index in $display-without-breakpoints {
+		#{'display-without-breakpoints__' + $index}: $index;
+	}
+
+	// display-with-breakpoints
+	@each $index in $display-with-breakpoints {
+		#{'display-with-breakpoints__' + $index}: $index;
+	}
+
 	// object-fit
 	@each $index in $object-fit {
 		#{'object-fit__' + $index}: $index;
@@ -249,6 +259,16 @@
 	// text-align
 	@each $index in $text-align {
 		#{'text-align__' + $index}: $index;
+	}
+
+	// list-style-type
+	@each $index in $list-style-type {
+		#{'list-style-type__' + $index}: $index;
+	}
+
+	// list-style-position
+	@each $index in $list-style-position {
+		#{'list-style-position__' + $index}: $index;
 	}
 
 	// text-decorator-line

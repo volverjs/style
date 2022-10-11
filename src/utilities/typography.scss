@@ -74,21 +74,14 @@
 
 // list-style-type
 @include spread-map-into-utilities(
-	$map: (
-		none,
-		disc,
-		decimal,
-	),
+	$map: $list-style-type,
 	$class: list,
 	$attribute: list-style-type
 );
 
 // list-style-position
 @include spread-map-into-utilities(
-	$map: (
-		inside,
-		outside,
-	),
+	$map: $list-style-position,
 	$class: list,
 	$attribute: list-style-position
 );
