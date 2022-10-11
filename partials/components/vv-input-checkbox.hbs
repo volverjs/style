@@ -62,69 +62,73 @@
 	<div class='mb-24'>
 		<label
 			class='vv-input-checkbox vv-input-checkbox--partial readonly'
-			for='checkbox-partial-option'
+			for='checkbox-indeterminate-option'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-partial-option'
-				name='checkbox-partial-option'
-				value='checkbox-partial-option'
+				id='checkbox-indeterminate-option'
+				name='checkbox-indeterminate-option'
+				value='checkbox-indeterminate-option'
 				onclick='javascript: return false;'
 				tabindex='-1'
 			/>
 			Option
 		</label>
 		<label
-			class='vv-input-checkbox vv-input-checkbox--partial'
-			for='checkbox-partial-option-checked'
+			class='vv-input-checkbox'
+			for='checkbox-indeterminate-option-checked'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-partial-option-checked'
-				name='checkbox-partial-option-checked'
-				value='checkbox-partial-option-checked'
-				checked='checked'
+				id='checkbox-indeterminate-option-checked'
+				name='checkbox-indeterminate-option-checked'
+				value='checkbox-indeterminate-option-checked'
 			/>
 			Checked
 		</label>
+		<script>
+			const checkbox =
+			document.getElementById("checkbox-indeterminate-option-checked");
+			checkbox.indeterminate = true;
+		</script>
 		<label
-			class='vv-input-checkbox vv-input-checkbox--partial'
-			for='checkbox-partial-option-checked'
+			class='vv-input-checkbox indeterminate'
+			for='checkbox-indeterminate-option-checked'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-partial-option-focus'
-				name='checkbox-partial-option-focus'
-				value='checkbox-partial-option-focus'
+				id='checkbox-indeterminate-option-focus'
+				name='checkbox-indeterminate-option-focus'
+				value='checkbox-indeterminate-option-focus'
 				checked='checked'
-				class='focus-visible'
+				class='focus-visible indeterminate'
 			/>
 			Focus
 		</label>
 		<label
-			class='vv-input-checkbox vv-input-checkbox--partial'
-			for='checkbox-partial-option-disabled'
+			class='vv-input-checkbox'
+			for='checkbox-indeterminate-option-disabled'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-partial-option-disabled'
-				name='checkbox-partial-option-disabled'
-				value='checkbox-partial-option-disabled'
+				id='checkbox-indeterminate-option-disabled'
+				name='checkbox-indeterminate-option-disabled'
+				value='checkbox-indeterminate-option-disabled'
 				disabled='disabled'
 			/>
 			Disabled
 		</label>
 		<label
-			class='vv-input-checkbox vv-input-checkbox--partial'
-			for='checkbox-partial-option-disabled-checked'
+			class='vv-input-checkbox indeterminate'
+			for='checkbox-indeterminate-option-disabled-checked'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-partial-option-disabled-checked'
-				name='checkbox-partial-option-disabled-checked'
-				value='checkbox-partial-option-disabled-checked'
+				id='checkbox-indeterminate-option-disabled-checked'
+				name='checkbox-indeterminate-option-disabled-checked'
+				value='checkbox-indeterminate-option-disabled-checked'
 				disabled='disabled'
-				checked='checked'
+				class='indeterminate'
 			/>
 			Disabled Checked
 		</label>

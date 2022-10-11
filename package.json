@@ -27,6 +27,7 @@
     "./components/vv-input-checkbox": "./dist/components/vv-input-checkbox",
     "./components/vv-input-radio-group": "./dist/components/vv-input-radio-group",
     "./components/vv-input-radio": "./dist/components/vv-input-radio",
+    "./components/vv-input-text": "./dist/components/vv-input-text",
     "./components/vv-table": "./dist/components/vv-table",
     "./components/vv-text": "./dist/components/vv-text",
     "./export": "./dist/export",

@@ -73,16 +73,74 @@ $vv-input-text: (
 			_alias: 'input + :where(svg, [data-icon])',
 			right: 0,
 		),
+		actions-group: (
+			display: flex,
+			flex-direction: column,
+			position: absolute,
+			right: 0,
+			top: 0,
+			bottom: var(--spacing-px),
+		),
+		action-chevron: (
+			flex: 1,
+			width: calc(1em + var(--spacing-sm) * 2),
+			background-position: center var(--spacing-2),
+			background-size: var(--text-14) auto,
+			background-repeat: no-repeat,
+			background-image:
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"),
+			cursor: pointer,
+			state: (
+				hover: (
+					background-color: var(--color-surface-4),
+				),
+				active: (
+					background-color: var(--color-surface-5),
+				),
+			),
+		),
+		action-chevron-up: (
+			transform: rotate(180deg),
+		),
 		input: (
 			_alias: 'input',
 			display: block,
 			flex: 1,
 			[padding]: var(--vv-input-padding-top) var(--vv-input-padding-right)
 				var(--vv-input-padding-bottom) var(--vv-input-padding-left),
+			min-height: var(--spacing-50),
 			pseudo: (
 				placeholder: (
 					color: var(--color-word-4),
 				),
+				-webkit-calendar-picker-indicator: (
+						position: absolute,
+						padding: var(--spacing-sm),
+						top: 0,
+						right: 0,
+						opacity: 0,
+					),
+				-webkit-search-cancel-button: (
+						display: none,
+					),
+				-webkit-color-swatch-wrapper: (
+						display: block,
+						border: none,
+						height: 100%,
+						padding: 0,
+					),
+				-webkit-color-swatch: (
+						display: block,
+						border: none,
+						height: var(--spacing-20),
+						border-radius: var(--spacing-4),
+					),
+				-webkit-outer-spin-button: (
+						display: none,
+					),
+				-webkit-inner-spin-button: (
+						display: none,
+					),
 			),
 			state: (
 				disabled: (

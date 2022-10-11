@@ -187,5 +187,149 @@
 				Please fill the input above.
 			</small>
 		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-left'
+		>
+			<label for='textfield-password'>Password</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:lock-on'></span>
+				<input
+					id='textfield-password'
+					type='password'
+					name='textfield-password'
+					placeholder='Floating label'
+					aria-describedby='textfield-password-hint'
+				/>
+			</div>
+			<small id='textfield-password-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-right'
+		>
+			<label for='textfield-datetime'>Datetime</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-datetime'
+					type='datetime-local'
+					name='textfield-datetime'
+					placeholder='Floating label'
+					aria-describedby='textfield-date-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:calendar'></span>
+			</div>
+			<small id='textfield-datetime-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-right'
+		>
+			<label for='textfield-date'>Date</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-date'
+					type='date'
+					name='textfield-date'
+					placeholder='Floating label'
+					aria-describedby='textfield-date-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:calendar'></span>
+			</div>
+			<small id='textfield-date-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-right'
+		>
+			<label for='textfield-time'>Time</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-time'
+					type='time'
+					name='textfield-time'
+					placeholder='Floating label'
+					aria-describedby='textfield-time-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:clock'></span>
+			</div>
+			<small id='textfield-time-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-right'
+		>
+			<label for='textfield-search'>Search</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-search'
+					type='search'
+					name='textfield-search'
+					placeholder='Floating label'
+					aria-describedby='textfield-search-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:search'></span>
+			</div>
+			<small id='textfield-search-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div class='vv-input-text vv-input-text--icon-right'>
+			<label for='textfield-color'>Color</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-color'
+					type='color'
+					name='textfield-color'
+					aria-describedby='textfield-color-hint'
+					value='#1976d2'
+				/>
+				<span class='iconify' data-icon='akar-icons:water'></span>
+			</div>
+			<small id='textfield-color-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--icon-right vv-input-text--floating'
+		>
+			<label for='textfield-number'>Number</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-number'
+					type='number'
+					name='textfield-number'
+					placeholder='Floating label'
+					aria-describedby='textfield-number-hint'
+					value='10'
+					step='0.1'
+				/>
+				<div class='vv-input-text__actions-group'>
+					<button
+						type='button'
+						id='textfield-number-increment'
+						class='vv-input-text__action-chevron vv-input-text__action-chevron-up'
+					></button>
+					<button
+						type='button'
+						id='textfield-number-decrement'
+						class='vv-input-text__action-chevron'
+					></button>
+				</div>
+			</div>
+			<small id='textfield-number-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<script>
+			const input = document.getElementById('textfield-number');
+			document.getElementById('textfield-number-increment').addEventListener('click',
+			() => { input.stepUp() });
+			document.getElementById('textfield-number-decrement').addEventListener('click',
+			() => { input.stepDown() });
+		</script>
 	</div>
 </section>

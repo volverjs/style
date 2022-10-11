@@ -47,7 +47,13 @@
 		// fix name
 		$name: str-replace($name, '\\/', '-');
 
-		@if string.slice(meta.inspect($key), 1, 1) != '_' {
+		@if string.slice(meta.inspect($key), 1, 1) !=
+			'_' and
+			string.slice(meta.inspect($key), 1, 2) !=
+			'--' and
+			string.slice(meta.inspect($key), 1, 1) !=
+			'['
+		{
 			@if type-of($value) == 'map' {
 				@if $deep {
 					@include spread-map-into-props($value, $name, $key);
@@ -382,7 +388,8 @@
 					placeholder-shown,
 					dirty,
 					valid,
-					invalid
+					invalid,
+					indeterminate
 				),
 				$state
 			)
@@ -573,7 +580,17 @@
 						@each $pseudo-element, $pseudo-map in $value {
 							@if type-of($pseudo-map) == 'map' {
 								@if list.index(
-									(before, after, placeholder),
+									(
+										before,
+										after,
+										placeholder,
+										-webkit-calendar-picker-indicator,
+										-webkit-search-cancel-button,
+										-webkit-color-swatch-wrapper,
+										-webkit-color-swatch,
+										-webkit-inner-spin-button,
+										-webkit-outer-spin-button
+									),
 									$pseudo-element
 								)
 								{

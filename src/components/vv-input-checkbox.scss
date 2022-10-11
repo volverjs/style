@@ -18,3 +18,11 @@ $component-selector: '.#{ $component-name}';
 ) {
 	@extend %#{$component-name}--disabled !optional;
 }
+
+@include wrap-with-where(
+	$selector:
+		'#{$component-selector}:has(> input[type="checkbox"]:indeterminate)',
+	$enabled: $zero-specificity-for-compoenents
+) {
+	@extend %#{$component-name}--indeterminate !optional;
+}

@@ -23,7 +23,7 @@ $vv-input-checkbox: (
 			height: var(--spacing-20),
 			margin-right: var(--spacing-xs),
 			background-position: center,
-			background-size: 0.8em auto,
+			background-size: var(--text-12) auto,
 			background-repeat: no-repeat,
 			cursor: pointer,
 			position: relative,
@@ -31,6 +31,10 @@ $vv-input-checkbox: (
 				checked: (
 					background-image:
 						url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E"),
+				),
+				indeterminate: (
+					background-image:
+						url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E"),
 				),
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-brand),
@@ -40,18 +44,6 @@ $vv-input-checkbox: (
 		),
 	),
 	modifier: (
-		partial: (
-			element: (
-				input: (
-					state: (
-						checked: (
-							background-image:
-								url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E"),
-						),
-					),
-				),
-			),
-		),
 		switch: (
 			element: (
 				input: (
