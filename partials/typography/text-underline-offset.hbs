@@ -17,90 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each text-underline-offset}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						underline-offset-auto
+						underline-offset-{{@key}}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-auto'
+						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-{{@key}}'
 					>
-						text-underline-offset: auto;
+					text-underline-offset: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						underline-offset-0
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-0'
-					>
-						text-underline-offset: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						underline-offset-1
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-1'
-					>
-						text-underline-offset: 1px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						underline-offset-2
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-2'
-					>
-						text-underline-offset: 2px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						underline-offset-4
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-4'
-					>
-						text-underline-offset: 4px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						underline-offset-8
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand underline-offset-8'
-					>
-						text-underline-offset: 8px;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

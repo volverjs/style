@@ -99,3 +99,75 @@ $letter-spacing: (
 	wider: 0.05em,
 	widest: 0.1em,
 ) !default;
+
+// font-variant-numeric
+$font-variant-numeric: (
+	normal-nums: normal,
+	ordinal: ordinal,
+	slashed-zero: slashed-zero,
+	lining-nums: lining-nums,
+	oldstyle-nums: oldstyle-nums,
+	proportional-nums: proportional-nums,
+	tabular-nums: tabular-nums,
+	diagonal-fractions: diagonal-fractions,
+	stacked-fractions: stacked-fractions,
+) !default;
+
+// text-align
+$text-align: (left, center, right, justify, start, end) !default;
+
+// text-decorator-line
+$text-decorator-line: (
+	underline: underline,
+	overline: overline,
+	line-through: line-through,
+	no-underline: none,
+) !default;
+
+// text-decorator-style
+$text-decorator-style: (solid, double, dotted, dashed, wavy) !default;
+
+// text-decorator-thickness
+$text-decorator-thickness: (
+	auto: auto,
+	from-font: from-font,
+	0: 0px,
+	1: 1px,
+	2: 2px,
+	4: 4px,
+	8: 8px,
+) !default;
+
+// text-underline-offset
+$text-underline-offset: (
+	auto: auto,
+	from-font: from-font,
+	0: 0px,
+	1: 1px,
+	2: 2px,
+	4: 4px,
+	8: 8px,
+) !default;
+
+// text-transform
+$text-transform: (
+	uppercase: uppercase,
+	lowercase: lowercase,
+	capitalize: capitalize,
+	normal-case: none,
+) !default;
+
+// vertical-align
+$vertical-align: (
+	baseline,
+	top,
+	middle,
+	bottom,
+	text-top,
+	text-bottom,
+	sub,
+	super
+) !default;
+
+// white-space
+$white-space: (normal, nowrap, pre, pre-line, pre-wrap) !default;

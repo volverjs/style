@@ -17,76 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each text-decorator-style}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						decoration-solid
+						decoration-{{this}}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-solid'
+						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-{{this}}'
 					>
-						text-decoration-style: solid;
+					text-decoration-style: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-double
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-double'
-					>
-						text-decoration-style: double;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-dotted
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-dotted'
-					>
-						text-decoration-style: dotted;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-dashed
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-dashed'
-					>
-						text-decoration-style: dashed;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-wavy
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-wavy'
-					>
-						text-decoration-style: wavy;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

@@ -17,104 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each text-decorator-thickness}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						decoration-auto
+						decoration-{{@key}}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-auto'
+						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-{{@key}}'
 					>
-						text-decoration-thickness: auto;
+					text-decoration-thickness: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-from-font
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-from-font'
-					>
-						text-decoration-thickness: from-font;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-0
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-0'
-					>
-						text-decoration-thickness: 0px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-1
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-1'
-					>
-						text-decoration-thickness: 1px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-2
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-2'
-					>
-						text-decoration-thickness: 2px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-4
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-4'
-					>
-						text-decoration-thickness: 4px;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-8
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand decoration-8'
-					>
-						text-decoration-thickness: 8px;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

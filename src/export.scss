@@ -159,4 +159,95 @@
 	@each $key, $value in $letter-spacing {
 		#{'letter-spacing__' + $key}: $value;
 	}
+
+	// font-variant-numeric
+	@each $key, $value in $font-variant-numeric {
+		#{'font-variant-numeric__' + $key}: $value;
+	}
+
+	// text-align
+	@each $index in $text-align {
+		#{'text-align__' + $index}: $index;
+	}
+
+	// text-decorator-line
+	@each $key, $value in $text-decorator-line {
+		#{'text-decorator-line__' + $key}: $value;
+	}
+
+	// text-decorator-style
+	@each $index in $text-decorator-style {
+		#{'text-decorator-style__' + $index}: $index;
+	}
+
+	// text-decorator-thickness
+	@each $key, $value in $text-decorator-thickness {
+		#{'text-decorator-thickness__' + $key}: $value;
+	}
+
+	// text-underline-offset
+	@each $key, $value in $text-underline-offset {
+		#{'text-underline-offset__' + $key}: $value;
+	}
+
+	// text-transform
+	@each $key, $value in $text-transform {
+		#{'text-transform__' + $key}: $value;
+	}
+
+	// vertical-align
+	@each $index in $vertical-align {
+		#{'vertical-align__' + $index}: $index;
+	}
+
+	// white-space
+	@each $index in $white-space {
+		#{'white-space__' + $index}: $index;
+	}
+
+	/* BACKGROUND
+    ============================================================== */
+	// background-attachment
+	@each $index in $background-attachment {
+		#{'background-attachment__' + $index}: $index;
+	}
+
+	// background-clip
+	@each $key, $value in $background-clip {
+		#{'background-clip__' + $key}: $value;
+	}
+
+	// background-origin
+	@each $key, $value in $background-origin {
+		#{'background-origin__' + $key}: $value;
+	}
+
+	// background-position
+	@each $key, $value in $background-position {
+		#{'background-position__' + $key}: $value;
+	}
+
+	// background-repeat
+	@each $key, $value in $background-repeat {
+		#{'background-repeat__' + $key}: $value;
+	}
+
+	// background-size
+	@each $index in $background-size {
+		#{'background-size__' + $index}: $index;
+	}
+
+	/* BORDER 
+    ============================================================== */
+	// border-style
+	@each $index in $border-style {
+		#{'border-style__' + $index}: $index;
+	}
+
+	/* EFFECTS 
+    ============================================================== */
+	// blend-mode
+	@each $index in $blend-mode {
+		#{'blend-mode__' + $index}: $index;
+	}
 }

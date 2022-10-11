@@ -2,76 +2,42 @@
 
 // background-attachment
 @include spread-map-into-utilities(
-	$map: (
-		fixed,
-		local,
-		scroll,
-	),
+	$map: $background-attachment,
 	$class: 'bg',
 	$attribute: 'background-attachment'
 );
 
 // background-clip
 @include spread-map-into-utilities(
-	$map: (
-		border: border-box,
-		padding: padding-box,
-		content: content-box,
-		text: text,
-	),
+	$map: $background-clip,
 	$class: 'bg-clip',
 	$attribute: 'background-clip'
 );
 
 // background-origin
 @include spread-map-into-utilities(
-	$map: (
-		border: border-box,
-		padding: padding-box,
-		content: content-box,
-	),
+	$map: $background-origin,
 	$class: 'bg-origin',
 	$attribute: 'background-origin'
 );
 
 // background-position
 @include spread-map-into-utilities(
-	$map: (
-		bottom: bottom,
-		center: center,
-		left: left,
-		left-bottom: left bottom,
-		left-top: left top,
-		right: right,
-		right-bottom: right bottom,
-		right-top: right top,
-		top: top,
-	),
+	$map: $background-position,
 	$class: 'bg',
 	$attribute: 'background-position'
 );
 
 // background-repeat
 @include spread-map-into-utilities(
-	$map: (
-		repeat: repeat,
-		no-repeat: no-repeat,
-		repeat-x: repeat-x,
-		repeat-y: repeat-y,
-		repeat-round: round,
-		repeat-space: space,
-	),
+	$map: $background-repeat,
 	$class: bg,
 	$attribute: background-repeat
 );
 
 // background-size
 @include spread-map-into-utilities(
-	$map: (
-		auto,
-		cover,
-		contain,
-	),
+	$map: $background-size,
 	$class: bg,
 	$attribute: background-size
 );

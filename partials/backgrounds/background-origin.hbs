@@ -18,48 +18,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each background-origin}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						bg-origin-border
+						bg-origin-{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						background-origin: border-box;
+					background-origin: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						bg-origin-padding
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						background-origin: padding-box;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						bg-origin-content
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						background-origin: content-box;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

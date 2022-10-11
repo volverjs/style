@@ -68,17 +68,7 @@
 
 // font-variant-numeric
 @include spread-map-into-utilities(
-	$map: (
-		normal-nums: normal,
-		ordinal: ordinal,
-		slashed-zero: slashed-zero,
-		lining-nums: lining-nums,
-		oldstyle-nums: oldstyle-nums,
-		proportional-nums: proportional-nums,
-		tabular-nums: tabular-nums,
-		diagonal-fractions: diagonal-fractions,
-		stacked-fractions: stacked-fractions,
-	),
+	$map: $font-variant-numeric,
 	$attribute: font-variant-numeric
 );
 
@@ -105,79 +95,41 @@
 
 // text-align
 @include spread-map-into-utilities(
-	$map: (
-		left,
-		center,
-		right,
-		justify,
-		start,
-		end,
-	),
+	$map: $text-align,
 	$class: text,
 	$attribute: text-align
 );
 
 // text-decorator-line
 @include spread-map-into-utilities(
-	$map: (
-		underline: underline,
-		overline: overline,
-		line-through: line-through,
-		no-underline: none,
-	),
+	$map: $text-decorator-line,
 	$attribute: text-decoration-line
 );
 
 // text-decorator-style
 @include spread-map-into-utilities(
-	$map: (
-		solid,
-		double,
-		dotted,
-		dashed,
-		wavy,
-	),
+	$map: $text-decorator-style,
 	$class: decoration,
 	$attribute: text-decoration-style
 );
 
 // text-decorator-thickness
 @include spread-map-into-utilities(
-	$map: (
-		auto: auto,
-		from-font: from-font,
-		0: 0px,
-		1: 1px,
-		2: 2px,
-		4: 4px,
-		8: 8px,
-	),
+	$map: $text-decorator-thickness,
 	$class: decoration,
 	$attribute: text-decoration-thickness
 );
 
 // text-underline-offset
 @include spread-map-into-utilities(
-	$map: (
-		auto: auto,
-		0: 0px,
-		1: 1px,
-		2: 2px,
-		4: 4px,
-		8: 8px,
-	),
+	$map: $text-underline-offset,
 	$class: underline-offset,
 	$attribute: text-underline-offset
 );
 
 // text-transform
 @include spread-map-into-utilities(
-	$map: (
-		uppercase: uppercase,
-		lowercase: lowercase,
-		capitalize: capitalize,
-		normal-case: none,
-	),
+	$map: $text-transform,
 	$attribute: text-transform
 );
 
@@ -218,29 +170,14 @@
 
 // vertical align
 @include spread-map-into-utilities(
-	$map: (
-		baseline,
-		top,
-		middle,
-		bottom,
-		text-top,
-		text-bottom,
-		sub,
-		super,
-	),
+	$map: $vertical-align,
 	$class: align,
 	$attribute: vertical-align
 );
 
 // white-space
 @include spread-map-into-utilities(
-	$map: (
-		normal,
-		nowrap,
-		pre,
-		pre-line,
-		pre-wrap,
-	),
+	$map: $white-space,
 	$class: whitespace,
 	$attribute: white-space
 );

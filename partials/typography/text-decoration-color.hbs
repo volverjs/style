@@ -17,216 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each colors}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						decoration-scheme
+						decoration-{{@key}}
 					</td>
 					<td
 						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-scheme'
+						class='underline decoration-{{@key}} font-mono text-info whitespace-nowrap'
 					>
-						text-decoration-color: light;
+					text-decoration-color: {{this}}
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-transparent
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-scheme'
-					>
-						text-decoration-color: transparent;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-black
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-black'
-					>
-						text-decoration-color: #000;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-white
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-white'
-					>
-						text-decoration-color: #fff;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-brand
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-brand'
-					>
-						text-decoration-color: #1976d2;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-accent
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-accent'
-					>
-						text-decoration-color: #9c27b0;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-success
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-success'
-					>
-						text-decoration-color: #21ba45;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-danger
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-danger'
-					>
-						text-decoration-color: #c10015;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-info
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-info'
-					>
-						text-decoration-color: #31ccec;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-warning
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-warning'
-					>
-						text-decoration-color: #f2c037;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-gray
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-gray'
-					>
-						text-decoration-color: hsl(209.8378378378deg, 15%, 50%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-word
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-word'
-					>
-						text-decoration-color: hsl(209.8378378378deg, 15%, 10%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-surface
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-surface'
-					>
-						text-decoration-color: hsl(209.8378378378deg, 10%, 98%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-shadow
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-shadow'
-					>
-						text-decoration-color: hsl(209.8378378378deg, 50%, 20%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						decoration-alpha
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap underline decoration-alpha'
-					>
-						text-decoration-color: hsl(0deg, 0%, 0%);
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

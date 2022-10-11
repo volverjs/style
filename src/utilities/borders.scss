@@ -73,14 +73,7 @@
 
 // border-style
 @include spread-map-into-utilities(
-	$map: (
-		solid,
-		dashed,
-		dotted,
-		double,
-		hidden,
-		none,
-	),
+	$map: $border-style,
 	$class: border,
 	$attribute: border-style
 );

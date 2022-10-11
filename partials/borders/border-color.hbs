@@ -17,216 +17,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each colors}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						border-scheme
+						{{@key}}
 					</td>
 					<td
 						translate='no'
-						class='border-scheme border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
+						class='border-{{@key}} border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
 					>
-						border-color: light;
+					border-color: {{this}}
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-transparent
-					</td>
-					<td
-						translate='no'
-						class='border-transparent border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: transparent;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-black
-					</td>
-					<td
-						translate='no'
-						class='border-black border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #000;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-white
-					</td>
-					<td
-						translate='no'
-						class='border-white border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #fff;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-brand
-					</td>
-					<td
-						translate='no'
-						class='border-brand border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #1976d2;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-accent
-					</td>
-					<td
-						translate='no'
-						class='border-accent border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #9c27b0;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-success
-					</td>
-					<td
-						translate='no'
-						class='border-success border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #21ba45;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-danger
-					</td>
-					<td
-						translate='no'
-						class='border-danger border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #c10015;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-info
-					</td>
-					<td
-						translate='no'
-						class='border-info border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #31ccec;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-warning
-					</td>
-					<td
-						translate='no'
-						class='border-warning border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: #f2c037;
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-gray
-					</td>
-					<td
-						translate='no'
-						class='border-gray border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: hsl(209.8378378378deg, 15%, 50%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-word
-					</td>
-					<td
-						translate='no'
-						class='border-word border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: hsl(209.8378378378deg, 15%, 10%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-surface
-					</td>
-					<td
-						translate='no'
-						class='border-surface border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: hsl(209.8378378378deg, 10%, 98%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-shadow
-					</td>
-					<td
-						translate='no'
-						class='border-shadow border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: hsl(209.8378378378deg, 50%, 20%);
-					</td>
-				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						border-alpha
-					</td>
-					<td
-						translate='no'
-						class='border-alpha border-l-4 border-solid p-4 font-mono text-info whitespace-nowrap'
-					>
-						border-color: hsl(0deg, 0%, 0%);
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>
