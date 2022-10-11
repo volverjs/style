@@ -12,6 +12,7 @@ $component-selector: '.#{ $component-name}';
 	$zero-specificity: $zero-specificity-for-compoenents
 );
 
+// disabled
 @include wrap-with-where(
 	$selector: '#{$component-selector}:has(input:disabled)',
 	$enabled: $zero-specificity-for-compoenents
@@ -53,12 +54,4 @@ $component-selector: '.#{ $component-name}';
 			@extend %#{$component-name}-state-readonly__#{$element} !optional;
 		}
 	}
-}
-
-// invalid
-@include wrap-with-where(
-	$selector: '#{$component-selector}:has(input:invalid)',
-	$enabled: $zero-specificity-for-compoenents
-) {
-	@extend %#{$component-name}--invalid !optional;
 }

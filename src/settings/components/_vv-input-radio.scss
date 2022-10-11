@@ -4,7 +4,8 @@ $vv-input-radio: (
 	align-items: center,
 	cursor: pointer,
 	user-select: none,
-	margin: 0 var(--spacing-md) var(--spacing-md) 0,
+	margin: 0 var(--input-gap) var(--input-gap) 0,
+	color: var(--input-color),
 	state: (
 		disabled: (
 			opacity: 0.3,
@@ -18,11 +19,11 @@ $vv-input-radio: (
 	element: (
 		input: (
 			_alias: "> input[type='radio']",
-			border: var(--spacing-2) solid var(--color-word),
+			border: var(--spacing-2) solid var(--input-color),
 			width: var(--spacing-20),
 			height: var(--spacing-20),
 			border-radius: 50%,
-			margin-right: var(--spacing-xs),
+			margin: 0 var(--input-label-gap) 0 0,
 			background: transparent,
 			cursor: pointer,
 			position: relative,
@@ -31,7 +32,7 @@ $vv-input-radio: (
 					position: absolute,
 					width: 70%,
 					height: 70%,
-					background: var(--color-word),
+					background: var(--input-color),
 					inset: 50% 50%,
 					border-radius: 50%,
 					transform: translate(-50%, -50%) scale(0),

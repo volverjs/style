@@ -1,20 +1,60 @@
 $vv-input-checkbox-group: (
-	display: inline-flex,
-	flex-direction: column,
+	display: var(--input-display),
+	flex: var(--input-flex),
+	flex-direction: var(--input-flex-direction),
 	element: (
 		legend: (
 			_alias: '> legend',
-			display: block,
-			font-size: var(--text-xs),
-			color: var(--color-word-3),
-			margin-bottom: var(--spacing-xs),
+			display: var(--input-label-display),
+			font-size: var(--input-label-font-size),
+			color: var(--input-label-color),
+			margin: 0 0 var(--input-label-gap) 0,
+			white-space: var(--input-label-white-space),
+			text-overflow: var(--input-label-text-overflow),
+			overflow: var(--input-label-overflow),
+			max-width: var(--input-label-max-width),
+		),
+		wrapper: (
+			position: relative,
+			display: flex,
+			flex-direction: column,
+			flex-wrap: wrap,
+		),
+		hint: (
+			_alias: '> small',
+			display: var(--input-hint-display),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+			padding-top: var(--input-hint-gap),
+			white-space: var(--input-hint-white-space),
+			text-overflow: var(--input-hint-text-overflow),
+			overflow: var(--input-hint-overflow),
+			max-width: var(--input-hint-max-width),
+			margin-top: calc(var(--input-gap) * -1),
+			margin-bottom: var(--input-gap),
 		),
 	),
 	modifier: (
 		horizontal: (
-			display: flex,
-			flex-direction: row,
-			flex-wrap: wrap,
+			element: (
+				wrapper: (
+					flex-direction: row,
+				),
+			),
+		),
+		valid: (
+			element: (
+				hint: (
+					color: var(--input-valid-color),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				hint: (
+					color: var(--input-invalid-color),
+				),
+			),
 		),
 	),
 ) !default;

@@ -1,4 +1,4 @@
-$vv-input-text: (
+$vv-select: (
 	display: var(--input-display),
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
@@ -57,54 +57,17 @@ $vv-input-text: (
 			),
 		),
 		input: (
-			_alias: 'input',
+			_alias: 'select',
 			display: block,
 			flex: 1,
-			color: var(--input-color),
+			color: var(--input-placeholder-color),
 			[padding]: var(--input-padding-top) var(--input-padding-right)
 				var(--input-padding-bottom) var(--input-padding-left),
 			min-height: var(--spacing-50),
-			pseudo: (
-				placeholder: (
-					color: var(--input-placeholder-color),
-				),
-				-webkit-calendar-picker-indicator: (
-						position: absolute,
-						padding: var(--spacing-sm),
-						top: 0,
-						right: 0,
-						opacity: 0,
-					),
-				-webkit-search-cancel-button: (
-						display: none,
-					),
-				-webkit-color-swatch-wrapper: (
-						display: block,
-						border: none,
-						height: 100%,
-						padding: 0,
-					),
-				-webkit-color-swatch: (
-						display: block,
-						border: none,
-						height: var(--spacing-20),
-						border-radius: var(--spacing-4),
-					),
-				-webkit-outer-spin-button: (
-						display: none,
-					),
-				-webkit-inner-spin-button: (
-						display: none,
-					),
-			),
-			state: (
-				disabled: (
-					cursor: not-allowed,
-				),
-				readonly: (
-					cursor: text,
-				),
-			),
+			background-image: var(--bg-chevron),
+			background-repeat: no-repeat,
+			background-position: right var(--input-padding-right) center,
+			background-size: 1em,
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
@@ -115,34 +78,6 @@ $vv-input-text: (
 		icon-right: (
 			_alias: 'input + :where(svg, [data-icon])',
 			right: 0,
-		),
-		actions-group: (
-			display: flex,
-			flex-direction: column,
-			position: absolute,
-			right: 0,
-			top: 0,
-			bottom: var(--spacing-px),
-		),
-		action-chevron: (
-			flex: 1,
-			width: calc(1em + var(--spacing-sm) * 2),
-			background-position: center var(--spacing-2),
-			background-size: var(--text-14) auto,
-			background-repeat: no-repeat,
-			background-image: var(--bg-chevron),
-			cursor: pointer,
-			state: (
-				hover: (
-					background-color: var(--color-surface-4),
-				),
-				active: (
-					background-color: var(--color-surface-5),
-				),
-			),
-		),
-		action-chevron-up: (
-			transform: rotate(180deg),
 		),
 		hint: (
 			_alias: '> small',
@@ -158,6 +93,13 @@ $vv-input-text: (
 		),
 	),
 	modifier: (
+		dirty: (
+			element: (
+				input: (
+					color: var(--input-color),
+				),
+			),
+		),
 		icon-left: (
 			--input-padding-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
@@ -215,80 +157,8 @@ $vv-input-text: (
 				),
 			),
 		),
-		floating: (
-			[margin-left]: var(--input-padding-left),
-			[margin-right]: var(--input-padding-right),
-			element: (
-				wrapper: (
-					[margin-left]: calc(var(--input-padding-left) * -1),
-					[margin-right]: calc(var(--input-padding-right) * -1),
-				),
-				hint: (
-					[margin-left]: calc(var(--input-padding-left) * -1),
-					[margin-right]: calc(var(--input-padding-right) * -1),
-				),
-				label: (
-					position: absolute,
-					z-index: 1,
-					pointer-events: none,
-					font-size: inherit,
-					[padding-top]: var(--input-padding-top),
-					[padding-bottom]: var(--input-padding-bottom),
-					padding-inline: 0,
-					margin: 0,
-					will-change: 'transform',
-					transform-origin: left,
-					transition: all 0.2s ease-in-out,
-				),
-				input: (
-					pseudo: (
-						placeholder: (
-							opacity: 0,
-						),
-					),
-				),
-			),
-			state: (
-				focus-within: (
-					element: (
-						label: (
-							transform: translateY(-1.2ch),
-							font-size: var(--text-12),
-						),
-						input: (
-							transform: translateY(0.85ch),
-							pseudo: (
-								placeholder: (
-									opacity: 1,
-								),
-							),
-						),
-					),
-				),
-				dirty: (
-					element: (
-						label: (
-							transform: translateY(-1.2ch),
-							font-size: var(--text-12),
-						),
-						input: (
-							transform: translateY(0.85ch),
-							pseudo: (
-								placeholder: (
-									opacity: 1,
-								),
-							),
-						),
-					),
-				),
-			),
-		),
-	),
-	state: (
-		disabled: (
-			opacity: 0.5,
-		),
 		readonly: (
+			opacity: 1,
 			element: (
 				wrapper: (
 					pseudo: (
@@ -302,28 +172,15 @@ $vv-input-text: (
 						),
 					),
 				),
+				input: (
+					background-image: none,
+				),
 			),
 		),
 	),
+	state: (
+		disabled: (
+			opacity: 0.5,
+		),
+	),
 ) !default;
-
-@keyframes progress {
-	0% {
-		transform: scaleX(0);
-	}
-
-	50% {
-		transform: scaleX(1);
-		transform-origin: left;
-	}
-
-	51% {
-		transform: scaleX(1);
-		transform-origin: center right;
-	}
-
-	100% {
-		transform: scaleX(0);
-		transform-origin: center right;
-	}
-}

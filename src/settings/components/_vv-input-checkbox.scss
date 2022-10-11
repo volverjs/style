@@ -4,7 +4,8 @@ $vv-input-checkbox: (
 	align-items: center,
 	cursor: pointer,
 	user-select: none,
-	margin: 0 var(--spacing-md) var(--spacing-md) 0,
+	margin: 0 var(--input-gap) var(--input-gap) 0,
+	color: var(--input-color),
 	state: (
 		disabled: (
 			opacity: 0.3,
@@ -18,10 +19,10 @@ $vv-input-checkbox: (
 	element: (
 		input: (
 			_alias: "> input[type='checkbox']",
-			border: var(--spacing-2) solid var(--color-word),
+			border: var(--spacing-2) solid var(--input-color),
 			width: var(--spacing-20),
 			height: var(--spacing-20),
-			margin-right: var(--spacing-xs),
+			margin: 0 var(--input-label-gap) 0 0,
 			background-position: center,
 			background-size: var(--text-12) auto,
 			background-repeat: no-repeat,
@@ -29,12 +30,10 @@ $vv-input-checkbox: (
 			position: relative,
 			state: (
 				checked: (
-					background-image:
-						url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E"),
+					background-image: var(--bg-check),
 				),
 				indeterminate: (
-					background-image:
-						url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E"),
+					background-image: var(--bg-minus),
 				),
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-brand),

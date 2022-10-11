@@ -1,0 +1,15 @@
+@import '../context';
+
+@mixin theme-dark-bg {
+	@include spread-map-into-props($background-image, 'bg');
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not(.theme-light) {
+		@include theme-dark-bg;
+	}
+}
+
+:where(.theme-dark) {
+	@include theme-dark-bg;
+}

@@ -1,0 +1,40 @@
+$input: (
+	display: flex,
+	flex: 1,
+	flex-direction: column,
+	padding-top: var(--spacing-sm),
+	padding-right: var(--spacing-sm),
+	padding-bottom: var(--spacing-sm),
+	padding-left: var(--spacing-sm),
+	color: var(--color-word),
+	gap: var(--spacing-md),
+	label: (
+		color: var(--color-word-3),
+		display: block,
+		font-size: var(--text-xs),
+		gap: var(--spacing-xs),
+		white-space: nowrap,
+		text-overflow: ellipsis,
+		overflow: hidden,
+		max-width: 100%,
+	),
+	hint: (
+		display: block,
+		font-size: var(--text-12),
+		color: var(--color-word-4),
+		gap: var(--spacing-8),
+		white-space: nowrap,
+		text-overflow: ellipsis,
+		overflow: hidden,
+		max-width: 100%,
+	),
+	placeholder: (
+		color: var(--color-word-4),
+	),
+	valid: (
+		color: var(--color-success),
+	),
+	invalid: (
+		color: var(--color-danger),
+	),
+) !default;

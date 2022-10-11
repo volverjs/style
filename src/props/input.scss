@@ -1,0 +1,3 @@
+:where(:host, :root) {
+	@include spread-map-into-props($map: $input, $prefix: input);
+}
