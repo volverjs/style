@@ -32,44 +32,21 @@
 
 // break-after
 @include spread-map-into-utilities(
-	$map: (
-		auto,
-		avoid,
-		all,
-		avoid-page,
-		page,
-		left,
-		right,
-		column,
-	),
+	$map: $break-after,
 	$class: break-after,
 	$attribute: break-after
 );
 
 // break-before
 @include spread-map-into-utilities(
-	$map: (
-		auto,
-		avoid,
-		all,
-		avoid-page,
-		page,
-		left,
-		right,
-		column,
-	),
+	$map: $break-before,
 	$class: break-before,
 	$attribute: break-before
 );
 
 // break-inside
 @include spread-map-into-utilities(
-	$map: (
-		auto,
-		avoid,
-		avoid-page,
-		avoid-column,
-	),
+	$map: $break-inside,
 	$class: break-inside,
 	$attribute: break-inside
 );
@@ -111,30 +88,14 @@
 
 // object-fit
 @include spread-map-into-utilities(
-	$map: (
-		fill,
-		contain,
-		cover,
-		none,
-		scale-down,
-	),
+	$map: $object-fit,
 	$class: object,
 	$attribute: object-fit
 );
 
 // object-position
 @include spread-map-into-utilities(
-	$map: (
-		bottom: bottom,
-		center: center,
-		left: left,
-		left-bottom: left bottom,
-		left-top: left top,
-		right: right,
-		right-bottom: right bottom,
-		right-top: right top,
-		top: top,
-	),
+	$map: $object-position,
 	$class: object,
 	$attribute: object-position
 );
@@ -154,23 +115,14 @@
 
 // position
 @include spread-map-into-utilities(
-	$map: (
-		static,
-		fixed,
-		absolute,
-		relative,
-		sticky,
-	),
+	$map: $position,
 	$attribute: position,
 	$bps: $breakpoints
 );
 
 // visibility
 @include spread-map-into-utilities(
-	$map: (
-		visible: visible,
-		invisible: hidden,
-	),
+	$map: $visibility,
 	$attribute: visibility,
 	$bps: $breakpoints
 );

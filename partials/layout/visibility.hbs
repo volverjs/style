@@ -23,34 +23,22 @@
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each visibility}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						visible
+						{{@key}}
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						visibility: visible;
+					visibility: {{this}};
 					</td>
 				</tr>
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						invisible
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-						visibility: hidden;
-					</td>
-				</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

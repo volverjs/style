@@ -17,7 +17,6 @@
 						str-index($subKey, 'hue') and not
 						str-index($subKey, 'saturation') and not
 						str-index($subKey, 'lightness') and not
-						str-index($subKey, 'surface') and not
 						str-index($subKey, #{$key})
 					{
 						#{'colors__' + $key}-#{$subKey}: $subValue;
@@ -47,6 +46,41 @@
 	// columns
 	@each $index in $columns {
 		#{'columns__' + $index}: $index;
+	}
+
+	// break-after
+	@each $index in $break-after {
+		#{'break-after__' + $index}: $index;
+	}
+
+	// break-before
+	@each $index in $break-before {
+		#{'break-before__' + $index}: $index;
+	}
+
+	// break-inside
+	@each $index in $break-inside {
+		#{'break-inside__' + $index}: $index;
+	}
+
+	// object-fit
+	@each $index in $object-fit {
+		#{'object-fit__' + $index}: $index;
+	}
+
+	// object-position
+	@each $key, $value in $object-position {
+		#{'object-position__' + $key}: $value;
+	}
+
+	// position
+	@each $index in $position {
+		#{'position__' + $index}: $index;
+	}
+
+	// visibility
+	@each $key, $value in $visibility {
+		#{'visibility__' + $key}: $value;
 	}
 
 	// z-index
