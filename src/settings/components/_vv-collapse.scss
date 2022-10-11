@@ -1,0 +1,65 @@
+@use 'sass:map';
+
+$vv-collapse: (
+	min-width: 2.093em,
+	padding: 0,
+	border-radius: 0,
+	border-bottom: none,
+	margin-bottom: var(--spacing-md),
+	background: none,
+	color: var(--color-white),
+	font-family: var(--font-sans),
+	font-size: 0.6em,
+	font-weight: normal,
+	element: (
+		header: (
+			cursor: pointer,
+			display: list-item,
+			counter-increment: list-item 0,
+			padding: 0,
+			margin-bottom: var(--spacing-xs),
+			background: none,
+			color: var(--color-word-3),
+			font-size: var(--text-md),
+			box-shadow: none,
+		),
+		content: (
+			display: block,
+			list-style-type: disclosure-open,
+			padding: 0,
+			margin: 0,
+			background: none,
+			color: var(--color-word-4),
+			font-size: var(--text-xs),
+			box-shadow: none,
+		),
+	),
+	modifier: (
+		open: (
+			display: contents,
+			padding: 0,
+			margin: 0,
+			element: (
+				header: (
+					display: list-item,
+					counter-increment: list-item 0,
+					padding: 0,
+					margin-bottom: var(--spacing-xs),
+					background: none,
+					color: var(--color-word-3),
+					font-size: var(--text-md),
+					box-shadow: none,
+				),
+				content: (
+					list-style-type: disclosure-open,
+					padding: 0,
+					margin: 0,
+					background: none,
+					color: var(--color-word-4),
+					font-size: var(--text-xs),
+					box-shadow: none,
+				),
+			),
+		),
+	),
+) !default;
