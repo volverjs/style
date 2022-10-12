@@ -340,6 +340,11 @@
 		#{'background-size__' + $index}: $index;
 	}
 
+	// background-image
+	@each $key, $value in $background-image {
+		#{'background-image__' + $key}: $value;
+	}
+
 	// #endregion
 
 	// ============================================================== */

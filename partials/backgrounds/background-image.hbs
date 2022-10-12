@@ -12,33 +12,37 @@
 						Class
 					</th>
 					<th>
+						Result
+					</th>
+					<th>
 						Properties
 					</th>
 				</tr>
 			</thead>
 			<tbody class='align-baseline'>
+				{{#each background-image}}
 				<tr>
 					<td
 						translate='no'
 						class='font-mono text-accent whitespace-nowrap'
 					>
-						bg-grid
+						bg-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='w-192 bg-{{@key}} bg-no-repeat bg-center font-mono text-accent whitespace-nowrap'
+					>
+						
 					</td>
 					<td
 						translate='no'
 						class='font-mono text-info whitespace-nowrap'
 					>
-						background-image: url("data:image/svg+xml,%3Csvg
-						xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'
-						width='32' height='32' fill='none' stroke='rgb(51 65 85
-						/ 0.25)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+					background-image: {{this}};
 					</td>
 				</tr>
+				{{/each}}
 			</tbody>
 		</table>
-	</div>
-
-	<div class='relative rounded-md bg-surface-1 p-56 border border-alpha-2'>
-		<div class='absolute inset-0 bg-grid'></div>
 	</div>
 </section>
