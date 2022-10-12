@@ -391,7 +391,8 @@
 					invalid,
 					indeterminate,
 					first-child,
-					last-child
+					last-child,
+					open
 				),
 				$state
 			)
@@ -414,7 +415,19 @@
 						);
 					}
 
-					@if $state == 'dirty' {
+					@if $state == 'open' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[open]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[open]'
+							);
+						}
+					} @else if $state == 'dirty' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}:not(:has(input:placeholder-shown))'

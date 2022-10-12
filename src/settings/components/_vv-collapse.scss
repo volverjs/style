@@ -1,63 +1,111 @@
 @use 'sass:map';
 
 $vv-collapse: (
+	display: block,
 	min-width: 2.093em,
 	padding: 0,
 	border-radius: 0,
-	border-bottom: none,
-	margin-bottom: var(--spacing-md),
+	border-bottom: 1px solid var(--color-surface-2),
+	margin: 0,
 	background: none,
-	color: var(--color-white),
 	font-family: var(--font-sans),
 	font-size: 0.6em,
 	font-weight: normal,
-	element: (
-		header: (
-			cursor: pointer,
-			display: list-item,
-			counter-increment: list-item 0,
-			padding: 0,
-			margin-bottom: var(--spacing-xs),
-			background: none,
-			color: var(--color-word-3),
-			font-size: var(--text-md),
-			box-shadow: none,
-		),
-		content: (
-			display: block,
-			list-style-type: disclosure-open,
-			padding: 0,
-			margin: 0,
-			background: none,
-			color: var(--color-word-4),
-			font-size: var(--text-xs),
-			box-shadow: none,
-		),
-	),
-	modifier: (
+	state: (
 		open: (
 			display: contents,
 			padding: 0,
 			margin: 0,
 			element: (
 				header: (
-					display: list-item,
-					counter-increment: list-item 0,
-					padding: 0,
-					margin-bottom: var(--spacing-xs),
-					background: none,
-					color: var(--color-word-3),
-					font-size: var(--text-md),
-					box-shadow: none,
+					list-style-type: none,
+					color: var(--color-brand),
+					pseudo: (
+						after: (
+							transform: rotate(0deg),
+							will-change: transform,
+							transition: transform 0.2s ease-in-out,
+						),
+					),
 				),
 				content: (
-					list-style-type: disclosure-open,
-					padding: 0,
-					margin: 0,
-					background: none,
-					color: var(--color-word-4),
-					font-size: var(--text-xs),
-					box-shadow: none,
+					height: auto,
+					opacity: 1,
+				),
+			),
+		),
+		blocked: (
+			cursor: not-allowed,
+			opacity: 0.5,
+			pointer-events: none,
+			user-select: none,
+		),
+	),
+	element: (
+		header: (
+			cursor: pointer,
+			list-style-type: none,
+			padding: 1em,
+			margin: 0,
+			background: none,
+			color: var(--color-word-3),
+			font-size: var(--text-sm),
+			line-height: 1em,
+			box-shadow: none,
+			pseudo: (
+				after: (
+					display: block,
+					float: right,
+					width: 1em,
+					height: 1em,
+					background-image: var(--bg-chevron),
+					background-position: right center,
+					background-size: 1em auto,
+					background-repeat: no-repeat,
+					transform: rotate(-90deg),
+					will-change: transform,
+					transition: transform 0.2s ease-in-out,
+				),
+			),
+		),
+		content: (
+			display: block,
+			height: 0,
+			padding: 0 1em 1em 1em,
+			margin: 0,
+			background: none,
+			color: var(--color-word-4),
+			font-size: var(--text-xs),
+			box-shadow: none,
+			opacity: 0,
+			transition: all 0.7s ease-in-out,
+		),
+	),
+	modifier: (
+		minimal: (
+			display: contents,
+			padding: 0,
+			margin: 0,
+			state: (
+				open: (
+					element: (
+						header: (
+							list-style-type: disclosure-open,
+							color: var(--color-brand),
+						),
+					),
+				),
+			),
+			element: (
+				header: (
+					display: list-item,
+					counter-increment: list-item 0,
+					list-style-type: disclosure-closed,
+					pseudo: (
+						after: (
+							display: none,
+						),
+					),
 				),
 			),
 		),
