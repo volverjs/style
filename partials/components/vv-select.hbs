@@ -85,8 +85,12 @@
 				id='select-valid'
 				aria-describedby='select-valid-hint'
 			>
-				<option value='' disabled='disabled'>Placeholder text</option>
-				<option value='1' selected='selected'>Option 1</option>
+				<option
+					value=''
+					disabled='disabled'
+					selected='selected'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
 				<option value='2'>Option 2</option>
 				<option value='3'>Option 3</option>
 			</select>
@@ -118,7 +122,7 @@
 		</small>
 	</div>
 	<div class='vv-select vv-select--loading'>
-		<label for='select-invalid'>Loading Select</label>
+		<label for='select-loading'>Loading Select</label>
 		<div class='vv-select__wrapper'>
 			<select
 				name='select'
@@ -138,5 +142,129 @@
 		<small id='select-loading-hint' class='vv-input-text__hint'>
 			Please fill the input above.
 		</small>
+	</div>
+	<div class='vv-select vv-select--icon-left'>
+		<label for='select-icon-left'>Icon Left</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-left'
+				aria-describedby='select-icon-left-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-icon-left-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--icon-right'>
+		<label for='select-icon-right'>Icon Right</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-icon-right'
+				aria-describedby='select-icon-right-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+		</div>
+		<small id='select-icon-right-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div
+		class='vv-select vv-select--valid vv-select--icon-left vv-select--icon-right'
+	>
+		<label for='select-icon-valid'>Valid Select with left and right icon</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-valid'
+				aria-describedby='select-icon-valid-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:check'></span>
+		</div>
+		<small id='select-icon-valid-hint' class='vv-input-text__hint'>
+			The input above is successful.
+		</small>
+	</div>
+	<div
+		class='vv-select vv-select--invalid vv-select--icon-left vv-select--icon-right'
+	>
+		<label for='select-icon-invalid'>Valid Select with left and right icon</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-invalid'
+				aria-describedby='select-icon-invalid-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:circle-alert'></span>
+		</div>
+		<small id='select-icon-invalid-hint' class='vv-input-text__hint'>
+			There was an error with the input above.
+		</small>
+	</div>
+
+	<div class='vv-select'>
+		<label>Custom Select with Dropdown</label>
+		<details role='list' class='vv-select__wrapper'>
+			<summary class='vv-select__input' aria-haspopup='listbox'>
+				Placeholder text
+			</summary>
+			<ul role='listbox'>
+				<li>
+					<a href='javascript:;'>
+						Option 1
+					</a>
+				</li>
+				<li>
+					<a href='javascript:;'>
+						Option 2
+					</a>
+				</li>
+				<li>
+					<a href='javascript:;'>
+						Option 3
+					</a>
+				</li>
+			</ul>
+		</details>
 	</div>
 </section>

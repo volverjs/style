@@ -66,7 +66,7 @@ $vv-select: (
 			min-height: var(--spacing-50),
 			background-image: var(--bg-chevron),
 			background-repeat: no-repeat,
-			background-position: right var(--input-padding-right) center,
+			[background-position]: right var(--input-padding-right) center,
 			background-size: 1em,
 		),
 		icon: (
@@ -76,7 +76,7 @@ $vv-select: (
 			pointer-events: none,
 		),
 		icon-right: (
-			_alias: 'input + :where(svg, [data-icon])',
+			_alias: 'select + :where(svg, [data-icon])',
 			right: 0,
 		),
 		hint: (

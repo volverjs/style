@@ -209,7 +209,7 @@ $vv-input-text: (
 							background: var(--color-brand-lighten-5),
 						),
 						after: (
-							animation: progress 2.2s infinite,
+							animation: var(--animate-indeterminate),
 						),
 					),
 				),
@@ -306,24 +306,3 @@ $vv-input-text: (
 		),
 	),
 ) !default;
-
-@keyframes progress {
-	0% {
-		transform: scaleX(0);
-	}
-
-	50% {
-		transform: scaleX(1);
-		transform-origin: left;
-	}
-
-	51% {
-		transform: scaleX(1);
-		transform-origin: center right;
-	}
-
-	100% {
-		transform: scaleX(0);
-		transform-origin: center right;
-	}
-}
