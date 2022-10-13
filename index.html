@@ -45,6 +45,16 @@
 		background-color: var(--color-surface-1);
 		-webkit-box-shadow: 0 0 1px var(--color-surface-1);
 	}
+
+	p[data-value] {
+		position: relative;
+	}
+	
+	p[data-value]::after {
+		content: attr(data-value) '%';
+		position: absolute;
+		right: 0;
+	}
 </style>
 
 <body>
@@ -88,6 +98,8 @@
 
 						{{> components/vv-button-group }}
 
+						{{> components/vv-loader }}
+						
 						{{> components/vv-collapse }}
 
 						{{> components/vv-input-checkbox }}

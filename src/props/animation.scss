@@ -68,3 +68,13 @@
 		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 	}
 }
+
+@keyframes progress-indeterminate {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}

@@ -392,7 +392,9 @@
 					indeterminate,
 					first-child,
 					last-child,
-					open
+					open,
+					determinate,
+					indeterminate
 				),
 				$state
 			)
@@ -604,7 +606,10 @@
 										-webkit-color-swatch-wrapper,
 										-webkit-color-swatch,
 										-webkit-inner-spin-button,
-										-webkit-outer-spin-button
+										-webkit-outer-spin-button,
+										-webkit-progress-bar,
+										-webkit-progress-value,
+										-webkit-progress-inner-element
 									),
 									$pseudo-element
 								)

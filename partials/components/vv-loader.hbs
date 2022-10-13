@@ -1,0 +1,30 @@
+<section id='component__vv-loader' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-loader</h1>
+	<h2 class='font-light text-word-3 mb-24'>Progress bar element displays an indicator usually used to showing the completion progress of a task or used while the page is loading.
+	</h2>
+	<div>
+		<p class="text-14 text-word-3 mb-8">Determinate</p>
+		<progress value="55" max="100" class="vv-loader vv-loader--determinate"></progress>
+
+		<p class="text-14 text-word-3 mb-8 w-full" style="min-height: 1rem;" data-value="80">Determinate with text</p>
+		{{!-- Need this to work. Now this code is located into tag style
+		p[data-value] {
+			position: relative;
+		}
+	
+		p[data-value]::after {
+			content: attr(data-value) '%';
+			position: absolute;
+			right: 0;
+		} --}}
+		<progress value="80" max="100" class="vv-loader vv-loader--determinate"></progress>
+	
+		<p class="text-14 text-word-3 mb-8">Indeterminate</p>
+		<progress id='progress-indeterminate' class="vv-loader vv-loader--indeterminate"></progress>
+		<script>
+			const progress =
+			document.getElementById("progress-indeterminate");
+			progress.indeterminate = true;
+		</script>
+	</div>
+</section>
