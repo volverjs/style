@@ -1,0 +1,54 @@
+<section id='flexbox-grid__grid-row-start-end' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Grid Row Start / End</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how elements are sized and placed across grid rows.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each grid-row}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						row-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					grid-row: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+				{{#each grid-row-start-end}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						row-{start|end}-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					grid-row-{start|end}: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</section>

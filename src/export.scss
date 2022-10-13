@@ -142,6 +142,46 @@
 		#{'justify-align-self__' + $key}: $value;
 	}
 
+	//  grid-template-columns
+	@each $key, $value in $grid-template-columns {
+		#{'grid-template-columns__' + $key}: $value;
+	}
+
+	//  grid-column
+	@each $key, $value in $grid-column {
+		#{'grid-column__' + $key}: $value;
+	}
+
+	//  grid-column-start-end
+	@each $key, $value in $grid-column-start-end {
+		#{'grid-column-start-end__' + $key}: $value;
+	}
+
+	//  grid-template-rows
+	@each $key, $value in $grid-template-rows {
+		#{'grid-template-rows__' + $key}: $value;
+	}
+
+	//  grid-row
+	@each $key, $value in $grid-row {
+		#{'grid-row__' + $key}: $value;
+	}
+
+	//  grid-row-start-end
+	@each $key, $value in $grid-row-start-end {
+		#{'grid-row-start-end__' + $key}: $value;
+	}
+
+	//  grid-auto-flow
+	@each $key, $value in $grid-auto-flow {
+		#{'grid-auto-flow__' + $key}: $value;
+	}
+
+	//  grid-auto-rows-columns
+	@each $key, $value in $grid-auto-rows-columns {
+		#{'grid-auto-rows-columns__' + $key}: $value;
+	}
+
 	// #endregion
 
 	// ============================================================== */
