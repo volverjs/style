@@ -13,6 +13,10 @@
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
+					@if not str-index($subKey, #{$key}) {
+						#{'colors__' + $key}: $subValue;
+					}
+
 					@if not
 						str-index($subKey, 'hue') and not
 						str-index($subKey, 'saturation') and not
