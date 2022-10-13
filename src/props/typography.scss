@@ -1,6 +1,6 @@
 @import '../context';
 
-:where(:host, :root) {
+:where(:host, :root, .theme) {
 	// font-family
 	@include spread-map-into-props($font-family, $prefix: font);
 

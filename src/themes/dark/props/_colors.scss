@@ -4,12 +4,12 @@
 	@include spread-map-into-props($colors, 'color');
 }
 
-@media (prefers-color-scheme: dark) {
-	:root:not(.theme-light) {
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
 		@include theme-dark-colors;
 	}
 }
 
-:where(.theme-dark) {
+:where(.theme.theme--dark) {
 	@include theme-dark-colors;
 }

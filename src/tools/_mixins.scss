@@ -711,8 +711,17 @@
 
 // Wrap selector with :where()
 @mixin wrap-with-where($selector, $enabled: true) {
-	@if $enabled {
-		$selector: ':where(' + $selector + ')';
+	@if type-of($selector) == 'map' {
+		$merged: '';
+		@each $element in $selector {
+			@if $enabled {
+				$merged: '#{$merged}, :where(#{$element})';
+			} @else {
+				$merged: '#{$merged}, #{$element}';
+			}
+		}
+	} @else if $enabled {
+		$selector: ':where(#{$selector})';
 	}
 	#{$selector} {
 		@content;
@@ -740,10 +749,7 @@
 
 		// custom props
 		@if $props {
-			@include wrap-with-where(
-				$selector: ':root, :host',
-				$enabled: $zero-specificity
-			) {
+			:where(:host, :root, .theme) {
 				@include spread-map-into-props(
 					$map: $map,
 					$prefix: $block,

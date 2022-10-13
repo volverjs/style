@@ -1,6 +1,6 @@
 @import '../context';
 
-:where(:host, :root) {
+:where(:host, :root, .theme) {
 	@media (prefers-reduced-motion: no-preference) {
 		@include spread-map-into-props($animate, $prefix: animate);
 	}

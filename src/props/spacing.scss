@@ -1,7 +1,7 @@
 @use 'sass:map';
 @import '../context';
 
-:where(:host, :root) {
+:where(:host, :root, .theme) {
 	// static
 	@each $size, $value in $spacing {
 		--spacing-#{$size}: #{$value};
