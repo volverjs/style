@@ -7,7 +7,7 @@ $vv-loader: (
 	width: 100%,
 	height: 0.5rem,
 	border: 0,
-	border-radius: 999px,
+	border-radius: var(--rounded-full),
 	margin-bottom: 1em,
 	overflow: hidden,
 	color: var(--color-brand),
@@ -33,7 +33,7 @@ $vv-loader: (
 					var(--color-gray) 30%
 				)
 				top left/150% 150% no-repeat,
-			animation: progress-indeterminate 1.5s linear infinite,
+			animation: var(--animate-progress-indeterminate),
 			pseudo: (
 				-webkit-progress-bar: (
 						background: transparent,
