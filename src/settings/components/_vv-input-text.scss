@@ -3,6 +3,8 @@ $vv-input-text: (
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
 	margin-bottom: var(--input-gap),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
 	element: (
 		label: (
 			_alias: '> label',
@@ -21,7 +23,7 @@ $vv-input-text: (
 			align-items: center,
 			flex: 1,
 			overflow: hidden,
-			background-color: var(--color-surface-1),
+			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: background-color 0.2s ease-in-out,
 			pseudo: (
@@ -108,9 +110,13 @@ $vv-input-text: (
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
-			margin: var(--spacing-sm),
-			position: absolute,
-			pointer-events: none,
+			margin: var(--input-padding-top) var(--input-padding-right)
+				var(--input-padding-bottom) var(--input-padding-left),
+			position: var(--input-icon-position),
+			width: var(--input-icon-width),
+			height: var(--input-icon-height),
+			padding: var(--input-icon-padding),
+			pointer-events: var(--input-icon-pointer-events),
 		),
 		icon-right: (
 			_alias: 'input + :where(svg, [data-icon])',

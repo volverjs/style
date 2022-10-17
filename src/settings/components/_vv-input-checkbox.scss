@@ -6,6 +6,8 @@ $vv-input-checkbox: (
 	user-select: none,
 	margin: 0 var(--input-gap) var(--input-gap) 0,
 	color: var(--input-color),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
 	state: (
 		disabled: (
 			opacity: 0.3,

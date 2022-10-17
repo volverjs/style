@@ -7,7 +7,10 @@ $input: (
 	padding-bottom: var(--spacing-sm),
 	padding-left: var(--spacing-sm),
 	color: var(--color-word),
+	background-color: var(--color-surface-1),
 	gap: var(--spacing-md),
+	line-height: var(--leading-normal),
+	font-size: var(--text-16),
 	label: (
 		color: var(--color-word-3),
 		display: block,
@@ -17,6 +20,14 @@ $input: (
 		text-overflow: ellipsis,
 		overflow: hidden,
 		max-width: 100%,
+	),
+	icon: (
+		position: absolute,
+		width: 1em,
+		height: calc(var(--input-icon-width) * var(--input-line-height)),
+		padding: calc((var(--input-icon-height) - var(--input-icon-width)) / 2)
+			0,
+		pointer-events: none,
 	),
 	hint: (
 		display: block,

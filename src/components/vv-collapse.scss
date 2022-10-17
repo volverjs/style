@@ -3,7 +3,6 @@
 
 $component-name: map.get($components-names, vv-collapse);
 $component-map: $vv-collapse;
-$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,

@@ -1,0 +1,189 @@
+<section id='component__vv-textarea' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-textarea</h1>
+	<h2 class='font-light text-word-3 mb-24'>Textarea is a multi-line text input
+		element.
+	</h2>
+	<div>
+		<div class='vv-textarea'>
+			<label for='textarea'>Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea'
+					name='textarea'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-hint'
+				></textarea>
+			</div>
+			<small id='textarea-hint' class='vv-textarea__hint'>Please fill the
+				input above.</small>
+		</div>
+		<div class='vv-textarea'>
+			<label for='textarea-disabled'>Disabled Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-disabled'
+					name='textarea-disabled'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-disabled-hint'
+					disabled='disabled'
+				></textarea>
+			</div>
+			<small id='textarea-disabled-hint' class='vv-textarea__hint'>Please
+				fill the input above.</small>
+		</div>
+		<div class='vv-textarea vv-textarea--readonly'>
+			<label for='textarea-readonly'>Readonly Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-readonly'
+					name='textarea-readonly'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-readonly-hint'
+					readonly='readonly'
+					value='Lorem ipsum dolor sit amet'
+					tabindex='-1'
+				></textarea>
+			</div>
+		</div>
+		<div class='vv-textarea vv-textarea--valid'>
+			<label for='textarea-success'>Valid Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-success'
+					name='textarea-success'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-success-hint'
+					aria-invalid='false'
+				></textarea>
+			</div>
+			<small id='textarea-success-hint' class='vv-textarea__hint'>The
+				input above is successful.</small>
+		</div>
+		<div class='vv-textarea vv-textarea--invalid'>
+			<label for='textarea-invalid'>Invalid Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-invalid'
+					name='textarea-invalid'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-invalid-hint'
+					aria-invalid='true'
+				></textarea>
+			</div>
+			<small id='textarea-invalid-hint' class='vv-textarea__hint'>There
+				was an error with the input above.</small>
+		</div>
+		<div class='vv-textarea vv-textarea--loading'>
+			<label for='textarea-loading'>Loading Textarea</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-loading'
+					name='textarea-loading'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-loading-hint'
+				></textarea>
+			</div>
+			<small
+				id='textarea-loading-hint'
+				class='vv-textarea__hint'
+			>Loading...</small>
+		</div>
+		<div class='vv-textarea vv-textarea--icon-left'>
+			<label for='textarea-icon-left'>Icon left</label>
+			<div class='vv-textarea__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<textarea
+					id='textarea-icon-left'
+					name='textarea-icon-left'
+					placeholder='Placeholder text'
+				></textarea>
+			</div>
+		</div>
+		<div class='vv-textarea vv-textarea--icon-right'>
+			<label for='textarea-icon-right'>Icon right</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-icon-right'
+					name='textarea-icon-right'
+					placeholder='Placeholder text'
+				></textarea>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+			</div>
+		</div>
+		<div
+			class='vv-textarea vv-textarea--valid vv-textarea--icon-left vv-textarea--icon-right'
+		>
+			<label for='textarea-valid-icon'>
+				Valid Textarea with left and right icon
+			</label>
+			<div class='vv-textarea__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<textarea
+					id='textarea-valid-icon'
+					name='textarea-invalid-icon'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-valid-icon-hint'
+					aria-invalid='true'
+				></textarea>
+				<span class='iconify' data-icon='akar-icons:check'></span>
+			</div>
+			<small id='textarea-valid-icon-hint' class='vv-textarea__hint'>
+				The input above is successful.
+			</small>
+		</div>
+		<div
+			class='vv-textarea vv-textarea--invalid vv-textarea--icon-left vv-textarea--icon-right'
+		>
+			<label for='textarea-invalid-icon'>
+				Invalid Textarea with left and right icon
+			</label>
+			<div class='vv-textarea__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<textarea
+					id='textarea-invalid-icon'
+					name='textarea-invalid-icon'
+					placeholder='Placeholder text'
+					aria-describedby='textarea-invalid-icon-hint'
+					aria-invalid='true'
+				></textarea>
+				<span
+					class='iconify'
+					data-icon='akar-icons:circle-alert'
+				></span>
+			</div>
+			<small id='textarea-invalid-icon-hint' class='vv-textarea__hint'>
+				There was an error with the input above.
+			</small>
+		</div>
+		<div class='vv-textarea vv-textarea--icon-left vv-textarea--floating'>
+			<label for='textarea-floating'>Floating label</label>
+			<div class='vv-textarea__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<textarea
+					id='textarea-floating'
+					name='textarea-floating'
+					placeholder='Floating label'
+					aria-describedby='textarea-floating-hint'
+				></textarea>
+			</div>
+			<small id='textarea-floating-hint' class='vv-textarea__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div class='vv-textarea vv-textarea--floating dirty'>
+			<label for='textarea-floating-dirty'>Floating label (dirty)</label>
+			<div class='vv-textarea__wrapper'>
+				<textarea
+					id='textarea-floating-dirty'
+					name='textarea-floating-dirty'
+					placeholder='Floating label'
+					aria-describedby='textarea-floating-dirty-hint'
+					value='Lorem ipsum dolor sit amet'
+				></textarea>
+			</div>
+			<small id='textarea-floating-dirty-hint' class='vv-textarea__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+	</div>
+</section>

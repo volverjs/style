@@ -1,4 +1,4 @@
-<section id='component__vv-input-select' class='mb-32'>
+<section id='component__vv-select' class='mb-32'>
 	<h1 class='text-20 text-word-2 mb-8'>vv-select</h1>
 	<h2 class='font-light text-word-3 mb-24'>Select is used to select an item
 		from a list of options.</h2>
@@ -241,28 +241,93 @@
 			There was an error with the input above.
 		</small>
 	</div>
-
-	<div class='vv-select'>
+	<div class='vv-select vv-select--dirty'>
 		<label>Custom Select with Dropdown</label>
 		<details role='list' class='vv-select__wrapper'>
 			<summary class='vv-select__input' aria-haspopup='listbox'>
-				Placeholder text
+				Option 1
 			</summary>
-			<ul role='listbox'>
+			<ul class='vv-dropdown' role='listbox'>
 				<li>
-					<a href='javascript:;'>
+					<label for='select-single-option-1'>
+						<input
+							type='radio'
+							id='select-single-option-1'
+							name='select-single-option'
+							value='1'
+							checked='checked'
+						/>
+
 						Option 1
-					</a>
+					</label>
 				</li>
 				<li>
-					<a href='javascript:;'>
+					<label for='select-single-option-2'>
+						<input
+							type='radio'
+							id='select-single-option-2'
+							name='select-single-option'
+							value='2'
+						/>
 						Option 2
-					</a>
+					</label>
 				</li>
 				<li>
-					<a href='javascript:;'>
+					<label for='select-single-option-3'>
+						<input
+							type='radio'
+							id='select-single-option-3'
+							name='select-single-option'
+							value='3'
+						/>
 						Option 3
-					</a>
+					</label>
+				</li>
+			</ul>
+		</details>
+	</div>
+	<div class='vv-select vv-select--dirty'>
+		<label>Custom Multiple Select with Dropdown</label>
+		<details role='list' class='vv-select__wrapper'>
+			<summary class='vv-select__input' aria-haspopup='listbox'>
+				Option 1, Option 3
+			</summary>
+			<ul class='vv-dropdown' role='listbox'>
+				<li>
+					<label for='select-multiple-option-1'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-1'
+							name='select-multiple-option'
+							value='1'
+							checked='checked'
+						/>
+
+						Option 1
+					</label>
+				</li>
+				<li>
+					<label for='select-multiple-option-2'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-2'
+							name='select-multiple-option'
+							value='2'
+						/>
+						Option 2
+					</label>
+				</li>
+				<li>
+					<label for='select-multiple-option-3'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-3'
+							name='select-multiple-option'
+							value='3'
+							checked='checked'
+						/>
+						Option 3
+					</label>
 				</li>
 			</ul>
 		</details>

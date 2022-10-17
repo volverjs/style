@@ -383,6 +383,7 @@
 					focus-visible,
 					disabled,
 					checked,
+					checked-within,
 					readonly,
 					empty,
 					placeholder-shown,
@@ -417,7 +418,19 @@
 						);
 					}
 
-					@if $state == 'open' {
+					@if $state == 'checked-within' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:has(input:checked)'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:has(input:checked)'
+							);
+						}
+					} @else if $state == 'open' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}[open]'
@@ -432,13 +445,13 @@
 					} @else if $state == 'dirty' {
 						$selectors: list.join(
 							$selectors,
-							'#{$modifier}#{$block-item}:not(:has(input:placeholder-shown))'
+							'#{$modifier}#{$block-item}:not(:has(*:placeholder-shown))'
 						);
 
 						@if $alias {
 							$selectors: list.join(
 								$selectors,
-								'#{$modifier}#{$alias}:not(:has(input:placeholder-shown))'
+								'#{$modifier}#{$alias}:not(:has(*:placeholder-shown))'
 							);
 						}
 					} @else if $state == 'disabled' or $state == 'readonly' {

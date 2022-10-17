@@ -1,4 +1,4 @@
-$vv-select: (
+$vv-textarea: (
 	display: var(--input-display),
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
@@ -20,8 +20,9 @@ $vv-select: (
 		wrapper: (
 			position: relative,
 			display: flex,
-			align-items: center,
+			align-items: flex-start,
 			flex: 1,
+			overflow: hidden,
 			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: background-color 0.2s ease-in-out,
@@ -55,28 +56,29 @@ $vv-select: (
 						),
 					),
 				),
-				open: (
-					background-color: var(--color-surface-2),
-					pseudo: (
-						after: (
-							transform: scaleX(1),
-						),
-					),
-				),
 			),
 		),
 		input: (
-			_alias: 'select',
+			_alias: 'textarea',
 			display: block,
 			flex: 1,
-			color: var(--input-placeholder-color),
+			color: var(--input-color),
 			[padding]: var(--input-padding-top) var(--input-padding-right)
 				var(--input-padding-bottom) var(--input-padding-left),
 			min-height: var(--spacing-50),
-			background-image: var(--bg-chevron),
-			background-repeat: no-repeat,
-			[background-position]: right var(--input-padding-right) center,
-			background-size: 1em,
+			pseudo: (
+				placeholder: (
+					color: var(--input-placeholder-color),
+				),
+			),
+			state: (
+				disabled: (
+					cursor: not-allowed,
+				),
+				readonly: (
+					cursor: text,
+				),
+			),
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
@@ -89,8 +91,16 @@ $vv-select: (
 			pointer-events: var(--input-icon-pointer-events),
 		),
 		icon-right: (
-			_alias: 'select + :where(svg, [data-icon])',
+			_alias: 'textarea + :where(svg, [data-icon])',
 			right: 0,
+		),
+		actions-group: (
+			display: flex,
+			flex-direction: column,
+			position: absolute,
+			right: 0,
+			top: 0,
+			bottom: var(--spacing-px),
 		),
 		hint: (
 			_alias: '> small',
@@ -106,13 +116,6 @@ $vv-select: (
 		),
 	),
 	modifier: (
-		dirty: (
-			element: (
-				input: (
-					color: var(--input-color),
-				),
-			),
-		),
 		icon-left: (
 			--input-padding-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
@@ -164,14 +167,86 @@ $vv-select: (
 							background: var(--color-brand-lighten-5),
 						),
 						after: (
-							animation: progress 2.2s infinite,
+							animation: var(--animate-indeterminate),
 						),
 					),
 				),
 			),
 		),
+		floating: (
+			[margin-left]: var(--input-padding-left),
+			[margin-right]: var(--input-padding-right),
+			element: (
+				wrapper: (
+					[margin-left]: calc(var(--input-padding-left) * -1),
+					[margin-right]: calc(var(--input-padding-right) * -1),
+				),
+				hint: (
+					[margin-left]: calc(var(--input-padding-left) * -1),
+					[margin-right]: calc(var(--input-padding-right) * -1),
+				),
+				label: (
+					position: absolute,
+					z-index: 1,
+					pointer-events: none,
+					font-size: inherit,
+					[padding-top]: var(--input-padding-top),
+					[padding-bottom]: var(--input-padding-bottom),
+					padding-inline: 0,
+					margin: 0,
+					will-change: 'transform',
+					transform-origin: left,
+					transition: all 0.2s ease-in-out,
+				),
+				input: (
+					pseudo: (
+						placeholder: (
+							opacity: 0,
+						),
+					),
+				),
+			),
+			state: (
+				focus-within: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+				dirty: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+	state: (
+		disabled: (
+			opacity: 0.5,
+		),
 		readonly: (
-			opacity: 1,
 			element: (
 				wrapper: (
 					pseudo: (
@@ -185,15 +260,7 @@ $vv-select: (
 						),
 					),
 				),
-				input: (
-					background-image: none,
-				),
 			),
-		),
-	),
-	state: (
-		disabled: (
-			opacity: 0.5,
 		),
 	),
 ) !default;

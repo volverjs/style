@@ -32,6 +32,6 @@ $colors: (
 	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
 	word: color-lighten-map($color-word, 'word', $scale: 15%),
 	surface: color-darken-map($color-surface, 'surface', $scale: 2%),
-	shadow: $color-shadow,
+	shadow: hsla-map($color-shadow, 'shadow'),
 	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
 ) !default;

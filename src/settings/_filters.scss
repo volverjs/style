@@ -1,0 +1,26 @@
+// blur
+$blur: (
+	none: blur(0),
+	sm: blur(4px),
+	blur: blur(8px),
+	md: blur(12px),
+	lg: blur(16px),
+	xl: blur(24px),
+	xxl: blur(40px),
+	xxxl: blur(64px),
+) !default;
+
+// brightness
+$brightness: (
+	0: brightness(0),
+	50: brightness(0.5),
+	75: brightness(0.75),
+	90: brightness(0.9),
+	95: brightness(0.95),
+	100: brightness(1),
+	105: brightness(1.05),
+	110: brightness(1.1),
+	125: brightness(1.25),
+	150: brightness(1.5),
+	200: brightness(2),
+) !default;

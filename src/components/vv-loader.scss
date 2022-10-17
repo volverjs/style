@@ -3,7 +3,6 @@
 
 $component-name: map.get($components-names, vv-loader);
 $component-map: $vv-loader;
-$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
