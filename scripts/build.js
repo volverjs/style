@@ -11,6 +11,7 @@ packageJson.exports = {}
 // get scss files
 glob('./src/**/!(_*).scss', async (err, files) => {
 	const sources = files.map((input) => {
+		const isIndex = input.includes('index.scss')
 		const exportName = input.replace(/.\/src\/|.scss|\/index/gm, '')
 		const splittedExportName = exportName.split('/')
 		const name = splittedExportName.pop()
@@ -20,19 +21,20 @@ glob('./src/**/!(_*).scss', async (err, files) => {
 			name,
 			dir,
 			input,
+			isIndex,
 		}
 	})
 
 	// build
 	await Promise.all(
-		sources.map(({ exportName, name, input, dir }) => {
+		sources.map(({ exportName, name, input, dir, isIndex }) => {
 			exportName = exportName.replace(/\/style|style/gm, '')
 			packageJson.exports[
 				`.${exportName ? `/${exportName}` : ``}`
 			] = `./dist/${dir ? `${dir}/` : ``}${name}`
 			packageJson.exports[
 				`./scss${exportName ? `/${exportName}` : ``}`
-			] = `./src/${dir ? `${dir}/` : ``}${name}`
+			] = `./src/${dir ? `${dir}/` : ``}${name}${isIndex ? '/index' : ''}`
 
 			return build({
 				plugins: [stylelint()],
