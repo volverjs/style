@@ -27,27 +27,47 @@
 );
 
 // font-style
-%italic,
-:where(.italic) {
+%italic {
 	font-style: italic;
 }
+@include wrap-with-where(
+	$selector: '.italic',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %italic;
+}
 
-%non-italic,
-:where(.non-italic) {
+%non-italic {
 	font-style: normal;
+}
+@include wrap-with-where(
+	$selector: '.non-italic',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %non-italic;
 }
 
 // font-smoothing
-%antialiased,
-:where(.antialiased) {
+%antialiased {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+@include wrap-with-where(
+	$selector: '.antialiased',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %antialiased;
+}
 
-%subpixel-antialiased,
-:where(.subpixel-antialiased) {
+%subpixel-antialiased {
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
+}
+@include wrap-with-where(
+	$selector: '.subpixel-antialiased',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %subpixel-antialiased;
 }
 
 // line-height
@@ -127,38 +147,68 @@
 );
 
 // text-overflow
-%truncate,
-:where(.truncate) {
+%truncate {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
-
-%text-ellipsis,
-:where(.text-ellipsis) {
-	text-overflow: ellipsis;
+@include wrap-with-where(
+	$selector: '.truncate',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %truncate;
 }
 
-%text-clip,
-:where(.text-clip) {
+%text-ellipsis {
+	text-overflow: ellipsis;
+}
+@include wrap-with-where(
+	$selector: '.text-ellipsis',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %text-ellipsis;
+}
+
+%text-clip {
 	text-overflow: clip;
+}
+@include wrap-with-where(
+	$selector: '.text-clip',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %text-clip;
 }
 
 // word break
-%break-normal,
-:where(.break-normal) {
+%break-normal {
 	overflow-wrap: normal;
 	word-break: normal;
 }
-
-%break-words,
-:where(.break-words) {
-	overflow-wrap: break-word;
+@include wrap-with-where(
+	$selector: '.break-normal',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %break-normal;
 }
 
-%break-all,
-:where(.break-all) {
+%break-words {
+	overflow-wrap: break-word;
+}
+@include wrap-with-where(
+	$selector: '.break-words',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %break-words;
+}
+
+%break-all {
 	word-break: break-all;
+}
+@include wrap-with-where(
+	$selector: '.break-all',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %break-all;
 }
 
 // vertical align

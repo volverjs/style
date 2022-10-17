@@ -12,9 +12,14 @@
 			$var: var(--spacing-#{$size}, #{$value});
 		}
 
-		%#{$dimension}-#{$size},
-		:where(.#{$dimension}-#{$size}) {
+		%#{$dimension}-#{$size} {
 			#{$attr}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$dimension}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$dimension}-#{$size};
 		}
 	}
 }
@@ -49,9 +54,14 @@
 
 @each $breakpoint, $breakpoint-value in $breakpoints {
 	@if $breakpoint-value > 0 {
-		%max-w-screen-#{$breakpoint},
-		:where(.max-w-screen-#{$breakpoint}) {
+		%max-w-screen-#{$breakpoint} {
 			max-width: $breakpoint-value;
+		}
+		@include wrap-with-where(
+			$selector: '.max-w-screen-#{$breakpoint}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %max-w-screen-#{$breakpoint};
 		}
 	}
 }

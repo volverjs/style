@@ -10,7 +10,7 @@
 );
 
 // container
-:where(.container) {
+%container {
 	width: 100%;
 
 	@each $breakpoint, $value in $breakpoints {
@@ -20,6 +20,12 @@
 			}
 		}
 	}
+}
+@include wrap-with-where(
+	$selector: '.container',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %container;
 }
 
 // columns
@@ -79,13 +85,27 @@
 
 // overflow
 @each $overflow in (auto, hidden, clip, visible, scroll) {
-	:where(.overflow-#{$overflow}) {
+	%overflow-#{$overflow} {
 		overflow: #{$overflow};
 	}
 
+	@include wrap-with-where(
+		$selector: '.overflow-#{$overflow}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %overflow-#{$overflow};
+	}
+
 	@each $prefix in (x, y) {
-		:where(.overflow-#{$prefix}-#{$overflow}) {
+		%overflow-#{$prefix}-#{$overflow} {
 			overflow-#{$prefix}: #{$overflow};
+		}
+
+		@include wrap-with-where(
+			$selector: '.overflow-#{$prefix}-#{$overflow}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %overflow-#{$prefix}-#{$overflow};
 		}
 	}
 }
@@ -113,28 +133,48 @@
 	}
 
 	// all
-	%inset-#{$size},
-	:where(.inset-#{$size}) {
+	%inset-#{$size} {
 		inset: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-#{$size};
 	}
 
 	// horizontal
-	%inset-x-#{$size},
-	:where(.inset-x-#{$size}) {
+	%inset-x-#{$size} {
 		inset-inline: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-x-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-x-#{$size};
 	}
 
 	// vertical
-	%inset-y-#{$size},
-	:where(.inset-y-#{$size}) {
+	%inset-y-#{$size} {
 		inset-block: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-y-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-y-#{$size};
 	}
 
 	// sides
 	@each $direction in(top, right, bottom, left) {
-		%#{$direction}-#{$size},
-		:where(.#{$direction}-#{$size}) {
+		%#{$direction}-#{$size} {
 			#{$direction}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$direction}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$direction}-#{$size};
 		}
 	}
 }

@@ -16,54 +16,94 @@
 		}
 
 		// all
-		%#{$prefix}#{$size},
-		:where(.#{$prefix}-#{$size}) {
+		%#{$prefix}#{$size} {
 			#{$prop}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}#{$size};
 		}
 
 		// horizontal
-		%#{$prefix}x-#{$size},
-		:where(.#{$prefix}x-#{$size}) {
+		%#{$prefix}x-#{$size} {
 			#{$prop}-inline: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}x-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}x-#{$size};
 		}
 
 		// vertical
-		%#{$prefix}y-#{$size},
-		:where(.#{$prefix}y-#{$size}) {
+		%#{$prefix}y-#{$size} {
 			#{$prop}-block: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}y-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}y-#{$size};
 		}
 
 		// sides
 		@each $direction-prefix,
 			$direction in(t: top, r: right, b: bottom, l: left)
 		{
-			%#{$prefix}#{$direction-prefix}-#{$size},
-			:where(.#{$prefix}#{$direction-prefix}-#{$size}) {
+			%#{$prefix}#{$direction-prefix}-#{$size} {
 				#{$prop}-#{$direction}: #{$var};
+			}
+			@include wrap-with-where(
+				$selector: '.#{$prefix}#{$direction-prefix}-#{$size}',
+				$enabled: $zero-specificity-for-utilities
+			) {
+				@extend %#{$prefix}#{$direction-prefix}-#{$size};
 			}
 		}
 	}
 }
 
 // auto
-%m-auto,
-:where(.m-auto) {
+%m-auto {
 	margin: auto;
 }
-
-%mx-auto,
-:where(.mx-auto) {
-	margin-inline: auto;
+@include wrap-with-where(
+	$selector: '.m-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %m-auto;
 }
 
-%my-auto,
-:where(.my-auto) {
+%mx-auto {
+	margin-inline: auto;
+}
+@include wrap-with-where(
+	$selector: '.mx-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %mx-auto;
+}
+
+%my-auto {
 	margin-block: auto;
+}
+@include wrap-with-where(
+	$selector: '.my-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %my-auto;
 }
 
 @each $direction-prefix, $direction in(t: top, r: right, b: bottom, l: left) {
-	%m#{$direction-prefix}-auto,
-	:where(.m#{$direction-prefix}-auto) {
+	%m#{$direction-prefix}-auto {
 		margin-#{$direction}: auto;
+	}
+	@include wrap-with-where(
+		$selector: '.m#{$direction-prefix}-auto',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %m#{$direction-prefix}-auto;
 	}
 }

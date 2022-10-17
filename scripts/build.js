@@ -30,6 +30,9 @@ glob('./src/**/!(_*).scss', async (err, files) => {
 			packageJson.exports[
 				`.${exportName ? `/${exportName}` : ``}`
 			] = `./dist/${dir ? `${dir}/` : ``}${name}`
+			packageJson.exports[
+				`./scss${exportName ? `/${exportName}` : ``}`
+			] = `./src/${dir ? `${dir}/` : ``}${name}`
 
 			return build({
 				plugins: [stylelint()],

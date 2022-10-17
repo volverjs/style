@@ -21,9 +21,14 @@
 // flex grow
 @each $prefix, $prop in (grow: flex-grow, shrink: flex-shrink) {
 	@each $value, $postfix in (1: '', 0: '-0') {
-		%#{$prefix}#{$postfix},
-		:where(.#{$prefix}#{$postfix}) {
+		%#{$prefix}#{$postfix} {
 			#{$prop}: #{$value};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}#{$postfix}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}#{$postfix};
 		}
 	}
 }
@@ -47,21 +52,36 @@
 	$var: var(--spacing-#{$size}, #{$default});
 
 	// all
-	%gap-#{$size},
-	:where(.gap-#{$size}) {
+	%gap-#{$size} {
 		gap: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.gap-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %gap-#{$size};
 	}
 
 	// horizontal
-	%gap-x-#{$size},
-	:where(.gap-x-#{$size}) {
+	%gap-x-#{$size} {
 		column-gap: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.gap-x-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %gap-x-#{$size};
 	}
 
 	// vertical
-	%gap-y-#{$size},
-	:where(.gap-y-#{$size}) {
+	%gap-y-#{$size} {
 		row-gap: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.gap-y-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %gap-y-#{$size};
 	}
 }
 
