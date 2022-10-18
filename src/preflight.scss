@@ -9,6 +9,7 @@
 }
 
 :where(.preflight) {
+	// typography
 	:where(h1, h2, h3, h4, h5, h6) {
 		@extend %vv-text !optional;
 		@extend %vv-text--headline !optional;
@@ -133,8 +134,17 @@
 		@extend %border-surface-3 !optional;
 	}
 
+	// buttons
 	:where(button, input[type='button'], input[type='submit'], input[type='reset']) {
 		@extend %vv-button !optional;
+
+		&:where([type='button']) {
+			@extend %vv-button--primary !optional;
+		}
+
+		&:where([type='reset']) {
+			@extend %vv-button--secondary !optional;
+		}
 
 		&:where(:disabled) {
 			@extend %vv-button--disabled !optional;
@@ -158,6 +168,114 @@
 
 		&:where(:active) {
 			@extend %vv-button--active !optional;
+		}
+	}
+
+	// table
+	:where(table) {
+		@extend %vv-table !optional;
+
+		:where(tr) {
+			@extend %vv-table__tr !optional;
+		}
+
+		:where(td) {
+			@extend %vv-table__td !optional;
+		}
+
+		:where(th) {
+			@extend %vv-table__th !optional;
+		}
+	}
+
+	// progress
+	:where(progress) {
+		@extend %vv-progress !optional;
+	}
+
+	// checkbox
+	:where(label:has(input[type='checkbox'])) {
+		@extend %vv-input-checkbox !optional;
+
+		:where(input[type='checkbox']) {
+			@extend %vv-input-checkbox__input !optional;
+
+			&:checked {
+				@extend %vv-input-checkbox-element-input--checked !optional;
+			}
+
+			&:indeterminate {
+				@extend %vv-input-checkbox-element-input--indeterminate
+						!optional;
+			}
+
+			&:focus-visible {
+				@extend %vv-input-checkbox-element-input--focus-visible
+						!optional;
+			}
+		}
+	}
+
+	:where(label:has(input[type='checkbox']:disabled)) {
+		@extend %vv-input-checkbox--disabled !optional;
+	}
+
+	// radio
+	:where(label:has(input[type='radio'])) {
+		@extend %vv-input-checkbox !optional;
+
+		:where(input[type='radio']) {
+			@extend %vv-input-radio__input !optional;
+
+			&:checked {
+				@extend %vv-input-radio-element-input--checked !optional;
+			}
+
+			&:focus-visible {
+				@extend %vv-input-radio-element-input--focus-visible !optional;
+			}
+		}
+	}
+
+	:where(label:has(input[type='radio']:disabled)) {
+		@extend %vv-input-radio--disabled !optional;
+	}
+
+	// textarea
+	:where(textarea) {
+		@extend %vv-textarea__wrapper !optional;
+		@extend %vv-textarea__input !optional;
+
+		&:disabled {
+			@extend %vv-textarea--disabled !optional;
+		}
+
+		&:readonly {
+			@extend %vv-textarea--readonly !optional;
+		}
+	}
+
+	// select
+	:where(select) {
+		@extend %vv-select__wrapper !optional;
+		@extend %vv-select__input !optional;
+
+		&:disabled {
+			@extend %vv-select--disabled !optional;
+		}
+	}
+
+	// input text
+	:where(input:not([type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset'])) {
+		@extend %vv-input-text__wrapper !optional;
+		@extend %vv-input-text__input !optional;
+
+		&:disabled {
+			@extend %vv-input-text--disabled !optional;
+		}
+
+		&:readonly {
+			@extend %vv-input-text--readonly !optional;
 		}
 	}
 }

@@ -13,23 +13,37 @@ $component-selector: '.#{ $component-name}';
 );
 
 // disabled
-@include wrap-with-where(
-	$selector: '#{$component-selector}:has(select:disabled)',
-	$enabled: $zero-specificity-for-compoenents
-) {
-	@extend %#{$component-name}--disabled !optional;
-}
+@each $state in ('disabled') {
+	@include wrap-with-where(
+		$selector: '#{$component-selector}:has(select:#{$state})',
+		$enabled: $zero-specificity-for-compoenents
+	) {
+		@extend %#{$component-name}--#{$state} !optional;
+	}
 
-@if map.get($component-map, 'state', 'disabled', 'element') {
-	@each $element,
-		$map in map.get($component-map, 'state', 'disabled', 'element')
-	{
-		@include wrap-with-where(
-			$selector:
-				'#{$component-selector}:has(select:disabled) #{$component-selector}__#{$element}',
-			$enabled: $zero-specificity-for-compoenents
-		) {
-			@extend %#{$component-name}-state-disabled__#{$element} !optional;
+	@if map.get($component-map, 'state', $state, 'element') {
+		@each $element,
+			$map in map.get($component-map, 'state', $state, 'element')
+		{
+			@include wrap-with-where(
+				$selector:
+					'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}',
+				$enabled: $zero-specificity-for-compoenents
+			) {
+				@extend %#{$component-name}-state-#{$state}__#{$element}
+						!optional;
+			}
+
+			@each $elementState, $elementMap in map.get($map, 'state') {
+				@include wrap-with-where(
+					$selector:
+						'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}:#{$elementState}',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
+							!optional;
+				}
+			}
 		}
 	}
 }

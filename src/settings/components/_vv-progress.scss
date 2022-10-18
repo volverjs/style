@@ -2,13 +2,12 @@
 
 $vv-progress: (
 	position: relative,
-	display: inline-block,
+	display: flex,
 	appearance: none,
 	width: 100%,
 	height: var(--spacing-8),
 	border: var(--border-0),
 	border-radius: var(--rounded-full),
-	margin-bottom: 1em,
 	overflow: hidden,
 	color: var(--color-brand),
 	background-color: var(--color-surface-2),

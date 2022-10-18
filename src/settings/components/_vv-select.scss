@@ -78,6 +78,11 @@ $vv-select: (
 			background-repeat: no-repeat,
 			[background-position]: right var(--input-padding-right) center,
 			background-size: 1em,
+			state: (
+				disabled: (
+					cursor: not-allowed,
+				),
+			),
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
@@ -173,6 +178,7 @@ $vv-select: (
 		),
 		readonly: (
 			opacity: 1,
+			user-select: text,
 			element: (
 				wrapper: (
 					pseudo: (
@@ -188,6 +194,7 @@ $vv-select: (
 				),
 				input: (
 					background-image: none,
+					cursor: 'text',
 				),
 			),
 		),
@@ -195,6 +202,15 @@ $vv-select: (
 	state: (
 		disabled: (
 			opacity: 0.5,
+			element: (
+				wrapper: (
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
+				),
+			),
 		),
 	),
 ) !default;

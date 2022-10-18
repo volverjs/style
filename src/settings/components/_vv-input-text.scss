@@ -297,6 +297,15 @@ $vv-input-text: (
 	state: (
 		disabled: (
 			opacity: 0.5,
+			element: (
+				wrapper: (
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
+				),
+			),
 		),
 		readonly: (
 			element: (

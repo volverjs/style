@@ -12,46 +12,38 @@ $component-selector: '.#{ $component-name}';
 	$zero-specificity: $zero-specificity-for-compoenents
 );
 
-// disabled
-@include wrap-with-where(
-	$selector: '#{$component-selector}:has(input:disabled)',
-	$enabled: $zero-specificity-for-compoenents
-) {
-	@extend %#{$component-name}--disabled !optional;
-}
-
-@if map.get($component-map, 'state', 'disabled', 'element') {
-	@each $element,
-		$map in map.get($component-map, 'state', 'disabled', 'element')
-	{
-		@include wrap-with-where(
-			$selector:
-				'#{$component-selector}:has(input:disabled) #{$component-selector}__#{$element}',
-			$enabled: $zero-specificity-for-compoenents
-		) {
-			@extend %#{$component-name}-state-disabled__#{$element} !optional;
-		}
+// disabled and readonly
+@each $state in ('disabled', 'readonly') {
+	@include wrap-with-where(
+		$selector: '#{$component-selector}:has(input:#{$state})',
+		$enabled: $zero-specificity-for-compoenents
+	) {
+		@extend %#{$component-name}--#{$state} !optional;
 	}
-}
 
-// readonly
-@include wrap-with-where(
-	$selector: '#{$component-selector}:has(input:readonly)',
-	$enabled: $zero-specificity-for-compoenents
-) {
-	@extend %#{$component-name}--readonly !optional;
-}
+	@if map.get($component-map, 'state', $state, 'element') {
+		@each $element,
+			$map in map.get($component-map, 'state', $state, 'element')
+		{
+			@include wrap-with-where(
+				$selector:
+					'#{$component-selector}:has(input:#{$state}) #{$component-selector}__#{$element}',
+				$enabled: $zero-specificity-for-compoenents
+			) {
+				@extend %#{$component-name}-state-#{$state}__#{$element}
+						!optional;
+			}
 
-@if map.get($component-map, 'state', 'readonly', 'element') {
-	@each $element,
-		$map in map.get($component-map, 'state', 'readonly', 'element')
-	{
-		@include wrap-with-where(
-			$selector:
-				'#{$component-selector}:has(input:readonly) #{$component-selector}__#{$element}',
-			$enabled: $zero-specificity-for-compoenents
-		) {
-			@extend %#{$component-name}-state-readonly__#{$element} !optional;
+			@each $elementState, $elementMap in map.get($map, 'state') {
+				@include wrap-with-where(
+					$selector:
+						'#{$component-selector}:has(input:#{$state}) #{$component-selector}__#{$element}:#{$elementState}',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
+							!optional;
+				}
+			}
 		}
 	}
 }
