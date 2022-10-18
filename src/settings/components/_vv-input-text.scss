@@ -70,34 +70,34 @@ $vv-input-text: (
 				placeholder: (
 					color: var(--input-placeholder-color),
 				),
-				-webkit-calendar-picker-indicator: (
-						position: absolute,
-						padding: var(--spacing-sm),
-						top: 0,
-						right: 0,
-						opacity: 0,
-					),
-				-webkit-search-cancel-button: (
-						display: none,
-					),
-				-webkit-color-swatch-wrapper: (
-						display: block,
-						border: none,
-						height: 100%,
-						padding: 0,
-					),
-				-webkit-color-swatch: (
-						display: block,
-						border: none,
-						height: var(--spacing-20),
-						border-radius: var(--spacing-4),
-					),
-				-webkit-outer-spin-button: (
-						display: none,
-					),
-				-webkit-inner-spin-button: (
-						display: none,
-					),
+				calendar-picker-indicator: (
+					position: absolute,
+					padding: var(--spacing-sm),
+					top: 0,
+					right: 0,
+					opacity: 0,
+				),
+				search-cancel-button: (
+					display: none,
+				),
+				color-swatch-wrapper: (
+					display: block,
+					border: none,
+					height: 100%,
+					padding: 0,
+				),
+				color-swatch: (
+					display: block,
+					border: none,
+					height: var(--spacing-20),
+					border-radius: var(--spacing-4),
+				),
+				outer-spin-button: (
+					display: none,
+				),
+				inner-spin-button: (
+					display: none,
+				),
 			),
 			state: (
 				disabled: (
@@ -107,6 +107,10 @@ $vv-input-text: (
 					cursor: text,
 				),
 			),
+		),
+		number: (
+			_alias: 'input[type="number"]',
+			-moz-appearance: textfield,
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',

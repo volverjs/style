@@ -15,6 +15,7 @@ $color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
 $color-word: hsl(color.hue($color-brand) 15% 10%) !default;
 $color-surface: hsl(color.hue($color-brand) 10% 98%) !default;
 $color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
+$color-backdrop: hsla(color.hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsla(0deg 0% 0% / 0%) !default;
 
 // colors map
@@ -33,5 +34,6 @@ $colors: (
 	word: color-lighten-map($color-word, 'word', $scale: 15%),
 	surface: color-darken-map($color-surface, 'surface', $scale: 2%),
 	shadow: hsla-map($color-shadow, 'shadow'),
+	backdrop: hsla-map($color-backdrop, 'backdrop'),
 	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
 ) !default;

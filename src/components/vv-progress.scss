@@ -1,8 +1,8 @@
 @use 'sass:map';
 @import '../context';
 
-$component-name: map.get($components-names, vv-loader);
-$component-map: $vv-loader;
+$component-name: map.get($components-names, vv-progress);
+$component-map: $vv-progress;
 
 @include spread-map-into-bem(
 	$map: $component-map,

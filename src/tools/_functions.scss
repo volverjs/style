@@ -9,8 +9,9 @@
 		hue: color.hue($color),
 		saturation: color.saturation($color),
 		lightness: color.lightness($color),
-		#{$name}: hsl(var(--color-#{$name}-hue) var(--color-#{$name}-saturation)
-					var(--color-#{$name}-lightness))
+		#{$name}: hsla(var(--color-#{$name}-hue)
+					var(--color-#{$name}-saturation)
+					var(--color-#{$name}-lightness) / color.alpha($color))
 	);
 }
 

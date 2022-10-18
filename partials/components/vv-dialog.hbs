@@ -1,0 +1,51 @@
+<section id='component__vv-dialog' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-dialog</h1>
+	<h2 class='font-light text-word-3 mb-24'>Dialog is a container to display
+		content in an overlay window.
+	</h2>
+	<button
+		type='button'
+		class='vv-button'
+		onclick="document.getElementById('dialog').open = true"
+	>
+		Open dialog
+	</button>
+	<dialog id='dialog' class='vv-dialog'>
+		<article class='vv-dialog__wrapper'>
+			<header class='vv-dialog__header'>
+				Dialog title
+				<button
+					type='buttom'
+					aria-label='Close'
+					class='vv-dialog__close'
+					onclick="document.getElementById('dialog').open = false"
+				>
+					<span class='iconify' data-icon='akar-icons:cross'></span>
+				</button>
+			</header>
+			<div class='vv-dialog__content'>
+				<p>
+					Nunc nec ligula a tortor sollicitudin dictum in vel enim.
+					Quisque facilisis turpis vel eros dictum aliquam et nec
+					turpis. Sed eleifend a dui nec ullamcorper. Praesent
+					vehicula lacus ac justo accumsan ullamcorper.
+				</p>
+			</div>
+			<footer class='vv-dialog__footer'>
+				<div class='vv-button-group' role='group'>
+					<button
+						type='button'
+						role='button'
+						class='vv-button vv-button--secondary'
+						onclick="document.getElementById('dialog').open = false"
+					>
+						Cancel
+					</button>
+					<button type='button' role='button' class='vv-button'>
+						Confirm
+					</button>
+				</div>
+			</footer>
+		</article>
+	</dialog>
+</section>

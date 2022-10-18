@@ -1,0 +1,6 @@
+@import '../context';
+
+:where(:host, :root, .theme) {
+	@include spread-map-into-props($blur, $prefix: blur);
+	@include spread-map-into-props($brightness, $prefix: brightness);
+}

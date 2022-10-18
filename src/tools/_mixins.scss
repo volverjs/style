@@ -394,6 +394,7 @@
 					first-child,
 					last-child,
 					open,
+					close,
 					determinate,
 					indeterminate
 				),
@@ -440,6 +441,18 @@
 							$selectors: list.join(
 								$selectors,
 								'#{$modifier}#{$alias}[open]'
+							);
+						}
+					} @else if $state == 'close' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not([open])'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not([open])'
 							);
 						}
 					} @else if $state == 'dirty' {
@@ -581,6 +594,35 @@
 	}
 }
 
+@mixin pseudo-element-placehoder($pseudo-element) {
+	@if list.index(
+		(
+			calendar-picker-indicator,
+			search-cancel-button,
+			color-swatch-wrapper,
+			color-swatch,
+			inner-spin-button,
+			outer-spin-button,
+			progress-bar,
+			progress-value,
+			progress-inner-element
+		),
+		$pseudo-element
+	)
+	{
+		&::-webkit-#{$pseudo-element} {
+			@content;
+		}
+		&::-moz-#{$pseudo-element} {
+			@content;
+		}
+	} @else {
+		&::#{$pseudo-element} {
+			@content;
+		}
+	}
+}
+
 // Transform a map into a list of CSS attributes
 @mixin spread-map-into-attrs(
 	$original: (),
@@ -595,7 +637,7 @@
 	@if type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
 			@if not list.index($ignore, $key) {
-				@if type-of($value) == 'map' and $deep {
+				@if type-of($value) == 'map' and ($deep or $key == 'pseudo') {
 					$original: map.get($original, $key);
 
 					@if not $original {
@@ -605,7 +647,6 @@
 					@if $postfix != '' {
 						$key: #{$postfix}-#{$key};
 					}
-
 					@if $key == 'pseudo' {
 						@each $pseudo-element, $pseudo-map in $value {
 							@if type-of($pseudo-map) == 'map' {
@@ -614,15 +655,21 @@
 										before,
 										after,
 										placeholder,
-										-webkit-calendar-picker-indicator,
-										-webkit-search-cancel-button,
-										-webkit-color-swatch-wrapper,
-										-webkit-color-swatch,
-										-webkit-inner-spin-button,
-										-webkit-outer-spin-button,
+										calendar-picker-indicator,
+										search-cancel-button,
+										color-swatch-wrapper,
+										color-swatch,
+										inner-spin-button,
+										outer-spin-button,
+										progress-bar,
+										progress-value,
+										inner-element,
 										-webkit-progress-bar,
 										-webkit-progress-value,
-										-webkit-progress-inner-element
+										-webkit-inner-element,
+										-moz-progress-bar,
+										-moz-progress-value,
+										-moz-inner-element
 									),
 									$pseudo-element
 								)
@@ -633,7 +680,9 @@
 									);
 									$key: pseudo-#{$pseudo-element};
 
-									&::#{$pseudo-element} {
+									@include pseudo-element-placehoder(
+										$pseudo-element
+									) {
 										@if not $original {
 											@if not
 												map.has-key(

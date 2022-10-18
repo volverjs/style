@@ -1,0 +1,46 @@
+@use 'sass:map';
+
+$vv-progress: (
+	position: relative,
+	display: inline-block,
+	appearance: none,
+	width: 100%,
+	height: var(--spacing-8),
+	border: var(--border-0),
+	border-radius: var(--rounded-full),
+	margin-bottom: 1em,
+	overflow: hidden,
+	color: var(--color-brand),
+	background-color: var(--color-surface-2),
+	pseudo: (
+		-webkit-progress-bar: (
+				background-color: transparent,
+			),
+		-moz-progress-bar: (
+				background-color: var(--color-brand),
+			),
+		-webkit-progress-value: (
+				background-color: var(--color-brand),
+			),
+	),
+	state: (
+		indeterminate: (
+			background: var(--color-surface-2)
+				linear-gradient(
+					to right,
+					var(--color-brand) 30%,
+					var(--color-surface-2) 30%
+				)
+				top left/150% 150% no-repeat,
+			animation: var(--animate-progress-indeterminate),
+			pseudo: (
+				progress-bar: (
+					background: transparent,
+				),
+				progress-value: (
+					background: transparent,
+				),
+			),
+		),
+	),
+) !default;

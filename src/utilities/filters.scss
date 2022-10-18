@@ -13,3 +13,10 @@
 	$class: brightness,
 	$attribute: filter
 );
+
+// backdrop blur
+@include spread-map-into-utilities(
+	$map: $blur,
+	$class: backdrop-blur,
+	$attribute: backdrop-filter
+);
