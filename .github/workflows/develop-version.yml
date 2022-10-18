@@ -24,7 +24,8 @@ jobs:
               id: version-bump
               uses: 'phips28/gh-action-bump-version@master'
               with:
-                  version-type: 'prerelease'
+                  default: 'prerelease'
+                  preid: 'beta'
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: 'cat package.json'
