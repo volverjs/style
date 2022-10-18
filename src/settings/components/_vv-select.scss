@@ -5,6 +5,7 @@ $vv-select: (
 	margin-bottom: var(--input-gap),
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
+	user-select: none,
 	element: (
 		label: (
 			_alias: '> label',

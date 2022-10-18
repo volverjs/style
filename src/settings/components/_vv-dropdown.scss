@@ -29,4 +29,9 @@ $vv-dropdown: (
 			display: none,
 		),
 	),
+	modifier: (
+		place-top: (
+			bottom: 100%,
+		),
+	),
 ) !default;
