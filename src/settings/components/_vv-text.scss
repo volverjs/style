@@ -1,0 +1,42 @@
+$vv-text: (
+	font-family: var(--font-sans),
+	font-weight: var(--font-normal),
+	line-height: var(--leading-normal),
+	modifier: (
+		headline: (
+			font-family: var(--font-serif),
+			font-weight: var(--font-semibold),
+			line-height: var(--leading-tight),
+			margin-top: var(--spacing-24),
+			margin-bottom: var(--spacing-16),
+		),
+		copy: (
+			margin-block: var(--spacing-16),
+		),
+		quote: (
+			font-family: var(--font-serif),
+			border-left: var(--spacing-4) solid var(--color-surface-3),
+			padding-left: var(--spacing-16),
+			margin-block: var(--spacing-16),
+			margin-inline: var(--spacing-40),
+		),
+		size-1: (
+			font-size: var(--text-32),
+		),
+		size-2: (
+			font-size: var(--text-24),
+		),
+		size-3: (
+			font-size: var(--text-20),
+		),
+		size-4: (
+			font-size: var(--text-16),
+		),
+		size-5: (
+			font-size: var(--text-14),
+		),
+		size-6: (
+			font-size: var(--text-12),
+		),
+	),
+) !default;

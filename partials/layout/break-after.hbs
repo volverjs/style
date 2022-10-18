@@ -1,0 +1,39 @@
+<section id='layout__break-after' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Break After</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how a
+		column or page should break after an element.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each break-after}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						break-after-{{this}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					break-after: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</section>

@@ -1,0 +1,96 @@
+<section id='layout__object-fit' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Object Fit</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how a
+		replaced element's content should be resized.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each object-fit}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						object-{{this}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					object-fit: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class='relative container h-full rounded-md bg-surface-1 p-24'>
+		<div class='absolute inset-0 bg-grid mix-blend-plus-lighter'></div>
+		<div
+			class='relative grid gap-10'
+			style='grid-template-columns: repeat(3, minmax(0, 1fr));'
+		>
+			<div class='relative w-100 h-150 bg-shadow'>
+				<img
+					class='w-100 h-150 object-fill'
+					src='https://picsum.photos/150'
+				/>
+				<span
+					role='status'
+					class='vv-badge absolute top-4 left-4'
+				>Fill</span>
+			</div>
+			<div class='relative w-100 h-150 bg-shadow'>
+				<img
+					class='relative w-100 h-150 object-contain'
+					src='https://picsum.photos/150'
+				/>
+				<span
+					role='status'
+					class='vv-badge absolute top-4 left-4'
+				>Contain</span>
+			</div>
+			<div class='relative w-100 h-150 bg-shadow'>
+				<img
+					class='relative w-100 h-150 object-cover'
+					src='https://picsum.photos/150'
+				/>
+				<span
+					role='status'
+					class='vv-badge absolute top-4 left-4'
+				>Cover</span>
+			</div>
+			<div class='relative w-100 h-150 bg-shadow'>
+				<img
+					class='relative w-100 h-150 object-none'
+					src='https://picsum.photos/150'
+				/>
+				<span
+					role='status'
+					class='vv-badge absolute top-4 left-4'
+				>None</span>
+			</div>
+			<div class='relative w-100 h-150 bg-shadow'>
+				<img
+					class='relative w-100 h-150 object-scale-down'
+					src='https://picsum.photos/150'
+				/>
+				<span role='status' class='vv-badge absolute top-4 left-4'>Scale
+					down</span>
+			</div>
+		</div>
+	</div>
+</section>

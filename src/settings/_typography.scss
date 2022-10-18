@@ -1,0 +1,179 @@
+// font-variables
+$font-family-sans: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"' !default;
+$font-family-serif: 'ui-serif, Georgia, Cambria, "Times New Roman", Times, serif' !default;
+$font-family-mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace' !default;
+
+// font-family
+$font-family: (
+	sans: $font-family-sans,
+	serif: $font-family-serif,
+	mono: $font-family-mono,
+) !default;
+
+// font-size static
+$font-size: (
+	smaller: smaller,
+	larger: larger,
+	6: 0.375rem,
+	8: 0.5rem,
+	10: 0.625rem,
+	12: 0.75rem,
+	14: 0.875rem,
+	16: 1rem,
+	18: 1.125rem,
+	20: 1.25rem,
+	22: 1.375rem,
+	24: 1.5rem,
+	26: 1.625rem,
+	28: 1.75rem,
+	30: 1.875rem,
+	32: 2rem,
+	34: 2.125rem,
+	36: 2.25rem,
+	48: 3rem,
+	60: 3.75rem,
+	72: 4.5rem,
+	96: 6rem,
+	128: 8rem,
+) !default;
+
+// font-size dynamic
+// could be a static reference or a custom value
+$font-size-dynamic: (
+	xs: (
+		xxs: 10,
+		sm: 12,
+		lg: 14,
+	),
+	sm: (
+		xxs: 12,
+		sm: 14,
+		lg: 16,
+	),
+	md: (
+		xxs: 14,
+		sm: 16,
+		lg: 18,
+	),
+	lg: (
+		xxs: 16,
+		sm: 18,
+		lg: 20,
+	),
+	xl: (
+		xxs: 18,
+		sm: 20,
+		lg: 22,
+	),
+) !default;
+
+// font-weight
+$font-weight: (
+	thin: 100,
+	extralight: 200,
+	light: 300,
+	normal: 400,
+	medium: 500,
+	semibold: 600,
+	bold: 700,
+	extrabold: 800,
+	black: 900,
+) !default;
+
+// line-height (leading)
+$line-height: (
+	none: 1,
+	tight: 1.25,
+	snug: 1.375,
+	normal: 1.5,
+	relaxed: 1.625,
+	loose: 2,
+) !default;
+
+// letter-spacing (tracking)
+$letter-spacing: (
+	tighter: -0.05em,
+	tight: -0.025em,
+	normal: 0em,
+	wide: 0.025em,
+	wider: 0.05em,
+	widest: 0.1em,
+) !default;
+
+// font-variant-numeric
+$font-variant-numeric: (
+	normal-nums: normal,
+	ordinal: ordinal,
+	slashed-zero: slashed-zero,
+	lining-nums: lining-nums,
+	oldstyle-nums: oldstyle-nums,
+	proportional-nums: proportional-nums,
+	tabular-nums: tabular-nums,
+	diagonal-fractions: diagonal-fractions,
+	stacked-fractions: stacked-fractions,
+) !default;
+
+// list-style-type
+$list-style-type: (none, disc, decimal) !default;
+
+// list-style-position
+$list-style-position: (inside, outside) !default;
+
+// text-align
+$text-align: (left, center, right, justify, start, end) !default;
+
+// text-decorator-line
+$text-decorator-line: (
+	underline: underline,
+	overline: overline,
+	line-through: line-through,
+	no-underline: none,
+) !default;
+
+// text-decorator-style
+$text-decorator-style: (solid, double, dotted, dashed, wavy) !default;
+
+// text-decorator-thickness
+$text-decorator-thickness: (
+	auto: auto,
+	from-font: from-font,
+	0: 0px,
+	1: 1px,
+	2: 2px,
+	4: 4px,
+	8: 8px,
+) !default;
+
+// text-underline-offset
+$text-underline-offset: (
+	auto: auto,
+	from-font: from-font,
+	0: 0px,
+	1: 1px,
+	2: 2px,
+	4: 4px,
+	8: 8px,
+) !default;
+
+// text-transform
+$text-transform: (
+	uppercase: uppercase,
+	lowercase: lowercase,
+	capitalize: capitalize,
+	normal-case: none,
+) !default;
+
+// vertical-align
+$vertical-align: (
+	baseline,
+	top,
+	middle,
+	bottom,
+	text-top,
+	text-bottom,
+	sub,
+	super
+) !default;
+
+// white-space
+$white-space: (normal, nowrap, pre, pre-line, pre-wrap) !default;

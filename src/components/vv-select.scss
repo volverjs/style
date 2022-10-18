@@ -1,0 +1,49 @@
+@use 'sass:map';
+@import '../context';
+
+$component-name: map.get($components-names, vv-select);
+$component-map: $vv-select;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents
+);
+
+// disabled
+@each $state in ('disabled') {
+	@include wrap-with-where(
+		$selector: '#{$component-selector}:has(select:#{$state})',
+		$enabled: $zero-specificity-for-compoenents
+	) {
+		@extend %#{$component-name}--#{$state} !optional;
+	}
+
+	@if map.get($component-map, 'state', $state, 'element') {
+		@each $element,
+			$map in map.get($component-map, 'state', $state, 'element')
+		{
+			@include wrap-with-where(
+				$selector:
+					'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}',
+				$enabled: $zero-specificity-for-compoenents
+			) {
+				@extend %#{$component-name}-state-#{$state}__#{$element}
+						!optional;
+			}
+
+			@each $elementState, $elementMap in map.get($map, 'state') {
+				@include wrap-with-where(
+					$selector:
+						'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}:#{$elementState}',
+					$enabled: $zero-specificity-for-compoenents
+				) {
+					@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
+							!optional;
+				}
+			}
+		}
+	}
+}

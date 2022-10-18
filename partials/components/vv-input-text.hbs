@@ -1,0 +1,353 @@
+<section id='component__vv-input-text' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-input-text</h1>
+	<h2 class='font-light text-word-3 mb-24'>Text Fields allow users to input
+		custom text entries with a keyboard. Various options can be shown with
+		the field to communicate the input requirements.
+	</h2>
+	<div>
+		<div class='vv-input-text'>
+			<label for='textfield'>Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield'
+					type='text'
+					name='textfield'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-hint'
+				/>
+			</div>
+			<small id='textfield-hint' class='vv-input-text__hint'>Please fill
+				the input above.</small>
+		</div>
+		<div class='vv-input-text'>
+			<label for='textfield-disabled'>Disabled Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-disabled'
+					type='text'
+					name='textfield-disabled'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-disabled-hint'
+					disabled='disabled'
+				/>
+			</div>
+			<small
+				id='textfield-disabled-hint'
+				class='vv-input-text__hint'
+			>Please fill the input above.</small>
+		</div>
+		<div class='vv-input-text vv-input-text--readonly'>
+			<label for='textfield-readonly'>Readonly Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-readonly'
+					type='text'
+					name='textfield-readonly'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-readonly-hint'
+					readonly='readonly'
+					value='Lorem ipsum dolor sit amet'
+					tabindex='-1'
+				/>
+			</div>
+		</div>
+		<div class='vv-input-text vv-input-text--valid'>
+			<label for='textfield-success'>Valid Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-success'
+					type='text'
+					name='textfield-success'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-success-hint'
+					aria-invalid='false'
+				/>
+			</div>
+			<small id='textfield-success-hint' class='vv-input-text__hint'>The
+				input above is successful.</small>
+		</div>
+		<div class='vv-input-text vv-input-text--invalid'>
+			<label for='textfield-invalid'>Invalid Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-invalid'
+					type='text'
+					name='textfield-invalid'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-invalid-hint'
+					aria-invalid='true'
+				/>
+			</div>
+			<small id='textfield-invalid-hint' class='vv-input-text__hint'>There
+				was an error with the input above.</small>
+		</div>
+		<div class='vv-input-text vv-input-text--loading'>
+			<label for='textfield-loading'>Loading Text Field</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-loading'
+					type='text'
+					name='textfield-loading'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-loading-hint'
+				/>
+			</div>
+			<small
+				id='textfield-loading-hint'
+				class='vv-input-text__hint'
+			>Loading...</small>
+		</div>
+		<div class='vv-input-text vv-input-text--icon-left'>
+			<label for='textfield-icon-left'>Icon left</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<input
+					id='textfield-icon-left'
+					type='text'
+					name='textfield-icon-left'
+					placeholder='Placeholder text'
+				/>
+			</div>
+		</div>
+		<div class='vv-input-text vv-input-text--icon-right'>
+			<label for='textfield-icon-right'>Icon right</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-icon-right'
+					type='text'
+					name='textfield-icon-right'
+					placeholder='Placeholder text'
+				/>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+			</div>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--valid vv-input-text--icon-left vv-input-text--icon-right'
+		>
+			<label for='textfield-valid-icon'>
+				Valid Text Field with left and right icon
+			</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<input
+					id='textfield-valid-icon'
+					type='text'
+					name='textfield-invalid-icon'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-valid-icon-hint'
+					aria-invalid='true'
+				/>
+				<span class='iconify' data-icon='akar-icons:check'></span>
+			</div>
+			<small id='textfield-valid-icon-hint' class='vv-input-text__hint'>
+				The input above is successful.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--invalid vv-input-text--icon-left vv-input-text--icon-right'
+		>
+			<label for='textfield-invalid-icon'>
+				Invalid Text Field with left and right icon
+			</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<input
+					id='textfield-invalid-icon'
+					type='text'
+					name='textfield-invalid-icon'
+					placeholder='Placeholder text'
+					aria-describedby='textfield-invalid-icon-hint'
+					aria-invalid='true'
+				/>
+				<span
+					class='iconify'
+					data-icon='akar-icons:circle-alert'
+				></span>
+			</div>
+			<small id='textfield-invalid-icon-hint' class='vv-input-text__hint'>
+				There was an error with the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--icon-left vv-input-text--floating'
+		>
+			<label for='textfield-floating'>Floating label</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:heart'></span>
+				<input
+					id='textfield-floating'
+					type='text'
+					name='textfield-floating'
+					placeholder='Floating label'
+					aria-describedby='textfield-floating-hint'
+				/>
+			</div>
+			<small id='textfield-floating-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div class='vv-input-text vv-input-text--floating dirty'>
+			<label for='textfield-floating-dirty'>Floating label (dirty)</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-floating-dirty'
+					type='text'
+					name='textfield-floating-dirty'
+					placeholder='Floating label'
+					aria-describedby='textfield-floating-dirty-hint'
+					value='Lorem ipsum dolor sit amet'
+				/>
+			</div>
+			<small
+				id='textfield-floating-dirty-hint'
+				class='vv-input-text__hint'
+			>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-left'
+		>
+			<label for='textfield-password'>Password</label>
+			<div class='vv-input-text__wrapper'>
+				<span class='iconify' data-icon='akar-icons:lock-on'></span>
+				<input
+					id='textfield-password'
+					type='password'
+					name='textfield-password'
+					placeholder='Floating label'
+					aria-describedby='textfield-password-hint'
+				/>
+			</div>
+			<small id='textfield-password-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--dirty vv-input-text--icon-right'
+		>
+			<label for='textfield-datetime'>Datetime</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-datetime'
+					type='datetime-local'
+					name='textfield-datetime'
+					placeholder='Floating label'
+					aria-describedby='textfield-date-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:calendar'></span>
+			</div>
+			<small id='textfield-datetime-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--dirty vv-input-text--icon-right'
+		>
+			<label for='textfield-date'>Date</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-date'
+					type='date'
+					name='textfield-date'
+					placeholder='Floating label'
+					aria-describedby='textfield-date-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:calendar'></span>
+			</div>
+			<small id='textfield-date-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--dirty vv-input-text--icon-right'
+		>
+			<label for='textfield-time'>Time</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-time'
+					type='time'
+					name='textfield-time'
+					placeholder='Floating label'
+					aria-describedby='textfield-time-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:clock'></span>
+			</div>
+			<small id='textfield-time-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--floating vv-input-text--icon-right'
+		>
+			<label for='textfield-search'>Search</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-search'
+					type='search'
+					name='textfield-search'
+					placeholder='Floating label'
+					aria-describedby='textfield-search-hint'
+				/>
+				<span class='iconify' data-icon='akar-icons:search'></span>
+			</div>
+			<small id='textfield-search-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div class='vv-input-text vv-input-text--icon-right'>
+			<label for='textfield-color'>Color</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-color'
+					type='color'
+					name='textfield-color'
+					aria-describedby='textfield-color-hint'
+					value='#1976d2'
+				/>
+				<span class='iconify' data-icon='akar-icons:water'></span>
+			</div>
+			<small id='textfield-color-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<div
+			class='vv-input-text vv-input-text--icon-right vv-input-text--dirty vv-input-text--floating'
+		>
+			<label for='textfield-number'>Number</label>
+			<div class='vv-input-text__wrapper'>
+				<input
+					id='textfield-number'
+					type='number'
+					name='textfield-number'
+					placeholder='Floating label'
+					aria-describedby='textfield-number-hint'
+					value='10'
+					step='0.1'
+				/>
+				<div class='vv-input-text__actions-group'>
+					<button
+						type='button'
+						id='textfield-number-increment'
+						class='vv-input-text__action-chevron vv-input-text__action-chevron-up'
+					></button>
+					<button
+						type='button'
+						id='textfield-number-decrement'
+						class='vv-input-text__action-chevron'
+					></button>
+				</div>
+			</div>
+			<small id='textfield-number-hint' class='vv-input-text__hint'>
+				Please fill the input above.
+			</small>
+		</div>
+		<script>
+			const input = document.getElementById('textfield-number');
+			document.getElementById('textfield-number-increment').addEventListener('click',
+			() => { input.stepUp() });
+			document.getElementById('textfield-number-decrement').addEventListener('click',
+			() => { input.stepDown() });
+		</script>
+	</div>
+</section>

@@ -1,0 +1,73 @@
+<section id='backgrounds__background-repeat' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Background Repeat</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling the
+		repetition of an element's background image.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each background-repeat}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						bg-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					background-repeat: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class='relative container h-full rounded-md bg-surface-1 p-24'>
+		<div class='absolute inset-0 bg-grid mix-blend-plus-lighter'></div>
+		<div
+			class='relative grid gap-10'
+			style='grid-template-columns: repeat(3, minmax(0, 1fr));'
+		>
+			<div
+				class='w-150 h-150 bg-contain bg-repeat'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			>
+				<span role='status' class='vv-badge'>Repeat</span></div>
+			<div
+				class='w-150 h-150 bg-contain bg-no-repeat'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			><span role='status' class='vv-badge'>No repeat</span></div>
+			<div
+				class='w-150 h-150 bg-contain bg-repeat-x'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			><span role='status' class='vv-badge'>Repeat-x</span></div>
+			<div
+				class='w-150 h-150 bg-contain bg-repeat-y'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			><span role='status' class='vv-badge'>Repeat-y</span></div>
+			<div
+				class='w-150 h-150 bg-contain bg-repeat-round'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			><span role='status' class='vv-badge'>Repeat around</span></div>
+			<div
+				class='w-150 h-150 bg-contain bg-repeat-space'
+				style="background-image: url('https://source.unsplash.com/random/150')"
+			><span role='status' class='vv-badge'>Repeat space</span></div>
+		</div>
+	</div>
+</section>

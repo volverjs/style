@@ -1,0 +1,8 @@
+@import '../context';
+
+// animate
+@include spread-map-into-utilities(
+	$map: $animate,
+	$class: 'animate',
+	$attribute: 'animation'
+);

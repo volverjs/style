@@ -1,0 +1,32 @@
+// use custom props for components
+$use-custom-props-for-components: true !default;
+
+// enable zero specificity for compoenents
+$zero-specificity-for-compoenents: true !default;
+
+// enable zero specificity for utilities
+$zero-specificity-for-utilities: true !default;
+
+// components prefix
+$components-prefix: vv !default;
+
+// components names
+$components-names: (
+	vv-badge: $components-prefix + -badge,
+	vv-button: $components-prefix + -button,
+	vv-button-group: $components-prefix + -button-group,
+	vv-progress: $components-prefix + -progress,
+	vv-collapse: $components-prefix + -collapse,
+	vv-dialog: $components-prefix + -dialog,
+	vv-dropdown: $components-prefix + -dropdown,
+	vv-input-checkbox: $components-prefix + -input-checkbox,
+	vv-input-checkbox-group: $components-prefix + -input-checkbox-group,
+	vv-input-radio: $components-prefix + -input-radio,
+	vv-input-radio-group: $components-prefix + -input-radio-group,
+	vv-input-text: $components-prefix + -input-text,
+	vv-textarea: $components-prefix + -textarea,
+	vv-select: $components-prefix + -select,
+	vv-table: $components-prefix + -table,
+	vv-card: $components-prefix + -card,
+	vv-text: $components-prefix + -text,
+) !default;

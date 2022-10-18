@@ -1,0 +1,33 @@
+<section id='component__vv-progress' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-progress</h1>
+	<h2 class='font-light text-word-3 mb-24'>Progress bar element displays an
+		indicator usually used to showing the completion progress of a task or
+		used while the page is loading.
+	</h2>
+	<div>
+		<label
+			for='progress-indeterminate'
+			class='block text-xs text-word-3 mb-xs'
+		>
+			Determinate
+		</label>
+		<progress
+			id='progress-indeterminate'
+			value='55'
+			max='100'
+			class='vv-progress mb-24'
+		></progress>
+		<label
+			for='progress-indeterminate'
+			class='block text-xs text-word-3 mb-xs'
+		>Indeterminate</label>
+		<progress
+			id='progress-indeterminate'
+			class='vv-progress vv-progress--indeterminate'
+		></progress>
+		<script>
+			const progress = document.getElementById("progress-indeterminate");
+			progress.indeterminate = true;
+		</script>
+	</div>
+</section>

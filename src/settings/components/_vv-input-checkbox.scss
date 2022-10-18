@@ -1,0 +1,92 @@
+$vv-input-checkbox: (
+	display: inline-flex,
+	flex-wrap: nowrap,
+	align-items: center,
+	cursor: pointer,
+	user-select: none,
+	margin: 0 var(--input-gap) var(--input-gap) 0,
+	color: var(--input-color),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
+	state: (
+		disabled: (
+			opacity: 0.3,
+			cursor: not-allowed,
+		),
+		readonly: (
+			cursor: default,
+			pointer-events: none,
+		),
+	),
+	element: (
+		input: (
+			_alias: "> input[type='checkbox']",
+			border: var(--spacing-2) solid var(--input-color),
+			width: var(--spacing-20),
+			height: var(--spacing-20),
+			margin: 0 var(--input-label-gap) 0 0,
+			background-position: center,
+			background-size: var(--text-12) auto,
+			background-repeat: no-repeat,
+			cursor: pointer,
+			position: relative,
+			state: (
+				checked: (
+					background-image: var(--bg-check),
+				),
+				indeterminate: (
+					background-image: var(--bg-minus),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+	),
+	modifier: (
+		switch: (
+			element: (
+				input: (
+					border: 0,
+					width: var(--spacing-44),
+					height: var(--spacing-24),
+					border-radius: var(--spacing-12),
+					background-color: var(--color-word-5),
+					position: relative,
+					will-change: background-color,
+					transition: background-color 0.2s ease-in-out,
+					pseudo: (
+						after: (
+							width: var(--spacing-20),
+							height: var(--spacing-20),
+							border-radius: 50%,
+							position: absolute,
+							inset: var(--spacing-2) 0 0 var(--spacing-2),
+							background: var(--color-white),
+							will-change: transform,
+							transition: transform 0.2s ease-in-out,
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--color-word-4),
+						),
+						active: (
+							background-color: var(--color-word-3),
+						),
+						checked: (
+							background-image: none,
+							background-color: var(--color-brand),
+							pseudo: (
+								after: (
+									transform: translateX(100%),
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+) !default;

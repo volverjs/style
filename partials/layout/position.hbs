@@ -1,0 +1,46 @@
+<section id='layout__position' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Position</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how an
+		element is positioned in the DOM.
+	</h2>
+
+	<details class='font-light text-word-4 list-none mb-16'>
+		<p>You can also use the breakpoint modifier to apply the class at only a
+			specific screen size and above. Example:
+			md-{static|fixed|absolute|relative|sticky}
+		</p>
+	</details>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each position}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						{{this}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					position: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</section>

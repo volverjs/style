@@ -1,0 +1,138 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:color';
+@use 'sass:string';
+@use 'sass:list';
+
+@function hsla-map($color, $name) {
+	@return (
+		hue: color.hue($color),
+		saturation: color.saturation($color),
+		lightness: color.lightness($color),
+		#{$name}: hsla(var(--color-#{$name}-hue)
+					var(--color-#{$name}-saturation)
+					var(--color-#{$name}-lightness) / color.alpha($color))
+	);
+}
+
+@function alpha-color($name, $alpha) {
+	@return hsla(
+		var(--color-#{$name}-hue) var(--color-#{$name}-saturation)
+			var(--color-#{$name}-lightness) / #{$alpha}
+	);
+}
+
+@function hex-to-rgb($hex) {
+	@return red($hex), green($hex), blue($hex);
+}
+
+@function color-alpha-map($color, $name, $steps: 9, $scale: 10%) {
+	$result: hsla-map($color, $name);
+	@for $index from 1 to ($steps + 1) {
+		$result: map.merge(
+			$result,
+			(#{$index}: alpha-color($name, $index * $scale))
+		);
+	}
+	@return $result;
+}
+
+@function color-shades-map($color, $name, $steps: 5, $scale: 10%) {
+	$result: (#{$name}: $color);
+	@for $index from 1 to ($steps + 1) {
+		$result: map.merge(
+			map.merge(
+				$result,
+				color-lighten-map($color, $name, $steps, $scale, 'lighten')
+			),
+			color-darken-map($color, $name, $steps, $scale, 'darken')
+		);
+	}
+	@return $result;
+}
+
+@function color-lighten-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 10%,
+	$prefix: ''
+) {
+	$result: hsla-map($color, $name);
+	@for $index from 1 to ($steps + 1) {
+		$key: $index;
+		@if $prefix != '' {
+			$key: $prefix + '-' + $index;
+		}
+
+		$value: color.scale($color, $lightness: $scale * $index);
+		$result: map.merge(
+			$result,
+			(
+				#{$key}:
+					hsl(
+						var(--color-#{$name}-hue)
+							var(--color-#{$name}-saturation)
+							color.lightness($value)
+					)
+			)
+		);
+	}
+	@return $result;
+}
+
+@function color-darken-map($color, $name, $steps: 5, $scale: 10%, $prefix: '') {
+	$result: hsla-map($color, $name);
+
+	@for $index from 1 to ($steps + 1) {
+		$key: $index;
+		@if $prefix != '' {
+			$key: $prefix + '-' + $index;
+		}
+
+		$value: color.scale($color, $lightness: -1 * $scale * $index);
+		$result: map.merge(
+			$result,
+			(
+				#{$key}:
+					hsl(
+						var(--color-#{$name}-hue)
+							var(--color-#{$name}-saturation)
+							color.lightness($value)
+					)
+			)
+		);
+	}
+	@return $result;
+}
+
+@function str-replace($string, $search, $replace: '') {
+	$index: string.index($string, $search);
+
+	@if $index {
+		@return string.slice($string, 1, $index - 1) + $replace +
+			str-replace(
+				string.slice($string, $index + string.length($search)),
+				$search,
+				$replace
+			);
+	}
+
+	@return $string;
+}
+
+@function list-to-string($list, $glue: ', ') {
+	$result: null;
+
+	@for $i from 1 through length($list) {
+		$e: list.nth($list, $i);
+
+		@if $result and $e {
+			$result: $result + $glue + $e;
+		} @else if $e {
+			$result: $e;
+		}
+	}
+
+	@return $result;
+}

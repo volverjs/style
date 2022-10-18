@@ -1,0 +1,66 @@
+<section id='flexbox-grid__align-items' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Align Items</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how flex and grid items are positioned along a container's cross axis.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each justify-align-items}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						items-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					align-items: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container columns-2 h-full rounded-md bg-surface-1 p-24">
+		<div class="flex flex-col items-start border-b border-alpha-1 mb-24 pb-24">
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">1</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">2</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">3</div>
+		</div>
+		<div class="flex flex-col items-end border-b border-alpha-1 mb-24 pb-24">
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">1</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">2</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">3</div>
+		</div>
+		<div class="break-after-column flex flex-col items-center">
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">1</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">2</div>
+			<div class="w-1/2 p-10 bg-info text-center rounded-sm">3</div>
+		</div>
+		<div class="flex flex-col items-baseline border-b border-alpha-1 mb-24 pb-24">
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">1</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">2</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">3</div>
+		</div>
+		<div class="flex flex-col items-stretch border-b border-alpha-1 mb-24 pb-24">
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">1</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">2</div>
+			<div class="w-1/2 p-10 mb-8 bg-info text-center rounded-sm">3</div>
+		</div>
+	</div>
+</section>

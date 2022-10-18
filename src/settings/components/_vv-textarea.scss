@@ -1,0 +1,275 @@
+$vv-textarea: (
+	display: var(--input-display),
+	flex: var(--input-flex),
+	flex-direction: var(--input-flex-direction),
+	margin-bottom: var(--input-gap),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
+	element: (
+		label: (
+			_alias: '> label',
+			display: var(--input-label-display),
+			font-size: var(--input-label-font-size),
+			color: var(--input-label-color),
+			margin: 0 0 var(--input-label-gap) 0,
+			white-space: var(--input-label-white-space),
+			text-overflow: var(--input-label-text-overflow),
+			overflow: var(--input-label-overflow),
+			max-width: var(--input-label-max-width),
+		),
+		wrapper: (
+			position: relative,
+			display: flex,
+			align-items: flex-start,
+			flex: 1,
+			overflow: hidden,
+			background-color: var(--input-background-color),
+			will-change: background-color,
+			transition: background-color 0.2s ease-in-out,
+			pseudo: (
+				before: (
+					position: absolute,
+					height: var(--spacing-1),
+					inset: auto 0 0 0,
+					background: var(--color-word-5),
+				),
+				after: (
+					position: absolute,
+					height: var(--spacing-2),
+					inset: auto 0 0 0,
+					background: var(--color-brand),
+					transform: scaleX(0),
+					transform-origin: left,
+					will-change: transform,
+					transition: transform 0.2s ease-in-out,
+				),
+			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-3),
+				),
+				focus-within: (
+					background-color: var(--color-surface-2),
+					pseudo: (
+						after: (
+							transform: scaleX(1),
+						),
+					),
+				),
+			),
+		),
+		input: (
+			_alias: 'textarea',
+			display: block,
+			flex: 1,
+			color: var(--input-color),
+			[padding]: var(--input-padding-top) var(--input-padding-right)
+				var(--input-padding-bottom) var(--input-padding-left),
+			min-height: var(--spacing-50),
+			pseudo: (
+				placeholder: (
+					color: var(--input-placeholder-color),
+				),
+			),
+			state: (
+				disabled: (
+					cursor: not-allowed,
+				),
+				readonly: (
+					cursor: text,
+				),
+			),
+		),
+		icon: (
+			_alias: ':where(svg, [data-icon])',
+			margin: var(--input-padding-top) var(--input-padding-right)
+				var(--input-padding-bottom) var(--input-padding-left),
+			position: var(--input-icon-position),
+			width: var(--input-icon-width),
+			height: var(--input-icon-height),
+			padding: var(--input-icon-padding),
+			pointer-events: var(--input-icon-pointer-events),
+		),
+		icon-right: (
+			_alias: 'textarea + :where(svg, [data-icon])',
+			right: 0,
+		),
+		actions-group: (
+			display: flex,
+			flex-direction: column,
+			position: absolute,
+			right: 0,
+			top: 0,
+			bottom: var(--spacing-px),
+		),
+		hint: (
+			_alias: '> small',
+			display: var(--input-hint-display),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+			padding-top: var(--input-hint-gap),
+			padding-inline: var(--spacing-xs),
+			white-space: var(--input-hint-white-space),
+			text-overflow: var(--input-hint-text-overflow),
+			overflow: var(--input-hint-overflow),
+			max-width: var(--input-hint-max-width),
+		),
+	),
+	modifier: (
+		icon-left: (
+			--input-padding-left: calc(var(--spacing-sm) * 2 + 1em),
+		),
+		icon-right: (
+			--input-padding-right: calc(var(--spacing-sm) * 2 + 1em),
+		),
+		valid: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--input-valid-color),
+							transform: scaleX(1),
+						),
+					),
+				),
+				hint: (
+					color: var(--input-valid-color),
+				),
+				icon-right: (
+					color: var(--input-valid-color),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--input-invalid-color),
+							transform: scaleX(1),
+						),
+					),
+				),
+				hint: (
+					color: var(--input-invalid-color),
+				),
+				icon-right: (
+					color: var(--input-invalid-color),
+				),
+			),
+		),
+		loading: (
+			element: (
+				wrapper: (
+					pseudo: (
+						before: (
+							height: 2px,
+							background: var(--color-brand-lighten-5),
+						),
+						after: (
+							animation: var(--animate-indeterminate),
+						),
+					),
+				),
+			),
+		),
+		floating: (
+			[margin-left]: var(--input-padding-left),
+			[margin-right]: var(--input-padding-right),
+			element: (
+				wrapper: (
+					[margin-left]: calc(var(--input-padding-left) * -1),
+					[margin-right]: calc(var(--input-padding-right) * -1),
+				),
+				hint: (
+					[margin-left]: calc(var(--input-padding-left) * -1),
+					[margin-right]: calc(var(--input-padding-right) * -1),
+				),
+				label: (
+					position: absolute,
+					z-index: 1,
+					pointer-events: none,
+					font-size: inherit,
+					[padding-top]: var(--input-padding-top),
+					[padding-bottom]: var(--input-padding-bottom),
+					padding-inline: 0,
+					margin: 0,
+					will-change: 'transform',
+					transform-origin: left,
+					transition: all 0.2s ease-in-out,
+				),
+				input: (
+					pseudo: (
+						placeholder: (
+							opacity: 0,
+						),
+					),
+				),
+			),
+			state: (
+				focus-within: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+				dirty: (
+					element: (
+						label: (
+							transform: translateY(-1.2ch),
+							font-size: var(--text-12),
+						),
+						input: (
+							transform: translateY(0.85ch),
+							pseudo: (
+								placeholder: (
+									opacity: 1,
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+	state: (
+		disabled: (
+			opacity: 0.5,
+			element: (
+				wrapper: (
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
+				),
+			),
+		),
+		readonly: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							opacity: 0,
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
+				),
+			),
+		),
+	),
+) !default;

@@ -1,0 +1,6 @@
+@import '../context';
+
+:where(:host, :root, .theme) {
+	@include spread-map-into-props($width, $prefix: w);
+	@include spread-map-into-props($height, $prefix: h);
+}

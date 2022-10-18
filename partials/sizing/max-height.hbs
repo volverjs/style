@@ -1,0 +1,38 @@
+<section id='sizing__max-height' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Max-Height</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for setting the maximum
+		height of an element.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each max-height}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						max-h-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+						max-height: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+		</table>
+	</div>
+</section>

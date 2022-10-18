@@ -1,0 +1,68 @@
+@use 'sass:map';
+@import '../context';
+
+// grid template columns
+@include spread-map-into-utilities(
+	$map: $grid-template-columns,
+	$class: grid-cols,
+	$attribute: grid-template-columns
+);
+
+// grid column
+@include spread-map-into-utilities(
+	$map: $grid-column,
+	$class: col,
+	$attribute: grid-column
+);
+
+// grid column start/end
+@each $class,
+	$attribute in (col-start: grid-column-start, col-end: grid-column-end)
+{
+	@include spread-map-into-utilities(
+		$map: $grid-column-start-end,
+		$class: $class,
+		$attribute: $attribute
+	);
+}
+
+// grid template rows
+@include spread-map-into-utilities(
+	$map: $grid-template-rows,
+	$class: grid-rows,
+	$attribute: grid-template-rows
+);
+
+// grid row
+@include spread-map-into-utilities(
+	$map: $grid-row,
+	$class: row,
+	$attribute: grid-row
+);
+
+// grid row start/end
+@each $class, $attribute in (row-start: grid-row-start, row-end: grid-row-end) {
+	@include spread-map-into-utilities(
+		$map: $grid-row-start-end,
+		$class: $class,
+		$attribute: $attribute
+	);
+}
+
+// grid auto flow
+@include spread-map-into-utilities(
+	$map: $grid-auto-flow,
+	$class: grid-flow,
+	$attribute: grid-auto-flow
+);
+
+// grid auto rows/columns
+@each $class,
+	$attribute in (auto-cols: grid-auto-columns, auto-rows: grid-auto-rows)
+{
+	@include spread-map-into-utilities(
+		$map: $grid-auto-rows-columns,
+		$class: $class,
+		$attribute: $attribute
+	);
+}

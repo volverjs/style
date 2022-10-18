@@ -1,0 +1,85 @@
+<section id='backgrounds__background-position' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Background Position</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling the
+		position of an element's background image.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each background-position}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						bg-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					background-position: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class='relative container h-full rounded-md bg-surface-1 p-24'>
+		<div class='absolute inset-0 bg-grid mix-blend-plus-lighter'></div>
+		<div
+			class='relative grid gap-10'
+			style='grid-template-columns: repeat(3, minmax(0, 1fr));'
+		>
+			<div
+				class='w-150 h-150 bg-auto bg-bottom'
+				style="background-image: url('https://picsum.photos/200')"
+			>
+				<span role='status' class='vv-badge'>Bottom</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-center'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Center</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-left'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Left</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-left-bottom'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Left-bottom</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-left-top'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Left-top</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-right'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Right</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-right-bottom'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Right-bottom</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-right-top'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Right-top</span></div>
+			<div
+				class='w-150 h-150 bg-auto bg-top'
+				style="background-image: url('https://picsum.photos/200')"
+			><span role='status' class='vv-badge'>Top</span></div>
+		</div>
+	</div>
+</section>

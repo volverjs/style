@@ -1,0 +1,57 @@
+@use 'sass:map';
+@import '../context';
+
+$component-name: map.get($components-names, vv-button);
+$component-map: $vv-button;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents,
+	$custom-block: true
+) {
+	// custom block
+	%#{$component-name} {
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		align-items: center;
+		cursor: pointer;
+		display: inline-flex;
+		justify-content: center;
+		text-align: center;
+		touch-action: manipulation;
+		user-select: none;
+
+		@include spread-map-into-attrs(
+			$map: $component-map,
+			$prefix: $component-name,
+			$props: $use-custom-props-for-components
+		);
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
+	}
+
+	@include wrap-with-where(
+		$selector: $component-selector,
+		$enabled: $zero-specificity-for-compoenents
+	) {
+		&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
+		&::file-selector-button {
+			@extend %#{$component-name};
+		}
+
+		// input file
+		@if map.get($component-map, 'gap') {
+			&::file-selector-button {
+				margin-inline-end: var(
+					--vv-button-gap,
+					map.get($component-map, 'gap')
+				);
+			}
+		}
+	}
+}

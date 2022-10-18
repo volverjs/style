@@ -1,0 +1,24 @@
+@use 'sass:map';
+@import '../context';
+
+$component-name: map.get($components-names, vv-input-checkbox);
+$component-map: $vv-input-checkbox;
+$props: true;
+
+@mixin theme-dark-vv-input-checkbox {
+	@include spread-map-into-props(
+		$map: $component-map,
+		$prefix: $component-name,
+		$deep: $props
+	);
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-vv-input-checkbox;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-vv-input-checkbox;
+}

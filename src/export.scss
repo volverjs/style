@@ -1,0 +1,411 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+
+// context
+@import 'context';
+
+:export {
+	// ============================================================== */
+	// #region CUSTOMIZATION
+	// colors
+	@each $key, $value in $colors {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					@if not str-index($subKey, #{$key}) {
+						#{'colors__' + $key}: $subValue;
+					}
+
+					@if not
+						str-index($subKey, 'hue') and not
+						str-index($subKey, 'saturation') and not
+						str-index($subKey, 'lightness') and not
+						str-index($subKey, #{$key})
+					{
+						#{'colors__' + $key}-#{$subKey}: $subValue;
+					}
+				}
+			}
+		} @else {
+			#{'colors__' + $key}: $value;
+		}
+	}
+
+	// #endregion
+
+	// ==============================================================
+	// #region LAYOUT
+	// aspect-ratio
+	@each $key, $value in $aspect-ratio {
+		$name: meta.inspect($value);
+		$name: str-replace($name, '"', '');
+
+		#{'aspect-ratio__' + $key}: $name;
+	}
+
+	// breakpoints
+	@each $key, $value in $breakpoints {
+		#{'breakpoints__' + $key}: $value;
+	}
+
+	// columns
+	@each $index in $columns {
+		#{'columns__' + $index}: $index;
+	}
+
+	// break-after
+	@each $index in $break-after {
+		#{'break-after__' + $index}: $index;
+	}
+
+	// break-before
+	@each $index in $break-before {
+		#{'break-before__' + $index}: $index;
+	}
+
+	// break-inside
+	@each $index in $break-inside {
+		#{'break-inside__' + $index}: $index;
+	}
+
+	// display-without-breakpoints
+	@each $index in $display-without-breakpoints {
+		#{'display-without-breakpoints__' + $index}: $index;
+	}
+
+	// display-with-breakpoints
+	@each $index in $display-with-breakpoints {
+		#{'display-with-breakpoints__' + $index}: $index;
+	}
+
+	// object-fit
+	@each $index in $object-fit {
+		#{'object-fit__' + $index}: $index;
+	}
+
+	// object-position
+	@each $key, $value in $object-position {
+		#{'object-position__' + $key}: $value;
+	}
+
+	// position
+	@each $index in $position {
+		#{'position__' + $index}: $index;
+	}
+
+	// visibility
+	@each $key, $value in $visibility {
+		#{'visibility__' + $key}: $value;
+	}
+
+	// z-index
+	@each $key, $value in $z-index {
+		$measure: meta.inspect($value);
+		$measure: str-replace($measure, '"', '');
+
+		#{'z-index__' + $key}: $measure;
+	}
+
+	// #endregion
+
+	// ==============================================================
+	// #region FLEXBOX
+	// flex-direction
+	@each $key, $value in $flex-direction {
+		#{'flex-direction__' + $key}: $value;
+	}
+
+	// flex-wrap
+	@each $index in $flex-wrap {
+		#{'flex-wrap__' + $index}: $index;
+	}
+
+	// flex
+	@each $key, $value in $flex {
+		#{'flex__' + $key}: $value;
+	}
+
+	// order
+	@each $key, $value in $order {
+		#{'order__' + $key}: $value;
+	}
+
+	// justify-align-content
+	@each $key, $value in $justify-align-content {
+		#{'justify-align-content__' + $key}: $value;
+	}
+
+	// justify-align-items
+	@each $key, $value in $justify-align-items {
+		#{'justify-align-items__' + $key}: $value;
+	}
+
+	// justify-align-self
+	@each $key, $value in $justify-align-self {
+		#{'justify-align-self__' + $key}: $value;
+	}
+
+	//  grid-template-columns
+	@each $key, $value in $grid-template-columns {
+		#{'grid-template-columns__' + $key}: $value;
+	}
+
+	//  grid-column
+	@each $key, $value in $grid-column {
+		#{'grid-column__' + $key}: $value;
+	}
+
+	//  grid-column-start-end
+	@each $key, $value in $grid-column-start-end {
+		#{'grid-column-start-end__' + $key}: $value;
+	}
+
+	//  grid-template-rows
+	@each $key, $value in $grid-template-rows {
+		#{'grid-template-rows__' + $key}: $value;
+	}
+
+	//  grid-row
+	@each $key, $value in $grid-row {
+		#{'grid-row__' + $key}: $value;
+	}
+
+	//  grid-row-start-end
+	@each $key, $value in $grid-row-start-end {
+		#{'grid-row-start-end__' + $key}: $value;
+	}
+
+	//  grid-auto-flow
+	@each $key, $value in $grid-auto-flow {
+		#{'grid-auto-flow__' + $key}: $value;
+	}
+
+	//  grid-auto-rows-columns
+	@each $key, $value in $grid-auto-rows-columns {
+		#{'grid-auto-rows-columns__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region SPACING
+	// spacing & spacing-dynamic
+	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					#{'spacers__' + $size}-#{$subKey}: $subValue;
+				}
+			}
+		} @else {
+			#{'spacers__' + $size}: $value;
+		}
+	}
+
+	// font-size & font-size-dynamic
+	@each $size, $value in map.merge($font-size, $font-size-dynamic) {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					#{'font-size__' + $size}-#{$subKey}: $subValue;
+				}
+			}
+		} @else {
+			#{'font-size__' + $size}: $value;
+		}
+	}
+
+	// width spacer
+	@each $key, $value in $width {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '/');
+
+		#{'width-spacer__' + $name}: $value;
+	}
+
+	// height spacer
+	@each $key, $value in $height {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '/');
+
+		#{'height-spacer__' + $name}: $value;
+	}
+
+	// border radius
+	@each $key, $value in $border-radius {
+		#{'border-radius-spacer__' + $key}: $value;
+	}
+
+	// border width
+	@each $key, $value in $border-width {
+		#{'border-width-spacer__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region SIZING
+	// min width
+	@each $key, $value in $min-width {
+		#{'min-width__' + $key}: $value;
+	}
+
+	// min height
+	@each $key, $value in $min-height {
+		#{'min-height__' + $key}: $value;
+	}
+
+	// max width
+	@each $key, $value in $max-width {
+		#{'max-width__' + $key}: $value;
+	}
+
+	// max height
+	@each $key, $value in $max-height {
+		#{'max-height__' + $key}: $value;
+	}
+
+	// max height
+	@each $key, $value in $max-height {
+		#{'max-height__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region TYPOGRAPHY
+	// font-family
+	@each $key, $value in $font-family {
+		#{'font-family__' + $key}: $value;
+	}
+
+	// font-weight
+	@each $key, $value in $font-weight {
+		#{'font-weight__' + $key}: $value;
+	}
+
+	// line-height
+	@each $key, $value in $line-height {
+		#{'line-height__' + $key}: $value;
+	}
+
+	// letter-spacing
+	@each $key, $value in $letter-spacing {
+		#{'letter-spacing__' + $key}: $value;
+	}
+
+	// font-variant-numeric
+	@each $key, $value in $font-variant-numeric {
+		#{'font-variant-numeric__' + $key}: $value;
+	}
+
+	// text-align
+	@each $index in $text-align {
+		#{'text-align__' + $index}: $index;
+	}
+
+	// list-style-type
+	@each $index in $list-style-type {
+		#{'list-style-type__' + $index}: $index;
+	}
+
+	// list-style-position
+	@each $index in $list-style-position {
+		#{'list-style-position__' + $index}: $index;
+	}
+
+	// text-decorator-line
+	@each $key, $value in $text-decorator-line {
+		#{'text-decorator-line__' + $key}: $value;
+	}
+
+	// text-decorator-style
+	@each $index in $text-decorator-style {
+		#{'text-decorator-style__' + $index}: $index;
+	}
+
+	// text-decorator-thickness
+	@each $key, $value in $text-decorator-thickness {
+		#{'text-decorator-thickness__' + $key}: $value;
+	}
+
+	// text-underline-offset
+	@each $key, $value in $text-underline-offset {
+		#{'text-underline-offset__' + $key}: $value;
+	}
+
+	// text-transform
+	@each $key, $value in $text-transform {
+		#{'text-transform__' + $key}: $value;
+	}
+
+	// vertical-align
+	@each $index in $vertical-align {
+		#{'vertical-align__' + $index}: $index;
+	}
+
+	// white-space
+	@each $index in $white-space {
+		#{'white-space__' + $index}: $index;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region BACKGROUND
+	// background-attachment
+	@each $index in $background-attachment {
+		#{'background-attachment__' + $index}: $index;
+	}
+
+	// background-clip
+	@each $key, $value in $background-clip {
+		#{'background-clip__' + $key}: $value;
+	}
+
+	// background-origin
+	@each $key, $value in $background-origin {
+		#{'background-origin__' + $key}: $value;
+	}
+
+	// background-position
+	@each $key, $value in $background-position {
+		#{'background-position__' + $key}: $value;
+	}
+
+	// background-repeat
+	@each $key, $value in $background-repeat {
+		#{'background-repeat__' + $key}: $value;
+	}
+
+	// background-size
+	@each $index in $background-size {
+		#{'background-size__' + $index}: $index;
+	}
+
+	// background-image
+	@each $key, $value in $background-image {
+		#{'background-image__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region BORDER
+	// border-style
+	@each $index in $border-style {
+		#{'border-style__' + $index}: $index;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region EFFECTS
+	// blend-mode
+	@each $index in $blend-mode {
+		#{'blend-mode__' + $index}: $index;
+	}
+
+	// #endregion
+}

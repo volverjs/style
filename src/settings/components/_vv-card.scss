@@ -1,0 +1,45 @@
+$vv-card: (
+	position: relative,
+	overflow: hidden,
+	border-color: var(--color-surface-4),
+	border-top-width: var(--border),
+	border-right-width: var(--border),
+	border-bottom-width: var(--border),
+	border-left-width: var(--border),
+	border-style: none,
+	border-radius: var(--border-8),
+	margin: var(--spacing-0),
+	background: var(--color-surface-4),
+	color: var(--color-word-2),
+	box-shadow: var(--spacing-0) var(--spacing-0) var(--spacing-px)
+		var(--color-surface-4),
+	backdrop-filter: none,
+	element: (
+		header: (
+			overflow: hidden,
+			font-size: var(--text-lg),
+			padding: var(--spacing-md) var(--spacing-md) var(--spacing-0),
+		),
+		header-img: (
+			width: 100%,
+			height: auto,
+			position: relative,
+			object-fit: cover,
+		),
+		body: (
+			padding: var(--spacing-md),
+		),
+		footer: (
+			font-size: var(--text-md),
+			padding: var(--spacing-0) var(--spacing-md) var(--spacing-md),
+		),
+	),
+	modifier: (
+		glass: (
+			background: rgb(238 238 238 / 10%),
+			box-shadow: 10px 10px 15px -10px rgb(238 238 238 / 20%),
+			border: var(--border) solid rgb(238 238 238 / 30%),
+			backdrop-filter: blur(10px) saturate(100%),
+		),
+	),
+) !default;

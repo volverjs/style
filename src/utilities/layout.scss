@@ -1,0 +1,188 @@
+@use 'sass:map';
+@import '../context';
+
+// aspect
+@include spread-map-into-utilities(
+	$map: $aspect-ratio,
+	$class: aspect,
+	$attribute: aspect-ratio,
+	$prop: aspect
+);
+
+// container
+%container {
+	width: 100%;
+
+	@each $breakpoint, $value in $breakpoints {
+		@if $value > 0 {
+			@include media-breakpoint-up($breakpoint) {
+				max-width: $value;
+			}
+		}
+	}
+}
+@include wrap-with-where(
+	$selector: '.container',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %container;
+}
+
+// columns
+@include spread-map-into-utilities(
+	$map: $columns,
+	$class: columns,
+	$attribute: column-count,
+	$bps: $breakpoints
+);
+
+// break-after
+@include spread-map-into-utilities(
+	$map: $break-after,
+	$class: break-after,
+	$attribute: break-after
+);
+
+// break-before
+@include spread-map-into-utilities(
+	$map: $break-before,
+	$class: break-before,
+	$attribute: break-before
+);
+
+// break-inside
+@include spread-map-into-utilities(
+	$map: $break-inside,
+	$class: break-inside,
+	$attribute: break-inside
+);
+
+// display
+@include spread-map-into-utilities(
+	$map: $display-without-breakpoints,
+	$attribute: display
+);
+
+@include spread-map-into-utilities(
+	$map: $display-with-breakpoints,
+	$attribute: display,
+	$bps: $breakpoints
+);
+
+// object-fit
+@include spread-map-into-utilities(
+	$map: $object-fit,
+	$class: object,
+	$attribute: object-fit
+);
+
+// object-position
+@include spread-map-into-utilities(
+	$map: $object-position,
+	$class: object,
+	$attribute: object-position
+);
+
+// overflow
+@each $overflow in (auto, hidden, clip, visible, scroll) {
+	%overflow-#{$overflow} {
+		overflow: #{$overflow};
+	}
+
+	@include wrap-with-where(
+		$selector: '.overflow-#{$overflow}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %overflow-#{$overflow};
+	}
+
+	@each $prefix in (x, y) {
+		%overflow-#{$prefix}-#{$overflow} {
+			overflow-#{$prefix}: #{$overflow};
+		}
+
+		@include wrap-with-where(
+			$selector: '.overflow-#{$prefix}-#{$overflow}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %overflow-#{$prefix}-#{$overflow};
+		}
+	}
+}
+
+// position
+@include spread-map-into-utilities(
+	$map: $position,
+	$attribute: position,
+	$bps: $breakpoints
+);
+
+// visibility
+@include spread-map-into-utilities(
+	$map: $visibility,
+	$attribute: visibility,
+	$bps: $breakpoints
+);
+
+// top / right / bottom / left
+@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+	// check if value is not a map (spacing-dynamic)
+	$var: var(--spacing-#{$size});
+	@if type-of($value) != 'map' {
+		$var: var(--spacing-#{$size}, #{$value});
+	}
+
+	// all
+	%inset-#{$size} {
+		inset: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-#{$size};
+	}
+
+	// horizontal
+	%inset-x-#{$size} {
+		inset-inline: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-x-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-x-#{$size};
+	}
+
+	// vertical
+	%inset-y-#{$size} {
+		inset-block: #{$var};
+	}
+	@include wrap-with-where(
+		$selector: '.inset-y-#{$size}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %inset-y-#{$size};
+	}
+
+	// sides
+	@each $direction in(top, right, bottom, left) {
+		%#{$direction}-#{$size} {
+			#{$direction}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$direction}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$direction}-#{$size};
+		}
+	}
+}
+
+// z-index
+@include spread-map-into-utilities(
+	$map: $z-index,
+	$class: z,
+	$attribute: z-index,
+	$prop: z
+);

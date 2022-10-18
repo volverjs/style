@@ -1,0 +1,66 @@
+// flex-direction
+$flex-direction: (
+	row: row,
+	row-reverse: row-reverse,
+	col: column,
+	col-reverse: column-reverse,
+) !default;
+
+// flex-wrap
+$flex-wrap: (wrap, wrap-reverse, nowrap) !default;
+
+// flex
+$flex: (
+	1: 1 1 0%,
+	auto: 1 1 auto,
+	initial: 0 1 auto,
+	none: none,
+) !default;
+
+// order
+$order: (
+	1: 1,
+	2: 2,
+	3: 3,
+	4: 4,
+	5: 5,
+	6: 6,
+	7: 7,
+	8: 8,
+	9: 9,
+	10: 10,
+	11: 11,
+	12: 12,
+	first: -9999,
+	last: 9999,
+	none: 0,
+) !default;
+
+// justify and align content
+$justify-align-content: (
+	start: flex-start,
+	end: flex-end,
+	center: center,
+	between: space-between,
+	around: space-around,
+	evenly: space-evenly,
+) !default;
+
+// justify and align items
+$justify-align-items: (
+	start: flex-start,
+	end: flex-end,
+	center: center,
+	baseline: baseline,
+	stretch: stretch,
+) !default;
+
+// justify and align self
+$justify-align-self: (
+	auto: auto,
+	start: flex-start,
+	end: flex-end,
+	center: center,
+	baseline: baseline,
+	stretch: stretch,
+) !default;

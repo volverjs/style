@@ -1,0 +1,80 @@
+@use 'sass:map';
+@import '../context';
+
+// width / height / max-width / max-height
+@each $dimension,
+	$attr in(w: width, h: height, max-w: max-width, max-h: max-height)
+{
+	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+		// check if value is not a map (spacing-dynamic)
+		$var: var(--spacing-#{$size});
+		@if type-of($value) != 'map' {
+			$var: var(--spacing-#{$size}, #{$value});
+		}
+
+		%#{$dimension}-#{$size} {
+			#{$attr}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$dimension}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$dimension}-#{$size};
+		}
+	}
+}
+
+@include spread-map-into-utilities(
+	$map: $width,
+	$class: w,
+	$attribute: width,
+	$bps: $breakpoints,
+	$prop: w
+);
+
+@include spread-map-into-utilities(
+	$map: $height,
+	$class: h,
+	$attribute: height,
+	$bps: $breakpoints,
+	$prop: h
+);
+
+@include spread-map-into-utilities(
+	$map: $max-width,
+	$class: max-w,
+	$attribute: max-width
+);
+
+@include spread-map-into-utilities(
+	$map: $max-height,
+	$class: max-h,
+	$attribute: max-height
+);
+
+@each $breakpoint, $breakpoint-value in $breakpoints {
+	@if $breakpoint-value > 0 {
+		%max-w-screen-#{$breakpoint} {
+			max-width: $breakpoint-value;
+		}
+		@include wrap-with-where(
+			$selector: '.max-w-screen-#{$breakpoint}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %max-w-screen-#{$breakpoint};
+		}
+	}
+}
+
+// min-width / min-height
+@include spread-map-into-utilities(
+	$map: $min-width,
+	$class: min-w,
+	$attribute: min-width
+);
+
+@include spread-map-into-utilities(
+	$map: $min-height,
+	$class: min-h,
+	$attribute: min-height
+);

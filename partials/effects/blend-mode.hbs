@@ -1,0 +1,129 @@
+<section id='effects__blend-mode' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Mix Blend Mode</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling how an
+		element should blend with the background.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each blend-mode}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						mix-blend-{{this}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					mix-blend-mode: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class='relative rounded-md bg-surface-1 p-16 border border-alpha-2'>
+		<div class='relative gap-10 columns-2 md:columns-3'>
+			<div
+				class='aspect-tv mix-blend-normal break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Normal</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-multiply break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Multiply</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-screen break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Screen</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-overlay break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Overlay</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-darken break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Darken</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-lighten break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Lighten</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-color-dodge break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Color-dodge</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-color-burn break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Color-burn</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-hard-light break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Hard-light</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-soft-light break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Soft-light</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-difference break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Difference</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-exclusion break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Exclusion</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-hue break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Hue</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-saturation break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Saturation</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-color break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Color</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-luminosity break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Luminosity</span>
+			</div>
+			<div
+				class='aspect-tv mix-blend-plus-lighter break-inside-avoid mb-16 flex justify-center items-center rounded-md bg-info'
+			>
+				<span class='text-xs font-semibold'>Plus-lighter</span>
+			</div>
+		</div>
+	</div>
+</section>

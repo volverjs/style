@@ -1,0 +1,15 @@
+@import '../context';
+
+@mixin theme-dark-colors {
+	@include spread-map-into-props($colors, 'color');
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-colors;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-colors;
+}

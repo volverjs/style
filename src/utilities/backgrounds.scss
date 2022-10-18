@@ -1,0 +1,50 @@
+@import '../context';
+
+// background-attachment
+@include spread-map-into-utilities(
+	$map: $background-attachment,
+	$class: 'bg',
+	$attribute: 'background-attachment'
+);
+
+// background-clip
+@include spread-map-into-utilities(
+	$map: $background-clip,
+	$class: 'bg-clip',
+	$attribute: 'background-clip'
+);
+
+// background-origin
+@include spread-map-into-utilities(
+	$map: $background-origin,
+	$class: 'bg-origin',
+	$attribute: 'background-origin'
+);
+
+// background-position
+@include spread-map-into-utilities(
+	$map: $background-position,
+	$class: 'bg',
+	$attribute: 'background-position'
+);
+
+// background-repeat
+@include spread-map-into-utilities(
+	$map: $background-repeat,
+	$class: bg,
+	$attribute: background-repeat
+);
+
+// background-size
+@include spread-map-into-utilities(
+	$map: $background-size,
+	$class: bg,
+	$attribute: background-size
+);
+
+// background-image
+@include spread-map-into-utilities(
+	$map: $background-image,
+	$class: bg,
+	$attribute: background-image
+);

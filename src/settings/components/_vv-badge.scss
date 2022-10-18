@@ -1,0 +1,43 @@
+$vv-badge: (
+	border-radius: 1.0465em,
+	background: var(--color-brand),
+	color: var(--color-white),
+	font-size: 0.6em,
+	height: 2.093em,
+	min-width: 2.093em,
+	padding: 0.37em 0.475em,
+	display: inline-flex,
+	justify-content: center,
+	font-weight: normal,
+	font-family: var(--font-sans),
+	text-shadow: none,
+	state: (
+		empty: (
+			font-size: inherit,
+			width: 0.5em,
+			height: 0.5em,
+			min-width: 0,
+			border-radius: 0.25em,
+			padding: 0,
+		),
+	),
+	modifier: (
+		white: (
+			background: alpha-color('white', 80%),
+			color: var(--color-black),
+		),
+		black: (
+			background: alpha-color('black', 80%),
+			color: var(--color-white),
+		),
+		danger: (
+			background: var(--color-danger),
+		),
+		success: (
+			background: var(--color-success),
+		),
+		warning: (
+			background: var(--color-warning),
+		),
+	),
+) !default;

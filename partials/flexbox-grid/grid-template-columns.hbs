@@ -1,0 +1,81 @@
+<section id='flexbox-grid__grid-template-columns' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Grid Template Columns</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for specifying the columns in a grid layout.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each grid-template-columns}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						grid-cols-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					grid-template-columns: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<div class='container h-full rounded-md bg-surface-1 p-24'>
+		<div class='grid grid-cols-3 gap-10 border-b border-alpha-1 mb-24 pb-24'>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>1</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>2</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>3</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>4</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>5</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>6</div>
+		</div>
+		<div class='relative grid grid-cols-6 gap-md'>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>1</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>2</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>3</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>4</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>5</div>
+			<div
+				class='rounded-md p-10 bg-info text-center'
+			>6</div>
+		</div>
+	</div>
+</section>

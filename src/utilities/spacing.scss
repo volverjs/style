@@ -1,0 +1,109 @@
+@use 'sass:map';
+@import '../context';
+
+@each $prefix, $prop in (m: margin, p: padding, n: margin) {
+	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+		$var: var(--spacing-#{$size});
+
+		// check if value is not a map (spacing-dynamic)
+		@if type-of($value) != 'map' {
+			$var: var(--spacing-#{$size}, #{$value});
+		}
+
+		// negative margin
+		@if $prefix == 'n' {
+			$var: calc(-1 * #{$var});
+		}
+
+		// all
+		%#{$prefix}#{$size} {
+			#{$prop}: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}#{$size};
+		}
+
+		// horizontal
+		%#{$prefix}x-#{$size} {
+			#{$prop}-inline: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}x-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}x-#{$size};
+		}
+
+		// vertical
+		%#{$prefix}y-#{$size} {
+			#{$prop}-block: #{$var};
+		}
+		@include wrap-with-where(
+			$selector: '.#{$prefix}y-#{$size}',
+			$enabled: $zero-specificity-for-utilities
+		) {
+			@extend %#{$prefix}y-#{$size};
+		}
+
+		// sides
+		@each $direction-prefix,
+			$direction in(t: top, r: right, b: bottom, l: left)
+		{
+			%#{$prefix}#{$direction-prefix}-#{$size} {
+				#{$prop}-#{$direction}: #{$var};
+			}
+			@include wrap-with-where(
+				$selector: '.#{$prefix}#{$direction-prefix}-#{$size}',
+				$enabled: $zero-specificity-for-utilities
+			) {
+				@extend %#{$prefix}#{$direction-prefix}-#{$size};
+			}
+		}
+	}
+}
+
+// auto
+%m-auto {
+	margin: auto;
+}
+@include wrap-with-where(
+	$selector: '.m-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %m-auto;
+}
+
+%mx-auto {
+	margin-inline: auto;
+}
+@include wrap-with-where(
+	$selector: '.mx-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %mx-auto;
+}
+
+%my-auto {
+	margin-block: auto;
+}
+@include wrap-with-where(
+	$selector: '.my-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %my-auto;
+}
+
+@each $direction-prefix, $direction in(t: top, r: right, b: bottom, l: left) {
+	%m#{$direction-prefix}-auto {
+		margin-#{$direction}: auto;
+	}
+	@include wrap-with-where(
+		$selector: '.m#{$direction-prefix}-auto',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		@extend %m#{$direction-prefix}-auto;
+	}
+}

@@ -1,0 +1,376 @@
+<section id='component__vv-select' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>vv-select</h1>
+	<h2 class='font-light text-word-3 mb-24'>Select is used to select an item
+		from a list of options.</h2>
+	<div class='vv-select'>
+		<label for='select'>Select</label>
+		<div class='vv-select__wrapper'>
+			<select name='select' id='select' aria-describedby='select-hint'>
+				<option
+					value=''
+					disabled='disabled'
+					selected='selected'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--dirty'>
+		<label for='select-dirty'>Dirty Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-dirty'
+				aria-describedby='select-dirty-hint'
+			>
+				<option value='' disabled='disabled'>Placeholder text</option>
+				<option value='1' selected='selected'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-dirty-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select'>
+		<label for='select-disabled'>Disabled Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-disabled'
+				aria-describedby='select-disabled-hint'
+				disabled='disabled'
+			>
+				<option
+					value=''
+					disabled='disabled'
+					selected='selected'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-disabled-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--readonly vv-select--dirty'>
+		<label for='select-readonly'>Readonly Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-readonly'
+				aria-describedby='select-readonly-hint'
+				disabled='disabled'
+			>
+				<option value='' disabled='disabled'>Placeholder text</option>
+				<option value='1' selected='selected'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+	</div>
+	<div class='vv-select vv-select--dirty vv-select--valid'>
+		<label for='select-valid'>Valid Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-valid'
+				aria-describedby='select-valid-hint'
+			>
+				<option value='' disabled='disabled'>Placeholder text</option>
+				<option value='1' selected='selected'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-valid-hint' class='vv-input-text__hint'>
+			The input above is successful.
+		</small>
+	</div>
+	<div class='vv-select vv-select--invalid'>
+		<label for='select-invalid'>Invalid Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-invalid'
+				aria-describedby='select-invalid-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-invalid-hint' class='vv-input-text__hint'>
+			There was an error with the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--loading'>
+		<label for='select-loading'>Loading Select</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-loading'
+				aria-describedby='select-loading-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-loading-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--icon-left'>
+		<label for='select-icon-left'>Icon Left</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-left'
+				aria-describedby='select-icon-left-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+		</div>
+		<small id='select-icon-left-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--icon-right'>
+		<label for='select-icon-right'>Icon Right</label>
+		<div class='vv-select__wrapper'>
+			<select
+				name='select'
+				id='select-icon-right'
+				aria-describedby='select-icon-right-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+		</div>
+		<small id='select-icon-right-hint' class='vv-input-text__hint'>
+			Please fill the input above.
+		</small>
+	</div>
+	<div
+		class='vv-select vv-select--valid vv-select--icon-left vv-select--icon-right'
+	>
+		<label for='select-icon-valid'>Valid Select with left and right icon</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-valid'
+				aria-describedby='select-icon-valid-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:check'></span>
+		</div>
+		<small id='select-icon-valid-hint' class='vv-input-text__hint'>
+			The input above is successful.
+		</small>
+	</div>
+	<div
+		class='vv-select vv-select--invalid vv-select--icon-left vv-select--icon-right'
+	>
+		<label for='select-icon-invalid'>Valid Select with left and right icon</label>
+		<div class='vv-select__wrapper'>
+			<span class='iconify' data-icon='akar-icons:heart'></span>
+			<select
+				name='select'
+				id='select-icon-invalid'
+				aria-describedby='select-icon-invalid-hint'
+			>
+				<option
+					value=''
+					selected='selected'
+					disabled='disabled'
+				>Placeholder text</option>
+				<option value='1'>Option 1</option>
+				<option value='2'>Option 2</option>
+				<option value='3'>Option 3</option>
+			</select>
+			<span class='iconify' data-icon='akar-icons:circle-alert'></span>
+		</div>
+		<small id='select-icon-invalid-hint' class='vv-input-text__hint'>
+			There was an error with the input above.
+		</small>
+	</div>
+	<div class='vv-select vv-select--dirty'>
+		<label>Custom Select with Dropdown</label>
+		<details role='list' class='vv-select__wrapper'>
+			<summary class='vv-select__input' aria-haspopup='listbox'>
+				Option 1
+			</summary>
+			<ul class='vv-dropdown' role='listbox'>
+				<li>
+					<label for='select-single-option-1'>
+						<input
+							type='radio'
+							id='select-single-option-1'
+							name='select-single-option'
+							value='1'
+							checked='checked'
+						/>
+
+						Option 1
+					</label>
+				</li>
+				<li>
+					<label for='select-single-option-2'>
+						<input
+							type='radio'
+							id='select-single-option-2'
+							name='select-single-option'
+							value='2'
+						/>
+						Option 2
+					</label>
+				</li>
+				<li>
+					<label for='select-single-option-3'>
+						<input
+							type='radio'
+							id='select-single-option-3'
+							name='select-single-option'
+							value='3'
+						/>
+						Option 3
+					</label>
+				</li>
+			</ul>
+		</details>
+	</div>
+	<div class='vv-select vv-select--dirty'>
+		<label>Custom Multiple Select with Dropdown</label>
+		<details role='list' class='vv-select__wrapper'>
+			<summary class='vv-select__input' aria-haspopup='listbox'>
+				Option 1, Option 3
+			</summary>
+			<ul class='vv-dropdown' role='listbox'>
+				<li>
+					<label for='select-multiple-option-1'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-1'
+							name='select-multiple-option'
+							value='1'
+							checked='checked'
+						/>
+
+						Option 1
+					</label>
+				</li>
+				<li>
+					<label for='select-multiple-option-2'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-2'
+							name='select-multiple-option'
+							value='2'
+						/>
+						Option 2
+					</label>
+				</li>
+				<li>
+					<label for='select-multiple-option-3'>
+						<input
+							type='checkbox'
+							id='select-multiple-option-3'
+							name='select-multiple-option'
+							value='3'
+							checked='checked'
+						/>
+						Option 3
+					</label>
+				</li>
+			</ul>
+		</details>
+	</div>
+	<div class='vv-select vv-select--dirty'>
+		<label>Custom Select with Top Dropdown</label>
+		<details role='list' class='vv-select__wrapper'>
+			<summary class='vv-select__input' aria-haspopup='listbox'>
+				Option 2
+			</summary>
+			<ul class='vv-dropdown vv-dropdown--place-top' role='listbox'>
+				<li>
+					<label for='select-single-option-top-1'>
+						<input
+							type='radio'
+							id='select-single-option-top-1'
+							name='select-single-option-top'
+							value='1'
+						/>
+
+						Option 2
+					</label>
+				</li>
+				<li>
+					<label for='select-single-option-top-2'>
+						<input
+							type='radio'
+							id='select-single-option-top-2'
+							name='select-single-option-top'
+							value='2'
+							checked='checked'
+						/>
+						Option 2
+					</label>
+				</li>
+				<li>
+					<label for='select-single-option-top-3'>
+						<input
+							type='radio'
+							id='select-single-option-top-3'
+							name='select-single-option-top'
+							value='3'
+						/>
+						Option 3
+					</label>
+				</li>
+			</ul>
+		</details>
+	</div>
+</section>

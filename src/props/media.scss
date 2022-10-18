@@ -1,0 +1,49 @@
+@import '../context';
+
+// motion
+@custom-media --motion-ok (prefers-reduced-motion: no-preference);
+@custom-media --motion-not-ok (prefers-reduced-motion: reduce);
+
+// opacity
+@custom-media --opacity-ok (prefers-reduced-transparency: no-preference);
+@custom-media --opacity-not-ok (prefers-reduced-transparency: reduce);
+
+// data
+@custom-media --use-data-ok (prefers-reduced-data: no-preference);
+@custom-media --use-data-not-ok (prefers-reduced-data: reduce);
+
+// color scheme
+@custom-media --os-dark (prefers-color-scheme: dark);
+@custom-media --os-light (prefers-color-scheme: light);
+
+// constrast
+@custom-media --high-contrast (prefers-contrast: more);
+@custom-media --low-contrast (prefers-contrast: less);
+
+// orientation
+@custom-media --portrait (orientation: portrait);
+@custom-media --landscape (orientation: landscape);
+
+// dynamic range
+@custom-media --hd-color (dynamic-range: high);
+
+// pointer
+@custom-media --touch (hover: none) and (pointer: coarse);
+@custom-media --stylus (hover: none) and (pointer: fine);
+@custom-media --pointer (hover) and (pointer: coarse);
+@custom-media --mouse (hover) and (pointer: fine);
+
+// breakpoints
+/* stylelint-disable */
+$old-breakpoint: null;
+$old-breakpoint-value: null;
+@each $breakpoint, $breakpoint-value in $breakpoints {
+	@if $old-breakpoint {
+		@custom-media --#{$old-breakpoint}-only (#{$old-breakpoint-value} <= width <= #{$breakpoint-value});
+		@custom-media --#{$old-breakpoint}-n-above (width >= #{$breakpoint-value});
+		@custom-media --#{$old-breakpoint}-n-below (width <= #{$breakpoint-value});
+	}
+
+	$old-breakpoint: $breakpoint;
+	$old-breakpoint-value: $breakpoint-value;
+}

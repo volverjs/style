@@ -1,0 +1,58 @@
+$vv-button: (
+	modifier: (
+		primary: (
+			border-color: var(--color-gray-lighten-3),
+			background: var(--color-gray-lighten-3),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray),
+				),
+				hover: (
+					background: var(--color-gray-lighten-2),
+					border-color: var(--color-gray-lighten-2),
+				),
+				active: (
+					background: var(--color-gray-lighten-1),
+					border-color: var(--color-gray-lighten-1),
+				),
+			),
+		),
+		secondary: (
+			border-color: var(--color-gray-darken-1),
+			background: var(--color-gray-darken-3),
+			text-shadow: 0 1px 0 var(--color-gray-darken-5),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray),
+				),
+				hover: (
+					background: var(--color-gray-darken-4),
+				),
+				active: (
+					background: var(--color-gray-darken-5),
+				),
+			),
+		),
+		ghost: (
+			background: transparent,
+			border-color: transparent,
+			color: var(--color-gray-lighten-2),
+			text-shadow: 0 1px 0 var(--color-gray-darken-4),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray),
+					outline-offset: 0,
+				),
+				hover: (
+					background: var(--color-gray-darken-4),
+				),
+				active: (
+					background: var(--color-gray-darken-5),
+				),
+			),
+		),
+		text: (
+			text-shadow: 0 1px 0 var(--color-gray-darken-5),
+		),
+	),
+) !default;

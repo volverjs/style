@@ -1,0 +1,37 @@
+$vv-dropdown: (
+	position: absolute,
+	inset: auto 0,
+	z-index: var(--z-dropdown),
+	display: flex,
+	flex-direction: column,
+	background-color: var(--color-surface-1),
+	box-shadow: var(--shadow-lg),
+	element: (
+		item: (
+			_alias: '> li > :where(a, label, button)',
+			display: block,
+			padding: var(--spacing-sm),
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+				),
+				active: (
+					background-color: var(--color-surface-3),
+				),
+				checked-within: (
+					color: var(--color-brand),
+					background-color: var(--color-surface-3),
+				),
+			),
+		),
+		input: (
+			_alias: '> li > input',
+			display: none,
+		),
+	),
+	modifier: (
+		place-top: (
+			bottom: 100%,
+		),
+	),
+) !default;

@@ -1,0 +1,48 @@
+<section id='backgrounds__background-image' class='mb-32'>
+	<h1 class='text-20 text-word-2 mb-8'>Background Image</h1>
+	<h2 class='font-light text-word-3 mb-24'>Utilities for controlling an
+		element's background image.
+	</h2>
+
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Class
+					</th>
+					<th>
+						Result
+					</th>
+					<th>
+						Properties
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each background-image}}
+				<tr>
+					<td
+						translate='no'
+						class='font-mono text-accent whitespace-nowrap'
+					>
+						bg-{{@key}}
+					</td>
+					<td
+						translate='no'
+						class='w-192 bg-{{@key}} bg-no-repeat bg-center font-mono text-accent whitespace-nowrap'
+					>
+						
+					</td>
+					<td
+						translate='no'
+						class='font-mono text-info whitespace-nowrap'
+					>
+					background-image: {{this}};
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</section>

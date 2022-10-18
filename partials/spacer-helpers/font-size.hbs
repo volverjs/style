@@ -1,0 +1,36 @@
+<details class='font-light text-word-4 mb-16'>
+	<summary>Font-size & Font-size-dynamic</summary>
+	<div class='max-h-288 overflow-y-auto mb-32'>
+		<table class='vv-table'>
+			<thead class='sticky z-sticky top-0 bg-surface'>
+				<tr>
+					<th>
+						Font size
+					</th>
+					<th>
+						Font value
+					</th>
+				</tr>
+			</thead>
+			<tbody class='align-baseline'>
+				{{#each font-size}}
+					<tr>
+						<td
+							translate='no'
+							class='font-mono text-accent whitespace-wrap'
+						>
+
+							{{@key}}
+						</td>
+						<td
+							translate='no'
+							class='font-mono text-info whitespace-wrap'
+						>
+							{{this}}
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</details>

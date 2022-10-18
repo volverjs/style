@@ -1,0 +1,902 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+@use 'sass:selector';
+
+// Check ascending order
+// Used to ensure the breakpoints are ordered ascending.
+@mixin assert-ascending($map, $map-name) {
+	$prev-key: null;
+	$prev-num: null;
+	@each $key, $num in $map {
+		@if not $prev-num or unit($num) == '%' {
+			// Do nothing
+		} @else if not comparable($prev-num, $num) {
+			@warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		} @else if $prev-num >= $num {
+			@warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+		}
+
+		$prev-key: $key;
+		$prev-num: $num;
+	}
+}
+
+// Starts at zero
+// Used to ensure the min-width of the lowest breakpoint starts at 0.
+@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
+	$values: map.values($map);
+	$first-value: list.nth($values, 1);
+	@if $first-value != 0 {
+		@warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
+	}
+}
+
+// Transform a map into a list of custom props
+@mixin spread-map-into-props($map: (), $prefix: '', $old-key: '', $deep: true) {
+	@each $key, $value in $map {
+		$name: meta.inspect($key);
+		@if $name == meta.inspect($old-key) {
+			$name: $prefix;
+		} @else if $prefix != '' and meta.inspect($prefix) != meta.inspect($key)
+		{
+			$name: $prefix + '-' + $key;
+		}
+
+		// fix name
+		$name: str-replace($name, '\\/', '-');
+
+		@if string.slice(meta.inspect($key), 1, 1) !=
+			'_' and
+			string.slice(meta.inspect($key), 1, 2) !=
+			'--' and
+			string.slice(meta.inspect($key), 1, 1) !=
+			'['
+		{
+			@if type-of($value) == 'map' {
+				@if $deep {
+					@include spread-map-into-props($value, $name, $key);
+				}
+			} @else {
+				#{'--' + $name}: #{$value};
+			}
+		}
+	}
+}
+
+// Transform a map into a list of utilities
+@mixin spread-map-into-utilities(
+	$map: (),
+	$class: '',
+	$attribute: '',
+	$prop: '',
+	$name: '',
+	$deep: true,
+	$bps: (
+		xxs: 0,
+	),
+	$prefix: '',
+	$zero-specificity: $zero-specificity-for-utilities
+) {
+	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
+	{
+		@each $breakpoint, $breakpoint-value in $bps {
+			@if $breakpoint-value > 0 {
+				$prefix: $breakpoint + '\\:';
+			}
+			@each $key, $value in $map {
+				@if $name != '' and meta.inspect($key) != meta.inspect($name) {
+					$key: #{$name}-#{meta.inspect($key)};
+				}
+				@if type-of($value) == 'map' and $deep {
+					@include spread-map-into-utilities(
+						$value,
+						$class,
+						$attribute,
+						$prop,
+						$key,
+						$prefix
+					);
+				} @else {
+					$default: null;
+					$class-name: $class;
+					$key: meta.inspect($key);
+					$var: $prop;
+
+					// fix class name
+					@if $class-name != $key and $prop != $key {
+						@if $class-name != '' {
+							$class-name: $class-name + '-';
+						}
+
+						$class-name: $class-name + $key;
+					}
+
+					// fix variable name
+					@if $var != '' and $var != $key {
+						$var: $var + '-' + $key;
+					}
+
+					$var: str-replace($var, '\\/', '-');
+
+					// check if value is not a map (spacing-dynamic)
+					@if type-of($value) != 'map' {
+						$default: $value;
+					}
+
+					// check if map is a list
+					@if type-of($map) ==
+						'list' and
+						(not $default or $default == '')
+					{
+						$default: $key;
+					}
+
+					%#{$prefix}#{$class-name} {
+						@include media-breakpoint-up($breakpoint) {
+							@if type-of($attribute) != 'list' {
+								$attribute: ($attribute);
+							}
+							@each $attr in $attribute {
+								@if $default {
+									@if $var != '' {
+										#{$attr}: var(--#{$var}, $default);
+									} @else {
+										#{$attr}: $default;
+									}
+								} @else if $var != '' {
+									#{$attr}: var(--#{$var});
+								}
+							}
+						}
+					}
+					@include wrap-with-where(
+						$selector: '.' + $prefix + $class-name,
+						$enabled: $zero-specificity
+					) {
+						@extend %#{$prefix}#{$class-name};
+					}
+				}
+			}
+		}
+	}
+}
+
+// Transform a map into a list of modifiers
+@mixin spread-map-into-modifiers(
+	$map: (),
+	$prefix: '',
+	$key: 'modifier',
+	$block: null,
+	$props: true,
+	$zero-specificity: true
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $modifier, $value in map.get($map, $key) {
+			$selector: $block + '--' + $modifier;
+
+			%#{$prefix + '--' + $modifier} {
+				@include spread-map-into-attrs(
+					$original: $map,
+					$map: $value,
+					$prefix: $prefix,
+					$variant: #{$key}-#{$modifier},
+					$deep: true,
+					$ignore: (
+						'state',
+						'breakpoint',
+						'element',
+					),
+					$props: $props
+				);
+			}
+
+			// map props and attributes
+			@include wrap-with-where(
+				$selector: $selector + $block,
+				$enabled: $zero-specificity
+			) {
+				@extend %#{$prefix + '--' + $modifier};
+			}
+
+			// map elements
+			@if map.get($value, 'element') {
+				@include spread-map-into-elements(
+					$original: $map,
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'element',
+					$block: $block,
+					$modifier: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+
+			// map states
+			@if map.get($value, 'state') {
+				@include spread-map-into-states(
+					$original: $map,
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'state',
+					$block: $block,
+					$modifier: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+
+			// map breakpoints
+			@if map.get($value, 'breakpoint') {
+				@include spread-map-into-breakpoints(
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$key: 'breakpoint',
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+	}
+}
+
+// Transform a map into a list of BEM elements
+@mixin spread-map-into-elements(
+	$original: (),
+	$map: (),
+	$prefix: '',
+	$key: 'element',
+	$block: null,
+	$modifier: null,
+	$props: true,
+	$zero-specificity: true
+) {
+	@if not $block {
+		$block: &;
+	}
+
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $element, $value in map.get($map, $key) {
+			$selector: $block + '__' + $element;
+
+			@if $modifier {
+				$selectors: ();
+				@each $item in selector.parse($modifier) {
+					$selectors: list.join(
+						$selectors,
+						selector.nest($item, $selector)
+					);
+				}
+
+				$selector: list-to-string($selectors);
+			}
+
+			// alias
+			$alias: map.get($value, '_alias');
+
+			@if not $alias {
+				$alias: map.get($original, $key, $element, '_alias');
+			}
+
+			@if $alias {
+				@if $modifier {
+					$aliases: ();
+					@each $item in selector.parse($modifier) {
+						$aliases: list.join(
+							$aliases,
+							selector.nest($item, $alias)
+						);
+					}
+
+					$alias: list-to-string($aliases);
+				} @else {
+					$alias: $block + ' ' + $alias;
+				}
+			}
+
+			%#{$prefix + '__' + $element} {
+				@include spread-map-into-attrs(
+					$map: $value,
+					$prefix: $prefix,
+					$variant: #{$key}-#{$element},
+					$deep: true,
+					$ignore: (
+						'state',
+						'breakpoint',
+					),
+					$props: $props
+				);
+			}
+
+			// attributes
+			@include wrap-with-where(
+				$selector: list-to-string(($selector, $alias)),
+				$enabled: $zero-specificity
+			) {
+				@extend %#{$prefix + '__' + $element};
+			}
+
+			// states
+			@if map.get($value, 'state') {
+				@include spread-map-into-states(
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$element},
+					$key: 'state',
+					$block: $selector,
+					$alias: $alias,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+
+			// breakpoints
+			@if map.get($value, 'breakpoint') {
+				@include spread-map-into-breakpoints(
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$element},
+					$key: 'breakpoint',
+					$block: list-to-string(($selector, $alias)),
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+	}
+}
+
+// Transform a map into a list of states
+@mixin spread-map-into-states(
+	$original: null,
+	$map: (),
+	$prefix: '',
+	$key: 'state',
+	$block: null,
+	$modifier: '',
+	$alias: null,
+	$props: true,
+	$zero-specificity: true
+) {
+	@if not $original {
+		$original: $map;
+	}
+
+	@if not $block {
+		$blocks: &;
+	}
+
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $state, $value in map.get($map, $key) {
+			@if list.index(
+				(
+					active,
+					focus,
+					hover,
+					focus-within,
+					target,
+					visited,
+					focus-visible,
+					disabled,
+					checked,
+					checked-within,
+					readonly,
+					empty,
+					placeholder-shown,
+					dirty,
+					valid,
+					invalid,
+					indeterminate,
+					first-child,
+					last-child,
+					open,
+					close,
+					determinate,
+					indeterminate
+				),
+				$state
+			)
+			{
+				$selectors: ();
+
+				@each $block-item in selector.parse($block) {
+					$selectors: list.join(
+						$selectors,
+						(
+							'#{$modifier}#{$block-item}--#{$state}',
+							'#{$modifier}#{$block-item}.#{$state}'
+						)
+					);
+
+					@if $alias {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$alias}.#{$state}'
+						);
+					}
+
+					@if $state == 'checked-within' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:has(input:checked)'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:has(input:checked)'
+							);
+						}
+					} @else if $state == 'open' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[open]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[open]'
+							);
+						}
+					} @else if $state == 'close' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not([open])'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not([open])'
+							);
+						}
+					} @else if $state == 'dirty' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not(:has(*:placeholder-shown))'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not(:has(*:placeholder-shown))'
+							);
+						}
+					} @else if $state == 'disabled' or $state == 'readonly' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[#{$state}]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[#{$state}]'
+							);
+						}
+					} @else if $state == 'focus-visible' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+							);
+						}
+					} @else if $state == 'checked' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:#{$state}'
+							);
+						}
+					} @else {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}:not([disabled]):#{$state}'
+							);
+						}
+					}
+				}
+
+				$selector: list-to-string($selectors);
+
+				%#{$prefix + '--' + $state} {
+					@include spread-map-into-attrs(
+						$original: $original,
+						$map: $value,
+						$prefix: $prefix,
+						$variant: #{$key}-#{$state},
+						$ignore: (
+							'element',
+						),
+						$deep: true,
+						$props: $props
+					);
+				}
+				@include wrap-with-where(
+					$selector: $selector,
+					$enabled: $zero-specificity
+				) {
+					@extend %#{$prefix + '--' + $state};
+				}
+
+				// map elements
+				@if map.get($value, 'element') {
+					@include spread-map-into-elements(
+						$original: $original,
+						$map: $value,
+						$prefix: #{$prefix}-#{$key}-#{$state},
+						$key: 'element',
+						$block: $block,
+						$modifier: $selector,
+						$props: $props,
+						$zero-specificity: $zero-specificity
+					);
+				}
+			}
+		}
+	}
+}
+
+// Transform a map into a list of breakpoints
+@mixin spread-map-into-breakpoints(
+	$map: (),
+	$prefix: '',
+	$key: 'breakpoint',
+	$block: null,
+	$props: true,
+	$bps: $breakpoints,
+	$zero-specificity: true
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $breakpoint, $value in map.get($map, $key) {
+			@if map.has-key($bps, $breakpoint) {
+				@include wrap-with-where(
+					$selector: $block,
+					$enabled: $zero-specificity
+				) {
+					@include media-breakpoint-up($breakpoint, $bps) {
+						@include spread-map-into-attrs(
+							$original: $map,
+							$map: $value,
+							$prefix: $prefix,
+							$variant: #{$key}-#{$breakpoint},
+							$deep: true,
+							$props: $props
+						);
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin pseudo-element-placehoder($pseudo-element) {
+	@if list.index(
+		(
+			calendar-picker-indicator,
+			search-cancel-button,
+			color-swatch-wrapper,
+			color-swatch,
+			inner-spin-button,
+			outer-spin-button,
+			progress-bar,
+			progress-value,
+			progress-inner-element
+		),
+		$pseudo-element
+	)
+	{
+		&::-webkit-#{$pseudo-element} {
+			@content;
+		}
+		&::-moz-#{$pseudo-element} {
+			@content;
+		}
+	} @else {
+		&::#{$pseudo-element} {
+			@content;
+		}
+	}
+}
+
+// Transform a map into a list of CSS attributes
+@mixin spread-map-into-attrs(
+	$original: (),
+	$map: (),
+	$prefix: '',
+	$variant: '',
+	$postfix: '',
+	$deep: false,
+	$ignore: (),
+	$props: true
+) {
+	@if type-of($map) == 'map' and $prefix != '' {
+		@each $key, $value in $map {
+			@if not list.index($ignore, $key) {
+				@if type-of($value) == 'map' and ($deep or $key == 'pseudo') {
+					$original: map.get($original, $key);
+
+					@if not $original {
+						$original: ();
+					}
+
+					@if $postfix != '' {
+						$key: #{$postfix}-#{$key};
+					}
+					@if $key == 'pseudo' {
+						@each $pseudo-element, $pseudo-map in $value {
+							@if type-of($pseudo-map) == 'map' {
+								@if list.index(
+									(
+										before,
+										after,
+										placeholder,
+										calendar-picker-indicator,
+										search-cancel-button,
+										color-swatch-wrapper,
+										color-swatch,
+										inner-spin-button,
+										outer-spin-button,
+										progress-bar,
+										progress-value,
+										inner-element,
+										-webkit-progress-bar,
+										-webkit-progress-value,
+										-webkit-inner-element,
+										-moz-progress-bar,
+										-moz-progress-value,
+										-moz-inner-element
+									),
+									$pseudo-element
+								)
+								{
+									$original: map.get(
+										$original,
+										$pseudo-element
+									);
+									$key: pseudo-#{$pseudo-element};
+
+									@include pseudo-element-placehoder(
+										$pseudo-element
+									) {
+										@if not $original {
+											@if not
+												map.has-key(
+													$pseudo-map,
+													'content'
+												)
+											{
+												content: '';
+											}
+
+											$original: ();
+										}
+
+										@include spread-map-into-attrs(
+											$original: $original,
+											$map: $pseudo-map,
+											$prefix: $prefix,
+											$variant: $variant,
+											$postfix: $key,
+											$deep: true,
+											$props: $props
+										);
+									}
+								}
+							}
+						}
+					} @else {
+						@include spread-map-into-attrs(
+							$original: $original,
+							$map: $value,
+							$prefix: $prefix,
+							$variant: $variant,
+							$postfix: $key,
+							$deep: true,
+							$props: $props
+						);
+					}
+				} @else if
+					type-of($value) !=
+					'map' and
+					(string.slice(meta.inspect($key), 1, 1) != '_')
+				{
+					@if $props and
+						$key !=
+						'content' and
+						(string.slice(meta.inspect($key), 1, 2) != '--') and
+						(string.slice(meta.inspect($key), 1, 1) != '[')
+					{
+						$prop-to-replace: --#{$prefix};
+						$prop-to-replace-with: --#{$prefix};
+
+						// add variant
+						@if $variant != '' {
+							$prop-to-replace-with: #{$prop-to-replace-with}-#{$variant};
+						}
+
+						// add postfix
+						@if $postfix != '' {
+							$prop-to-replace: #{$prop-to-replace}-#{$postfix};
+							$prop-to-replace-with: #{$prop-to-replace-with}-#{$postfix};
+						}
+
+						// add key
+						$prop-to-replace: #{$prop-to-replace}-#{$key};
+						$prop-to-replace-with: #{$prop-to-replace-with}-#{$key};
+
+						@if map.get($original, $key) {
+							#{$prop-to-replace}: var(#{$prop-to-replace-with});
+						} @else {
+							#{$key}: var(#{$prop-to-replace-with});
+						}
+					} @else {
+						@if string.slice(meta.inspect($key), 1, 1) == '[' {
+							$key: string.slice(
+								meta.inspect($key),
+								2,
+								string.length(meta.inspect($key)) - 1
+							);
+						}
+
+						#{$key}: #{$value};
+					}
+				}
+			}
+		}
+	}
+}
+
+// Wrap selector with :where()
+@mixin wrap-with-where($selector, $enabled: true) {
+	@if type-of($selector) == 'map' {
+		$merged: '';
+		@each $element in $selector {
+			@if $enabled {
+				$merged: '#{$merged}, :where(#{$element})';
+			} @else {
+				$merged: '#{$merged}, #{$element}';
+			}
+		}
+	} @else if $enabled {
+		$selector: ':where(#{$selector})';
+	}
+	#{$selector} {
+		@content;
+	}
+}
+
+// Transform a map into a BEM component
+@mixin spread-map-into-bem(
+	$map,
+	$block: '',
+	$elements-key: 'element',
+	$modifiers-key: 'modifier',
+	$states-key: 'state',
+	$breakpoints-key: 'breakpoint',
+	$props: true,
+	$zero-specificity: true,
+	$custom-block: false,
+	$custom-elements: false,
+	$custom-modifiers: false,
+	$custom-states: false,
+	$custom-breakpoints: false
+) {
+	@if type-of($map) == 'map' and $block != '' {
+		$selector: '.' + $block;
+
+		// custom props
+		@if $props {
+			:where(:host, :root, .theme) {
+				@include spread-map-into-props(
+					$map: $map,
+					$prefix: $block,
+					$deep: true
+				);
+			}
+		}
+
+		// block
+		@if not $custom-block {
+			%#{$block} {
+				@include spread-map-into-attrs(
+					$map: $map,
+					$prefix: $block,
+					$props: $props
+				);
+
+				// content
+				@content;
+			}
+			@include wrap-with-where(
+				$selector: $selector,
+				$enabled: $zero-specificity
+			) {
+				@extend %#{$block};
+			}
+		} @else {
+			// content
+			@content;
+		}
+
+		// elements
+		@if not $custom-elements {
+			@if map.has-key($map, $elements-key) {
+				@include spread-map-into-elements(
+					$map: $map,
+					$prefix: $block,
+					$key: $elements-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+
+		// states
+		@if not $custom-states {
+			@if map.has-key($map, $states-key) {
+				@include spread-map-into-states(
+					$map: $map,
+					$prefix: $block,
+					$key: $states-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+
+		// modifiers
+		@if not $custom-modifiers {
+			@if map.has-key($map, $modifiers-key) {
+				@include spread-map-into-modifiers(
+					$map: $map,
+					$prefix: $block,
+					$key: $modifiers-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+
+		// breakpoints
+		@if not $custom-breakpoints {
+			@if map.has-key($map, $breakpoints-key) {
+				@include spread-map-into-breakpoints(
+					$map: $map,
+					$prefix: $block,
+					$key: $breakpoints-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity
+				);
+			}
+		}
+	}
+}

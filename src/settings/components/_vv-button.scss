@@ -1,0 +1,214 @@
+$vv-button: (
+	position: relative,
+	background: var(--color-brand),
+	border-radius: 0.5ch,
+	border-width: var(--spacing-2),
+	border-style: solid,
+	border-color: var(--color-brand),
+	color: var(--color-white),
+	font-family: var(--font-sans),
+	font-weight: var(--font-semibold),
+	gap: 1ch,
+	line-height: var(--leading-normal),
+	padding-block: 0.75ch,
+	padding-inline: 1.75ch,
+	text-shadow: 0 1px 0 var(--color-gray-darken-5),
+	transition: all 0.2s ease-in-out,
+	will-change: all,
+	min-width: 0,
+	state: (
+		focus-visible: (
+			outline-offset: var(--spacing-4),
+			outline: var(--spacing-px) solid var(--color-brand),
+		),
+		hover: (
+			background: var(--color-brand-darken-1),
+			border-color: var(--color-brand-darken-1),
+		),
+		active: (
+			background: var(--color-brand-darken-2),
+			border-color: var(--color-brand-darken-2),
+		),
+		disabled: (
+			opacity: 0.5,
+			cursor: not-allowed,
+		),
+	),
+	element: (
+		icon: (
+			_alias: '> :where(svg, [data-icon])',
+			block-size: 1.1em,
+			inline-size: 1.1em,
+			margin: 0,
+			stroke: currentcolor,
+			fill: none,
+			flex-shrink: 0,
+			stroke-linecap: round,
+			stroke-linejoin: round,
+		),
+		label: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			min-width: 0,
+			overflow: hidden,
+		),
+	),
+	modifier: (
+		primary: (
+			background: var(--color-gray-darken-3),
+			border-color: var(--color-gray-darken-3),
+			color: var(--color-white),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-darken-3),
+				),
+				hover: (
+					background: var(--color-gray-darken-4),
+					border-color: var(--color-gray-darken-4),
+				),
+				active: (
+					background: var(--color-gray-darken-5),
+					border-color: var(--color-gray-darken-5),
+				),
+			),
+		),
+		secondary: (
+			background: var(--color-white),
+			border-width: var(--spacing-2),
+			border-style: solid,
+			border-color: var(--color-gray-lighten-4),
+			color: var(--color-word),
+			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				hover: (
+					background: var(--color-gray-lighten-4),
+				),
+				active: (
+					background: var(--color-gray-lighten-3),
+				),
+			),
+		),
+		danger: (
+			background: var(--color-danger),
+			border-color: var(--color-danger),
+			color: var(--color-white),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-danger),
+				),
+				hover: (
+					background: var(--color-danger-darken-1),
+					border-color: var(--color-danger-darken-1),
+				),
+				active: (
+					background: var(--color-danger-darken-2),
+					border-color: var(--color-danger-darken-2),
+				),
+			),
+		),
+		ghost: (
+			background: transparent,
+			border-color: transparent,
+			color: var(--color-gray),
+			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+					outline-offset: 0,
+				),
+				hover: (
+					background: var(--color-gray-lighten-5),
+				),
+				active: (
+					background: var(--color-gray-lighten-4),
+				),
+			),
+		),
+		text: (
+			background: transparent,
+			border-color: var(--color-word),
+			border-width: 0,
+			border-radius: 0,
+			padding: 0,
+			color: var(--color-word),
+			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			state: (
+				focus-visible: (
+					color: var(--color-brand),
+					outline: none,
+				),
+				hover: (
+					border-width: 0 0 1px 0,
+				),
+			),
+		),
+		static-light: (
+			background: var(--color-white),
+			border-color: var(--color-white),
+			color: var(--color-black),
+			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				hover: (
+					border-color: var(--color-gray-lighten-5),
+					background: var(--color-gray-lighten-5),
+				),
+				active: (
+					border-color: var(--color-gray-lighten-4),
+					background: var(--color-gray-lighten-4),
+				),
+			),
+		),
+		static-dark: (
+			background: var(--color-black),
+			border-color: var(--color-black),
+			color: var(--color-white),
+			text-shadow: 0 1px 0 var(--color-gray-darken-5),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-darken-4),
+				),
+				hover: (
+					border-color: var(--color-gray-darken-4),
+					background: var(--color-gray-darken-4),
+				),
+				active: (
+					border-color: var(--color-gray-darken-3),
+					background: var(--color-gray-darken-3),
+				),
+			),
+		),
+		rounded: (
+			border-radius: var(--rounded-full),
+			element: (
+				icon: (
+					margin: 0 -1ch,
+				),
+			),
+		),
+		block: (
+			display: block,
+			width: 100%,
+			max-width: auto,
+		),
+		reverse: (
+			element: (
+				label: (
+					order: -1,
+				),
+			),
+		),
+		column: (
+			flex-direction: column,
+			gap: 0.2em,
+		),
+		full-bleed: (
+			min-width: 20ch,
+		),
+	),
+) !default;

@@ -1,0 +1,6 @@
+@import '../context';
+
+:where(:host, :root, .theme) {
+	@include spread-map-into-props($map: $aspect-ratio, $prefix: aspect);
+	@include spread-map-into-props($map: $z-index, $prefix: z);
+}

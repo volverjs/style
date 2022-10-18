@@ -1,0 +1,22 @@
+@import '../context';
+
+// blur
+@include spread-map-into-utilities(
+	$map: $blur,
+	$class: blur,
+	$attribute: filter
+);
+
+// brightness
+@include spread-map-into-utilities(
+	$map: $brightness,
+	$class: brightness,
+	$attribute: filter
+);
+
+// backdrop blur
+@include spread-map-into-utilities(
+	$map: $blur,
+	$class: backdrop-blur,
+	$attribute: backdrop-filter
+);

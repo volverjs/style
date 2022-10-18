@@ -1,0 +1,15 @@
+@import '../context';
+
+// box shadow
+@include spread-map-into-utilities(
+	$map: $box-shadow,
+	$class: shadow,
+	$attribute: box-shadow
+);
+
+// blend mode
+@include spread-map-into-utilities(
+	$map: $blend-mode,
+	$class: mix-blend,
+	$attribute: mix-blend-mode
+);
