@@ -10,7 +10,7 @@ on:
 
 jobs:
     bump-version:
-        name: 'Bump Version on develop'
+        name: 'Bump Version on Develop'
         runs-on: ubuntu-latest
 
         steps:
