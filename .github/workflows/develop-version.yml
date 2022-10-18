@@ -1,4 +1,4 @@
-name: 'Bump Version'
+name: 'Bump Version on Develop'
 
 on:
     push:
@@ -15,7 +15,7 @@ jobs:
 
         steps:
             - name: 'Checkout source code'
-              uses: 'actions/checkout@v3'
+              uses: 'actions/checkout@v2'
               with:
                   ref: ${{ github.ref }}
             - name: 'cat package.json'
