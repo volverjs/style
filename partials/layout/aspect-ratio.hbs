@@ -18,20 +18,21 @@
 			</thead>
 			<tbody class='align-baseline'>
 				{{#each aspect-ratio}}
-				<tr>
-					<td
-						translate='no'
-						class='font-mono text-accent whitespace-nowrap'
-					>
-						{{@key}}
-					</td>
-					<td
-						translate='no'
-						class='font-mono text-info whitespace-nowrap'
-					>
-					aspect-ratio: {{this}};
-					</td>
-				</tr>
+					<tr>
+						<td
+							translate='no'
+							class='font-mono text-accent whitespace-nowrap'
+						>
+							aspect-{{@key}}
+						</td>
+						<td
+							translate='no'
+							class='font-mono text-info whitespace-nowrap'
+						>
+							aspect-ratio:
+							{{this}};
+						</td>
+					</tr>
 				{{/each}}
 			</tbody>
 		</table>

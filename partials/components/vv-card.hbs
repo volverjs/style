@@ -1,34 +1,63 @@
 <section id='component__vv-card' class='mb-32'>
 	<h1 class='text-20 text-word-2 mb-8'>vv-card</h1>
-	<h2 class='font-light text-word-3 mb-24'>A flexible container with graceful spacings across devices and viewports.
+	<h2 class='font-light text-word-3 mb-24'>A flexible container with graceful
+		spacings across devices and viewports.
 	</h2>
 	<div>
-		
-		<article class="vv-card mb-24">
-			<header class="vv-card__header">Header</header>
-			<div class="vv-card__body">Culpa et dolore et id pariatur. Aute duis Lorem voluptate excepteur do.</div>
-			<footer class="vv-card__footer">Footer</footer>
-		</article>
 
-		<article class="vv-card mb-24">
-			<header class="vv-card__header-img">
-				<img src="https://picsum.photos/600/150" alt="card-header">
-			</header>
-			<div class="vv-card__body">Fugiat excepteur velit laborum Lorem voluptate commodo et aute consectetur Lorem officia. Do reprehenderit ad aliquip officia ea commodo.</div>
-			<footer class="vv-card__footer">Footer</footer>
-		</article>
-
-		<div>
-			<div class="relative w-full">
-				<span class="absolute top-8 right-8" style="height: 50px; width: 50px; background-color: #bbb; border-radius: 50%; display: inline-block;"></span>
-				<span class="absolute" style="bottom: -20px; right: -20px; height: 50px; width: 50px; background-color: #bbb; border-radius: 50%; display: inline-block;"></span>
-				<article class="vv-card vv-card--glass">
-					<header class="vv-card__header">Header</header>
-					<div class="vv-card__body">Nostrud quis excepteur incididunt eiusmod ut aute magna enim consequat labore nulla dolor. Dolor tempor id anim anim duis deserunt non nulla eu velit anim laboris mollit.</div>
-					<footer class="vv-card__footer">Footer</footer>
-				</article>
+		<article class='vv-card mb-24'>
+			<header class='vv-card__header'>Header</header>
+			<div class='vv-card__content'>
+				Culpa et dolore et id pariatur. Aute duis Lorem voluptate
+				excepteur do.
 			</div>
+			<footer class='vv-card__footer flex'>
+				<span>Lorem ipsum dolor</span>
+				<button class='vv-button vv-button--text ml-auto' type='button'>
+					<span class='iconify' data-icon='akar-icons:heart'></span>
+				</button>
+			</footer>
+		</article>
+
+		<article class='vv-card mb-24'>
+			<picture>
+				<img
+					class='vv-card__picture aspect-photo'
+					src='https://source.unsplash.com/featured/300×300/?city,night'
+					alt='Card picture'
+				/>
+			</picture>
+			<div class='vv-card__content'>
+				Fugiat excepteur velit laborum Lorem voluptate commodo et aute
+				consectetur Lorem officia. Do reprehenderit ad aliquip officia
+				ea commodo.
+			</div>
+			<footer class='vv-card__footer flex'>
+				<span>Lorem ipsum dolor</span>
+				<button class='vv-button vv-button--text ml-auto' type='button'>
+					<span class='iconify' data-icon='akar-icons:heart'></span>
+				</button>
+			</footer>
+		</article>
+
+		<div class='relative theme theme--light'>
+			<picture>
+				<img
+					class='aspect-photo block'
+					src='https://source.unsplash.com/featured/300×300/?ocean'
+					alt='Card picture'
+				/>
+			</picture>
+
+			<article class='vv-card vv-card--glass absolute inset-32'>
+				<header class='vv-card__header'>Header</header>
+				<div class='vv-card__content'>
+					Nostrud quis excepteur incididunt eiusmod ut aute magna enim
+					consequat labore nulla dolor. Dolor tempor id anim anim duis
+					deserunt non nulla eu velit anim laboris mollit.
+				</div>
+			</article>
 		</div>
-		
+
 	</div>
 </section>

@@ -1,5 +1,7 @@
 $vv-card: (
 	position: relative,
+	display: flex,
+	flex-direction: column,
 	overflow: hidden,
 	border-color: var(--color-surface-4),
 	border-top-width: var(--border),
@@ -9,37 +11,64 @@ $vv-card: (
 	border-style: none,
 	border-radius: var(--border-8),
 	margin: var(--spacing-0),
-	background: var(--color-surface-4),
+	background-color: var(--color-surface),
+	box-shadow: var(--shadow-md),
 	color: var(--color-word-2),
-	box-shadow: var(--spacing-0) var(--spacing-0) var(--spacing-px)
-		var(--color-surface-4),
 	backdrop-filter: none,
 	element: (
 		header: (
+			_alias: '> header',
 			overflow: hidden,
-			font-size: var(--text-lg),
-			padding: var(--spacing-md) var(--spacing-md) var(--spacing-0),
+			font-size: var(--text-md),
+			padding: var(--spacing-md),
+			background-color: var(--color-surface-1),
+			border-bottom: var(--border) solid var(--color-surface-4),
 		),
-		header-img: (
+		picture: (
+			_alias: '> picture > img',
+			display: block,
 			width: 100%,
 			height: auto,
-			position: relative,
-			object-fit: cover,
 		),
-		body: (
+		content: (
 			padding: var(--spacing-md),
+			flex-grow: 1,
+			min-height: 0,
+			overflow: auto,
 		),
 		footer: (
-			font-size: var(--text-md),
-			padding: var(--spacing-0) var(--spacing-md) var(--spacing-md),
+			_alias: '> footer',
+			background-color: var(--color-surface-1),
+			border-top: var(--border) solid var(--color-surface-4),
+			padding: var(--spacing-md),
 		),
 	),
 	modifier: (
 		glass: (
-			background: rgb(238 238 238 / 10%),
-			box-shadow: 10px 10px 15px -10px rgb(238 238 238 / 20%),
-			border: var(--border) solid rgb(238 238 238 / 30%),
-			backdrop-filter: blur(10px) saturate(100%),
+			background-color:
+				hsla(
+					var(--color-surface-hue) var(--color-surface-saturation)
+						var(--color-surface-lightness) / 60%
+				),
+			backdrop-filter: var(--blur-md),
+			element: (
+				header: (
+					background-color:
+						hsla(
+							var(--color-surface-hue)
+								var(--color-surface-saturation)
+								var(--color-surface-lightness) / 30%
+						),
+				),
+				footer: (
+					background-color:
+						hsla(
+							var(--color-surface-hue)
+								var(--color-surface-saturation)
+								var(--color-surface-lightness) / 30%
+						),
+				),
+			),
 		),
 	),
 ) !default;
