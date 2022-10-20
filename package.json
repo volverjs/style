@@ -1,6 +1,6 @@
 {
   "name": "@volverjs/style",
-  "version": "0.1.2-beta.1",
+  "version": "0.0.0",
   "description": "@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui and static webpages as well.",
   "main": "dist/style.css",
   "style": "dist/style.css",
