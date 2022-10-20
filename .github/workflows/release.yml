@@ -1,8 +1,20 @@
 name: Publish on NPM and GitHub Packages
 
 on:
+    # Runs on release publish
     release:
         types: [published]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+    group: 'pages'
+    cancel-in-progress: true
 
 jobs:
     build:
@@ -24,12 +36,20 @@ jobs:
             - name: Bump version with release tag name
               run: pnpm version --no-git-tag-version ${{ github.event.release.tag_name }}
             - name: Pack package
-              run: npm pack
+              run: pnpm pack
             - name: Upload artifact
               uses: actions/upload-artifact@v3
               with:
                   name: package
                   path: '*.tgz'
+            - name: Build stileguide
+              run: pnpm styleguide
+            - name: Setup GitHub Pages
+              uses: actions/configure-pages@v2
+            - name: Upload styleguide
+              uses: actions/upload-pages-artifact@v1
+              with:
+                  path: './styleguide'
 
     publish-npm:
         needs: build
@@ -65,3 +85,14 @@ jobs:
             - run: npm publish $(ls *.tgz) --access=public
               env:
                   NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    deploy:
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v1

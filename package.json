@@ -11,7 +11,8 @@
   "packageManager": "pnpm@7.8.0",
   "scripts": {
     "dev": "vite --port 3000 --open",
-    "build": "vite build --base=./ && node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "styleguide": "vite build --base=./"
   },
   "files": [
     "src/*",
