@@ -8,9 +8,8 @@ $vv-badge: (
 	padding: 0.37em 0.475em,
 	display: inline-flex,
 	justify-content: center,
-	font-weight: normal,
 	font-family: var(--font-sans),
-	text-shadow: none,
+	line-height: var(--leading-normal),
 	state: (
 		empty: (
 			font-size: inherit,

@@ -1,0 +1,85 @@
+$vv-breadcrumb: (
+	element: (
+		list: (
+			_alias: '> ol',
+			position: relative,
+			display: flex,
+			flex-wrap: no-wrap,
+			list-style: none,
+			overflow: auto,
+			padding: 0,
+			background: var(--color-surface),
+			pseudo: (
+				after: (
+					position: absolute,
+					top: 0,
+					bottom: 0,
+					right: 0,
+					display: block,
+					width: var(--spacing-sm),
+					background:
+						linear-gradient(
+							45deg,
+							transparent,
+							var(--color-surface)
+						),
+				),
+			),
+		),
+		item: (
+			_alias: '> ol > li:has(a)',
+			display: inline-flex,
+			color: var(--color-word-2),
+			pseudo: (
+				after: (
+					display: block,
+					margin-inline: 1ch,
+					width: calc(var(--leading-normal) * 1em),
+					height: calc(var(--leading-normal) * 1em),
+					background-image: var(--bg-chevron),
+					background-position: center,
+					background-size: 1em,
+					background-repeat: no-repeat,
+					transform: rotate(-90deg),
+				),
+			),
+		),
+		item-active: (
+			_alias: '> ol > li:not(:has(a))',
+			display: inline-flex,
+			font-weight: var(--font-bold),
+			padding-right: var(--spacing-16),
+		),
+		link: (
+			_alias: '> ol > li > a',
+			state: (
+				hover: (
+					text-decoration: underline,
+				),
+				focus-within: (
+					text-decoration: underline,
+				),
+				active: (
+					color: var(--color-brand-darken-2),
+				),
+			),
+		),
+	),
+	modifier: (
+		multiline: (
+			element: (
+				list: (
+					flex-wrap: wrap,
+				),
+				item: (
+					font-size: var(--text-12),
+				),
+				item-active: (
+					width: 100%,
+					font-size: var(--text-18),
+					line-height: var(--leading-relaxed),
+				),
+			),
+		),
+	),
+) !default;

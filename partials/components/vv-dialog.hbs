@@ -110,7 +110,7 @@
 		function openDialogWithTransition(dialog, transition = 'fade-block') {
 			dialog.classList.add(`vv-dialog--${transition}-enter-from`)
 			dialog.classList.add(`vv-dialog--${transition}-enter-active`)
-			dialog.open = true
+			dialog.showModal()
 			setTimeout(() => {
 				dialog.classList.remove(`vv-dialog--${transition}-enter-from`)
 				dialog.addEventListener('transitionend', () => {
@@ -122,7 +122,7 @@
 			dialog.classList.add(`vv-dialog--${transition}-leave-active`)
 			dialog.classList.add(`vv-dialog--${transition}-leave-to`)
 			dialog.addEventListener('transitionend', () => {
-				dialog.open = false
+				dialog.close()
 				dialog.classList.remove(`vv-dialog--${transition}-leave-active`)
 				dialog.classList.remove(`vv-dialog--${transition}-leave-to`)
 			}, { once: true });

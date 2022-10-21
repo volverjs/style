@@ -1,0 +1,128 @@
+$vv-accordion: (
+	--accordion-marker-size:
+		calc(var(--spacing-sm) + var(--leading-normal) * 1em),
+	--accordion-padding-top: 0px,
+	--accordion-padding-right: 0px,
+	--accordion-padding-bottom: 0px,
+	--accordion-padding-left: 0px,
+	element: (
+		summary: (
+			_alias: '> summary',
+			position: relative,
+			cursor: pointer,
+			[padding-top]: var(--accordion-padding-top),
+			[padding-right]: var(--accordion-padding-right),
+			[padding-bottom]: var(--accordion-padding-bottom),
+			[padding-left]:
+				calc(
+					var(--accordion-padding-left) + var(--accordion-marker-size)
+				),
+			line-height: var(--leading-normal),
+			color: var(--color-word-2),
+			will-change: background-color,
+			transition: background-color 0.2s ease-in-out,
+			font-size: var(--text-sm),
+			pseudo: (
+				before: (
+					display: block,
+					position: absolute,
+					[top]: var(--accordion-padding-top),
+					[left]: var(--accordion-padding-left),
+					width: calc(var(--leading-normal) * 1em),
+					height: calc(var(--leading-normal) * 1em),
+					background-image: var(--bg-chevron),
+					background-position: center,
+					background-size: 1em,
+					background-repeat: no-repeat,
+					will-change: transform,
+					transition: transform 0.2s ease-in-out,
+					transform: rotate(-90deg),
+				),
+				marker: (
+					display: none,
+				),
+				-webkit-details-marker: (
+						display: none,
+					),
+			),
+		),
+		content: (
+			_alias: '> summary + *',
+			padding-block: var(--spacing-sm),
+			[padding-inline]: var(--accordion-padding-left)
+				var(--accordion-padding-right),
+		),
+	),
+	state: (
+		open: (
+			element: (
+				summary: (
+					pseudo: (
+						before: (
+							transform: rotate(0),
+						),
+					),
+				),
+			),
+		),
+	),
+	modifier: (
+		marker-right: (
+			element: (
+				summary: (
+					[padding-right]:
+						calc(
+							var(--accordion-padding-right) +
+								var(--accordion-marker-size)
+						),
+					[padding-left]: var(--accordion-padding-left),
+					pseudo: (
+						before: (
+							left: auto,
+							[right]: var(--accordion-padding-right),
+							transform: rotate(0def),
+						),
+					),
+				),
+			),
+			state: (
+				open: (
+					element: (
+						summary: (
+							pseudo: (
+								before: (
+									transform: rotate(-180deg),
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+		bordered: (
+			--accordion-padding-top: var(--spacing-sm),
+			--accordion-padding-right: var(--spacing-sm),
+			--accordion-padding-bottom: var(--spacing-sm),
+			--accordion-padding-left: var(--spacing-sm),
+			border-bottom: var(--border) solid var(--color-surface-2),
+			element: (
+				summary: (
+					state: (
+						hover: (
+							background-color: var(--color-surface-1),
+						),
+					),
+				),
+			),
+			state: (
+				open: (
+					element: (
+						summary: (
+							background-color: var(--color-surface-2),
+						),
+					),
+				),
+			),
+		),
+	),
+) !default;

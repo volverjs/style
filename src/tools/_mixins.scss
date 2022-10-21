@@ -396,7 +396,8 @@
 					open,
 					close,
 					determinate,
-					indeterminate
+					indeterminate,
+					selected
 				),
 				$state
 			)
@@ -503,7 +504,7 @@
 								'#{$modifier}#{$alias}:#{$state}'
 							);
 						}
-					} @else {
+					} @else if $state != 'selected' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'
@@ -664,12 +665,14 @@
 										progress-bar,
 										progress-value,
 										inner-element,
+										marker,
 										-webkit-progress-bar,
 										-webkit-progress-value,
 										-webkit-inner-element,
 										-moz-progress-bar,
 										-moz-progress-value,
-										-moz-inner-element
+										-moz-inner-element,
+										-webkit-details-marker
 									),
 									$pseudo-element
 								)
@@ -684,11 +687,12 @@
 										$pseudo-element
 									) {
 										@if not $original {
-											@if not
+											@if not(
 												map.has-key(
 													$pseudo-map,
 													'content'
 												)
+											)
 											{
 												content: '';
 											}
@@ -763,7 +767,7 @@
 							);
 						}
 
-						#{$key}: #{$value};
+						#{$key}: $value;
 					}
 				}
 			}
@@ -785,6 +789,7 @@
 	} @else if $enabled {
 		$selector: ':where(#{$selector})';
 	}
+
 	#{$selector} {
 		@content;
 	}

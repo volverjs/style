@@ -1,8 +1,8 @@
 @use 'sass:map';
 @import '../context';
 
-$component-name: map.get($components-names, vv-collapse);
-$component-map: $vv-collapse;
+$component-name: map.get($components-names, vv-nav);
+$component-map: $vv-nav;
 
 @include spread-map-into-bem(
 	$map: $component-map,

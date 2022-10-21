@@ -30,8 +30,8 @@
     "./scss/components/vv-button": "./src/components/vv-button",
     "./components/vv-card": "./dist/components/vv-card",
     "./scss/components/vv-card": "./src/components/vv-card",
-    "./components/vv-collapse": "./dist/components/vv-collapse",
-    "./scss/components/vv-collapse": "./src/components/vv-collapse",
+    "./components/vv-accordion": "./dist/components/vv-accordion",
+    "./scss/components/vv-accordion": "./src/components/vv-accordion",
     "./components/vv-dialog": "./dist/components/vv-dialog",
     "./scss/components/vv-dialog": "./src/components/vv-dialog",
     "./components/vv-dropdown": "./dist/components/vv-dropdown",
@@ -148,10 +148,10 @@
     "sass": "^1.55.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard-scss": "^5.0.0",
-    "stylelint": "^14.13.0",
+    "stylelint": "^14.14.0",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-handlebars": "^1.6.0",
-    "vite-plugin-stylelint": "^3.0.7",
+    "vite-plugin-stylelint": "^3.0.8",
     "vite": "^3.1.8"
   }
 }

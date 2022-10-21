@@ -2,7 +2,7 @@ $vv-button: (
 	position: relative,
 	background: var(--color-brand),
 	border-radius: 0.5ch,
-	border-width: var(--spacing-2),
+	border-width: var(--border-2),
 	border-style: solid,
 	border-color: var(--color-brand),
 	color: var(--color-white),
@@ -74,7 +74,6 @@ $vv-button: (
 		),
 		secondary: (
 			background: var(--color-white),
-			border-width: var(--spacing-2),
 			border-style: solid,
 			border-color: var(--color-gray-lighten-4),
 			color: var(--color-word),
@@ -130,7 +129,7 @@ $vv-button: (
 		text: (
 			background: transparent,
 			border-color: var(--color-word),
-			border-width: 0,
+			border-width: var(--border-0),
 			border-radius: 0,
 			padding: 0,
 			color: var(--color-word),
@@ -141,7 +140,8 @@ $vv-button: (
 					outline: none,
 				),
 				hover: (
-					border-width: 0 0 1px 0,
+					text-decoration: underline,
+					text-underline-offset: var(--spacing-4),
 				),
 			),
 		),
@@ -180,6 +180,79 @@ $vv-button: (
 				active: (
 					border-color: var(--color-gray-darken-3),
 					background: var(--color-gray-darken-3),
+				),
+			),
+		),
+		action: (
+			font-size: 0.875em,
+			background: var(--color-surface-1),
+			color: var(--color-word-1),
+			border-color: var(--color-word-5),
+			border-width: var(--border),
+			font-weight: var(--font-normal),
+			padding-inline: 0.75ch,
+			padding-block: 0.5ch,
+			line-height: var(--leading-none),
+			text-shadow: none,
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				hover: (
+					background: var(--color-surface-2),
+				),
+				active: (
+					background: var(--color-surface-5),
+				),
+				selected: (
+					color: var(--color-white),
+					background: var(--color-gray),
+					border-color: var(--color-gray),
+				),
+			),
+			element: (
+				icon: (
+					margin-inline: -0.125ch,
+					block-size: 1.4em,
+					inline-size: 1.4em,
+				),
+			),
+		),
+		action-quiet: (
+			font-size: var(--text-14),
+			background: transparent,
+			color: var(--color-word-1),
+			border-width: var(--border),
+			border-color: transparent,
+			font-weight: var(--font-normal),
+			padding-inline: 0.75ch,
+			padding-block: 0.5ch,
+			line-height: var(--leading-none),
+			text-shadow: none,
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+					outline-offset: 0,
+				),
+				hover: (
+					background: var(--color-surface-2),
+					border-color: var(--color-surface-2),
+				),
+				active: (
+					background: var(--color-surface-5),
+					border-color: var(--color-surface-5),
+				),
+				selected: (
+					color: var(--color-white),
+					background: var(--color-gray),
+					border-color: var(--color-gray),
+				),
+			),
+			element: (
+				icon: (
+					margin-inline: -0.125ch,
+					block-size: 1.4em,
+					inline-size: 1.4em,
 				),
 			),
 		),

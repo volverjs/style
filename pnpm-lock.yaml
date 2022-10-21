@@ -9,13 +9,13 @@ specifiers:
   postcss-preset-env: ^7.8.2
   promise: ^8.2.0
   sass: ^1.55.0
-  stylelint: ^14.13.0
+  stylelint: ^14.14.0
   stylelint-config-prettier: ^9.0.3
   stylelint-config-standard-scss: ^5.0.0
   vite: ^3.1.8
   vite-plugin-eslint: ^1.8.1
   vite-plugin-handlebars: ^1.6.0
-  vite-plugin-stylelint: ^3.0.7
+  vite-plugin-stylelint: ^3.0.8
 
 devDependencies:
   eslint: 8.25.0
@@ -26,13 +26,13 @@ devDependencies:
   postcss-preset-env: 7.8.2_postcss@8.4.18
   promise: 8.2.0
   sass: 1.55.0
-  stylelint: 14.13.0
-  stylelint-config-prettier: 9.0.3_stylelint@14.13.0
-  stylelint-config-standard-scss: 5.0.0_5yg2enrd6w5uhqlhk7xeqwtyqm
+  stylelint: 14.14.0
+  stylelint-config-prettier: 9.0.3_stylelint@14.14.0
+  stylelint-config-standard-scss: 5.0.0_mnalcscwzozovshmobozjae4pq
   vite: 3.1.8_sass@1.55.0
   vite-plugin-eslint: 1.8.1_eslint@8.25.0+vite@3.1.8
   vite-plugin-handlebars: 1.6.0_sass@1.55.0
-  vite-plugin-stylelint: 3.0.7_2ocv2x2my3hadid4bdpw3bug7u
+  vite-plugin-stylelint: 3.0.8_hp32htu4udhqk35iaq4qzsb4pq
 
 packages:
 
@@ -2504,59 +2504,59 @@ packages:
     resolution: {integrity: sha512-Dj1Okke1C3uKKwQcetra4jSuk0DqbzbYtXipzFlFMZtowbF1x7BKJwB9AayVMyFARvU8EDrZdcax4At/452cAg==}
     dev: true
 
-  /stylelint-config-prettier/9.0.3_stylelint@14.13.0:
+  /stylelint-config-prettier/9.0.3_stylelint@14.14.0:
     resolution: {integrity: sha512-5n9gUDp/n5tTMCq1GLqSpA30w2sqWITSSEiAWQlpxkKGAUbjcemQ0nbkRvRUa0B1LgD3+hCvdL7B1eTxy1QHJg==}
     engines: {node: '>= 12'}
     hasBin: true
     peerDependencies:
       stylelint: '>=11.0.0'
     dependencies:
-      stylelint: 14.13.0
+      stylelint: 14.14.0
     dev: true
 
-  /stylelint-config-recommended-scss/7.0.0_5yg2enrd6w5uhqlhk7xeqwtyqm:
+  /stylelint-config-recommended-scss/7.0.0_mnalcscwzozovshmobozjae4pq:
     resolution: {integrity: sha512-rGz1J4rMAyJkvoJW4hZasuQBB7y9KIrShb20l9DVEKKZSEi1HAy0vuNlR8HyCKy/jveb/BdaQFcoiYnmx4HoiA==}
     peerDependencies:
       stylelint: ^14.4.0
     dependencies:
       postcss-scss: 4.0.5_postcss@8.4.18
-      stylelint: 14.13.0
-      stylelint-config-recommended: 8.0.0_stylelint@14.13.0
-      stylelint-scss: 4.3.0_stylelint@14.13.0
+      stylelint: 14.14.0
+      stylelint-config-recommended: 8.0.0_stylelint@14.14.0
+      stylelint-scss: 4.3.0_stylelint@14.14.0
     transitivePeerDependencies:
       - postcss
     dev: true
 
-  /stylelint-config-recommended/8.0.0_stylelint@14.13.0:
+  /stylelint-config-recommended/8.0.0_stylelint@14.14.0:
     resolution: {integrity: sha512-IK6dWvE000+xBv9jbnHOnBq01gt6HGVB2ZTsot+QsMpe82doDQ9hvplxfv4YnpEuUwVGGd9y6nbaAnhrjcxhZQ==}
     peerDependencies:
       stylelint: ^14.8.0
     dependencies:
-      stylelint: 14.13.0
+      stylelint: 14.14.0
     dev: true
 
-  /stylelint-config-standard-scss/5.0.0_5yg2enrd6w5uhqlhk7xeqwtyqm:
+  /stylelint-config-standard-scss/5.0.0_mnalcscwzozovshmobozjae4pq:
     resolution: {integrity: sha512-zoXLibojHZYPFjtkc4STZtAJ2yGTq3Bb4MYO0oiyO6f/vNxDKRcSDZYoqN260Gv2eD5niQIr1/kr5SXlFj9kcQ==}
     peerDependencies:
       stylelint: ^14.9.0
     dependencies:
-      stylelint: 14.13.0
-      stylelint-config-recommended-scss: 7.0.0_5yg2enrd6w5uhqlhk7xeqwtyqm
-      stylelint-config-standard: 26.0.0_stylelint@14.13.0
+      stylelint: 14.14.0
+      stylelint-config-recommended-scss: 7.0.0_mnalcscwzozovshmobozjae4pq
+      stylelint-config-standard: 26.0.0_stylelint@14.14.0
     transitivePeerDependencies:
       - postcss
     dev: true
 
-  /stylelint-config-standard/26.0.0_stylelint@14.13.0:
+  /stylelint-config-standard/26.0.0_stylelint@14.14.0:
     resolution: {integrity: sha512-hUuB7LaaqM8abvkOO84wh5oYSkpXgTzHu2Zza6e7mY+aOmpNTjoFBRxSLlzY0uAOMWEFx0OMKzr+reG1BUtcqQ==}
     peerDependencies:
       stylelint: ^14.9.0
     dependencies:
-      stylelint: 14.13.0
-      stylelint-config-recommended: 8.0.0_stylelint@14.13.0
+      stylelint: 14.14.0
+      stylelint-config-recommended: 8.0.0_stylelint@14.14.0
     dev: true
 
-  /stylelint-scss/4.3.0_stylelint@14.13.0:
+  /stylelint-scss/4.3.0_stylelint@14.14.0:
     resolution: {integrity: sha512-GvSaKCA3tipzZHoz+nNO7S02ZqOsdBzMiCx9poSmLlb3tdJlGddEX/8QzCOD8O7GQan9bjsvLMsO5xiw6IhhIQ==}
     peerDependencies:
       stylelint: ^14.5.1
@@ -2566,11 +2566,11 @@ packages:
       postcss-resolve-nested-selector: 0.1.1
       postcss-selector-parser: 6.0.10
       postcss-value-parser: 4.2.0
-      stylelint: 14.13.0
+      stylelint: 14.14.0
     dev: true
 
-  /stylelint/14.13.0:
-    resolution: {integrity: sha512-NJSAdloiAB/jgVJKxMR90mWlctvmeBFGFVUvyKngi9+j/qPSJ5ZB+u8jOmGbLTnS7OHrII9NFGehPRyar8U5vg==}
+  /stylelint/14.14.0:
+    resolution: {integrity: sha512-yUI+4xXfPHVnueYddSQ/e1GuEA/2wVhWQbGj16AmWLtQJtn28lVxfS4b0CsWyVRPgd3Auzi0NXOthIEUhtQmmA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -2765,8 +2765,9 @@ packages:
       - stylus
     dev: true
 
-  /vite-plugin-stylelint/3.0.7_2ocv2x2my3hadid4bdpw3bug7u:
-    resolution: {integrity: sha512-52ZXi8YHV0BYseomVJP6MoGdqniDQ5y9wTVT+C0+3mhjgbFBrcBsl9TBCB8/TManq7BNtsR+lnQOKHjY49AQmA==}
+  /vite-plugin-stylelint/3.0.8_hp32htu4udhqk35iaq4qzsb4pq:
+    resolution: {integrity: sha512-LMxvT+3soQBJKe+Ii2MkFEH+/N40k3oGyaX0WsNDLdfRaKh1Ea8DFrg28DtoCTry+fOfE6p5+6hOvG8/cGEBmg==}
+    engines: {node: '>=12.2'}
     peerDependencies:
       '@types/stylelint': ^13.0.0
       stylelint: ^13.0.0 || ^14.0.0
@@ -2776,7 +2777,7 @@ packages:
         optional: true
     dependencies:
       '@rollup/pluginutils': 4.2.1
-      stylelint: 14.13.0
+      stylelint: 14.14.0
       vite: 3.1.8_sass@1.55.0
     dev: true
 
