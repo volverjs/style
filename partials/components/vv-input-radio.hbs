@@ -3,14 +3,12 @@
 	<h2 class='font-light text-word-3 mb-24'>A radio allows the user to select
 		one option from a set.
 	</h2>
-	<label class='vv-input-radio readonly' for='radio-option'>
+	<label class='vv-input-radio' for='radio-option'>
 		<input
 			type='radio'
 			id='radio-option'
 			name='radio-option'
 			value='radio-option'
-			onclick='javascript: return false;'
-			tabindex='-1'
 		/>
 		Option
 	</label>
@@ -55,5 +53,28 @@
 			checked='checked'
 		/>
 		Disabled Checked
+	</label>
+	<label class='vv-input-radio readonly' for='radio-option-readonly'>
+		<input
+			type='radio'
+			id='radio-option-readonly'
+			name='radio-option-readonly'
+			value='radio-option-readonly'
+			disabled='disabled'
+			tabindex='-1'
+		/>
+		Readonly
+	</label>
+	<label class='vv-input-radio readonly' for='radio-option-readonly-checked'>
+		<input
+			type='radio'
+			id='radio-option-readonly-checked'
+			name='radio-option-readonly-checked'
+			value='radio-option-readonly-checked'
+			disabled='disabled'
+			checked='checked'
+			tabindex='-1'
+		/>
+		Readonly Checked
 	</label>
 </section>

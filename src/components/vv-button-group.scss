@@ -64,14 +64,12 @@ $button-component-selector: '.' + $button-component-name;
 					}
 
 					// clear margin for inner children
-					@if map.get($vv-button, 'border-width') {
+					@if map.get($vv-button, '--button-border-width') {
 						@include wrap-with-where(
 							$selector: '&:not(:last-child, :last-child)',
 							$enabled: $zero-specificity-for-compoenents
 						) {
-							margin-block: calc(
-								map.get($vv-button, 'border-width') * -1
-							);
+							margin-block: calc(var(--button-border-width) * -1);
 						}
 					}
 				}
@@ -99,14 +97,12 @@ $button-component-selector: '.' + $button-component-name;
 				}
 
 				// clear margin for inner children
-				@if map.get($vv-button, 'border-width') {
+				@if map.get($vv-button, '--button-border-width') {
 					@include wrap-with-where(
 						$selector: '&:not(:last-child, :last-child)',
 						$enabled: $zero-specificity-for-compoenents
 					) {
-						margin-inline: calc(
-							map.get($vv-button, 'border-width') * -1
-						);
+						margin-inline: calc(var(--button-border-width) * -1);
 					}
 				}
 			}

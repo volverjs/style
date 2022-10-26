@@ -1,8 +1,9 @@
 $vv-button: (
+	--button-border-width: var(--border-2),
 	position: relative,
 	background: var(--color-brand),
 	border-radius: 0.5ch,
-	border-width: var(--border-2),
+	[border-width]: var(--button-border-width),
 	border-style: solid,
 	border-color: var(--color-brand),
 	color: var(--color-white),
@@ -184,15 +185,15 @@ $vv-button: (
 			),
 		),
 		action: (
+			--button-border-width: var(--border),
 			font-size: 0.875em,
 			background: var(--color-surface-1),
 			color: var(--color-word-1),
 			border-color: var(--color-word-5),
-			border-width: var(--border),
 			font-weight: var(--font-normal),
 			padding-inline: 0.75ch,
 			padding-block: 0.5ch,
-			line-height: var(--leading-none),
+			line-height: var(--leading-snug),
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -213,21 +214,21 @@ $vv-button: (
 			element: (
 				icon: (
 					margin-inline: -0.125ch,
-					block-size: 1.4em,
-					inline-size: 1.4em,
+					block-size: calc(1em * var(--leading-snug)),
+					inline-size: calc(1em * var(--leading-snug)),
 				),
 			),
 		),
 		action-quiet: (
+			--button-border-width: var(--border),
 			font-size: var(--text-14),
 			background: transparent,
 			color: var(--color-word-1),
-			border-width: var(--border),
 			border-color: transparent,
 			font-weight: var(--font-normal),
 			padding-inline: 0.75ch,
 			padding-block: 0.5ch,
-			line-height: var(--leading-none),
+			line-height: var(--leading-snug),
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -251,8 +252,8 @@ $vv-button: (
 			element: (
 				icon: (
 					margin-inline: -0.125ch,
-					block-size: 1.4em,
-					inline-size: 1.4em,
+					block-size: calc(1em * var(--leading-snug)),
+					inline-size: calc(1em * var(--leading-snug)),
 				),
 			),
 		),

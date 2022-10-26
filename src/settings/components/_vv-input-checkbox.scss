@@ -14,6 +14,7 @@ $vv-input-checkbox: (
 			cursor: not-allowed,
 		),
 		readonly: (
+			opacity: 1,
 			cursor: default,
 			pointer-events: none,
 		),

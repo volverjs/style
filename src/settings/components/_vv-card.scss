@@ -29,6 +29,8 @@ $vv-card: (
 			display: block,
 			width: 100%,
 			height: auto,
+			object-fit: cover,
+			object-position: center,
 		),
 		content: (
 			padding: var(--spacing-md),
@@ -38,7 +40,6 @@ $vv-card: (
 		),
 		footer: (
 			_alias: '> footer',
-			background-color: var(--color-surface-1),
 			border-top: var(--border) solid var(--color-surface-4),
 			padding: var(--spacing-md),
 		),

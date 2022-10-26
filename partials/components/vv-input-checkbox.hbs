@@ -5,14 +5,12 @@
 		individual item as selected.
 	</h2>
 	<div class='mb-24'>
-		<label class='vv-input-checkbox readonly' for='checkbox-option'>
+		<label class='vv-input-checkbox' for='checkbox-option'>
 			<input
 				type='checkbox'
 				id='checkbox-option'
 				name='checkbox-option'
 				value='checkbox-option'
-				onclick='javascript: return false;'
-				tabindex='-1'
 			/>
 			Option
 		</label>
@@ -26,6 +24,20 @@
 			/>
 			Checked
 		</label>
+		<label class='vv-input-checkbox' for='checkbox-option-indeterminate'>
+			<input
+				type='checkbox'
+				id='checkbox-option-indeterminate'
+				name='checkbox-option-indeterminate'
+				value='checkbox-option-indeterminate'
+			/>
+			Indeterminate
+		</label>
+		<script>
+			const checkbox =
+			document.getElementById("checkbox-option-indeterminate");
+			checkbox.indeterminate = true;
+		</script>
 		<label class='vv-input-checkbox' for='checkbox-option-checked'>
 			<input
 				type='checkbox'
@@ -58,83 +70,38 @@
 			/>
 			Disabled Checked
 		</label>
-	</div>
-	<div class='mb-24'>
 		<label
-			class='vv-input-checkbox vv-input-checkbox--partial readonly'
-			for='checkbox-indeterminate-option'
+			class='vv-input-checkbox readonly'
+			for='checkbox-option-readonly'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-indeterminate-option'
-				name='checkbox-indeterminate-option'
-				value='checkbox-indeterminate-option'
-				onclick='javascript: return false;'
+				id='checkbox-option-readonly'
+				name='checkbox-option-readonly'
+				value='checkbox-option-readonly'
+				disabled='disabled'
 				tabindex='-1'
 			/>
-			Option
+			Readonly
 		</label>
 		<label
-			class='vv-input-checkbox'
-			for='checkbox-indeterminate-option-checked'
+			class='vv-input-checkbox readonly'
+			for='checkbox-option-readonly-checked'
 		>
 			<input
 				type='checkbox'
-				id='checkbox-indeterminate-option-checked'
-				name='checkbox-indeterminate-option-checked'
-				value='checkbox-indeterminate-option-checked'
-			/>
-			Checked
-		</label>
-		<script>
-			const checkbox =
-			document.getElementById("checkbox-indeterminate-option-checked");
-			checkbox.indeterminate = true;
-		</script>
-		<label
-			class='vv-input-checkbox indeterminate'
-			for='checkbox-indeterminate-option-checked'
-		>
-			<input
-				type='checkbox'
-				id='checkbox-indeterminate-option-focus'
-				name='checkbox-indeterminate-option-focus'
-				value='checkbox-indeterminate-option-focus'
+				id='checkbox-option-readonly-checked'
+				name='checkbox-option-readonly-checked'
+				value='checkbox-option-readonly-checked'
+				disabled='disabled'
 				checked='checked'
-				class='focus-visible indeterminate'
+				tabindex='-1'
 			/>
-			Focus
-		</label>
-		<label
-			class='vv-input-checkbox'
-			for='checkbox-indeterminate-option-disabled'
-		>
-			<input
-				type='checkbox'
-				id='checkbox-indeterminate-option-disabled'
-				name='checkbox-indeterminate-option-disabled'
-				value='checkbox-indeterminate-option-disabled'
-				disabled='disabled'
-			/>
-			Disabled
-		</label>
-		<label
-			class='vv-input-checkbox indeterminate'
-			for='checkbox-indeterminate-option-disabled-checked'
-		>
-			<input
-				type='checkbox'
-				id='checkbox-indeterminate-option-disabled-checked'
-				name='checkbox-indeterminate-option-disabled-checked'
-				value='checkbox-indeterminate-option-disabled-checked'
-				disabled='disabled'
-				class='indeterminate'
-			/>
-			Disabled Checked
+			Readonly Checked
 		</label>
 	</div>
 	<label
-		class='vv-input-checkbox vv-input-checkbox--switch readonly'
+		class='vv-input-checkbox vv-input-checkbox--switch'
 		for='switch-option'
 	>
 		<input
@@ -143,8 +110,6 @@
 			id='switch-option'
 			name='switch-option'
 			value='switch-option'
-			onclick='javascript: return false;'
-			tabindex='-1'
 		/>
 		Option
 	</label>
@@ -205,5 +170,36 @@
 			checked='checked'
 		/>
 		Disabled Checked
+	</label>
+	<label
+		class='vv-input-checkbox vv-input-checkbox--switch readonly'
+		for='switch-option-readonly'
+	>
+		<input
+			type='checkbox'
+			role='switch'
+			id='switch-option-readonly'
+			name='switch-option-readonly'
+			value='switch-option-readonly'
+			disabled='disabled'
+			tabindex='-1'
+		/>
+		Readonly
+	</label>
+	<label
+		class='vv-input-checkbox vv-input-checkbox--switch readonly'
+		for='switch-option-readonly-checked'
+	>
+		<input
+			type='checkbox'
+			role='switch'
+			id='switch-option-readonly-checked'
+			name='switch-option-readonly-checked'
+			value='switch-option-readonly-checked'
+			disabled='disabled'
+			checked='checked'
+			tabindex='-1'
+		/>
+		Readonly Checked
 	</label>
 </section>

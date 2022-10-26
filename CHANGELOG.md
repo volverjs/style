@@ -2,16 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.7] - 2022-10-26
+
+### Added
+
+-   new **vv-badge** _rounded_ and _small_ modifier
+-   fix **vv-input-radio** and **vv-input-checkbox** readonly state
+
 ## [0.1.2-beta.6] - 2022-10-21
 
 ### Added
 
--   vv-breadcrumb
+-   new component **vv-breadcrumb**
 
 ### Changed
 
--   vv-collapse is now vv-accordion
--   new vv-button _action_ and _action-quite_ modifier
+-   **vv-collapse** is now **vv-accordion**
+-   new **vv-button** _action_ and _action-quite_ modifier
 
 ## [0.1.1] - 2022-10-18
 
@@ -35,5 +42,6 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
-[0.1.2-beta.6]: https://github.com/volverjs/style/compare/0.1.2-beta.5...0.1.2-beta.6
-[0.1.1]: https://github.com/volverjs/style/compare/0.1.0...0.1.1
+[0.1.2-beta.7]: https://github.com/volverjs/style/compare/v0.1.2-beta.6...v0.1.2-beta.7
+[0.1.2-beta.6]: https://github.com/volverjs/style/compare/v0.1.2-beta.5...v0.1.2-beta.6
+[0.1.1]: https://github.com/volverjs/style/compare/v0.1.0...v0.1.1
