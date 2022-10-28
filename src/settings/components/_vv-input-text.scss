@@ -25,7 +25,7 @@ $vv-input-text: (
 			overflow: hidden,
 			background-color: var(--input-background-color),
 			will-change: background-color,
-			transition: background-color 0.2s ease-in-out,
+			transition: background-color 0.3s ease-in-out,
 			pseudo: (
 				before: (
 					position: absolute,
@@ -41,7 +41,7 @@ $vv-input-text: (
 					transform: scaleX(0),
 					transform-origin: left,
 					will-change: transform,
-					transition: transform 0.2s ease-in-out,
+					transition: transform 0.3s ease-in-out,
 				),
 			),
 			state: (
@@ -248,7 +248,7 @@ $vv-input-text: (
 					margin: 0,
 					will-change: 'transform',
 					transform-origin: left,
-					transition: all 0.2s ease-in-out,
+					transition: all 0.3s ease-in-out,
 				),
 				input: (
 					pseudo: (

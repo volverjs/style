@@ -1,6 +1,6 @@
 <div align="center">
   
-[![volverjs](src/assets/volverjs.svg)](https://github.com/volverjs)
+[![volverjs](public/volverjs.svg)](https://volverjs.github.io/style)
 
 ## @volverjs/style
 
@@ -14,7 +14,7 @@
 
 <br>
 
-[![24/Consulting](src/assets/24consulting.svg)](https://24consulting.it)
+[![24/Consulting](public/24consulting.svg)](https://24consulting.it)
 
 <br>
 

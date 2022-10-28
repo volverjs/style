@@ -1,20 +1,26 @@
-import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
 import { defineConfig } from 'vite'
+import cssExports from 'vite-plugin-css-export'
 import eslint from 'vite-plugin-eslint'
-import handlebars from 'vite-plugin-handlebars'
+import { plugin as md } from 'vite-plugin-markdown'
 import stylelint from 'vite-plugin-stylelint'
-import context from './vite.config.context'
 
 export default defineConfig({
 	plugins: [
-		handlebars({
-			partialDirectory: resolve(__dirname, 'partials'),
-			context,
-		}),
+		vue(),
 		eslint(),
 		stylelint(),
+		cssExports(),
+		md({ mode: ['html', 'vue'] }),
 	],
 	build: {
 		outDir: 'styleguide',
+	},
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src'),
+			'@docs': path.resolve(__dirname, './docs'),
+		},
 	},
 })

@@ -1,1 +1,56 @@
-$vv-nav: () !default;
+$vv-nav: (
+	--nav-item-padding: var(--spacing-xs) var(--spacing-sm),
+	element: (
+		menu: (
+			_alias: 'ul',
+			flex: 1,
+			display: flex,
+			flex-direction: column,
+		),
+		item: (
+			_alias: 'li',
+		),
+		heading-label: (
+			_alias: '[aria-hidden="true"]',
+			display: block,
+			font-weight: var(--font-semibold),
+			[padding]: var(--nav-item-padding),
+		),
+		item-label: (
+			_alias: 'li > a',
+			display: block,
+			will-change: background-color color,
+			transition: all 0.3s ease-in-out,
+			border-radius: var(--rounded-md),
+			color: var(--color-word-3),
+			[padding]: var(--nav-item-padding),
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word-1),
+				),
+				active: (
+					background-color: var(--color-surface-3),
+				),
+				current: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word-1),
+				),
+			),
+		),
+		divider: (
+			_alias: 'li[role="separator"]',
+			display: block,
+			margin-block: var(--spacing-16),
+			height: var(--spacing-px),
+			background-color: var(--color-surface-3),
+		),
+	),
+	modifier: (
+		menu: (
+			font-size: 0.9em,
+			display: flex,
+			flex-direction: column,
+		),
+	),
+) !default;

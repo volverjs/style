@@ -397,7 +397,8 @@
 					close,
 					determinate,
 					indeterminate,
-					selected
+					selected,
+					current
 				),
 				$state
 			)
@@ -504,7 +505,7 @@
 								'#{$modifier}#{$alias}:#{$state}'
 							);
 						}
-					} @else if $state != 'selected' {
+					} @else if $state != 'selected' & $state != 'current' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'

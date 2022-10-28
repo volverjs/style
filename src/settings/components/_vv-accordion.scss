@@ -20,7 +20,7 @@ $vv-accordion: (
 			line-height: var(--leading-normal),
 			color: var(--color-word-2),
 			will-change: background-color,
-			transition: background-color 0.2s ease-in-out,
+			transition: background-color 0.3s ease-in-out,
 			font-size: var(--text-sm),
 			pseudo: (
 				before: (
@@ -35,7 +35,7 @@ $vv-accordion: (
 					background-size: 1em,
 					background-repeat: no-repeat,
 					will-change: transform,
-					transition: transform 0.2s ease-in-out,
+					transition: transform 0.3s ease-in-out,
 					transform: rotate(-90deg),
 				),
 				marker: (

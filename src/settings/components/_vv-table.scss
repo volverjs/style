@@ -1,11 +1,18 @@
 $vv-table: (
+	--table-cell-padding: var(--spacing-md) 0,
 	width: 100%,
+	border-collapse: collapse,
+	border-color: var(--color-surface-5),
 	element: (
 		tr: (
 			_alias: 'tr',
 			border-width: 0 0 1px 0,
 			border-style: solid,
-			border-color: var(--color-alpha-1),
+			border-color: var(--color-surface-5),
+		),
+		tbody-tr: (
+			_alias: 'tbody > tr',
+			border-color: var(--color-surface-3),
 			state: (
 				last-child: (
 					border-width: 0,
@@ -15,15 +22,21 @@ $vv-table: (
 		th: (
 			_alias: 'th',
 			font-weight: semibold,
-			padding-block: var(--spacing-md),
 			font-size: var(--text-sm),
 			color: var(--color-word-2),
+			[padding]: var(--table-cell-padding),
 		),
 		td: (
 			_alias: 'td',
-			padding-block: var(--spacing-md),
 			border-style: solid,
 			font-size: var(--text-xs),
+			[padding]: var(--table-cell-padding),
+		),
+	),
+	modifier: (
+		inline-spacing: (
+			--table-cell-padding: var(--spacing-md),
+			border-width: 0,
 		),
 	),
 ) !default;

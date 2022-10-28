@@ -3,14 +3,14 @@ module.exports = {
 	env: {
 		node: true,
 	},
-	extends: ['eslint:recommended', 'prettier'],
+	extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
 	rules: {
 		'no-console': process.env.NODE_ENV === 'development' ? 'off' : 'error',
 		'no-debugger': process.env.NODE_ENV === 'development' ? 'off' : 'error',
 		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+		'no-unused-vars': 'off',
 	},
 	parserOptions: {
-		parser: '@babel/eslint-parser',
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
