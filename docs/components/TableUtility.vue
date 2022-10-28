@@ -5,11 +5,21 @@
 	const props = defineProps({
 		prefix: {
 			type: String,
-			required: true,
+			default: '',
+			required: false,
 		},
 		property: {
 			type: String,
 			required: true,
+		},
+		/**
+		 * Sometimes css property doesn't match with the property used to generate css utilities.
+		 * Use this prop to change the property name within the demonstration table.
+		 */
+		customProperty: {
+			type: String,
+			default: '',
+			required: false,
 		},
 	})
 
@@ -43,14 +53,14 @@
 						translate="no"
 						class="font-mono text-accent whitespace-nowrap">
 						<div class="border-b border-surface-3 py-sm">
-							{{ prefix }}-{{ key }}
+							{{ prefix ? `${prefix}-${key}` : key }}
 						</div>
 					</td>
 					<td
 						translate="no"
 						class="font-mono text-info whitespace-nowrap">
 						<div class="border-b border-surface-3 py-sm">
-							{{ property }}: {{ value }};
+							{{ customProperty || property }}: {{ value }};
 						</div>
 					</td>
 				</tr>

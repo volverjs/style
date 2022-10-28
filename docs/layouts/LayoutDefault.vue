@@ -139,7 +139,251 @@
 										</router-link>
 									</li>
 								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'columns',
+												},
+											}"
+											tabindex="0">
+											Columns
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'break-after',
+												},
+											}"
+											tabindex="0">
+											Break After
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'break-before',
+												},
+											}"
+											tabindex="0">
+											Break Before
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'break-inside',
+												},
+											}"
+											tabindex="0">
+											Break Inside
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'display',
+												},
+											}"
+											tabindex="0">
+											Display
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'overflow',
+												},
+											}"
+											tabindex="0">
+											Overflow
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'position',
+												},
+											}"
+											tabindex="0">
+											Position
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'visibility',
+												},
+											}"
+											tabindex="0">
+											Visibility
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup: 'layout',
+													utilityName: 'z-index',
+												},
+											}"
+											tabindex="0">
+											Z-Index
+										</router-link>
+									</li>
+								</ul>
 							</li>
+
+							<!-- #region Flexbox & Grid -->
+							<li class="vv-nav__divider" role="separator"></li>
+							<li class="vv-nav__item" role="presentation">
+								<span
+									id="menu-section-utilities"
+									class="vv-nav__heading-label"
+									aria-hidden="true">
+									Flexbox & Grid
+								</span>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup:
+														'flexbox-grid',
+													utilityName:
+														'flex-direction',
+												},
+											}"
+											tabindex="0">
+											Flex Direction
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup:
+														'flexbox-grid',
+													utilityName: 'flex-wrap',
+												},
+											}"
+											tabindex="0">
+											Flex Wrap
+										</router-link>
+									</li>
+								</ul>
+								<ul
+									class="vv-nav__menu"
+									role="group"
+									aria-labelledby="menu-section-utilities">
+									<li class="vv-nav__item">
+										<router-link
+											class="vv-nav__item-label"
+											:to="{
+												name: 'utility',
+												params: {
+													utilityGroup:
+														'flexbox-grid',
+													utilityName: 'flex',
+												},
+											}"
+											tabindex="0">
+											Flex
+										</router-link>
+									</li>
+								</ul>
+							</li>
+							<!-- #endregion Flexbox & Grid -->
 						</ul>
 					</nav>
 				</aside>
