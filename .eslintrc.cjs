@@ -9,6 +9,7 @@ module.exports = {
 		'no-debugger': process.env.NODE_ENV === 'development' ? 'off' : 'error',
 		'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
 		'no-unused-vars': 'off',
+		'sort-imports': 'off',
 	},
 	parserOptions: {
 		ecmaVersion: 'latest',

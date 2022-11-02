@@ -23,13 +23,8 @@
 		</div>
 		<div
 			v-if="showSource"
-			class="flex-1 bg-surface-1 border-t border-surface-4 p-24 text-sm">
+			class="flex-1 bg-surface-1 border-t border-surface-4 p-24 font-mono text-xs">
 			<slot name="editor"></slot>
 		</div>
 	</div>
 </template>
-
-<style lang="scss">
-	@import '@docs/assets/scss/prism-themes/light';
-	@import '@docs/assets/scss/prism-themes/dark';
-</style>

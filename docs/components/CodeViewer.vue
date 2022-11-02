@@ -1,11 +1,11 @@
 <script setup>
-	import { computedAsync } from '@vueuse/core'
+	import { computedAsync, useClipboard } from '@vueuse/core'
 	import { highlight, languages } from 'prismjs/components/prism-core'
+	import 'prismjs/components/prism-bash'
+	import 'prismjs/components/prism-css'
 	import 'prismjs/components/prism-markup'
-	import 'prismjs/themes/prism-tomorrow.css'
-	import 'vue-live/lib/vue-live.esm.css'
+	import 'prismjs/components/prism-scss'
 	import { PrismEditor } from 'vue-prism-editor'
-	import 'vue-prism-editor/dist/prismeditor.min.css'
 
 	const props = defineProps({
 		code: {
@@ -24,6 +24,10 @@
 			type: String,
 			default: undefined,
 		},
+		language: {
+			type: String,
+			default: 'html',
+		},
 	})
 
 	const currentCode = computedAsync(async () => {
@@ -37,14 +41,33 @@
 	})
 
 	const highlighter = (code) => {
-		return highlight(code, languages.html)
+		return highlight(code, languages[props.language] ?? languages.text)
 	}
+
+	// actions
+	const {
+		copy: copyToClipboard,
+		copied,
+		isSupported: isCopyToClipboardSupported,
+	} = useClipboard({ source: currentCode })
 </script>
 
 <template>
 	<div class="vv-card">
-		<div class="vv-card__header bg-surface">Lorem</div>
+		<div class="none">
+			<slot />
+		</div>
 		<div class="vv-card__content theme theme--dark">
+			<button
+				v-if="isCopyToClipboardSupported"
+				title="Copy to clipboard"
+				:class="{ 'bg-success-lighten-5 text-black': copied }"
+				class="vv-button vv-button--action-quiet absolute top-xs right-xs z-sticky"
+				type="button"
+				@click.stop="copyToClipboard()">
+				<IconifyIcon icon="akar-icons:copy" />
+				<template v-if="copied">Copied!</template>
+			</button>
 			<PrismEditor
 				:model-value="currentCode"
 				:highlight="highlighter"

@@ -5,14 +5,14 @@ export default [
 		component: () => import('../pages/PageHome.vue'),
 	},
 	{
-		name: 'contents',
+		name: 'getting-started',
 		path: '/getting-started',
 		component: () => import('../layouts/LayoutDefault.vue'),
 		children: [
 			{
 				name: 'content',
 				path: '/:name',
-				component: () => import('../pages/PageContent.vue'),
+				component: () => import('../pages/PageGettingStarted.vue'),
 			},
 		],
 	},

@@ -1,8 +1,7 @@
 <script setup>
+	import { VueLive } from 'vue-live'
 	import { computedAsync, useClipboard } from '@vueuse/core'
 	import { inject, provide, ref, watch } from 'vue'
-	import { VueLive } from 'vue-live'
-	import 'vue-live/lib/vue-live.esm.css'
 	import CodeLayoutVue from './CodeLayout.vue'
 
 	// props

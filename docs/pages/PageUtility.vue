@@ -33,8 +33,13 @@
 			</span>
 			<h1
 				v-if="metadata.title"
-				class="vv-text vv-text--size-1 font-bold mb-sm">
+				class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
 				{{ metadata.title }}
+				<span
+					v-if="metadata.breakpoints"
+					class="vv-badge vv-badge--small ml-16 mb-12"
+					>breakpoints</span
+				>
 			</h1>
 			<h2
 				v-if="metadata.description"

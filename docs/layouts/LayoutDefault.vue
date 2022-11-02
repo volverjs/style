@@ -1,4 +1,5 @@
 <script setup>
+	import { mainMenu } from '@docs/settings/navigation'
 	import { useToggle } from '@vueuse/core'
 	import { inject } from 'vue'
 	import { useRoute } from 'vue-router'
@@ -59,338 +60,48 @@
 					class="w-288 h-full border-r border-surface-3 off-canvas-aside bg-surface overflow-y-auto">
 					<nav class="vv-nav vv-nav--menu p-lg">
 						<ul class="vv-nav__menu" role="menu">
-							<li class="vv-nav__item" role="presentation">
-								<span
-									id="menu-section-contents"
-									class="vv-nav__heading-label"
-									aria-hidden="true">
-									Getting Started
-								</span>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-contents">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'content',
-												params: {
-													name: 'installation',
-												},
-											}"
-											tabindex="0">
-											Installation
-										</router-link>
-									</li>
-								</ul>
-							</li>
-							<li class="vv-nav__divider" role="separator"></li>
-							<li class="vv-nav__item" role="presentation">
-								<span
-									id="menu-section-components"
-									class="vv-nav__heading-label"
-									aria-hidden="true">
-									Components
-								</span>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-components">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'component',
-												params: {
-													componentName: 'vv-button',
-												},
-											}"
-											tabindex="0">
-											Buttons
-										</router-link>
-									</li>
-								</ul>
-							</li>
-							<li class="vv-nav__divider" role="separator"></li>
-							<li class="vv-nav__item" role="presentation">
-								<span
-									id="menu-section-utilities"
-									class="vv-nav__heading-label"
-									aria-hidden="true">
-									Layout
-								</span>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'aspect-ratio',
-												},
-											}"
-											tabindex="0">
-											Aspect Ratio
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'columns',
-												},
-											}"
-											tabindex="0">
-											Columns
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'break-after',
-												},
-											}"
-											tabindex="0">
-											Break After
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'break-before',
-												},
-											}"
-											tabindex="0">
-											Break Before
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'break-inside',
-												},
-											}"
-											tabindex="0">
-											Break Inside
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'display',
-												},
-											}"
-											tabindex="0">
-											Display
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'overflow',
-												},
-											}"
-											tabindex="0">
-											Overflow
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'position',
-												},
-											}"
-											tabindex="0">
-											Position
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'visibility',
-												},
-											}"
-											tabindex="0">
-											Visibility
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup: 'layout',
-													utilityName: 'z-index',
-												},
-											}"
-											tabindex="0">
-											Z-Index
-										</router-link>
-									</li>
-								</ul>
-							</li>
-
-							<!-- #region Flexbox & Grid -->
-							<li class="vv-nav__divider" role="separator"></li>
-							<li class="vv-nav__item" role="presentation">
-								<span
-									id="menu-section-utilities"
-									class="vv-nav__heading-label"
-									aria-hidden="true">
-									Flexbox & Grid
-								</span>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup:
-														'flexbox-grid',
-													utilityName:
-														'flex-direction',
-												},
-											}"
-											tabindex="0">
-											Flex Direction
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup:
-														'flexbox-grid',
-													utilityName: 'flex-wrap',
-												},
-											}"
-											tabindex="0">
-											Flex Wrap
-										</router-link>
-									</li>
-								</ul>
-								<ul
-									class="vv-nav__menu"
-									role="group"
-									aria-labelledby="menu-section-utilities">
-									<li class="vv-nav__item">
-										<router-link
-											class="vv-nav__item-label"
-											:to="{
-												name: 'utility',
-												params: {
-													utilityGroup:
-														'flexbox-grid',
-													utilityName: 'flex',
-												},
-											}"
-											tabindex="0">
-											Flex
-										</router-link>
-									</li>
-								</ul>
-							</li>
-							<!-- #endregion Flexbox & Grid -->
+							<template
+								v-for="(section, sectionIndex) in mainMenu"
+								:key="sectionIndex">
+								<li class="vv-nav__item" role="presentation">
+									<span
+										id="menu-section-contents"
+										class="vv-nav__heading-label"
+										aria-hidden="true">
+										{{ section.name }}
+									</span>
+									<ul
+										v-if="section.children"
+										class="vv-nav__menu"
+										role="group"
+										aria-labelledby="menu-section-contents">
+										<li
+											v-for="(
+												child, childIndex
+											) in section.children"
+											:key="childIndex"
+											class="vv-nav__item">
+											<router-link
+												class="vv-nav__item-label"
+												:to="child.to"
+												tabindex="0">
+												{{ child.name }}
+											</router-link>
+										</li>
+									</ul>
+								</li>
+								<li
+									v-if="sectionIndex < mainMenu.length - 1"
+									class="vv-nav__divider"
+									role="separator"></li>
+							</template>
 						</ul>
 					</nav>
 				</aside>
 			</div>
 			<main class="flex-1 bg-surface-1">
-				<div class="xl:w-8/12 mx-auto">
-					<router-view />
+				<div class="lg:w-10/12 xl:w-8/12 xxl:w-6/12 mx-auto">
+					<router-view :key="route.path" />
 				</div>
 			</main>
 		</div>

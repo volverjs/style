@@ -7,7 +7,7 @@
 	const router = useRouter()
 	const metadata = ref({})
 	const MainContent = defineAsyncComponent(() =>
-		import(`../contents/${route.params.name}.md`)
+		import(`../contents/getting-started/${route.params.name}.md`)
 			.then(({ attributes, VueComponentWith }) => {
 				metadata.value = attributes
 				return VueComponentWith({

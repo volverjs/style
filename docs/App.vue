@@ -15,6 +15,11 @@
 </template>
 
 <style lang="scss">
+	@import '@/style';
+	@import 'vue-live/lib/vue-live.esm.css';
+	@import '@docs/assets/scss/prism-themes/light';
+	@import '@docs/assets/scss/prism-themes/dark';
+
 	:root,
 	:host,
 	.theme {
@@ -28,6 +33,26 @@
 	body,
 	#app {
 		height: 100%;
+	}
+
+	pre[class*='language-'] {
+		@extend %vv-card;
+
+		margin-bottom: var(--spacing-lg);
+	}
+
+	code[class*='language-'] {
+		@extend %vv-card__content;
+
+		font-family: var(--font-mono);
+		font-size: var(--text-xs);
+		direction: ltr;
+		text-align: left;
+		white-space: pre;
+		word-spacing: normal;
+		word-break: normal;
+		tab-size: 4;
+		hyphens: none;
 	}
 
 	section {

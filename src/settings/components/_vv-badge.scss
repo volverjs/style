@@ -1,5 +1,5 @@
 $vv-badge: (
-	--badge-font-size: 0.7em,
+	--badge-font-size: 0.7rem,
 	[font-size]: var(--badge-font-size),
 	border-radius: 0.5em,
 	background: var(--color-brand),
@@ -29,7 +29,7 @@ $vv-badge: (
 	),
 	modifier: (
 		small: (
-			--badge-font-size: 0.6em,
+			--badge-font-size: 0.6rem,
 		),
 		rounded: (
 			border-radius: 1em,
