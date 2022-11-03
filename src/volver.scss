@@ -4,11 +4,11 @@
 // props
 @import 'props';
 
-// preflight
-@import 'preflight';
-
 // components
 @import 'components';
 
-// utilities (must be the last one)
+// utilities
 @import 'utilities';
+
+// preflight
+@import 'preflight';

@@ -15,24 +15,25 @@
 </template>
 
 <style lang="scss">
-	@import '@/style';
+	@import '@/context';
+
+	// custom font
+	$font-family-sans: 'Open Sans', sans-serif;
+
+	@import '@/volver';
+	@import '@/themes/dark/volver';
 	@import 'vue-live/lib/vue-live.esm.css';
 	@import '@docs/assets/scss/prism-themes/light';
 	@import '@docs/assets/scss/prism-themes/dark';
 
-	:root,
-	:host,
-	.theme {
-		--font-sans: 'Open Sans', sans-serif;
-	}
-
-	html {
-		height: 100%;
-	}
-
+	html,
 	body,
 	#app {
 		height: 100%;
+	}
+
+	p > code {
+		color: var(--color-accent);
 	}
 
 	pre[class*='language-'] {

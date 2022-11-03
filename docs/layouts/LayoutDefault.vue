@@ -1,4 +1,5 @@
 <script setup>
+	import FooterNotes from '@docs/components/FooterNotes.vue'
 	import { mainMenu } from '@docs/settings/navigation'
 	import { useToggle } from '@vueuse/core'
 	import { inject } from 'vue'
@@ -10,7 +11,7 @@
 </script>
 
 <template>
-	<div class="flex flex-col min-h-full relative">
+	<div class="flex flex-col h-full relative">
 		<nav class="flex border-b border-surface-3 p-16 items-center">
 			<a
 				:href="`#${route.path}#aside`"
@@ -20,7 +21,7 @@
 			</a>
 			<router-link
 				:to="{ name: 'home' }"
-				class="flex items-start"
+				class="flex items-center"
 				title="Go to home">
 				<img
 					src="/volverjs.svg"
@@ -50,14 +51,14 @@
 				</a>
 			</div>
 		</nav>
-		<div class="flex flex-1">
-			<div :id="`${route.path}#aside`" class="off-canvas">
+		<div class="flex flex-1 min-h-0">
+			<div :id="`${route.path}#aside`" class="off-canvas min-h-0">
 				<a
 					:href="`#${route.path}`"
 					class="off-canvas-overlay"
 					title="Close Menu"></a>
 				<aside
-					class="w-288 h-full border-r border-surface-3 off-canvas-aside bg-surface overflow-y-auto">
+					class="w-288 h-full border-r border-surface-3 off-canvas-aside bg-surface h-full overflow-y-auto">
 					<nav class="vv-nav vv-nav--menu p-lg">
 						<ul class="vv-nav__menu" role="menu">
 							<template
@@ -99,9 +100,10 @@
 					</nav>
 				</aside>
 			</div>
-			<main class="flex-1 bg-surface-1">
-				<div class="lg:w-10/12 xl:w-8/12 xxl:w-6/12 mx-auto">
+			<main class="flex-1 bg-surface-1 min-h-0 overflow-y-auto">
+				<div class="lg:w-10/12 xl:w-9/12 xxl:w-7/12 mx-auto">
 					<router-view :key="route.path" />
+					<FooterNotes />
 				</div>
 			</main>
 		</div>

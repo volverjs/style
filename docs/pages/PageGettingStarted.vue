@@ -1,7 +1,7 @@
 <script setup>
 	import { defineAsyncComponent, ref } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
-	import CodeViewer from '../components/CodeViewer.vue'
+	import CodeEditor from '../components/CodeEditor.vue'
 
 	const route = useRoute()
 	const router = useRouter()
@@ -11,7 +11,7 @@
 			.then(({ attributes, VueComponentWith }) => {
 				metadata.value = attributes
 				return VueComponentWith({
-					CodeViewer,
+					CodeEditor,
 				})
 			})
 			.catch(() => {
@@ -38,6 +38,8 @@
 				{{ metadata.description }}
 			</h2>
 		</header>
-		<MainContent />
+		<div class="preflight">
+			<MainContent />
+		</div>
 	</div>
 </template>

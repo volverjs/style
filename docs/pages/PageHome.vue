@@ -1,3 +1,7 @@
+<script setup>
+	import FooterNotes from '@docs/components/FooterNotes.vue'
+</script>
+
 <template>
 	<header
 		class="bg-surface-1 h-full"
@@ -50,16 +54,7 @@
 					</router-link>
 				</div>
 			</div>
-			<div
-				class="border-t border-alpha-1 border-solid text-word-3 text-14 text-center mt-16 p-16">
-				proudly powered by
-				<a
-					href="https://24consulting.it"
-					target="_blank"
-					class="font-semibold"
-					>24/Consulting</a
-				>
-			</div>
+			<FooterNotes class="text-center" />
 		</div>
 	</header>
 </template>

@@ -2,7 +2,7 @@
 @import '../context';
 
 $component-name: map.get($components-names, vv-button);
-$component-map: $vv-button;
+$component-map: $dark-vv-button;
 $props: true;
 
 @mixin theme-dark-vv-button {

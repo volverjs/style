@@ -11,6 +11,42 @@ export const mainMenu = [
 					},
 				},
 			},
+			{
+				name: 'Customization',
+				to: {
+					name: 'content',
+					params: {
+						name: 'customization',
+					},
+				},
+			},
+			{
+				name: 'Configuration',
+				to: {
+					name: 'content',
+					params: {
+						name: 'configuration',
+					},
+				},
+			},
+			{
+				name: 'Theming',
+				to: {
+					name: 'content',
+					params: {
+						name: 'theming',
+					},
+				},
+			},
+			{
+				name: 'Preflight',
+				to: {
+					name: 'content',
+					params: {
+						name: 'preflight',
+					},
+				},
+			},
 		],
 	},
 	{

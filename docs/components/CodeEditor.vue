@@ -22,6 +22,10 @@
 			type: String,
 			default: undefined,
 		},
+		forceSource: {
+			type: Boolean,
+			default: false,
+		},
 	})
 
 	// code
@@ -59,7 +63,7 @@
 	watch(isThemeDark, (value) => {
 		isPreviewInDarkMode.value = value
 	})
-	provide('showSource', showSource)
+	provide('showSource', props.forceSource || showSource)
 	provide('isPreviewInDarkMode', isPreviewInDarkMode)
 	provide('metadata', metadata)
 	const toggleSource = () => {
@@ -81,6 +85,7 @@
 			<span v-if="metadata.title">{{ metadata.title }}</span>
 			<div class="vv-button-group ml-auto">
 				<button
+					v-if="!props.forceSource"
 					:title="showSource ? 'Hide source' : 'Show source'"
 					:class="{ 'vv-button--active': showSource }"
 					class="vv-button vv-button--action-quiet"

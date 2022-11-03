@@ -169,6 +169,11 @@
 		&:where(:active) {
 			@extend %vv-button--active !optional;
 		}
+
+		&
+			+ :where(button, input[type='button'], input[type='submit'], input[type='reset']) {
+			@extend %ml-sm !optional;
+		}
 	}
 
 	// table
@@ -194,7 +199,16 @@
 	}
 
 	// checkbox
+	:where(fieldset:has(input[type='checkbox'])) {
+		@extend %vv-input-checkbox-group !optional;
+
+		:where(legend) {
+			@extend %vv-input-checkbox-group__legend !optional;
+		}
+	}
+
 	:where(label:has(input[type='checkbox'])) {
+		@extend %w-full !optional;
 		@extend %vv-input-checkbox !optional;
 
 		:where(input[type='checkbox']) {
@@ -216,13 +230,51 @@
 		}
 	}
 
+	// switch
+	:where(label:has(input[type='checkbox'][role='switch'])) {
+		@extend %vv-input-checkbox--switch !optional;
+
+		:where(input[type='checkbox'][role='switch']) {
+			@extend %vv-input-checkbox-modifier-switch__input !optional;
+
+			&:hover {
+				@extend %vv-input-checkbox-modifier-switch-element-input--hover
+						!optional;
+			}
+
+			&:active {
+				@extend %vv-input-checkbox-modifier-switch-element-input--active
+						!optional;
+			}
+
+			&:checked {
+				@extend %vv-input-checkbox-modifier-switch-element-input--checked
+						!optional;
+			}
+
+			&:focus-visible {
+				@extend %vv-input-checkbox-modifier-switch-element-input--focus-visible
+						!optional;
+			}
+		}
+	}
+
 	:where(label:has(input[type='checkbox']:disabled)) {
 		@extend %vv-input-checkbox--disabled !optional;
 	}
 
 	// radio
+	:where(fieldset:has(input[type='radio'])) {
+		@extend %vv-input-radio-group !optional;
+
+		:where(legend) {
+			@extend %vv-input-radio-group__legend !optional;
+		}
+	}
+
 	:where(label:has(input[type='radio'])) {
-		@extend %vv-input-checkbox !optional;
+		@extend %w-full !optional;
+		@extend %vv-input-radio !optional;
 
 		:where(input[type='radio']) {
 			@extend %vv-input-radio__input !optional;
@@ -242,7 +294,13 @@
 	}
 
 	// textarea
+	:where(label:has(+ textarea)) {
+		@extend %vv-textarea__label !optional;
+	}
+
 	:where(textarea) {
+		@extend %w-full !optional;
+		@extend %vv-textarea !optional;
 		@extend %vv-textarea__wrapper !optional;
 		@extend %vv-textarea__input !optional;
 
@@ -256,7 +314,13 @@
 	}
 
 	// select
+	:where(label:has(+ select)) {
+		@extend %vv-select__label !optional;
+	}
+
 	:where(select) {
+		@extend %w-full !optional;
+		@extend %vv-select !optional;
 		@extend %vv-select__wrapper !optional;
 		@extend %vv-select__input !optional;
 
@@ -266,7 +330,13 @@
 	}
 
 	// input text
+	:where(label:has(+ input:not([type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset']))) {
+		@extend %vv-input-text__label !optional;
+	}
+
 	:where(input:not([type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset'])) {
+		@extend %w-full !optional;
+		@extend %vv-input-text !optional;
 		@extend %vv-input-text__wrapper !optional;
 		@extend %vv-input-text__input !optional;
 
