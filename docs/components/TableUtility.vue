@@ -21,6 +21,13 @@
 			default: '',
 			required: false,
 		},
+		/**
+		 * Sometimes, especially in helper classes such as spacing we don’t need to specify the property because we only care about the value.
+		 */
+		hasProperty: {
+			type: Boolean,
+			default: true,
+		},
 	})
 
 	const items = computed(() => {
@@ -59,8 +66,13 @@
 					<td
 						translate="no"
 						class="font-mono text-info whitespace-nowrap">
-						<div class="border-b border-surface-3 py-sm">
+						<div
+							v-if="hasProperty"
+							class="border-b border-surface-3 py-sm">
 							{{ customProperty || property }}: {{ value }};
+						</div>
+						<div v-else class="border-b border-surface-3 py-sm">
+							{{ value }};
 						</div>
 					</td>
 				</tr>

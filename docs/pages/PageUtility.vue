@@ -3,6 +3,7 @@
 	import { useRoute, useRouter } from 'vue-router'
 	import CardExample from '../components/CardExample.vue'
 	import TableUtility from '../components/TableUtility.vue'
+	import TableHelper from '../components/TableHelper.vue'
 
 	const route = useRoute()
 	const router = useRouter()
@@ -15,6 +16,7 @@
 				metadata.value = attributes
 				return VueComponentWith({
 					TableUtility,
+					TableHelper,
 					CardExample,
 				})
 			})

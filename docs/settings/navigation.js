@@ -77,6 +77,16 @@ export const mainMenu = [
 				},
 			},
 			{
+				name: 'Container',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'layout',
+						utilityName: 'container',
+					},
+				},
+			},
+			{
 				name: 'Columns',
 				to: {
 					name: 'utility',
@@ -127,6 +137,26 @@ export const mainMenu = [
 				},
 			},
 			{
+				name: 'Object Fit',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'layout',
+						utilityName: 'object-fit',
+					},
+				},
+			},
+			{
+				name: 'Object Position',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'layout',
+						utilityName: 'object-position',
+					},
+				},
+			},
+			{
 				name: 'Overflow',
 				to: {
 					name: 'utility',
@@ -153,6 +183,16 @@ export const mainMenu = [
 					params: {
 						utilityGroup: 'layout',
 						utilityName: 'visibility',
+					},
+				},
+			},
+			{
+				name: 'Top / Right / Bottom / Left',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'layout',
+						utilityName: 'top-right-bottom-left',
 					},
 				},
 			},
@@ -242,12 +282,32 @@ export const mainMenu = [
 				},
 			},
 			{
+				name: 'Grid Column Start / End',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-column-start-end',
+					},
+				},
+			},
+			{
 				name: 'Grid Template Rows',
 				to: {
 					name: 'utility',
 					params: {
 						utilityGroup: 'flexbox-grid',
 						utilityName: 'grid-template-rows',
+					},
+				},
+			},
+			{
+				name: 'Grid Row Start / End',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-row-start-end',
 					},
 				},
 			},
@@ -281,16 +341,16 @@ export const mainMenu = [
 					},
 				},
 			},
-			// {
-			// 	name: 'Gap',
-			// 	to: {
-			// 		name: 'utility',
-			// 		params: {
-			// 			utilityGroup: 'flexbox-grid',
-			// 			utilityName: 'gap',
-			// 		},
-			// 	},
-			// },
+			{
+				name: 'Gap',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'gap',
+					},
+				},
+			},
 			{
 				name: 'Justify Content',
 				to: {
