@@ -201,6 +201,156 @@ export const mainMenu = [
 					},
 				},
 			},
+			{
+				name: 'Flex Grow',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'flex-grow',
+					},
+				},
+			},
+			{
+				name: 'Flex Shrink',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'flex-shrink',
+					},
+				},
+			},
+			{
+				name: 'Order',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'order',
+					},
+				},
+			},
+			{
+				name: 'Grid Template Columns',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-template-columns',
+					},
+				},
+			},
+			{
+				name: 'Grid Template Rows',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-template-rows',
+					},
+				},
+			},
+			{
+				name: 'Grid Auto Flow',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-auto-flow',
+					},
+				},
+			},
+			{
+				name: 'Grid Auto Columns',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-auto-columns',
+					},
+				},
+			},
+			{
+				name: 'Grid Auto Rows',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'grid-auto-rows',
+					},
+				},
+			},
+			// {
+			// 	name: 'Gap',
+			// 	to: {
+			// 		name: 'utility',
+			// 		params: {
+			// 			utilityGroup: 'flexbox-grid',
+			// 			utilityName: 'gap',
+			// 		},
+			// 	},
+			// },
+			{
+				name: 'Justify Content',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'justify-content',
+					},
+				},
+			},
+			{
+				name: 'Justify Items',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'justify-items',
+					},
+				},
+			},
+			{
+				name: 'Justify Self',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'justify-self',
+					},
+				},
+			},
+			{
+				name: 'Align Content',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'align-content',
+					},
+				},
+			},
+			{
+				name: 'Align Items',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'align-items',
+					},
+				},
+			},
+			{
+				name: 'Align Self',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'flexbox-grid',
+						utilityName: 'align-self',
+					},
+				},
+			},
 		],
 	},
 ]
