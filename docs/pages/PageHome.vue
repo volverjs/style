@@ -44,7 +44,7 @@
 							name: 'content',
 							params: { name: 'installation' },
 						}"
-						class="vv-button vv-button--accent vv-button--full-bleed vv-button--rounded">
+						class="vv-button vv-button--primary vv-button--full-bleed vv-button--rounded">
 						Getting Started
 					</router-link>
 					<router-link

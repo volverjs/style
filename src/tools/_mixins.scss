@@ -481,16 +481,30 @@
 								'#{$modifier}#{$alias}[#{$state}]'
 							);
 						}
+
+						@if $state == 'disabled' {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$block-item}[aria-disabled="true"]'
+							);
+
+							@if $alias {
+								$selectors: list.join(
+									$selectors,
+									'#{$modifier}#{$alias}[aria-disabled="true"]'
+								);
+							}
+						}
 					} @else if $state == 'focus-visible' {
 						$selectors: list.join(
 							$selectors,
-							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
 						);
 
 						@if $alias {
 							$selectors: list.join(
 								$selectors,
-								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
 							);
 						}
 					} @else if $state == 'checked' {
@@ -505,7 +519,19 @@
 								'#{$modifier}#{$alias}:#{$state}'
 							);
 						}
-					} @else if $state != 'selected' & $state != 'current' {
+					} @else if $state == 'selected' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[aria-selected="true"]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[aria-selected="true"]'
+							);
+						}
+					} @else if $state != 'current' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'

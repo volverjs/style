@@ -30,8 +30,13 @@
 			</span>
 			<h1
 				v-if="metadata.title"
-				class="vv-text vv-text--size-1 font-bold mb-sm">
+				class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
 				{{ metadata.title }}
+				<span
+					v-if="metadata.uiVue"
+					class="vv-badge vv-badge--small vv-badge--success ml-16 mb-12"
+					>ui-vue</span
+				>
 			</h1>
 			<p
 				v-if="metadata.description"

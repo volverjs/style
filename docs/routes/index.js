@@ -19,7 +19,7 @@ export default [
 	{
 		name: 'components',
 		path: '/components',
-		redirect: '/components/vv-button',
+		redirect: '/components/badges',
 		component: () => import('../layouts/LayoutDefault.vue'),
 		children: [
 			{

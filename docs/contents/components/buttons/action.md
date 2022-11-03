@@ -15,7 +15,7 @@ wrapperClass: flex flex-wrap gap-8 items-center justify-center
     Active
 </button>
 
-<button class="vv-button vv-button--action selected">
+<button class="vv-button vv-button--action selected" aria-selected="true">
     Selected
 </button>
 

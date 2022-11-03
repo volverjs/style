@@ -29,6 +29,7 @@ $vv-breadcrumb: (
 		item: (
 			_alias: '> ol > li:has(a)',
 			display: inline-flex,
+			align-items: center,
 			color: var(--color-word-2),
 			pseudo: (
 				after: (
@@ -47,6 +48,7 @@ $vv-breadcrumb: (
 		item-active: (
 			_alias: '> ol > li:not(:has(a))',
 			display: inline-flex,
+			align-items: center,
 			font-weight: var(--font-bold),
 			padding-right: var(--spacing-16),
 		),

@@ -1,6 +1,6 @@
 ---
 title: Default Style without Classes
-description: Use native HTML tags semantic keeping the code simple. The perfect companion for Markdown generated templates.
+description: Use native HTML tags semantic keeping the code simple. The perfect companion for Markdown generated templates, WYSIWYG or rich text editors.
 ---
 
 *Preflight* is already included in compliled *CSS*. In a custom build keep preflight import at the end. 

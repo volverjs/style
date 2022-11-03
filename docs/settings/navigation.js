@@ -53,11 +53,29 @@ export const mainMenu = [
 		name: 'Components',
 		children: [
 			{
+				name: 'Badges',
+				to: {
+					name: 'component',
+					params: {
+						componentName: 'badges',
+					},
+				},
+			},
+			{
+				name: 'Breadcrumbs',
+				to: {
+					name: 'component',
+					params: {
+						componentName: 'breadcrumbs',
+					},
+				},
+			},
+			{
 				name: 'Buttons',
 				to: {
 					name: 'component',
 					params: {
-						componentName: 'vv-button',
+						componentName: 'buttons',
 					},
 				},
 			},
