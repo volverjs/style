@@ -6,7 +6,7 @@ description: Utilities for controlling the width of an element's borders.
 	<table-helper property="border-width-spacer" title="Border width spacers" class="mb-lg"></table-helper>
     <div class="max-h-288 overflow-y-auto mb-32">
 		<table class="vv-table">
-			<thead class="sticky z-sticky top-0 bg-surface">
+			<thead class="sticky z-sticky top-0 bg-surface-1">
 				<tr>
 					<th>
 						Class

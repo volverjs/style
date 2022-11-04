@@ -38,14 +38,18 @@ description: Utilities for controlling how flex items shrink.
     <card-example>
 		<div class="container h-full rounded-md bg-surface-1 p-24">
 			<div class="flex flex-row justify-between gap-md border-b border-alpha-1 mb-24 pb-24">
-				<div class="w-100 shrink rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">1</span></div>
-				<div class="w-100 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">2</span></div>
-				<div class="w-100 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">3</span></div>
+				<div class="w-192 shrink rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">1</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">2</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">3</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">4</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">5</span></div>
 			</div>
 			<div class="flex flex-row justify-between gap-md">
-				<div class="w-100 shrink-0 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">1</span></div>
-				<div class="w-100 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">2</span></div>
-				<div class="w-100 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">3</span></div>
+				<div class="w-192 shrink-0 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">1</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">2</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">3</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">4</span></div>
+				<div class="w-192 rounded-md py-10 bg-info text-center"><span class="text-xs text-white font-semibold">5</span></div>
 			</div>
 		</div>
     </card-example>
