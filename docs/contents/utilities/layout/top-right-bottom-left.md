@@ -3,7 +3,7 @@ title: Top / Right / Bottom / Left
 description: Utilities for controlling the placement of positioned elements.
 ---
 <div>
-	<table-helper property="spacers" title="Spacing & Spacing-dynamic"></table-helper>
+	<table-helper property="spacers" title="Spacing & Spacing-dynamic" class="mb-lg"></table-helper>
     <div class="max-h-288 overflow-y-auto mb-32">
 		<table class="vv-table">
 			<thead class="sticky z-sticky top-0 bg-surface-1">

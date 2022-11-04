@@ -23,6 +23,7 @@
 			{{ title }}
 		</summary>
 		<table-utility
-			v-bind="{ property, 'has-property': false }"></table-utility>
+			v-bind="{ property, 'has-property': false }"
+			class="mb-lg"></table-utility>
 	</details>
 </template>

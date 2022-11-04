@@ -4,6 +4,7 @@
 	import CardExample from '../components/CardExample.vue'
 	import TableUtility from '../components/TableUtility.vue'
 	import TableHelper from '../components/TableHelper.vue'
+	import ColorHelper from '../components/ColorHelper.vue'
 
 	const route = useRoute()
 	const router = useRouter()
@@ -17,6 +18,7 @@
 				return VueComponentWith({
 					TableUtility,
 					TableHelper,
+					ColorHelper,
 					CardExample,
 				})
 			})

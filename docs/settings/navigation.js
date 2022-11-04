@@ -431,4 +431,464 @@ export const mainMenu = [
 			},
 		],
 	},
+	{
+		name: 'Spacing',
+		children: [
+			{
+				name: 'Padding',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'spacing',
+						utilityName: 'padding',
+					},
+				},
+			},
+			{
+				name: 'Margin',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'spacing',
+						utilityName: 'margin',
+					},
+				},
+			},
+		],
+	},
+	{
+		name: 'Sizing',
+		children: [
+			{
+				name: 'Width',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'width',
+					},
+				},
+			},
+			{
+				name: 'Min Width',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'min-width',
+					},
+				},
+			},
+			{
+				name: 'Max Width',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'max-width',
+					},
+				},
+			},
+			{
+				name: 'Height',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'height',
+					},
+				},
+			},
+			{
+				name: 'Min Height',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'min-height',
+					},
+				},
+			},
+			{
+				name: 'Max Height',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'sizing',
+						utilityName: 'max-height',
+					},
+				},
+			},
+		],
+	},
+	{
+		name: 'Typography',
+		children: [
+			{
+				name: 'Font Family',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-family',
+					},
+				},
+			},
+			{
+				name: 'Font Size',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-size',
+					},
+				},
+			},
+			{
+				name: 'Font Smoothing',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-smoothing',
+					},
+				},
+			},
+			{
+				name: 'Font Style',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-style',
+					},
+				},
+			},
+			{
+				name: 'Font Weight',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-weight',
+					},
+				},
+			},
+			{
+				name: 'Font Variant Numeric',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'font-variant-numeric',
+					},
+				},
+			},
+			{
+				name: 'Letter Spacing',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'letter-spacing',
+					},
+				},
+			},
+			{
+				name: 'Line Height',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'line-height',
+					},
+				},
+			},
+			{
+				name: 'List Style Type',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'list-style-type',
+					},
+				},
+			},
+			{
+				name: 'List Style Position',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'list-style-position',
+					},
+				},
+			},
+			{
+				name: 'Text Align',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-align',
+					},
+				},
+			},
+			{
+				name: 'Text Color',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-color',
+					},
+				},
+			},
+			{
+				name: 'Text Decoration Line',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-decoration-line',
+					},
+				},
+			},
+			{
+				name: 'Text Decoration Color',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-decoration-color',
+					},
+				},
+			},
+			{
+				name: 'Text Decoration Style',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-decoration-style',
+					},
+				},
+			},
+			{
+				name: 'Text Decoration Thickness',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-decoration-thickness',
+					},
+				},
+			},
+			{
+				name: 'Text Overflow',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-overflow',
+					},
+				},
+			},
+			{
+				name: 'Text Transform',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-transform',
+					},
+				},
+			},
+			{
+				name: 'Text Underline Offset',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'text-underline-offset',
+					},
+				},
+			},
+			{
+				name: 'Vertical Align',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'vertical-align',
+					},
+				},
+			},
+			{
+				name: 'Whitespace',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'whitespace',
+					},
+				},
+			},
+			{
+				name: 'Word Break',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'typography',
+						utilityName: 'word-break',
+					},
+				},
+			},
+		],
+	},
+	{
+		name: 'Backgrounds',
+		children: [
+			{
+				name: 'Background Attachment',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-attachment',
+					},
+				},
+			},
+			{
+				name: 'Background Clip',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-clip',
+					},
+				},
+			},
+			{
+				name: 'Background Color',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-color',
+					},
+				},
+			},
+			{
+				name: 'Background Origin',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-origin',
+					},
+				},
+			},
+			{
+				name: 'Background Position',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-position',
+					},
+				},
+			},
+			{
+				name: 'Background Repeat',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-repeat',
+					},
+				},
+			},
+			{
+				name: 'Background Size',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-size',
+					},
+				},
+			},
+			{
+				name: 'Background Image',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'backgrounds',
+						utilityName: 'background-image',
+					},
+				},
+			},
+		],
+	},
+	{
+		name: 'Borders',
+		children: [
+			{
+				name: 'Border Radius',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'borders',
+						utilityName: 'border-radius',
+					},
+				},
+			},
+			{
+				name: 'Border Width',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'borders',
+						utilityName: 'border-width',
+					},
+				},
+			},
+			{
+				name: 'Border Color',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'borders',
+						utilityName: 'border-color',
+					},
+				},
+			},
+			{
+				name: 'Border Style',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'borders',
+						utilityName: 'border-style',
+					},
+				},
+			},
+		],
+	},
+	{
+		name: 'Effects',
+		children: [
+			{
+				name: 'Mix Blend Mode',
+				to: {
+					name: 'utility',
+					params: {
+						utilityGroup: 'effects',
+						utilityName: 'mix-blend-mode',
+					},
+				},
+			},
+		],
+	},
 ]

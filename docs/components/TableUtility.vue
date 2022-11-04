@@ -28,6 +28,13 @@
 			type: Boolean,
 			default: true,
 		},
+		/**
+		 * Used to customize the table columns.
+		 */
+		customColumns: {
+			type: Object,
+			default: () => {},
+		},
 	})
 
 	const items = computed(() => {
