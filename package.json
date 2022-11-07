@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "vite --port 3000 --open",
     "build": "node ./scripts/build.js",
-    "styleguide": "vite-ssg build --base=./"
+    "styleguide": "vite-ssg build"
   },
   "files": [
     "src/*",
