@@ -23,7 +23,12 @@
 			{{ title }}
 		</summary>
 		<table-utility
-			v-bind="{ property, 'has-property': false }"
+			v-bind="{
+				property,
+				'has-property': false,
+				'label-first-col': 'Spacer size',
+				'label-second-col': 'Spacer value',
+			}"
 			class="mb-lg"></table-utility>
 	</details>
 </template>
