@@ -6,6 +6,7 @@ import App from '@docs/App.vue'
 import generatedRoutes from '~pages'
 import { mainMenu } from '@docs/settings/navigation'
 import { createRouter, createMemoryHistory } from 'vue-router'
+import { createHead } from '@vueuse/head'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -36,7 +37,12 @@ export function includedRoutes(paths, routes) {
 		return item.children.map(({ to }) => router.resolve(to).path)
 	})
 	return routes.reduce((acc, route) => {
-		if (!route.children) {
+		if (!route.component) {
+			route.children.forEach((child) => {
+				acc.push(
+					child.path ? `${route.path}/${child.path}` : route.path,
+				)
+			})
 			acc.push(route.path)
 		}
 		return acc

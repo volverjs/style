@@ -11,6 +11,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Layouts from 'vite-plugin-vue-layouts'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
+import generateSitemap from 'vite-ssg-sitemap'
 
 export default defineConfig({
 	plugins: [
@@ -64,7 +65,10 @@ export default defineConfig({
 		script: 'async',
 		formatting: 'minify',
 		onFinished() {
-			generateSitemap()
+			generateSitemap({
+				hostname: 'https://volverjs.github.io/style',
+				outDir: 'styleguide',
+			})
 		},
 	},
 })

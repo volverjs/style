@@ -1,3 +1,16 @@
+<script setup>
+	useHead({
+		title: 'Volver CSS Library',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui-vue and static webpages as well.',
+			},
+		],
+	})
+</script>
+
 <template>
 	<header
 		class="bg-surface-1 h-full"

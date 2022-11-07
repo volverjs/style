@@ -3,11 +3,15 @@
 
 	const route = useRoute()
 	const router = useRouter()
-	const metadata = ref({})
+	const title = ref('')
+	const description = ref('')
+	const uiVue = ref(false)
 	const MainContent = defineAsyncComponent(() =>
 		import(`../../contents/components/${route.params.name}/index.md`)
 			.then(({ attributes, VueComponentWith }) => {
-				metadata.value = attributes
+				title.value = attributes.title
+				description.value = attributes.description
+				uiVue.value = attributes.uiVue
 				return VueComponentWith({
 					CodeEditor,
 				})
@@ -16,6 +20,15 @@
 				router.replace({ name: 'index' })
 			}),
 	)
+	useHead({
+		title,
+		meta: [
+			{
+				name: 'description',
+				content: description,
+			},
+		],
+	})
 </script>
 
 <template>
@@ -25,19 +38,17 @@
 				Components
 			</span>
 			<h1
-				v-if="metadata.title"
+				v-if="title"
 				class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
-				{{ metadata.title }}
+				{{ title }}
 				<span
-					v-if="metadata.uiVue"
+					v-if="uiVue"
 					class="vv-badge vv-badge--small vv-badge--success ml-16 mb-12"
 					>ui-vue</span
 				>
 			</h1>
-			<p
-				v-if="metadata.description"
-				class="vv-text text-word-2 max-w-prose">
-				{{ metadata.description }}
+			<p v-if="description" class="vv-text text-word-2 max-w-prose">
+				{{ description }}
 			</p>
 		</header>
 		<MainContent />

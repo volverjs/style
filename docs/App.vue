@@ -1,10 +1,16 @@
 <script setup>
+	import { useHead } from '@vueuse/head'
+
 	const isThemeDark = useDark({
 		attribute: 'class',
 		valueDark: 'theme theme--dark',
 		valueLight: 'theme theme--light',
 	})
 	provide('isThemeDark', isThemeDark)
+	useHead({
+		titleTemplate: (title) =>
+			title ? `${title} | Volver.js` : 'Volver.js',
+	})
 </script>
 
 <template>

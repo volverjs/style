@@ -6,13 +6,17 @@
 
 	const route = useRoute()
 	const router = useRouter()
-	const metadata = ref({})
+	const title = ref('')
+	const description = ref('')
+	const breakpoints = ref(false)
 	const MainContent = defineAsyncComponent(() =>
 		import(
 			`../../../contents/utilities/${route.params.group}/${route.params.name}.md`
 		)
 			.then(({ attributes, VueComponentWith }) => {
-				metadata.value = attributes
+				title.value = attributes.title
+				description.value = attributes.description
+				breakpoints.value = attributes.breakpoints
 				return VueComponentWith({
 					TableUtility,
 					TableHelper,
@@ -24,6 +28,15 @@
 				router.replace({ name: 'index' })
 			}),
 	)
+	useHead({
+		title,
+		meta: [
+			{
+				name: 'description',
+				content: description,
+			},
+		],
+	})
 </script>
 
 <template>
@@ -34,19 +47,19 @@
 				{{ route.params.group }}
 			</span>
 			<h1
-				v-if="metadata.title"
+				v-if="title"
 				class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
-				{{ metadata.title }}
+				{{ title }}
 				<span
-					v-if="metadata.breakpoints"
+					v-if="breakpoints"
 					class="vv-badge vv-badge--small ml-16 mb-12"
 					>breakpoints</span
 				>
 			</h1>
 			<h2
-				v-if="metadata.description"
+				v-if="description"
 				class="vv-text vv-text--size-4 text-word-2 max-w-prose">
-				{{ metadata.description }}
+				{{ description }}
 			</h2>
 		</header>
 		<MainContent />
