@@ -2,7 +2,7 @@
 @import '../context';
 
 $component-name: map.get($components-names, vv-input-checkbox);
-$component-map: $vv-input-checkbox;
+$component-map: $dark-vv-input-checkbox;
 $props: true;
 
 @mixin theme-dark-vv-input-checkbox {

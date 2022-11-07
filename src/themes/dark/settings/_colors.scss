@@ -1,15 +1,15 @@
 @use 'sass:color';
 
-$color-scheme: dark !default;
-$color-brand: #1976d2 !default;
-$color-word: hsl(color.hue($color-brand) 15% 85%) !default;
-$color-surface: hsl(color.hue($color-brand) 10% 5%) !default;
-$color-alpha: hsla(0deg 0% 100% / 0%) !default;
+$dark-color-scheme: dark !default;
+$dark-color-brand: #1976d2 !default;
+$dark-color-word: hsl(color.hue($dark-color-brand) 15% 85%) !default;
+$dark-color-surface: hsl(color.hue($dark-color-brand) 10% 5%) !default;
+$dark-color-alpha: hsla(0deg 0% 100% / 0%) !default;
 
 // color map
-$colors: (
-	scheme: $color-scheme,
-	word: color-darken-map($color-word, 'word', $scale: 15%),
-	surface: color-lighten-map($color-surface, 'surface', $scale: 5%),
-	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
+$dark-colors: (
+	scheme: $dark-color-scheme,
+	word: color-darken-map($dark-color-word, 'word', $scale: 15%),
+	surface: color-lighten-map($dark-color-surface, 'surface', $scale: 5%),
+	alpha: color-alpha-map($dark-color-alpha, 'alpha', $steps: 5, $scale: 5%),
 ) !default;

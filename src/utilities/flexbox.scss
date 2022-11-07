@@ -5,18 +5,25 @@
 @include spread-map-into-utilities(
 	$map: $flex-direction,
 	$class: flex,
-	$attribute: flex-direction
+	$attribute: flex-direction,
+	$bps: $breakpoints
 );
 
 // flex wrap
 @include spread-map-into-utilities(
 	$map: $flex-wrap,
 	$class: flex,
-	$attribute: flex-wrap
+	$attribute: flex-wrap,
+	$bps: $breakpoints
 );
 
 // flex
-@include spread-map-into-utilities($map: $flex, $class: flex, $attribute: flex);
+@include spread-map-into-utilities(
+	$map: $flex,
+	$class: flex,
+	$attribute: flex,
+	$bps: $breakpoints
+);
 
 // flex grow
 @each $prefix, $prop in (grow: flex-grow, shrink: flex-shrink) {
@@ -37,7 +44,8 @@
 @include spread-map-into-utilities(
 	$map: $order,
 	$class: order,
-	$attribute: order
+	$attribute: order,
+	$bps: $breakpoints
 );
 
 // gap
@@ -90,7 +98,8 @@
 	@include spread-map-into-utilities(
 		$map: $justify-align-content,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints
 	);
 }
 
@@ -99,7 +108,8 @@
 	@include spread-map-into-utilities(
 		$map: $justify-align-items,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints
 	);
 }
 
@@ -108,6 +118,7 @@
 	@include spread-map-into-utilities(
 		$map: $justify-align-self,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints
 	);
 }

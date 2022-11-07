@@ -14,7 +14,7 @@ $vv-button: (
 	padding-block: 0.75ch,
 	padding-inline: 1.75ch,
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
-	transition: all 0.2s ease-in-out,
+	transition: all 0.3s ease-in-out,
 	will-change: all,
 	min-width: 0,
 	state: (
@@ -27,6 +27,10 @@ $vv-button: (
 			border-color: var(--color-brand-darken-1),
 		),
 		active: (
+			background: var(--color-brand-darken-2),
+			border-color: var(--color-brand-darken-2),
+		),
+		selected: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
 		),
@@ -71,6 +75,10 @@ $vv-button: (
 					background: var(--color-gray-darken-5),
 					border-color: var(--color-gray-darken-5),
 				),
+				selected: (
+					background: var(--color-gray-darken-5),
+					border-color: var(--color-gray-darken-5),
+				),
 			),
 		),
 		secondary: (
@@ -89,6 +97,9 @@ $vv-button: (
 				active: (
 					background: var(--color-gray-lighten-3),
 				),
+				selected: (
+					background: var(--color-gray-lighten-3),
+				),
 			),
 		),
 		danger: (
@@ -104,6 +115,10 @@ $vv-button: (
 					border-color: var(--color-danger-darken-1),
 				),
 				active: (
+					background: var(--color-danger-darken-2),
+					border-color: var(--color-danger-darken-2),
+				),
+				selected: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
 				),
@@ -125,9 +140,12 @@ $vv-button: (
 				active: (
 					background: var(--color-gray-lighten-4),
 				),
+				selected: (
+					background: var(--color-gray-lighten-4),
+				),
 			),
 		),
-		text: (
+		link: (
 			background: transparent,
 			border-color: var(--color-word),
 			border-width: var(--border-0),
@@ -163,6 +181,10 @@ $vv-button: (
 					border-color: var(--color-gray-lighten-4),
 					background: var(--color-gray-lighten-4),
 				),
+				selected: (
+					border-color: var(--color-gray-lighten-4),
+					background: var(--color-gray-lighten-4),
+				),
 			),
 		),
 		static-dark: (
@@ -179,6 +201,10 @@ $vv-button: (
 					background: var(--color-gray-darken-4),
 				),
 				active: (
+					border-color: var(--color-gray-darken-3),
+					background: var(--color-gray-darken-3),
+				),
+				selected: (
 					border-color: var(--color-gray-darken-3),
 					background: var(--color-gray-darken-3),
 				),
