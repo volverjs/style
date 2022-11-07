@@ -15,7 +15,12 @@ export const createApp = ViteSSG(
 	// the root component
 	App,
 	// vue-router options
-	{ routes, linkActiveClass: 'selected', linkExactActiveClass: 'current' },
+	{
+		routes,
+		linkActiveClass: 'selected',
+		linkExactActiveClass: 'current',
+		base: import.meta.env.BASE_URL,
+	},
 	// function to have custom setups
 	({ app, isClient }) => {
 		if (isClient) {
@@ -32,7 +37,11 @@ export const createApp = ViteSSG(
 )
 
 export function includedRoutes(paths, routes) {
-	const router = createRouter({ routes, history: createMemoryHistory() })
+	const router = createRouter({
+		routes,
+		history: createMemoryHistory(),
+		base: import.meta.env.BASE_URL,
+	})
 	const mainMenuRoutes = Object.values(mainMenu).flatMap((item) => {
 		return item.children.map(({ to }) => router.resolve(to).path)
 	})

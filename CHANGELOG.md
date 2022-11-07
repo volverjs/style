@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.10] - 2022-11-07
+
+### Changed
+
+-   base url in `vue-router` configuration
+
 ## [0.1.2-beta.9] - 2022-11-07
 
 ### Changed
@@ -59,6 +65,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.10]: https://github.com/volverjs/style/compare/v0.1.2-beta.9...v0.1.2-beta.10
 [0.1.2-beta.9]: https://github.com/volverjs/style/compare/v0.1.2-beta.8...v0.1.2-beta.9
 [0.1.2-beta.8]: https://github.com/volverjs/style/compare/v0.1.2-beta.7...v0.1.2-beta.8
 [0.1.2-beta.7]: https://github.com/volverjs/style/compare/v0.1.2-beta.6...v0.1.2-beta.7
