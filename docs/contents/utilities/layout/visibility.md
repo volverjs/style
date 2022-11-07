@@ -5,7 +5,7 @@ breakpoints: true
 ---
 <div>
     <table-utility property="visibility" class="mb-lg"></table-utility>
-	 <details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
+	<details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
 		<summary class="vv-accordion__summary flex items-center" aria-controls="#accordion-item-1" aria-expanded="false">
 			<iconify-icon icon="akar-icons:info" class="mr-sm"></iconify-icon>
 			Accept breakpoint utilities
