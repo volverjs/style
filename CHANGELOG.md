@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.8] - 2022-11-07
+
+### Added
+
+-   new docs site
+-   selected state for all `vv-button` variants
+
+### Changed
+
+-   `vv-button--text` is now `vv-button--link`
+
 ## [0.1.2-beta.7] - 2022-10-26
 
 ### Added
@@ -42,6 +53,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.8]: https://github.com/volverjs/style/compare/v0.1.2-beta.7...v0.1.2-beta.8
 [0.1.2-beta.7]: https://github.com/volverjs/style/compare/v0.1.2-beta.6...v0.1.2-beta.7
 [0.1.2-beta.6]: https://github.com/volverjs/style/compare/v0.1.2-beta.5...v0.1.2-beta.6
 [0.1.1]: https://github.com/volverjs/style/compare/v0.1.0...v0.1.1
