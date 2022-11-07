@@ -1,4 +1,6 @@
 ---
+index: 4
+label: Preflight
 title: Default Style without Classes
 description: Use native HTML tags semantic keeping the code simple. The perfect companion for Markdown generated templates, WYSIWYG or rich text editors.
 ---

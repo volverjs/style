@@ -1,4 +1,6 @@
 ---
+index: 3
+label: Theming
 title: Multiple Colors 
 description: Volver offer color themes for components and utilities based on user color scheme preferences or design requirements. 
 ---

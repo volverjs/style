@@ -1,30 +1,44 @@
+import { ViteSSG } from 'vite-ssg'
+import { setupLayouts } from 'virtual:generated-layouts'
 import { Icon as IconifyIcon } from '@iconify/vue'
 import prismjs from 'prismjs'
-import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
-import App from './App.vue'
-import routes from './routes'
+import App from '@docs/App.vue'
+import generatedRoutes from '~pages'
+import { mainMenu } from '@docs/settings/navigation'
+import { createRouter, createMemoryHistory } from 'vue-router'
 
-// fix prismjs error
-window.Prism = prismjs
+const routes = setupLayouts(generatedRoutes)
 
-// create app
-const app = createApp(App)
+// https://github.com/antfu/vite-ssg
+export const createApp = ViteSSG(
+	// the root component
+	App,
+	// vue-router options
+	{ routes, linkActiveClass: 'selected', linkExactActiveClass: 'current' },
+	// function to have custom setups
+	({ app, isClient }) => {
+		if (isClient) {
+			// fix prismjs error
+			window.Prism = prismjs
+		}
 
-// add router
-const router = createRouter({
-	history: createWebHashHistory(),
-	routes,
-	linkActiveClass: 'selected',
-	linkExactActiveClass: 'current',
-})
-app.use(router)
+		// enable devtools in development
+		app.config.devtools = import.meta.env.DEV
 
-// enable devtools in development
-app.config.devtools = import.meta.env.DEV
+		// add icons
+		app.component('IconifyIcon', IconifyIcon)
+	},
+)
 
-// add icons
-app.component('IconifyIcon', IconifyIcon)
-
-// mount app
-app.mount('#app')
+export function includedRoutes(paths, routes) {
+	const router = createRouter({ routes, history: createMemoryHistory() })
+	const mainMenuRoutes = Object.values(mainMenu).flatMap((item) => {
+		return item.children.map(({ to }) => router.resolve(to).path)
+	})
+	return routes.reduce((acc, route) => {
+		if (!route.children) {
+			acc.push(route.path)
+		}
+		return acc
+	}, mainMenuRoutes)
+}

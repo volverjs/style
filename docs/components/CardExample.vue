@@ -1,6 +1,4 @@
 <script setup>
-	import { inject, ref, watch } from 'vue'
-
 	defineProps({
 		title: {
 			type: String,

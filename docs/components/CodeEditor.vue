@@ -1,8 +1,6 @@
 <script setup>
+	import CodeLayout from './CodeLayout.vue'
 	import { VueLive } from 'vue-live'
-	import { computedAsync, useClipboard } from '@vueuse/core'
-	import { inject, provide, ref, watch } from 'vue'
-	import CodeLayoutVue from './CodeLayout.vue'
 
 	// props
 	const props = defineProps({
@@ -125,7 +123,7 @@
 		<VueLive
 			v-if="editedCode"
 			:code="editedCode"
-			:layout="CodeLayoutVue"
+			:layout="CodeLayout"
 			@change="onChange" />
 	</div>
 </template>

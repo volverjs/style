@@ -1,6 +1,4 @@
 <script setup>
-	import TableUtility from './TableUtility.vue'
-
 	const props = defineProps({
 		property: {
 			type: String,

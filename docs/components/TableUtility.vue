@@ -1,7 +1,4 @@
 <script setup>
-	import { computed } from 'vue'
-	import icssExports from '../utils/icssExports'
-
 	const props = defineProps({
 		prefix: {
 			type: String,

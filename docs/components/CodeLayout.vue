@@ -1,6 +1,4 @@
 <script setup>
-	import { inject } from 'vue'
-
 	const showSource = inject('showSource')
 	const isPreviewInDarkMode = inject('isPreviewInDarkMode')
 	const metadata = inject('metadata')

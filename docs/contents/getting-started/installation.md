@@ -1,4 +1,6 @@
 ---
+index: 0
+label: Installation
 title: Getting Started with Volver
 description: 'Volver Style is a JavaScript agnostic responsive CSS components and utility library. There are several ways you can use it in your project: package managers, CDN or manual install.'
 ---

@@ -1,7 +1,4 @@
 <script setup>
-	import { computed } from 'vue'
-	import icssExports from '../utils/icssExports'
-
 	const colors = computed(() => {
 		let exports = icssExports['colors'] ?? []
 		return Object.keys(exports)

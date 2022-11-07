@@ -1,6 +1,7 @@
 ---
 title: Aspect Ratio
 description: Utilities for controlling the aspect ratio of an element.
+breakpoints: true
 ---
 <div>
     <table-utility prefix="aspect" property="aspect-ratio" class="mb-lg"></table-utility>

@@ -1,4 +1,6 @@
 ---
+index: 1
+label: Customization
 title: Make your own Style
 description: 'Volver Style is made to be hightly configurable and customizable. You can use both CSS custom properties or SCSS variables maps.'
 ---

@@ -1,7 +1,4 @@
 <script setup>
-	import { useDark } from '@vueuse/core'
-	import { provide } from 'vue'
-
 	const isThemeDark = useDark({
 		attribute: 'class',
 		valueDark: 'theme theme--dark',
@@ -11,7 +8,7 @@
 </script>
 
 <template>
-	<router-view />
+	<RouterView />
 </template>
 
 <style lang="scss">
