@@ -2,6 +2,8 @@
 	const route = useRoute()
 	const isThemeDark = inject('isThemeDark')
 	const toggleDark = useToggle(isThemeDark)
+	/* eslint-disable-next-line */
+	const appVersion = __APP_VERSION__
 </script>
 
 <template>
@@ -23,7 +25,10 @@
 					class="w-26 block mr-10" />
 				<span class="text-18 font-semibold">volverjs/style</span>
 			</RouterLink>
-			<div class="vv-button-group ml-auto">
+			<span class="text-xs text-word-4 px-sm ml-auto">
+				v{{ appVersion }}
+			</span>
+			<div class="vv-button-group">
 				<button
 					type="button"
 					class="vv-button vv-button--action-quiet"

@@ -17,6 +17,13 @@ $vv-textarea: (
 			overflow: var(--input-label-overflow),
 			max-width: var(--input-label-max-width),
 		),
+		limit: (
+			position: absolute,
+			right: var(--input-gap),
+			bottom: var(--input-gap),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+		),
 		wrapper: (
 			position: relative,
 			display: flex,
@@ -66,6 +73,7 @@ $vv-textarea: (
 			[padding]: var(--input-padding-top) var(--input-padding-right)
 				var(--input-padding-bottom) var(--input-padding-left),
 			min-height: var(--spacing-50),
+			overflow: auto,
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
@@ -122,6 +130,13 @@ $vv-textarea: (
 		icon-right: (
 			--input-padding-right: calc(var(--spacing-sm) * 2 + 1em),
 		),
+		resizable: (
+			element: (
+				input: (
+					resize: vertical,
+				),
+			),
+		),
 		valid: (
 			element: (
 				wrapper: (
@@ -133,6 +148,9 @@ $vv-textarea: (
 					),
 				),
 				hint: (
+					color: var(--input-valid-color),
+				),
+				limit: (
 					color: var(--input-valid-color),
 				),
 				icon-right: (
@@ -151,6 +169,9 @@ $vv-textarea: (
 					),
 				),
 				hint: (
+					color: var(--input-invalid-color),
+				),
+				limit: (
 					color: var(--input-invalid-color),
 				),
 				icon-right: (

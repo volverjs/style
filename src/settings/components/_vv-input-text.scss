@@ -166,6 +166,11 @@ $vv-input-text: (
 			overflow: var(--input-hint-overflow),
 			max-width: var(--input-hint-max-width),
 		),
+		limit: (
+			[padding-right]: var(--input-padding-right),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+		),
 	),
 	modifier: (
 		icon-left: (
@@ -173,6 +178,11 @@ $vv-input-text: (
 		),
 		icon-right: (
 			--input-padding-right: calc(var(--spacing-sm) * 2 + 1em),
+			element: (
+				limit: (
+					margin-left: calc((var(--spacing-sm) + 1em) * -1),
+				),
+			),
 		),
 		valid: (
 			element: (
@@ -185,6 +195,9 @@ $vv-input-text: (
 					),
 				),
 				hint: (
+					color: var(--input-valid-color),
+				),
+				limit: (
 					color: var(--input-valid-color),
 				),
 				icon-right: (
@@ -203,6 +216,9 @@ $vv-input-text: (
 					),
 				),
 				hint: (
+					color: var(--input-invalid-color),
+				),
+				limit: (
 					color: var(--input-invalid-color),
 				),
 				icon-right: (

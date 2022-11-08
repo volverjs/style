@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.12] - 2022-11-08
+
+### Added
+
+-   limit element for **vv-textarea** component
+-   limit element for **vv-input-text** component
+
 ## [0.1.2-beta.11] - 2022-11-08
 
 ### Added
@@ -71,6 +78,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.12]: https://github.com/volverjs/style/compare/v0.1.2-beta.11...v0.1.2-beta.12
 [0.1.2-beta.11]: https://github.com/volverjs/style/compare/v0.1.2-beta.10...v0.1.2-beta.11
 [0.1.2-beta.10]: https://github.com/volverjs/style/compare/v0.1.2-beta.9...v0.1.2-beta.10
 [0.1.2-beta.9]: https://github.com/volverjs/style/compare/v0.1.2-beta.8...v0.1.2-beta.9
