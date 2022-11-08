@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.11] - 2022-11-08
+
+### Added
+
+-   new **vv-alert** component
+
 ## [0.1.2-beta.10] - 2022-11-07
 
 ### Changed
@@ -65,6 +71,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.11]: https://github.com/volverjs/style/compare/v0.1.2-beta.10...v0.1.2-beta.11
 [0.1.2-beta.10]: https://github.com/volverjs/style/compare/v0.1.2-beta.9...v0.1.2-beta.10
 [0.1.2-beta.9]: https://github.com/volverjs/style/compare/v0.1.2-beta.8...v0.1.2-beta.9
 [0.1.2-beta.8]: https://github.com/volverjs/style/compare/v0.1.2-beta.7...v0.1.2-beta.8

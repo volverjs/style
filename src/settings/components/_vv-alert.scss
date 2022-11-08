@@ -1,0 +1,148 @@
+$vv-alert: (
+	--alert-padding-top: var(--spacing-md),
+	--alert-padding-right: var(--spacing-md),
+	--alert-padding-bottom: var(--spacing-md),
+	--alert-padding-left: var(--spacing-md),
+	[padding-top]: var(--alert-padding-top),
+	[padding-right]: var(--alert-padding-right),
+	[padding-bottom]: var(--alert-padding-bottom),
+	[padding-left]: var(--alert-padding-left),
+	background-color: var(--color-surface-2),
+	border-color: var(--color-surface-4),
+	border-width: var(--border),
+	border-style: solid,
+	border-radius: var(--rounded),
+	position: relative,
+	modifier: (
+		success: (
+			border-color: var(--color-success-lighten-5),
+			background-color:
+				hsl(
+					var(--color-success-hue) var(--color-success-saturation) 90%
+				),
+			element: (
+				icon: (
+					color: var(--color-success),
+				),
+				title: (
+					color: var(--color-success),
+				),
+			),
+		),
+		danger: (
+			border-color: var(--color-danger-lighten-5),
+			background-color:
+				hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
+			element: (
+				icon: (
+					color: var(--color-danger-darken-1),
+				),
+				title: (
+					color: var(--color-danger-darken-1),
+				),
+			),
+		),
+		warning: (
+			border-color: var(--color-warning-lighten-5),
+			background-color:
+				hsl(
+					var(--color-warning-hue) var(--color-warning-saturation) 90%
+				),
+			element: (
+				icon: (
+					color: var(--color-warning-darken-1),
+				),
+				title: (
+					color: var(--color-warning-darken-1),
+				),
+			),
+		),
+		info: (
+			border-color: var(--color-info-lighten-5),
+			background-color:
+				hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
+			element: (
+				icon: (
+					color: var(--color-info-darken-1),
+				),
+				title: (
+					color: var(--color-info-darken-1),
+				),
+			),
+		),
+		accent: (
+			border-color: var(--color-accent-lighten-5),
+			background-color:
+				hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
+			element: (
+				icon: (
+					color: var(--color-accent-darken-1),
+				),
+				title: (
+					color: var(--color-accent-darken-1),
+				),
+			),
+		),
+		brand: (
+			--alert-color: var(--color-brand-darken-1),
+			border-color: var(--color-brand-lighten-5),
+			background-color:
+				hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
+			element: (
+				icon: (
+					color: var(--color-brand-darken-1),
+				),
+				title: (
+					color: var(--color-brand-darken-1),
+				),
+			),
+		),
+		callout: (
+			border-radius: var(--rounded-none),
+			border-width: 0 0 0 var(--spacing-4),
+		),
+		icon: (
+			[padding-left]: calc(var(--alert-padding-left) * 2 + 1.2em),
+			element: (
+				icon: (
+					position: absolute,
+					[left]: var(--alert-padding-left),
+				),
+			),
+		),
+		action: (
+			[padding-right]: calc(var(--alert-padding-right) * 2 + 1.2em),
+			element: (
+				action: (
+					position: absolute,
+					[right]: var(--alert-padding-right),
+				),
+			),
+		),
+	),
+	element: (
+		icon: (
+			_alias: '> :where(svg, [data-icon])',
+			inline-size: 1.2em,
+			block-size: 1.2em,
+		),
+		action: (
+			font-size: 1.2em,
+			inline-size: 1em,
+			block-size: 1em,
+			cursor: pointer,
+		),
+		title: (
+			display: block,
+			margin-bottom: var(--spacing-sm),
+			font-weight: var(--font-bold),
+			text-transform: uppercase,
+		),
+		separator: (
+			_alias: '> hr',
+			height: var(--border),
+			background-color: var(--color-alpha-2),
+			margin-block: var(--spacing-sm),
+		),
+	),
+) !default;

@@ -832,6 +832,7 @@
 	$breakpoints-key: 'breakpoint',
 	$props: true,
 	$zero-specificity: true,
+	$custom-props: false,
 	$custom-block: false,
 	$custom-elements: false,
 	$custom-modifiers: false,
@@ -842,13 +843,15 @@
 		$selector: '.' + $block;
 
 		// custom props
-		@if $props {
-			:where(:host, :root, .theme) {
-				@include spread-map-into-props(
-					$map: $map,
-					$prefix: $block,
-					$deep: true
-				);
+		@if not $custom-props {
+			@if $props {
+				:where(:host, :root, .theme) {
+					@include spread-map-into-props(
+						$map: $map,
+						$prefix: $block,
+						$deep: true
+					);
+				}
 			}
 		}
 

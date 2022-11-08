@@ -1,0 +1,12 @@
+@use 'sass:map';
+@import '../context';
+
+$component-name: map.get($components-names, vv-alert);
+$component-map: $vv-alert;
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-compoenents
+);

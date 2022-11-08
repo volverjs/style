@@ -3,13 +3,11 @@
 
 $component-name: map.get($components-names, vv-button);
 $component-map: $dark-vv-button;
-$props: true;
 
 @mixin theme-dark-vv-button {
 	@include spread-map-into-props(
 		$map: $component-map,
-		$prefix: $component-name,
-		$deep: $props
+		$prefix: $component-name
 	);
 }
 
