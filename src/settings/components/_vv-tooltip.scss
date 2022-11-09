@@ -1,0 +1,77 @@
+$vv-tooltip: (
+	position: relative,
+	display: inline-flex,
+	align-items: center,
+	element: (
+		content: (
+			opacity: 0,
+			position: absolute,
+			z-index: var(--z-tooltip),
+			display: block,
+			min-width: var(--spacing-160),
+			border-radius: var(--rounded-md),
+			border-width: 2px,
+			border-style: solid,
+			border-color: var(--color-gray-darken-4),
+			padding: var(--spacing-4) var(--spacing-sm),
+			margin: 0 0 0 var(--spacing-xs),
+			background: var(--color-gray-darken-4),
+			font-size: var(--text-12),
+			font-weight: var(--font-normal),
+			color: var(--color-gray-lighten-5),
+			text-align: center,
+			inset-inline: 100% auto,
+			inset-block: auto,
+			filter: drop-shadow(0 0 0.2rem var(--color-gray-darken-4)),
+		),
+	),
+	modifier: (
+		top: (
+			element: (
+				content: (
+					margin: 0 0 var(--spacing-xs) 0,
+					inset-inline: auto,
+					inset-block: auto 100%,
+				),
+			),
+		),
+		right: (
+			element: (
+				content: (
+					margin: 0 0 0 var(--spacing-xs),
+					inset-inline: 100% auto,
+					inset-block: auto,
+				),
+			),
+		),
+		bottom: (
+			element: (
+				content: (
+					margin: var(--spacing-xs) 0 0 0,
+					inset-inline: auto,
+					inset-block: 100% auto,
+				),
+			),
+		),
+		left: (
+			element: (
+				content: (
+					margin: 0 var(--spacing-xs) 0 0,
+					inset-inline: auto 100%,
+					inset-block: auto,
+				),
+			),
+		),
+	),
+	state: (
+		hover: (
+			element: (
+				content: (
+					opacity: 1,
+					will-change: opacity,
+					transition: opacity 0.3s ease-in-out,
+				),
+			),
+		),
+	),
+) !default;
