@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.15] - 2022-11-09
+
+### Added
+
+-   new **vv-toast** component
+
+### Changed
+
+-   docs inner navigation
+-   **vv-alert** elements structure
+
+## [0.1.2-beta.14] - 2022-11-09
+
+### Added
+
+-   add _arrow_ to **vv-tooltip** component
+
+## [0.1.2-beta.13] - 2022-11-09
+
+### Added
+
+-   new **vv-tooltip** component
+
 ## [0.1.2-beta.12] - 2022-11-08
 
 ### Added
@@ -78,6 +101,9 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.15]: https://github.com/volverjs/style/compare/v0.1.2-beta.14...v0.1.2-beta.15
+[0.1.2-beta.14]: https://github.com/volverjs/style/compare/v0.1.2-beta.13...v0.1.2-beta.14
+[0.1.2-beta.13]: https://github.com/volverjs/style/compare/v0.1.2-beta.12...v0.1.2-beta.13
 [0.1.2-beta.12]: https://github.com/volverjs/style/compare/v0.1.2-beta.11...v0.1.2-beta.12
 [0.1.2-beta.11]: https://github.com/volverjs/style/compare/v0.1.2-beta.10...v0.1.2-beta.11
 [0.1.2-beta.10]: https://github.com/volverjs/style/compare/v0.1.2-beta.9...v0.1.2-beta.10

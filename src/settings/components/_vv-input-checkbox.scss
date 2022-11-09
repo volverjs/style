@@ -76,6 +76,14 @@ $vv-input-checkbox: (
 						active: (
 							background-color: var(--color-word-3),
 						),
+						indeterminate: (
+							background-image: none,
+							pseudo: (
+								after: (
+									transform: translateX(50%),
+								),
+							),
+						),
 						checked: (
 							background-image: none,
 							background-color: var(--color-brand),

@@ -19,7 +19,8 @@ $vv-nav: (
 		),
 		item-label: (
 			_alias: 'li > a',
-			display: block,
+			display: flex,
+			align-items: center,
 			will-change: background-color color,
 			transition: all 0.3s ease-in-out,
 			border-radius: var(--rounded-md),
@@ -52,6 +53,31 @@ $vv-nav: (
 			font-size: 0.9em,
 			display: flex,
 			flex-direction: column,
+		),
+		border: (
+			--nav-item-padding: var(--spacing-8) var(--spacing-12),
+			font-size: var(--text-12),
+			display: flex,
+			flex-direction: column,
+			border-left: var(--border) solid var(--color-surface-3),
+			element: (
+				heading-label: (
+					text-transform: uppercase,
+				),
+				item-label: (
+					margin-left: calc(-1 * var(--border)),
+					border-left: var(--border) solid var(--color-surface-3),
+					border-radius: 0,
+					state: (
+						hover: (
+							border-color: var(--color-brand),
+						),
+						selected: (
+							border-color: var(--color-brand),
+						),
+					),
+				),
+			),
 		),
 	),
 ) !default;

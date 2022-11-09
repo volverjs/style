@@ -10,13 +10,13 @@ specifiers:
   eslint-plugin-vue: ^9.7.0
   glob: ^8.0.3
   icss-utils: ^5.1.0
+  markdown-it-anchor: ^8.6.5
   markdown-it-prism: ^2.3.0
   postcss: ^8.4.18
   postcss-html: ^1.5.0
   postcss-preset-env: ^7.8.2
   prism-themes: ^1.9.0
   prismjs: 1.29.0
-  promise: ^8.3.0
   sass: ^1.56.0
   stylelint: ^14.14.1
   stylelint-config-prettier: ^9.0.3
@@ -49,13 +49,13 @@ devDependencies:
   eslint-plugin-vue: 9.7.0_eslint@8.27.0
   glob: 8.0.3
   icss-utils: 5.1.0_postcss@8.4.18
+  markdown-it-anchor: 8.6.5
   markdown-it-prism: 2.3.0
   postcss: 8.4.18
   postcss-html: 1.5.0
   postcss-preset-env: 7.8.2_postcss@8.4.18
   prism-themes: 1.9.0
   prismjs: 1.29.0
-  promise: 8.3.0
   sass: 1.56.0
   stylelint: 14.14.1
   stylelint-config-prettier: 9.0.3_stylelint@14.14.1
@@ -739,10 +739,6 @@ packages:
   /arrify/1.0.1:
     resolution: {integrity: sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==}
     engines: {node: '>=0.10.0'}
-    dev: true
-
-  /asap/2.0.6:
-    resolution: {integrity: sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==}
     dev: true
 
   /astral-regex/2.0.0:
@@ -2672,6 +2668,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /markdown-it-anchor/8.6.5:
+    resolution: {integrity: sha512-PI1qEHHkTNWT+X6Ip9w+paonfIQ+QZP9sCeMYi47oqhH+EsW8CrJ8J7CzV19QVOj6il8ATGbK2nTECj22ZHGvQ==}
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: '*'
+    dev: true
+
   /markdown-it-prism/2.3.0:
     resolution: {integrity: sha512-ePtHY80gZyeje4bn3R3SL0jpd1C9HFaYffJW2Ma0YD+tspqa2v9TuVwUyFwboFu4jnFNcO8oPQROgbcYJbmBvw==}
     engines: {node: '>=6.0.0'}
@@ -3422,12 +3425,6 @@ packages:
   /prismjs/1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
     engines: {node: '>=6'}
-    dev: true
-
-  /promise/8.3.0:
-    resolution: {integrity: sha512-rZPNPKTOYVNEEKFaq1HqTgOwZD+4/YHS5ukLzQCypkj+OkYx7iv0mA91lJlpPPZ8vMau3IIGj5Qlwrx+8iiSmg==}
-    dependencies:
-      asap: 2.0.6
     dev: true
 
   /psl/1.9.0:

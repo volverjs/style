@@ -40,29 +40,32 @@
 </script>
 
 <template>
-	<div class="p-16">
-		<header class="my-lg">
-			<span
-				class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
-				{{ route.params.group }}
-			</span>
-			<h1
-				v-if="title"
-				class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
-				{{ title }}
+	<div class="lg:w-10/12 xl:w-9/12 xxl:w-7/12 pr-3/12">
+		<div class="p-16">
+			<header class="my-lg">
 				<span
-					v-if="breakpoints"
-					class="vv-badge vv-badge--small ml-16 mb-12"
-					>breakpoints</span
-				>
-			</h1>
-			<h2
-				v-if="description"
-				class="vv-text vv-text--size-4 text-word-2 max-w-prose">
-				{{ description }}
-			</h2>
-		</header>
-		<MainContent />
+					class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
+					{{ route.params.group }}
+				</span>
+				<h1
+					v-if="title"
+					class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
+					{{ title }}
+					<span
+						v-if="breakpoints"
+						class="vv-badge vv-badge--small ml-16 mb-12"
+						>breakpoints</span
+					>
+				</h1>
+				<h2
+					v-if="description"
+					class="vv-text vv-text--size-4 text-word-2 max-w-prose">
+					{{ description }}
+				</h2>
+			</header>
+			<MainContent />
+		</div>
+		<FooterNotes />
 	</div>
 </template>
 

@@ -1,0 +1,128 @@
+$vv-toast: (
+	position: relative,
+	display: flex,
+	flex-direction: column,
+	overflow: hidden,
+	border-radius: var(--rounded),
+	background-color: var(--color-surface),
+	box-shadow: var(--shadow-lg),
+	color: var(--color-word-2),
+	backdrop-filter: none,
+	border-width: var(--border),
+	border-style: solid,
+	border-color: var(--color-gray),
+	width: clamp(15vw, 20rem, 80vw),
+	element: (
+		header: (
+			display: flex,
+			overflow: hidden,
+			align-items: center,
+			padding: var(--spacing-xs),
+			color: var(--color-white),
+			background-color: var(--color-gray),
+			font-size: var(--text-16),
+		),
+		content: (
+			padding: var(--spacing-xs),
+			background-color: var(--color-surface-2),
+			flex-grow: 1,
+			min-height: 0,
+			overflow: auto,
+			font-size: var(--text-14),
+		),
+		close: (
+			position: absolute,
+			right: var(--spacing-xs),
+			inline-size: 1.1em,
+			block-size: 1.1em,
+			cursor: pointer,
+			border-radius: var(--rounded),
+			background-image: var(--bg-close),
+			background-color: var(--color-surface-2),
+			background-position: center,
+			background-size: 70% auto,
+			background-repeat: no-repeat,
+		),
+	),
+	modifier: (
+		close: (
+			element: (
+				header: (
+					padding-right: calc(var(--spacing-xs) * 2 + 1.1em),
+				),
+			),
+		),
+		success: (
+			border-color: var(--color-success),
+			element: (
+				header: (
+					background-color: var(--color-success),
+				),
+				content: (
+					border-color: var(--color-success),
+					background-color: var(--color-surface-success),
+				),
+			),
+		),
+		danger: (
+			border-color: var(--color-danger),
+			element: (
+				header: (
+					background-color: var(--color-danger),
+				),
+				content: (
+					border-color: var(--color-danger),
+					background-color: var(--color-surface-danger),
+				),
+			),
+		),
+		warning: (
+			border-color: var(--color-warning-darken-1),
+			element: (
+				header: (
+					background-color: var(--color-warning-darken-1),
+				),
+				content: (
+					border-color: var(--color-warning),
+					background-color: var(--color-surface-warning),
+				),
+			),
+		),
+		info: (
+			border-color: var(--color-info-darken-1),
+			element: (
+				header: (
+					background-color: var(--color-info-darken-1),
+				),
+				content: (
+					border-color: var(--color-info),
+					background-color: var(--color-surface-info),
+				),
+			),
+		),
+		accent: (
+			border-color: var(--color-accent),
+			element: (
+				header: (
+					background-color: var(--color-accent),
+				),
+				content: (
+					border-color: var(--color-accent),
+					background-color: var(--color-surface-accent),
+				),
+			),
+		),
+		brand: (
+			border-color: var(--color-brand),
+			element: (
+				header: (
+					background-color: var(--color-brand),
+				),
+				content: (
+					border-color: var(--color-brand),
+					background-color: var(--color-surface-brand),
+				),
+			),
+		),
+	),
+) !default;

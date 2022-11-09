@@ -20,6 +20,7 @@ function getUtilitiesGroup(group) {
 			const name = key.split('/').pop().split('.').shift()
 			acc.push({
 				name: utilities[key].title,
+				isNew: utilities[key].isNew ?? false,
 				to: {
 					name: 'utilities-group-name',
 					params: { group, name },
@@ -39,6 +40,7 @@ export const mainMenu = [
 				return {
 					index: gettingStarted[key].index,
 					name: gettingStarted[key].label,
+					isNew: gettingStarted[key].isNew,
 					to: {
 						name: 'getting-started-name',
 						params: { name },
@@ -53,6 +55,7 @@ export const mainMenu = [
 			const name = key.split('/').slice(-2, -1).pop()
 			return {
 				name: components[key].title,
+				isNew: components[key].isNew ?? false,
 				to: {
 					name: 'components-name',
 					params: { name },

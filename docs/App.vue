@@ -59,6 +59,31 @@
 		hyphens: none;
 	}
 
+	.preflight {
+		:where(h1, h2, h3, h4, h5, h6) {
+			position: relative;
+			scroll-margin-top: 3rem;
+
+			.header-anchor {
+				color: var(--color-brand);
+				text-decoration: none;
+
+				@include media-breakpoint-up('md') {
+					position: absolute;
+					left: -1.5ch;
+					opacity: 0;
+					transition: opacity 0.3s ease-in-out;
+				}
+			}
+
+			&:hover {
+				.header-anchor {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
 	section {
 		& > ::-webkit-scrollbar {
 			width: 5px;

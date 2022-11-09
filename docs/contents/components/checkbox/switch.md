@@ -2,6 +2,24 @@
 title: Switch
 wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
 ---
+
+<script>
+    import { ref, onMounted } from 'vue'
+    export default {
+        setup() {
+            const input = ref(null)
+
+            onMounted(() => {
+                input.value.indeterminate = true
+            })
+
+            return {
+                input
+            }
+        },
+    }
+</script>
+
 <template>
        <label class="vv-input-checkbox 
                      vv-input-checkbox--switch"
@@ -23,6 +41,16 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               value="switch-option-checked" 
               checked="checked" />
        Checked
+       </label>
+       <label class="vv-input-checkbox
+                     vv-input-checkbox--switch" 
+              for="switch-option-indeterminate">
+              <input id="switch-option-indeterminate" 
+                     ref="input" 
+                     type="checkbox" 
+                     name="switch-option-indeterminate" 
+                     value="switch-option-indeterminate" />
+              Indeterminate
        </label>
        <label class="vv-input-checkbox 
                      vv-input-checkbox--switch"

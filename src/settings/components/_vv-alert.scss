@@ -1,25 +1,59 @@
 $vv-alert: (
-	--alert-padding-top: var(--spacing-md),
-	--alert-padding-right: var(--spacing-md),
-	--alert-padding-bottom: var(--spacing-md),
-	--alert-padding-left: var(--spacing-md),
-	[padding-top]: var(--alert-padding-top),
-	[padding-right]: var(--alert-padding-right),
-	[padding-bottom]: var(--alert-padding-bottom),
-	[padding-left]: var(--alert-padding-left),
+	display: flex,
+	min-width: 0,
+	overflow: hidden,
+	align-items: center,
+	padding: var(--spacing-md),
 	background-color: var(--color-surface-2),
-	border-color: var(--color-surface-4),
+	border-color: var(--color-gray-lighten-4),
 	border-width: var(--border),
 	border-style: solid,
 	border-radius: var(--rounded),
 	position: relative,
+	element: (
+		icon: (
+			_alias: '> :where(svg, [data-icon])',
+			position: absolute,
+			left: var(--spacing-md),
+			inline-size: 1.2em,
+			block-size: 1.2em,
+		),
+		close: (
+			position: absolute,
+			right: var(--spacing-md),
+			inline-size: 1em,
+			block-size: 1em,
+			cursor: pointer,
+			background-image: var(--bg-close),
+			background-position: center,
+			background-size: 100% auto,
+			background-repeat: no-repeat,
+		),
+		title: (
+			display: flex,
+			margin-right: 1ch,
+			line-height: var(--leading-none),
+			font-weight: var(--font-bold),
+			color: var(--color-word),
+		),
+		content: (
+			line-height: var(--leading-none),
+			color: var(--color-word-1),
+			text-overflow: ellipsis,
+			white-space: nowrap,
+			overflow: hidden,
+		),
+		separator: (
+			_alias: '> hr',
+			height: var(--border),
+			background-color: var(--color-alpha-2),
+			margin-block: var(--spacing-sm),
+		),
+	),
 	modifier: (
 		success: (
 			border-color: var(--color-success-lighten-5),
-			background-color:
-				hsl(
-					var(--color-success-hue) var(--color-success-saturation) 90%
-				),
+			background-color: var(--color-surface-success),
 			element: (
 				icon: (
 					color: var(--color-success),
@@ -31,118 +65,85 @@ $vv-alert: (
 		),
 		danger: (
 			border-color: var(--color-danger-lighten-5),
-			background-color:
-				hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
+			background-color: var(--color-surface-danger),
 			element: (
 				icon: (
-					color: var(--color-danger-darken-1),
+					color: var(--color-danger),
 				),
 				title: (
-					color: var(--color-danger-darken-1),
+					color: var(--color-danger),
 				),
 			),
 		),
 		warning: (
 			border-color: var(--color-warning-lighten-5),
-			background-color:
-				hsl(
-					var(--color-warning-hue) var(--color-warning-saturation) 90%
-				),
+			background-color: var(--color-surface-warning),
 			element: (
 				icon: (
-					color: var(--color-warning-darken-1),
+					color: var(--color-warning-darken-2),
 				),
 				title: (
-					color: var(--color-warning-darken-1),
+					color: var(--color-warning-darken-2),
 				),
 			),
 		),
 		info: (
 			border-color: var(--color-info-lighten-5),
-			background-color:
-				hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
+			background-color: var(--color-surface-info),
 			element: (
 				icon: (
-					color: var(--color-info-darken-1),
+					color: var(--color-info-darken-2),
 				),
 				title: (
-					color: var(--color-info-darken-1),
+					color: var(--color-info-darken-2),
 				),
 			),
 		),
 		accent: (
 			border-color: var(--color-accent-lighten-5),
-			background-color:
-				hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
+			background-color: var(--color-surface-accent),
 			element: (
 				icon: (
-					color: var(--color-accent-darken-1),
+					color: var(--color-accent),
 				),
 				title: (
-					color: var(--color-accent-darken-1),
+					color: var(--color-accent),
 				),
 			),
 		),
 		brand: (
-			--alert-color: var(--color-brand-darken-1),
 			border-color: var(--color-brand-lighten-5),
-			background-color:
-				hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
+			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand-darken-1),
+					color: var(--color-brand),
 				),
 				title: (
-					color: var(--color-brand-darken-1),
+					color: var(--color-brand),
 				),
 			),
 		),
 		callout: (
+			display: block,
 			border-radius: var(--rounded-none),
 			border-width: 0 0 0 var(--spacing-4),
-		),
-		icon: (
-			[padding-left]: calc(var(--alert-padding-left) * 2 + 1.2em),
 			element: (
-				icon: (
-					position: absolute,
-					[left]: var(--alert-padding-left),
+				title: (
+					margin-bottom: var(--spacing-sm),
+					margin-right: 0,
+					text-transform: uppercase,
+				),
+				content: (
+					line-height: var(--leading-normal),
+					white-space: wrap,
 				),
 			),
 		),
-		action: (
-			[padding-right]: calc(var(--alert-padding-right) * 2 + 1.2em),
-			element: (
-				action: (
-					position: absolute,
-					[right]: var(--alert-padding-right),
-				),
-			),
-		),
-	),
-	element: (
 		icon: (
-			_alias: '> :where(svg, [data-icon])',
-			inline-size: 1.2em,
-			block-size: 1.2em,
+			padding-left: calc(var(--spacing-md) * 2 + 1em),
 		),
-		action: (
-			font-size: 1.2em,
-			inline-size: 1em,
-			block-size: 1em,
-			cursor: pointer,
-		),
-		title: (
-			display: block,
-			margin-bottom: var(--spacing-sm),
-			font-weight: var(--font-bold),
-			text-transform: uppercase,
-		),
-		separator: (
-			_alias: '> hr',
-			height: var(--border),
-			background-color: var(--color-alpha-2),
-			margin-block: var(--spacing-sm),
+		close: (
+			padding-right: calc(var(--spacing-md) * 2 + 1em),
 		),
 	),
 ) !default;

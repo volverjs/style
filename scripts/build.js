@@ -1,6 +1,5 @@
 import fs from 'fs'
 import glob from 'glob'
-import Promise from 'promise'
 import { build } from 'vite'
 import stylelint from 'vite-plugin-stylelint'
 

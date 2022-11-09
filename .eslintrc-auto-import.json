@@ -60,6 +60,7 @@
     "onUnmounted": true,
     "onUpdated": true,
     "pausableWatch": true,
+    "permalinkToPath": true,
     "provide": true,
     "reactify": true,
     "reactifyObject": true,

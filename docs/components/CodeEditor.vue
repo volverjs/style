@@ -79,7 +79,8 @@
 
 <template>
 	<div class="vv-card">
-		<div class="vv-card__header bg-surface flex items-center">
+		<div
+			class="vv-card__header bg-surface flex items-center preflight-revert">
 			<span v-if="metadata.title">{{ metadata.title }}</span>
 			<div class="vv-button-group ml-auto">
 				<button

@@ -22,7 +22,7 @@ $vv-tooltip: (
 			text-align: center,
 			inset-inline: 100% auto,
 			inset-block: auto,
-			filter: drop-shadow(0 0 0.2rem var(--color-gray-darken-4)),
+			box-shadow: var(--shadow-md),
 			pseudo: (
 				after: (
 					position: absolute,

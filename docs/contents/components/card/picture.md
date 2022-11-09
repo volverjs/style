@@ -3,7 +3,7 @@ title: Picture
 wrapperClass: md:w-9/12
 ---
 
-<article class="vv-card mb-24">
+<article class="vv-card">
     <picture>
         <img class="vv-card__picture aspect-photo" src="https://source.unsplash.com/featured/300×300/?city,night" alt="Card picture">
     </picture>

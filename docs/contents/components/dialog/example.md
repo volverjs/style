@@ -120,9 +120,7 @@ wrapperClass: flex-1 flex flex-col
         <article class="vv-dialog__wrapper">
             <header class="vv-dialog__header">
                 Dialog title 
-                <button type="buttom" aria-label="Close" class="vv-dialog__close" @click.stop="closeDialog">
-                    <IconifyIcon icon="akar-icons:cross" />
-                </button>
+                <button class="vv-dialog__close" type="buttom" aria-label="Close" @click.stop="closeDialog"></button>
             </header>
             <div class="vv-dialog__content">
                 <p>

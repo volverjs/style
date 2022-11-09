@@ -9,7 +9,7 @@ wrapperClass: md:w-9/12
     <div class="vv-textarea__wrapper">
         <textarea id="textarea-resizable" 
                   name="textarea-resizable" 
-                  placeholder="Resizable" 
+                  placeholder="Placehoder text" 
                   aria-describedby="textarea-resizable-hint"></textarea>
     </div>
     <small id="textarea-resizable-hint" class="vv-textarea__hint">

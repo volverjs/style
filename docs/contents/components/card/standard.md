@@ -3,7 +3,7 @@ title: Standard
 wrapperClass: md:w-9/12
 ---
 
-<article class="vv-card mb-24">
+<article class="vv-card">
     <header class="vv-card__header">Header</header>
     <div class="vv-card__content">
         Culpa et dolore et id pariatur. Aute duis Lorem voluptate

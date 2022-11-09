@@ -9,7 +9,7 @@ $vv-card: (
 	border-bottom-width: var(--border),
 	border-left-width: var(--border),
 	border-style: none,
-	border-radius: var(--border-8),
+	border-radius: var(--rounded-lg),
 	margin: var(--spacing-0),
 	background-color: var(--color-surface),
 	box-shadow: var(--shadow-md),
@@ -34,6 +34,7 @@ $vv-card: (
 		),
 		content: (
 			padding: var(--spacing-md),
+			line-height: var(--leading-normal),
 			flex-grow: 1,
 			min-height: 0,
 			overflow: auto,

@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use 'sass:map';
 
 // color variables
 $color-scheme: light !default;
@@ -14,6 +15,14 @@ $color-warning: #f2c037 !default;
 $color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
 $color-word: hsl(color.hue($color-brand) 15% 10%) !default;
 $color-surface: hsl(color.hue($color-brand) 10% 98%) !default;
+$color-surface-palette: (
+	brand: hsl(color.hue($color-brand) color.saturation($color-brand) 90%),
+	accent: hsl(color.hue($color-accent) color.saturation($color-accent) 90%),
+	success: hsl(color.hue($color-success) color.saturation($color-success) 90%),
+	danger: hsl(color.hue($color-danger) color.saturation($color-danger) 90%),
+	info: hsl(color.hue($color-info) color.saturation($color-info) 90%),
+	warning: hsl(color.hue($color-warning) color.saturation($color-warning) 90%),
+) !default;
 $color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
 $color-backdrop: hsla(color.hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsla(0deg 0% 0% / 0%) !default;
@@ -32,7 +41,11 @@ $colors: (
 	warning: color-shades-map($color-warning, 'warning'),
 	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
 	word: color-lighten-map($color-word, 'word', $scale: 15%),
-	surface: color-darken-map($color-surface, 'surface', $scale: 2%),
+	surface:
+		map.merge(
+			color-darken-map($color-surface, 'surface', $scale: 2%),
+			$color-surface-palette
+		),
 	shadow: hsla-map($color-shadow, 'shadow'),
 	backdrop: hsla-map($color-backdrop, 'backdrop'),
 	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),

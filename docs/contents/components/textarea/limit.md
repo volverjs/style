@@ -21,7 +21,7 @@ wrapperClass: md:w-9/12
             <textarea id="textarea-limit" 
                     v-model="value"
                     name="textarea-limit" 
-                    placeholder="Resizable" 
+                    placeholder="Placehoder text" 
                     aria-describedby="textarea-limit-hint"
                     maxlength="100"></textarea>
             <span class="vv-textarea__limit">{{value.length}} / 100</span>

@@ -1,9 +1,9 @@
 ---
 title: Form fields
-wrapperClass: md:w-9/12 mx-auto
+wrapperClass: md:w-9/12 mx-auto preflight
 ---
 
-<form>
+<form class="preflight">
     <label for="field-username">Text</label>
     <input 
         id="field-username" 

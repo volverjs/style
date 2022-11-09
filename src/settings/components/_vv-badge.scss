@@ -51,5 +51,11 @@ $vv-badge: (
 		warning: (
 			background: var(--color-warning),
 		),
+		info: (
+			background: var(--color-info),
+		),
+		accent: (
+			background: var(--color-accent),
+		),
 	),
 ) !default;

@@ -3,6 +3,10 @@
 	const isPreviewInDarkMode = inject('isPreviewInDarkMode')
 	const metadata = inject('metadata')
 	const isThemeDark = inject('isThemeDark')
+
+	const hasPreflight = computed(() => {
+		return metadata.value.wrapperClass?.includes('preflight')
+	})
 </script>
 
 <template>
@@ -15,7 +19,11 @@
 					'theme theme--light': !isPreviewInDarkMode && isThemeDark,
 				},
 			]">
-			<div :class="metadata.wrapperClass">
+			<div
+				:class="[
+					metadata.wrapperClass,
+					{ 'preflight-revert': !hasPreflight },
+				]">
 				<slot name="preview"></slot>
 			</div>
 		</div>

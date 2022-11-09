@@ -51,12 +51,12 @@
 			</div>
 		</nav>
 		<div class="flex flex-1 min-h-0">
-			<div :id="`${route.path}#aside`" class="off-canvas min-h-0">
+			<aside :id="`${route.path}#aside`" class="off-canvas min-h-0">
 				<a
 					:href="`#${route.path}`"
 					class="off-canvas-overlay"
 					title="Close Menu"></a>
-				<aside
+				<div
 					class="w-288 h-full border-r border-surface-3 off-canvas-aside bg-surface h-full overflow-y-auto">
 					<nav class="vv-nav vv-nav--menu p-lg">
 						<ul class="vv-nav__menu" role="menu">
@@ -65,7 +65,7 @@
 								:key="sectionIndex">
 								<li class="vv-nav__item" role="presentation">
 									<span
-										id="menu-section-contents"
+										:id="`section-${sectionIndex}`"
 										class="vv-nav__heading-label"
 										aria-hidden="true">
 										{{ section.name }}
@@ -74,7 +74,7 @@
 										v-if="section.children"
 										class="vv-nav__menu"
 										role="group"
-										aria-labelledby="menu-section-contents">
+										:aria-labelledby="`section-${sectionIndex}`">
 										<li
 											v-for="(
 												child, childIndex
@@ -86,6 +86,11 @@
 												:to="child.to"
 												tabindex="0">
 												{{ child.name }}
+												<span
+													v-if="child.isNew"
+													class="vv-badge vv-badge--small vv-badge--info ml-auto"
+													>new</span
+												>
 											</RouterLink>
 										</li>
 									</ul>
@@ -97,13 +102,11 @@
 							</template>
 						</ul>
 					</nav>
-				</aside>
-			</div>
-			<main class="flex-1 bg-surface-1 min-h-0 overflow-y-auto">
-				<div class="lg:w-10/12 xl:w-9/12 xxl:w-7/12 mx-auto">
-					<RouterView :key="route.path" />
-					<FooterNotes />
 				</div>
+			</aside>
+			<main
+				class="flex flex-1 bg-surface-1 min-h-0 overflow-y-auto justify-center">
+				<RouterView :key="route.path" />
 			</main>
 		</div>
 	</div>

@@ -5,8 +5,9 @@ import CSSExports from 'vite-plugin-css-export'
 import ESLint from 'vite-plugin-eslint'
 import { plugin as Markdown } from 'vite-plugin-markdown'
 import Stylelint from 'vite-plugin-stylelint'
-import MarkdownItPrism from 'markdown-it-prism'
 import MarkdownIt from 'markdown-it'
+import MarkdownItPrism from 'markdown-it-prism'
+import MarkdownItAnchor from 'markdown-it-anchor'
 import AutoImport from 'unplugin-auto-import/vite'
 import Layouts from 'vite-plugin-vue-layouts'
 import Pages from 'vite-plugin-pages'
@@ -28,8 +29,14 @@ export default ({ mode }) => {
 			CSSExports(),
 			// https://github.com/hmsk/vite-plugin-markdown
 			Markdown({
-				mode: ['html', 'vue'],
-				markdownIt: MarkdownIt({ html: true }).use(MarkdownItPrism),
+				mode: ['html', 'vue', 'toc'],
+				markdownIt: MarkdownIt({ html: true, linkify: true })
+					.use(MarkdownItPrism)
+					.use(MarkdownItAnchor, {
+						permalink: MarkdownItAnchor.permalink.ariaHidden({
+							placement: 'before',
+						}),
+					}),
 			}),
 			// https://github.com/antfu/unplugin-auto-import
 			AutoImport({
