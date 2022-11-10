@@ -41,7 +41,7 @@ $dark-vv-button: (
 			state: (
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-gray),
-					outline-offset: 0,
+					outline-offset: var(--spacing-0),
 				),
 				hover: (
 					background: var(--color-gray-darken-4),

@@ -31,4 +31,10 @@ $vv-avatar: (
 			font-size: 1.7em,
 		),
 	),
+	state: (
+		focus: (
+			outline: var(--spacing-px) solid var(--color-brand),
+			outline-offset: var(--spacing-0),
+		),
+	),
 ) !default;
