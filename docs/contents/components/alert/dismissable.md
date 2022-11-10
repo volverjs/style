@@ -1,5 +1,5 @@
 ---
-title: Close
+title: Dismissable
 wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
 ---
 

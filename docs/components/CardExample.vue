@@ -11,9 +11,7 @@
 	watch(isThemeDark, (value) => {
 		isPreviewInDarkMode.value = value
 	})
-	const toggleDarkMode = () => {
-		isPreviewInDarkMode.value = !isPreviewInDarkMode.value
-	}
+	const toggleDarkMode = useToggle(isPreviewInDarkMode)
 </script>
 
 <template>

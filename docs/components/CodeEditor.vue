@@ -1,6 +1,7 @@
 <script setup>
 	import CodeLayout from './CodeLayout.vue'
 	import { VueLive } from 'vue-live'
+	import { nextTick, watch } from 'vue'
 
 	// props
 	const props = defineProps({
@@ -55,6 +56,7 @@
 	}
 
 	// actions
+	const root = ref()
 	const showSource = ref(false)
 	const isThemeDark = inject('isThemeDark')
 	const isPreviewInDarkMode = ref(isThemeDark.value)
@@ -64,21 +66,30 @@
 	provide('showSource', props.forceSource || showSource)
 	provide('isPreviewInDarkMode', isPreviewInDarkMode)
 	provide('metadata', metadata)
-	const toggleSource = () => {
-		showSource.value = !showSource.value
-	}
-	const toggleDarkMode = () => {
-		isPreviewInDarkMode.value = !isPreviewInDarkMode.value
-	}
+	const toggleSource = useToggle(showSource)
+	const toggleDarkMode = useToggle(isPreviewInDarkMode)
 	const {
 		copy: copyToClipboard,
 		copied,
 		isSupported: isCopyToClipboardSupported,
 	} = useClipboard({ source: editedCode })
+	watch(showSource, (newValue) => {
+		nextTick(() => {
+			if (newValue) {
+				const source = root.value.querySelector('.code-layout__source')
+				if (source) {
+					source.scrollIntoView({
+						behavior: 'smooth',
+						block: 'center',
+					})
+				}
+			}
+		})
+	})
 </script>
 
 <template>
-	<div class="vv-card">
+	<div ref="root" class="vv-card">
 		<div
 			class="vv-card__header bg-surface flex items-center preflight-revert">
 			<span v-if="metadata.title">{{ metadata.title }}</span>
@@ -89,7 +100,7 @@
 					:class="{ 'vv-button--active': showSource }"
 					class="vv-button vv-button--action-quiet"
 					type="button"
-					@click.stop="toggleSource">
+					@click.stop="toggleSource()">
 					<IconifyIcon icon="bi:code" />
 				</button>
 				<button
@@ -101,7 +112,7 @@
 					}"
 					class="vv-button vv-button--action-quiet"
 					type="button"
-					@click.stop="toggleDarkMode">
+					@click.stop="toggleDarkMode()">
 					<IconifyIcon
 						:icon="
 							isThemeDark

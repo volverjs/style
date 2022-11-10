@@ -12,7 +12,7 @@
 <template>
 	<div class="code-layout flex flex-col">
 		<div
-			class="flex-1 flex items-center justify-center p-24"
+			class="code-layout__preview flex-1 flex items-center justify-center p-24"
 			:class="[
 				{
 					'theme theme--dark': isPreviewInDarkMode && !isThemeDark,
@@ -29,7 +29,7 @@
 		</div>
 		<div
 			v-if="showSource"
-			class="flex-1 bg-surface-1 border-t border-surface-4 p-24 font-mono text-xs">
+			class="code-layout__source flex-1 bg-surface-1 border-t border-surface-4 p-24 font-mono text-xs">
 			<slot name="editor"></slot>
 		</div>
 	</div>

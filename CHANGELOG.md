@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.18] - 2022-11-10
+
+### Changed
+
+-   docs for `vv-tooltip` and `vv-alert` components
+
 ## [0.1.2-beta.17] - 2022-11-10
 
 ### Added
@@ -108,6 +114,9 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.18]: https://github.com/volverjs/style/compare/v0.1.2-beta.17...v0.1.2-beta.18
+[0.1.2-beta.17]: https://github.com/volverjs/style/compare/v0.1.2-beta.16...v0.1.2-beta.17
+[0.1.2-beta.16]: https://github.com/volverjs/style/compare/v0.1.2-beta.15...v0.1.2-beta.16
 [0.1.2-beta.15]: https://github.com/volverjs/style/compare/v0.1.2-beta.14...v0.1.2-beta.15
 [0.1.2-beta.14]: https://github.com/volverjs/style/compare/v0.1.2-beta.13...v0.1.2-beta.14
 [0.1.2-beta.13]: https://github.com/volverjs/style/compare/v0.1.2-beta.12...v0.1.2-beta.13

@@ -154,7 +154,7 @@
   "devDependencies": {
     "@iconify/vue": "^4.0.0",
     "@vitejs/plugin-vue": "^3.2.0",
-    "@vueuse/core": "^9.4.0",
+    "@vueuse/core": "^9.5.0",
     "@vueuse/head": "^0.9.8",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
@@ -168,9 +168,9 @@
     "postcss-preset-env": "^7.8.2",
     "prism-themes": "^1.9.0",
     "prismjs": "1.29.0",
-    "sass": "^1.56.0",
+    "sass": "^1.56.1",
     "stylelint": "^14.14.1",
-    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-prettier": "^9.0.4",
     "stylelint-config-recommended-scss": "^8.0.0",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard-scss": "^6.1.0",
@@ -186,7 +186,7 @@
     "vite-plugin-vue-layouts": "^0.7.0",
     "vite-ssg": "^0.21.2",
     "vite-ssg-sitemap": "^0.4.3",
-    "vue": "^3.2.41",
+    "vue": "^3.2.44",
     "vue-live": "^2.1.0",
     "vue-router": "^4.1.6"
   }

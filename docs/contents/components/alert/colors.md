@@ -1,5 +1,5 @@
 ---
-title: Status
+title: Colors
 wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
 ---
 

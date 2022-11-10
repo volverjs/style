@@ -1,6 +1,6 @@
 ---
 title: Example
-wrapperClass: flex-1 flex flex-col 
+wrapperClass: flex flex-1 flex-wrap gap-md items-center 
 ---
 
 <script>
@@ -47,7 +47,7 @@ wrapperClass: flex-1 flex flex-col
 </script>
 
 <template>
-    <fieldset class="vv-input-radio-group vv-input-radio-group--horizontal">
+    <fieldset class="vv-input-radio-group">
         <legend>Transition</legend>
         <div class="vv-input-radio-group__wrapper">
             <label class="vv-input-radio" for="fade-block">
@@ -80,7 +80,7 @@ wrapperClass: flex-1 flex flex-col
             </label>
         </div>
     </fieldset>
-    <fieldset class="vv-input-radio-group vv-input-radio-group--horizontal">
+    <fieldset class="vv-input-radio-group">
         <legend>Size</legend>
         <div class="vv-input-radio-group__wrapper">
             <label class="vv-input-radio" for="standard">

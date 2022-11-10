@@ -49,7 +49,7 @@
 		@extend %vv-card__content;
 
 		font-family: var(--font-mono);
-		font-size: var(--text-xs);
+		font-size: var(--text-14);
 		direction: ltr;
 		text-align: left;
 		white-space: pre;

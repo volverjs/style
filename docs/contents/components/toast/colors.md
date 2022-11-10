@@ -1,5 +1,5 @@
 ---
-title: Status
+title: Colors
 wrapperClass: flex flex-1 items-center flex-col gap-md bg-surface-2 n-24 p-24
 ---
 

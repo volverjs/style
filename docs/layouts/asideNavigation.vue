@@ -1,7 +1,12 @@
 <script setup>
 	const route = useRoute()
 	const isThemeDark = inject('isThemeDark')
+	const isAsideOpen = ref(false)
 	const toggleDark = useToggle(isThemeDark)
+	const toggleAside = useToggle(isAsideOpen)
+	watch(route, () => {
+		isAsideOpen.value = false
+	})
 	/* eslint-disable-next-line */
 	const appVersion = __APP_VERSION__
 </script>
@@ -9,12 +14,13 @@
 <template>
 	<div class="flex flex-col h-full relative">
 		<nav class="flex border-b border-surface-3 p-16 items-center">
-			<a
-				:href="`#${route.path}#aside`"
+			<button
+				type="button"
 				class="vv-button vv-button--action-quiet mr-sm md:none"
-				title="Toggle menu">
+				title="Toggle menu"
+				@click.stop="toggleAside()">
 				<IconifyIcon icon="akar-icons:three-line-horizontal" />
-			</a>
+			</button>
 			<RouterLink
 				:to="{ name: 'index' }"
 				class="flex items-center"
@@ -51,13 +57,14 @@
 			</div>
 		</nav>
 		<div class="flex flex-1 min-h-0">
-			<aside :id="`${route.path}#aside`" class="off-canvas min-h-0">
-				<a
-					:href="`#${route.path}`"
-					class="off-canvas-overlay"
-					title="Close Menu"></a>
+			<aside
+				class="off-canvas min-h-0"
+				:class="{ 'off-canvas--open': isAsideOpen }">
 				<div
-					class="w-288 h-full border-r border-surface-3 off-canvas-aside bg-surface h-full overflow-y-auto">
+					class="off-canvas__overlay"
+					@click.stop="toggleAside()"></div>
+				<div
+					class="w-288 h-full border-r border-surface-3 off-canvas__aside bg-surface h-full overflow-y-auto">
 					<nav class="vv-nav vv-nav--menu p-lg">
 						<ul class="vv-nav__menu" role="menu">
 							<template
@@ -104,8 +111,7 @@
 					</nav>
 				</div>
 			</aside>
-			<main
-				class="flex flex-1 bg-surface-1 min-h-0 overflow-y-auto justify-center">
+			<main class="bg-surface-1 flex-1 overflow-y-auto">
 				<RouterView :key="route.path" />
 			</main>
 		</div>
@@ -119,7 +125,7 @@
 		position: relative;
 		z-index: var(--z-fixed);
 
-		.off-canvas-aside {
+		&__aside {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -130,7 +136,7 @@
 			z-index: 1;
 		}
 
-		.off-canvas-overlay {
+		&__overlay {
 			position: absolute;
 			top: 0;
 			bottom: 0;
@@ -143,16 +149,16 @@
 			background: rgb(0 0 0 / 10%);
 		}
 
-		&:target {
+		&--open {
 			position: fixed;
 			inset: 0;
 
-			.off-canvas-aside {
+			.off-canvas__aside {
 				transform: translateX(0);
 				box-shadow: var(--shadow-xl);
 			}
 
-			.off-canvas-overlay {
+			.off-canvas__overlay {
 				opacity: 1;
 			}
 		}
@@ -160,7 +166,7 @@
 		@include media-breakpoint-up('md') {
 			position: relative;
 
-			.off-canvas-aside {
+			.off-canvas__aside {
 				position: relative;
 				transform: none;
 			}
