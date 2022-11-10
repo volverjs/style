@@ -1,0 +1,34 @@
+$vv-avatar: (
+	display: inline-flex,
+	justify-content: center,
+	align-items: center,
+	width: var(--spacing-40),
+	height: var(--spacing-40),
+	border-radius: 50%,
+	border-width: var(--spacing-2),
+	border-style: solid,
+	border-color: var(--color-surface-4),
+	background-color: var(--color-word),
+	background-position: center,
+	background-size: contain,
+	background-repeat: no-repeat,
+	color: var(--color-surface),
+	object-fit: contain,
+	overflow: hidden,
+	modifier: (
+		small: (
+			width: var(--spacing-40),
+			height: var(--spacing-40),
+		),
+		medium: (
+			width: var(--spacing-50),
+			height: var(--spacing-50),
+			font-size: 1.3em,
+		),
+		large: (
+			width: var(--spacing-64),
+			height: var(--spacing-64),
+			font-size: 1.7em,
+		),
+	),
+) !default;

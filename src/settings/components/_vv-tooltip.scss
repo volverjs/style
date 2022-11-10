@@ -30,7 +30,8 @@ $vv-tooltip: (
 					inset-inline: -10% auto,
 					inset-block: 50% auto,
 					transform: translateY(-50%),
-					border: 10px solid var(--color-gray-darken-4),
+					border-width: 10px,
+					border-style: solid,
 					border-color: transparent var(--color-gray-darken-4)
 						transparent transparent,
 				),
@@ -50,7 +51,8 @@ $vv-tooltip: (
 							z-index: -1,
 							inset-inline: 45% auto,
 							inset-block: 130% auto,
-							border: 10px solid var(--color-gray-darken-4),
+							border-width: 10px,
+							border-style: solid,
 							border-color: var(--color-gray-darken-4) transparent
 								transparent,
 						),
@@ -71,7 +73,8 @@ $vv-tooltip: (
 							inset-inline: -10% auto,
 							inset-block: 50% auto,
 							transform: translateY(-50%),
-							border: 10px solid var(--color-gray-darken-4),
+							border-width: 10px,
+							border-style: solid,
 							border-color: transparent var(--color-gray-darken-4)
 								transparent transparent,
 						),
@@ -91,7 +94,8 @@ $vv-tooltip: (
 							z-index: -1,
 							inset-inline: 45% auto,
 							inset-block: auto 50%,
-							border: 10px solid var(--color-gray-darken-4),
+							border-width: 10px,
+							border-style: solid,
 							border-color: transparent transparent
 								var(--color-gray-darken-4) transparent,
 						),
@@ -112,7 +116,8 @@ $vv-tooltip: (
 							inset-inline: auto -10%,
 							inset-block: 50% auto,
 							transform: translateY(-50%),
-							border: 10px solid var(--color-gray-darken-4),
+							border-width: 10px,
+							border-style: solid,
 							border-color: transparent transparent transparent
 								var(--color-gray-darken-4),
 						),

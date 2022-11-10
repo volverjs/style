@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.16] - 2022-11-10
+
+### Added
+
+-   new **vv-avatar** component
+
+
 ## [0.1.2-beta.15] - 2022-11-09
 
 ### Added

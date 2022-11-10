@@ -1,0 +1,15 @@
+---
+title: Standard
+wrapperClass: md:w-9/12 mx-auto
+---
+
+<div class="container h-full rounded-md bg-surface-1 p-24">
+    <div class="flex justify-center items-center gap-48">
+        <img src="/volverjs.svg" alt="avatar" class="vv-avatar">
+        <img src="https://gravatar.com/avatar/dfb63daa83b45e913d62dc45f32d8ef3?s=400&d=retro&r=x" alt="avatar" class="vv-avatar">
+        <img src="https://avatars.dicebear.com/v2/identicon/dfb63daa83b45e913d62dc45f32d8ef3.svg" alt="avatar" class="vv-avatar">
+        <span role="img" aria-label="Mario Rossi" class="vv-avatar">MR</span>
+    </div>
+</div>
+
+
