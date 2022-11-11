@@ -1,11 +1,25 @@
 $vv-accordion: (
 	--accordion-marker-size:
 		calc(var(--spacing-sm) + var(--leading-normal) * 1em),
-	--accordion-padding-top: 0px,
-	--accordion-padding-right: 0px,
-	--accordion-padding-bottom: 0px,
-	--accordion-padding-left: 0px,
+	--accordion-padding-top: var(--spacing-xs),
+	--accordion-padding-right: var(--spacing-xs),
+	--accordion-padding-bottom: var(--spacing-xs),
+	--accordion-padding-left: var(--spacing-xs),
 	overflow: hidden,
+	state: (
+		open: (
+			element: (
+				summary: (
+					background-color: var(--color-surface-2),
+					pseudo: (
+						before: (
+							transform: rotate(0),
+						),
+					),
+				),
+			),
+		),
+	),
 	element: (
 		summary: (
 			_alias: '> summary',
@@ -23,6 +37,7 @@ $vv-accordion: (
 			will-change: background-color,
 			transition: background-color 0.3s ease-in-out,
 			font-size: var(--text-sm),
+			border-radius: var(--rounded-lg),
 			pseudo: (
 				before: (
 					display: block,
@@ -46,25 +61,17 @@ $vv-accordion: (
 						display: none,
 					),
 			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-1),
+				),
+			),
 		),
 		content: (
 			_alias: '> summary + *',
 			padding-block: var(--spacing-sm),
 			[padding-inline]: var(--accordion-padding-left)
 				var(--accordion-padding-right),
-		),
-	),
-	state: (
-		open: (
-			element: (
-				summary: (
-					pseudo: (
-						before: (
-							transform: rotate(0),
-						),
-					),
-				),
-			),
 		),
 	),
 	modifier: (
@@ -107,20 +114,12 @@ $vv-accordion: (
 			--accordion-padding-left: var(--spacing-xs),
 			border: var(--border) solid var(--color-surface-4),
 			border-radius: var(--rounded-lg),
-			element: (
-				summary: (
-					state: (
-						hover: (
-							background-color: var(--color-surface-1),
-						),
-					),
-				),
-			),
 			state: (
 				open: (
 					element: (
 						summary: (
-							background-color: var(--color-surface-2),
+							border-bottom-right-radius: 0,
+							border-bottom-left-radius: 0,
 						),
 					),
 				),

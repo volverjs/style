@@ -3,7 +3,7 @@ title: Bordered
 wrapperClass: md:w-9/12 mx-auto
 ---
 
-<div class="flex flex-col gap-md">
+<div class="flex flex-col gap-sm">
     <details id="accordion-item-bordered-1" class="vv-accordion vv-accordion--bordered">
         <summary class="vv-accordion__summary" 
                  aria-controls="#accordion-item-bordered-1" 

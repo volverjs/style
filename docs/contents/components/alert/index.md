@@ -2,7 +2,7 @@
 title: Alert
 description: Alerts are used to communicate a state that affects a system, feature or page.
 uiVue: true
-isNew: true
+isNew: false
 ---
 
 ### Colors

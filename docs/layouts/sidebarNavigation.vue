@@ -93,11 +93,23 @@
 												:to="child.to"
 												tabindex="0">
 												{{ child.name }}
-												<span
-													v-if="child.isNew"
-													class="vv-badge vv-badge--sm vv-badge--info ml-auto"
-													>new</span
-												>
+												<div
+													v-if="
+														child.isNew ||
+														child.isDraft
+													"
+													class="flex gap-8 ml-auto">
+													<span
+														v-if="child.isNew"
+														class="vv-badge vv-badge--sm vv-badge--info"
+														>new</span
+													>
+													<span
+														v-if="child.isDraft"
+														class="vv-badge vv-badge--sm vv-badge--warning"
+														>draft</span
+													>
+												</div>
 											</RouterLink>
 										</li>
 									</ul>

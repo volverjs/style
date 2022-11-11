@@ -2,7 +2,7 @@
 title: Avatar
 description: Avatars are images that users can set as their profile picture.
 uiVue: true
-isNew: true
+isNew: false
 ---
 
 ### Wrappers

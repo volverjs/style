@@ -117,8 +117,25 @@ $vv-nav: (
 						current: (
 							color: var(--color-brand),
 							border-color: var(--color-brand),
+							background-color:
+								hsla(
+									var(--color-brand-hue)
+										var(--color-brand-saturation)
+										var(--color-brand-lightness) / 5%
+								),
 						),
 					),
+				),
+			),
+		),
+		full: (
+			element: (
+				item: (
+					flex: 1 1 0%,
+				),
+				item-label: (
+					display: block,
+					text-align: center,
 				),
 			),
 		),

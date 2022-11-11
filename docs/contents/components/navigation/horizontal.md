@@ -1,16 +1,17 @@
 ---
 title: Horizontal
-wrapperClass: flex-1 w-100
+wrapperClass: flex flex-1 flex-col w-100 gap-lg
 ---
 
-<nav class="vv-nav vv-nav--tabs">
+<nav class="vv-nav 
+            vv-nav--tabs">
     <ul class="vv-nav__menu" role="menu">
         <li class="vv-nav__item">
             <a
                 class="vv-nav__item-label"
                 tabindex="0"
                 href="#">
-                Sidebar item 1
+                Tab item 1
             </a>
         </li>
         <li class="vv-nav__item">
@@ -18,16 +19,7 @@ wrapperClass: flex-1 w-100
                 class="vv-nav__item-label current"
                 tabindex="0"
                 href="#">
-                Sidebar item 2
-            </a>
-        </li>
-        <li class="vv-nav__divider" role="separator"></li>
-        <li class="vv-nav__item">
-            <a
-                class="vv-nav__item-label"
-                tabindex="0"
-                href="#">
-                Sidebar item 3
+                Tab item 2
             </a>
         </li>
         <li class="vv-nav__item">
@@ -35,7 +27,54 @@ wrapperClass: flex-1 w-100
                 class="vv-nav__item-label"
                 tabindex="0"
                 href="#">
-                Sidebar item 4
+                Tab item 3
+            </a>
+        </li>
+        <li class="vv-nav__item">
+            <a
+                class="vv-nav__item-label"
+                tabindex="0"
+                href="#">
+                Tab item 4
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<nav class="vv-nav 
+            vv-nav--tabs 
+            vv-nav--full">
+    <ul class="vv-nav__menu" role="menu">
+        <li class="vv-nav__item">
+            <a
+                class="vv-nav__item-label"
+                tabindex="0"
+                href="#">
+                Tab item 1
+            </a>
+        </li>
+        <li class="vv-nav__item">
+            <a
+                class="vv-nav__item-label current"
+                tabindex="0"
+                href="#">
+                Tab item 2
+            </a>
+        </li>
+        <li class="vv-nav__item">
+            <a
+                class="vv-nav__item-label"
+                tabindex="0"
+                href="#">
+                Tab item 3
+            </a>
+        </li>
+        <li class="vv-nav__item">
+            <a
+                class="vv-nav__item-label"
+                tabindex="0"
+                href="#">
+                Tab item 4
             </a>
         </li>
     </ul>

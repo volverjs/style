@@ -2,7 +2,7 @@
 title: Tooltip
 description: Tooltips are floating labels that briefly explain the function of a user interface element.
 uiVue: true
-isNew: true
+isNew: false
 ---
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">

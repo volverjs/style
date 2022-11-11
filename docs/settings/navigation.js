@@ -21,6 +21,7 @@ function getUtilitiesGroup(group) {
 			acc.push({
 				name: utilities[key].title,
 				isNew: utilities[key].isNew ?? false,
+				isDraft: utilities[key].isDraft ?? false,
 				to: {
 					name: 'utilities-group-name',
 					params: { group, name },
@@ -41,6 +42,7 @@ export const mainMenu = [
 					index: gettingStarted[key].index,
 					name: gettingStarted[key].label,
 					isNew: gettingStarted[key].isNew,
+					isDraft: gettingStarted[key].isDraft ?? false,
 					to: {
 						name: 'getting-started-name',
 						params: { name },
@@ -56,6 +58,7 @@ export const mainMenu = [
 			return {
 				name: components[key].title,
 				isNew: components[key].isNew ?? false,
+				isDraft: components[key].isDraft ?? false,
 				to: {
 					name: 'components-name',
 					params: { name },

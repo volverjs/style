@@ -24,7 +24,9 @@ $component-selector: '.#{ $component-name}';
 	$enabled: $zero-specificity-for-compoenents
 ) {
 	&:hover,
-	&:focus-visible {
+	&:focus-visible,
+	&.hover,
+	&.focus-visible {
 		@extend %vv-tooltip--visible !optional;
 	}
 }

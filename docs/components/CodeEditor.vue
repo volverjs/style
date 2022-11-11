@@ -123,7 +123,7 @@
 				<button
 					v-if="isCopyToClipboardSupported"
 					title="Copy to clipboard"
-					:class="{ 'bg-success-lighten-5': copied }"
+					:class="{ active: copied }"
 					class="vv-button vv-button--action-quiet"
 					type="button"
 					@click.stop="copyToClipboard()">
