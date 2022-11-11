@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.20] - 2022-11-11
+
+### Added
+
+-   Added `vv-tab` component.
+
 ## [0.1.2-beta.19] - 2022-11-11
 
 ### Added
@@ -124,6 +130,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.20]: https://github.com/volverjs/style/compare/v0.1.2-beta.19...v0.1.2-beta.20
 [0.1.2-beta.19]: https://github.com/volverjs/style/compare/v0.1.2-beta.18...v0.1.2-beta.19
 [0.1.2-beta.18]: https://github.com/volverjs/style/compare/v0.1.2-beta.17...v0.1.2-beta.18
 [0.1.2-beta.17]: https://github.com/volverjs/style/compare/v0.1.2-beta.16...v0.1.2-beta.17
