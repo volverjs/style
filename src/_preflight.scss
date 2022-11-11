@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 :where(:host, :root, [class*='theme']) {
 	accent-color: var(--color-brand);
 	background: var(--color-surface);
@@ -72,6 +74,10 @@
 			@extend %italic !optional;
 		}
 
+		&:where(svg) {
+			@extend %align-middle !optional;
+		}
+
 		&:where(dfn, var) {
 			@extend %font-serif !optional;
 		}
@@ -80,7 +86,7 @@
 			@extend %line-through !optional;
 		}
 
-		&:where(ins, u, cite, a) {
+		&:where(ins, u, cite) {
 			@extend %underline !optional;
 		}
 
@@ -133,6 +139,32 @@
 			@extend %border !optional;
 			@extend %border-solid !optional;
 			@extend %border-surface-3 !optional;
+		}
+
+		// anchor
+		&:where(a:not(.#{map.get($components-names, vv-button)})) {
+			@extend %vv-text !optional;
+			@extend %vv-text--link !optional;
+
+			&:where(:hover) {
+				@extend %vv-button-modifier-link--hover !optional;
+			}
+
+			&:where(:focus) {
+				@extend %vv-button-modifier-link--focus !optional;
+			}
+
+			&:where(:focus-visible) {
+				@extend %vv-button-modifier-link--focus-visible !optional;
+			}
+
+			&:where(:visited) {
+				@extend %vv-button-modifier-link--visited !optional;
+			}
+
+			&:where(:active) {
+				@extend %vv-button-modifier-link--active !optional;
+			}
 		}
 
 		// buttons

@@ -61,7 +61,7 @@
 						{{ title }}
 						<span
 							v-if="uiVue"
-							class="vv-badge vv-badge--small vv-badge--success ml-16 mb-12"
+							class="vv-badge vv-badge--sm vv-badge--success ml-16 mb-12"
 							>ui-vue</span
 						>
 					</h1>
@@ -77,11 +77,11 @@
 				</div>
 			</div>
 		</div>
-		<div
+		<aside
 			v-if="permalinks.length"
 			class="none xl:block xl:w-2/12 py-16 px-24 right-0">
 			<div class="my-lg fixed">
-				<nav class="vv-nav vv-nav--border">
+				<nav class="vv-nav vv-nav--aside">
 					<ul class="vv-nav__menu" role="menu">
 						<li class="vv-nav__item" role="presentation">
 							<span
@@ -105,7 +105,7 @@
 										tabindex="0"
 										:href="hash"
 										:class="{
-											selected: route.hash === hash,
+											current: route.hash === hash,
 										}"
 										@click.prevent="scrollIntoView(hash)">
 										{{ label }}
@@ -116,11 +116,11 @@
 					</ul>
 				</nav>
 			</div>
-		</div>
+		</aside>
 	</div>
 </template>
 
 <route lang="yaml">
 meta:
-    layout: asideNavigation
+    layout: sidebarNavigation
 </route>

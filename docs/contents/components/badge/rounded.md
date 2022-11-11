@@ -12,7 +12,7 @@ wrapperClass: flex flex-wrap gap-4 items-center justify-center
 <div role="status" class="vv-badge vv-badge--rounded vv-badge--danger">
     8
 </div>
-<div role="status" class="vv-badge vv-badge--roundedvv-badge--success">
+<div role="status" class="vv-badge vv-badge--rounded vv-badge--success">
     <IconifyIcon icon="akar-icons:check" />
     NEW
 </div>

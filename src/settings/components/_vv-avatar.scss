@@ -1,40 +1,48 @@
 $vv-avatar: (
 	display: inline-flex,
+	position: relative,
 	justify-content: center,
 	align-items: center,
-	width: var(--spacing-40),
-	height: var(--spacing-40),
-	border-radius: 50%,
-	border-width: var(--spacing-2),
-	border-style: solid,
-	border-color: var(--color-surface-4),
-	background-color: var(--color-word),
+	font-size: var(--text-12),
+	line-height: var(--leading-none),
+	width: var(--spacing-28),
+	height: var(--spacing-28),
+	border-radius: var(--rounded),
 	background-position: center,
 	background-size: contain,
 	background-repeat: no-repeat,
-	color: var(--color-surface),
+	color: var(--color-white),
 	object-fit: contain,
-	overflow: hidden,
 	modifier: (
-		small: (
+		rounded: (
+			border-radius: var(--rounded-full),
+			overflow: hidden,
+		),
+		md: (
+			font-size: var(--text-14),
+			width: var(--spacing-34),
+			height: var(--spacing-34),
+		),
+		lg: (
+			font-size: var(--text-16),
 			width: var(--spacing-40),
 			height: var(--spacing-40),
-		),
-		medium: (
-			width: var(--spacing-50),
-			height: var(--spacing-50),
-			font-size: 1.3em,
-		),
-		large: (
-			width: var(--spacing-64),
-			height: var(--spacing-64),
-			font-size: 1.7em,
 		),
 	),
 	state: (
 		focus: (
 			outline: var(--spacing-px) solid var(--color-brand),
 			outline-offset: var(--spacing-0),
+		),
+	),
+	element: (
+		badge: (
+			_alias: '> sup',
+			position: absolute,
+			top: 0,
+			right: 0,
+			transform: translate(50%, -50%),
+			box-shadow: var(--shadow-sm),
 		),
 	),
 ) !default;

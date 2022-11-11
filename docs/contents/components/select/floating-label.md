@@ -1,6 +1,6 @@
 ---
 title: Floating label
-wrapperClass: md:w-9/12
+wrapperClass: w-full md:w-9/12
 ---
 
 <div class="vv-select

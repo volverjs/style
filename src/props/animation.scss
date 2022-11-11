@@ -78,3 +78,14 @@
 		background-position: -200% 0;
 	}
 }
+
+@keyframes pie-masks {
+	0% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}

@@ -28,6 +28,6 @@ Add `vv-alert--callout` to show the alert inside the page content.
 <code-editor resource-folder="alert" resource-name="callout" class="mb-lg"></code-editor>
 
 ### Example
-Use [utilities](/utilities/layout/top-right-bottom-left) to change alert position and [z-index](/utilities/layout/z-index).
+Use [utilities](/style/utilities/layout/top-right-bottom-left) to change alert position and [z-index](/style/utilities/layout/z-index) or the helper `vv-alert--fixed` with `vv-alert--top` or `vv-alert--bottom`.
 
 <code-editor resource-folder="alert" resource-name="example"></code-editor>

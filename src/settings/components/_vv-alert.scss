@@ -51,6 +51,18 @@ $vv-alert: (
 		),
 	),
 	modifier: (
+		fixed: (
+			position: fixed,
+			z-index: var(--z-notification-alert),
+		),
+		top: (
+			inset-inline: var(--spacing-lg),
+			inset-block: var(--spacing-lg) auto,
+		),
+		bottom: (
+			inset-inline: var(--spacing-lg),
+			inset-block: auto var(--spacing-lg),
+		),
 		success: (
 			border-color: var(--color-success-lighten-5),
 			background-color: var(--color-surface-success),

@@ -12,6 +12,26 @@ $vv-text: (
 		copy: (
 			margin-block: var(--spacing-16),
 		),
+		link: (
+			color: var(--color-brand),
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-4),
+				),
+				hover: (
+					text-decoration: underline,
+					text-underline-offset: var(--spacing-4),
+				),
+				active: (
+					color: var(--color-brand-darken-3),
+				),
+				disabled: (
+					opacity: 0.5,
+					cursor: not-allowed,
+				),
+			),
+		),
 		quote: (
 			font-family: var(--font-serif),
 			border-left: var(--spacing-4) solid var(--color-surface-3),

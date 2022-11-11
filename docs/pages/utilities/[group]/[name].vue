@@ -54,7 +54,7 @@
 						{{ title }}
 						<span
 							v-if="breakpoints"
-							class="vv-badge vv-badge--small ml-16 mb-12"
+							class="vv-badge vv-badge--sm ml-16 mb-12"
 							>breakpoints</span
 						>
 					</h1>
@@ -73,5 +73,5 @@
 
 <route lang="yaml">
 meta:
-    layout: asideNavigation
+    layout: sidebarNavigation
 </route>

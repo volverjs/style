@@ -5,12 +5,22 @@ uiVue: true
 isNew: true
 ---
 
-### Standard
-Used to indicate a profile.
+### Wrappers
+You can use the following wrappers to display an avatar.
 
-<code-editor resource-folder="avatar" resource-name="standard" class="mb-lg"></code-editor>
+<code-editor resource-folder="avatar" resource-name="wrappers" class="mb-lg"></code-editor>
 
-### Sizing
-Use the `vv-avatar--small`, `vv-avatar--medium` and `vv-avatar--large` modifiers to size the tooltip.
+### Rounded
+Add `vv-avatar--rounded` to display a rounded avatar.
 
-<code-editor resource-folder="avatar" resource-name="sizing" class="mb-lg"></code-editor>
+<code-editor resource-folder="avatar" resource-name="rounded" class="mb-lg"></code-editor>
+
+### Badge
+You can use the `vv-badge` component to display a badge on top of an avatar.
+
+<code-editor resource-folder="avatar" resource-name="badge" class="mb-lg"></code-editor>
+
+### Sizes
+Add `vv-avatar--md` or `vv-avatar--lg` modifiers to display an avatar in different sizes.
+
+<code-editor resource-folder="avatar" resource-name="sizing"></code-editor>

@@ -3,7 +3,7 @@ title: Standard
 wrapperClass: md:w-9/12 mx-auto
 ---
 
-<div class="vv-accordion-group">
+<div class="flex flex-col gap-md">
     <details id="accordion-item-1" class="vv-accordion">
         <summary class="vv-accordion__summary" aria-controls="#accordion-item-1" aria-expanded="false">
             Lorem Ipsum

@@ -1,6 +1,6 @@
 ---
 title: Custom Dropdown
-wrapperClass: md:w-9/12
+wrapperClass: w-full md:w-9/12
 ---
 
 <div class="vv-select vv-select--dirty">

@@ -9,12 +9,27 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             return {
                 positionBlock: 'top',
                 positionInline: 'right',
-                show: false
+                show: false,
+                timeout: undefined
             }
         },
         methods: {
             toggle() {
+                if (this.timeout) {
+                    clearTimeout(this.timeout)
+                }
                 this.show = !this.show
+            }
+        },
+        watch: {
+            show(newValue) {
+                if (newValue) {
+                    this.timeout = setTimeout(() => {
+                        if (this.show) {
+                            this.show = false
+                        }
+                    }, 5000)
+                }
             }
         }
     }
@@ -43,6 +58,16 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                     value="left" 
                         />
                 left
+            </label>
+            <label class="vv-input-radio" for="position-center">
+                <input 
+                    v-model="positionInline"
+                    id="position-center" 
+                    type="radio" 
+                    name="position-inline" 
+                    value="center" 
+                        />
+                center
             </label>
         </div>
     </fieldset>
@@ -74,17 +99,19 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
     <div v-if="show" 
          class="vv-toast 
                 vv-toast--success
-                vv-toast--close
-                fixed
-                z-toast" 
+                vv-toast--dismissable
+                vv-toast--fixed" 
          aria-live="assertive" 
          aria-atomic="true"
-         :class="[`${positionBlock}-lg`, `${positionInline}-lg`]">
+         :class="[`vv-toast--${positionBlock}`, `vv-toast--${positionInline}`]"
+         :style="{'--toast-pie-animation-duration': '5s'}">
         <div class="vv-toast__header">
-            <IconifyIcon icon="akar-icons:check" class="mr-xs"/>
+            <IconifyIcon icon="akar-icons:check" class="mr-12"/>
             Success!
             <small class="ml-auto font-extralight text-14">11 mins ago</small>
-            <button class="vv-toast__close" type="buttom" aria-label="Close" @click="toggle"></button>
+            <button type="button" class="vv-toast__pie" @click="toggle">
+                <div class="vv-toast__pie-mask"></div>
+            </button>
         </div>
     </div>
 </template>

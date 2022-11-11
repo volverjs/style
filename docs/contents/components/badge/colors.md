@@ -1,5 +1,5 @@
 ---
-title: Standard
+title: Colors
 wrapperClass: flex flex-wrap gap-4 items-center justify-center
 ---
 

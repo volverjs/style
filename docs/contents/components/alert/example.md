@@ -50,10 +50,8 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                 vv-alert--close
                 vv-alert--icon
                 vv-alert--success
-                fixed
-                inset-x-lg
-                z-notification-alert"
-        :class="`${position}-lg`"
+                vv-alert--fixed"
+        :class="`vv-alert--${position}`"
         role="alert">
         <button class="vv-alert__close" type="button" aria-label="Close" @click="toggle"></button>
         <IconifyIcon icon="akar-icons:circle-check" />

@@ -5,6 +5,7 @@ $vv-accordion: (
 	--accordion-padding-right: 0px,
 	--accordion-padding-bottom: 0px,
 	--accordion-padding-left: 0px,
+	overflow: hidden,
 	element: (
 		summary: (
 			_alias: '> summary',
@@ -100,11 +101,12 @@ $vv-accordion: (
 			),
 		),
 		bordered: (
-			--accordion-padding-top: var(--spacing-sm),
-			--accordion-padding-right: var(--spacing-sm),
-			--accordion-padding-bottom: var(--spacing-sm),
-			--accordion-padding-left: var(--spacing-sm),
-			border-bottom: var(--border) solid var(--color-surface-2),
+			--accordion-padding-top: var(--spacing-xs),
+			--accordion-padding-right: var(--spacing-xs),
+			--accordion-padding-bottom: var(--spacing-xs),
+			--accordion-padding-left: var(--spacing-xs),
+			border: var(--border) solid var(--color-surface-4),
+			border-radius: var(--rounded-lg),
 			element: (
 				summary: (
 					state: (

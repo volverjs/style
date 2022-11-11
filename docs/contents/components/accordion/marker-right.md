@@ -3,7 +3,7 @@ title: Marker right
 wrapperClass: md:w-9/12 mx-auto
 ---
 
-<div class="vv-accordion-group">
+<div class="flex flex-col gap-md">
     <details id="accordion-item-right-1" class="vv-accordion vv-accordion--marker-right">
         <summary class="vv-accordion__summary" aria-controls="#accordion-item-right-1" aria-expanded="false">
             Lorem Ipsum

@@ -25,6 +25,7 @@ $vv-button: (
 		hover: (
 			background: var(--color-brand-darken-1),
 			border-color: var(--color-brand-darken-1),
+			text-decoration: none,
 		),
 		active: (
 			background: var(--color-brand-darken-2),
@@ -147,20 +148,23 @@ $vv-button: (
 		),
 		link: (
 			background: transparent,
-			border-color: var(--color-word),
 			border-width: var(--border-0),
-			border-radius: 0,
 			padding: 0,
-			color: var(--color-word),
-			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			color: var(--color-brand),
+			font-weight: var(--font-normal),
+			text-shadow: none,
 			state: (
 				focus-visible: (
-					color: var(--color-brand),
-					outline: none,
+					outline: var(--spacing-px) solid
+						var(--color-brand-lighten-4),
+					outline-offset: var(--spacing-4),
 				),
 				hover: (
 					text-decoration: underline,
 					text-underline-offset: var(--spacing-4),
+				),
+				active: (
+					color: var(--color-brand-darken-3),
 				),
 			),
 		),

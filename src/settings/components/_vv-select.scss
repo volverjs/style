@@ -68,7 +68,8 @@ $vv-select: (
 		),
 		input: (
 			_alias: 'select',
-			display: block,
+			display: flex,
+			align-items: center,
 			flex: 1,
 			color: var(--input-placeholder-color),
 			[padding]: var(--input-padding-top) var(--input-padding-right)

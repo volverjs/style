@@ -1,4 +1,5 @@
 $vv-toast: (
+	--toast-pie-animation-duration: 3s,
 	position: relative,
 	display: flex,
 	flex-direction: column,
@@ -17,13 +18,13 @@ $vv-toast: (
 			display: flex,
 			overflow: hidden,
 			align-items: center,
-			padding: var(--spacing-xs),
+			padding: var(--spacing-10),
 			color: var(--color-white),
 			background-color: var(--color-gray),
 			font-size: var(--text-16),
 		),
 		content: (
-			padding: var(--spacing-xs),
+			padding: var(--spacing-10),
 			background-color: var(--color-surface-2),
 			flex-grow: 1,
 			min-height: 0,
@@ -32,7 +33,7 @@ $vv-toast: (
 		),
 		close: (
 			position: absolute,
-			right: var(--spacing-xs),
+			right: var(--spacing-10),
 			inline-size: 1.1em,
 			block-size: 1.1em,
 			cursor: pointer,
@@ -43,12 +44,83 @@ $vv-toast: (
 			background-size: 70% auto,
 			background-repeat: no-repeat,
 		),
+		pie: (
+			position: absolute,
+			display: block,
+			right: var(--spacing-10),
+			width: 1.1em,
+			height: 1.1em,
+			background-color: var(--color-white),
+			border: 1px solid var(--color-white),
+			border-radius: 50%,
+			overflow: hidden,
+			opacity: 0.8,
+			cursor: pointer,
+			pseudo: (
+				before: (
+					position: absolute,
+					top: 0,
+					width: 50%,
+					height: 100%,
+					transform-origin: 100% 50%,
+					background-color: var(--color-gray),
+					border-radius: 100% 0 0 100% / 50% 0 0 50%,
+					will-change: transform,
+					[animation]: spin var(--toast-pie-animation-duration) linear,
+				),
+				after: (
+					position: absolute,
+					top: 0,
+					width: 50%,
+					height: 100%,
+					background-color: var(--color-white),
+					will-change: opacity,
+					border-radius: 100% 0 0 100% / 50% 0 0 50%,
+					[animation]: pie-masks var(--toast-pie-animation-duration)
+						steps(1, end),
+					opacity: 0,
+				),
+			),
+		),
+		pie-mask: (
+			position: absolute,
+			top: 0,
+			width: 50%,
+			height: 100%,
+			left: 50%,
+			background-color: var(--color-gray),
+			will-change: opacity,
+			[animation]: pie-masks var(--toast-pie-animation-duration)
+				steps(1, end) reverse,
+			z-index: 1,
+			opactiy: 1,
+		),
 	),
 	modifier: (
-		close: (
+		fixed: (
+			position: fixed,
+			z-index: var(--z-toast),
+		),
+		top: (
+			inset-block: var(--spacing-lg) auto,
+		),
+		right: (
+			inset-inline: auto var(--spacing-lg),
+		),
+		bottom: (
+			inset-block: auto var(--spacing-lg),
+		),
+		left: (
+			inset-inline: var(--spacing-lg) auto,
+		),
+		center: (
+			inset-inline: 50% auto,
+			transform: translateX(-50%),
+		),
+		dismissable: (
 			element: (
 				header: (
-					padding-right: calc(var(--spacing-xs) * 2 + 1.1em),
+					padding-right: calc(var(--spacing-10) * 2 + 1.1em),
 				),
 			),
 		),
@@ -62,6 +134,16 @@ $vv-toast: (
 					border-color: var(--color-success),
 					background-color: var(--color-surface-success),
 				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-success),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-success),
+				),
 			),
 		),
 		danger: (
@@ -73,6 +155,16 @@ $vv-toast: (
 				content: (
 					border-color: var(--color-danger),
 					background-color: var(--color-surface-danger),
+				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-danger),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-danger),
 				),
 			),
 		),
@@ -86,6 +178,16 @@ $vv-toast: (
 					border-color: var(--color-warning),
 					background-color: var(--color-surface-warning),
 				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-warning),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-warning),
+				),
 			),
 		),
 		info: (
@@ -97,6 +199,16 @@ $vv-toast: (
 				content: (
 					border-color: var(--color-info),
 					background-color: var(--color-surface-info),
+				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-info-darken-1),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-info-darken-1),
 				),
 			),
 		),
@@ -110,6 +222,16 @@ $vv-toast: (
 					border-color: var(--color-accent),
 					background-color: var(--color-surface-accent),
 				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-accent),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-accent),
+				),
 			),
 		),
 		brand: (
@@ -121,6 +243,16 @@ $vv-toast: (
 				content: (
 					border-color: var(--color-brand),
 					background-color: var(--color-surface-brand),
+				),
+				pie: (
+					pseudo: (
+						before: (
+							background-color: var(--color-brand),
+						),
+					),
+				),
+				pie-mask: (
+					background-color: var(--color-brand),
 				),
 			),
 		),

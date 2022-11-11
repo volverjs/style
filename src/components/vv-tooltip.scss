@@ -3,6 +3,7 @@
 
 $component-name: map.get($components-names, vv-tooltip);
 $component-map: $vv-tooltip;
+$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -10,3 +11,20 @@ $component-map: $vv-tooltip;
 	$props: $use-custom-props-for-components,
 	$zero-specificity: $zero-specificity-for-compoenents
 );
+
+@include wrap-with-where(
+	$selector: '*:has(#{$component-selector})',
+	$enabled: $zero-specificity-for-compoenents
+) {
+	position: relative;
+}
+
+@include wrap-with-where(
+	$selector: '*:has(> #{$component-selector})',
+	$enabled: $zero-specificity-for-compoenents
+) {
+	&:hover,
+	&:focus-visible {
+		@extend %vv-tooltip--visible !optional;
+	}
+}

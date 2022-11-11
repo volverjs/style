@@ -57,7 +57,7 @@
 			</div>
 		</nav>
 		<div class="flex flex-1 min-h-0">
-			<aside
+			<div
 				class="off-canvas min-h-0"
 				:class="{ 'off-canvas--open': isAsideOpen }">
 				<div
@@ -65,7 +65,7 @@
 					@click.stop="toggleAside()"></div>
 				<div
 					class="w-288 h-full border-r border-surface-3 off-canvas__aside bg-surface h-full overflow-y-auto">
-					<nav class="vv-nav vv-nav--menu p-lg">
+					<nav class="vv-nav vv-nav--sidebar p-lg">
 						<ul class="vv-nav__menu" role="menu">
 							<template
 								v-for="(section, sectionIndex) in mainMenu"
@@ -95,7 +95,7 @@
 												{{ child.name }}
 												<span
 													v-if="child.isNew"
-													class="vv-badge vv-badge--small vv-badge--info ml-auto"
+													class="vv-badge vv-badge--sm vv-badge--info ml-auto"
 													>new</span
 												>
 											</RouterLink>
@@ -110,7 +110,7 @@
 						</ul>
 					</nav>
 				</div>
-			</aside>
+			</div>
 			<main class="bg-surface-1 flex-1 overflow-y-auto">
 				<RouterView :key="route.path" />
 			</main>
