@@ -1,6 +1,7 @@
 $vv-tooltip: (
 	position: relative,
 	display: inline-flex,
+	justify-content: center,
 	align-items: center,
 	element: (
 		content: (
@@ -9,6 +10,7 @@ $vv-tooltip: (
 			z-index: var(--z-tooltip),
 			display: block,
 			min-width: var(--spacing-160),
+			min-height: var(--spacing-28),
 			border-radius: var(--rounded-md),
 			border-width: 2px,
 			border-style: solid,
