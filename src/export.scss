@@ -402,9 +402,46 @@
 
 	// ============================================================== */
 	// #region EFFECTS
-	// blend-mode
-	@each $index in $blend-mode {
-		#{'blend-mode__' + $index}: $index;
+	// box-shadow
+	@each $key, $value in $box-shadow {
+		#{'box-shadow__' + $key}: $value;
+	}
+
+	// opacity
+	@each $key, $value in $opacity {
+		#{'opacity__' + $key}: $value;
+	}
+
+	// mix-blend-mode
+	@each $index in $mix-blend-mode {
+		#{'mix-blend-mode__' + $index}: $index;
+	}
+
+	// background-blend-mode
+	@each $index in $background-blend-mode {
+		#{'background-blend-mode__' + $index}: $index;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region TRANSITIONS & ANIMATIONS
+	// transition property
+	@each $key, $value in $transition-property {
+		#{'transition-property__' + $key}: $value;
+	}
+
+	// transition duration
+	@each $key, $value in $transition-duration-delay {
+		#{'transition-duration-delay__' + $key}: $value;
+	}
+
+	@each $key, $value in $transition-timing-function {
+		#{'transition-timing-function__' + $key}: $value;
+	}
+
+	@each $key, $value in $animation {
+		#{'animation__' + $key}: $value;
 	}
 
 	// #endregion

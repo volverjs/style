@@ -98,4 +98,8 @@ export const mainMenu = [
 		name: 'Effects',
 		children: getUtilitiesGroup('effects'),
 	},
+	{
+		name: 'Transitions & Animation',
+		children: getUtilitiesGroup('transitions'),
+	},
 ]

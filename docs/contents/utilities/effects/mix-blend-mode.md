@@ -3,7 +3,7 @@ title: Mix Blend Mode
 description: Utilities for controlling how flex and grid items are positioned along a container's main axis.
 ---
 <div>
-    <table-utility prefix="mix-blend" property="blend-mode" custom-property="mix-blend-mode" class="mb-lg"></table-utility>
+    <table-utility prefix="mix-blend" property="mix-blend-mode" class="mb-lg"></table-utility>
     <card-example>
 		<div class="relative rounded-md bg-surface-1 p-16 border border-alpha-2">
 			<div class="relative gap-10 columns-2 md:columns-3">

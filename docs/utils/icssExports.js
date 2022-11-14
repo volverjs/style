@@ -2,7 +2,7 @@ import icssExports from '../../src/export.scss?export'
 
 export default Object.keys(icssExports).reduce((accumulator, key) => {
 	const splittedKey = key.split('__')
-	const value = icssExports[key]
+	const value = icssExports[key].replaceAll('"', '')
 
 	let current = accumulator
 	splittedKey.forEach((subKey, index) => {

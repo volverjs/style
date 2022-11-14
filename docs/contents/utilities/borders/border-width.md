@@ -19,10 +19,27 @@ description: Utilities for controlling the width of an element's borders.
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						border
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						border-width: 1px
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
 						border-{spacer-size}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
 						border-width: {spacer-value}
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						border-x
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						<div>border-left-width: 1px</div>
+						<div>border-right-width: 1px</div>
 					</td>
 				</tr>
 				<tr>
@@ -36,11 +53,28 @@ description: Utilities for controlling the width of an element's borders.
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						border-y
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						<div>border-top-width: 1px</div>
+						<div>border-bottom-width: 1px</div>
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
 						border-y-{spacer-size}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
 						<div>border-top-width: {spacer-value}</div>
 						<div>border-bottom-width: {spacer-value}</div>
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						border-{t|r|b|l}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						border-{top|right|bottom|left}-width: 1px
 					</td>
 				</tr>
 				<tr>
