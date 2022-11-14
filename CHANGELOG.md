@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.21] - 2022-11-14
+
+### Changed
+
+-  Some responsive fixes and Safari iOS improvements
+
 ## [0.1.2-beta.20] - 2022-11-11
 
 ### Added
@@ -130,6 +136,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card
 -   vv-text
 
+[0.1.2-beta.21]: https://github.com/volverjs/style/compare/v0.1.2-beta.20...v0.1.2-beta.21
 [0.1.2-beta.20]: https://github.com/volverjs/style/compare/v0.1.2-beta.19...v0.1.2-beta.20
 [0.1.2-beta.19]: https://github.com/volverjs/style/compare/v0.1.2-beta.18...v0.1.2-beta.19
 [0.1.2-beta.18]: https://github.com/volverjs/style/compare/v0.1.2-beta.17...v0.1.2-beta.18

@@ -38,6 +38,7 @@ $vv-accordion: (
 			transition: background-color 0.3s ease-in-out,
 			font-size: var(--text-sm),
 			border-radius: var(--rounded-lg),
+			-webkit-tap-highlight-color: transparent,
 			pseudo: (
 				before: (
 					display: block,

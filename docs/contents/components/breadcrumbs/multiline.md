@@ -1,6 +1,6 @@
 ---
 title: Multiline
-wrapperClass: flex flex-1
+wrapperClass: w-full
 ---
 
 <nav class="vv-breadcrumb 

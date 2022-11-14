@@ -1,6 +1,6 @@
 ---
 title: Standard
-wrapperClass: flex-1
+wrapperClass: w-full
 ---
 
 <nav class="vv-breadcrumb" aria-label="breadcrumbs">

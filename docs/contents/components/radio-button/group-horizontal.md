@@ -1,6 +1,6 @@
 ---
 title: Group Horizontal
-wrapperClass: flex-1
+wrapperClass: w-full
 ---
 
 <fieldset class="vv-input-radio-group 

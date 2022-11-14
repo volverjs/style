@@ -65,7 +65,7 @@ $vv-input-text: (
 			color: var(--input-color),
 			[padding]: var(--input-padding-top) var(--input-padding-right)
 				var(--input-padding-bottom) var(--input-padding-left),
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
@@ -80,15 +80,7 @@ $vv-input-text: (
 				search-cancel-button: (
 					display: none,
 				),
-				color-swatch-wrapper: (
-					display: block,
-					border: none,
-					height: 100%,
-					padding: 0,
-				),
 				color-swatch: (
-					display: block,
-					border: none,
 					height: var(--spacing-20),
 					border-radius: var(--spacing-4),
 				),
@@ -256,6 +248,9 @@ $vv-input-text: (
 				label: (
 					position: absolute,
 					z-index: 1,
+					display: flex,
+					align-items: center,
+					min-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
 					[padding-top]: var(--input-padding-top),

@@ -1,6 +1,6 @@
 ---
 title: Group Validation
-wrapperClass: flex flex-1
+wrapperClass: flex flex-1 flex-col md:flex-row
 ---
 
 <div class="md:w-1/2">

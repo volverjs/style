@@ -1,9 +1,9 @@
 ---
 title: Group Validation
-wrapperClass: flex flex-1
+wrapperClass: flex flex-1 flex-col md:flex-row
 ---
 
-<div class="md:w-1/2">
+<div class="w-full md:w-1/2">
     <fieldset class="vv-input-checkbox-group 
                      vv-input-checkbox-group--valid">
         <legend>Group Valid</legend>
@@ -52,7 +52,7 @@ wrapperClass: flex flex-1
         </small>
     </fieldset>
 </div>
-<div class="md:w-1/2">
+<div class="w-full md:w-1/2">
     <fieldset class="vv-input-checkbox-group 
                      vv-input-checkbox-group--invalid">
         <legend>Group Invalid</legend>

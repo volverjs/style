@@ -1,6 +1,6 @@
 ---
 title: Standard
-wrapperClass: md:w-9/12 mx-auto
+wrapperClass: w-full md:w-9/12 mx-auto
 ---
 
 <div class="flex flex-col gap-sm">

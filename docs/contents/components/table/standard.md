@@ -3,33 +3,50 @@ title: Standard
 wrapperClass: md:w-9/12 mx-auto w-full
 ---
 
-<div>
-     <table class="vv-table">
-          <thead>
-               <tr>
-                    <th>Nome</th>
-                    <th>Genere</th>
-                    <th>Et&#224;</th>
-               </tr>
-          </thead>
-          <tbody>
-               <tr>
-                    <th>Mario</th>
-                    <td>Maschio</td>
-                    <td>22</td>
-               </tr>
-               <tr>
-                    <th>Luigi</th>
-                    <td>Maschio</td>
-                    <td>26</td>
-               </tr>
-               <tr>
-                    <th>Laura</th>
-                    <td>Femmina</td>
-                    <td>23</td>
-               </tr>
-          </tbody>
-     </table>
-</div>
-
-
+<table class="vv-table">
+     <caption>
+          Table Caption
+     </caption>
+     <thead>
+          <tr>
+               <th>Table Heading 1</th>
+               <th>Table Heading 2</th>
+               <th>Table Heading 3</th>
+               <th>Table Heading 4</th>
+          </tr>
+     </thead>
+     <tfoot>
+          <tr>
+               <th>Table Footer 1</th>
+               <th>Table Footer 2</th>
+               <th>Table Footer 3</th>
+               <th>Table Footer 4</th>
+          </tr>
+     </tfoot>
+     <tbody>
+          <tr>
+               <td>Table Cell 1</td>
+               <td>Table Cell 2</td>
+               <td>Table Cell 3</td>
+               <td>Table Cell 4</td>
+          </tr>
+          <tr>
+               <td>Table Cell 1</td>
+               <td>Table Cell 2</td>
+               <td>Table Cell 3</td>
+               <td>Table Cell 4</td>
+          </tr>
+          <tr>
+               <td>Table Cell 1</td>
+               <td>Table Cell 2</td>
+               <td>Table Cell 3</td>
+               <td>Table Cell 4</td>
+          </tr>
+          <tr>
+               <td>Table Cell 1</td>
+               <td>Table Cell 2</td>
+               <td>Table Cell 3</td>
+               <td>Table Cell 4</td>
+          </tr>
+     </tbody>
+</table>

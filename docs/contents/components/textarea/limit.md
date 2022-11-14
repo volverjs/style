@@ -1,6 +1,6 @@
 ---
 title: Limit
-wrapperClass: md:w-9/12
+wrapperClass: w-full md:w-9/12
 ---
 
 <script>

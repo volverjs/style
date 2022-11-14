@@ -84,6 +84,14 @@ $vv-select: (
 					cursor: not-allowed,
 				),
 			),
+			pseudo: (
+				marker: (
+					display: none,
+				),
+				-webkit-details-marker: (
+						display: none,
+					),
+			),
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',

@@ -2,26 +2,16 @@
 @import '../context';
 
 // width / height / max-width / max-height
-@each $dimension,
-	$attr in(w: width, h: height, max-w: max-width, max-h: max-height)
+@each $class,
+	$attribute in(w: width, h: height, max-w: max-width, max-h: max-height)
 {
-	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
-		// check if value is not a map (spacing-dynamic)
-		$var: var(--spacing-#{$size});
-		@if type-of($value) != 'map' {
-			$var: var(--spacing-#{$size}, #{$value});
-		}
-
-		%#{$dimension}-#{$size} {
-			#{$attr}: #{$var};
-		}
-		@include wrap-with-where(
-			$selector: '.#{$dimension}-#{$size}',
-			$enabled: $zero-specificity-for-utilities
-		) {
-			@extend %#{$dimension}-#{$size};
-		}
-	}
+	@include spread-map-into-utilities(
+		$map: map.merge($spacing, $spacing-dynamic),
+		$class: $class,
+		$attribute: $attribute,
+		$bps: $breakpoints,
+		$prop: spacing
+	);
 }
 
 @include spread-map-into-utilities(

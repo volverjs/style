@@ -18,11 +18,10 @@
 </template>
 
 <style lang="scss">
-	@import '@/context';
-
 	// custom font
 	$font-family-sans: 'Open Sans', sans-serif;
 
+	@import '@/context';
 	@import '@/volver';
 	@import '@/themes/dark/volver';
 	@import 'vue-live/lib/vue-live.esm.css';

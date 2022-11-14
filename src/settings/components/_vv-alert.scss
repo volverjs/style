@@ -3,7 +3,7 @@ $vv-alert: (
 	min-width: 0,
 	overflow: hidden,
 	align-items: center,
-	padding: var(--spacing-md),
+	padding: var(--spacing-sm) var(--spacing-md),
 	background-color: var(--color-surface-2),
 	border-color: var(--color-gray-lighten-4),
 	border-width: var(--border),
@@ -32,12 +32,12 @@ $vv-alert: (
 		title: (
 			display: flex,
 			margin-right: 1ch,
-			line-height: var(--leading-none),
+			line-height: var(--leading-normal),
 			font-weight: var(--font-bold),
 			color: var(--color-word),
 		),
 		content: (
-			line-height: var(--leading-none),
+			line-height: var(--leading-normal),
 			color: var(--color-word-1),
 			text-overflow: ellipsis,
 			white-space: nowrap,

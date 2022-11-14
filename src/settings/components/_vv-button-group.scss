@@ -1,6 +1,10 @@
 $vv-button-group: (
 	display: inline-flex,
+	flex-wrap: wrap,
+	min-width: 0,
+	max-width: 100%,
 	align-items: center,
+	justify-content: center,
 	gap: var(--spacing-4),
 	modifier: (
 		block: (

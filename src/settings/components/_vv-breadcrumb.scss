@@ -1,29 +1,37 @@
 $vv-breadcrumb: (
+	position: relative,
+	pseudo: (
+		after: (
+			position: absolute,
+			top: 0,
+			bottom: 0,
+			right: 0,
+			display: block,
+			width: var(--spacing-sm),
+			background:
+				linear-gradient(45deg, transparent, var(--color-surface)),
+		),
+	),
 	element: (
 		list: (
 			_alias: '> ol',
 			position: relative,
+			overflow: auto hidden,
+			overscroll-behavior-x: contain,
+			scroll-behavior: smooth,
+			scroll-snap-type: x mandatory,
+			scrollbar-width: none,
 			display: flex,
 			flex-wrap: no-wrap,
 			list-style: none,
-			overflow: auto,
 			padding: 0,
 			background: var(--color-surface),
+			white-space: nowrap,
 			pseudo: (
-				after: (
-					position: absolute,
-					top: 0,
-					bottom: 0,
-					right: 0,
-					display: block,
-					width: var(--spacing-sm),
-					background:
-						linear-gradient(
-							45deg,
-							transparent,
-							var(--color-surface)
-						),
-				),
+				-webkit-scrollbar: (
+						width: 0,
+						height: 0,
+					),
 			),
 		),
 		item: (

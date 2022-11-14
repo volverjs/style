@@ -27,7 +27,10 @@
 
 			<div
 				class="flex flex-col flex-1 justify-center items-center text-center">
-				<img src="/volverjs.svg" alt="Volver" class="w-256 mb-24" />
+				<img
+					src="/volverjs.svg"
+					alt="Volver"
+					class="w-208 md:w-256 mb-24" />
 				<h1 class="text-22 text-word font-semibold mb-16">
 					@volverjs/style
 				</h1>
@@ -66,7 +69,7 @@
 					</RouterLink>
 				</div>
 			</div>
-			<FooterNotes class="text-center" />
+			<FooterNotes class="text-center mt-32" />
 		</div>
 	</header>
 </template>

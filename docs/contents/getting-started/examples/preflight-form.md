@@ -4,9 +4,9 @@ wrapperClass: md:w-9/12 mx-auto preflight
 ---
 
 <form class="preflight">
-    <label for="field-username">Text</label>
+    <label for="field-text">Text</label>
     <input 
-        id="field-username" 
+        id="field-text" 
         type="text" 
         name="text" 
         placeholder="Insert the text" />
@@ -14,6 +14,7 @@ wrapperClass: md:w-9/12 mx-auto preflight
     <input 
         id="field-password" 
         type="password" 
+        autocomplete="new-password"
         name="password" 
         placeholder="Insert the password" />
     <label for="field-select">Select</label>
