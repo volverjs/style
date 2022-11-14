@@ -52,7 +52,7 @@
 					target="_blank"
 					class="vv-button vv-button--action-quiet"
 					title="GitHub">
-					<IconifyIcon icon="akar-icons:github" />
+					<IconifyIcon icon="akar-icons:github-fill" />
 				</a>
 			</div>
 		</nav>

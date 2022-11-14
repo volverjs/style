@@ -9,6 +9,7 @@
 	const title = ref('')
 	const description = ref('')
 	const breakpoints = ref(false)
+	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/utilities/${route.params.group}/${route.params.name}.md`
 	const MainContent = defineAsyncComponent(() =>
 		import(
 			`../../../contents/utilities/${route.params.group}/${route.params.name}.md`
@@ -48,16 +49,28 @@
 						class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
 						{{ route.params.group }}
 					</span>
-					<h1
-						v-if="title"
-						class="vv-text vv-text--size-1 font-bold mb-sm flex items-end">
-						{{ title }}
-						<span
-							v-if="breakpoints"
-							class="vv-badge vv-badge--sm ml-16 mb-12"
-							>breakpoints</span
-						>
-					</h1>
+					<div class="flex items-center mb-sm">
+						<h1
+							v-if="title"
+							class="vv-text vv-text--size-1 font-bold flex items-end mr-auto">
+							{{ title }}
+							<span
+								v-if="breakpoints"
+								class="vv-badge vv-badge--sm ml-16 mb-12"
+								>breakpoints</span
+							>
+						</h1>
+						<div class="vv-button-group vv-button-group--compact">
+							<a
+								class="vv-button vv-button--action-quiet"
+								target="_blank"
+								rel="noopener noreferrer"
+								title="Edit this page on GitHub"
+								:href="githubUrl">
+								<IconifyIcon icon="akar-icons:octocat-fill" />
+							</a>
+						</div>
+					</div>
 					<h2
 						v-if="description"
 						class="vv-text vv-text--size-4 text-word-2 max-w-prose">
@@ -65,7 +78,17 @@
 					</h2>
 				</header>
 				<MainContent />
-				<FooterNotes class="mt-xl" />
+				<div class="flex mt-lg">
+					<a
+						class="vv-button vv-button--action-quiet"
+						target="_blank"
+						rel="noopener noreferrer"
+						:href="githubUrl">
+						<IconifyIcon icon="akar-icons:edit" />
+						Edit this page on GitHub
+					</a>
+				</div>
+				<FooterNotes class="mt-lg" />
 			</div>
 		</div>
 	</div>

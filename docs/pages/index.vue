@@ -21,7 +21,9 @@
 					href="https://github.com/volverjs/style"
 					target="_blank"
 					class="ml-auto">
-					<IconifyIcon class="text-32 p-4" icon="akar-icons:github" />
+					<IconifyIcon
+						class="text-32 p-4"
+						icon="akar-icons:github-fill" />
 				</a>
 			</nav>
 

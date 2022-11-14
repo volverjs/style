@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.22] - 2022-11-14
+
+### Changed
+
+-  Added Stackblitz example for *getting-started/customization* in docs.
+
 ## [0.1.2-beta.21] - 2022-11-14
 
 ### Changed
 
--  Some responsive fixes and Safari iOS improvements
+-  Some responsive fixes and Safari iOS improvements.
 
 ## [0.1.2-beta.20] - 2022-11-11
 
@@ -22,75 +28,74 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
--   docs for `vv-badge` and `vv-avatar` components
+-   Docs for `vv-badge` and `vv-avatar` components.
 
 ## [0.1.2-beta.18] - 2022-11-10
 
 ### Changed
 
--   docs for `vv-tooltip` and `vv-alert` components
+-   Docs for `vv-tooltip` and `vv-alert` components.
 
 ## [0.1.2-beta.17] - 2022-11-10
 
 ### Added
 
--   new **vv-avatar** component
-
+-   New **vv-avatar** component.
 
 ## [0.1.2-beta.15] - 2022-11-09
 
 ### Added
 
--   new **vv-toast** component
+-   New **vv-toast** component.
 
 ### Changed
 
--   docs inner navigation
--   **vv-alert** elements structure
+-   Docs inner navigation;
+-   **vv-alert** elements structure.
 
 ## [0.1.2-beta.14] - 2022-11-09
 
 ### Added
 
--   add _arrow_ to **vv-tooltip** component
+-   Ddd _arrow_ to **vv-tooltip** component.
 
 ## [0.1.2-beta.13] - 2022-11-09
 
 ### Added
 
--   new **vv-tooltip** component
+-   new **vv-tooltip** component.
 
 ## [0.1.2-beta.12] - 2022-11-08
 
 ### Added
 
--   limit element for **vv-textarea** component
--   limit element for **vv-input-text** component
+-   Limit element for **vv-textarea** component;
+-   Limit element for **vv-input-text** component.
 
 ## [0.1.2-beta.11] - 2022-11-08
 
 ### Added
 
--   new **vv-alert** component
+-   New **vv-alert** component.
 
 ## [0.1.2-beta.10] - 2022-11-07
 
 ### Changed
 
--   base url in `vue-router` configuration
+-   Base url in `vue-router` configuration.
 
 ## [0.1.2-beta.9] - 2022-11-07
 
 ### Changed
 
--   base url for docs site
+-   Base url for docs site.
 
 ## [0.1.2-beta.8] - 2022-11-07
 
 ### Added
 
--   new docs site
--   selected state for all `vv-button` variants
+-   New docs site;
+-   Selected state for all `vv-button` variants.
 
 ### Changed
 
@@ -100,42 +105,43 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
--   new **vv-badge** _rounded_ and _small_ modifier
--   fix **vv-input-radio** and **vv-input-checkbox** readonly state
+-   New **vv-badge** _rounded_ and _small_ modifier;
+-   Fix **vv-input-radio** and **vv-input-checkbox** readonly state.
 
 ## [0.1.2-beta.6] - 2022-10-21
 
 ### Added
 
--   new component **vv-breadcrumb**
+-   New component **vv-breadcrumb**.
 
 ### Changed
 
--   **vv-collapse** is now **vv-accordion**
--   new **vv-button** _action_ and _action-quite_ modifier
+-   **vv-collapse** is now **vv-accordion**;
+-   New **vv-button** _action_ and _action-quite_ modifier.
 
 ## [0.1.1] - 2022-10-18
 
 ### Added
 
--   vv-badge
--   vv-button
--   vv-button-group
--   vv-progress
--   vv-accordion
--   vv-dialog
--   vv-dropdown
--   vv-input-checkbox
--   vv-input-checkbox-group
--   vv-input-radio
--   vv-input-radio-group
--   vv-input-text
--   vv-textarea
--   vv-select
--   vv-table
--   vv-card
--   vv-text
+-   vv-badge;
+-   vv-button;
+-   vv-button-group;
+-   vv-progress;
+-   vv-accordion;
+-   vv-dialog;
+-   vv-dropdown;
+-   vv-input-checkbox;
+-   vv-input-checkbox-group;
+-   vv-input-radio;
+-   vv-input-radio-group;
+-   vv-input-text;
+-   vv-textarea;
+-   vv-select;
+-   vv-table;
+-   vv-card;
+-   vv-text.
 
+[0.1.2-beta.22]: https://github.com/volverjs/style/compare/v0.1.2-beta.21...v0.1.2-beta.22
 [0.1.2-beta.21]: https://github.com/volverjs/style/compare/v0.1.2-beta.20...v0.1.2-beta.21
 [0.1.2-beta.20]: https://github.com/volverjs/style/compare/v0.1.2-beta.19...v0.1.2-beta.20
 [0.1.2-beta.19]: https://github.com/volverjs/style/compare/v0.1.2-beta.18...v0.1.2-beta.19

@@ -6,12 +6,15 @@
 	const router = useRouter()
 	const title = ref('')
 	const description = ref('')
+	const stackblitzExample = ref('')
 	const permalinks = ref([])
+	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/getting-started/${route.params.name}.md`
 	const MainContent = defineAsyncComponent(() =>
 		import(`../../contents/getting-started/${route.params.name}.md`)
 			.then(({ attributes, toc, VueComponentWith }) => {
 				title.value = attributes.title
 				description.value = attributes.description
+				stackblitzExample.value = attributes.stackblitzExample
 				permalinks.value = toc.map(({ content }) =>
 					permalinkToPath(content),
 				)
@@ -53,11 +56,32 @@
 						class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
 						{{ route.params.name }}
 					</span>
-					<h1
-						v-if="title"
-						class="vv-text vv-text--size-1 font-bold mb-sm">
-						{{ title }}
-					</h1>
+					<div class="flex items-center mb-sm">
+						<h1
+							v-if="title"
+							class="vv-text vv-text--size-1 font-bold flex-1 mr-auto">
+							{{ title }}
+						</h1>
+						<div class="vv-button-group vv-button-group--compact">
+							<a
+								v-if="stackblitzExample"
+								class="vv-button vv-button--action-quiet"
+								target="_blank"
+								rel="noopener noreferrer"
+								title="Se an example on Stackblitz"
+								:href="stackblitzExample">
+								<iconify-icon icon="simple-icons:stackblitz" />
+							</a>
+							<a
+								class="vv-button vv-button--action-quiet"
+								target="_blank"
+								rel="noopener noreferrer"
+								title="Edit this page on GitHub"
+								:href="githubUrl">
+								<IconifyIcon icon="akar-icons:octocat-fill" />
+							</a>
+						</div>
+					</div>
 					<h2
 						v-if="description"
 						class="vv-text vv-text--size-4 text-word-2 max-w-prose">
@@ -66,7 +90,27 @@
 				</header>
 				<div class="preflight">
 					<MainContent />
-					<FooterNotes class="mt-xl" />
+					<div class="flex mt-lg">
+						<a
+							class="vv-button vv-button--action-quiet"
+							target="_blank"
+							rel="noopener noreferrer"
+							:href="githubUrl">
+							<IconifyIcon icon="akar-icons:edit" />
+							Edit this page on GitHub
+						</a>
+						<a
+							v-if="stackblitzExample"
+							class="vv-button vv-button--action-quiet ml-auto"
+							target="_blank"
+							rel="noopener noreferrer"
+							title="Se an example on Stackblitz"
+							:href="stackblitzExample">
+							<iconify-icon icon="simple-icons:stackblitz" />
+							Example on Stackblitz
+						</a>
+					</div>
+					<FooterNotes class="mt-lg" />
 				</div>
 			</div>
 		</div>
