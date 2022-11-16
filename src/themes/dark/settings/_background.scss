@@ -1,3 +1,6 @@
+@use 'colors' as *;
+@use '../../../tools/functions' as *;
+
 // background-image
 $dark-background-image: (
 	none: none,

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-button);
 $component-map: $dark-vv-button;

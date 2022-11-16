@@ -3,7 +3,7 @@
 @use 'sass:string';
 
 // context
-@import 'context';
+@use 'context' as *;
 
 :export {
 	// ============================================================== */

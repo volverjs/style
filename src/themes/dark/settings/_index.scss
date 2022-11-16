@@ -1,5 +1,4 @@
-@import 'colors';
-@import 'background';
+@forward 'colors';
+@forward 'background';
 
-@import 'components/vv-button';
-@import 'components/vv-input-checkbox';
+@forward 'components/vv-button';

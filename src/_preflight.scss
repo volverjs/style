@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'context' as *;
 
 :where(:host, :root, [class*='theme']) {
 	accent-color: var(--color-brand);

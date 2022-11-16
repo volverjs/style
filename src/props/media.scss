@@ -1,4 +1,4 @@
-@import '../context';
+@use '../context' as *;
 
 // motion
 @custom-media --motion-ok (prefers-reduced-motion: no-preference);

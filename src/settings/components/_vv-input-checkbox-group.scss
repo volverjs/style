@@ -2,6 +2,7 @@ $vv-input-checkbox-group: (
 	display: var(--input-display),
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
+	min-width: var(--input-min-width),
 	element: (
 		legend: (
 			_alias: '> legend',

@@ -1,4 +1,4 @@
-@import '../context';
+@use '../context' as *;
 
 @mixin theme-dark-colors {
 	@include spread-map-into-props($dark-colors, 'color');

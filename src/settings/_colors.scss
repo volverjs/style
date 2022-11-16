@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use 'sass:map';
+@use '../tools/functions' as *;
 
 // color variables
 $color-scheme: light !default;

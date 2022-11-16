@@ -3,6 +3,8 @@
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass:selector';
+@use 'functions' as *;
+@use 'breakpoints' as *;
 
 // Check ascending order
 // Used to ensure the breakpoints are ordered ascending.
@@ -77,7 +79,7 @@
 		xxs: 0,
 	),
 	$prefix: '',
-	$zero-specificity: $zero-specificity-for-utilities
+	$zero-specificity: false
 ) {
 	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
 	{
@@ -91,12 +93,14 @@
 				}
 				@if type-of($value) == 'map' and $deep {
 					@include spread-map-into-utilities(
-						$value,
-						$class,
-						$attribute,
-						$prop,
-						$key,
-						$prefix
+						$map: $value,
+						$class: $class,
+						$attribute: $attribute,
+						$prop: $prop,
+						$name: $key,
+						$bps: $bps,
+						$prefix: $prefix,
+						$zero-specificity: $zero-specificity
 					);
 				} @else {
 					$default: null;
@@ -134,7 +138,7 @@
 					}
 
 					%#{$prefix}#{$class-name} {
-						@include media-breakpoint-up($breakpoint) {
+						@include media-breakpoint-up($breakpoint, $bps) {
 							@if type-of($attribute) != 'list' {
 								$attribute: ($attribute);
 							}
@@ -170,7 +174,10 @@
 	$key: 'modifier',
 	$block: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $block {
 		$block: &;
@@ -255,7 +262,10 @@
 	$block: null,
 	$modifier: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $block {
 		$block: &;
@@ -360,7 +370,10 @@
 	$modifier: '',
 	$alias: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $original {
 		$original: $map;
@@ -593,7 +606,9 @@
 	$key: 'breakpoint',
 	$block: null,
 	$props: true,
-	$bps: $breakpoints,
+	$bps: (
+		xxs: 0,
+	),
 	$zero-specificity: true
 ) {
 	@if not $block {
@@ -660,7 +675,10 @@
 	$postfix: '',
 	$deep: false,
 	$ignore: (),
-	$props: true
+	$props: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
@@ -838,7 +856,8 @@
 	$custom-elements: false,
 	$custom-modifiers: false,
 	$custom-states: false,
-	$custom-breakpoints: false
+	$custom-breakpoints: false,
+	$bps: (xxs: 0)
 ) {
 	@if type-of($map) == 'map' and $block != '' {
 		$selector: '.' + $block;
@@ -888,7 +907,8 @@
 					$key: $elements-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -902,7 +922,8 @@
 					$key: $states-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -916,7 +937,8 @@
 					$key: $modifiers-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -930,7 +952,8 @@
 					$key: $breakpoints-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}

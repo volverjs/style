@@ -9,10 +9,10 @@ description: Use native HTML tags semantic keeping the code simple. The perfect 
 *Preflight* is already included in compliled *CSS*. In a custom build keep preflight import at the end. 
 
 ```scss
-@import '@volverjs/style/scss/reset';
-@import '@volverjs/style/scss/props';
-@import '@volverjs/style/scss/components';
-@import '@volverjs/style/scss/utilities';
+@use '@volverjs/style/scss/reset';
+@use '@volverjs/style/scss/props';
+@use '@volverjs/style/scss/components';
+@use '@volverjs/style/scss/utilities';
 /* keep at the end */
 @import '@volverjs/style/scss/preflight';
 ```

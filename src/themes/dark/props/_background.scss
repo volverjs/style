@@ -1,4 +1,4 @@
-@import '../context';
+@use '../context' as *;
 
 @mixin theme-dark-bg {
 	@include spread-map-into-props($dark-background-image, 'bg');

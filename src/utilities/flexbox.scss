@@ -1,12 +1,13 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // flex direction
 @include spread-map-into-utilities(
 	$map: $flex-direction,
 	$class: flex,
 	$attribute: flex-direction,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // flex wrap
@@ -14,7 +15,8 @@
 	$map: $flex-wrap,
 	$class: flex,
 	$attribute: flex-wrap,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // flex
@@ -22,7 +24,8 @@
 	$map: $flex,
 	$class: flex,
 	$attribute: flex,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // flex grow
@@ -45,7 +48,8 @@
 	$map: $order,
 	$class: order,
 	$attribute: order,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // gap
@@ -99,7 +103,8 @@
 		$map: $justify-align-content,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -109,7 +114,8 @@
 		$map: $justify-align-items,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -119,6 +125,7 @@
 		$map: $justify-align-self,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }

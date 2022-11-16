@@ -1,29 +1,33 @@
-@import '../context';
+@use '../context' as *;
 
 // box shadow
 @include spread-map-into-utilities(
 	$map: $box-shadow,
 	$class: shadow,
-	$attribute: box-shadow
+	$attribute: box-shadow,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // opacity
 @include spread-map-into-utilities(
 	$map: $opacity,
 	$class: opacity,
-	$attribute: opacity
+	$attribute: opacity,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // mix blend mode
 @include spread-map-into-utilities(
 	$map: $mix-blend-mode,
 	$class: mix-blend,
-	$attribute: mix-blend-mode
+	$attribute: mix-blend-mode,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background blend mode
 @include spread-map-into-utilities(
 	$map: $background-blend-mode,
 	$class: bg-blend,
-	$attribute: background-blend-mode
+	$attribute: background-blend-mode,
+	$zero-specificity: $zero-specificity-for-utilities
 );

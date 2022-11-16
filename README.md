@@ -33,7 +33,7 @@ $ npm i -s @volverjs/style
 @import '@volverjs/style';
 
 /* scss */
-@import '@volverjs/style/scss';
+@use '@volverjs/style/scss';
 ```
 
 or cherry pick what you want
@@ -46,10 +46,10 @@ or cherry pick what you want
 @import '@volverjs/style/components/vv-button';
 
 /* scss */
-@import '@volverjs/style/scss/reset';
-@import '@volverjs/style/scss/props/layout';
-@import '@volverjs/style/scss/utilities/layout';
-@import '@volverjs/style/scss/components/vv-button';
+@use '@volverjs/style/scss/reset';
+@use '@volverjs/style/scss/props/layout';
+@use '@volverjs/style/scss/utilities/layout';
+@use '@volverjs/style/scss/components/vv-button';
 ```
 
 ## Principles
@@ -88,13 +88,14 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
 ### SCSS
 
 ```scss
-/* custom color brand */
-$color-brand: #45cb85;
+@use '@volverjs/style/scss/context' with (
+	// custom color brand 
+	$color-brand: #45cb85,
+	//custom font sans
+	$font-sans: 'Open Sans', sans-serif,
+);
+@use '@volverjs/style/scss';
 
-/* custom font sans */
-$font-sans: 'Open Sans', sans-serif;
-
-@import '@volverjs/style';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 ```
 
@@ -106,11 +107,11 @@ Root attributes style the component, submaps _state_, _element_, and _modifier_ 
 ```scss
 @use 'sass:map';
 // import volverjs default settings, functions and mixins
-@import '@volverjs/style/scss/context';
+@use '@volverjs/style/scss/context';
 
 // override vv-button map
-$vv-button: map.deep-merge(
-	$vv-button,
+context.$vv-button: map.deep-merge(
+	context.$vv-button,
 	(
 		// change default button background
 		background: #ddd,
@@ -131,7 +132,7 @@ $vv-button: map.deep-merge(
 );
 
 // import volverjs style
-@import '@volverjs/style/scss';
+@use '@volverjs/style/scss';
 ```
 
 ```html

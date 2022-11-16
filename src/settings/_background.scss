@@ -1,3 +1,6 @@
+@use 'colors' as *;
+@use '../tools/functions' as *;
+
 // background-attachment
 $background-attachment: (fixed, local, scroll) !default;
 

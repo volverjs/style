@@ -2,10 +2,10 @@
 @use 'sass:map';
 
 // configuration
-@import 'config';
+@forward 'config';
 
 // tools (mixins, functions, recipes)
-@import 'tools';
+@forward 'tools';
 
 // settings
-@import 'settings';
+@forward 'settings';

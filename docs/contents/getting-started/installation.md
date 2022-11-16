@@ -46,13 +46,14 @@ Or cherry pick what you want.
 You can also import the *SCSS* source for customization or theming.
 
 ```scss
-@import '@volverjs/style/scss';
+@use '@volverjs/style/scss';
 ```
 
 Or only *SCSS* context for *variables*, *mixins* and *functions*.
 
 ```scss
-@import '@volverjs/style/scss/context';
+@use '@volverjs/style/scss/context';
+@debug context.$font-family-sans;
 ```
 
 ### Install with CDN

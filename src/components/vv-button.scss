@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-button);
 $component-map: $vv-button;
@@ -10,7 +10,8 @@ $component-selector: '.#{ $component-name}';
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
 	$zero-specificity: $zero-specificity-for-compoenents,
-	$custom-block: true
+	$custom-block: true,
+	$bps: $breakpoints
 ) {
 	// custom block
 	%#{$component-name} {

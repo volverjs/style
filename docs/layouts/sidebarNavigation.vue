@@ -131,7 +131,7 @@
 </template>
 
 <style lang="scss">
-	@import '@/context';
+	@use '@/context' as *;
 
 	.off-canvas {
 		position: relative;
@@ -175,7 +175,7 @@
 			}
 		}
 
-		@include media-breakpoint-up('md') {
+		@include media-breakpoint-up('md', $breakpoints) {
 			position: relative;
 
 			.off-canvas__aside {

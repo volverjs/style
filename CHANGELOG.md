@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.23] - 2022-11-16
+
+### Changed
+
+-  Move from `@import` to `@use` in all SCSS files.
+
 ## [0.1.2-beta.22] - 2022-11-14
 
 ### Changed
@@ -10,7 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.2-beta.21] - 2022-11-14
 
-### Changed
+### Fixed
 
 -  Some responsive fixes and Safari iOS improvements.
 
@@ -26,13 +32,13 @@ All notable changes to this project will be documented in this file.
 
 -   Added `vv-nav` component for navigation and tabs.
 
-### Changed
+### Fixed
 
 -   Docs for `vv-badge` and `vv-avatar` components.
 
 ## [0.1.2-beta.18] - 2022-11-10
 
-### Changed
+### Fixed
 
 -   Docs for `vv-tooltip` and `vv-alert` components.
 
@@ -48,7 +54,7 @@ All notable changes to this project will be documented in this file.
 
 -   New **vv-toast** component.
 
-### Changed
+### Fixed
 
 -   Docs inner navigation;
 -   **vv-alert** elements structure.
@@ -57,13 +63,13 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
--   Ddd _arrow_ to **vv-tooltip** component.
+-   Added _arrow_ to **vv-tooltip** component.
 
 ## [0.1.2-beta.13] - 2022-11-09
 
 ### Added
 
--   new **vv-tooltip** component.
+-   New **vv-tooltip** component.
 
 ## [0.1.2-beta.12] - 2022-11-08
 
@@ -80,7 +86,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.1.2-beta.10] - 2022-11-07
 
-### Changed
+### Fixed
 
 -   Base url in `vue-router` configuration.
 
@@ -141,6 +147,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card;
 -   vv-text.
 
+[0.1.2-beta.23]: https://github.com/volverjs/style/compare/v0.1.2-beta.22...v0.1.2-beta.23
 [0.1.2-beta.22]: https://github.com/volverjs/style/compare/v0.1.2-beta.21...v0.1.2-beta.22
 [0.1.2-beta.21]: https://github.com/volverjs/style/compare/v0.1.2-beta.20...v0.1.2-beta.21
 [0.1.2-beta.20]: https://github.com/volverjs/style/compare/v0.1.2-beta.19...v0.1.2-beta.20

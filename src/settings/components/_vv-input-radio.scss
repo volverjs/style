@@ -8,6 +8,7 @@ $vv-input-radio: (
 	color: var(--input-color),
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
 	state: (
 		disabled: (
 			opacity: 0.3,

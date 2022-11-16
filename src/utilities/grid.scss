@@ -1,12 +1,13 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // grid template columns
 @include spread-map-into-utilities(
 	$map: $grid-template-columns,
 	$class: grid-cols,
 	$attribute: grid-template-columns,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid column
@@ -14,7 +15,8 @@
 	$map: $grid-column,
 	$class: col,
 	$attribute: grid-column,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid column start/end
@@ -25,7 +27,8 @@
 		$map: $grid-column-start-end,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -34,7 +37,8 @@
 	$map: $grid-template-rows,
 	$class: grid-rows,
 	$attribute: grid-template-rows,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid row
@@ -42,7 +46,8 @@
 	$map: $grid-row,
 	$class: row,
 	$attribute: grid-row,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid row start/end
@@ -51,7 +56,8 @@
 		$map: $grid-row-start-end,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -60,7 +66,8 @@
 	$map: $grid-auto-flow,
 	$class: grid-flow,
 	$attribute: grid-auto-flow,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid auto rows/columns
@@ -71,6 +78,7 @@
 		$map: $grid-auto-rows-columns,
 		$class: $class,
 		$attribute: $attribute,
-		$bps: $breakpoints
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }

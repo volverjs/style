@@ -1,50 +1,57 @@
-@import '../context';
+@use '../context' as *;
 
 // background-attachment
 @include spread-map-into-utilities(
 	$map: $background-attachment,
 	$class: 'bg',
-	$attribute: 'background-attachment'
+	$attribute: 'background-attachment',
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-clip
 @include spread-map-into-utilities(
 	$map: $background-clip,
 	$class: 'bg-clip',
-	$attribute: 'background-clip'
+	$attribute: 'background-clip',
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-origin
 @include spread-map-into-utilities(
 	$map: $background-origin,
 	$class: 'bg-origin',
-	$attribute: 'background-origin'
+	$attribute: 'background-origin',
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-position
 @include spread-map-into-utilities(
 	$map: $background-position,
 	$class: 'bg',
-	$attribute: 'background-position'
+	$attribute: 'background-position',
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-repeat
 @include spread-map-into-utilities(
 	$map: $background-repeat,
 	$class: bg,
-	$attribute: background-repeat
+	$attribute: background-repeat,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-size
 @include spread-map-into-utilities(
 	$map: $background-size,
 	$class: bg,
-	$attribute: background-size
+	$attribute: background-size,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // background-image
 @include spread-map-into-utilities(
 	$map: $background-image,
 	$class: bg,
-	$attribute: background-image
+	$attribute: background-image,
+	$zero-specificity: $zero-specificity-for-utilities
 );

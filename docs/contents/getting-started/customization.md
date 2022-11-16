@@ -43,7 +43,30 @@ You can also overwrite utilities *CSS Custom Property* defined globally.
 }
 ```
 
-### SCSS Variables Maps
+### SCSS Variables
+You can override _SCSS Variables_ defined globally importing `scss/context` with `@use`. 
+
+```scss
+@use '@volverjs/style/scss/context' with (
+	// custom color brand 
+	$color-brand: #45cb85,
+	//custom font sans
+	$font-sans: 'Open Sans', sans-serif,
+);
+@use '@volverjs/style/scss';
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+```
+
+<div class="vv-alert 
+            vv-alert--callout 
+            vv-alert--info" 
+     role="alert">
+    <div class="vv-alert__content">Read more about <code>@use</code> and <code>with</code> in <a href="https://sass-lang.com/documentation/at-rules/use#configuration" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
+</div>
+
+
+### Components
 All components are defined with [BEM](https://getbem.com/) methodology. The style is generated starting from a *SCSS Map* with some keywords.
 
 ```scss
@@ -187,7 +210,7 @@ $vv-button: (
 
 Pseudo elements, by default, have an empty `content` attribute but can be customized.
 
-#### Custom properties
+#### Custom Properties
 Inside the map can also be defined some *custom properties*. Attributes that use these props must be escaped with `[]`.
 
 ```scss
@@ -212,18 +235,18 @@ $vv-button: (
 }
 ```
 
-#### Default override
+#### Maps Customization
 Default maps can be easily overridden without useless code generation.
 
 ```scss
 @use 'sass:map';
 
 // import default settings, functions and mixins
-@import '@volverjs/style/scss/context';
+@use '@volverjs/style/scss/context';
 
 // override vv-button map
-$vv-button: map.deep-merge(
-	$vv-button,
+context.$vv-button: map.deep-merge(
+	contex.$vv-button,
 	(
 		// change button background
 		background: blue,
@@ -231,18 +254,33 @@ $vv-button: map.deep-merge(
 );
 
 // import volverjs style
-@import '@volverjs/style/scss';
+@use '@volverjs/style/scss';
 ```
 
 Also the utilities classes can be modified with the same approach. 
 
 ```scss
+@use 'sass:map';
+
+// import default settings, functions and mixins
+@use '@volverjs/style/scss/context';
+
 // override aspect-ratio map
-$aspect-ratio: map.deep-merge(
-	$aspect-ratio,
+context.$aspect-ratio: map.deep-merge(
+	contex.$aspect-ratio,
 	(
 		// add cinemascope aspect ratio
 		cinemascope: '2.35/1',
 	)
 );
+
+// import volverjs style
+@use '@volverjs/style/scss';
 ```
+
+<div class="vv-alert 
+            vv-alert--callout 
+            vv-alert--info" 
+     role="alert">
+    <div class="vv-alert__content">Read more about <code>map.deep-merge</code> in <a href="https://sass-lang.com/documentation/modules/map#deep-merge" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
+</div>

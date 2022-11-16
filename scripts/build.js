@@ -13,7 +13,7 @@ packageJson.exports = {
 	'./scss/functions': './src/tools/_functions.scss',
 	'./scss/mixins': './src/tools/_mixins.scss',
 	'./scss/settings': './src/settings/_index.scss',
-	'./scss/preflight': './src/settings/_preflight.scss',
+	'./scss/preflight': './src/_preflight.scss',
 }
 
 // get scss files

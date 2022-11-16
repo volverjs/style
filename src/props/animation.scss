@@ -1,4 +1,4 @@
-@import '../context';
+@use '../context' as *;
 
 :where(:host, :root, .theme) {
 	@media (prefers-reduced-motion: no-preference) {

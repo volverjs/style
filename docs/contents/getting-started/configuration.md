@@ -15,11 +15,13 @@ An other reason could be to avoid the change of components style with utilities.
 You can configure the specificity of components and utilities by setting the `$zero-specificity-for-compoenents` and the `$zero-specificity-for-utilities` variables.
 
 ```scss
-// disable zero specificity for compoenents
-$zero-specificity-for-compoenents: false;
-
-// enable zero specificity for utilities
-$zero-specificity-for-utilities: true;
+@use '@volverjs/style/scss/context' with (
+	// disable zero specificity for compoenents
+	$zero-specificity-for-compoenents: false,
+	// enable zero specificity for utilities
+	$zero-specificity-for-utilities: true,
+);
+@use '@volverjs/style/scss';
 ```
 
 
@@ -27,15 +29,30 @@ $zero-specificity-for-utilities: true;
 By default every component attribute is defined by a *CSS Custom Property* so it can be overwritten easily. If you want to disable this feature you can set the `$use-custom-props-for-components` variable to `false`.
 
 ```scss
-$use-custom-props-for-components: false;
+@use '@volverjs/style/scss/context' with (
+	// disable custom properties for components
+	$use-custom-props-for-components: false,
+);
+@use '@volverjs/style/scss';
 ```
 
+<div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
+    <div class="vv-alert__title">Warning</div>
+    <div class="vv-alert__content">
+        Disabling the use of CSS Custom Properties for components will not permit to use themes.
+    </div>
+</div>
+
+
 ### Components Names
-By default all components are defined with [BEM](https://getbem.com/) methodology and the they have a `vv-` prefix. If you want to change the prefix or the methodology you can set the `$components-prefix` variable.
+By default all components are defined with [BEM](https://getbem.com/) methodology and the they have a `vv-` prefix. If you want to change the prefix you can set the `$components-prefix` variable.
 
 ```scss
-// components prefix
-$components-prefix: my;
+@use '@volverjs/style/scss/context' with (
+	// custom components prefix
+	$components-prefix: my,
+);
+@use '@volverjs/style/scss';
 
 // now all components have a `my-` prefix
 // example: my-button, my-button--primary, my-button__icon
@@ -46,13 +63,18 @@ If you want a completely different name for a component you can set the `$compon
 ```scss
 @use 'sass:map';
 
-$components-names: map.deep-merge(
-	$components-names,
+// import default settings, functions and mixins
+@use '@volverjs/style/scss/context';
+
+// override components names
+context.$components-names: map.deep-merge(
+	context.$components-names,
 	(
 		// change button name
 		vv-button: 'btn',
 	)
 );
+@use '@volverjs/style/scss';
 
 // now vv-button class is btn
 // example: btn, btn--primary, btn__icon

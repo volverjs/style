@@ -18,15 +18,16 @@
 </template>
 
 <style lang="scss">
-	// custom font
-	$font-family-sans: 'Open Sans', sans-serif;
+	@use '@/context' as * with (
+		$font-family-sans: "'Open Sans', sans-serif"
+	);
+	@use '@/volver';
+	@use '@/themes/dark/volver' as volverDark;
 
-	@import '@/context';
-	@import '@/volver';
-	@import '@/themes/dark/volver';
-	@import 'vue-live/lib/vue-live.esm.css';
-	@import '@docs/assets/scss/prism-themes/light';
-	@import '@docs/assets/scss/prism-themes/dark';
+	// code highlighting
+	@use 'vue-live/lib/vue-live.esm.css';
+	@use '@docs/assets/scss/prism-themes/light';
+	@use '@docs/assets/scss/prism-themes/dark';
 
 	html,
 	body,
@@ -67,7 +68,7 @@
 				color: var(--color-brand);
 				text-decoration: none;
 
-				@include media-breakpoint-up('md') {
+				@include media-breakpoint-up('md', $breakpoints) {
 					position: absolute;
 					left: -1.5ch;
 					opacity: 0;

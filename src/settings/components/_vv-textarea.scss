@@ -5,6 +5,7 @@ $vv-textarea: (
 	margin-bottom: var(--input-gap),
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
 	element: (
 		label: (
 			_alias: '> label',

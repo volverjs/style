@@ -1,11 +1,11 @@
 // configuration
-@import '../../config';
+@forward '../../config';
 
 // tools (mixins, functions, recipes)
-@import '../../tools';
+@forward '../../tools';
 
 // main settings
-@import '../../settings';
+@forward '../../settings';
 
 // theme settings
-@import 'settings';
+@forward 'settings';

@@ -1,14 +1,14 @@
 // reset
-@import 'reset';
+@use 'reset';
 
 // props
-@import 'props';
+@use 'props';
 
 // components
-@import 'components';
+@use 'components';
 
 // utilities
-@import 'utilities';
+@use 'utilities';
 
 // preflight
 @import 'preflight';

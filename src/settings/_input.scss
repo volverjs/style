@@ -12,6 +12,7 @@ $input: (
 	line-height: var(--leading-normal),
 	font-size: var(--text-16),
 	min-height: var(--spacing-50),
+	min-width: 0,
 	label: (
 		color: var(--color-word-3),
 		display: block,

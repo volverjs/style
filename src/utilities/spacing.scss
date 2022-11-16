@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 @each $prefix, $prop in (m: margin, p: padding, n: margin) {
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {

@@ -1,5 +1,7 @@
 @use 'sass:color';
 @use 'sass:map';
+@use '../../../tools/functions' as *;
+@use '../../../settings/colors' as *;
 
 $dark-color-scheme: dark !default;
 $dark-color-brand: #1976d2 !default;

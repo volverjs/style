@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-tab);
 $component-map: $vv-tab;
@@ -8,5 +8,6 @@ $component-map: $vv-tab;
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents
+	$zero-specificity: $zero-specificity-for-compoenents,
+	$bps: $breakpoints
 );

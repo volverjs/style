@@ -1,11 +1,12 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // transition property
 @include spread-map-into-utilities(
 	$map: $transition-property,
 	$class: transition,
-	$attribute: transition-property
+	$attribute: transition-property,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // transition duration and transition delay
@@ -15,7 +16,8 @@
 	@include spread-map-into-utilities(
 		$map: $transition-duration-delay,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -23,5 +25,6 @@
 @include spread-map-into-utilities(
 	$map: $transition-timing-function,
 	$class: ease,
-	$attribute: transition-timing-function
+	$attribute: transition-timing-function,
+	$zero-specificity: $zero-specificity-for-utilities
 );

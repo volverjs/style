@@ -1,12 +1,13 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // font-family
 @include spread-map-into-utilities(
 	$map: $font-family,
 	$class: font,
 	$attribute: font-family,
-	$prop: font
+	$prop: font,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // font-weight
@@ -14,7 +15,8 @@
 	$map: $font-weight,
 	$class: font,
 	$attribute: font-weight,
-	$prop: font
+	$prop: font,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // font-size
@@ -23,7 +25,8 @@
 	$class: text,
 	$attribute: font-size,
 	$prop: text,
-	$deep: false
+	$deep: false,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // font-style
@@ -75,7 +78,8 @@
 	$map: $line-height,
 	$class: leading,
 	$attribute: line-height,
-	$prop: leading
+	$prop: leading,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // letter-spacing
@@ -83,67 +87,77 @@
 	$map: $letter-spacing,
 	$class: tracking,
 	$attribute: letter-spacing,
-	$prop: tracking
+	$prop: tracking,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // font-variant-numeric
 @include spread-map-into-utilities(
 	$map: $font-variant-numeric,
-	$attribute: font-variant-numeric
+	$attribute: font-variant-numeric,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // list-style-type
 @include spread-map-into-utilities(
 	$map: $list-style-type,
 	$class: list,
-	$attribute: list-style-type
+	$attribute: list-style-type,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // list-style-position
 @include spread-map-into-utilities(
 	$map: $list-style-position,
 	$class: list,
-	$attribute: list-style-position
+	$attribute: list-style-position,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-align
 @include spread-map-into-utilities(
 	$map: $text-align,
 	$class: text,
-	$attribute: text-align
+	$attribute: text-align,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-decorator-line
 @include spread-map-into-utilities(
 	$map: $text-decorator-line,
-	$attribute: text-decoration-line
+	$attribute: text-decoration-line,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-decorator-style
 @include spread-map-into-utilities(
 	$map: $text-decorator-style,
 	$class: decoration,
-	$attribute: text-decoration-style
+	$attribute: text-decoration-style,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-decorator-thickness
 @include spread-map-into-utilities(
 	$map: $text-decorator-thickness,
 	$class: decoration,
-	$attribute: text-decoration-thickness
+	$attribute: text-decoration-thickness,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-underline-offset
 @include spread-map-into-utilities(
 	$map: $text-underline-offset,
 	$class: underline-offset,
-	$attribute: text-underline-offset
+	$attribute: text-underline-offset,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-transform
 @include spread-map-into-utilities(
 	$map: $text-transform,
-	$attribute: text-transform
+	$attribute: text-transform,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-overflow
@@ -215,12 +229,14 @@
 @include spread-map-into-utilities(
 	$map: $vertical-align,
 	$class: align,
-	$attribute: vertical-align
+	$attribute: vertical-align,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // white-space
 @include spread-map-into-utilities(
 	$map: $white-space,
 	$class: whitespace,
-	$attribute: white-space
+	$attribute: white-space,
+	$zero-specificity: $zero-specificity-for-utilities
 );

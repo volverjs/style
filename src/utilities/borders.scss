@@ -1,12 +1,13 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // border-radius
 @include spread-map-into-utilities(
 	$map: $border-radius,
 	$class: rounded,
 	$attribute: border-radius,
-	$prop: rounded
+	$prop: rounded,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @each $x-key, $x-value in (t: top, b: bottom) {
@@ -17,7 +18,8 @@
 			border- + $x-value + -left-radius,
 			border- + $x-value + -right-radius,
 		),
-		$prop: rounded
+		$prop: rounded,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 
 	@each $y-key, $y-value in (r: right, l: left) {
@@ -27,7 +29,8 @@
 			$attribute: (
 				border- + $x-value + '-' + $y-value + -radius,
 			),
-			$prop: rounded
+			$prop: rounded,
+			$zero-specificity: $zero-specificity-for-utilities
 		);
 	}
 }
@@ -37,7 +40,8 @@
 	$map: $border-width,
 	$class: border,
 	$attribute: border-width,
-	$prop: border
+	$prop: border,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
@@ -47,7 +51,8 @@
 		border-right-width,
 		border-left-width,
 	),
-	$prop: border
+	$prop: border,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
@@ -57,7 +62,8 @@
 		border-top-width,
 		border-bottom-width,
 	),
-	$prop: border
+	$prop: border,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @each $key, $value in (t: top, r: right, b: bottom, l: left) {
@@ -67,7 +73,8 @@
 		$attribute: (
 			border- + $value + -width,
 		),
-		$prop: border
+		$prop: border,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -75,5 +82,6 @@
 @include spread-map-into-utilities(
 	$map: $border-style,
 	$class: border,
-	$attribute: border-style
+	$attribute: border-style,
+	$zero-specificity: $zero-specificity-for-utilities
 );

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-button-group);
 $component-map: $vv-button-group;
@@ -11,7 +11,8 @@ $button-component-selector: '.' + $button-component-name;
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents
+	$zero-specificity: $zero-specificity-for-compoenents,
+	$bps: $breakpoints
 );
 
 // if has block modifier

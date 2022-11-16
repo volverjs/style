@@ -17,8 +17,8 @@ You can load the theme file *CSS* after the main one.
 Same as for the *SCSS* source.
 
 ```scss
-@import '@volverjs/style/scss';
-@import '@volverjs/style/scss/themes/dark';
+@use '@volverjs/style/scss';
+@use '@volverjs/style/scss/themes/dark';
 ```
 
 ### Color Scheme
