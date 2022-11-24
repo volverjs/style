@@ -11,7 +11,7 @@ $button-component-selector: '.' + $button-component-name;
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents
+	$zero-specificity: $zero-specificity-for-components
 );
 
 // if has block modifier
@@ -22,7 +22,7 @@ $button-component-selector: '.' + $button-component-name;
 				@include wrap-with-where(
 					$selector:
 						'&.active, &#{$button-component-selector}--active, &:active',
-					$enabled: $zero-specificity-for-compoenents
+					$enabled: $zero-specificity-for-components
 				) {
 					z-index: 1;
 				}
@@ -31,7 +31,7 @@ $button-component-selector: '.' + $button-component-name;
 
 		@include wrap-with-where(
 			$selector: $button-component-selector,
-			$enabled: $zero-specificity-for-compoenents
+			$enabled: $zero-specificity-for-components
 		) {
 			flex: 1;
 		}
@@ -48,7 +48,7 @@ $button-component-selector: '.' + $button-component-name;
 					// clear top border-radius for first child
 					@include wrap-with-where(
 						$selector: '&:not(:first-child)',
-						$enabled: $zero-specificity-for-compoenents
+						$enabled: $zero-specificity-for-components
 					) {
 						border-top-right-radius: 0;
 						border-top-left-radius: 0;
@@ -57,7 +57,7 @@ $button-component-selector: '.' + $button-component-name;
 					// clear bottom border-radius for last child
 					@include wrap-with-where(
 						$selector: '&:not(:last-child)',
-						$enabled: $zero-specificity-for-compoenents
+						$enabled: $zero-specificity-for-components
 					) {
 						border-bottom-right-radius: 0;
 						border-bottom-left-radius: 0;
@@ -67,7 +67,7 @@ $button-component-selector: '.' + $button-component-name;
 					@if map.get($vv-button, 'border-width') {
 						@include wrap-with-where(
 							$selector: '&:not(:last-child, :last-child)',
-							$enabled: $zero-specificity-for-compoenents
+							$enabled: $zero-specificity-for-components
 						) {
 							margin-block: calc(
 								map.get($vv-button, 'border-width') * -1
@@ -83,7 +83,7 @@ $button-component-selector: '.' + $button-component-name;
 				// clear left border-radius for first child
 				@include wrap-with-where(
 					$selector: '&:not(:first-child)',
-					$enabled: $zero-specificity-for-compoenents
+					$enabled: $zero-specificity-for-components
 				) {
 					border-top-left-radius: 0;
 					border-bottom-left-radius: 0;
@@ -92,7 +92,7 @@ $button-component-selector: '.' + $button-component-name;
 				// clear right border-radius for first child
 				@include wrap-with-where(
 					$selector: '&:not(:last-child)',
-					$enabled: $zero-specificity-for-compoenents
+					$enabled: $zero-specificity-for-components
 				) {
 					border-top-right-radius: 0;
 					border-bottom-right-radius: 0;
@@ -102,7 +102,7 @@ $button-component-selector: '.' + $button-component-name;
 				@if map.get($vv-button, 'border-width') {
 					@include wrap-with-where(
 						$selector: '&:not(:last-child, :last-child)',
-						$enabled: $zero-specificity-for-compoenents
+						$enabled: $zero-specificity-for-components
 					) {
 						margin-inline: calc(
 							map.get($vv-button, 'border-width') * -1
