@@ -12,12 +12,12 @@ In some circumstances you may want to increase the specificity of components or 
 
 An other reason could be to avoid the change of components style with utilities.
 
-You can configure the specificity of components and utilities by setting the `$zero-specificity-for-compoenents` and the `$zero-specificity-for-utilities` variables.
+You can configure the specificity of components and utilities by setting the `$zero-specificity-for-components` and the `$zero-specificity-for-utilities` variables.
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// disable zero specificity for compoenents
-	$zero-specificity-for-compoenents: false,
+	// disable zero specificity for components
+	$zero-specificity-for-components: false,
 	// enable zero specificity for utilities
 	$zero-specificity-for-utilities: true,
 );

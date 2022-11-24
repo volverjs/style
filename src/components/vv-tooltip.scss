@@ -9,20 +9,20 @@ $component-selector: '.#{ $component-name}';
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents,
+	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
 
 @include wrap-with-where(
 	$selector: '*:has(#{$component-selector})',
-	$enabled: $zero-specificity-for-compoenents
+	$enabled: $zero-specificity-for-components
 ) {
 	position: relative;
 }
 
 @include wrap-with-where(
 	$selector: '*:has(> #{$component-selector})',
-	$enabled: $zero-specificity-for-compoenents
+	$enabled: $zero-specificity-for-components
 ) {
 	&:hover,
 	&:focus-visible,
