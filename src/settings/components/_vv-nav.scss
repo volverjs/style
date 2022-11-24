@@ -13,7 +13,6 @@ $vv-nav: (
 			_alias: 'li',
 		),
 		heading-label: (
-			_alias: '[aria-hidden="true"]',
 			display: block,
 			font-weight: var(--font-semibold),
 			[padding]: var(--nav-item-padding),

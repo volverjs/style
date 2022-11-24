@@ -1,16 +1,17 @@
 $vv-button: (
 	--button-border-width: var(--border-2),
+	--button-line-height: var(--leading-normal),
+	[border-width]: var(--button-border-width),
+	[line-height]: var(--button-line-height),
 	position: relative,
 	background: var(--color-brand),
 	border-radius: 0.5ch,
-	[border-width]: var(--button-border-width),
 	border-style: solid,
 	border-color: var(--color-brand),
 	color: var(--color-white),
 	font-family: var(--font-sans),
 	font-weight: var(--font-semibold),
 	gap: 1ch,
-	line-height: var(--leading-normal),
 	padding-block: 0.75ch,
 	padding-inline: 1.75ch,
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
@@ -51,6 +52,7 @@ $vv-button: (
 			flex-shrink: 0,
 			stroke-linecap: round,
 			stroke-linejoin: round,
+			[min-height]: calc(var(--button-line-height) * 1em),
 		),
 		label: (
 			white-space: nowrap,
@@ -99,7 +101,7 @@ $vv-button: (
 					background: var(--color-gray-lighten-3),
 				),
 				selected: (
-					background: var(--color-gray-lighten-3),
+					background: var(--color-gray-lighten-4),
 				),
 			),
 		),
@@ -216,14 +218,14 @@ $vv-button: (
 		),
 		action: (
 			--button-border-width: var(--border),
-			font-size: 0.875em,
+			--button-line-height: var(--leading-snug),
+			font-size: var(--text-14),
 			background: var(--color-surface-1),
 			color: var(--color-word-1),
 			border-color: var(--color-word-5),
 			font-weight: var(--font-normal),
 			padding-inline: 0.75ch,
 			padding-block: 0.5ch,
-			line-height: var(--leading-snug),
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -251,6 +253,7 @@ $vv-button: (
 		),
 		action-quiet: (
 			--button-border-width: var(--border),
+			--button-line-height: var(--leading-snug),
 			font-size: var(--text-14),
 			background: transparent,
 			color: var(--color-word-1),
@@ -258,7 +261,6 @@ $vv-button: (
 			font-weight: var(--font-normal),
 			padding-inline: 0.75ch,
 			padding-block: 0.5ch,
-			line-height: var(--leading-snug),
 			text-shadow: none,
 			state: (
 				focus-visible: (

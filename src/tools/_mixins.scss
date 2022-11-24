@@ -137,6 +137,10 @@
 						$default: $key;
 					}
 
+					@if type-of($default) == 'string' {
+						$default: string.unquote($default);
+					}
+
 					%#{$prefix}#{$class-name} {
 						@include media-breakpoint-up($breakpoint, $bps) {
 							@if type-of($attribute) != 'list' {
@@ -648,7 +652,9 @@
 			outer-spin-button,
 			progress-bar,
 			progress-value,
-			progress-inner-element
+			progress-inner-element,
+			datetime-edit-fields-wrapper,
+			datetime-edit-day-field
 		),
 		$pseudo-element
 	)
@@ -711,6 +717,8 @@
 										progress-value,
 										inner-element,
 										marker,
+										datetime-edit-fields-wrapper,
+										datetime-edit-day-field,
 										-webkit-progress-bar,
 										-webkit-progress-value,
 										-webkit-inner-element,

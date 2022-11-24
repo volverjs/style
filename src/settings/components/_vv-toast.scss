@@ -93,7 +93,6 @@ $vv-toast: (
 			[animation]: pie-masks var(--toast-pie-animation-duration)
 				steps(1, end) reverse,
 			z-index: 1,
-			opactiy: 1,
 		),
 	),
 	modifier: (

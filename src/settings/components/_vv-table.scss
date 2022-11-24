@@ -4,6 +4,10 @@ $vv-table: (
 	border-collapse: collapse,
 	border-color: var(--color-surface-5),
 	element: (
+		caption: (
+			_alias: 'caption',
+			caption-side: bottom,
+		),
 		tr: (
 			_alias: 'tr',
 			border-width: 0 0 1px 0,
@@ -24,12 +28,14 @@ $vv-table: (
 			font-weight: semibold,
 			font-size: var(--text-sm),
 			color: var(--color-word-2),
+			vertical-align: middle,
 			[padding]: var(--table-cell-padding),
 		),
 		td: (
 			_alias: 'td',
 			border-style: solid,
 			font-size: var(--text-xs),
+			vertical-align: middle,
 			[padding]: var(--table-cell-padding),
 		),
 	),

@@ -51,7 +51,7 @@ You can override _SCSS Variables_ defined globally importing `scss/context` with
 	// custom color brand 
 	$color-brand: #45cb85,
 	//custom font sans
-	$font-sans: 'Open Sans', sans-serif,
+	$font-family-sans: 'Open Sans', sans-serif,
 );
 @use '@volverjs/style/scss';
 

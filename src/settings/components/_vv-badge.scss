@@ -10,7 +10,6 @@ $vv-badge: (
 	[border-color]: var(--badge-background-color),
 	border-style: solid,
 	border-radius: 0.5em,
-	line-height: 2em,
 	min-height: 2em,
 	min-width: 2em,
 	padding: 0 0.5em,
@@ -50,11 +49,19 @@ $vv-badge: (
 			[color]: var(--badge-background-color),
 		),
 		white: (
-			--badge-background-color: alpha-color('white', 80%),
+			--badge-background-color:
+				hsla(
+					var(--color-white-hue) var(--color-white-saturation)
+						var(--color-white-lightness) / 80%
+				),
 			--badge-color: var(--color-black),
 		),
 		black: (
-			--badge-background-color: alpha-color('black', 80%),
+			--badge-background-color:
+				hsla(
+					var(--color-black-hue) var(--color-black-saturation)
+						var(--color-black-lightness) / 80%
+				),
 			--badge-color: var(--color-white),
 		),
 		danger: (
