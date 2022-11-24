@@ -9,7 +9,7 @@ $component-selector: '.#{ $component-name}';
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents,
+	$zero-specificity: $zero-specificity-for-components,
 	$custom-block: true
 ) {
 	// custom block
@@ -37,7 +37,7 @@ $component-selector: '.#{ $component-name}';
 
 	@include wrap-with-where(
 		$selector: $component-selector,
-		$enabled: $zero-specificity-for-compoenents
+		$enabled: $zero-specificity-for-components
 	) {
 		&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
 		&::file-selector-button {
