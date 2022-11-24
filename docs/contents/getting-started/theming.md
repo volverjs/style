@@ -28,10 +28,10 @@ The light or dark theme can be forced by the `theme--light` and `theme--dark` mo
 
 ```html
 <!-- light theme -->
-<html lang="eng" dir="ltr" class="theme theme--light">
+<html lang="en" dir="ltr" class="theme theme--light">
 
 <!-- dark theme -->
-<html lang="eng" dir="ltr" class="theme theme--dark">
+<html lang="en" dir="ltr" class="theme theme--dark">
 ```
 
 #### Section Theme
