@@ -30,10 +30,6 @@ $component-selector: '.#{ $component-name}';
 			$prefix: $component-name,
 			$props: $use-custom-props-for-components
 		);
-
-		@media (prefers-reduced-motion: reduce) {
-			transition: none;
-		}
 	}
 
 	@include wrap-with-where(

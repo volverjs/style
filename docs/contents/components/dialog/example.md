@@ -9,39 +9,22 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             return {
                 transition: 'fade-block',
                 size: 'standard',
-                transitionClasses: new Set()
-            }
-        },
-        methods:{
-            openDialog() {
-                this.transitionClasses.add(`vv-dialog--${this.transition}-enter-from`)
-                this.$nextTick(() => {
-                    this.$refs.dialog.showModal()
-                    this.transitionClasses.add(`vv-dialog--${this.transition}-enter-active`)
-                    this.transitionClasses.delete(`vv-dialog--${this.transition}-enter-from`)
-                })
-                this.$refs.dialog.addEventListener('transitionend', () => {
-                    this.transitionClasses.delete(`vv-dialog--${this.transition}-enter-active`)
-                }, { once: true })
-            },
-            closeDialog() {
-                this.transitionClasses.add(`vv-dialog--${this.transition}-leave-to`)
-                this.$nextTick(() => {
-                    this.transitionClasses.add(`vv-dialog--${this.transition}-leave-active`)
-                })
-                this.$refs.dialog.addEventListener('transitionend', () => {
-                    this.$refs.dialog.close()
-                    this.transitionClasses.delete(`vv-dialog--${this.transition}-leave-to`)
-                    this.transitionClasses.delete(`vv-dialog--${this.transition}-leave-active`)
-                }, { once: true })
+                open: false,
+                openAttribute: false,
             }
         },
         computed: {
-            dialogClasses() {
-                const toReturn = Array.from(this.transitionClasses)
-                toReturn.push(`vv-dialog--${this.size}`)
-                return toReturn
+            transitionName: function() {
+                return `vv-dialog--${this.transition}`
             }
+        },
+        methods: {
+            toggleOpen() {
+                this.open = !this.open;
+            },
+            toggleOpenAttribute() {
+                this.openAttribute = !this.openAttribute;
+            },
         }
     }
 </script>
@@ -113,33 +96,35 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             </label>
         </div>
     </fieldset>
-    <button type="button" class="vv-button mr-auto" @click.stop="openDialog">
+    <button type="button" class="vv-button mr-auto" @click.stop="toggleOpen">
         Open Dialog
     </button>
-    <dialog id="dialog" ref="dialog" class="vv-dialog" :class="dialogClasses">
-        <article class="vv-dialog__wrapper">
-            <header class="vv-dialog__header">
-                Dialog title 
-                <button class="vv-dialog__close" type="buttom" aria-label="Close" @click.stop="closeDialog"></button>
-            </header>
-            <div class="vv-dialog__content">
-                <p>
-                    Nunc nec ligula a tortor sollicitudin dictum in vel enim.
-                    Quisque facilisis turpis vel eros dictum aliquam et nec
-                    turpis. Sed eleifend a dui nec ullamcorper. Praesent
-                    vehicula lacus ac justo accumsan ullamcorper.
-                </p>
-            </div>
-            <footer class="vv-dialog__footer">
-                <div class="vv-button-group" role="group">
-                    <button type="button" class="vv-button vv-button--secondary" @click.stop="closeDialog">
-                        Cancel
-                    </button>
-                    <button type="button" class="vv-button" @click.stop="closeDialog">
-                        Confirm
-                    </button>
+    <Transition :name="transitionName" @after-leave="toggleOpenAttribute" @before-enter="toggleOpenAttribute">
+        <dialog v-show="open" id="dialog" ref="dialog" class="vv-dialog" :class="`vv-dialog--${size}`" :open="openAttribute">
+            <article class="vv-dialog__wrapper">
+                <header class="vv-dialog__header">
+                    Dialog title 
+                    <button class="vv-dialog__close" type="buttom" aria-label="Close" @click.stop="toggleOpen"></button>
+                </header>
+                <div class="vv-dialog__content">
+                    <p>
+                        Nunc nec ligula a tortor sollicitudin dictum in vel enim.
+                        Quisque facilisis turpis vel eros dictum aliquam et nec
+                        turpis. Sed eleifend a dui nec ullamcorper. Praesent
+                        vehicula lacus ac justo accumsan ullamcorper.
+                    </p>
                 </div>
-            </footer>
-        </article>
-    </dialog>
+                <footer class="vv-dialog__footer">
+                    <div class="vv-button-group" role="group">
+                        <button type="button" class="vv-button vv-button--secondary" @click.stop="toggleOpen">
+                            Cancel
+                        </button>
+                        <button type="button" class="vv-button" @click.stop="toggleOpen">
+                            Confirm
+                        </button>
+                    </div>
+                </footer>
+            </article>
+        </dialog>
+    </Transition>
 </template>

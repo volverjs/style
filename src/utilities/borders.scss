@@ -41,6 +41,7 @@
 	$class: border,
 	$attribute: border-width,
 	$prop: border,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -51,6 +52,7 @@
 		border-right-width,
 		border-left-width,
 	),
+	$bps: $breakpoints,
 	$prop: border,
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -62,6 +64,7 @@
 		border-top-width,
 		border-bottom-width,
 	),
+	$bps: $breakpoints,
 	$prop: border,
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -73,6 +76,7 @@
 		$attribute: (
 			border- + $value + -width,
 		),
+		$bps: $breakpoints,
 		$prop: border,
 		$zero-specificity: $zero-specificity-for-utilities
 	);
@@ -83,5 +87,6 @@
 	$map: $border-style,
 	$class: border,
 	$attribute: border-style,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );

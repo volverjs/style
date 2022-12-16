@@ -41,7 +41,7 @@ $vv-input-radio: (
 					border-radius: 50%,
 					transform: translate(-50%, -50%) scale(0),
 					will-change: transform,
-					transition: transform 0.3s ease-in-out,
+					transition: var(--transition-transform),
 				),
 			),
 			state: (

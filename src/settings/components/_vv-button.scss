@@ -15,7 +15,7 @@ $vv-button: (
 	padding-block: 0.75ch,
 	padding-inline: 1.75ch,
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
-	transition: all 0.3s ease-in-out,
+	transition: var(--transition-all),
 	will-change: all,
 	min-width: 0,
 	state: (

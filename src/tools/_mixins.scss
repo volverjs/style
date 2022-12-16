@@ -857,6 +857,7 @@
 	$modifiers-key: 'modifier',
 	$states-key: 'state',
 	$breakpoints-key: 'breakpoint',
+	$transitions-key: 'transition',
 	$props: true,
 	$zero-specificity: true,
 	$custom-props: false,
@@ -865,6 +866,7 @@
 	$custom-modifiers: false,
 	$custom-states: false,
 	$custom-breakpoints: false,
+	$custom-transitions: false,
 	$bps: (xxs: 0)
 ) {
 	@if type-of($map) == 'map' and $block != '' {
@@ -951,6 +953,21 @@
 			}
 		}
 
+		// transition
+		@if not $custom-transitions {
+			@if map.has-key($map, $transitions-key) {
+				@include spread-map-into-transitions(
+					$map: $map,
+					$prefix: $block,
+					$key: $transitions-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
+				);
+			}
+		}
+
 		// breakpoints
 		@if not $custom-breakpoints {
 			@if map.has-key($map, $breakpoints-key) {
@@ -963,6 +980,84 @@
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
+			}
+		}
+	}
+}
+
+// Transform a map into a list of transitions
+@mixin spread-map-into-transitions(
+	$map: (),
+	$prefix: '',
+	$key: 'transition',
+	$block: null,
+	$props: true,
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $transition, $states in map.get($map, $key) {
+			@each $state, $value in $states {
+				@if $state in [ 'enter-from', 'enter-active', 'enter-to',
+					'leave-from', 'leave-active', 'leave-to', 'active',
+					'inert' ] and type-of($value) == 'map'
+				{
+					$selector: '.#{$transition}';
+
+					@if $prefix != '' {
+						$selector: '.#{$prefix}--#{$transition}';
+					}
+
+					@if $state == 'active' {
+						$selector: (
+							'#{$selector}-enter-active',
+							'#{$selector}-leave-active'
+						);
+					} @else if $state == 'inert' {
+						$selector: (
+							'#{$selector}-enter-from',
+							'#{$selector}-leave-to'
+						);
+					} @else {
+						$selector: '#{$selector}-#{$state}';
+					}
+
+					// map props and attributes
+					@include wrap-with-where(
+						$selector,
+						$enabled: $zero-specificity
+					) {
+						@include spread-map-into-attrs(
+							$map: $value,
+							$prefix: $prefix,
+							$variant: #{$key}-#{$transition}-#{$state},
+							$deep: true,
+							$ignore: (
+								'element',
+							),
+							$props: $props
+						);
+					}
+
+					// map elements
+					@if map.get($value, 'element') {
+						@include spread-map-into-elements(
+							$original: $map,
+							$map: $value,
+							$prefix: #{$prefix}-#{$key}-#{$transition}-#{$state},
+							$key: 'element',
+							$block: $block,
+							$modifier: $selector,
+							$props: $props,
+							$zero-specificity: $zero-specificity
+						);
+					}
+				}
 			}
 		}
 	}

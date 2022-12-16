@@ -4,7 +4,7 @@
 // transition property
 @include spread-map-into-utilities(
 	$map: $transition-property,
-	$class: transition,
+	$class: transition-property,
 	$attribute: transition-property,
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -28,3 +28,19 @@
 	$attribute: transition-timing-function,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+@each $property in $transition-property {
+	@include wrap-with-where(
+		$selector: '.transition-#{$property}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		transition-property: $property;
+		@if $property != 'none' {
+			transition-duration: map.get($transition-duration-delay, '300');
+			transition-timing-function: map.get(
+				$transition-timing-function,
+				'in-out'
+			);
+		}
+	}
+}

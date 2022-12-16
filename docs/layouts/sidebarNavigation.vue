@@ -143,7 +143,7 @@
 			bottom: 0;
 			left: 0;
 			will-change: transform;
-			transition: transform 0.3s ease-in-out;
+			transition: var(--transition-transform);
 			transform: translateX(-100%);
 			z-index: 1;
 		}
@@ -156,7 +156,7 @@
 			right: 0;
 			z-index: 1;
 			will-change: opacity;
-			transition: opacity 0.3s ease-in-out;
+			transition: var(--transition-opacity);
 			opacity: 0;
 			background: rgb(0 0 0 / 10%);
 		}

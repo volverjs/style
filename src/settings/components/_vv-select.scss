@@ -26,7 +26,7 @@ $vv-select: (
 			flex: 1,
 			background-color: var(--input-background-color),
 			will-change: background-color,
-			transition: background-color 0.3s ease-in-out,
+			transition: var(--transition-colors),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -42,7 +42,7 @@ $vv-select: (
 					transform: scaleX(0),
 					transform-origin: left,
 					will-change: transform,
-					transition: transform 0.3s ease-in-out,
+					transition: var(--transition-transform),
 				),
 			),
 			state: (
@@ -209,7 +209,7 @@ $vv-select: (
 					margin: 0,
 					will-change: 'transform',
 					transform-origin: left,
-					transition: all 0.3s ease-in-out,
+					transition: var(--transition-all),
 				),
 				input: (
 					pseudo: (
@@ -223,14 +223,14 @@ $vv-select: (
 				focus-within: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
 							[padding-top]:
-								calc(var(--input-padding-top) + 0.85ch),
+								calc(var(--input-padding-top) + 0.55em),
 							[padding-bottom]:
-								calc(var(--input-padding-bottom) - 0.85ch),
+								calc(var(--input-padding-bottom) - 0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,
@@ -242,14 +242,14 @@ $vv-select: (
 				dirty: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
 							[padding-top]:
-								calc(var(--input-padding-top) + 0.85ch),
+								calc(var(--input-padding-top) + 0.55em),
 							[padding-bottom]:
-								calc(var(--input-padding-bottom) - 0.85ch),
+								calc(var(--input-padding-bottom) - 0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,

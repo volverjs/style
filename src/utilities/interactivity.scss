@@ -1,9 +1,10 @@
+@use 'sass:map';
 @use '../context' as *;
 
-// animate
+// grid template columns
 @include spread-map-into-utilities(
-	$map: $animate,
-	$class: 'animate',
-	$attribute: 'animation',
+	$map: $cursor,
+	$class: cursor,
+	$attribute: cursor,
 	$zero-specificity: $zero-specificity-for-utilities
 );

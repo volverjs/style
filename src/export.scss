@@ -219,7 +219,7 @@
 	// width spacer
 	@each $key, $value in $width {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
+		$name: str-replace($name, '\\/', '_');
 
 		#{'width-spacer__' + $name}: $value;
 	}
@@ -227,7 +227,7 @@
 	// height spacer
 	@each $key, $value in $height {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
+		$name: str-replace($name, '\\/', '_');
 
 		#{'height-spacer__' + $name}: $value;
 	}

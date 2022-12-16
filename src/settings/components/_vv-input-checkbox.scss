@@ -57,7 +57,7 @@ $vv-input-checkbox: (
 					background-color: var(--color-word-5),
 					position: relative,
 					will-change: background-color,
-					transition: background-color 0.3s ease-in-out,
+					transition: var(--transition-colors),
 					pseudo: (
 						after: (
 							width: var(--spacing-20),
@@ -67,7 +67,7 @@ $vv-input-checkbox: (
 							inset: var(--spacing-2) 0 0 var(--spacing-2),
 							background: var(--color-white),
 							will-change: transform,
-							transition: transform 0.3s ease-in-out,
+							transition: var(--transition-transform),
 						),
 					),
 					state: (

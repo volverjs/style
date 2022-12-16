@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.26] - 2022-12-16
+
+### Added
+
+-   Added `vv-skeleton` component.
+-   Added `cursor` utilities and custom properties.
+
+### Removed
+-   Removed `animation` utitlities and custom properties, moved into transitions.
+
+### Changed
+
+-  Update dependencies to support vite@4.0.1
+
 ## [0.1.2-beta.25] - 2022-11-24
 
 ### Fixed
@@ -160,6 +174,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card;
 -   vv-text.
 
+[0.1.2-beta.26]: https://github.com/volverjs/style/compare/v0.1.2-beta.25...v0.1.2-beta.26
 [0.1.2-beta.25]: https://github.com/volverjs/style/compare/v0.1.2-beta.24...v0.1.2-beta.25
 [0.1.2-beta.24]: https://github.com/volverjs/style/compare/v0.1.2-beta.23...v0.1.2-beta.24
 [0.1.2-beta.23]: https://github.com/volverjs/style/compare/v0.1.2-beta.22...v0.1.2-beta.23

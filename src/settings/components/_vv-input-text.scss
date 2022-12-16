@@ -26,7 +26,7 @@ $vv-input-text: (
 			overflow: hidden,
 			background-color: var(--input-background-color),
 			will-change: background-color,
-			transition: background-color 0.3s ease-in-out,
+			transition: var(--transition-colors),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -42,7 +42,7 @@ $vv-input-text: (
 					transform: scaleX(0),
 					transform-origin: left,
 					will-change: transform,
-					transition: transform 0.3s ease-in-out,
+					transition: var(--transition-transform),
 				),
 			),
 			state: (
@@ -80,10 +80,7 @@ $vv-input-text: (
 					opacity: 0,
 				),
 				search-cancel-button: (
-					position: absolute,
-					padding: var(--spacing-sm),
-					top: 0,
-					right: 0,
+					-webkit-appearance: none,
 					opacity: 0,
 				),
 				color-swatch: (
@@ -271,7 +268,7 @@ $vv-input-text: (
 					margin: 0,
 					will-change: 'transform',
 					transform-origin: left,
-					transition: all 0.3s ease-in-out,
+					transition: var(--transition-all),
 				),
 				input: (
 					pseudo: (
@@ -285,11 +282,11 @@ $vv-input-text: (
 				focus-within: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
-							transform: translateY(0.85ch),
+							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,
@@ -301,11 +298,11 @@ $vv-input-text: (
 				dirty: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
-							transform: translateY(0.85ch),
+							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,

@@ -1,11 +1,45 @@
 @use '../context' as *;
 
 :where(:host, :root, .theme) {
+	// animation
 	@media (prefers-reduced-motion: no-preference) {
-		@include spread-map-into-props($animate, $prefix: animate);
+		// transition-property
+		@include spread-map-into-props(
+			$transition-property,
+			$prefix: transition-property
+		);
+
+		// duration
+		@include spread-map-into-props(
+			$transition-duration-delay,
+			$prefix: duration
+		);
+
+		// ease
+		@include spread-map-into-props(
+			$transition-timing-function,
+			$prefix: ease
+		);
+
+		// animation
+		@include spread-map-into-props($animation, animation);
+
+		// transition
+		@each $property, $value in $transition-property {
+			@if $property != 'none' {
+				--transition-#{$property}: var(
+						--transition-property-#{$property}
+					)
+					var(--duration-300)
+					var(--ease-in-out);
+			} @else {
+				--transition-#{$property}: none;
+			}
+		}
 	}
 }
 
+// keyframes
 @keyframes indeterminate {
 	0% {
 		transform: scaleX(0);
@@ -87,5 +121,11 @@
 	50%,
 	100% {
 		opacity: 0;
+	}
+}
+
+@keyframes shine {
+	to {
+		background-position-x: -200%;
 	}
 }

@@ -24,6 +24,7 @@
 	$map: map.merge($font-size, $font-size-dynamic),
 	$class: text,
 	$attribute: font-size,
+	$bps: $breakpoints,
 	$prop: text,
 	$deep: false,
 	$zero-specificity: $zero-specificity-for-utilities

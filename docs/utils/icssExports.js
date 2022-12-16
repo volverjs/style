@@ -1,7 +1,7 @@
 import icssExports from '../../src/export.scss?export'
 
 export default Object.keys(icssExports).reduce((accumulator, key) => {
-	const splittedKey = key.split('__')
+	const splittedKey = key.split('__').map((key) => key.replace(/_/g, '/'))
 	const value = icssExports[key].replaceAll('"', '')
 
 	let current = accumulator
@@ -10,6 +10,7 @@ export default Object.keys(icssExports).reduce((accumulator, key) => {
 			accumulator[subKey] = accumulator[subKey] || {}
 			current = accumulator[subKey]
 		} else {
+			const key = subKey.replace(/_/g, '/')
 			current[subKey] = value
 		}
 	})

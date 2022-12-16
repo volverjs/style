@@ -25,7 +25,7 @@
 	@use '@/themes/dark/volver' as volverDark;
 
 	// code highlighting
-	@use 'vue-live/lib/vue-live.esm.css';
+	@use 'vue-live/style.css';
 	@use '@docs/assets/scss/prism-themes/light';
 	@use '@docs/assets/scss/prism-themes/dark';
 
@@ -72,7 +72,7 @@
 					position: absolute;
 					left: -1.5ch;
 					opacity: 0;
-					transition: opacity 0.3s ease-in-out;
+					transition: var(--transition-opacity);
 				}
 			}
 

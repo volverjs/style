@@ -22,7 +22,7 @@ $vv-nav: (
 			display: flex,
 			align-items: center,
 			will-change: background-color color,
-			transition: all 0.3s ease-in-out,
+			transition: var(--transition-all),
 			color: var(--color-word-3),
 			[padding]: var(--nav-item-padding),
 			state: (

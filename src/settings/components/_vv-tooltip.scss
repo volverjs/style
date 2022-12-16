@@ -17,7 +17,7 @@ $vv-tooltip: (
 	text-align: center,
 	box-shadow: var(--shadow-md),
 	will-change: opacity,
-	transition: opacity 0.3s ease-in-out,
+	transition: var(--transition-opacity),
 	pseudo: (
 		after: (
 			position: absolute,

@@ -1,19 +1,19 @@
 // utilities and custom props
-@forward 'animation';
+@forward 'colors';
+@forward 'background';
 @forward 'borders';
 @forward 'breakpoints';
-@forward 'colors';
-@forward 'layout';
+@forward 'effects';
 @forward 'filters';
 @forward 'flexbox';
 @forward 'grid';
+@forward 'input';
+@forward 'interactivity';
+@forward 'layout';
 @forward 'sizing';
 @forward 'spacing';
-@forward 'typography';
-@forward 'background';
-@forward 'effects';
-@forward 'input';
 @forward 'transitions';
+@forward 'typography';
 
 // components
 @forward 'components/vv-accordion';
@@ -34,6 +34,7 @@
 @forward 'components/vv-nav';
 @forward 'components/vv-progress';
 @forward 'components/vv-select';
+@forward 'components/vv-skeleton';
 @forward 'components/vv-tab';
 @forward 'components/vv-table';
 @forward 'components/vv-text';
