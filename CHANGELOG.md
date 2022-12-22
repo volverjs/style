@@ -6,188 +6,188 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
--   Added `saturation` utility and custom property.
+- Added `saturation` utility and custom property.
 
 ### Fixed
 
--   Transition utilities and custom properties.
--   Preflight theme.
+- Transition utilities and custom properties.
+- Preflight theme.
 
 ### Changed
 
--  Update dependencies to support vite@4.0.3
+- Update dependencies to support vite@4.0.3
 
 ## [0.1.2-beta.26] - 2022-12-16
 
 ### Added
 
--   Added `vv-skeleton` component.
--   Added `cursor` utilities and custom properties.
+- Added `vv-skeleton` component.
+- Added `cursor` utilities and custom properties.
 
 ### Removed
--   Removed `animation` utitlities and custom properties, moved into transitions.
+- Removed `animation` utitlities and custom properties, moved into transitions.
 
 ### Changed
 
--  Update dependencies to support vite@4.0.1
+- Update dependencies to support vite@4.0.1
 
 ## [0.1.2-beta.25] - 2022-11-24
 
 ### Fixed
 
--  Typo in SCSS variable $zero-specificity-for-components, thanks to @tinny77 for the PR [#](https://github.com/volverjs/style/pull/2)
+- Typo in SCSS variable $zero-specificity-for-components, thanks to @tinny77 for the PR [#](https://github.com/volverjs/style/pull/2)
 
 ## [0.1.2-beta.24] - 2022-11-24
 
 ### Fixed
 
--  Some style improvements.
--  Dependencies updates.
+- Some style improvements.
+- Dependencies updates.
 
 ## [0.1.2-beta.23] - 2022-11-16
 
 ### Changed
 
--  Move from `@import` to `@use` in all SCSS files.
+- Move from `@import` to `@use` in all SCSS files.
 
 ## [0.1.2-beta.22] - 2022-11-14
 
 ### Changed
 
--  Added Stackblitz example for *getting-started/customization* in docs.
+- Added Stackblitz example for *getting-started/customization* in docs.
 
 ## [0.1.2-beta.21] - 2022-11-14
 
 ### Fixed
 
--  Some responsive fixes and Safari iOS improvements.
+- Some responsive fixes and Safari iOS improvements.
 
 ## [0.1.2-beta.20] - 2022-11-11
 
 ### Added
 
--   Added `vv-tab` component.
+- Added `vv-tab` component.
 
 ## [0.1.2-beta.19] - 2022-11-11
 
 ### Added
 
--   Added `vv-nav` component for navigation and tabs.
+- Added `vv-nav` component for navigation and tabs.
 
 ### Fixed
 
--   Docs for `vv-badge` and `vv-avatar` components.
+- Docs for `vv-badge` and `vv-avatar` components.
 
 ## [0.1.2-beta.18] - 2022-11-10
 
 ### Fixed
 
--   Docs for `vv-tooltip` and `vv-alert` components.
+- Docs for `vv-tooltip` and `vv-alert` components.
 
 ## [0.1.2-beta.17] - 2022-11-10
 
 ### Added
 
--   New **vv-avatar** component.
+- New **vv-avatar** component.
 
 ## [0.1.2-beta.15] - 2022-11-09
 
 ### Added
 
--   New **vv-toast** component.
+- New **vv-toast** component.
 
 ### Fixed
 
--   Docs inner navigation;
--   **vv-alert** elements structure.
+- Docs inner navigation;
+- **vv-alert** elements structure.
 
 ## [0.1.2-beta.14] - 2022-11-09
 
 ### Added
 
--   Added _arrow_ to **vv-tooltip** component.
+- Added _arrow_ to **vv-tooltip** component.
 
 ## [0.1.2-beta.13] - 2022-11-09
 
 ### Added
 
--   New **vv-tooltip** component.
+- New **vv-tooltip** component.
 
 ## [0.1.2-beta.12] - 2022-11-08
 
 ### Added
 
--   Limit element for **vv-textarea** component;
--   Limit element for **vv-input-text** component.
+- Limit element for **vv-textarea** component;
+- Limit element for **vv-input-text** component.
 
 ## [0.1.2-beta.11] - 2022-11-08
 
 ### Added
 
--   New **vv-alert** component.
+- New **vv-alert** component.
 
 ## [0.1.2-beta.10] - 2022-11-07
 
 ### Fixed
 
--   Base url in `vue-router` configuration.
+- Base url in `vue-router` configuration.
 
 ## [0.1.2-beta.9] - 2022-11-07
 
 ### Changed
 
--   Base url for docs site.
+- Base url for docs site.
 
 ## [0.1.2-beta.8] - 2022-11-07
 
 ### Added
 
--   New docs site;
--   Selected state for all `vv-button` variants.
+- New docs site;
+- Selected state for all `vv-button` variants.
 
 ### Changed
 
--   `vv-button--text` is now `vv-button--link`
+- `vv-button--text` is now `vv-button--link`
 
 ## [0.1.2-beta.7] - 2022-10-26
 
 ### Added
 
--   New **vv-badge** _rounded_ and _small_ modifier;
--   Fix **vv-input-radio** and **vv-input-checkbox** readonly state.
+- New **vv-badge** _rounded_ and _small_ modifier;
+- Fix **vv-input-radio** and **vv-input-checkbox** readonly state.
 
 ## [0.1.2-beta.6] - 2022-10-21
 
 ### Added
 
--   New component **vv-breadcrumb**.
+- New component **vv-breadcrumb**.
 
 ### Changed
 
--   **vv-collapse** is now **vv-accordion**;
--   New **vv-button** _action_ and _action-quite_ modifier.
+- **vv-collapse** is now **vv-accordion**;
+- New **vv-button** _action_ and _action-quite_ modifier.
 
 ## [0.1.1] - 2022-10-18
 
 ### Added
 
--   vv-badge;
--   vv-button;
--   vv-button-group;
--   vv-progress;
--   vv-accordion;
--   vv-dialog;
--   vv-dropdown;
--   vv-input-checkbox;
--   vv-input-checkbox-group;
--   vv-input-radio;
--   vv-input-radio-group;
--   vv-input-text;
--   vv-textarea;
--   vv-select;
--   vv-table;
--   vv-card;
--   vv-text.
+- vv-badge;
+- vv-button;
+- vv-button-group;
+- vv-progress;
+- vv-accordion;
+- vv-dialog;
+- vv-dropdown;
+- vv-input-checkbox;
+- vv-input-checkbox-group;
+- vv-input-radio;
+- vv-input-radio-group;
+- vv-input-text;
+- vv-textarea;
+- vv-select;
+- vv-table;
+- vv-card;
+- vv-text.
 
 [0.1.2-beta.27]: https://github.com/volverjs/style/compare/v0.1.2-beta.26...v0.1.2-beta.27
 [0.1.2-beta.26]: https://github.com/volverjs/style/compare/v0.1.2-beta.25...v0.1.2-beta.26

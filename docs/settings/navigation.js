@@ -99,6 +99,10 @@ export const mainMenu = [
 		children: getUtilitiesGroup('effects'),
 	},
 	{
+		name: 'Filters',
+		children: getUtilitiesGroup('filters'),
+	},
+	{
 		name: 'Transitions & Animation',
 		children: getUtilitiesGroup('transitions'),
 	},

@@ -425,6 +425,25 @@
 	// #endregion
 
 	// ============================================================== */
+	// #region FILTERS
+	// blur
+	@each $key, $value in $blur {
+		#{'blur__' + $key}: $value;
+	}
+
+	// brightness
+	@each $key, $value in $brightness {
+		#{'brightness__' + $key}: $value;
+	}
+
+	// saturation
+	@each $key, $value in $saturation {
+		#{'saturation__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
 	// #region TRANSITIONS & ANIMATIONS
 	// transition property
 	@each $key, $value in $transition-property {
