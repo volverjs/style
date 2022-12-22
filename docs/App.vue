@@ -1,6 +1,4 @@
 <script setup>
-	import { useHead } from '@vueuse/head'
-
 	const isThemeDark = useDark({
 		attribute: 'class',
 		valueDark: 'theme theme--dark',

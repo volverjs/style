@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:string';
 @use '../context' as *;
 
 // transition property
@@ -29,14 +30,14 @@
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
-@each $property in $transition-property {
+@each $property, $value in $transition-property {
 	@include wrap-with-where(
 		$selector: '.transition-#{$property}',
 		$enabled: $zero-specificity-for-utilities
 	) {
-		transition-property: $property;
+		transition-property: string.unquote($value);
 		@if $property != 'none' {
-			transition-duration: map.get($transition-duration-delay, '300');
+			transition-duration: map.get($transition-duration-delay, 300);
 			transition-timing-function: map.get(
 				$transition-timing-function,
 				'in-out'

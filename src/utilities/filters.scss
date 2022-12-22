@@ -16,6 +16,14 @@
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
+// saturation
+@include spread-map-into-utilities(
+	$map: $saturation,
+	$class: saturate,
+	$attribute: filter,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
 // backdrop blur
 @include spread-map-into-utilities(
 	$map: $blur,

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use 'context' as *;
 
-:where(:host, :root, [class*='theme']) {
+:where(:host, :root, .theme) {
 	accent-color: var(--color-brand);
 	background: var(--color-surface);
 	caret-color: var(--color-brand);
@@ -169,7 +169,12 @@
 		}
 
 		// buttons
-		&:where(button, input[type='button'], input[type='submit'], input[type='reset']) {
+		&:where(
+				button,
+				input[type='button'],
+				input[type='submit'],
+				input[type='reset']
+			) {
 			@extend %vv-button !optional;
 
 			&:where([type='button']) {
@@ -205,7 +210,12 @@
 			}
 
 			&
-				+ :where(button, input[type='button'], input[type='submit'], input[type='reset']) {
+				+ :where(
+					button,
+					input[type='button'],
+					input[type='submit'],
+					input[type='reset']
+				) {
 				@extend %ml-sm !optional;
 			}
 		}
@@ -365,11 +375,29 @@
 		}
 
 		// input text
-		&:where(label:has(+ input:not([type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset']))) {
+		&:where(
+				label:has(
+						+ input:not(
+								[type='radio'],
+								[type='checkbox'],
+								[type='button'],
+								[type='submit'],
+								[type='reset']
+							)
+					)
+			) {
 			@extend %vv-input-text__label !optional;
 		}
 
-		&:where(input:not([type='radio'], [type='checkbox'], [type='button'], [type='submit'], [type='reset'])) {
+		&:where(
+				input:not(
+						[type='radio'],
+						[type='checkbox'],
+						[type='button'],
+						[type='submit'],
+						[type='reset']
+					)
+			) {
 			@extend %w-full !optional;
 			@extend %vv-input-text !optional;
 			@extend %vv-input-text__wrapper !optional;

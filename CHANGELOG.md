@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.27] - 2022-12-22
+
+### Added
+
+-   Added `saturation` utility and custom property.
+
+### Fixed
+
+-   Transition utilities and custom properties.
+-   Preflight theme.
+
+### Changed
+
+-  Update dependencies to support vite@4.0.3
+
 ## [0.1.2-beta.26] - 2022-12-16
 
 ### Added
@@ -174,6 +189,7 @@ All notable changes to this project will be documented in this file.
 -   vv-card;
 -   vv-text.
 
+[0.1.2-beta.27]: https://github.com/volverjs/style/compare/v0.1.2-beta.26...v0.1.2-beta.27
 [0.1.2-beta.26]: https://github.com/volverjs/style/compare/v0.1.2-beta.25...v0.1.2-beta.26
 [0.1.2-beta.25]: https://github.com/volverjs/style/compare/v0.1.2-beta.24...v0.1.2-beta.25
 [0.1.2-beta.24]: https://github.com/volverjs/style/compare/v0.1.2-beta.23...v0.1.2-beta.24

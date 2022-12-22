@@ -6,7 +6,6 @@ import App from '@docs/App.vue'
 import generatedRoutes from '~pages'
 import { mainMenu } from '@docs/settings/navigation'
 import { createRouter, createMemoryHistory } from 'vue-router'
-import { createHead } from '@vueuse/head'
 
 const routes = setupLayouts(generatedRoutes)
 
