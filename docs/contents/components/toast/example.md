@@ -36,10 +36,10 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
 </script>
 
 <template>
-    <fieldset class="vv-input-radio-group vv-input-radio-group--horizontal">
+    <fieldset class="vv-radio-group vv-radio-group--horizontal">
         <legend>Position Inline</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" for="position-right">
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" for="position-right">
                 <input 
                     v-model="positionInline"
                     id="position-right" 
@@ -49,7 +49,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                         />
                 right
             </label>
-            <label class="vv-input-radio" for="position-left">
+            <label class="vv-radio" for="position-left">
                 <input 
                     v-model="positionInline"
                     id="position-left" 
@@ -59,7 +59,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                         />
                 left
             </label>
-            <label class="vv-input-radio" for="position-center">
+            <label class="vv-radio" for="position-center">
                 <input 
                     v-model="positionInline"
                     id="position-center" 
@@ -71,10 +71,10 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             </label>
         </div>
     </fieldset>
-    <fieldset class="vv-input-radio-group vv-input-radio-group--horizontal">
+    <fieldset class="vv-radio-group vv-radio-group--horizontal">
         <legend>Position Block</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" for="position-top">
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" for="position-top">
                 <input 
                     v-model="positionBlock"
                     id="position-top" 
@@ -83,7 +83,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                     value="top" />
                 top
             </label>
-            <label class="vv-input-radio" for="position-bottom">
+            <label class="vv-radio" for="position-bottom">
                 <input 
                     v-model="positionBlock"
                     id="position-bottom" 

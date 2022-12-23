@@ -21,8 +21,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
 </script>
 
 <template>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch"
               for="switch-option">
        <input id="switch-option" 
               type="checkbox" 
@@ -31,8 +31,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               value="switch-option" />
        Option
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch"
               for="switch-option-checked">
        <input id="switch-option-checked" 
               type="checkbox" 
@@ -42,8 +42,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               checked="checked" />
        Checked
        </label>
-       <label class="vv-input-checkbox
-                     vv-input-checkbox--switch" 
+       <label class="vv-checkbox
+                     vv-checkbox--switch" 
               for="switch-option-indeterminate">
               <input id="switch-option-indeterminate" 
                      ref="input" 
@@ -52,8 +52,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                      value="switch-option-indeterminate" />
               Indeterminate
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch"
               for="switch-option-checked">
        <input id="switch-option-focus" 
               type="checkbox" 
@@ -64,8 +64,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               class="focus-visible" />
        Focus
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch"
               for="switch-option-disabled">
        <input id="switch-option-disabled" 
               type="checkbox" 
@@ -75,8 +75,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               disabled="disabled" />
        Disabled
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch"
               for="switch-option-disabled-checked">
        <input id="switch-option-disabled-checked" 
               type="checkbox" 
@@ -87,9 +87,9 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               checked="checked" />
        Disabled Checked
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch 
-                     vv-input-checkbox--readonly"
+       <label class="vv-checkbox 
+                     vv-checkbox--switch 
+                     vv-checkbox--readonly"
               for="switch-option-readonly">
        <input id="switch-option-readonly" 
               type="checkbox" 
@@ -100,9 +100,9 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
               tabindex="-1" />
        Readonly
        </label>
-       <label class="vv-input-checkbox 
-                     vv-input-checkbox--switch 
-                     vv-input-checkbox--readonly" 
+       <label class="vv-checkbox 
+                     vv-checkbox--switch 
+                     vv-checkbox--readonly" 
               for="switch-option-readonly-checked">
        <input id="switch-option-readonly-checked" 
               type="checkbox" 

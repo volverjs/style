@@ -3,14 +3,14 @@ title: States
 wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
 ---
 
-<label class="vv-input-radio" for="radio-option">
+<label class="vv-radio" for="radio-option">
     <input id="radio-option" 
            type="radio" 
            name="radio-option" 
            value="radio-option" />
     Option
 </label>
-<label class="vv-input-radio" for="radio-option-checked">
+<label class="vv-radio" for="radio-option-checked">
     <input id="radio-option-checked" 
            type="radio" 
            name="radio-option-checked" 
@@ -18,7 +18,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            checked="checked" />
     Checked
 </label>
-<label class="vv-input-radio" for="radio-option-checked">
+<label class="vv-radio" for="radio-option-checked">
     <input id="radio-option-focus" 
            type="radio" 
            name="radio-option-focus" 
@@ -27,7 +27,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            class="focus-visible" />
     Focus
 </label>
-<label class="vv-input-radio" for="radio-option-disabled">
+<label class="vv-radio" for="radio-option-disabled">
     <input id="radio-option-disabled" 
            type="radio" 
            name="radio-option-disabled" 
@@ -35,7 +35,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            disabled="disabled" />
     Disabled
 </label>
-<label class="vv-input-radio" for="radio-option-disabled-checked">
+<label class="vv-radio" for="radio-option-disabled-checked">
     <input id="radio-option-disabled-checked" 
            type="radio" 
            name="radio-option-disabled-checked" 
@@ -44,8 +44,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            checked="checked" />
     Disabled Checked
 </label>
-<label class="vv-input-radio 
-              vv-input-radio--readonly" for="radio-option-readonly">
+<label class="vv-radio 
+              vv-radio--readonly" for="radio-option-readonly">
     <input id="radio-option-readonly" 
            type="radio" 
            name="radio-option-readonly" 
@@ -54,8 +54,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            tabindex="-1" />
     Readonly
 </label>
-<label class="vv-input-radio 
-              vv-input-radio--readonly" for="radio-option-readonly-checked">
+<label class="vv-radio 
+              vv-radio--readonly" for="radio-option-readonly-checked">
     <input id="radio-option-readonly-checked" 
            type="radio" 
            name="radio-option-readonly-checked" 

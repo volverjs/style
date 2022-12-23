@@ -1,6 +1,6 @@
-$vv-input-checkbox: (
+$vv-checkbox: (
 	display: inline-flex,
-	flex-wrap: nowrap,
+	flex-wrap: wrap,
 	align-items: center,
 	cursor: pointer,
 	user-select: none,
@@ -14,17 +14,12 @@ $vv-input-checkbox: (
 			opacity: 0.3,
 			cursor: not-allowed,
 		),
-		readonly: (
-			opacity: 1,
-			cursor: default,
-			pointer-events: none,
-		),
 	),
 	element: (
 		input: (
 			_alias: "> input[type='checkbox']",
 			border: var(--spacing-2) solid var(--input-color),
-			width: var(--spacing-20),
+			min-width: var(--spacing-20),
 			height: var(--spacing-20),
 			margin: 0 var(--input-label-gap) 0 0,
 			background-position: center,
@@ -45,13 +40,30 @@ $vv-input-checkbox: (
 				),
 			),
 		),
+		hint: (
+			_alias: '> small',
+			flex-basis: 100%,
+			display: var(--input-hint-display),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+			padding-top: var(--input-hint-gap),
+			white-space: var(--input-hint-white-space),
+			text-overflow: var(--input-hint-text-overflow),
+			overflow: var(--input-hint-overflow),
+			max-width: var(--input-hint-max-width),
+		),
 	),
 	modifier: (
+		readonly: (
+			opacity: 1,
+			cursor: default,
+			pointer-events: none,
+		),
 		switch: (
 			element: (
 				input: (
 					border: 0,
-					width: var(--spacing-44),
+					min-width: var(--spacing-44),
 					height: var(--spacing-24),
 					border-radius: var(--spacing-12),
 					background-color: var(--color-word-5),
@@ -95,6 +107,20 @@ $vv-input-checkbox: (
 							),
 						),
 					),
+				),
+			),
+		),
+		valid: (
+			element: (
+				hint: (
+					color: var(--input-valid-color),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				hint: (
+					color: var(--input-invalid-color),
 				),
 			),
 		),

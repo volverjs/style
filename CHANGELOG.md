@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.28] - 2022-12-22
+
+### Changed
+
+- **vv-input-checkbox** is now **vv-checkbox**;
+- **vv-input-checkbox-group** is now **vv-checkbox-group**;
+- **vv-input-radio** is now **vv-radio**;
+- **vv-input-radio-group** is now **vv-radio-group**;
+
 ## [0.1.2-beta.27] - 2022-12-22
 
 ### Added
@@ -154,7 +163,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - New **vv-badge** _rounded_ and _small_ modifier;
-- Fix **vv-input-radio** and **vv-input-checkbox** readonly state.
+- Fix **vv-radio** and **vv-checkbox** readonly state.
 
 ## [0.1.2-beta.6] - 2022-10-21
 
@@ -178,10 +187,10 @@ All notable changes to this project will be documented in this file.
 - vv-accordion;
 - vv-dialog;
 - vv-dropdown;
-- vv-input-checkbox;
-- vv-input-checkbox-group;
-- vv-input-radio;
-- vv-input-radio-group;
+- vv-checkbox;
+- vv-checkbox-group;
+- vv-radio;
+- vv-radio-group;
 - vv-input-text;
 - vv-textarea;
 - vv-select;
@@ -189,6 +198,7 @@ All notable changes to this project will be documented in this file.
 - vv-card;
 - vv-text.
 
+[0.1.2-beta.28]: https://github.com/volverjs/style/compare/v0.1.2-beta.27...v0.1.2-beta.28
 [0.1.2-beta.27]: https://github.com/volverjs/style/compare/v0.1.2-beta.26...v0.1.2-beta.27
 [0.1.2-beta.26]: https://github.com/volverjs/style/compare/v0.1.2-beta.25...v0.1.2-beta.26
 [0.1.2-beta.25]: https://github.com/volverjs/style/compare/v0.1.2-beta.24...v0.1.2-beta.25

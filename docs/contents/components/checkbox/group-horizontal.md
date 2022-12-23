@@ -3,11 +3,11 @@ title: Group Horizontal
 wrapperClass: w-full
 ---
 
-<fieldset class="vv-input-checkbox-group 
-                 vv-input-checkbox-group--horizontal">
+<fieldset class="vv-checkbox-group 
+                 vv-checkbox-group--horizontal">
     <legend>Group Horizontal</legend>
-    <div class="vv-input-checkbox-group__wrapper">
-        <label class="vv-input-checkbox" for="checkbox-group-option-1">
+    <div class="vv-checkbox-group__wrapper">
+        <label class="vv-checkbox" for="checkbox-group-option-1">
             <input id="checkbox-group-option-1" 
                    type="checkbox" 
                    name="checkbox-group-horizontal" 
@@ -16,7 +16,7 @@ wrapperClass: w-full
                    aria-describedby="checkbox-group-horizontal-hint" />
             Option 1
         </label>
-        <label class="vv-input-checkbox" for="checkbox-group-option-2">
+        <label class="vv-checkbox" for="checkbox-group-option-2">
             <input id="checkbox-group-option-2" 
                    type="checkbox" 
                    name="checkbox-group-horizontal" 
@@ -24,7 +24,7 @@ wrapperClass: w-full
                    aria-describedby="checkbox-group-horizontal-hint" />
             Option 2
         </label>
-        <label class="vv-input-checkbox" for="checkbox-group-option-3">
+        <label class="vv-checkbox" for="checkbox-group-option-3">
             <input id="checkbox-group-option-3" 
                    type="checkbox" 
                    name="checkbox-group-horizontal" 
@@ -32,7 +32,7 @@ wrapperClass: w-full
                    aria-describedby="checkbox-group-horizontal-hint" />
             Option 3
         </label>
-        <label class="vv-input-checkbox" for="checkbox-group-option-4">
+        <label class="vv-checkbox" for="checkbox-group-option-4">
             <input id="checkbox-group-option-4" 
                    type="checkbox" 
                    name="checkbox-group-horizontal" 
@@ -42,7 +42,7 @@ wrapperClass: w-full
             Option 4
         </label>
     </div>
-    <small id="checkbox-group-horizontal-hint" class="vv-input-checkbox-group__hint">
+    <small id="checkbox-group-horizontal-hint" class="vv-checkbox-group__hint">
         Please fill the input above.
     </small>
 </fieldset>

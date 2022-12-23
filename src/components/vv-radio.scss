@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-input-checkbox);
-$component-map: $vv-input-checkbox;
+$component-name: map.get($components-names, vv-radio);
+$component-map: $vv-radio;
 $component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
@@ -14,16 +14,8 @@ $component-selector: '.#{ $component-name}';
 );
 
 @include wrap-with-where(
-	$selector: '#{$component-selector}:has(> input[type="checkbox"]:disabled)',
+	$selector: '#{$component-selector}:has(> input[type="radio"]:disabled)',
 	$enabled: $zero-specificity-for-components
 ) {
 	@extend %#{$component-name}--disabled !optional;
-}
-
-@include wrap-with-where(
-	$selector:
-		'#{$component-selector}:has(> input[type="checkbox"]:indeterminate)',
-	$enabled: $zero-specificity-for-components
-) {
-	@extend %#{$component-name}--indeterminate !optional;
 }

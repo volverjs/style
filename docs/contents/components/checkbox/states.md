@@ -21,7 +21,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
 </script>
 
 <template>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option">
         <input id="checkbox-option" 
                type="checkbox"
@@ -29,7 +29,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                value="checkbox-option" />
         Option
     </label>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option-checked">
         <input id="checkbox-option-checked" 
                type="checkbox"
@@ -38,7 +38,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                checked="checked" />
         Checked
     </label>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option-indeterminate">
         <input id="checkbox-option-indeterminate" 
                ref="checkbox" 
@@ -47,7 +47,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                value="checkbox-option-indeterminate" />
         Indeterminate
     </label>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option-checked">
         <input id="checkbox-option-focus" 
                type="checkbox"
@@ -57,7 +57,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                class="focus-visible" />
         Focus
     </label>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option-disabled">
         <input id="checkbox-option-disabled" 
                type="checkbox"
@@ -66,7 +66,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                disabled="disabled" />
         Disabled
     </label>
-    <label class="vv-input-checkbox" 
+    <label class="vv-checkbox" 
            for="checkbox-option-disabled-checked">
         <input id="checkbox-option-disabled-checked" 
                type="checkbox"
@@ -76,8 +76,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                checked="checked" />
         Disabled Checked
     </label>
-    <label class="vv-input-checkbox 
-                  vv-input-checkbox--readonly" 
+    <label class="vv-checkbox 
+                  vv-checkbox--readonly" 
            for="checkbox-option-readonly">
         <input id="checkbox-option-readonly" 
                type="checkbox"
@@ -87,8 +87,8 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
                tabindex="-1" />
         Readonly
     </label>
-    <label class="vv-input-checkbox 
-                  vv-input-checkbox--readonly" 
+    <label class="vv-checkbox 
+                  vv-checkbox--readonly" 
            for="checkbox-option-readonly-checked">
         <input id="checkbox-option-readonly-checked" 
                type="checkbox"

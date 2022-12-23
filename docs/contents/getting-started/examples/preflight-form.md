@@ -76,7 +76,7 @@ wrapperClass: md:w-9/12 mx-auto preflight
         </label>
     </fieldset>
     <fieldset>
-        <legend>Radio buttons</legend>
+        <legend>Radio</legend>
         <label for="field-radio-1">
             <input id="field-radio-1" name="checkradiobox" value="a" type="radio" checked="checked" />
             Choice A

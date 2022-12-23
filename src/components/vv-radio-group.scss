@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-input-radio-group);
-$component-map: $vv-input-radio-group;
+$component-name: map.get($components-names, vv-radio-group);
+$component-map: $vv-radio-group;
 
 @include spread-map-into-bem(
 	$map: $component-map,

@@ -244,98 +244,95 @@
 
 		// checkbox
 		&:where(fieldset:has(input[type='checkbox'])) {
-			@extend %vv-input-checkbox-group !optional;
+			@extend %vv-checkbox-group !optional;
 
 			:where(legend) {
-				@extend %vv-input-checkbox-group__legend !optional;
+				@extend %vv-checkbox-group__legend !optional;
 			}
 		}
 
 		&:where(label:has(input[type='checkbox'])) {
 			@extend %w-full !optional;
-			@extend %vv-input-checkbox !optional;
+			@extend %vv-checkbox !optional;
 
 			:where(input[type='checkbox']) {
-				@extend %vv-input-checkbox__input !optional;
+				@extend %vv-checkbox__input !optional;
 
 				&:checked {
-					@extend %vv-input-checkbox-element-input--checked !optional;
+					@extend %vv-checkbox-element-input--checked !optional;
 				}
 
 				&:indeterminate {
-					@extend %vv-input-checkbox-element-input--indeterminate
-							!optional;
+					@extend %vv-checkbox-element-input--indeterminate !optional;
 				}
 
 				&:focus-visible {
-					@extend %vv-input-checkbox-element-input--focus-visible
-							!optional;
+					@extend %vv-checkbox-element-input--focus-visible !optional;
 				}
 			}
 		}
 
 		// switch
 		&:where(label:has(input[type='checkbox'][role='switch'])) {
-			@extend %vv-input-checkbox--switch !optional;
+			@extend %vv-checkbox--switch !optional;
 
 			:where(input[type='checkbox'][role='switch']) {
-				@extend %vv-input-checkbox-modifier-switch__input !optional;
+				@extend %vv-checkbox-modifier-switch__input !optional;
 
 				&:hover {
-					@extend %vv-input-checkbox-modifier-switch-element-input--hover
+					@extend %vv-checkbox-modifier-switch-element-input--hover
 							!optional;
 				}
 
 				&:active {
-					@extend %vv-input-checkbox-modifier-switch-element-input--active
+					@extend %vv-checkbox-modifier-switch-element-input--active
 							!optional;
 				}
 
 				&:checked {
-					@extend %vv-input-checkbox-modifier-switch-element-input--checked
+					@extend %vv-checkbox-modifier-switch-element-input--checked
 							!optional;
 				}
 
 				&:focus-visible {
-					@extend %vv-input-checkbox-modifier-switch-element-input--focus-visible
+					@extend %vv-checkbox-modifier-switch-element-input--focus-visible
 							!optional;
 				}
 			}
 		}
 
 		&:where(label:has(input[type='checkbox']:disabled)) {
-			@extend %vv-input-checkbox--disabled !optional;
+			@extend %vv-checkbox--disabled !optional;
 		}
 
 		// radio
 		&:where(fieldset:has(input[type='radio'])) {
-			@extend %vv-input-radio-group !optional;
+			@extend %vv-radio-group !optional;
 
 			:where(legend) {
-				@extend %vv-input-radio-group__legend !optional;
+				@extend %vv-radio-group__legend !optional;
 			}
 		}
 
 		&:where(label:has(input[type='radio'])) {
 			@extend %w-full !optional;
-			@extend %vv-input-radio !optional;
+			@extend %vv-radio !optional;
 
 			:where(input[type='radio']) {
-				@extend %vv-input-radio__input !optional;
+				@extend %vv-radio__input !optional;
 
 				&:checked {
-					@extend %vv-input-radio-element-input--checked !optional;
+					@extend %vv-radio-element-input--checked !optional;
 				}
 
 				&:focus-visible {
-					@extend %vv-input-radio-element-input--focus-visible
-							!optional;
+					@extend %vv-radio-element-input--focus-visible !optional;
 				}
 			}
 		}
 
 		&:where(label:has(input[type='radio']:disabled)) {
-			@extend %vv-input-radio--disabled !optional;
+			@extend %vv-radio--disabled !optional;
 		}
 
 		// textarea

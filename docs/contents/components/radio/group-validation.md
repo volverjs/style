@@ -4,11 +4,11 @@ wrapperClass: flex flex-1 flex-col md:flex-row
 ---
 
 <div class="md:w-1/2">
-    <fieldset class="vv-input-radio-group
-                     vv-input-radio-group--valid">
+    <fieldset class="vv-radio-group
+                     vv-radio-group--valid">
         <legend>Group Valid</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" 
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-valid-1">
                 <input id="radio-group-option-vertical-valid-1"
                        type="radio" 
@@ -19,7 +19,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 1
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-valid-2">
                 <input id="radio-group-option-vertical-valid-2"
                        type="radio" 
@@ -29,7 +29,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 2
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-valid-3">
                 <input id="radio-group-option-vertical-valid-3"
                        type="radio" 
@@ -39,7 +39,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 3
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-valid-4">
                 <input id="radio-group-option-vertical-valid-4"
                        type="radio" 
@@ -50,17 +50,17 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                 Option 4
             </label>
         </div>
-        <small id="radio-group-valid-hint" class="vv-input-radio-group__hint">
+        <small id="radio-group-valid-hint" class="vv-radio-group__hint">
             The input above is successful.
         </small>
     </fieldset>
 </div>
 <div class="md:w-1/2">
-    <fieldset class="vv-input-radio-group 
-                     vv-input-radio-group--invalid">
+    <fieldset class="vv-radio-group 
+                     vv-radio-group--invalid">
         <legend>Group Invalid</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" 
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-invalid-1">
                 <input id="radio-group-option-vertical-invalid-1" 
                        type="radio"
@@ -71,7 +71,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 1
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-invalid-2">
                 <input id="radio-group-option-vertical-invalid-2" 
                        type="radio"
@@ -81,7 +81,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 2
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-invalid-3">
                 <input id="radio-group-option-vertical-invalid-3" 
                        type="radio"
@@ -91,7 +91,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 3
             </label>
-            <label class="vv-input-radio" 
+            <label class="vv-radio" 
                    for="radio-group-option-vertical-invalid-4">
                 <input id="radio-group-option-vertical-invalid-4" 
                        type="radio"
@@ -102,7 +102,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                 Option 4
             </label>
         </div>
-        <small id="radio-group-invalid-hint" class="vv-input-radio-group__hint">
+        <small id="radio-group-invalid-hint" class="vv-radio-group__hint">
             There was an error with the input above.
         </small>
     </fieldset>

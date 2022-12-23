@@ -30,10 +30,10 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
 </script>
 
 <template>
-    <fieldset class="vv-input-radio-group">
+    <fieldset class="vv-radio-group">
         <legend>Transition</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" for="fade-block">
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" for="fade-block">
                 <input 
                     v-model="transition"
                     id="fade-block" 
@@ -42,7 +42,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                     value="fade-block" />
                 fade-block
             </label>
-            <label class="vv-input-radio" for="fade-inline">
+            <label class="vv-radio" for="fade-inline">
                 <input 
                     v-model="transition"
                     id="fade-inline" 
@@ -52,7 +52,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                         />
                 fade-inline
             </label>
-            <label class="vv-input-radio" for="scale">
+            <label class="vv-radio" for="scale">
                 <input 
                     v-model="transition"
                     id="scale" 
@@ -63,10 +63,10 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             </label>
         </div>
     </fieldset>
-    <fieldset class="vv-input-radio-group">
+    <fieldset class="vv-radio-group">
         <legend>Size</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" for="standard">
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" for="standard">
                 <input 
                     v-model="size"
                     id="standard" 
@@ -75,7 +75,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                     value="standard" />
                 standard
             </label>
-            <label class="vv-input-radio" for="small">
+            <label class="vv-radio" for="small">
                 <input 
                     v-model="size"
                     id="small" 
@@ -85,7 +85,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                         />
                 small
             </label>
-            <label class="vv-input-radio" for="fullscreen">
+            <label class="vv-radio" for="fullscreen">
                 <input 
                     v-model="size"
                     id="fullscreen" 

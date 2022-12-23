@@ -3,11 +3,11 @@ title: Group Horizontal
 wrapperClass: w-full
 ---
 
-<fieldset class="vv-input-radio-group 
-                 vv-input-radio-group--horizontal">
+<fieldset class="vv-radio-group 
+                 vv-radio-group--horizontal">
     <legend>Group Horizontal</legend>
-    <div class="vv-input-radio-group__wrapper">
-        <label class="vv-input-radio" for="radio-group-option-1">
+    <div class="vv-radio-group__wrapper">
+        <label class="vv-radio" for="radio-group-option-1">
             <input id="radio-group-option-1" 
                     type="radio" 
                     name="radio-group-horizontal" 
@@ -16,7 +16,7 @@ wrapperClass: w-full
                     aria-describedby="radio-group-horizontal-hint" />
             Option 1
         </label>
-        <label class="vv-input-radio" for="radio-group-option-2">
+        <label class="vv-radio" for="radio-group-option-2">
             <input id="radio-group-option-2" 
                    type="radio" 
                    name="radio-group-horizontal" 
@@ -24,7 +24,7 @@ wrapperClass: w-full
                    aria-describedby="radio-group-horizontal-hint" />
             Option 2
         </label>
-        <label class="vv-input-radio" for="radio-group-option-3">
+        <label class="vv-radio" for="radio-group-option-3">
             <input id="radio-group-option-3" 
                    type="radio" 
                    name="radio-group-horizontal" 
@@ -32,7 +32,7 @@ wrapperClass: w-full
                    aria-describedby="radio-group-horizontal-hint" />
             Option 3
         </label>
-        <label class="vv-input-radio" for="radio-group-option-4">
+        <label class="vv-radio" for="radio-group-option-4">
             <input id="radio-group-option-4" 
                    type="radio" 
                    name="radio-group-horizontal" 
@@ -42,7 +42,7 @@ wrapperClass: w-full
             Option 4
         </label>
     </div>
-    <small id="radio-group-horizontal-hint" class="vv-input-radio-group__hint">
+    <small id="radio-group-horizontal-hint" class="vv-radio-group__hint">
         Please fill the input above.
     </small>
 </fieldset>

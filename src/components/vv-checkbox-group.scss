@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-input-checkbox-group);
-$component-map: $vv-input-checkbox-group;
+$component-name: map.get($components-names, vv-checkbox-group);
+$component-map: $vv-checkbox-group;
 
 @include spread-map-into-bem(
 	$map: $component-map,

@@ -20,10 +20,10 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
 </script>
 
 <template>
-    <fieldset class="vv-input-radio-group vv-input-radio-group--horizontal">
+    <fieldset class="vv-radio-group vv-radio-group--horizontal">
         <legend>Position</legend>
-        <div class="vv-input-radio-group__wrapper">
-            <label class="vv-input-radio" for="position-top">
+        <div class="vv-radio-group__wrapper">
+            <label class="vv-radio" for="position-top">
                 <input 
                     v-model="position"
                     id="position-top" 
@@ -32,7 +32,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                     value="top" />
                 top
             </label>
-            <label class="vv-input-radio" for="position-bottom">
+            <label class="vv-radio" for="position-bottom">
                 <input 
                     v-model="position"
                     id="position-bottom" 

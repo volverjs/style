@@ -4,11 +4,11 @@ wrapperClass: flex flex-1 flex-col md:flex-row
 ---
 
 <div class="w-full md:w-1/2">
-    <fieldset class="vv-input-checkbox-group 
-                     vv-input-checkbox-group--valid">
+    <fieldset class="vv-checkbox-group 
+                     vv-checkbox-group--valid">
         <legend>Group Valid</legend>
-        <div class="vv-input-checkbox-group__wrapper">
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-invalid-1">
+        <div class="vv-checkbox-group__wrapper">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-1">
                 <input id="checkbox-group-option-vertical-valid-1" 
                        type="checkbox"
                        name="checkbox-group-vertical-valid" 
@@ -18,7 +18,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 1
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-valid-2">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-valid-2">
                 <input id="checkbox-group-option-vertical-valid-2" 
                        type="checkbox"
                        name="checkbox-group-vertical-valid" 
@@ -27,7 +27,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 2
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-valid-3">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-valid-3">
                 <input id="checkbox-group-option-vertical-valid-3" 
                        type="checkbox"
                        name="checkbox-group-vertical-valid" 
@@ -36,7 +36,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="false" />
                 Option 3
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-valid-4">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-valid-4">
                 <input id="checkbox-group-option-vertical-valid-4" 
                        type="checkbox"
                        name="checkbox-group-vertical-valid" 
@@ -47,17 +47,17 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                 Option 4
             </label>
         </div>
-        <small id="checkbox-group-vertical-valid-hint" class="vv-input-checkbox-group__hint">
+        <small id="checkbox-group-vertical-valid-hint" class="vv-checkbox-group__hint">
             The input above is successful.
         </small>
     </fieldset>
 </div>
 <div class="w-full md:w-1/2">
-    <fieldset class="vv-input-checkbox-group 
-                     vv-input-checkbox-group--invalid">
+    <fieldset class="vv-checkbox-group 
+                     vv-checkbox-group--invalid">
         <legend>Group Invalid</legend>
-        <div class="vv-input-checkbox-group__wrapper">
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-invalid-1">
+        <div class="vv-checkbox-group__wrapper">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-1">
                 <input id="checkbox-group-option-vertical-invalid-1" 
                        type="checkbox" 
                        name="checkbox-group-vertical-invalid" 
@@ -67,7 +67,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 1
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-invalid-2">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-2">
                 <input id="checkbox-group-option-vertical-invalid-2" 
                        type="checkbox" 
                        name="checkbox-group-vertical-invalid" 
@@ -76,7 +76,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 2
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-invalid-3">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-3">
                 <input id="checkbox-group-option-vertical-invalid-3" 
                        type="checkbox" 
                        name="checkbox-group-vertical-invalid" 
@@ -85,7 +85,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                        aria-invalid="true" />
                 Option 3
             </label>
-            <label class="vv-input-checkbox" for="checkbox-group-option-vertical-invalid-4">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-4">
                 <input id="checkbox-group-option-vertical-invalid-4" 
                        type="checkbox" 
                        name="checkbox-group-vertical-invalid" 
@@ -96,7 +96,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                 Option 4
             </label>
         </div>
-        <small id="checkbox-group-vertical-invalid-hint" class="vv-input-checkbox-group__hint">
+        <small id="checkbox-group-vertical-invalid-hint" class="vv-checkbox-group__hint">
             There was an error with the input above.
         </small>
     </fieldset>
