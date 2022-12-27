@@ -75,13 +75,13 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
 :root {
-	/* custom color brand */
-	--color-brand-hue: 149deg;
-	--color-brand-saturation: 56%;
-	--color-brand-lightness: 53%;
+  /* custom color brand */
+  --color-brand-hue: 149deg;
+  --color-brand-saturation: 56%;
+  --color-brand-lightness: 53%;
 
-	/* custom font sans */
-	--font-sans: 'Open Sans', sans-serif;
+  /* custom font sans */
+  --font-sans: 'Open Sans', sans-serif;
 }
 ```
 
@@ -89,10 +89,10 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// custom color brand 
-	$color-brand: #45cb85,
-	//custom font sans
-	$font-family-sans: 'Open Sans', sans-serif,
+  // custom color brand 
+  $color-brand: #45cb85,
+  //custom font sans
+  $font-family-sans: 'Open Sans', sans-serif,
 );
 @use '@volverjs/style/scss';
 
@@ -111,24 +111,23 @@ Root attributes style the component, submaps _state_, _element_, and _modifier_ 
 
 // override vv-button map
 context.$vv-button: map.deep-merge(
-	context.$vv-button,
-	(
-		// change default button background
-		background: #ddd,
-		state: (
-			hover: (
-				// change default button background on hover
-				background: #aaa,
-			),
-		),
-		modifier: (
-			// add a custom modifier
-			my-error:
-				(
-					background: red,
-				)
-		)
-	)
+  context.$vv-button,
+  (
+    // change default button background
+    background: #ddd,
+    state: (
+      hover: (
+        // change default button background on hover
+        background: #aaa,
+      ),
+    ),
+    modifier: (
+      // add a custom modifier
+      my-error: (
+        background: red,
+      )
+    )
+  )
 );
 
 // import volverjs style
