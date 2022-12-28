@@ -414,7 +414,7 @@
 					close,
 					determinate,
 					indeterminate,
-					selected,
+					pressed,
 					current
 				),
 				$state
@@ -536,16 +536,16 @@
 								'#{$modifier}#{$alias}:#{$state}'
 							);
 						}
-					} @else if $state == 'selected' {
+					} @else if $state == 'pressed' {
 						$selectors: list.join(
 							$selectors,
-							'#{$modifier}#{$block-item}[aria-selected="true"]'
+							'#{$modifier}#{$block-item}[aria-pressed="true"]'
 						);
 
 						@if $alias {
 							$selectors: list.join(
 								$selectors,
-								'#{$modifier}#{$alias}[aria-selected="true"]'
+								'#{$modifier}#{$alias}[aria-pressed="true"]'
 							);
 						}
 					} @else if $state != 'current' {
@@ -578,6 +578,7 @@
 						$props: $props
 					);
 				}
+
 				@include wrap-with-where(
 					$selector: $selector,
 					$enabled: $zero-specificity
@@ -831,17 +832,17 @@
 
 // Wrap selector with :where()
 @mixin wrap-with-where($selector, $enabled: true) {
-	@if type-of($selector) == 'map' {
+	@if type-of($selector) == 'map' or type-of($selector) == 'list' {
 		$merged: '';
 		@each $element in $selector {
 			@if $enabled {
-				$merged: '#{$merged}, :where(#{$element})';
+				$merged: '#{$merged}, :where(#{unquote($element)})';
 			} @else {
-				$merged: '#{$merged}, #{$element}';
+				$merged: '#{$merged}, #{unquote($element)}';
 			}
 		}
 	} @else if $enabled {
-		$selector: ':where(#{$selector})';
+		$selector: ':where(#{unquote($selector)})';
 	}
 
 	#{$selector} {

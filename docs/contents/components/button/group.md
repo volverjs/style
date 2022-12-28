@@ -10,7 +10,7 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
     </button>
     <button type="button" 
             class="vv-button" 
-            aria-selected="true">
+            aria-pressed="true">
         Second
     </button>
     <button type="button" 
@@ -29,7 +29,7 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
     <button type="button" 
             class="vv-button
                    vv-button--action" 
-            aria-selected="true">
+            aria-pressed="true">
          <IconifyIcon icon="akar-icons:cut" />
         Second
     </button>
@@ -52,7 +52,7 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
             class="vv-button 
                    vv-button--action" 
                    title="Second"
-                   aria-selected="true">
+                   aria-pressed="true">
          <IconifyIcon icon="akar-icons:cut" />
     </button>
     <button type="button" 
@@ -74,7 +74,7 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
             class="vv-button
                    vv-button--action-quiet" 
             title="Second"
-            aria-selected="true">
+            aria-pressed="true">
          <IconifyIcon icon="akar-icons:cut" />
     </button>
     <button type="button" 

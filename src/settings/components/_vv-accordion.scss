@@ -39,6 +39,7 @@ $vv-accordion: (
 			font-size: var(--text-sm),
 			border-radius: var(--rounded-lg),
 			-webkit-tap-highlight-color: transparent,
+			outline: none,
 			pseudo: (
 				before: (
 					display: block,
@@ -64,6 +65,9 @@ $vv-accordion: (
 			),
 			state: (
 				hover: (
+					background-color: var(--color-surface-1),
+				),
+				focus-visible: (
 					background-color: var(--color-surface-1),
 				),
 			),

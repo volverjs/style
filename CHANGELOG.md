@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [0.1.2-beta.30] - 2022-12-28
+
+### Changed
+
+- state **selected** is now **pressed** for **vv-button** component.
+
+### Fixed
+
+- some A11y colors improvements.
+
 ## [0.1.2-beta.29] - 2022-12-27
 
 ### Fixed
@@ -204,6 +215,7 @@ All notable changes to this project will be documented in this file.
 - vv-card;
 - vv-text.
 
+[0.1.2-beta.30]: https://github.com/volverjs/style/compare/v0.1.2-beta.28...v0.1.2-beta.30
 [0.1.2-beta.29]: https://github.com/volverjs/style/compare/v0.1.2-beta.28...v0.1.2-beta.29
 [0.1.2-beta.28]: https://github.com/volverjs/style/compare/v0.1.2-beta.27...v0.1.2-beta.28
 [0.1.2-beta.27]: https://github.com/volverjs/style/compare/v0.1.2-beta.26...v0.1.2-beta.27

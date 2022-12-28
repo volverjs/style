@@ -16,7 +16,7 @@ export const createApp = ViteSSG(
 	// vue-router options
 	{
 		routes,
-		linkActiveClass: 'selected',
+		linkActiveClass: 'pressed',
 		linkExactActiveClass: 'current',
 		base: import.meta.env.BASE_URL,
 	},

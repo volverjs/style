@@ -32,7 +32,7 @@ $vv-button: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
 		),
-		selected: (
+		pressed: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
 		),
@@ -78,7 +78,7 @@ $vv-button: (
 					background: var(--color-gray-darken-5),
 					border-color: var(--color-gray-darken-5),
 				),
-				selected: (
+				pressed: (
 					background: var(--color-gray-darken-5),
 					border-color: var(--color-gray-darken-5),
 				),
@@ -100,7 +100,7 @@ $vv-button: (
 				active: (
 					background: var(--color-gray-lighten-3),
 				),
-				selected: (
+				pressed: (
 					background: var(--color-gray-lighten-4),
 				),
 			),
@@ -121,7 +121,7 @@ $vv-button: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
 				),
-				selected: (
+				pressed: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
 				),
@@ -130,7 +130,7 @@ $vv-button: (
 		ghost: (
 			background: transparent,
 			border-color: transparent,
-			color: var(--color-gray),
+			color: var(--color-gray-darken-1),
 			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
 			state: (
 				focus-visible: (
@@ -143,7 +143,7 @@ $vv-button: (
 				active: (
 					background: var(--color-gray-lighten-4),
 				),
-				selected: (
+				pressed: (
 					background: var(--color-gray-lighten-4),
 				),
 			),
@@ -152,7 +152,7 @@ $vv-button: (
 			background: transparent,
 			border-width: var(--border-0),
 			padding: 0,
-			color: var(--color-brand),
+			color: var(--color-brand-darken-1),
 			font-weight: var(--font-normal),
 			text-shadow: none,
 			state: (
@@ -187,7 +187,7 @@ $vv-button: (
 					border-color: var(--color-gray-lighten-4),
 					background: var(--color-gray-lighten-4),
 				),
-				selected: (
+				pressed: (
 					border-color: var(--color-gray-lighten-4),
 					background: var(--color-gray-lighten-4),
 				),
@@ -210,7 +210,7 @@ $vv-button: (
 					border-color: var(--color-gray-darken-3),
 					background: var(--color-gray-darken-3),
 				),
-				selected: (
+				pressed: (
 					border-color: var(--color-gray-darken-3),
 					background: var(--color-gray-darken-3),
 				),
@@ -237,7 +237,7 @@ $vv-button: (
 				active: (
 					background: var(--color-surface-5),
 				),
-				selected: (
+				pressed: (
 					color: var(--color-white),
 					background: var(--color-gray),
 					border-color: var(--color-gray),
@@ -275,7 +275,7 @@ $vv-button: (
 					background: var(--color-surface-5),
 					border-color: var(--color-surface-5),
 				),
-				selected: (
+				pressed: (
 					color: var(--color-white),
 					background: var(--color-gray),
 					border-color: var(--color-gray),

@@ -1,0 +1,15 @@
+@use '../context' as *;
+
+@mixin theme-dark-input {
+	@include spread-map-into-props($dark-input, 'input');
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-input;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-input;
+}
