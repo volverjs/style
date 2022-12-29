@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2-beta.31] - 2022-12-29
+
+### Fixed
+
+- Documentation improvements.
 
 ## [0.1.2-beta.30] - 2022-12-28
 
@@ -215,7 +220,8 @@ All notable changes to this project will be documented in this file.
 - vv-card;
 - vv-text.
 
-[0.1.2-beta.30]: https://github.com/volverjs/style/compare/v0.1.2-beta.28...v0.1.2-beta.30
+[0.1.2-beta.31]: https://github.com/volverjs/style/compare/v0.1.2-beta.30...v0.1.2-beta.31
+[0.1.2-beta.30]: https://github.com/volverjs/style/compare/v0.1.2-beta.29...v0.1.2-beta.30
 [0.1.2-beta.29]: https://github.com/volverjs/style/compare/v0.1.2-beta.28...v0.1.2-beta.29
 [0.1.2-beta.28]: https://github.com/volverjs/style/compare/v0.1.2-beta.27...v0.1.2-beta.28
 [0.1.2-beta.27]: https://github.com/volverjs/style/compare/v0.1.2-beta.26...v0.1.2-beta.27

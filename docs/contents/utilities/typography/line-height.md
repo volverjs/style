@@ -1,11 +1,12 @@
 ---
 title: Line Height
 description: Utilities for controlling the leading (line height) of an element. ​
+customProperties: true
 ---
 <div>
-	<table-utility prefix="leading" property="line-height" class="mb-lg"></table-utility>
+	<table-utility prefix="leading" property="line-height" custom-property="leading" class="mb-lg"></table-utility>
     <card-example>
-		<div class="container h-full grid rounded-md bg-surface-1 text-white p-24" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
+		<div class="container h-full grid rounded-md bg-surface-1 p-24" style="grid-template-columns: repeat(2, minmax(0, 1fr));">
 			<div class="leading-none border-b border-alpha-1 mb-24 pb-24">
 				<p>First line</p>
 				<p>Second line</p>

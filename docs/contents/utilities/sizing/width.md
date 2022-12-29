@@ -2,6 +2,7 @@
 title: Width
 description: Utilities for setting the width of an element.
 breakpoints: true
+customProperties: true
 ---
 <div>
 	<table-helper property="spacers" title="Spacing & Spacing-dynamic" class="mb-lg"></table-helper>
@@ -14,40 +15,20 @@ breakpoints: true
 						Class
 					</th>
 					<th>
-						Properties
+						Value
 					</th>
 				</tr>
 			</thead>
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-wrap">
-						w-{spacer-size}
+						.w-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-wrap">
-						width: {spacer-value};
+						width: {spacing-value};
 					</td>
-				</tr>
-				<tr>
-					<td translate="no" class="font-mono text-accent whitespace-wrap">
-						w-{width-spacer-size}
-					</td>
-					<td translate="no" class="font-mono text-info whitespace-wrap">
-						width: {width-spacer-value};
-					</td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
-	<details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
-		<summary class="vv-accordion__summary flex items-center" aria-controls="#accordion-item-1" aria-expanded="false">
-			<iconify-icon icon="akar-icons:info" class="mr-sm"></iconify-icon>
-			Accept breakpoint utilities
-		</summary>
-		<div aria-hidden="true" class="vv-accordion__content">
-			<p class="font-light text-word-3">
-				You can also use the breakpoint modifier to apply the class at only a specific screen size and above.<br />
-				Example: md:w-{spacer-size|width-spacer-size}
-			</p>
-		</div>
-	</details>
+	<table-utility prefix="w" property="width" custom-property="w" ></table-utility>
 </div>

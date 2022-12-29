@@ -12,35 +12,57 @@ description: Utilities for controlling an element's padding.
 						Class
 					</th>
 					<th>
-						Properties
+						Value
 					</th>
 				</tr>
 			</thead>
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						p{t|r|b|l|}-{spacer-size}
+						.pt-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						padding-{top|right|bottom|left}: {spacer-value};
+						padding-top: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						p-x-{spacer-size}
+						.pr-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						<p>padding-left: {spacer-value};</p>
-						<p>padding-right: {spacer-value};</p>
+						padding-right: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						p-y-{spacer-size}
+						.pb-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						<p>padding-top: {spacer-value};</p>
-						<p>padding-bottom: {spacer-value};</p>
+						padding-bottom: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.pl-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						padding-left: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.px-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						padding-inline: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.py-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						padding-block: {spacing-value};
 					</td>
 				</tr>
 			</tbody>

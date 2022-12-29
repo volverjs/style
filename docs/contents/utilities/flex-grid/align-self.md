@@ -1,22 +1,11 @@
 ---
-title: Align Self
+title: Align / Justify Self
 description: Utilities for controlling how an individual flex or grid item is positioned along its container's cross axis.
 breakpoints: true
 ---
 <div>
-    <table-utility prefix="self" property="justify-align-self" custom-property="align-self" class="mb-lg"></table-utility>
-	<details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
-		<summary class="vv-accordion__summary flex items-center" aria-controls="#accordion-item-1" aria-expanded="false">
-			<iconify-icon icon="akar-icons:info" class="mr-sm"></iconify-icon>
-			Accept breakpoint utilities
-		</summary>
-		<div aria-hidden="true" class="vv-accordion__content">
-			<p class="font-light text-word-3">
-				You can also use the breakpoint modifier to apply the class at only a specific screen size and above.<br />
-				Example: md:self-{auto|start|end|center|baseline|stretch}
-			</p>
-		</div>
-	</details>
+    <table-utility prefix="self" property="justify-align-self" attribute="align-self" class="mb-lg"></table-utility>
+    <table-utility prefix="justify-self" property="justify-align-self" attribute="justify-self" class="mb-lg"></table-utility>
     <card-example>
 		<div class="container h-full rounded-md bg-surface-1 p-24">
 			<div class="flex flex-wrap justify-around gap-4">

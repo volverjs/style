@@ -1,9 +1,10 @@
 ---
 title: Font Family
 description: Utilities for controlling the font family of an element.
+customProperties: true
 ---
 <div>
-	<table-utility prefix="font" property="font-family" class="mb-lg"></table-utility>
+	<table-utility prefix="font" property="font-family" custom-property="font" class="mb-lg"></table-utility>
     <card-example>
 		<div class="container h-full rounded-md bg-surface-1 p-24">
 			<p class="font-sans border-b border-alpha-1 mb-24 pb-24">I'm font-sans</p>

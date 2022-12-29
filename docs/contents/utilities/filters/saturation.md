@@ -1,7 +1,8 @@
 ---
 title: Saturation
 description: Utilities for controlling the saturation of an element.
+customProperties: true
 ---
 <div>
-    <table-utility prefix="saturation" property="saturation"></table-utility>
+    <table-utility prefix="saturate" property="saturation" attribute="filter" custom-property="saturate"></table-utility>
 </div>

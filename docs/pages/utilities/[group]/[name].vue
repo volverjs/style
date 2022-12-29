@@ -1,7 +1,6 @@
 <script setup>
 	import CardExample from '../../../components/CardExample.vue'
 	import TableUtility from '../../../components/TableUtility.vue'
-	import TableHelper from '../../../components/TableHelper.vue'
 	import ColorHelper from '../../../components/ColorHelper.vue'
 
 	const route = useRoute()
@@ -9,6 +8,7 @@
 	const title = ref('')
 	const description = ref('')
 	const breakpoints = ref(false)
+	const customProperties = ref(false)
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/utilities/${route.params.group}/${route.params.name}.md`
 	const MainContent = defineAsyncComponent(() =>
 		import(
@@ -18,9 +18,9 @@
 				title.value = attributes.title
 				description.value = attributes.description
 				breakpoints.value = attributes.breakpoints
+				customProperties.value = attributes.customProperties
 				return VueComponentWith({
 					TableUtility,
-					TableHelper,
 					ColorHelper,
 					CardExample,
 				})
@@ -58,6 +58,11 @@
 								v-if="breakpoints"
 								class="vv-badge vv-badge--sm ml-16 mb-12"
 								>breakpoints</span
+							>
+							<span
+								v-if="customProperties"
+								class="vv-badge vv-badge--info vv-badge--sm ml-16 mb-12"
+								>custom properties</span
 							>
 						</h1>
 						<div class="vv-button-group vv-button-group--compact">

@@ -1,6 +1,6 @@
 ---
 title: Inline spacing variant
-wrapperClass: md:w-9/12 mx-auto w-full
+wrapperClass: w-full
 ---
 
 <table class="vv-table vv-table--inline-spacing">

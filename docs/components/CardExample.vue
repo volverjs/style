@@ -28,7 +28,7 @@
 					}"
 					class="vv-button vv-button--action-quiet"
 					type="button"
-					@click.stop="toggleDarkMode">
+					@click.stop="toggleDarkMode()">
 					<IconifyIcon
 						:icon="
 							isThemeDark

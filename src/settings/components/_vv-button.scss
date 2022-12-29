@@ -52,7 +52,6 @@ $vv-button: (
 			flex-shrink: 0,
 			stroke-linecap: round,
 			stroke-linejoin: round,
-			[min-height]: calc(var(--button-line-height) * 1em),
 		),
 		label: (
 			white-space: nowrap,

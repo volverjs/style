@@ -12,33 +12,33 @@ description: Utilities for controlling gutters between grid and flexbox items.
 						Class
 					</th>
 					<th>
-						Properties
+						Value
 					</th>
 				</tr>
 			</thead>
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-wrap">
-						gap-{spacer-size}
+						gap-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-wrap">
-						gap: {spacer-value};
+						gap: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-wrap">
-						gap-x-{spacer-size}
+						gap-x-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-wrap">
-						column-gap: {spacer-value};
+						column-gap: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-wrap">
-						gap-y-{spacer-size}
+						gap-y-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-wrap">
-						row-gap: {spacer-value};
+						row-gap: {spacing-value};
 					</td>
 				</tr>
 			</tbody>

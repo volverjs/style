@@ -1,22 +1,11 @@
 ---
-title: Align Content
+title: Align / Justify Content
 description: Utilities for controlling how rows are positioned in multi-row flex and grid containers.
 breakpoints: true
 ---
 <div>
-    <table-utility prefix="content" property="justify-align-content" custom-property="align-content" class="mb-lg"></table-utility>
-	<details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
-		<summary class="vv-accordion__summary flex items-center" aria-controls="#accordion-item-1" aria-expanded="false">
-			<iconify-icon icon="akar-icons:info" class="mr-sm"></iconify-icon>
-			Accept breakpoint utilities
-		</summary>
-		<div aria-hidden="true" class="vv-accordion__content">
-			<p class="font-light text-word-3">
-				You can also use the breakpoint modifier to apply the class at only a specific screen size and above.<br />
-				Example: md:content-{start|end|center|between|around|evenly}
-			</p>
-		</div>
-	</details>
+    <table-utility prefix="content" property="justify-align-content" attribute="align-content" class="mb-lg"></table-utility>
+    <table-utility prefix="justify" property="justify-align-content" attribute="justify-content" class="mb-lg"></table-utility>
     <card-example>
 		<div class="container h-full rounded-md bg-surface-1 p-24">
 			<div class="flex flex-wrap justify-around gap-4">

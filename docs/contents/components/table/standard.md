@@ -1,6 +1,6 @@
 ---
 title: Standard
-wrapperClass: md:w-9/12 mx-auto w-full
+wrapperClass: w-full
 ---
 
 <table class="vv-table">

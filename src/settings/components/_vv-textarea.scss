@@ -72,7 +72,7 @@ $vv-textarea: (
 			display: block,
 			flex: 1,
 			color: var(--input-color),
-			[margin]: var(--input-spacing-top) var(--input-spacing-right)
+			[padding]: var(--input-spacing-top) var(--input-spacing-right)
 				var(--input-spacing-bottom) var(--input-spacing-left),
 			overflow: auto,
 			pseudo: (

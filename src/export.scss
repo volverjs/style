@@ -27,7 +27,7 @@
 					}
 				}
 			}
-		} @else {
+		} @else if $key != 'scheme' {
 			#{'colors__' + $key}: $value;
 		}
 	}
@@ -45,7 +45,7 @@
 	}
 
 	// breakpoints
-	@each $key, $value in $breakpoints {
+	@each $key, $value in map.remove($breakpoints, 'xxs') {
 		#{'breakpoints__' + $key}: $value;
 	}
 
@@ -87,6 +87,11 @@
 	// object-position
 	@each $key, $value in $object-position {
 		#{'object-position__' + $key}: $value;
+	}
+
+	// overflow
+	@each $key, $value in $overflow {
+		#{'overflow__' + $key}: $value;
 	}
 
 	// position
@@ -221,7 +226,7 @@
 		$name: meta.inspect($key);
 		$name: str-replace($name, '\\/', '_');
 
-		#{'width-spacer__' + $name}: $value;
+		#{'width__' + $name}: $value;
 	}
 
 	// height spacer
@@ -229,17 +234,17 @@
 		$name: meta.inspect($key);
 		$name: str-replace($name, '\\/', '_');
 
-		#{'height-spacer__' + $name}: $value;
+		#{'height__' + $name}: $value;
 	}
 
 	// border radius
 	@each $key, $value in $border-radius {
-		#{'border-radius-spacer__' + $key}: $value;
+		#{'border-radius__' + $key}: $value;
 	}
 
 	// border width
 	@each $key, $value in $border-width {
-		#{'border-width-spacer__' + $key}: $value;
+		#{'border-width__' + $key}: $value;
 	}
 
 	// #endregion

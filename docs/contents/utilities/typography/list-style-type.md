@@ -5,7 +5,7 @@ description: Utilities for controlling the bullet/number style of a list.
 <div>
 	<table-utility prefix="list" property="list-style-type" class="mb-lg"></table-utility>
     <card-example>
-		<div class="container flex justify-around h-full rounded-md bg-surface-1 text-white p-24">
+		<div class="container flex justify-around h-full rounded-md bg-surface-1 p-24">
 			<div class="flex items-center">
 				<ul class="list-none">
 					<li>HTML</li>

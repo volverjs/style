@@ -83,6 +83,14 @@ $object-position: (
 	top: top,
 ) !default;
 
+// overflow
+$overflow: (
+	visible: visible,
+	hidden: hidden,
+	scroll: scroll,
+	auto: auto,
+) !default;
+
 // position
 $position: (static, fixed, absolute, relative, sticky) !default;
 
@@ -95,15 +103,15 @@ $visibility: (
 // z-index
 $z-index: (
 	dropdown: 1000,
-	sticky: 1020,
-	fixed: 1030,
-	modal-backdrop: 1040,
-	modal: 1050,
-	confirm-backdrop: 1060,
-	confirm: 1070,
-	popover: 1060,
-	tooltip: 1070,
-	toast: 1080,
-	notification-alert: 1090,
+	sticky: 1010,
+	fixed: 1020,
+	modal-backdrop: 1030,
+	modal: 1040,
+	confirm-backdrop: 1050,
+	confirm: 1060,
+	popover: 1070,
+	tooltip: 1080,
+	toast: 1090,
+	notification-alert: 1100,
 	auto: 'auto',
 ) !default;

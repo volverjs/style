@@ -1,7 +1,6 @@
 ---
 title: Tooltip
 description: Tooltips are floating labels that briefly explain the function of a user interface element.
-uiVue: true
 isNew: false
 ---
 

@@ -4,22 +4,9 @@ description: Utilities for controlling how elements are sized and placed across 
 breakpoints: true
 ---
 <div>
-	<p class="vv-text text-word-2 max-w-prose">Grid row with start and end utilities</p>
-    <table-utility prefix="row" property="grid-row" class="mb-lg"></table-utility>
-	<p class="vv-text text-word-2 max-w-prose">Grid row with start or end utilities</p>
-	<table-utility prefix="row-{start|end}" property="grid-row-start-end" custom-property="grid-row-{start|end}" class="mb-lg"></table-utility>
-	<details id="accordion-item-1" class="vv-accordion vv-accordion--bordered vv-accordion--marker-right bg-surface mb-lg">
-		<summary class="vv-accordion__summary flex items-center" aria-controls="#accordion-item-1" aria-expanded="false">
-			<iconify-icon icon="akar-icons:info" class="mr-sm"></iconify-icon>
-			Accept breakpoint utilities
-		</summary>
-		<div aria-hidden="true" class="vv-accordion__content">
-			<p class="font-light text-word-3">
-				You can also use the breakpoint modifier to apply the class at only a specific screen size and above.<br />
-				Example: md:row-{auto|span-1|span-2|span-3|span-4|span-5|span-6|span-full} or md:row-{start|end}-{1|2|3|4|5|6|7|auto}
-			</p>
-		</div>
-	</details>
+	<table-utility prefix="row" attribute="grid-row" property="grid-row" class="mb-lg"></table-utility>
+	<table-utility prefix="row-start" property="grid-row-start-end" attribute="grid-row-start" class="mb-lg"></table-utility>
+	<table-utility prefix="row-end" property="grid-row-start-end" attribute="grid-row-end" class="mb-lg"></table-utility>
     <card-example>
 		<div class="container h-full rounded-md bg-surface-1 p-24">
 			<div class="grid grid-cols-2 gap-10 border-b border-alpha-1 mb-24 pb-24">

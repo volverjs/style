@@ -21,6 +21,7 @@ $vv-badge: (
 	font-family: var(--font-sans),
 	font-weight: var(--font-normal),
 	text-shadow: none,
+	line-height: var(--leading-none),
 	state: (
 		empty: (
 			font-size: inherit,

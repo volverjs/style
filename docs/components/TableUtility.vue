@@ -1,10 +1,5 @@
 <script setup>
 	const props = defineProps({
-		prefix: {
-			type: String,
-			default: '',
-			required: false,
-		},
 		property: {
 			type: String,
 			required: true,
@@ -15,32 +10,39 @@
 		 */
 		customProperty: {
 			type: String,
+			default: undefined,
+		},
+		prefix: {
+			type: String,
 			default: '',
-			required: false,
 		},
-		/**
-		 * Sometimes, especially in helper classes (e.g. spacing) we don’t need to specify the property because we only care about the value.
-		 */
-		hasProperty: {
+		attribute: {
+			type: String,
+			default: '',
+		},
+		labelClass: {
+			type: String,
+			default: 'Class',
+		},
+		labelValue: {
+			type: String,
+			default: 'Value',
+		},
+		labelCustomProperty: {
+			type: String,
+			default: 'CSS Custom Property',
+		},
+		hideValue: {
 			type: Boolean,
-			default: true,
+			default: false,
 		},
-		/**
-		 * Used to customize the table columns.
-		 */
-		customColumns: {
-			type: Object,
-			default: () => {},
+		hideClass: {
+			type: Boolean,
+			default: false,
 		},
-		labelFirstCol: {
-			type: String,
-			default: 'Class / Prop',
-			required: false,
-		},
-		labelSecondCol: {
-			type: String,
-			default: 'Properties',
-			required: false,
+		exclude: {
+			type: Array,
+			default: () => [],
 		},
 	})
 
@@ -48,104 +50,72 @@
 		return icssExports[props.property] ?? []
 	})
 
-	const columns = computed(() => {
-		if (typeof props.customColumns == 'string') {
-			return JSON.parse(props.customColumns)
-		}
-		return null
-	})
+	const getClass = (key) => {
+		return `.${
+			props.prefix && props.prefix !== key
+				? `${props.prefix}-${key}`
+				: key
+		}`
+	}
+
+	const getCustomProperty = (key) => {
+		const prefix =
+			props.customProperty !== key ? `${props.customProperty}-` : ''
+		return `--${
+			props.customProperty ? `${prefix}${key.replace('/', '-')}` : key
+		}`
+	}
 </script>
 
 <template>
-	<div v-if="columns" class="max-h-288 overflow-y-auto mb-lg">
-		<table class="w-full text-xs">
+	<div class="max-h-288 overflow-y-auto">
+		<table
+			v-if="Object.keys(items).length"
+			class="vv-table vv-table--inline-spacing nx-md">
 			<thead class="sticky z-sticky top-0 bg-surface-1">
 				<tr>
-					<template
-						v-for="(column, index) in Object.values(columns)"
-						:key="index">
-						<th>
-							<div
-								class="border-b border-surface-5 py-sm text-word-2 font-semibold">
-								{{ column }}
-							</div>
-						</th>
-					</template>
+					<th v-if="!hideClass">{{ labelClass }}</th>
+					<th v-if="customProperty">{{ labelCustomProperty }}</th>
+					<th v-if="!hideValue">{{ labelValue }}</th>
 				</tr>
 			</thead>
 			<tbody class="align-baseline">
-				<tr v-for="(value, key, i) in items" :key="key">
-					<td
-						v-if="i == 0"
-						:rowspan="Object.values(items).length"
-						translate="no"
-						class="font-mono text-accent">
-						{{ prefix }}
-					</td>
-					<td
-						translate="no"
-						class="font-mono text-word-4 whitespace-nowrap">
-						<div class="border-b border-surface-3 py-sm">
-							{{ key }}
-						</div>
-					</td>
-					<td
-						translate="no"
-						class="font-mono text-info whitespace-nowrap">
-						<div
-							v-if="hasProperty"
-							class="border-b border-surface-3 py-sm">
-							{{ customProperty || property }}: {{ value }};
-						</div>
-						<div v-else class="border-b border-surface-3 py-sm">
-							{{ value }};
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-	<div v-else class="max-h-288 overflow-y-auto">
-		<table v-if="Object.keys(items).length" class="w-full text-xs">
-			<thead class="sticky z-sticky top-0 bg-surface-1">
-				<tr>
-					<th>
-						<div
-							class="border-b border-surface-5 py-sm text-word-2 font-semibold">
-							{{ labelFirstCol }}
-						</div>
-					</th>
-					<th>
-						<div
-							class="border-b border-surface-5 py-sm text-word-2 font-semibold">
-							{{ labelSecondCol }}
-						</div>
-					</th>
-				</tr>
-			</thead>
-			<tbody class="align-baseline">
-				<tr v-for="(value, key) in items" :key="key">
-					<td
-						translate="no"
-						class="font-mono text-accent whitespace-nowrap">
-						<div class="border-b border-surface-3 py-sm">
-							{{ prefix ? `${prefix}-${key}` : key }}
-						</div>
-					</td>
-					<td
-						translate="no"
-						class="font-mono text-info whitespace-nowrap">
-						<div
-							v-if="hasProperty"
-							class="border-b border-surface-3 py-sm">
-							{{ customProperty || property }}: {{ value }};
-						</div>
-						<div v-else class="border-b border-surface-3 py-sm">
-							{{ value }};
-						</div>
-					</td>
-				</tr>
+				<template v-for="(value, key) in items">
+					<tr v-if="!exclude.includes(key)" :key="key">
+						<td
+							v-if="!hideClass"
+							translate="no"
+							class="font-mono text-accent whitespace-nowrap">
+							<slot name="class" v-bind="{ value, key }">
+								{{ getClass(key) }}
+							</slot>
+						</td>
+						<td
+							v-if="customProperty !== undefined"
+							translate="no"
+							class="font-mono text-brand whitespace-nowrap">
+							<slot
+								name="custom-property"
+								v-bind="{ value, key }">
+								{{ getCustomProperty(key) }}: {{ value }};
+							</slot>
+						</td>
+						<td
+							v-if="!hideValue"
+							translate="no"
+							class="font-mono text-info whitespace-nowrap">
+							<slot name="value" v-bind="{ value, key }">
+								{{
+									`${attribute || property}: ${
+										customProperty !== undefined
+											? `var(${getCustomProperty(key)})`
+											: value
+									};`
+								}}
+							</slot>
+						</td>
+					</tr>
+				</template>
 			</tbody>
 		</table>
 	</div>

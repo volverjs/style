@@ -2,9 +2,10 @@
 title: Aspect Ratio
 description: Utilities for controlling the aspect ratio of an element.
 breakpoints: true
+customProperties: true
 ---
 <div>
-    <table-utility prefix="aspect" property="aspect-ratio" class="mb-lg"></table-utility>
+    <table-utility prefix="aspect" property="aspect-ratio" custom-property="aspect" class="mb-lg"></table-utility>
     <card-example>
         <div class="absolute inset-0 bg-grid mix-blend-plus-lighter"></div>
         <div class="relative gap-sm columns-2 md:columns-3">

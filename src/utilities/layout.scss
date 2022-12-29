@@ -94,28 +94,28 @@
 );
 
 // overflow
-@each $overflow in (auto, hidden, clip, visible, scroll) {
-	%overflow-#{$overflow} {
-		overflow: #{$overflow};
+@each $key, $value in $overflow {
+	%overflow-#{$key} {
+		overflow: #{$value};
 	}
 
 	@include wrap-with-where(
-		$selector: '.overflow-#{$overflow}',
+		$selector: '.overflow-#{$key}',
 		$enabled: $zero-specificity-for-utilities
 	) {
-		@extend %overflow-#{$overflow};
+		@extend %overflow-#{$key};
 	}
 
 	@each $prefix in (x, y) {
-		%overflow-#{$prefix}-#{$overflow} {
-			overflow-#{$prefix}: #{$overflow};
+		%overflow-#{$prefix}-#{$key} {
+			overflow-#{$prefix}: #{$value};
 		}
 
 		@include wrap-with-where(
-			$selector: '.overflow-#{$prefix}-#{$overflow}',
+			$selector: '.overflow-#{$prefix}-#{$key}',
 			$enabled: $zero-specificity-for-utilities
 		) {
-			@extend %overflow-#{$prefix}-#{$overflow};
+			@extend %overflow-#{$prefix}-#{$key};
 		}
 	}
 }

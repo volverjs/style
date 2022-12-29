@@ -11,7 +11,7 @@ description: Utilities for controlling how flex items grow.
 						Class
 					</th>
 					<th>
-						Properties
+						Value
 					</th>
 				</tr>
 			</thead>

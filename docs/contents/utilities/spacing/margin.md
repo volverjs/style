@@ -12,35 +12,177 @@ description: Utilities for controlling an element's margin.
 						Class
 					</th>
 					<th>
-						Properties
+						Value
 					</th>
 				</tr>
 			</thead>
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						m{t|r|b|l|}-{spacer-size}
+						.m-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						margin-{top|right|bottom|left}: {spacer-value};
+						margin: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						m-x-{spacer-size}
+						.mt-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						<p>margin-left: {spacer-value};</p>
-						<p>margin-right: {spacer-value};</p>
+						margin-top: {spacing-value};
 					</td>
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						m-y-{spacer-size}
+						.mr-{spacing-key}
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
-						<p>margin-top: {spacer-value};</p>
-						<p>margin-bottom: {spacer-value};</p>
+						margin-right: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mb-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-bottom: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.ml-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-left: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mx-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-inline: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.my-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-block: {spacing-value};
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.m-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mt-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-top: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mr-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-right: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mb-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-bottom: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.ml-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-left: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.mx-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-inline: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.my-auto
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-block: auto;
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.n-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.nt-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-top: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.nr-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-right: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.nb-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-bottom: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.nl-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-left: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.nx-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-inline: calc(-1 * {spacing-value});
+					</td>
+				</tr>
+				<tr>
+					<td translate="no" class="font-mono text-accent whitespace-nowrap">
+						.ny-{spacing-key}
+					</td>
+					<td translate="no" class="font-mono text-info whitespace-nowrap">
+						margin-block: calc(-1 * {spacing-value});
 					</td>
 				</tr>
 			</tbody>
