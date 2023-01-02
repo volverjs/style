@@ -38,16 +38,13 @@
 }
 
 @function color-shades-map($color, $name, $steps: 5, $scale: 10%) {
-	$result: (#{$name}: $color);
-	@for $index from 1 to ($steps + 1) {
-		$result: map.merge(
-			map.merge(
-				$result,
-				color-lighten-map($color, $name, $steps, $scale, 'lighten')
-			),
-			color-darken-map($color, $name, $steps, $scale, 'darken')
-		);
-	}
+	$result: map.merge(
+		map.merge(
+			(#{$name}: $color),
+			color-lighten-map($color, $name, $steps, $scale, 'lighten')
+		),
+		color-darken-map($color, $name, $steps, $scale, 'darken')
+	);
 	@return $result;
 }
 

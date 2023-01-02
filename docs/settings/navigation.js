@@ -3,6 +3,11 @@ const gettingStarted = import.meta.glob('../contents/getting-started/*.md', {
 	import: 'attributes',
 })
 
+const settings = import.meta.glob('../contents/settings/*.md', {
+	eager: true,
+	import: 'attributes',
+})
+
 const components = import.meta.glob('../contents/components/*/index.md', {
 	eager: true,
 	import: 'attributes',
@@ -45,6 +50,24 @@ export const mainMenu = [
 					isDraft: gettingStarted[key].isDraft ?? false,
 					to: {
 						name: 'getting-started-name',
+						params: { name },
+					},
+				}
+			})
+			.sort((a, b) => a.index - b.index),
+	},
+	{
+		name: 'Settings',
+		children: Object.keys(settings)
+			.map((key) => {
+				const name = key.split('/').pop().split('.').shift()
+				return {
+					index: settings[key].index,
+					name: settings[key].label,
+					isNew: settings[key].isNew,
+					isDraft: settings[key].isDraft ?? false,
+					to: {
+						name: 'settings-name',
 						params: { name },
 					},
 				}
