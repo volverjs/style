@@ -1,3 +1,5 @@
+@use '../tools/mixins' as *;
+
 $breakpoints: (
 	xxs: 0,
 	xs: 360px,

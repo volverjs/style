@@ -1,19 +1,35 @@
 @use 'sass:color';
+@use 'sass:map';
+@use '../../../tools/functions' as *;
+@use '../../../settings/colors' as *;
 
-$color-scheme: dark !default;
-$color-brand: #1976d2 !default;
-$color-word: hsl(color.hue($color-brand) 15% 85%) !default;
-$color-surface: hsl(color.hue($color-brand) 10% 5%) !default;
-$color-shadow: hsl(color.hue($color-brand) 50% 90%) !default;
-$color-backdrop: hsl(color.hue($color-brand) 50% 90%) !default;
-$color-alpha: hsla(0deg 0% 100% / 0%) !default;
+$dark-color-scheme: dark !default;
+$dark-color-brand: #1976d2 !default;
+$dark-color-word: hsl(color.hue($dark-color-brand) 15% 85%) !default;
+$dark-color-surface: hsl(color.hue($dark-color-brand) 10% 5%) !default;
+$dark-color-alpha: hsla(0deg 0% 100% / 0%) !default;
+$dark-color-surface-palette: (
+	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
+	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
+	success: hsl(var(--color-success-hue) var(--color-success-saturation) 10%),
+	danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 10%),
+	info: hsl(var(--color-info-hue) var(--color-info-saturation) 10%),
+	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 10%),
+) !default;
 
 // color map
-$colors: (
-	scheme: $color-scheme,
-	word: color-darken-map($color-word, 'word', $scale: 15%),
-	surface: color-lighten-map($color-surface, 'surface', $scale: 5%),
-	shadow: hsla-map($color-shadow, 'shadow'),
-	backdrop: hsla-map($color-backdrop, 'backdrop'),
-	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
+$dark-colors: (
+	scheme: $dark-color-scheme,
+	word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
+	surface:
+		map.merge(
+			color-lighten-map(
+				$dark-color-surface,
+				'surface',
+				$scale: 5%,
+				$fixed: true
+			),
+			$dark-color-surface-palette
+		),
+	alpha: color-alpha-map($dark-color-alpha, 'alpha', $steps: 5, $scale: 5%),
 ) !default;

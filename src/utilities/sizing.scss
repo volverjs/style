@@ -1,27 +1,18 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // width / height / max-width / max-height
-@each $dimension,
-	$attr in(w: width, h: height, max-w: max-width, max-h: max-height)
+@each $class,
+	$attribute in(w: width, h: height, max-w: max-width, max-h: max-height)
 {
-	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
-		// check if value is not a map (spacing-dynamic)
-		$var: var(--spacing-#{$size});
-		@if type-of($value) != 'map' {
-			$var: var(--spacing-#{$size}, #{$value});
-		}
-
-		%#{$dimension}-#{$size} {
-			#{$attr}: #{$var};
-		}
-		@include wrap-with-where(
-			$selector: '.#{$dimension}-#{$size}',
-			$enabled: $zero-specificity-for-utilities
-		) {
-			@extend %#{$dimension}-#{$size};
-		}
-	}
+	@include spread-map-into-utilities(
+		$map: map.merge($spacing, $spacing-dynamic),
+		$class: $class,
+		$attribute: $attribute,
+		$bps: $breakpoints,
+		$prop: spacing,
+		$zero-specificity: $zero-specificity-for-utilities
+	);
 }
 
 @include spread-map-into-utilities(
@@ -29,7 +20,8 @@
 	$class: w,
 	$attribute: width,
 	$bps: $breakpoints,
-	$prop: w
+	$prop: w,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
@@ -37,19 +29,22 @@
 	$class: h,
 	$attribute: height,
 	$bps: $breakpoints,
-	$prop: h
+	$prop: h,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
 	$map: $max-width,
 	$class: max-w,
-	$attribute: max-width
+	$attribute: max-width,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
 	$map: $max-height,
 	$class: max-h,
-	$attribute: max-height
+	$attribute: max-height,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @each $breakpoint, $breakpoint-value in $breakpoints {
@@ -70,11 +65,13 @@
 @include spread-map-into-utilities(
 	$map: $min-width,
 	$class: min-w,
-	$attribute: min-width
+	$attribute: min-width,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
 	$map: $min-height,
 	$class: min-h,
-	$attribute: min-height
+	$attribute: min-height,
+	$zero-specificity: $zero-specificity-for-utilities
 );

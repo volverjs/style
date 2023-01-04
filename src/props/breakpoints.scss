@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use '../context' as *;
+
+:where(:host, :root, .theme) {
+	@each $breakpoint, $breakpoint-value in $breakpoints {
+		@media screen and (min-width: $breakpoint-value) {
+			--breakpoint-key: #{$breakpoint};
+			--breakpoint-value: #{$breakpoint-value};
+		}
+	}
+	@include spread-map-into-props(
+		$map: map.remove($breakpoints, 'xxs'),
+		$prefix: breakpoint
+	);
+}

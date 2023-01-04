@@ -3,6 +3,8 @@
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass:selector';
+@use 'functions' as *;
+@use 'breakpoints' as *;
 
 // Check ascending order
 // Used to ensure the breakpoints are ordered ascending.
@@ -77,7 +79,7 @@
 		xxs: 0,
 	),
 	$prefix: '',
-	$zero-specificity: $zero-specificity-for-utilities
+	$zero-specificity: false
 ) {
 	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
 	{
@@ -91,12 +93,14 @@
 				}
 				@if type-of($value) == 'map' and $deep {
 					@include spread-map-into-utilities(
-						$value,
-						$class,
-						$attribute,
-						$prop,
-						$key,
-						$prefix
+						$map: $value,
+						$class: $class,
+						$attribute: $attribute,
+						$prop: $prop,
+						$name: $key,
+						$bps: $bps,
+						$prefix: $prefix,
+						$zero-specificity: $zero-specificity
 					);
 				} @else {
 					$default: null;
@@ -133,8 +137,12 @@
 						$default: $key;
 					}
 
+					@if type-of($default) == 'string' {
+						$default: string.unquote($default);
+					}
+
 					%#{$prefix}#{$class-name} {
-						@include media-breakpoint-up($breakpoint) {
+						@include media-breakpoint-up($breakpoint, $bps) {
 							@if type-of($attribute) != 'list' {
 								$attribute: ($attribute);
 							}
@@ -170,7 +178,10 @@
 	$key: 'modifier',
 	$block: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $block {
 		$block: &;
@@ -255,7 +266,10 @@
 	$block: null,
 	$modifier: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $block {
 		$block: &;
@@ -360,7 +374,10 @@
 	$modifier: '',
 	$alias: null,
 	$props: true,
-	$zero-specificity: true
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if not $original {
 		$original: $map;
@@ -396,7 +413,9 @@
 					open,
 					close,
 					determinate,
-					indeterminate
+					indeterminate,
+					pressed,
+					current
 				),
 				$state
 			)
@@ -479,16 +498,30 @@
 								'#{$modifier}#{$alias}[#{$state}]'
 							);
 						}
+
+						@if $state == 'disabled' {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$block-item}[aria-disabled="true"]'
+							);
+
+							@if $alias {
+								$selectors: list.join(
+									$selectors,
+									'#{$modifier}#{$alias}[aria-disabled="true"]'
+								);
+							}
+						}
 					} @else if $state == 'focus-visible' {
 						$selectors: list.join(
 							$selectors,
-							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+							'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
 						);
 
 						@if $alias {
 							$selectors: list.join(
 								$selectors,
-								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):#{$state}'
+								'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
 							);
 						}
 					} @else if $state == 'checked' {
@@ -503,7 +536,19 @@
 								'#{$modifier}#{$alias}:#{$state}'
 							);
 						}
-					} @else {
+					} @else if $state == 'pressed' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[aria-pressed="true"]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[aria-pressed="true"]'
+							);
+						}
+					} @else if $state != 'current' {
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}:not([disabled]):#{$state}'
@@ -533,6 +578,7 @@
 						$props: $props
 					);
 				}
+
 				@include wrap-with-where(
 					$selector: $selector,
 					$enabled: $zero-specificity
@@ -565,7 +611,9 @@
 	$key: 'breakpoint',
 	$block: null,
 	$props: true,
-	$bps: $breakpoints,
+	$bps: (
+		xxs: 0,
+	),
 	$zero-specificity: true
 ) {
 	@if not $block {
@@ -605,7 +653,9 @@
 			outer-spin-button,
 			progress-bar,
 			progress-value,
-			progress-inner-element
+			progress-inner-element,
+			datetime-edit-fields-wrapper,
+			datetime-edit-day-field
 		),
 		$pseudo-element
 	)
@@ -632,7 +682,10 @@
 	$postfix: '',
 	$deep: false,
 	$ignore: (),
-	$props: true
+	$props: true,
+	$bps: (
+		xxs: 0,
+	)
 ) {
 	@if type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
@@ -664,12 +717,17 @@
 										progress-bar,
 										progress-value,
 										inner-element,
+										marker,
+										datetime-edit-fields-wrapper,
+										datetime-edit-day-field,
 										-webkit-progress-bar,
 										-webkit-progress-value,
 										-webkit-inner-element,
 										-moz-progress-bar,
 										-moz-progress-value,
-										-moz-inner-element
+										-moz-inner-element,
+										-webkit-details-marker,
+										-webkit-scrollbar
 									),
 									$pseudo-element
 								)
@@ -684,11 +742,12 @@
 										$pseudo-element
 									) {
 										@if not $original {
-											@if not
+											@if not(
 												map.has-key(
 													$pseudo-map,
 													'content'
 												)
+											)
 											{
 												content: '';
 											}
@@ -763,7 +822,7 @@
 							);
 						}
 
-						#{$key}: #{$value};
+						#{$key}: $value;
 					}
 				}
 			}
@@ -773,18 +832,19 @@
 
 // Wrap selector with :where()
 @mixin wrap-with-where($selector, $enabled: true) {
-	@if type-of($selector) == 'map' {
+	@if type-of($selector) == 'map' or type-of($selector) == 'list' {
 		$merged: '';
 		@each $element in $selector {
 			@if $enabled {
-				$merged: '#{$merged}, :where(#{$element})';
+				$merged: '#{$merged}, :where(#{unquote($element)})';
 			} @else {
-				$merged: '#{$merged}, #{$element}';
+				$merged: '#{$merged}, #{unquote($element)}';
 			}
 		}
 	} @else if $enabled {
-		$selector: ':where(#{$selector})';
+		$selector: ':where(#{unquote($selector)})';
 	}
+
 	#{$selector} {
 		@content;
 	}
@@ -798,25 +858,31 @@
 	$modifiers-key: 'modifier',
 	$states-key: 'state',
 	$breakpoints-key: 'breakpoint',
+	$transitions-key: 'transition',
 	$props: true,
 	$zero-specificity: true,
+	$custom-props: false,
 	$custom-block: false,
 	$custom-elements: false,
 	$custom-modifiers: false,
 	$custom-states: false,
-	$custom-breakpoints: false
+	$custom-breakpoints: false,
+	$custom-transitions: false,
+	$bps: (xxs: 0)
 ) {
 	@if type-of($map) == 'map' and $block != '' {
 		$selector: '.' + $block;
 
 		// custom props
-		@if $props {
-			:where(:host, :root, .theme) {
-				@include spread-map-into-props(
-					$map: $map,
-					$prefix: $block,
-					$deep: true
-				);
+		@if not $custom-props {
+			@if $props {
+				:where(:host, :root, .theme) {
+					@include spread-map-into-props(
+						$map: $map,
+						$prefix: $block,
+						$deep: true
+					);
+				}
 			}
 		}
 
@@ -852,7 +918,8 @@
 					$key: $elements-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -866,7 +933,8 @@
 					$key: $states-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -880,7 +948,23 @@
 					$key: $modifiers-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
+				);
+			}
+		}
+
+		// transition
+		@if not $custom-transitions {
+			@if map.has-key($map, $transitions-key) {
+				@include spread-map-into-transitions(
+					$map: $map,
+					$prefix: $block,
+					$key: $transitions-key,
+					$block: $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -894,8 +978,87 @@
 					$key: $breakpoints-key,
 					$block: $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
+			}
+		}
+	}
+}
+
+// Transform a map into a list of transitions
+@mixin spread-map-into-transitions(
+	$map: (),
+	$prefix: '',
+	$key: 'transition',
+	$block: null,
+	$props: true,
+	$zero-specificity: true,
+	$bps: (
+		xxs: 0,
+	)
+) {
+	@if not $block {
+		$block: &;
+	}
+	@if type-of(map.get($map, $key)) == 'map' {
+		@each $transition, $states in map.get($map, $key) {
+			@each $state, $value in $states {
+				@if $state in [ 'enter-from', 'enter-active', 'enter-to',
+					'leave-from', 'leave-active', 'leave-to', 'active',
+					'inert' ] and type-of($value) == 'map'
+				{
+					$selector: '.#{$transition}';
+
+					@if $prefix != '' {
+						$selector: '.#{$prefix}--#{$transition}';
+					}
+
+					@if $state == 'active' {
+						$selector: (
+							'#{$selector}-enter-active',
+							'#{$selector}-leave-active'
+						);
+					} @else if $state == 'inert' {
+						$selector: (
+							'#{$selector}-enter-from',
+							'#{$selector}-leave-to'
+						);
+					} @else {
+						$selector: '#{$selector}-#{$state}';
+					}
+
+					// map props and attributes
+					@include wrap-with-where(
+						$selector,
+						$enabled: $zero-specificity
+					) {
+						@include spread-map-into-attrs(
+							$map: $value,
+							$prefix: $prefix,
+							$variant: #{$key}-#{$transition}-#{$state},
+							$deep: true,
+							$ignore: (
+								'element',
+							),
+							$props: $props
+						);
+					}
+
+					// map elements
+					@if map.get($value, 'element') {
+						@include spread-map-into-elements(
+							$original: $map,
+							$map: $value,
+							$prefix: #{$prefix}-#{$key}-#{$transition}-#{$state},
+							$key: 'element',
+							$block: $block,
+							$modifier: $selector,
+							$props: $props,
+							$zero-specificity: $zero-specificity
+						);
+					}
+				}
 			}
 		}
 	}

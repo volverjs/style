@@ -1,0 +1,8 @@
+$dark-input: (
+	invalid: (
+		color: var(--color-danger-lighten-2),
+	),
+	valid: (
+		color: var(--color-success-lighten-2),
+	),
+) !default;

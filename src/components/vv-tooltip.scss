@@ -1,0 +1,33 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-tooltip);
+$component-map: $vv-tooltip;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+@include wrap-with-where(
+	$selector: '*:has(#{$component-selector})',
+	$enabled: $zero-specificity-for-components
+) {
+	position: relative;
+}
+
+@include wrap-with-where(
+	$selector: '*:has(> #{$component-selector})',
+	$enabled: $zero-specificity-for-components
+) {
+	&:hover,
+	&:focus-visible,
+	&.hover,
+	&.focus-visible {
+		@extend %vv-tooltip--visible !optional;
+	}
+}

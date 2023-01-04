@@ -24,3 +24,12 @@ $brightness: (
 	150: brightness(1.5),
 	200: brightness(2),
 ) !default;
+
+// saturation
+$saturation: (
+	0: saturate(0),
+	50: saturate(0.5),
+	100: saturate(1),
+	150: saturate(1.5),
+	200: saturate(2),
+) !default;

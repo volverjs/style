@@ -1,4 +1,6 @@
 @use 'sass:color';
+@use 'sass:map';
+@use '../tools/functions' as *;
 
 // color variables
 $color-scheme: light !default;
@@ -7,13 +9,21 @@ $color-black: #000 !default;
 $color-white: #fff !default;
 $color-brand: #1976d2 !default;
 $color-accent: #9c27b0 !default;
-$color-success: #21ba45 !default;
-$color-danger: #c10015 !default;
+$color-success: #178230 !default;
+$color-danger: #af2323 !default;
 $color-info: #31ccec !default;
 $color-warning: #f2c037 !default;
 $color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
 $color-word: hsl(color.hue($color-brand) 15% 10%) !default;
 $color-surface: hsl(color.hue($color-brand) 10% 98%) !default;
+$color-surface-palette: (
+	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
+	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
+	success: hsl(var(--color-success-hue) var(--color-success-saturation) 90%),
+	danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
+	info: hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
+	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
+) !default;
 $color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
 $color-backdrop: hsla(color.hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsla(0deg 0% 0% / 0%) !default;
@@ -31,8 +41,17 @@ $colors: (
 	info: color-shades-map($color-info, 'info'),
 	warning: color-shades-map($color-warning, 'warning'),
 	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
-	word: color-lighten-map($color-word, 'word', $scale: 15%),
-	surface: color-darken-map($color-surface, 'surface', $scale: 2%),
+	word: color-lighten-map($color-word, 'word', $scale: 12%, $fixed: true),
+	surface:
+		map.merge(
+			color-darken-map(
+				$color-surface,
+				'surface',
+				$scale: 2%,
+				$fixed: true
+			),
+			$color-surface-palette
+		),
 	shadow: hsla-map($color-shadow, 'shadow'),
 	backdrop: hsla-map($color-backdrop, 'backdrop'),
 	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),

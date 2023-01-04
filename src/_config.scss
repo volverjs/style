@@ -1,8 +1,8 @@
 // use custom props for components
 $use-custom-props-for-components: true !default;
 
-// enable zero specificity for compoenents
-$zero-specificity-for-compoenents: true !default;
+// enable zero specificity for components
+$zero-specificity-for-components: true !default;
 
 // enable zero specificity for utilities
 $zero-specificity-for-utilities: true !default;
@@ -12,21 +12,29 @@ $components-prefix: vv !default;
 
 // components names
 $components-names: (
+	vv-accordion: $components-prefix + -accordion,
+	vv-alert: $components-prefix + -alert,
 	vv-badge: $components-prefix + -badge,
-	vv-button: $components-prefix + -button,
+	vv-breadcrumb: $components-prefix + -breadcrumb,
 	vv-button-group: $components-prefix + -button-group,
-	vv-progress: $components-prefix + -progress,
-	vv-collapse: $components-prefix + -collapse,
+	vv-button: $components-prefix + -button,
+	vv-card: $components-prefix + -card,
 	vv-dialog: $components-prefix + -dialog,
 	vv-dropdown: $components-prefix + -dropdown,
-	vv-input-checkbox: $components-prefix + -input-checkbox,
-	vv-input-checkbox-group: $components-prefix + -input-checkbox-group,
-	vv-input-radio: $components-prefix + -input-radio,
-	vv-input-radio-group: $components-prefix + -input-radio-group,
+	vv-checkbox-group: $components-prefix + -checkbox-group,
+	vv-checkbox: $components-prefix + -checkbox,
+	vv-radio-group: $components-prefix + -radio-group,
+	vv-radio: $components-prefix + -radio,
+	vv-avatar: $components-prefix + -avatar,
 	vv-input-text: $components-prefix + -input-text,
-	vv-textarea: $components-prefix + -textarea,
+	vv-nav: $components-prefix + -nav,
+	vv-progress: $components-prefix + -progress,
 	vv-select: $components-prefix + -select,
+	vv-skeleton: $components-prefix + -skeleton,
+	vv-tab: $components-prefix + -tab,
 	vv-table: $components-prefix + -table,
-	vv-card: $components-prefix + -card,
 	vv-text: $components-prefix + -text,
+	vv-textarea: $components-prefix + -textarea,
+	vv-toast: $components-prefix + -toast,
+	vv-tooltip: $components-prefix + -tooltip,
 ) !default;

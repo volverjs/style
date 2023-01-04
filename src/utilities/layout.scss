@@ -1,12 +1,14 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // aspect
 @include spread-map-into-utilities(
 	$map: $aspect-ratio,
 	$class: aspect,
 	$attribute: aspect-ratio,
-	$prop: aspect
+	$prop: aspect,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // container
@@ -15,7 +17,7 @@
 
 	@each $breakpoint, $value in $breakpoints {
 		@if $value > 0 {
-			@include media-breakpoint-up($breakpoint) {
+			@include media-breakpoint-up($breakpoint, $breakpoints) {
 				max-width: $value;
 			}
 		}
@@ -33,79 +35,87 @@
 	$map: $columns,
 	$class: columns,
 	$attribute: column-count,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // break-after
 @include spread-map-into-utilities(
 	$map: $break-after,
 	$class: break-after,
-	$attribute: break-after
+	$attribute: break-after,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // break-before
 @include spread-map-into-utilities(
 	$map: $break-before,
 	$class: break-before,
-	$attribute: break-before
+	$attribute: break-before,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // break-inside
 @include spread-map-into-utilities(
 	$map: $break-inside,
 	$class: break-inside,
-	$attribute: break-inside
+	$attribute: break-inside,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // display
 @include spread-map-into-utilities(
 	$map: $display-without-breakpoints,
-	$attribute: display
+	$attribute: display,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 @include spread-map-into-utilities(
 	$map: $display-with-breakpoints,
 	$attribute: display,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // object-fit
 @include spread-map-into-utilities(
 	$map: $object-fit,
 	$class: object,
-	$attribute: object-fit
+	$attribute: object-fit,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // object-position
 @include spread-map-into-utilities(
 	$map: $object-position,
 	$class: object,
-	$attribute: object-position
+	$attribute: object-position,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // overflow
-@each $overflow in (auto, hidden, clip, visible, scroll) {
-	%overflow-#{$overflow} {
-		overflow: #{$overflow};
+@each $key, $value in $overflow {
+	%overflow-#{$key} {
+		overflow: #{$value};
 	}
 
 	@include wrap-with-where(
-		$selector: '.overflow-#{$overflow}',
+		$selector: '.overflow-#{$key}',
 		$enabled: $zero-specificity-for-utilities
 	) {
-		@extend %overflow-#{$overflow};
+		@extend %overflow-#{$key};
 	}
 
 	@each $prefix in (x, y) {
-		%overflow-#{$prefix}-#{$overflow} {
-			overflow-#{$prefix}: #{$overflow};
+		%overflow-#{$prefix}-#{$key} {
+			overflow-#{$prefix}: #{$value};
 		}
 
 		@include wrap-with-where(
-			$selector: '.overflow-#{$prefix}-#{$overflow}',
+			$selector: '.overflow-#{$prefix}-#{$key}',
 			$enabled: $zero-specificity-for-utilities
 		) {
-			@extend %overflow-#{$prefix}-#{$overflow};
+			@extend %overflow-#{$prefix}-#{$key};
 		}
 	}
 }
@@ -114,14 +124,16 @@
 @include spread-map-into-utilities(
 	$map: $position,
 	$attribute: position,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // visibility
 @include spread-map-into-utilities(
 	$map: $visibility,
 	$attribute: visibility,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // top / right / bottom / left
@@ -184,5 +196,6 @@
 	$map: $z-index,
 	$class: z,
 	$attribute: z-index,
-	$prop: z
+	$prop: z,
+	$zero-specificity: $zero-specificity-for-utilities
 );

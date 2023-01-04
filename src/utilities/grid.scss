@@ -1,18 +1,22 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 // grid template columns
 @include spread-map-into-utilities(
 	$map: $grid-template-columns,
 	$class: grid-cols,
-	$attribute: grid-template-columns
+	$attribute: grid-template-columns,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid column
 @include spread-map-into-utilities(
 	$map: $grid-column,
 	$class: col,
-	$attribute: grid-column
+	$attribute: grid-column,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid column start/end
@@ -22,7 +26,9 @@
 	@include spread-map-into-utilities(
 		$map: $grid-column-start-end,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -30,14 +36,18 @@
 @include spread-map-into-utilities(
 	$map: $grid-template-rows,
 	$class: grid-rows,
-	$attribute: grid-template-rows
+	$attribute: grid-template-rows,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid row
 @include spread-map-into-utilities(
 	$map: $grid-row,
 	$class: row,
-	$attribute: grid-row
+	$attribute: grid-row,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid row start/end
@@ -45,7 +55,9 @@
 	@include spread-map-into-utilities(
 		$map: $grid-row-start-end,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
 
@@ -53,7 +65,9 @@
 @include spread-map-into-utilities(
 	$map: $grid-auto-flow,
 	$class: grid-flow,
-	$attribute: grid-auto-flow
+	$attribute: grid-auto-flow,
+	$bps: $breakpoints,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // grid auto rows/columns
@@ -63,6 +77,8 @@
 	@include spread-map-into-utilities(
 		$map: $grid-auto-rows-columns,
 		$class: $class,
-		$attribute: $attribute
+		$attribute: $attribute,
+		$bps: $breakpoints,
+		$zero-specificity: $zero-specificity-for-utilities
 	);
 }

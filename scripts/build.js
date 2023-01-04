@@ -1,12 +1,20 @@
 import fs from 'fs'
 import glob from 'glob'
-import Promise from 'promise'
 import { build } from 'vite'
 import stylelint from 'vite-plugin-stylelint'
 
 // load package.json and reset exports
 const packageJson = JSON.parse(fs.readFileSync('./package.json'))
-packageJson.exports = {}
+
+// scss context (variables, mixins, etc.)
+packageJson.exports = {
+	'./scss/context': './src/_context.scss',
+	'./scss/tools': './src/tools/_index.scss',
+	'./scss/functions': './src/tools/_functions.scss',
+	'./scss/mixins': './src/tools/_mixins.scss',
+	'./scss/settings': './src/settings/_index.scss',
+	'./scss/preflight': './src/_preflight.scss',
+}
 
 // get scss files
 glob('./src/**/!(_*).scss', async (err, files) => {
@@ -28,17 +36,20 @@ glob('./src/**/!(_*).scss', async (err, files) => {
 	// build
 	await Promise.all(
 		sources.map(({ exportName, name, input, dir, isIndex }) => {
-			exportName = exportName.replace(/\/style|style/gm, '')
+			exportName = exportName.replace(/\/volver|volver/gm, '')
 			packageJson.exports[
 				`.${exportName ? `/${exportName}` : ``}`
-			] = `./dist/${dir ? `${dir}/` : ``}${name}`
+			] = `./dist/${dir ? `${dir}/` : ``}${name}.css`
 			packageJson.exports[
 				`./scss${exportName ? `/${exportName}` : ``}`
-			] = `./src/${dir ? `${dir}/` : ``}${name}${isIndex ? '/index' : ''}`
+			] = `./src/${dir ? `${dir}/` : ``}${name}${
+				isIndex ? '/index.scss' : '.scss'
+			}`
 
 			return build({
 				plugins: [stylelint()],
 				configFile: false,
+				publicDir: false,
 				build: {
 					emptyOutDir: false,
 					rollupOptions: {

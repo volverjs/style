@@ -1,0 +1,16 @@
+$vv-tab: (
+	display: flex,
+	flex-direction: column,
+	element: (
+		panel: (
+			display: none,
+			padding: var(--spacing-lg),
+			line-height: var(--leading-normal),
+			state: (
+				target: (
+					display: block,
+				),
+			),
+		),
+	),
+) !default;

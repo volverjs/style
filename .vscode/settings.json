@@ -3,14 +3,19 @@
 	"scss.validate": false,
 	"editor.formatOnPaste": true,
 	"editor.formatOnSave": true,
+	"editor.detectIndentation": false,
 	"editor.codeActionsOnSave": {
-		"source.organizeImports": true,
+		"source.organizeImports": false,
 		"source.fixAll": true,
 		"source.fixAll.eslint": true,
 		"source.fixAll.stylelint": true
 	},
 	"stylelint.validate": ["css", "scss", "vue"],
 	"eslint.validate": ["javascript", "vue"],
-	"vetur.validation.template": false,
-	"px-to-rem.px-per-rem": 16
+	"px-to-rem.px-per-rem": 16,
+	"eslint.packageManager": "pnpm",
+	"[markdown]": {
+		"editor.tabSize": 2,
+		"editor.defaultFormatter": "unifiedjs.vscode-remark"
+	}
 }

@@ -1,11 +1,12 @@
-@import '../context';
+@use '../context' as *;
 
 // background-color
 @include spread-map-into-utilities(
 	$map: $colors,
 	$class: bg,
 	$attribute: background-color,
-	$prop: color
+	$prop: color,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // color
@@ -13,7 +14,8 @@
 	$map: $colors,
 	$class: text,
 	$attribute: color,
-	$prop: color
+	$prop: color,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // text-decoration-color
@@ -21,7 +23,8 @@
 	$map: $colors,
 	$class: decoration,
 	$attribute: text-decoration-color,
-	$prop: color
+	$prop: color,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // border-color
@@ -29,5 +32,6 @@
 	$map: $colors,
 	$class: border,
 	$attribute: border-color,
-	$prop: color
+	$prop: color,
+	$zero-specificity: $zero-specificity-for-utilities
 );

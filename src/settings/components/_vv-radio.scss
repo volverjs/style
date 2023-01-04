@@ -1,0 +1,90 @@
+$vv-radio: (
+	display: inline-flex,
+	flex-wrap: wrap,
+	align-items: center,
+	cursor: pointer,
+	user-select: none,
+	margin: 0 var(--input-gap) var(--input-gap) 0,
+	color: var(--input-color),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
+	state: (
+		disabled: (
+			opacity: 0.3,
+			cursor: not-allowed,
+		),
+	),
+	modifier: (
+		readonly: (
+			opacity: 1,
+			cursor: default,
+			pointer-events: none,
+		),
+		valid: (
+			element: (
+				hint: (
+					color: var(--input-valid-color),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				hint: (
+					color: var(--input-invalid-color),
+				),
+			),
+		),
+	),
+	element: (
+		input: (
+			_alias: "> input[type='radio']",
+			border: var(--spacing-2) solid var(--input-color),
+			min-width: var(--spacing-20),
+			height: var(--spacing-20),
+			border-radius: 50%,
+			margin: 0 var(--input-label-gap) 0 0,
+			background: transparent,
+			cursor: pointer,
+			position: relative,
+			pseudo: (
+				after: (
+					position: absolute,
+					width: 70%,
+					height: 70%,
+					background: var(--input-color),
+					inset: 50% 50%,
+					border-radius: 50%,
+					transform: translate(-50%, -50%) scale(0),
+					will-change: transform,
+					transition: var(--transition-transform),
+				),
+			),
+			state: (
+				checked: (
+					pseudo: (
+						after: (
+							transform: translate(-50%, -50%) scale(1),
+						),
+					),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+		hint: (
+			_alias: '> small',
+			flex-basis: 100%,
+			display: var(--input-hint-display),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+			padding-top: var(--input-hint-gap),
+			white-space: var(--input-hint-white-space),
+			text-overflow: var(--input-hint-text-overflow),
+			overflow: var(--input-hint-overflow),
+			max-width: var(--input-hint-max-width),
+		),
+	),
+) !default;

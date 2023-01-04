@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-button);
 $component-map: $vv-button;
@@ -9,8 +9,9 @@ $component-selector: '.#{ $component-name}';
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents,
-	$custom-block: true
+	$zero-specificity: $zero-specificity-for-components,
+	$custom-block: true,
+	$bps: $breakpoints
 ) {
 	// custom block
 	%#{$component-name} {
@@ -29,15 +30,11 @@ $component-selector: '.#{ $component-name}';
 			$prefix: $component-name,
 			$props: $use-custom-props-for-components
 		);
-
-		@media (prefers-reduced-motion: reduce) {
-			transition: none;
-		}
 	}
 
 	@include wrap-with-where(
 		$selector: $component-selector,
-		$enabled: $zero-specificity-for-compoenents
+		$enabled: $zero-specificity-for-components
 	) {
 		&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
 		&::file-selector-button {

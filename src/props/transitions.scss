@@ -1,0 +1,131 @@
+@use '../context' as *;
+
+:where(:host, :root, .theme) {
+	// animation
+	@media (prefers-reduced-motion: no-preference) {
+		// transition-property
+		@include spread-map-into-props(
+			$transition-property,
+			$prefix: transition-property
+		);
+
+		// duration
+		@include spread-map-into-props(
+			$transition-duration-delay,
+			$prefix: duration
+		);
+
+		// ease
+		@include spread-map-into-props(
+			$transition-timing-function,
+			$prefix: ease
+		);
+
+		// animation
+		@include spread-map-into-props($animation, animation);
+
+		// transition
+		@each $property, $value in $transition-property {
+			@if $property != 'none' {
+				--transition-#{$property}: var(
+						--transition-property-#{$property}
+					)
+					var(--duration-300)
+					var(--ease-in-out);
+			} @else {
+				--transition-#{$property}: none;
+			}
+		}
+	}
+}
+
+// keyframes
+@keyframes indeterminate {
+	0% {
+		transform: scaleX(0);
+	}
+
+	50% {
+		transform: scaleX(1);
+		transform-origin: left;
+	}
+
+	51% {
+		transform: scaleX(1);
+		transform-origin: center right;
+	}
+
+	100% {
+		transform: scaleX(0);
+		transform-origin: center right;
+	}
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes ping {
+	75%,
+	100% {
+		transform: scale(2);
+		opacity: 0;
+	}
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(-25%);
+		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+	}
+
+	50% {
+		transform: translateY(0);
+		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+	}
+}
+
+@keyframes progress-indeterminate {
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+@keyframes pie-masks {
+	0% {
+		opacity: 1;
+	}
+
+	50%,
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes shine {
+	to {
+		background-position-x: -200%;
+	}
+}

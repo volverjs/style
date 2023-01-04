@@ -5,6 +5,7 @@ $vv-input-text: (
 	margin-bottom: var(--input-gap),
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
 	element: (
 		label: (
 			_alias: '> label',
@@ -25,7 +26,8 @@ $vv-input-text: (
 			overflow: hidden,
 			background-color: var(--input-background-color),
 			will-change: background-color,
-			transition: background-color 0.2s ease-in-out,
+			transition: var(--transition-colors),
+			min-height: var(--spacing-50),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -41,7 +43,7 @@ $vv-input-text: (
 					transform: scaleX(0),
 					transform-origin: left,
 					will-change: transform,
-					transition: transform 0.2s ease-in-out,
+					transition: var(--transition-transform),
 				),
 			),
 			state: (
@@ -63,9 +65,11 @@ $vv-input-text: (
 			display: block,
 			flex: 1,
 			color: var(--input-color),
-			[padding]: var(--input-padding-top) var(--input-padding-right)
-				var(--input-padding-bottom) var(--input-padding-left),
-			min-height: var(--spacing-50),
+			[margin-block]: var(--input-spacing-top) var(--input-spacing-bottom),
+			[padding-inline]: var(--input-spacing-left)
+				var(--input-spacing-right),
+			min-width: 0,
+			block-size: calc(var(--input-line-height) * var(--input-font-size)),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
@@ -78,25 +82,28 @@ $vv-input-text: (
 					opacity: 0,
 				),
 				search-cancel-button: (
-					display: none,
+					-webkit-appearance: none,
+					opacity: 0,
 				),
 				color-swatch-wrapper: (
-					display: block,
-					border: none,
-					height: 100%,
-					padding: 0,
+					padding: 1px,
 				),
 				color-swatch: (
-					display: block,
-					border: none,
 					height: var(--spacing-20),
 					border-radius: var(--spacing-4),
+					padding: 0,
 				),
 				outer-spin-button: (
 					display: none,
 				),
 				inner-spin-button: (
 					display: none,
+				),
+				datetime-edit-fields-wrapper: (
+					padding: 0,
+				),
+				datetime-edit-day-field: (
+					padding: 0,
 				),
 			),
 			state: (
@@ -114,35 +121,52 @@ $vv-input-text: (
 		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
-			margin: var(--input-padding-top) var(--input-padding-right)
-				var(--input-padding-bottom) var(--input-padding-left),
-			position: var(--input-icon-position),
+			margin: var(--input-spacing-top) var(--input-spacing-right)
+				var(--input-spacing-bottom) var(--input-spacing-left),
 			width: var(--input-icon-width),
 			height: var(--input-icon-height),
 			padding: var(--input-icon-padding),
+		),
+		icon-left: (
+			_alias: '> div > :where(svg, [data-icon])',
+			position: var(--input-icon-position),
 			pointer-events: var(--input-icon-pointer-events),
 		),
 		icon-right: (
 			_alias: 'input + :where(svg, [data-icon])',
+			position: var(--input-icon-position),
+			pointer-events: var(--input-icon-pointer-events),
 			right: 0,
 		),
 		actions-group: (
 			display: flex,
 			flex-direction: column,
-			position: absolute,
-			right: 0,
-			top: 0,
-			bottom: var(--spacing-px),
+			height: var(--input-min-height),
+		),
+		action: (
+			cursor: pointer,
+			state: (
+				focus-visible: (
+					text-shadow: 0 1px 0 var(--color-gray-darken-5),
+				),
+			),
 		),
 		action-chevron: (
 			flex: 1,
-			width: calc(1em + var(--spacing-sm) * 2),
+			width:
+				calc(
+					var(--input-icon-width) + var(--input-spacing-left) +
+						var(--input-spacing-right)
+				),
 			background-position: center var(--spacing-2),
 			background-size: var(--text-14) auto,
 			background-repeat: no-repeat,
 			background-image: var(--bg-chevron),
 			cursor: pointer,
 			state: (
+				focus-visible: (
+					background-color: var(--color-surface-3),
+				),
 				hover: (
 					background-color: var(--color-surface-4),
 				),
@@ -166,13 +190,23 @@ $vv-input-text: (
 			overflow: var(--input-hint-overflow),
 			max-width: var(--input-hint-max-width),
 		),
+		limit: (
+			[padding-right]: var(--input-spacing-right),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+		),
 	),
 	modifier: (
 		icon-left: (
-			--input-padding-left: calc(var(--spacing-sm) * 2 + 1em),
+			--input-spacing-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
 		icon-right: (
-			--input-padding-right: calc(var(--spacing-sm) * 2 + 1em),
+			--input-spacing-right: calc(var(--spacing-sm) * 2 + 1em),
+			element: (
+				limit: (
+					margin-left: calc((var(--spacing-sm) + 1em) * -1),
+				),
+			),
 		),
 		valid: (
 			element: (
@@ -185,6 +219,9 @@ $vv-input-text: (
 					),
 				),
 				hint: (
+					color: var(--input-valid-color),
+				),
+				limit: (
 					color: var(--input-valid-color),
 				),
 				icon-right: (
@@ -205,6 +242,9 @@ $vv-input-text: (
 				hint: (
 					color: var(--input-invalid-color),
 				),
+				limit: (
+					color: var(--input-invalid-color),
+				),
 				icon-right: (
 					color: var(--input-invalid-color),
 				),
@@ -219,40 +259,46 @@ $vv-input-text: (
 							background: var(--color-brand-lighten-5),
 						),
 						after: (
-							animation: var(--animate-indeterminate),
+							animation: var(--animation-indeterminate),
 						),
 					),
 				),
 			),
 		),
 		floating: (
-			[margin-left]: var(--input-padding-left),
-			[margin-right]: var(--input-padding-right),
+			[margin-left]: var(--input-spacing-left),
+			[margin-right]: var(--input-spacing-right),
 			element: (
 				wrapper: (
-					[margin-left]: calc(var(--input-padding-left) * -1),
-					[margin-right]: calc(var(--input-padding-right) * -1),
+					[margin-left]: calc(var(--input-spacing-left) * -1),
+					[margin-right]: calc(var(--input-spacing-right) * -1),
 				),
 				hint: (
-					[margin-left]: calc(var(--input-padding-left) * -1),
-					[margin-right]: calc(var(--input-padding-right) * -1),
+					[margin-left]: calc(var(--input-spacing-left) * -1),
+					[margin-right]: calc(var(--input-spacing-right) * -1),
 				),
 				label: (
 					position: absolute,
 					z-index: 1,
+					display: flex,
+					align-items: center,
+					min-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
-					[padding-top]: var(--input-padding-top),
-					[padding-bottom]: var(--input-padding-bottom),
+					[padding-top]: var(--input-spacing-top),
+					[padding-bottom]: var(--input-spacing-bottom),
 					padding-inline: 0,
 					margin: 0,
 					will-change: 'transform',
-					transform-origin: left,
-					transition: all 0.2s ease-in-out,
+					transition: var(--transition-all),
 				),
 				input: (
+					will-change: 'transform',
+					transition: var(--transition-all),
 					pseudo: (
 						placeholder: (
+							will-change: 'opacity',
+							transition: var(--transition-opacity),
 							opacity: 0,
 						),
 					),
@@ -262,11 +308,11 @@ $vv-input-text: (
 				focus-within: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
-							transform: translateY(0.85ch),
+							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,
@@ -278,11 +324,11 @@ $vv-input-text: (
 				dirty: (
 					element: (
 						label: (
-							transform: translateY(-1.2ch),
+							transform: translateY(-0.8em),
 							font-size: var(--text-12),
 						),
 						input: (
-							transform: translateY(0.85ch),
+							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
 									opacity: 1,

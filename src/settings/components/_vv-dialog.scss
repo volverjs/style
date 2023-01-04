@@ -13,6 +13,7 @@ $vv-dialog: (
 	border: 0,
 	background-color: var(--color-backdrop),
 	backdrop-filter: var(--blur-sm),
+	opacity: 1,
 	state: (
 		close: (
 			display: none,
@@ -21,11 +22,16 @@ $vv-dialog: (
 	element: (
 		wrapper: (
 			_alias: '> article',
+			display: flex,
+			flex-direction: column,
 			position: relative,
 			box-shadow: var(--shadow-lg),
-			max-width: 700px,
+			width: clamp(30vw, 40rem, 90vw),
+			max-height: 90vh,
 			z-index: var(--z-modal),
 			background: var(--color-surface),
+			border-radius: var(--rounded-md),
+			overflow: hidden,
 		),
 		header: (
 			_alias: '> article > header',
@@ -36,15 +42,23 @@ $vv-dialog: (
 			font-size: var(--text-md),
 			padding: var(--spacing-md),
 			background: var(--color-surface-1),
-			border-width: 0 0 var(--spacing-1) 0,
-			border-color: var(--color-surface-5),
+			border-bottom: var(--border) solid var(--color-surface-4),
 		),
 		close: (
-			display: flex,
+			inline-size: 1em,
+			block-size: 1em,
 			cursor: pointer,
+			background-image: var(--bg-close),
+			background-position: center,
+			background-size: 100% auto,
+			background-repeat: no-repeat,
 		),
 		content: (
 			padding: var(--spacing-md),
+			line-height: var(--leading-normal),
+			flex: 1,
+			min-height: 0,
+			overflow: auto,
 		),
 		footer: (
 			_alias: '> article > footer',
@@ -52,8 +66,100 @@ $vv-dialog: (
 			justify-content: flex-end,
 			padding: var(--spacing-md),
 			background: var(--color-surface-1),
-			border-width: var(--spacing-1) 0 0 0,
-			border-color: var(--color-surface-5),
+			border-top: var(--border) solid var(--color-surface-4),
+		),
+	),
+	transition: (
+		fade-block: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			enter-from: (
+				opacity: 0,
+				element: (
+					wrapper: (
+						transform: translateY(100%),
+					),
+				),
+			),
+			leave-to: (
+				opacity: 0,
+				element: (
+					wrapper: (
+						transform: translateY(-100%),
+					),
+				),
+			),
+		),
+		fade-inline: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			enter-from: (
+				opacity: 0,
+				element: (
+					wrapper: (
+						transform: translateX(-100%),
+					),
+				),
+			),
+			leave-to: (
+				opacity: 0,
+				element: (
+					wrapper: (
+						transform: translateX(100%),
+					),
+				),
+			),
+		),
+		scale: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			inert: (
+				opacity: 0,
+				element: (
+					wrapper: (
+						transform: scale(0%),
+					),
+				),
+			),
+		),
+	),
+	modifier: (
+		small: (
+			element: (
+				wrapper: (
+					width: clamp(10vw, 25rem, 90vw),
+				),
+			),
+		),
+		fullscreen: (
+			padding: 0,
+			element: (
+				wrapper: (
+					border-radius: var(--rounded-0),
+					max-width: auto,
+					max-height: auto,
+					width: 100%,
+					height: 100%,
+				),
+			),
 		),
 	),
 ) !default;

@@ -1,19 +1,21 @@
 $vv-button: (
+	--button-border-width: var(--border-2),
+	--button-line-height: var(--leading-normal),
+	[border-width]: var(--button-border-width),
+	[line-height]: var(--button-line-height),
 	position: relative,
 	background: var(--color-brand),
 	border-radius: 0.5ch,
-	border-width: var(--spacing-2),
 	border-style: solid,
 	border-color: var(--color-brand),
 	color: var(--color-white),
 	font-family: var(--font-sans),
 	font-weight: var(--font-semibold),
 	gap: 1ch,
-	line-height: var(--leading-normal),
 	padding-block: 0.75ch,
 	padding-inline: 1.75ch,
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
-	transition: all 0.2s ease-in-out,
+	transition: var(--transition-all),
 	will-change: all,
 	min-width: 0,
 	state: (
@@ -24,8 +26,13 @@ $vv-button: (
 		hover: (
 			background: var(--color-brand-darken-1),
 			border-color: var(--color-brand-darken-1),
+			text-decoration: none,
 		),
 		active: (
+			background: var(--color-brand-darken-2),
+			border-color: var(--color-brand-darken-2),
+		),
+		pressed: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
 		),
@@ -70,11 +77,14 @@ $vv-button: (
 					background: var(--color-gray-darken-5),
 					border-color: var(--color-gray-darken-5),
 				),
+				pressed: (
+					background: var(--color-gray-darken-5),
+					border-color: var(--color-gray-darken-5),
+				),
 			),
 		),
 		secondary: (
 			background: var(--color-white),
-			border-width: var(--spacing-2),
 			border-style: solid,
 			border-color: var(--color-gray-lighten-4),
 			color: var(--color-word),
@@ -88,6 +98,9 @@ $vv-button: (
 				),
 				active: (
 					background: var(--color-gray-lighten-3),
+				),
+				pressed: (
+					background: var(--color-gray-lighten-4),
 				),
 			),
 		),
@@ -107,17 +120,21 @@ $vv-button: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
 				),
+				pressed: (
+					background: var(--color-danger-darken-2),
+					border-color: var(--color-danger-darken-2),
+				),
 			),
 		),
 		ghost: (
 			background: transparent,
 			border-color: transparent,
-			color: var(--color-gray),
+			color: var(--color-gray-darken-1),
 			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
 			state: (
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
-					outline-offset: 0,
+					outline-offset: var(--spacing-0),
 				),
 				hover: (
 					background: var(--color-gray-lighten-5),
@@ -125,23 +142,30 @@ $vv-button: (
 				active: (
 					background: var(--color-gray-lighten-4),
 				),
+				pressed: (
+					background: var(--color-gray-lighten-4),
+				),
 			),
 		),
-		text: (
+		link: (
 			background: transparent,
-			border-color: var(--color-word),
-			border-width: 0,
-			border-radius: 0,
+			border-width: var(--border-0),
 			padding: 0,
-			color: var(--color-word),
-			text-shadow: 0 1px 0 var(--color-gray-lighten-5),
+			color: var(--color-brand-darken-1),
+			font-weight: var(--font-normal),
+			text-shadow: none,
 			state: (
 				focus-visible: (
-					color: var(--color-brand),
-					outline: none,
+					outline: var(--spacing-px) solid
+						var(--color-brand-lighten-4),
+					outline-offset: var(--spacing-4),
 				),
 				hover: (
-					border-width: 0 0 1px 0,
+					text-decoration: underline,
+					text-underline-offset: var(--spacing-4),
+				),
+				active: (
+					color: var(--color-brand-darken-3),
 				),
 			),
 		),
@@ -159,6 +183,10 @@ $vv-button: (
 					background: var(--color-gray-lighten-5),
 				),
 				active: (
+					border-color: var(--color-gray-lighten-4),
+					background: var(--color-gray-lighten-4),
+				),
+				pressed: (
 					border-color: var(--color-gray-lighten-4),
 					background: var(--color-gray-lighten-4),
 				),
@@ -180,6 +208,83 @@ $vv-button: (
 				active: (
 					border-color: var(--color-gray-darken-3),
 					background: var(--color-gray-darken-3),
+				),
+				pressed: (
+					border-color: var(--color-gray-darken-3),
+					background: var(--color-gray-darken-3),
+				),
+			),
+		),
+		action: (
+			--button-border-width: var(--border),
+			--button-line-height: var(--leading-snug),
+			font-size: var(--text-14),
+			background: var(--color-surface-1),
+			color: var(--color-word-1),
+			border-color: var(--color-word-5),
+			font-weight: var(--font-normal),
+			padding-inline: 0.75ch,
+			padding-block: 0.5ch,
+			text-shadow: none,
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				hover: (
+					background: var(--color-surface-2),
+				),
+				active: (
+					background: var(--color-surface-5),
+				),
+				pressed: (
+					color: var(--color-white),
+					background: var(--color-gray),
+					border-color: var(--color-gray),
+				),
+			),
+			element: (
+				icon: (
+					margin-inline: -0.125ch,
+					block-size: calc(1em * var(--leading-snug)),
+					inline-size: calc(1em * var(--leading-snug)),
+				),
+			),
+		),
+		action-quiet: (
+			--button-border-width: var(--border),
+			--button-line-height: var(--leading-snug),
+			font-size: var(--text-14),
+			background: transparent,
+			color: var(--color-word-1),
+			border-color: transparent,
+			font-weight: var(--font-normal),
+			padding-inline: 0.75ch,
+			padding-block: 0.5ch,
+			text-shadow: none,
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+					outline-offset: var(--spacing-0),
+				),
+				hover: (
+					background: var(--color-surface-2),
+					border-color: var(--color-surface-2),
+				),
+				active: (
+					background: var(--color-surface-5),
+					border-color: var(--color-surface-5),
+				),
+				pressed: (
+					color: var(--color-white),
+					background: var(--color-gray),
+					border-color: var(--color-gray),
+				),
+			),
+			element: (
+				icon: (
+					margin-inline: -0.125ch,
+					block-size: calc(1em * var(--leading-snug)),
+					inline-size: calc(1em * var(--leading-snug)),
 				),
 			),
 		),

@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 $component-name: map.get($components-names, vv-input-text);
 $component-map: $vv-input-text;
@@ -9,14 +9,15 @@ $component-selector: '.#{ $component-name}';
 	$map: $component-map,
 	$block: $component-name,
 	$props: $use-custom-props-for-components,
-	$zero-specificity: $zero-specificity-for-compoenents
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
 );
 
 // disabled and readonly
 @each $state in ('disabled', 'readonly') {
 	@include wrap-with-where(
 		$selector: '#{$component-selector}:has(input:#{$state})',
-		$enabled: $zero-specificity-for-compoenents
+		$enabled: $zero-specificity-for-components
 	) {
 		@extend %#{$component-name}--#{$state} !optional;
 	}
@@ -28,7 +29,7 @@ $component-selector: '.#{ $component-name}';
 			@include wrap-with-where(
 				$selector:
 					'#{$component-selector}:has(input:#{$state}) #{$component-selector}__#{$element}',
-				$enabled: $zero-specificity-for-compoenents
+				$enabled: $zero-specificity-for-components
 			) {
 				@extend %#{$component-name}-state-#{$state}__#{$element}
 						!optional;
@@ -38,7 +39,7 @@ $component-selector: '.#{ $component-name}';
 				@include wrap-with-where(
 					$selector:
 						'#{$component-selector}:has(input:#{$state}) #{$component-selector}__#{$element}:#{$elementState}',
-					$enabled: $zero-specificity-for-compoenents
+					$enabled: $zero-specificity-for-components
 				) {
 					@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
 							!optional;

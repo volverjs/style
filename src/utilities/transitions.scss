@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use 'sass:string';
+@use '../context' as *;
+
+// transition property
+@include spread-map-into-utilities(
+	$map: $transition-property,
+	$class: transition-property,
+	$attribute: transition-property,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+// transition duration and transition delay
+@each $class,
+	$attribute in (duration: transition-duration, delay: transition-delay)
+{
+	@include spread-map-into-utilities(
+		$map: $transition-duration-delay,
+		$class: $class,
+		$attribute: $attribute,
+		$zero-specificity: $zero-specificity-for-utilities
+	);
+}
+
+// transition timing function
+@include spread-map-into-utilities(
+	$map: $transition-timing-function,
+	$class: ease,
+	$attribute: transition-timing-function,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+@each $property, $value in $transition-property {
+	@include wrap-with-where(
+		$selector: '.transition-#{$property}',
+		$enabled: $zero-specificity-for-utilities
+	) {
+		transition-property: string.unquote($value);
+		@if $property != 'none' {
+			transition-duration: map.get($transition-duration-delay, 300);
+			transition-timing-function: map.get(
+				$transition-timing-function,
+				'in-out'
+			);
+		}
+	}
+}

@@ -1,0 +1,66 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.1.2] - 2023-01-04
+
+### Added
+
+*   Docs site;
+*   `saturation` utility and custom property;
+*   `cursor` utilities and custom properties;
+*   `vv-skeleton` component;
+*   `vv-tab` component;
+*   `vv-nav` component for navigation and tabs;
+*   `vv-avatar` component;
+*   `vv-toast` component;
+*   `vv-alert` component;
+*   `vv-tooltip` component;
+*   `vv-badge` component;
+*   `vv-breadcrumb` component;
+*   `vv-button` *action* and *action-quite* modifier.
+
+### Fixed
+
+*   Preflight for themes;
+*   A11y improvements;
+*   Transition utilities and custom properties;
+*   Typo in SCSS variable $zero-specificity-for-components, thanks to @tinny77 for the PR [#](https://github.com/volverjs/style/pull/2);
+*   Safari iOS improvements;
+*   `vv-radio` and `vv-checkbox` readonly state.
+
+### Changed
+
+*   Move from `@import` to `@use`;
+*   `vv-input-checkbox` is now `vv-checkbox`;
+*   `vv-input-checkbox-group` is now `vv-checkbox-group`;
+*   `vv-input-radio` is now `vv-radio`;
+*   `vv-input-radio-group` is now `vv-radio-group`;
+*   `vv-collapse` is now `vv-accordion`;
+*   state *selected* is now *pressed* in `vv-button` component.
+
+## [0.1.1] - 2022-10-18
+
+### Added
+
+*   `vv-badge` component;
+*   `vv-button` component;
+*   `vv-button-group` component;
+*   `vv-progress` component;
+*   `vv-accordion` component;
+*   `vv-dialog` component;
+*   `vv-dropdown` component;
+*   `vv-checkbox` component;
+*   `vv-checkbox-group` component;
+*   `vv-radio` component;
+*   `vv-radio-group` component;
+*   `vv-input-text` component;
+*   `vv-textarea` component;
+*   `vv-select` component;
+*   `vv-table` component;
+*   `vv-card` component;
+*   `vv-text` component.
+
+[0.1.2]: https://github.com/volverjs/style/compare/v0.1.1...v0.1.2
+
+[0.1.1]: https://github.com/volverjs/style/compare/v0.1.0...v0.1.1

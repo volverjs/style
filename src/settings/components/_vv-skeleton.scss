@@ -1,0 +1,22 @@
+$vv-skeleton: (
+	--skeleton-background: var(--color-surface-2),
+	--skeleton-shine-color: var(--color-surface),
+	display: grid,
+	gap: calc(1em * (var(--leading-normal) - 1)),
+	element: (
+		item: (
+			[background]:
+				linear-gradient(
+					110deg,
+					var(--skeleton-background) 8%,
+					var(--skeleton-shine-color) 18%,
+					var(--skeleton-background) 33%
+				),
+			[color]: transparent,
+			background-size: 200% 100%,
+			height: 1em,
+			border-radius: var(--rounded),
+			animation: var(--animation-shine),
+		),
+	),
+) !default;

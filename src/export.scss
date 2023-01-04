@@ -3,7 +3,7 @@
 @use 'sass:string';
 
 // context
-@import 'context';
+@use 'context' as *;
 
 :export {
 	// ============================================================== */
@@ -13,21 +13,20 @@
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					@if not str-index($subKey, #{$key}) {
-						#{'colors__' + $key}: $subValue;
-					}
-
 					@if not
 						str-index($subKey, 'hue') and not
 						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness') and not
-						str-index($subKey, #{$key})
+						str-index($subKey, 'lightness')
 					{
-						#{'colors__' + $key}-#{$subKey}: $subValue;
+						@if '' + $key == $subKey {
+							#{'colors__' + $key}: $subValue;
+						} @else {
+							#{'colors__' + $key + '-' + $subKey}: $subValue;
+						}
 					}
 				}
 			}
-		} @else {
+		} @else if $key != 'scheme' {
 			#{'colors__' + $key}: $value;
 		}
 	}
@@ -45,7 +44,7 @@
 	}
 
 	// breakpoints
-	@each $key, $value in $breakpoints {
+	@each $key, $value in map.remove($breakpoints, 'xxs') {
 		#{'breakpoints__' + $key}: $value;
 	}
 
@@ -87,6 +86,11 @@
 	// object-position
 	@each $key, $value in $object-position {
 		#{'object-position__' + $key}: $value;
+	}
+
+	// overflow
+	@each $key, $value in $overflow {
+		#{'overflow__' + $key}: $value;
 	}
 
 	// position
@@ -191,55 +195,57 @@
 	// ============================================================== */
 	// #region SPACING
 	// spacing & spacing-dynamic
-	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+	@each $size, $value in $spacing {
+		spacing__#{$size}: $value;
+	}
+	@each $size, $value in $spacing-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'spacers__' + $size}-#{$subKey}: $subValue;
+					spacing-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
-		} @else {
-			#{'spacers__' + $size}: $value;
 		}
 	}
 
 	// font-size & font-size-dynamic
-	@each $size, $value in map.merge($font-size, $font-size-dynamic) {
+	@each $size, $value in $font-size {
+		font-size__#{$size}: $value;
+	}
+	@each $size, $value in $font-size-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'font-size__' + $size}-#{$subKey}: $subValue;
+					font-size-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
-		} @else {
-			#{'font-size__' + $size}: $value;
 		}
 	}
 
 	// width spacer
 	@each $key, $value in $width {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
+		$name: str-replace($name, '\\/', '_');
 
-		#{'width-spacer__' + $name}: $value;
+		#{'width__' + $name}: $value;
 	}
 
 	// height spacer
 	@each $key, $value in $height {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
+		$name: str-replace($name, '\\/', '_');
 
-		#{'height-spacer__' + $name}: $value;
+		#{'height__' + $name}: $value;
 	}
 
 	// border radius
 	@each $key, $value in $border-radius {
-		#{'border-radius-spacer__' + $key}: $value;
+		#{'border-radius__' + $key}: $value;
 	}
 
 	// border width
 	@each $key, $value in $border-width {
-		#{'border-width-spacer__' + $key}: $value;
+		#{'border-width__' + $key}: $value;
 	}
 
 	// #endregion
@@ -402,9 +408,65 @@
 
 	// ============================================================== */
 	// #region EFFECTS
-	// blend-mode
-	@each $index in $blend-mode {
-		#{'blend-mode__' + $index}: $index;
+	// box-shadow
+	@each $key, $value in $box-shadow {
+		#{'box-shadow__' + $key}: $value;
+	}
+
+	// opacity
+	@each $key, $value in $opacity {
+		#{'opacity__' + $key}: $value;
+	}
+
+	// mix-blend-mode
+	@each $index in $mix-blend-mode {
+		#{'mix-blend-mode__' + $index}: $index;
+	}
+
+	// background-blend-mode
+	@each $index in $background-blend-mode {
+		#{'background-blend-mode__' + $index}: $index;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region FILTERS
+	// blur
+	@each $key, $value in $blur {
+		#{'blur__' + $key}: $value;
+	}
+
+	// brightness
+	@each $key, $value in $brightness {
+		#{'brightness__' + $key}: $value;
+	}
+
+	// saturation
+	@each $key, $value in $saturation {
+		#{'saturation__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region TRANSITIONS & ANIMATIONS
+	// transition property
+	@each $key, $value in $transition-property {
+		#{'transition-property__' + $key}: $value;
+	}
+
+	// transition duration
+	@each $key, $value in $transition-duration-delay {
+		#{'transition-duration-delay__' + $key}: $value;
+	}
+
+	@each $key, $value in $transition-timing-function {
+		#{'transition-timing-function__' + $key}: $value;
+	}
+
+	@each $key, $value in $animation {
+		#{'animation__' + $key}: $value;
 	}
 
 	// #endregion

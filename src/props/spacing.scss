@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../context';
+@use '../context' as *;
 
 :where(:host, :root, .theme) {
 	// static
@@ -11,7 +11,7 @@
 	@each $name, $sizes in $spacing-dynamic {
 		@each $breakpoint, $size in $sizes {
 			@if map-has-key($breakpoints, $breakpoint) {
-				@include media-breakpoint-up($breakpoint) {
+				@include media-breakpoint-up($breakpoint, $breakpoints) {
 					$var: $size;
 
 					// if is a static spacing

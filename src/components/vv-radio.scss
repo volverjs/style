@@ -1,0 +1,21 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-radio);
+$component-map: $vv-radio;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+@include wrap-with-where(
+	$selector: '#{$component-selector}:has(> input[type="radio"]:disabled)',
+	$enabled: $zero-specificity-for-components
+) {
+	@extend %#{$component-name}--disabled !optional;
+}

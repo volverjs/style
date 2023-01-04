@@ -31,7 +31,7 @@ $vv-progress: (
 					var(--color-surface-2) 30%
 				)
 				top left/150% 150% no-repeat,
-			animation: var(--animate-progress-indeterminate),
+			animation: var(--animation-progress-indeterminate),
 			pseudo: (
 				progress-bar: (
 					background: transparent,
