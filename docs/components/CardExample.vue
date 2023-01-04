@@ -15,7 +15,7 @@
 </script>
 
 <template>
-	<div class="vv-card">
+	<div class="vv-card preflight-revert">
 		<div class="vv-card__header bg-surface flex">
 			<span v-if="title">{{ title }}</span>
 			<div class="vv-button-group ml-auto">

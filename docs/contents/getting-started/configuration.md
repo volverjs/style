@@ -16,10 +16,10 @@ You can configure the specificity of components and utilities by setting the `$z
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// disable zero specificity for components
-	$zero-specificity-for-components: false,
-	// enable zero specificity for utilities
-	$zero-specificity-for-utilities: true,
+  // disable zero specificity for components
+  $zero-specificity-for-components: false,
+  // enable zero specificity for utilities
+  $zero-specificity-for-utilities: true
 );
 @use '@volverjs/style/scss';
 ```
@@ -30,17 +30,17 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// disable custom properties for components
-	$use-custom-props-for-components: false,
+  // disable custom properties for components
+  $use-custom-props-for-components: false
 );
 @use '@volverjs/style/scss';
 ```
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-    <div class="vv-alert__title">Warning</div>
-    <div class="vv-alert__content">
-        Disabling the use of CSS Custom Properties for components will not permit to use themes.
-    </div>
+  <div class="vv-alert__title">Warning</div>
+  <div class="vv-alert__content">
+    Disabling the use of CSS Custom Properties for components will not permit to use themes.
+  </div>
 </div>
 
 
@@ -49,8 +49,8 @@ By default all components are defined with [BEM](https://getbem.com/) methodolog
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// custom components prefix
-	$components-prefix: my,
+  // custom components prefix
+  $components-prefix: my
 );
 @use '@volverjs/style/scss';
 
@@ -68,11 +68,11 @@ If you want a completely different name for a component you can set the `$compon
 
 // override components names
 context.$components-names: map.deep-merge(
-	context.$components-names,
-	(
-		// change button name
-		vv-button: 'btn',
-	)
+  context.$components-names,
+  (
+    // change button name
+    vv-button: 'btn'
+  )
 );
 @use '@volverjs/style/scss';
 

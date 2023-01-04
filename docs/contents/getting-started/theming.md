@@ -40,11 +40,11 @@ A custom theme can also be defined inside a specific page section.
 
 ```html
 <body>
-    <section class="theme theme--light">
-        Light Section 
-    </section>
-    <section class="theme theme--dark">
-        Dark Section 
-    </section>
+  <section class="theme theme--light">
+    Light Section 
+  </section>
+  <section class="theme theme--dark">
+    Dark Section 
+  </section>
 </body>
 ```

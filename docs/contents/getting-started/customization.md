@@ -13,12 +13,12 @@ The style of each class can be overwritten easily without `!important` or comple
 
 ```css
 .vv-button {
-    background: green;
-    font-weight: light;
+  background: green;
+  font-weight: light;
 }
 
 .font-sans {
-    font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 ```
 
@@ -27,8 +27,8 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 
 ```css
 .vv-button--new-variant {
-    --vv-button-background: green;
-    --vv-button-font-weight: light;
+  --vv-button-background: green;
+  --vv-button-font-weight: light;
 }
 ```
 
@@ -36,10 +36,10 @@ You can also overwrite utilities *CSS Custom Property* defined globally.
 
 ```css
 :root, :host, .theme {
-    --font-sans: "Open Sans", sans-serif;
-    --color-brand-hue: 150deg;
-    --color-brand-saturation: 64%;
-    --color-brand-lightness: 40%;
+  --font-sans: "Open Sans", sans-serif;
+  --color-brand-hue: 150deg;
+  --color-brand-saturation: 64%;
+  --color-brand-lightness: 40%;
 }
 ```
 
@@ -48,10 +48,10 @@ You can override _SCSS Variables_ defined globally importing `scss/context` with
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	// custom color brand 
-	$color-brand: #45cb85,
-	//custom font sans
-	$font-family-sans: 'Open Sans', sans-serif,
+  // custom color brand 
+  $color-brand: #45cb85,
+  //custom font sans
+  $font-family-sans: 'Open Sans', sans-serif,
 );
 @use '@volverjs/style/scss';
 
@@ -62,7 +62,7 @@ You can override _SCSS Variables_ defined globally importing `scss/context` with
             vv-alert--callout 
             vv-alert--info" 
      role="alert">
-    <div class="vv-alert__content">Read more about <code>@use</code> and <code>with</code> in <a href="https://sass-lang.com/documentation/at-rules/use#configuration" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
+  <div class="vv-alert__content">Read more about <code>@use</code> and <code>with</code> in <a href="https://sass-lang.com/documentation/at-rules/use#configuration" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
 </div>
 
 
@@ -71,28 +71,28 @@ All components are defined with [BEM](https://getbem.com/) methodology. The styl
 
 ```scss
 $vv-button: (
-    background: blue
-    element: (
-        icon: (
-            font-size: 1.2rem,
-        )
-    ),
-    modifier: (
-        primary: (
-            color: black,
-        )
+  background: blue
+  element: (
+    icon: (
+      font-size: 1.2rem
     )
+  ),
+  modifier: (
+    primary: (
+      color: black
+    )
+  )
 );
 
 /* will generate */
 .vv-button { 
-    background: blue;
+  background: blue;
 }
 .vv-button__icon {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 .vv-button--primary {
-     color: black;
+  color: black; 
 }
 ```
 
@@ -104,19 +104,19 @@ Each `element` can have an `_alias`, a selector with the same properites.
 
 ```scss
 $vv-button: (
-    background: blue
-    element: (
-        icon: (
-            _alias: '> svg',
-            font-size: 1.2rem,
-        )
-    ),
+  background: blue,
+  element: (
+    icon: (
+      _alias: '> svg',
+      font-size: 1.2rem
+    )
+  )
 );
 
 /* will generate */
 .vv-button__icon, 
 .vv-button > svg {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 ```
 
@@ -126,18 +126,18 @@ States (`:hover`, `:active`, `:disabled`, ecc.) can be defined with `state` keyw
 
 ```scss
 $vv-button: (
-    state: (
-        hover: (
-            text-decoration: undeline
-        )
+  state: (
+    hover: (
+      text-decoration: undeline
     )
+  )
 );
 
 /* will generate */
 .vv-button--hover, 
 .vv-button.hover, 
 .vv-button:hover { 
-    text-decoration: undeline;
+  text-decoration: undeline;
 }
 ```
 
@@ -145,20 +145,20 @@ $vv-button: (
 
 ```scss
 $vv-button: (
-    modifier: (
-        danger: (
-            element: (
-                icon: (
-                    color: red
-                )
-            )
+  modifier: (
+    danger: (
+      element: (
+        icon: (
+          color: red
         )
+      )
     )
+  )
 );
 
 /* will generate */
 .vv-button--danger .vv-button__icon {
-    color: red;
+  color: red;
 }
 ```
 
@@ -166,22 +166,22 @@ $vv-button: (
 
 ```scss
 $vv-button: (
-    modifier: (
-        danger: (
-            state: (
-                hover: (
-                    background: red
-                )
-            )
+  modifier: (
+    danger: (
+      state: (
+        hover: (
+          background: red
         )
+      )
     )
+  )
 );
 
 /* will generate */
 .vv-button--danger.vv-button--hover, 
 .vv-button--danger.hover, 
 .vv-button--danger:hover { 
-    background: red;
+  background: red;
 }
 ```
 
@@ -190,21 +190,21 @@ Pseudo elements (like `::before` and `::after`) can be defined with the `pseudo`
 
 ```scss
 $vv-button: (
-    pseudo: (
-        before: (
-            width: 1rem,
-            height: 1rem,
-            background: red,
-        )
+  pseudo: (
+    before: (
+      width: 1rem,
+      height: 1rem,
+      background: red
     )
+  )
 );
 
 /* will generate */
 .vv-button::before {
-    content: '';
-    width: 1rem;
-    height: 1rem;
-    backgound: red;
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  backgound: red;
 } 
 ```
 
@@ -215,23 +215,23 @@ Inside the map can also be defined some *custom properties*. Attributes that use
 
 ```scss
 $vv-button: (
-    --button-padding: 1rem,
-    [padding]: var(--button-padding),
-    modifier: (
-        small: (
-            --button-padding: .5rem
-        )
+  --button-padding: 1rem,
+  [padding]: var(--button-padding),
+  modifier: (
+    small: (
+      --button-padding: .5rem
     )
+  )
 );
 
 /* will generate */
 .vv-button {
-    --button-padding: 1rem;
+  --button-padding: 1rem;
 
-    padding: var(--button-padding);
+  padding: var(--button-padding);
 }
 .vv-button--small {
-     --button-padding: .5rem;
+  --button-padding: .5rem;
 }
 ```
 
@@ -246,11 +246,11 @@ Default maps can be easily overridden without useless code generation.
 
 // override vv-button map
 context.$vv-button: map.deep-merge(
-	contex.$vv-button,
-	(
-		// change button background
-		background: blue,
-	)
+  contex.$vv-button,
+  (
+    // change button background
+    background: blue,
+  )
 );
 
 // import volverjs style
@@ -267,11 +267,11 @@ Also the utilities classes can be modified with the same approach.
 
 // override aspect-ratio map
 context.$aspect-ratio: map.deep-merge(
-	contex.$aspect-ratio,
-	(
-		// add cinemascope aspect ratio
-		cinemascope: '2.35/1',
-	)
+  contex.$aspect-ratio,
+  (
+    // add cinemascope aspect ratio
+    cinemascope: '2.35/1',
+  )
 );
 
 // import volverjs style
@@ -282,5 +282,5 @@ context.$aspect-ratio: map.deep-merge(
             vv-alert--callout 
             vv-alert--info" 
      role="alert">
-    <div class="vv-alert__content">Read more about <code>map.deep-merge</code> in <a href="https://sass-lang.com/documentation/modules/map#deep-merge" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
+  <div class="vv-alert__content">Read more about <code>map.deep-merge</code> in <a href="https://sass-lang.com/documentation/modules/map#deep-merge" target="_blank" rel="noopener noreferrer"><em>SCSS</em> documentation.</a></div>
 </div>

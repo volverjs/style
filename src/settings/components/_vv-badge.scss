@@ -80,5 +80,8 @@ $vv-badge: (
 		accent: (
 			--badge-background-color: var(--color-accent),
 		),
+		gray: (
+			--badge-background-color: var(--color-gray),
+		),
 	),
 ) !default;

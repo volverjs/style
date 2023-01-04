@@ -1,11 +1,11 @@
 <div align="center">
-  
+
 [![volverjs](public/volverjs.svg)](https://volverjs.github.io/style)
 
 ## @volverjs/style
 
-`backgrounds` `border` `colors` `aspect ratios` `typography`  
-`easings` `animations` `sizes` `borders` `z-indexes` `media-queries`
+`backgrounds` `border` `colors` `aspect ratios` `typography`\
+`easings` `animations` `sizes` `borders` `z-indexes` `media-queries`\
 `layout` `spacing` `flexbox` `grid` `custom properties` `scss`
 
 <br>
@@ -22,8 +22,15 @@
 
 ## Install
 
-```
-$ npm i -s @volverjs/style
+```bash
+# pnpm
+pnpm add @volverjs/style
+
+# yarn
+yarn add @volverjs/style
+
+# npm 
+npm install @volverjs/style --save
 ```
 
 ## Usage
@@ -56,7 +63,7 @@ or cherry pick what you want
 
 ### 👌 Zero Specificity
 
-Everything is defined with _:where()_ so you can override all definitions easily.
+Everything is defined with *:where()* so you can override all definitions easily.
 
 ### 🎨 Custom properties
 
@@ -64,7 +71,7 @@ All attributes have a [custom properties](https://developer.mozilla.org/en-US/do
 
 ### 😱 Utility-first + BEM
 
-You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) or use components (_vv-\*_ for ex. _vv-button_) written with [BEM](http://getbem.com/introduction/).
+You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) or use components (*vv-\** for ex. *vv-button*) written with [BEM](http://getbem.com/introduction/).
 
 ## Basic personalization
 
@@ -92,7 +99,7 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
   // custom color brand 
   $color-brand: #45cb85,
   //custom font sans
-  $font-family-sans: 'Open Sans', sans-serif,
+  $font-family-sans: 'Open Sans', sans-serif
 );
 @use '@volverjs/style/scss';
 
@@ -102,7 +109,7 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
 ## Deep override
 
 All components are written through SCSS maps.
-Root attributes style the component, submaps _state_, _element_, and _modifier_ generates BEM selectors.
+Root attributes style the component, submaps *state*, *element*, and *modifier* generates BEM selectors.
 
 ```scss
 @use 'sass:map';
@@ -118,13 +125,13 @@ context.$vv-button: map.deep-merge(
     state: (
       hover: (
         // change default button background on hover
-        background: #aaa,
-      ),
+        background: #aaa
+      )
     ),
     modifier: (
       // add a custom modifier
       my-error: (
-        background: red,
+        background: red
       )
     )
   )

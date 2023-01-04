@@ -68,10 +68,10 @@
 </script>
 
 <template>
-	<div class="max-h-288 overflow-y-auto">
+	<div class="max-h-288 overflow-y-auto preflight-revert">
 		<table
 			v-if="Object.keys(items).length"
-			class="vv-table vv-table--inline-spacing nx-md">
+			class="vv-table vv-table--inline-spacing">
 			<thead class="sticky z-sticky top-0 bg-surface-1">
 				<tr>
 					<th v-if="!hideClass">{{ labelClass }}</th>

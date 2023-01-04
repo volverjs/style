@@ -124,7 +124,7 @@
 
 		&:where(pre) {
 			@extend %font-mono !optional;
-			@extend %whitespace-pre-line !optional;
+			@extend %whitespace-pre !optional;
 		}
 
 		&:where(dl) {

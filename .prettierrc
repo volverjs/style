@@ -5,5 +5,14 @@
     "singleQuote": true,
     "trailingComma": "all",
     "bracketSameLine": true,
-    "vueIndentScriptAndStyle": true
+    "vueIndentScriptAndStyle": true,
+    "overrides": [
+        {
+            "files": "*.md",
+            "options": {
+                "useTabs": false,
+                "tabWidth": 2
+            }
+        }
+    ]
 }

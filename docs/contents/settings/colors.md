@@ -6,46 +6,32 @@ description: Volver Style includes a default color palette that can be used to s
 ---
 
 ### Surface Colors
-_Surface colors_ are used for backgrounds and borders. They are defined in the `--color-surface` CSS Custom Property and have 5 shades for each theme.
+_Surface colors_ are used for backgrounds and borders. They are defined in the `--color-surface` CSS Custom Property and have 5 shades and 6 colors for each theme.
 
-Light Theme
-
-<div class="theme theme--light mb-lg">
-    <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-        <div class="bg-surface py-22">surface</div>
-        <div v-for="i in 5" :class="`bg-surface-${i}`" class="py-22">surface-{{i}}</div>
-    </div>
-</div>
-
-Dark Theme
-
-<div class="theme theme--dark mb-lg">
-    <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-        <div class="bg-surface py-22">surface</div>
-        <div v-for="i in 5" :class="`bg-surface-${i}`" class="py-22">surface-{{i}}</div>
-    </div>
-</div>
+<card-example title="Surface Palette">
+  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
+    <div class="bg-surface py-22">surface</div>
+    <div v-for="i in 5" :class="`bg-surface-${i}`" class="py-22">surface-{{i}}</div>
+  </div>
+  <div class="grid grid-cols-2 xl:grid-cols-3 text-center font-mono whitespace-nowrap text-14">
+    <div class="bg-surface-brand py-22">surface-brand</div>
+    <div class="bg-surface-success py-22">surface-success</div>
+    <div class="bg-surface-warning py-22">surface-warning</div>
+    <div class="bg-surface-danger py-22">surface-danger</div>
+    <div class="bg-surface-info py-22">surface-info</div>
+    <div class="bg-surface-accent py-22">surface-accent</div>
+  </div>
+</card-example>
 
 ### Word Colors
 _Word colors_ are used for text. They are defined in the `--color-word` CSS Custom Property and have 5 shades for each theme.
 
-Light Theme
-
-<div class="theme theme--light mb-lg">
-    <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-        <div class="text-word py-22">word</div>
-        <div v-for="i in 5" :class="`text-word-${i}`" class="py-22">word-{{i}}</div>
-    </div>
-</div>
-
-Dark Theme
-
-<div class="theme theme--dark mb-lg">
-    <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-        <div class="text-word py-22">word</div>
-        <div v-for="i in 5" :class="`text-word-${i}`" class="py-22">word-{{i}}</div>
-    </div>
-</div>
+<card-example title="Word Palette">
+  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
+    <div class="text-word py-22">word</div>
+    <div v-for="i in 5" :class="`text-word-${i}`" class="py-22">word-{{i}}</div>
+  </div>
+</card-example>
 
 ### Brand Colors
 _Brand colors_ are used for primary actions. They are defined in the `--color-brand` CSS Custom Property and have 10 shades.
@@ -72,6 +58,11 @@ _Danger colors_ are used for danger actions. They are defined in the `--color-da
 _Info colors_ are used for info actions. They are defined in the `--color-info` CSS Custom Property and have 10 shades.
 
 <color-palette name="info"></color-palette>
+
+### Accent Colors
+_Accent colors_ are used for accent actions. They are defined in the `--color-accent` CSS Custom Property and have 10 shades.
+
+<color-palette name="accent"></color-palette>
 
 ### Gray Colors
 _Gray colors_ are used for neutral actions. They are defined in the `--color-gray` CSS Custom Property and have 10 shades.
@@ -105,7 +96,7 @@ Colors properties are splitted in hue, saturation and lightness. You can use the
 @import '@volverjs/style';
 
 :root {
-    --color-surface-6: hsl(var(--color-surface-hue), var(--color-surface-saturation), 86%);
+  --color-surface-6: hsl(var(--color-surface-hue), var(--color-surface-saturation), 86%);
 }
 ```
 
@@ -115,7 +106,9 @@ Overriding hue, saturation and lightness properties you can create your own colo
 @import '@volverjs/style';
 
 :root {
-    --color-brand-hue: 112deg;
+  --color-brand-hue: 149deg;
+  --color-brand-saturation: 56%;
+  --color-brand-lightness: 53%;
 }
 ```
 
@@ -149,14 +142,14 @@ Or you can create your own color palette.
 @use '@volverjs/style/scss/context';
 
 context.$colors: map.deep-merge(
-	contex.$colors,
-	(
-		brand: (
-            brand: #45cb85,
-            lighten-1: #5edc9f,
-            lighten-2: #75ecb9,
-        )
-	)
+  contex.$colors,
+  (
+    brand: (
+      brand: #45cb85,
+      lighten-1: #5edc9f,
+      lighten-2: #75ecb9,
+    )
+  )
 );
 
 @use '@volverjs/style/scss';

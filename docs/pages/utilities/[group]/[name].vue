@@ -8,7 +8,9 @@
 	const title = ref('')
 	const description = ref('')
 	const breakpoints = ref(false)
+	const colors = ref(false)
 	const customProperties = ref(false)
+	const spacing = ref(false)
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/utilities/${route.params.group}/${route.params.name}.md`
 	const MainContent = defineAsyncComponent(() =>
 		import(
@@ -18,7 +20,9 @@
 				title.value = attributes.title
 				description.value = attributes.description
 				breakpoints.value = attributes.breakpoints
+				colors.value = attributes.colors
 				customProperties.value = attributes.customProperties
+				spacing.value = attributes.spacing
 				return VueComponentWith({
 					TableUtility,
 					ColorHelper,
@@ -50,21 +54,33 @@
 						{{ route.params.group }}
 					</span>
 					<div class="flex items-center mb-sm">
-						<h1
-							v-if="title"
-							class="vv-text vv-text--size-1 font-bold flex items-end mr-auto">
-							{{ title }}
-							<span
-								v-if="breakpoints"
-								class="vv-badge vv-badge--sm ml-16 mb-12"
-								>breakpoints</span
-							>
-							<span
-								v-if="customProperties"
-								class="vv-badge vv-badge--info vv-badge--sm ml-16 mb-12"
-								>custom properties</span
-							>
-						</h1>
+						<div v-if="title" class="md:flex items-end mr-auto">
+							<h1 class="vv-text vv-text--size-1 font-bold mr-16">
+								{{ title }}
+							</h1>
+							<div class="flex gap-10 mb-12 mt-6">
+								<span
+									v-if="breakpoints"
+									class="vv-badge vv-badge--sm">
+									breakpoints
+								</span>
+								<span
+									v-if="customProperties"
+									class="vv-badge vv-badge--info vv-badge--sm">
+									custom properties
+								</span>
+								<span
+									v-if="colors"
+									class="vv-badge vv-badge--accent vv-badge--sm">
+									colors
+								</span>
+								<span
+									v-if="spacing"
+									class="vv-badge vv-badge--gray vv-badge--sm">
+									spacing
+								</span>
+							</div>
+						</div>
 						<div class="vv-button-group vv-button-group--compact">
 							<a
 								class="vv-button vv-button--action-quiet"
@@ -82,7 +98,85 @@
 						{{ description }}
 					</h2>
 				</header>
-				<MainContent />
+				<div
+					v-if="breakpoints"
+					class="vv-alert vv-alert--callout vv-alert--brand mb-lg"
+					role="alert">
+					<div class="vv-alert__title">Breakpoints</div>
+					<div class="vv-alert__content">
+						<p class="mb-12">
+							This set of utilities can be used with breakpoint
+							prefix.
+						</p>
+						<code class="font-mono"> .{breakpoint}:{utility} </code>
+						<div class="mt-sm">
+							<RouterLink
+								:to="{
+									name: 'settings-name',
+									params: {
+										name: 'breakpoints',
+									},
+									hash: '#responsive-utilities',
+								}"
+								class="vv-button vv-button--action">
+								<IconifyIcon icon="akar-icons:info" />
+								Find out more
+							</RouterLink>
+						</div>
+					</div>
+				</div>
+				<div
+					v-if="colors"
+					class="vv-alert vv-alert--callout vv-alert--accent mb-lg"
+					role="alert">
+					<div class="vv-alert__title">Colors</div>
+					<div class="vv-alert__content">
+						<p class="mb-12">
+							This set of utilities use the color palette.
+						</p>
+						<div class="mt-sm">
+							<RouterLink
+								:to="{
+									name: 'settings-name',
+									params: {
+										name: 'colors',
+									},
+								}"
+								class="vv-button vv-button--action">
+								<IconifyIcon icon="akar-icons:info" />
+								Find out more
+							</RouterLink>
+						</div>
+					</div>
+				</div>
+				<div
+					v-if="spacing"
+					class="vv-alert vv-alert--callout vv-alert--gray mb-lg"
+					role="alert">
+					<div class="vv-alert__title">Spacing</div>
+					<div class="vv-alert__content">
+						<p class="mb-12">
+							This set of utilities use the static and dynamic
+							spacing scale.
+						</p>
+						<div class="mt-sm">
+							<RouterLink
+								:to="{
+									name: 'settings-name',
+									params: {
+										name: 'spacing',
+									},
+								}"
+								class="vv-button vv-button--action">
+								<IconifyIcon icon="akar-icons:info" />
+								Find out more
+							</RouterLink>
+						</div>
+					</div>
+				</div>
+				<div class="preflight">
+					<MainContent />
+				</div>
 				<div class="flex mt-lg">
 					<a
 						class="vv-button vv-button--action-quiet"

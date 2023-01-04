@@ -3,6 +3,7 @@
 @use 'sass:color';
 @use 'sass:string';
 @use 'sass:list';
+@use 'sass:math';
 
 @function hsla-map($color, $name) {
 	@return (
@@ -37,13 +38,19 @@
 	@return $result;
 }
 
-@function color-shades-map($color, $name, $steps: 5, $scale: 10%) {
+@function color-shades-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 10%,
+	$fixed: false
+) {
 	$result: map.merge(
 		map.merge(
 			(#{$name}: $color),
-			color-lighten-map($color, $name, $steps, $scale, 'lighten')
+			color-lighten-map($color, $name, $steps, $scale, 'lighten', $fixed)
 		),
-		color-darken-map($color, $name, $steps, $scale, 'darken')
+		color-darken-map($color, $name, $steps, $scale, 'darken', $fixed)
 	);
 	@return $result;
 }
@@ -53,7 +60,8 @@
 	$name,
 	$steps: 5,
 	$scale: 10%,
-	$prefix: ''
+	$prefix: '',
+	$fixed: false
 ) {
 	$result: hsla-map($color, $name);
 	@for $index from 1 to ($steps + 1) {
@@ -62,23 +70,53 @@
 			$key: $prefix + '-' + $index;
 		}
 
-		$value: color.scale($color, $lightness: $scale * $index);
-		$result: map.merge(
-			$result,
-			(
-				#{$key}:
-					hsl(
-						var(--color-#{$name}-hue)
-							var(--color-#{$name}-saturation)
-							color.lightness($value)
-					)
-			)
-		);
+		@if $fixed {
+			$increment: $scale * $index;
+			$result: map.merge(
+				$result,
+				(
+					#{$key}:
+						hsl(
+							var(--color-#{$name}-hue)
+								var(--color-#{$name}-saturation)
+								calc(
+									var(--color-#{$name}-lightness) +
+										#{$increment}
+								)
+						)
+				)
+			);
+		} @else {
+			$increment: math.div($scale * $index, 100);
+			$increment: math.div($increment, ($increment * 0 + 1));
+			$result: map.merge(
+				$result,
+				(
+					#{$key}:
+						hsl(
+							var(--color-#{$name}-hue)
+								var(--color-#{$name}-saturation)
+								calc(
+									var(--color-#{$name}-lightness) +
+										var(--color-#{$name}-lightness) *
+										#{$increment}
+								)
+						)
+				)
+			);
+		}
 	}
 	@return $result;
 }
 
-@function color-darken-map($color, $name, $steps: 5, $scale: 10%, $prefix: '') {
+@function color-darken-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 10%,
+	$prefix: '',
+	$fixed: false
+) {
 	$result: hsla-map($color, $name);
 
 	@for $index from 1 to ($steps + 1) {
@@ -87,18 +125,41 @@
 			$key: $prefix + '-' + $index;
 		}
 
-		$value: color.scale($color, $lightness: -1 * $scale * $index);
-		$result: map.merge(
-			$result,
-			(
-				#{$key}:
-					hsl(
-						var(--color-#{$name}-hue)
-							var(--color-#{$name}-saturation)
-							color.lightness($value)
-					)
-			)
-		);
+		@if $fixed {
+			$decrement: $scale * $index;
+			$result: map.merge(
+				$result,
+				(
+					#{$key}:
+						hsl(
+							var(--color-#{$name}-hue)
+								var(--color-#{$name}-saturation)
+								calc(
+									var(--color-#{$name}-lightness) -
+										#{$decrement}
+								)
+						)
+				)
+			);
+		} @else {
+			$decrement: math.div($scale * $index, 100);
+			$decrement: math.div($decrement, ($decrement * 0 + 1));
+			$result: map.merge(
+				$result,
+				(
+					#{$key}:
+						hsl(
+							var(--color-#{$name}-hue)
+								var(--color-#{$name}-saturation)
+								calc(
+									var(--color-#{$name}-lightness) -
+										var(--color-#{$name}-lightness) *
+										#{$decrement}
+								)
+						)
+				)
+			);
+		}
 	}
 	@return $result;
 }

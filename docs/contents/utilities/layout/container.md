@@ -1,7 +1,6 @@
 ---
 title: Container
 description: A component for fixing an element's width to the current breakpoint.
-customProperties: true
 ---
 <div>
     <table-utility prefix="container" property="breakpoints" attribute="max-width">

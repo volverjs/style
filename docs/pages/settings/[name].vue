@@ -1,6 +1,8 @@
 <script setup>
 	import CodeEditor from '../../components/CodeEditor.vue'
 	import ColorPalette from '../../components/ColorPalette.vue'
+	import TableUtility from '../../components/TableUtility.vue'
+	import CardExample from '../../components/CardExample.vue'
 	import { permalinkToPath } from '@docs/utils/permalink'
 
 	const route = useRoute()
@@ -22,6 +24,8 @@
 				return VueComponentWith({
 					CodeEditor,
 					ColorPalette,
+					TableUtility,
+					CardExample,
 				})
 			})
 			.catch(() => {
@@ -92,28 +96,28 @@
 				</header>
 				<div class="preflight">
 					<MainContent />
-					<div class="flex mt-lg">
-						<a
-							class="vv-button vv-button--action-quiet"
-							target="_blank"
-							rel="noopener noreferrer"
-							:href="githubUrl">
-							<IconifyIcon icon="akar-icons:edit" />
-							Edit this page on GitHub
-						</a>
-						<a
-							v-if="stackblitzExample"
-							class="vv-button vv-button--action-quiet ml-auto"
-							target="_blank"
-							rel="noopener noreferrer"
-							title="Se an example on Stackblitz"
-							:href="stackblitzExample">
-							<iconify-icon icon="simple-icons:stackblitz" />
-							Example on Stackblitz
-						</a>
-					</div>
-					<FooterNotes class="mt-lg" />
 				</div>
+				<div class="flex mt-lg">
+					<a
+						class="vv-button vv-button--action-quiet"
+						target="_blank"
+						rel="noopener noreferrer"
+						:href="githubUrl">
+						<IconifyIcon icon="akar-icons:edit" />
+						Edit this page on GitHub
+					</a>
+					<a
+						v-if="stackblitzExample"
+						class="vv-button vv-button--action-quiet ml-auto"
+						target="_blank"
+						rel="noopener noreferrer"
+						title="Se an example on Stackblitz"
+						:href="stackblitzExample">
+						<iconify-icon icon="simple-icons:stackblitz" />
+						Example on Stackblitz
+					</a>
+				</div>
+				<FooterNotes class="mt-lg" />
 			</div>
 		</div>
 		<aside

@@ -4,19 +4,19 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
 ---
 
 <script>
-    export default {
-        data() {
-            return {
-                position: 'top',
-                show: false
-            }
-        },
-        methods: {
-            toggle() {
-                this.show = !this.show
-            }
-        }
+  export default {
+    data() {
+      return {
+        position: 'top',
+        show: false
+      }
+    },
+    methods: {
+      toggle() {
+      this.show = !this.show
+      }
     }
+  }
 </script>
 
 <template>

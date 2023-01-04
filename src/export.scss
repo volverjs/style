@@ -195,28 +195,30 @@
 	// ============================================================== */
 	// #region SPACING
 	// spacing & spacing-dynamic
-	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
+	@each $size, $value in $spacing {
+		spacing__#{$size}: $value;
+	}
+	@each $size, $value in $spacing-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'spacers__' + $size}-#{$subKey}: $subValue;
+					spacing-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
-		} @else {
-			#{'spacers__' + $size}: $value;
 		}
 	}
 
 	// font-size & font-size-dynamic
-	@each $size, $value in map.merge($font-size, $font-size-dynamic) {
+	@each $size, $value in $font-size {
+		font-size__#{$size}: $value;
+	}
+	@each $size, $value in $font-size-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
-					#{'font-size__' + $size}-#{$subKey}: $subValue;
+					font-size-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
-		} @else {
-			#{'font-size__' + $size}: $value;
 		}
 	}
 
