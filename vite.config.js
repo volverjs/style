@@ -83,5 +83,8 @@ export default ({ mode }) => {
 		define: {
 			__APP_VERSION__: JSON.stringify(require('./package.json').version),
 		},
+		optimizeDeps: {
+			include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
+		},
 	})
 }

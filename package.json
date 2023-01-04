@@ -84,6 +84,8 @@
     "./scss/props/background": "./src/props/background.scss",
     "./props/borders": "./dist/props/borders.css",
     "./scss/props/borders": "./src/props/borders.scss",
+    "./props/breakpoints": "./dist/props/breakpoints.css",
+    "./scss/props/breakpoints": "./src/props/breakpoints.scss",
     "./props/colors": "./dist/props/colors.css",
     "./scss/props/colors": "./src/props/colors.scss",
     "./props/effects": "./dist/props/effects.css",

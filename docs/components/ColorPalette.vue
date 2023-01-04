@@ -55,18 +55,20 @@
 		}),
 	)
 
-	const colorHue = useCssVar(
-		`--color-${props.name}-hue`,
-		document.documentElement,
-	)
+	const documentElement = ref('')
+	const colorHue = useCssVar(`--color-${props.name}-hue`, documentElement)
 	const colorSaturation = useCssVar(
 		`--color-${props.name}-saturation`,
-		document.documentElement,
+		documentElement,
 	)
 	const colorLightess = useCssVar(
 		`--color-${props.name}-lightness`,
-		document.documentElement,
+		documentElement,
 	)
+
+	onMounted(() => {
+		documentElement.value = document.documentElement
+	})
 
 	const colorHls = computed(() => {
 		return {
@@ -105,11 +107,13 @@
 	watchThrottled(
 		[selected, colorHue, colorSaturation, colorLightess],
 		() => {
-			selectedHls.value = getHls(
-				getComputedStyle(document.documentElement).getPropertyValue(
-					`--color-${selected.value}`,
-				),
-			)
+			if (documentElement.value) {
+				selectedHls.value = getHls(
+					getComputedStyle(documentElement.value).getPropertyValue(
+						`--color-${selected.value}`,
+					),
+				)
+			}
 		},
 		{ immediate: true, throttle: 500 },
 	)
@@ -192,6 +196,13 @@
 
 	const colorHex = computed({
 		get() {
+			if (
+				!colorHue.value ||
+				!colorSaturation.value ||
+				!colorLightess.value
+			) {
+				return ''
+			}
 			return hslToHex(
 				parseFloat(colorHue.value.replace('deg', '')),
 				parseFloat(colorSaturation.value.replace('%', '')),
@@ -255,7 +266,9 @@
 					</div>
 				</div>
 				<div>
-					<div class="vv-input-text vv-input-text--icon-right">
+					<div
+						v-if="colorHex"
+						class="vv-input-text vv-input-text--icon-right">
 						<label for="textfield-color">Change Color</label>
 						<div class="vv-input-text__wrapper">
 							<input
