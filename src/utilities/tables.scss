@@ -1,0 +1,15 @@
+@import '../context';
+
+// border-collapse
+@include spread-map-into-utilities(
+	$map: $border-collapse,
+	$class: border,
+	$attribute: border-collapse
+);
+
+// table-layout
+@include spread-map-into-utilities(
+	$map: $table-layout,
+	$class: table,
+	$attribute: table-layout
+);

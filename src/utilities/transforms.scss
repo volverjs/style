@@ -1,0 +1,50 @@
+@import '../context';
+
+// scale
+@include spread-map-into-utilities(
+	$map: $scale,
+	$class: scale,
+	$attribute: transform
+);
+
+// scale-x
+@include spread-map-into-utilities(
+	$map: $scale-x,
+	$class: scale-x,
+	$attribute: transform
+);
+
+// scale-y
+@include spread-map-into-utilities(
+	$map: $scale-y,
+	$class: scale-y,
+	$attribute: transform
+);
+
+// rotate
+@include spread-map-into-utilities(
+	$map: $rotate,
+	$class: rotate,
+	$attribute: transform
+);
+
+// translate-x
+@include spread-map-into-utilities(
+	$map: $translate-x,
+	$class: translate-x,
+	$attribute: transform
+);
+
+// translate-y
+@include spread-map-into-utilities(
+	$map: $translate-y,
+	$class: translate-y,
+	$attribute: transform
+);
+
+// transform-origin
+@include spread-map-into-utilities(
+	$map: $transform-origin,
+	$class: origin,
+	$attribute: transform-origin
+);

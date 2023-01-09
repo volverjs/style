@@ -125,8 +125,16 @@ export const mainMenu = [
 		name: 'Filters',
 		children: getUtilitiesGroup('filters'),
 	},
+    {
+		name: 'Tables',
+		children: getUtilitiesGroup('tables'),
+	},
 	{
 		name: 'Transitions & Animation',
 		children: getUtilitiesGroup('transitions'),
+	},
+	{
+		name: 'Transforms',
+		children: getUtilitiesGroup('transforms'),
 	},
 ]
