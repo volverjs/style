@@ -13,7 +13,7 @@ $vv-dialog: (
 	border: 0,
 	background-color: var(--color-backdrop),
 	backdrop-filter: var(--blur-sm),
-	opacity: 1,
+	opacity: var(--opacity-100),
 	state: (
 		close: (
 			display: none,
@@ -80,7 +80,7 @@ $vv-dialog: (
 				),
 			),
 			enter-from: (
-				opacity: 0,
+				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
 						transform: translateY(100%),
@@ -88,7 +88,7 @@ $vv-dialog: (
 				),
 			),
 			leave-to: (
-				opacity: 0,
+				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
 						transform: translateY(-100%),
@@ -106,7 +106,7 @@ $vv-dialog: (
 				),
 			),
 			enter-from: (
-				opacity: 0,
+				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
 						transform: translateX(-100%),
@@ -114,7 +114,7 @@ $vv-dialog: (
 				),
 			),
 			leave-to: (
-				opacity: 0,
+				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
 						transform: translateX(100%),
@@ -132,7 +132,7 @@ $vv-dialog: (
 				),
 			),
 			inert: (
-				opacity: 0,
+				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
 						transform: scale(0%),

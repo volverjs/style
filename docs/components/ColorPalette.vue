@@ -68,6 +68,11 @@
 
 	onMounted(() => {
 		documentElement.value = document.documentElement
+		selectedHls.value = getHls(
+			getComputedStyle(documentElement.value).getPropertyValue(
+				`--color-${selected.value}`,
+			),
+		)
 	})
 
 	const colorHls = computed(() => {

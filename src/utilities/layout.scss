@@ -137,11 +137,16 @@
 );
 
 // top / right / bottom / left
-@each $size, $value in map.merge($spacing, $spacing-dynamic) {
-	// check if value is not a map (spacing-dynamic)
-	$var: var(--spacing-#{$size});
-	@if type-of($value) != 'map' {
-		$var: var(--spacing-#{$size}, #{$value});
+@each $size,
+	$value in map.merge($placement, map.merge($spacing, $spacing-dynamic))
+{
+	$var: $value;
+	@if not map-has-key($placement, $size) {
+		// check if value is not a map (spacing-dynamic)
+		$var: var(--spacing-#{$size});
+		@if type-of($value) != 'map' {
+			$var: var(--spacing-#{$size}, #{$value});
+		}
 	}
 
 	// all

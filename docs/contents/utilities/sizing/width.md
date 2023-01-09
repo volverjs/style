@@ -10,7 +10,7 @@ spacing: true
 ### Spacing scale
 Width can also be set using the static and dynamic spacing scale, for example `w-lg`. 
 
-<div class="max-h-288 overflow-y-auto mb-32 preflight-revert">
+<div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">
 		<thead class="sticky z-sticky top-0 bg-surface-1">
 			<tr>

@@ -98,6 +98,14 @@
 		#{'position__' + $index}: $index;
 	}
 
+	// placement
+	@each $key, $value in $placement {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '_');
+
+		#{'placement__' + $name}: $value;
+	}
+
 	// visibility
 	@each $key, $value in $visibility {
 		#{'visibility__' + $key}: $value;
@@ -492,35 +500,17 @@
 		#{'scale__' + $key}: $value;
 	}
 
-	// scale-x
-	@each $key, $value in $scale-x {
-		#{'scale-x__' + $key}: $value;
-	}
-
-	// scale-y
-	@each $key, $value in $scale-y {
-		#{'scale-y__' + $key}: $value;
-	}
-
 	// rotate
 	@each $key, $value in $rotate {
 		#{'rotate__' + $key}: $value;
 	}
 
-	// translate-x
-	@each $key, $value in $translate-x {
+	// translate
+	@each $key, $value in $translate {
 		$name: meta.inspect($key);
 		$name: str-replace($name, '\\/', '/');
 
-		#{'translate-x__' + $name}: $value;
-	}
-
-	// translate-y
-	@each $key, $value in $translate-y {
-		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
-
-		#{'translate-y__' + $name}: $value;
+		#{'translate__' + $name}: $value;
 	}
 
 	// transform-origin

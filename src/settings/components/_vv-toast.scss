@@ -54,7 +54,7 @@ $vv-toast: (
 			border: 1px solid var(--color-white),
 			border-radius: 50%,
 			overflow: hidden,
-			opacity: 0.8,
+			opacity: var(--opacity-80),
 			cursor: pointer,
 			pseudo: (
 				before: (
@@ -78,7 +78,7 @@ $vv-toast: (
 					border-radius: 100% 0 0 100% / 50% 0 0 50%,
 					[animation]: pie-masks var(--toast-pie-animation-duration)
 						steps(1, end),
-					opacity: 0,
+					opacity: var(--opacity-0),
 				),
 			),
 		),

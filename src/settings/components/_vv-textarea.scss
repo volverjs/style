@@ -226,7 +226,7 @@ $vv-textarea: (
 						placeholder: (
 							will-change: 'opacity',
 							transition: var(--transition-opacity),
-							opacity: 0,
+							opacity: var(--opacity-0),
 						),
 					),
 				),
@@ -242,7 +242,7 @@ $vv-textarea: (
 							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
-									opacity: 1,
+									opacity: var(--opacity-100),
 								),
 							),
 						),
@@ -258,7 +258,7 @@ $vv-textarea: (
 							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
-									opacity: 1,
+									opacity: var(--opacity-100),
 								),
 							),
 						),
@@ -269,7 +269,7 @@ $vv-textarea: (
 	),
 	state: (
 		disabled: (
-			opacity: 0.5,
+			opacity: var(--opacity-50),
 			element: (
 				wrapper: (
 					state: (

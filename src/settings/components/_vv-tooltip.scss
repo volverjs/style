@@ -1,5 +1,5 @@
 $vv-tooltip: (
-	opacity: 0,
+	opacity: var(--opacity-0),
 	display: block,
 	position: absolute,
 	inset-inline: 100% auto,
@@ -33,7 +33,7 @@ $vv-tooltip: (
 	),
 	modifier: (
 		visible: (
-			opacity: 1,
+			opacity: var(--opacity-100),
 		),
 		top: (
 			inset-inline: 50% 0,

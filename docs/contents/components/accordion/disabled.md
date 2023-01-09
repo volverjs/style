@@ -1,12 +1,12 @@
 ---
-title: Bordered
+title: Disabled
 wrapperClass: w-full md:w-9/12 mx-auto
 ---
 
 <div class="vv-accordion-group">
   <details
     id="accordion-item-bordered-1"
-    class="vv-accordion vv-accordion--bordered">
+    class="vv-accordion" disabled>
     <summary
       class="vv-accordion__summary"
       aria-controls="#accordion-item-bordered-1"
@@ -22,7 +22,7 @@ wrapperClass: w-full md:w-9/12 mx-auto
   </details>
   <details
     id="accordion-item-bordered-2"
-    class="vv-accordion vv-accordion--bordered">
+    class="vv-accordion">
     <summary
       class="vv-accordion__summary"
       aria-controls="#accordion-item-bordered-2"
@@ -38,7 +38,7 @@ wrapperClass: w-full md:w-9/12 mx-auto
   </details>
   <details
     id="accordion-item-bordered-3"
-    class="vv-accordion vv-accordion--bordered"
+    class="vv-accordion"
     open>
     <summary
       class="vv-accordion__summary"

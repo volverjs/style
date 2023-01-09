@@ -79,11 +79,11 @@ $vv-input-text: (
 					padding: var(--spacing-sm),
 					top: 0,
 					right: 0,
-					opacity: 0,
+					opacity: var(--opacity-0),
 				),
 				search-cancel-button: (
 					-webkit-appearance: none,
-					opacity: 0,
+					opacity: var(--opacity-0),
 				),
 				color-swatch-wrapper: (
 					padding: 1px,
@@ -299,7 +299,7 @@ $vv-input-text: (
 						placeholder: (
 							will-change: 'opacity',
 							transition: var(--transition-opacity),
-							opacity: 0,
+							opacity: var(--opacity-0),
 						),
 					),
 				),
@@ -315,7 +315,7 @@ $vv-input-text: (
 							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
-									opacity: 1,
+									opacity: var(--opacity-100),
 								),
 							),
 						),
@@ -331,7 +331,7 @@ $vv-input-text: (
 							transform: translateY(0.55em),
 							pseudo: (
 								placeholder: (
-									opacity: 1,
+									opacity: var(--opacity-100),
 								),
 							),
 						),
@@ -342,7 +342,7 @@ $vv-input-text: (
 	),
 	state: (
 		disabled: (
-			opacity: 0.5,
+			opacity: var(--opacity-50),
 			element: (
 				wrapper: (
 					state: (
@@ -358,7 +358,7 @@ $vv-input-text: (
 				wrapper: (
 					pseudo: (
 						after: (
-							opacity: 0,
+							opacity: var(--opacity-0),
 						),
 					),
 					state: (

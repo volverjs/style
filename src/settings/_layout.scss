@@ -94,6 +94,18 @@ $overflow: (
 // position
 $position: (static, fixed, absolute, relative, sticky) !default;
 
+// placement
+$placement: (
+	1\/2: 50%,
+	1\/3: 33.3333%,
+	2\/3: 66.6667%,
+	1\/4: 25%,
+	2\/4: 50%,
+	3\/4: 75%,
+	full: 100%,
+	auto: auto
+) !default;
+
 // visibility
 $visibility: (
 	visible: visible,

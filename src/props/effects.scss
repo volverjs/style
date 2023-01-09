@@ -2,4 +2,5 @@
 
 :where(:host, :root, .theme) {
 	@include spread-map-into-props($box-shadow, $prefix: shadow);
+	@include spread-map-into-props($opacity, $prefix: opacity);
 }

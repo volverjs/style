@@ -19,6 +19,15 @@ $vv-accordion: (
 				),
 			),
 		),
+		disabled: (
+			element: (
+				summary: (
+					cursor: not-allowed,
+					pointer-events: none,
+					opacity: var(--opacity-50),
+				),
+			),
+		),
 	),
 	element: (
 		summary: (
