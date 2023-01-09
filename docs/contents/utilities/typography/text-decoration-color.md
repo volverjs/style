@@ -4,10 +4,8 @@ description: Utilities for controlling the color of text decorations.
 customProperties: true
 colors: true
 ---
-<div>
-	<table-utility prefix="decoration" property="colors" attribute="text-decoration">
-		<template #value="{ key }">
-			text-decoration-color: var(--color-{{ key }});
-		</template>
-	</table-utility>
-</div>
+<table-utility prefix="decoration" property="colors" attribute="text-decoration">
+  <template #value="{ key }">
+    text-decoration-color: var(--color-{{ key }});
+  </template>
+</table-utility>

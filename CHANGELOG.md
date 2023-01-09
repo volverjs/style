@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2023-01-09
+
+### Added
+
+*   `translate` utilities;
+*   `rotate` utilities;
+*   `origin` utilities;
+*   `scale` utilities;
+*   `table` utilities;
+*   `border-collapse` and `border-separate` utilities;
+*   `vv-accordion-group` component.
+
 ## [0.1.2] - 2023-01-04
 
 ### Added

@@ -12,6 +12,7 @@ $components-prefix: vv !default;
 
 // components names
 $components-names: (
+	vv-accordion-group: $components-prefix + -accordion-group,
 	vv-accordion: $components-prefix + -accordion,
 	vv-alert: $components-prefix + -alert,
 	vv-badge: $components-prefix + -badge,

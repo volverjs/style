@@ -98,6 +98,14 @@
 		#{'position__' + $index}: $index;
 	}
 
+	// placement
+	@each $key, $value in $placement {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '_');
+
+		#{'placement__' + $name}: $value;
+	}
+
 	// visibility
 	@each $key, $value in $visibility {
 		#{'visibility__' + $key}: $value;
@@ -450,6 +458,20 @@
 	// #endregion
 
 	// ============================================================== */
+	// #region TABLES
+	// border-collapse
+	@each $key, $value in $border-collapse {
+		#{'border-collapse__' + $key}: $value;
+	}
+
+	// table-layout
+	@each $key, $value in $table-layout {
+		#{'table-layout__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
 	// #region TRANSITIONS & ANIMATIONS
 	// transition property
 	@each $key, $value in $transition-property {
@@ -467,6 +489,33 @@
 
 	@each $key, $value in $animation {
 		#{'animation__' + $key}: $value;
+	}
+
+	// #endregion
+
+	// ============================================================== */
+	// #region TRANSFORMS
+	// scale
+	@each $key, $value in $scale {
+		#{'scale__' + $key}: $value;
+	}
+
+	// rotate
+	@each $key, $value in $rotate {
+		#{'rotate__' + $key}: $value;
+	}
+
+	// translate
+	@each $key, $value in $translate {
+		$name: meta.inspect($key);
+		$name: str-replace($name, '\\/', '/');
+
+		#{'translate__' + $name}: $value;
+	}
+
+	// transform-origin
+	@each $key, $value in $transform-origin {
+		#{'transform-origin__' + $key}: $value;
 	}
 
 	// #endregion

@@ -12,10 +12,13 @@
 @forward 'layout';
 @forward 'sizing';
 @forward 'spacing';
+@forward 'tables';
+@forward 'transforms';
 @forward 'transitions';
 @forward 'typography';
 
 // components
+@forward 'components/vv-accordion-group';
 @forward 'components/vv-accordion';
 @forward 'components/vv-alert';
 @forward 'components/vv-badge';

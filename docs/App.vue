@@ -69,14 +69,14 @@
 				@include media-breakpoint-up('md', $breakpoints) {
 					position: absolute;
 					left: -1.5ch;
-					opacity: 0;
+					opacity: var(--opacity-0);
 					transition: var(--transition-opacity);
 				}
 			}
 
 			&:hover {
 				.header-anchor {
-					opacity: 1;
+					opacity: var(--opacity-100);
 				}
 			}
 		}

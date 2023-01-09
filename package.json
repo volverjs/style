@@ -173,7 +173,7 @@
     "icss-utils": "^5.1.0",
     "markdown-it-anchor": "^8.6.6",
     "markdown-it-prism": "^2.3.0",
-    "postcss": "^8.4.20",
+    "postcss": "^8.4.21",
     "postcss-html": "^1.5.0",
     "postcss-preset-env": "^7.8.3",
     "prism-themes": "^1.9.0",

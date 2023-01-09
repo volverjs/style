@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-accordion-group);
+$component-map: $vv-accordion-group;
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);

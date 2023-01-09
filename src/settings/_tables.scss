@@ -1,0 +1,11 @@
+// border-collapse
+$border-collapse: (
+	collapse: collapse,
+	separate: separate,
+) !default;
+
+// table-layout
+$table-layout: (
+	auto: auto,
+	fixed: fixed,
+) !default;

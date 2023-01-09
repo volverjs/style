@@ -11,13 +11,13 @@ $vv-radio: (
 	min-width: var(--input-min-width),
 	state: (
 		disabled: (
-			opacity: 0.3,
+			opacity: var(--opacity-30),
 			cursor: not-allowed,
 		),
 	),
 	modifier: (
 		readonly: (
-			opacity: 1,
+			opacity: var(--opacity-100),
 			cursor: default,
 			pointer-events: none,
 		),
