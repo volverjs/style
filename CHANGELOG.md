@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.4] - 2023-01-17
+
+### Fixed
+
+*   `translate` utilities;
+*   `rotate` utilities;
+*   `origin` utilities;
+*   `scale` utilities;
+*   `table` utilities specificity;
+*   `vv-button` spacing in `rem`;
+*   `eslint`, `eslint-plugin-vue`, `glob` and `vite-plugin-stylelint` updates;
+*   `vv-button--icon-only` modifier.
+
 ## [0.1.3] - 2023-01-09
 
 ### Added
@@ -73,6 +86,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.4]: https://github.com/volverjs/style/compare/v0.1.3...v0.1.4
+[0.1.3]: https://github.com/volverjs/style/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/volverjs/style/compare/v0.1.1...v0.1.2
-
 [0.1.1]: https://github.com/volverjs/style/compare/v0.1.0...v0.1.1

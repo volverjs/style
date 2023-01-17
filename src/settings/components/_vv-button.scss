@@ -5,15 +5,15 @@ $vv-button: (
 	[line-height]: var(--button-line-height),
 	position: relative,
 	background: var(--color-brand),
-	border-radius: 0.5ch,
+	border-radius: var(--rounded),
 	border-style: solid,
 	border-color: var(--color-brand),
 	color: var(--color-white),
 	font-family: var(--font-sans),
 	font-weight: var(--font-semibold),
 	gap: 1ch,
-	padding-block: 0.75ch,
-	padding-inline: 1.75ch,
+	padding-block: var(--spacing-7),
+	padding-inline: var(--spacing-16),
 	text-shadow: 0 1px 0 var(--color-gray-darken-5),
 	transition: var(--transition-all),
 	will-change: all,
@@ -61,6 +61,13 @@ $vv-button: (
 		),
 	),
 	modifier: (
+		icon-only: (
+			element: (
+				icon: (
+					margin-inline: calc(var(--spacing-9) * -1),
+				),
+			),
+		),
 		primary: (
 			background: var(--color-gray-darken-3),
 			border-color: var(--color-gray-darken-3),
@@ -223,8 +230,8 @@ $vv-button: (
 			color: var(--color-word-1),
 			border-color: var(--color-word-5),
 			font-weight: var(--font-normal),
-			padding-inline: 0.75ch,
-			padding-block: 0.5ch,
+			padding-inline: var(--spacing-6),
+			padding-block: var(--spacing-4),
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -258,8 +265,8 @@ $vv-button: (
 			color: var(--color-word-1),
 			border-color: transparent,
 			font-weight: var(--font-normal),
-			padding-inline: 0.75ch,
-			padding-block: 0.5ch,
+			padding-inline: var(--spacing-6),
+			padding-block: var(--spacing-4),
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -290,11 +297,6 @@ $vv-button: (
 		),
 		rounded: (
 			border-radius: var(--rounded-full),
-			element: (
-				icon: (
-					margin: 0 -1ch,
-				),
-			),
 		),
 		block: (
 			display: block,
