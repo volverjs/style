@@ -6,7 +6,7 @@
 		transform: scale(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'scale-#{$size}',
+		$selector: '.scale-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %scale-#{$size};
@@ -16,7 +16,7 @@
 		transform: scaleX(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'scale-x-#{$size}',
+		$selector: '.scale-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %scale-x-#{$size};
@@ -26,7 +26,7 @@
 		transform: scaleY(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'scale-y-#{$size}',
+		$selector: '.scale-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %scale-y-#{$size};
@@ -37,14 +37,16 @@
 @include spread-map-into-utilities(
 	$map: $rotate,
 	$class: rotate,
-	$attribute: transform
+	$attribute: transform,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // transform-origin
 @include spread-map-into-utilities(
 	$map: $transform-origin,
 	$class: origin,
-	$attribute: transform-origin
+	$attribute: transform-origin,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // translate
@@ -53,7 +55,7 @@
 		transform: translate(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'translate-#{$size}',
+		$selector: '.translate-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %translate-#{$size};
@@ -63,7 +65,7 @@
 		transform: translateX(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'translate-x-#{$size}',
+		$selector: '.translate-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %translate-x-#{$size};
@@ -73,7 +75,7 @@
 		transform: translateY(#{$value});
 	}
 	@include wrap-with-where(
-		$selector: 'translate-y-#{$size}',
+		$selector: '.translate-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %translate-y-#{$size};
@@ -83,7 +85,7 @@
 		transform: translate(-#{$value});
 	}
 	@include wrap-with-where(
-		$selector: '-translate-#{$size}',
+		$selector: '.-translate-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %-translate-#{$size};
@@ -93,7 +95,7 @@
 		transform: translateX(-#{$value});
 	}
 	@include wrap-with-where(
-		$selector: '-translate-x-#{$size}',
+		$selector: '.-translate-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %-translate-x-#{$size};
@@ -103,7 +105,7 @@
 		transform: translateY(-#{$value});
 	}
 	@include wrap-with-where(
-		$selector: '-translate-y-#{$size}',
+		$selector: '.-translate-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
 	) {
 		@extend %-translate-y-#{$size};

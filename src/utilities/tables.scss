@@ -4,12 +4,14 @@
 @include spread-map-into-utilities(
 	$map: $border-collapse,
 	$class: border,
-	$attribute: border-collapse
+	$attribute: border-collapse,
+	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // table-layout
 @include spread-map-into-utilities(
 	$map: $table-layout,
 	$class: table,
-	$attribute: table-layout
+	$attribute: table-layout,
+	$zero-specificity: $zero-specificity-for-utilities
 );
