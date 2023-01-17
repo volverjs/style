@@ -144,3 +144,9 @@ context.$vv-button: map.deep-merge(
 ```html
 <button type="button" class="vv-button vv-button--my-error">Error</button>
 ```
+
+## Documentation
+To learn more about `@volverjs/style`, check [its documentation](https://volverjs.github.io/style).
+
+## License
+[MIT](http://opensource.org/licenses/MIT)
