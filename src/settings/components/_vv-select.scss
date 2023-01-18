@@ -79,7 +79,7 @@ $vv-select: (
 			background-repeat: no-repeat,
 			[background-position]: right var(--input-spacing-right) center,
 			background-size: 1em,
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			state: (
 				disabled: (
 					cursor: not-allowed,
@@ -201,6 +201,7 @@ $vv-select: (
 				label: (
 					position: absolute,
 					z-index: 1,
+					min-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
 					[padding-top]: var(--input-spacing-top),

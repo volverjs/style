@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2023-01-18
+
+### Fixed
+
+*   `vv-button` min-height with `vv-button--icon-only` modifier;
+*   `vv-input-text`, `vv-textarea` and `vv-select` wrapper min-height.
+
 ## [0.1.4] - 2023-01-17
 
 ### Fixed
@@ -86,6 +93,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.5]: https://github.com/volverjs/style/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/volverjs/style/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/volverjs/style/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/volverjs/style/compare/v0.1.1...v0.1.2

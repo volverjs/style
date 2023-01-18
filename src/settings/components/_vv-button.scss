@@ -52,6 +52,7 @@ $vv-button: (
 			flex-shrink: 0,
 			stroke-linecap: round,
 			stroke-linejoin: round,
+			[min-height]: calc(1em * var(--button-line-height)),
 		),
 		label: (
 			white-space: nowrap,
@@ -64,7 +65,7 @@ $vv-button: (
 		icon-only: (
 			element: (
 				icon: (
-					margin-inline: calc(var(--spacing-9) * -1),
+					margin-inline: calc(var(--spacing-6) * -1),
 				),
 			),
 		),
@@ -312,7 +313,7 @@ $vv-button: (
 		),
 		column: (
 			flex-direction: column,
-			gap: 0.2em,
+			gap: var(--spacing-2),
 		),
 		full-bleed: (
 			min-width: 20ch,

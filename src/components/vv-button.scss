@@ -36,7 +36,13 @@ $component-selector: '.#{ $component-name}';
 		$selector: $component-selector,
 		$enabled: $zero-specificity-for-components
 	) {
-		&:where(a[href], button, input[type='button'], input[type='submit'], input[type='reset']),
+		&:where(
+				a[href],
+				button,
+				input[type='button'],
+				input[type='submit'],
+				input[type='reset']
+			),
 		&::file-selector-button {
 			@extend %#{$component-name};
 		}

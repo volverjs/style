@@ -1,18 +1,33 @@
 {
-    "semi": false,
-    "useTabs": true,
-    "tabWidth": 4,
-    "singleQuote": true,
-    "trailingComma": "all",
-    "bracketSameLine": true,
-    "vueIndentScriptAndStyle": true,
-    "overrides": [
-        {
-            "files": "*.md",
-            "options": {
-                "useTabs": false,
-                "tabWidth": 2
-            }
-        }
-    ]
+	"semi": false,
+	"useTabs": true,
+	"tabWidth": 4,
+	"singleQuote": true,
+	"trailingComma": "all",
+	"bracketSameLine": true,
+	"vueIndentScriptAndStyle": true,
+	"overrides": [
+		{
+			"files": "*.md",
+			"options": {
+				"trailingComma": "none",
+				"useTabs": false,
+				"tabWidth": 2
+			}
+		},
+		{
+			"files": "*.json",
+			"options": {
+				"useTabs": false,
+				"tabWidth": 2
+			}
+		},
+		{
+			"files": "*.yaml",
+			"options": {
+				"useTabs": false,
+				"tabWidth": 2
+			}
+		}
+	]
 }
