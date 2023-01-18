@@ -365,6 +365,7 @@
 			@extend %vv-select !optional;
 			@extend %vv-select__wrapper !optional;
 			@extend %vv-select__input !optional;
+			@extend %vv-select-modifier-dirty__input !optional;
 
 			&:disabled {
 				@extend %vv-select--disabled !optional;

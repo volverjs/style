@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.6] - 2023-01-18
+
+### Fixed
+
+*   `vv-input-text` fix floating modifier and label alignment;
+*   `vv-select` fix floating modifier;
+*   `vv-textarea` fix floating modifier.
+
+### Added
+
+*   `vv-select` multiple modifier;
+*   `spread-map-into-modifiers` mixin now support nested modifiers.
+
 ## [0.1.5] - 2023-01-18
 
 ### Fixed
@@ -93,6 +106,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.6]: https://github.com/volverjs/style/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/volverjs/style/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/volverjs/style/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/volverjs/style/compare/v0.1.2...v0.1.3
