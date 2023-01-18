@@ -27,7 +27,7 @@ $vv-input-text: (
 			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: var(--transition-colors),
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -280,8 +280,6 @@ $vv-input-text: (
 				label: (
 					position: absolute,
 					z-index: 1,
-					display: flex,
-					align-items: center,
 					min-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,

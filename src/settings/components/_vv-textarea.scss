@@ -34,7 +34,7 @@ $vv-textarea: (
 			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: var(--transition-colors),
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -210,6 +210,7 @@ $vv-textarea: (
 				label: (
 					position: absolute,
 					z-index: 1,
+					min-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
 					[padding-top]: var(--input-spacing-top),

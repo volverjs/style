@@ -125,7 +125,7 @@ export const mainMenu = [
 		name: 'Filters',
 		children: getUtilitiesGroup('filters'),
 	},
-    {
+	{
 		name: 'Tables',
 		children: getUtilitiesGroup('tables'),
 	},
