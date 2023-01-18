@@ -15,7 +15,8 @@ $input: (
 	min-width: 0,
 	label: (
 		color: var(--color-word-2),
-		display: block,
+		display: flex,
+		align-items: center,
 		font-size: var(--text-xs),
 		gap: var(--spacing-xs),
 		white-space: nowrap,
@@ -49,5 +50,13 @@ $input: (
 	),
 	invalid: (
 		color: var(--color-danger),
+	),
+	floating: (
+		padding-top: calc(var(--input-spacing-top) + 0.55em),
+		padding-bottom: calc(var(--input-spacing-bottom) - 0.55em),
+		label: (
+			font-size: var(--text-12),
+			transform: translateY(-0.8em),
+		),
 	),
 ) !default;

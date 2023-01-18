@@ -173,34 +173,40 @@
 
 // Transform a map into a list of modifiers
 @mixin spread-map-into-modifiers(
+	$original: null,
 	$map: (),
 	$prefix: '',
 	$key: 'modifier',
 	$block: null,
+	$modifier: '',
 	$props: true,
 	$zero-specificity: true,
 	$bps: (
 		xxs: 0,
 	)
 ) {
+	@if not $original {
+		$original: $map;
+	}
 	@if not $block {
 		$block: &;
 	}
 	@if type-of(map.get($map, $key)) == 'map' {
-		@each $modifier, $value in map.get($map, $key) {
-			$selector: $block + '--' + $modifier;
+		@each $item, $value in map.get($map, $key) {
+			$selector: $block + '--' + $item;
 
-			%#{$prefix + '--' + $modifier} {
+			%#{$prefix + '--' + $item} {
 				@include spread-map-into-attrs(
-					$original: $map,
+					$original: $original,
 					$map: $value,
 					$prefix: $prefix,
-					$variant: #{$key}-#{$modifier},
+					$variant: #{$key}-#{$item},
 					$deep: true,
 					$ignore: (
 						'state',
 						'breakpoint',
 						'element',
+						'modifier',
 					),
 					$props: $props
 				);
@@ -208,21 +214,21 @@
 
 			// map props and attributes
 			@include wrap-with-where(
-				$selector: $selector + $block,
+				$selector: $modifier + $selector + $block,
 				$enabled: $zero-specificity
 			) {
-				@extend %#{$prefix + '--' + $modifier};
+				@extend %#{$prefix + '--' + $item};
 			}
 
 			// map elements
 			@if map.get($value, 'element') {
 				@include spread-map-into-elements(
-					$original: $map,
+					$original: $original,
 					$map: $value,
-					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$prefix: #{$prefix}-#{$key}-#{$item},
 					$key: 'element',
 					$block: $block,
-					$modifier: $selector,
+					$modifier: $modifier + $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -231,12 +237,12 @@
 			// map states
 			@if map.get($value, 'state') {
 				@include spread-map-into-states(
-					$original: $map,
+					$original: $original,
 					$map: $value,
-					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$prefix: #{$prefix}-#{$key}-#{$item},
 					$key: 'state',
 					$block: $block,
-					$modifier: $selector,
+					$modifier: $modifier + $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
 				);
@@ -246,11 +252,26 @@
 			@if map.get($value, 'breakpoint') {
 				@include spread-map-into-breakpoints(
 					$map: $value,
-					$prefix: #{$prefix}-#{$key}-#{$modifier},
+					$prefix: #{$prefix}-#{$key}-#{$item},
 					$key: 'breakpoint',
 					$block: $selector,
 					$props: $props,
 					$zero-specificity: $zero-specificity
+				);
+			}
+
+			// map modifiers
+			@if map.get($value, 'modifier') {
+				@include spread-map-into-modifiers(
+					$original: $original,
+					$map: $value,
+					$prefix: #{$prefix}-#{$key}-#{$item},
+					$key: 'modifier',
+					$block: $block,
+					$modifier: $modifier + $selector,
+					$props: $props,
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}

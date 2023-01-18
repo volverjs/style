@@ -11,6 +11,7 @@ $vv-select: (
 		label: (
 			_alias: '> label',
 			display: var(--input-label-display),
+			align-items: var(--input-label-align-items),
 			font-size: var(--input-label-font-size),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
@@ -94,6 +95,9 @@ $vv-select: (
 					),
 			),
 		),
+		option: (
+			_alias: 'select > option',
+		),
 		icon: (
 			_alias: ':where(svg, [data-icon])',
 			margin: var(--input-spacing-top) var(--input-spacing-right)
@@ -126,6 +130,36 @@ $vv-select: (
 			element: (
 				input: (
 					color: var(--input-color),
+				),
+			),
+		),
+		multiple: (
+			element: (
+				wrapper: (
+					align-items: flex-start,
+				),
+				input: (
+					overflow: auto,
+					background-image: none,
+					padding: 0,
+				),
+				option: (
+					[padding]: var(--input-spacing-top)
+						var(--input-spacing-right) var(--input-spacing-bottom)
+						var(--input-spacing-left),
+					min-height: var(--input-min-height),
+					display: flex,
+					align-items: center,
+					color: var(--input-color),
+					state: (
+						checked: (
+							color: var(--color-brand),
+							background-color: var(--color-surface-brand),
+						),
+						disabled: (
+							color: var(--input-placeholder-color),
+						),
+					),
 				),
 			),
 		),
@@ -213,30 +247,37 @@ $vv-select: (
 					transition: var(--transition-all),
 				),
 				input: (
-					pseudo: (
-						placeholder: (
-							opacity: var(--opacity-0),
+					opacity: var(--opacity-0),
+				),
+			),
+			state: (
+				focus-within: (
+					element: (
+						label: (
+							transform: var(--input-floating-label-transform),
+							font-size: var(--input-floating-label-font-size),
+						),
+						input: (
+							[padding-top]: var(--input-floating-padding-top),
+							[padding-bottom]:
+								var(--input-floating-padding-bottom),
+							opacity: var(--opacity-100),
 						),
 					),
 				),
 			),
-			state: (
+			modifier: (
 				dirty: (
 					element: (
 						label: (
-							transform: translateY(-0.8em),
-							font-size: var(--text-12),
+							transform: var(--input-floating-label-transform),
+							font-size: var(--input-floating-label-font-size),
 						),
 						input: (
-							[padding-top]:
-								calc(var(--input-spacing-top) + 0.55em),
+							[padding-top]: var(--input-floating-padding-top),
 							[padding-bottom]:
-								calc(var(--input-spacing-bottom) - 0.55em),
-							pseudo: (
-								placeholder: (
-									opacity: var(--opacity-100),
-								),
-							),
+								var(--input-floating-padding-bottom),
+							opacity: var(--opacity-100),
 						),
 					),
 				),

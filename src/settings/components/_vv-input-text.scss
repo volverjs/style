@@ -10,6 +10,7 @@ $vv-input-text: (
 		label: (
 			_alias: '> label',
 			display: var(--input-label-display),
+			align-items: var(--input-label-align-items),
 			font-size: var(--input-label-font-size),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
@@ -27,7 +28,6 @@ $vv-input-text: (
 			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: var(--transition-colors),
-			min-height: var(--input-min-height),
 			pseudo: (
 				before: (
 					position: absolute,
@@ -65,14 +65,17 @@ $vv-input-text: (
 			display: block,
 			flex: 1,
 			color: var(--input-color),
-			[margin-block]: var(--input-spacing-top) var(--input-spacing-bottom),
+			line-height: var(--leading-none),
+			[padding-block]: var(--input-spacing-top)
+				var(--input-spacing-bottom),
 			[padding-inline]: var(--input-spacing-left)
 				var(--input-spacing-right),
 			min-width: 0,
-			block-size: calc(var(--input-line-height) * var(--input-font-size)),
+			min-height: var(--input-min-height),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
+					text-overlow: ellipsis,
 				),
 				calendar-picker-indicator: (
 					position: absolute,
@@ -306,11 +309,13 @@ $vv-input-text: (
 				focus-within: (
 					element: (
 						label: (
-							transform: translateY(-0.8em),
-							font-size: var(--text-12),
+							transform: var(--input-floating-label-transform),
+							font-size: var(--input-floating-label-font-size),
 						),
 						input: (
-							transform: translateY(0.55em),
+							[padding-top]: var(--input-floating-padding-top),
+							[padding-bottom]:
+								var(--input-floating-padding-bottom),
 							pseudo: (
 								placeholder: (
 									opacity: var(--opacity-100),
@@ -322,11 +327,13 @@ $vv-input-text: (
 				dirty: (
 					element: (
 						label: (
-							transform: translateY(-0.8em),
-							font-size: var(--text-12),
+							transform: var(--input-floating-label-transform),
+							font-size: var(--input-floating-label-font-size),
 						),
 						input: (
-							transform: translateY(0.55em),
+							[padding-top]: var(--input-floating-padding-top),
+							[padding-bottom]:
+								var(--input-floating-padding-bottom),
 							pseudo: (
 								placeholder: (
 									opacity: var(--opacity-100),

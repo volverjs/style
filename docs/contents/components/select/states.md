@@ -117,7 +117,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 <div class="vv-select 
-            vv-select--dirty 
             vv-select--loading">
     <label for="select-loading">Loading Select</label>
     <div class="vv-select__wrapper">
