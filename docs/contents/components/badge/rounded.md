@@ -6,7 +6,7 @@ wrapperClass: flex flex-wrap gap-4 items-center justify-center
 <div role="status" class="vv-badge vv-badge--rounded">
     99+
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--black">
+<div role="status" class="vv-badge vv-badge--rounded vv-badge--gray">
     42
 </div>
 <div role="status" class="vv-badge vv-badge--rounded vv-badge--danger">
@@ -19,4 +19,11 @@ wrapperClass: flex flex-wrap gap-4 items-center justify-center
 <div role="status" class="vv-badge vv-badge--rounded vv-badge--warning">
     <IconifyIcon icon="akar-icons:pencil" />
     DRAFT
+</div>
+<div role="status" class="vv-badge vv-badge--rounded vv-badge--info">
+    <IconifyIcon icon="akar-icons:info" />
+    INFO
+</div>
+<div role="status" class="vv-badge vv-badge--rounded vv-badge--accent">
+    <IconifyIcon icon="akar-icons:octocat-fill" />
 </div>

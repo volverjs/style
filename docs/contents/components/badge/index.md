@@ -28,3 +28,8 @@ Add `vv-badge--ghost` for a transparent background.
 Use `vv-badge--sm` to change the size of the badge.
 
 <code-editor resource-folder="badge" resource-name="small"></code-editor>
+
+### Action
+Add a button to the badge to make it interactive.
+
+<code-editor resource-folder="badge" resource-name="action"></code-editor>

@@ -32,7 +32,7 @@ wrapperClass: md:w-9/12
         </small>
     </div>
     <div class="vv-input-text 
-                vv-input-text--icon-right">
+                vv-input-text--icon-after">
         <label for="textfield-limit-icon">Limit with icon right</label>
         <div class="vv-input-text__wrapper">
             <input id="textfield-limit-icon" 

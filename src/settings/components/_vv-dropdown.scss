@@ -1,37 +1,112 @@
 $vv-dropdown: (
-	position: absolute,
-	inset: auto 0,
+	--dropdown-border-radius: 0px,
+	position: relative,
 	z-index: var(--z-dropdown),
 	display: flex,
 	flex-direction: column,
-	background-color: var(--color-surface-1),
 	box-shadow: var(--shadow-lg),
+	width: 'max-content',
+	overflow: auto,
 	element: (
+		list: (
+			_alias: 'ul',
+			[border-radius]: var(--dropdown-border-radius),
+			background-color: var(--color-surface-1),
+		),
 		item: (
-			_alias: '> li > :where(a, label, button)',
+			_alias: 'li',
+		),
+		item-first: (
+			_alias: 'li:first-child',
+			[border-top-left-radius]: var(--dropdown-border-radius),
+			[border-top-right-radius]: var(--dropdown-border-radius),
+		),
+		item-last: (
+			_alias: 'li:last-child',
+			[border-bottom-left-radius]: var(--dropdown-border-radius),
+			[border-bottom-right-radius]: var(--dropdown-border-radius),
+		),
+		item-not-last: (
+			_alias: 'li:not(:last-child)',
+			border-width: 0 0 var(--border) 0,
+			border-color: var(--color-surface-3),
+			border-style: solid,
+		),
+		search: (
 			display: block,
+			min-width: 0,
+			align-items: center,
+			min-height: var(--spacing-50),
+			background-color: var(--color-surface-2),
 			padding: var(--spacing-sm),
-			state: (
-				hover: (
-					background-color: var(--color-surface-2),
+			pseudo: (
+				search-cancel-button: (
+					-webkit-appearance: none,
+					opacity: var(--opacity-0),
 				),
-				active: (
-					background-color: var(--color-surface-3),
-				),
-				checked-within: (
-					color: var(--color-brand),
-					background-color: var(--color-surface-3),
+				placeholder: (
+					color: var(--color-word-4),
+					text-overflow: ellipsis,
 				),
 			),
 		),
-		input: (
-			_alias: '> li > input',
-			display: none,
+		arrow: (
+			position: absolute,
+			width: var(--spacing-20),
+			height: var(--spacing-20),
+			z-index: -1,
+			pointer-events: none,
+			border: none,
+			pseudo: (
+				before: (
+					position: absolute,
+					top: 0,
+					left: 0,
+					width: 0,
+					height: 0,
+					border-left: var(--spacing-10) solid transparent,
+					border-right: var(--spacing-10) solid transparent,
+					border-bottom: var(--spacing-10) solid
+						var(--color-surface-1),
+				),
+				after: (
+					position: absolute,
+					bottom: 0,
+					left: 0,
+					width: 0,
+					height: 0,
+					border-left: var(--spacing-10) solid transparent,
+					border-right: var(--spacing-10) solid transparent,
+					border-top: var(--spacing-10) solid var(--color-surface-1),
+				),
+			),
 		),
 	),
 	modifier: (
-		place-top: (
+		rounded: (
+			--dropdown-border-radius: var(--rounded),
+		),
+		block: (
+			width: 100%,
+		),
+		bottom: (
+			position: absolute,
+			top: 100%,
+			right: 0,
+			left: 0,
+		),
+		top: (
+			position: absolute,
+			left: 0,
+			right: 0,
 			bottom: 100%,
+		),
+		full-bleed: (
+			element: (
+				item: (
+					min-width: 20ch,
+				),
+			),
 		),
 	),
 ) !default;

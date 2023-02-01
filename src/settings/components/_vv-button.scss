@@ -47,11 +47,7 @@ $vv-button: (
 			block-size: 1.1em,
 			inline-size: 1.1em,
 			margin: 0,
-			stroke: currentcolor,
-			fill: none,
 			flex-shrink: 0,
-			stroke-linecap: round,
-			stroke-linejoin: round,
 			[min-height]: calc(1em * var(--button-line-height)),
 		),
 		label: (
@@ -174,6 +170,11 @@ $vv-button: (
 				),
 				active: (
 					color: var(--color-brand-darken-3),
+				),
+			),
+			element: (
+				icon: (
+					margin: var(--spacing-0),
 				),
 			),
 		),
@@ -300,7 +301,6 @@ $vv-button: (
 			border-radius: var(--rounded-full),
 		),
 		block: (
-			display: block,
 			width: 100%,
 			max-width: auto,
 		),

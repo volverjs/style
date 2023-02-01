@@ -22,6 +22,8 @@ $vv-badge: (
 	font-weight: var(--font-normal),
 	text-shadow: none,
 	line-height: var(--leading-none),
+	overflow: hidden,
+	flex-shrink: 0,
 	state: (
 		empty: (
 			font-size: inherit,
@@ -32,8 +34,33 @@ $vv-badge: (
 			[border-radius]: calc(var(--badge-font-size) * 0.5),
 			padding: 0,
 		),
+		focus-within: (
+			outline-offset: var(--spacing-4),
+			[outline]: var(--spacing-px) solid var(--badge-background-color),
+		),
+	),
+	element: (
+		button: (
+			_alias: '> button',
+			cursor: pointer,
+			padding: 0 0.5em,
+			margin: 0 -0.5em,
+			min-height: 2em,
+			transition: var(--transition-colors),
+			state: (
+				hover: (
+					background-color: var(--color-alpha-3),
+				),
+				active: (
+					background-color: var(--color-alpha-5),
+				),
+			),
+		),
 	),
 	modifier: (
+		action: (
+			gap: calc(0.5ch + 0.5em),
+		),
 		sm: (
 			--badge-font-size: 0.6rem,
 		),

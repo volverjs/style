@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2023-02-01
+
+### Fixed
+
+*   `vv-dropdown` search input, arrow and position;
+*   `vv-input-text` type date placeholder align on Safari;
+*   `transition-*` utilities and props;
+*   `translate-*` utilities now works on both x and y axis.
+
+### Added
+
+*   `vv-avatar-group` block for group of avatars;
+*   `vv-avatar` with sub `vv-badge`;
+*   `vv-avatar--{color}` modifiers;
+*   `vv-avarar--bordered` modifier;
+*   `vv-avatar--ring` modifier;
+*   `vv-avatar--square` modifier;
+*   `vv-dropdown-action` block for actions inside dropdowns;
+*   `vv-badgte--action` modifier for actions inside badges.
+
+### Changed
+
+*   `vv-input-text`, `vv-textarea` and `vv-select` now have a `*--icon-after` element and modifier that replace the `*--icon-right`.
+
 ## [0.1.6] - 2023-01-18
 
 ### Fixed
@@ -13,7 +37,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 *   `vv-select` multiple modifier;
-*   `spread-map-into-modifiers` mixin now support nested modifiers.
+*   `@spread-map-into-modifiers` mixin now support nested modifiers.
 
 ## [0.1.5] - 2023-01-18
 

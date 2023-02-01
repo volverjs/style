@@ -26,6 +26,11 @@ $vv-textarea: (
 			font-size: var(--input-hint-font-size),
 			color: var(--input-hint-color),
 		),
+		inner: (
+			position: relative,
+			display: flex,
+			flex: 1,
+		),
 		wrapper: (
 			position: relative,
 			display: flex,
@@ -79,7 +84,7 @@ $vv-textarea: (
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
-					text-overlow: ellipsis,
+					text-overflow: ellipsis,
 				),
 			),
 			state: (
@@ -91,17 +96,27 @@ $vv-textarea: (
 				),
 			),
 		),
+		input-before: (
+			display: flex,
+			align-items: center,
+			margin-top: var(--input-spacing-top),
+			margin-left: var(--input-spacing-left),
+		),
+		input-after: (
+			display: flex,
+			align-items: center,
+			margin-top: var(--input-spacing-top),
+			margin-right: var(--input-spacing-right),
+		),
 		icon: (
-			_alias: ':where(svg, [data-icon])',
-			margin: var(--input-spacing-top) var(--input-spacing-right)
-				var(--input-spacing-bottom) var(--input-spacing-left),
+			_alias: '> div > :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			width: var(--input-icon-width),
-			height: var(--input-icon-height),
-			padding: var(--input-icon-padding),
+			height: var(--input-min-height),
+			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
 		),
-		icon-right: (
+		icon-after: (
 			_alias: 'textarea + :where(svg, [data-icon])',
 			right: 0,
 		),
@@ -127,10 +142,10 @@ $vv-textarea: (
 		),
 	),
 	modifier: (
-		icon-left: (
+		icon-before: (
 			--input-spacing-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
-		icon-right: (
+		icon-after: (
 			--input-spacing-right: calc(var(--spacing-sm) * 2 + 1em),
 		),
 		resizable: (
@@ -156,7 +171,7 @@ $vv-textarea: (
 				limit: (
 					color: var(--input-valid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-valid-color),
 				),
 			),
@@ -177,7 +192,7 @@ $vv-textarea: (
 				limit: (
 					color: var(--input-invalid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-invalid-color),
 				),
 			),

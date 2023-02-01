@@ -4,29 +4,29 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 ---
 
 <div class="vv-textarea 
-            vv-textarea--icon-left">
-    <label for="textarea-icon-left">Icon left</label>
+            vv-textarea--icon-before">
+    <label for="textarea-icon-before">Icon left</label>
     <div class="vv-textarea__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
-        <textarea id="textarea-icon-left" 
-                  name="textarea-icon-left" 
+        <textarea id="textarea-icon-before" 
+                  name="textarea-icon-before" 
                   placeholder="Placeholder text"></textarea>
     </div>
 </div>
 <div class="vv-textarea 
-            vv-textarea--icon-right">
-    <label for="textarea-icon-right">Icon right</label>
+            vv-textarea--icon-after">
+    <label for="textarea-icon-after">Icon right</label>
     <div class="vv-textarea__wrapper">
-        <textarea id="textarea-icon-right" 
-                  name="textarea-icon-right" 
+        <textarea id="textarea-icon-after" 
+                  name="textarea-icon-after" 
                   placeholder="Placeholder text"></textarea>
         <IconifyIcon icon="akar-icons:heart" />
     </div>
 </div>
 <div class="vv-textarea 
             vv-textarea--valid 
-            vv-textarea--icon-left 
-            vv-textarea--icon-right">
+            vv-textarea--icon-before 
+            vv-textarea--icon-after">
     <label for="textarea-valid-icon">
         Valid Textarea with left and right icon
     </label>
@@ -45,8 +45,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 </div>
 <div class="vv-textarea 
             vv-textarea--invalid 
-            vv-textarea--icon-left 
-            vv-textarea--icon-right">
+            vv-textarea--icon-before 
+            vv-textarea--icon-after">
     <label for="textarea-invalid-icon">
         Invalid Textarea with left and right icon
     </label>

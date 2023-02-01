@@ -4,13 +4,13 @@ description: Utilities for translating elements with transform.
 ---
 <table-utility prefix="translate" property="translate" class="mb-lg">
   <template #value="{ value }">
-    transform: translate({{ value }});
+    transform: translate({{ value }}, {{ value }});
   </template>
 </table-utility>
 
 <table-utility prefix="-translate" property="translate" class="mb-lg">
   <template #value="{ value }">
-    transform: translate(-{{ value }});
+    transform: translate(-{{ value }}, -{{ value }});
   </template>
 </table-utility>
 

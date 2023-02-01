@@ -3,25 +3,25 @@ title: Icons
 wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 ---
 
-<div class="vv-select vv-select--icon-left">
-    <label for="select-icon-left">Icon Left</label>
+<div class="vv-select vv-select--icon-before">
+    <label for="select-icon-before">Icon Left</label>
     <div class="vv-select__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
-        <select name="select" id="select-icon-left" aria-describedby="select-icon-left-hint">
+        <select name="select" id="select-icon-before" aria-describedby="select-icon-before-hint">
             <option value="" selected="selected" disabled="disabled">Placeholder text</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-icon-left-hint" class="vv-input-text__hint">
+    <small id="select-icon-before-hint" class="vv-input-text__hint">
         Please fill the input above.
     </small>
 </div>
-<div class="vv-select vv-select--icon-right">
-    <label for="select-icon-right">Icon Right</label>
+<div class="vv-select vv-select--icon-after">
+    <label for="select-icon-after">Icon Right</label>
     <div class="vv-select__wrapper">
-        <select name="select" id="select-icon-right" aria-describedby="select-icon-right-hint">
+        <select name="select" id="select-icon-after" aria-describedby="select-icon-after-hint">
             <option value="" selected="selected" disabled="disabled">Placeholder text</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -29,11 +29,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         </select>
         <IconifyIcon icon="akar-icons:heart" />
     </div>
-    <small id="select-icon-right-hint" class="vv-input-text__hint">
+    <small id="select-icon-after-hint" class="vv-input-text__hint">
         Please fill the input above.
     </small>
 </div>
-<div class="vv-select vv-select--valid vv-select--icon-left vv-select--icon-right">
+<div class="vv-select vv-select--valid vv-select--icon-before vv-select--icon-after">
     <label for="select-icon-valid">Valid Select with left and right icon</label>
     <div class="vv-select__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
@@ -49,7 +49,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         The input above is successful.
     </small>
 </div>
-<div class="vv-select vv-select--invalid vv-select--icon-left vv-select--icon-right">
+<div class="vv-select vv-select--invalid vv-select--icon-before vv-select--icon-after">
     <label for="select-icon-invalid">Valid Select with left and right icon</label>
     <div class="vv-select__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
