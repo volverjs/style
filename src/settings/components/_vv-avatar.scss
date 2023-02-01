@@ -1,4 +1,11 @@
 $vv-avatar: (
+	--avatar-background-color: var(--color-brand),
+	--avatar-color: var(--color-white),
+	--avatar-border-radius: var(--rounded),
+	--avatar-border-color: var(--color-brand-darken-3),
+	[background-color]: var(--avatar-background-color),
+	[border-radius]: var(--avatar-border-radius),
+	[color]: var(--avatar-color),
 	display: inline-flex,
 	position: relative,
 	justify-content: center,
@@ -7,28 +14,10 @@ $vv-avatar: (
 	line-height: var(--leading-none),
 	width: var(--spacing-28),
 	height: var(--spacing-28),
-	border-radius: var(--rounded),
 	background-position: center,
 	background-size: contain,
 	background-repeat: no-repeat,
-	color: var(--color-white),
 	object-fit: contain,
-	modifier: (
-		rounded: (
-			border-radius: var(--rounded-full),
-			overflow: hidden,
-		),
-		md: (
-			font-size: var(--text-14),
-			width: var(--spacing-34),
-			height: var(--spacing-34),
-		),
-		lg: (
-			font-size: var(--text-16),
-			width: var(--spacing-40),
-			height: var(--spacing-40),
-		),
-	),
 	state: (
 		focus: (
 			outline: var(--spacing-px) solid var(--color-brand),
@@ -41,15 +30,124 @@ $vv-avatar: (
 			position: absolute,
 			top: 0,
 			right: 0,
-			transform: translate(50%, -50%),
+			transform: translate(50%, -33.3%),
+			box-shadow: var(--shadow-sm),
+		),
+		badge-bottom: (
+			_alias: '> sub',
+			position: absolute,
+			bottom: 0,
+			right: 0,
+			transform: translate(50%, 33.3%),
 			box-shadow: var(--shadow-sm),
 		),
 		image: (
 			_alias: '> img',
 			width: 100%,
 			height: 100%,
-			border-radius: inherit,
 			object-fit: inherit,
+			[border-radius]: var(--avatar-border-radius),
+			overflow: hidden,
+		),
+	),
+	modifier: (
+		rounded: (
+			--avatar-border-radius: var(--rounded-full),
+		),
+		square: (
+			--avatar-border-radius: var(--rounded-none),
+		),
+		bordered: (
+			[border-color]: var(--avatar-border-color),
+			border-width: var(--border),
+			border-style: solid,
+		),
+		md: (
+			font-size: var(--text-14),
+			width: var(--spacing-34),
+			height: var(--spacing-34),
+		),
+		lg: (
+			font-size: var(--text-16),
+			width: var(--spacing-40),
+			height: var(--spacing-40),
+		),
+		transparent: (
+			--avatar-background-color: var(--color-transparent),
+		),
+		surface: (
+			--avatar-background-color: var(--color-surface-1),
+			--avatar-border-color: var(--color-surface-3),
+			--avatar-color: var(--color-word-2),
+		),
+		danger: (
+			--avatar-background-color: var(--color-danger),
+			--avatar-border-color: var(--color-danger-darken-3),
+		),
+		success: (
+			--avatar-background-color: var(--color-success),
+			--avatar-border-color: var(--color-success-darken-3),
+		),
+		warning: (
+			--avatar-background-color: var(--color-warning),
+			--avatar-border-color: var(--color-warning-darken-3),
+		),
+		info: (
+			--avatar-background-color: var(--color-info),
+			--avatar-border-color: var(--color-info-darken-3),
+		),
+		accent: (
+			--avatar-background-color: var(--color-accent),
+			--avatar-border-color: var(--color-accent-darken-3),
+		),
+		gray: (
+			--avatar-background-color: var(--color-gray),
+			--avatar-border-color: var(--color-gray-darken-3),
+		),
+		ring: (
+			--avatar-color: var(--color-brand),
+			--avatar-background-color: var(--color-surface-brand),
+			--avatar-border-color: var(--color-brand),
+			[border-color]: var(--avatar-border-color),
+			border-width: var(--border),
+			border-style: solid,
+			modifier: (
+				surface: (
+					--avatar-background-color: var(--color-surface),
+					--avatar-border-color: var(--color-surface-5),
+					--avatar-color: var(--color-word-2),
+				),
+				danger: (
+					--avatar-background-color: var(--color-surface-danger),
+					--avatar-border-color: var(--color-danger),
+					--avatar-color: var(--color-danger),
+				),
+				success: (
+					--avatar-background-color: var(--color-surface-success),
+					--avatar-border-color: var(--color-success),
+					--avatar-color: var(--color-success),
+				),
+				warning: (
+					--avatar-background-color: var(--color-surface-warning),
+					--avatar-border-color: var(--color-warning),
+					--avatar-color: var(--color-warning),
+				),
+				info: (
+					--avatar-background-color: var(--color-surface-info),
+					--avatar-border-color: var(--color-info),
+					--avatar-color: var(--color-info),
+				),
+				accent: (
+					--avatar-background-color: var(--color-surface-accent),
+					--avatar-border-color: var(--color-accent),
+					--avatar-color: var(--color-accent),
+				),
+				gray: (
+					--avatar-background-color: var(--color-surface-4),
+					--avatar-border-color: var(--color-gray),
+					--avatar-color: var(--color-word-2),
+				),
+			),
 		),
 	),
 ) !default;

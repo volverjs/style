@@ -52,7 +52,7 @@
 // translate
 @each $size, $value in $translate {
 	%translate-#{$size} {
-		transform: translate(#{$value});
+		transform: translate(#{$value}, #{$value});
 	}
 	@include wrap-with-where(
 		$selector: '.translate-#{$size}',
@@ -82,7 +82,7 @@
 	}
 
 	%-translate-#{$size} {
-		transform: translate(-#{$value});
+		transform: translate(-#{$value}, -#{$value});
 	}
 	@include wrap-with-where(
 		$selector: '.-translate-#{$size}',

@@ -60,12 +60,18 @@ $vv-input-text: (
 				),
 			),
 		),
+		inner: (
+			position: relative,
+			display: flex,
+			flex: 1,
+		),
 		input: (
 			_alias: 'input',
-			display: block,
+			display: flex,
 			flex: 1,
+			align-items: center,
 			color: var(--input-color),
-			line-height: var(--leading-none),
+			line-height: var(--leading-normal),
 			[padding-block]: var(--input-spacing-top)
 				var(--input-spacing-bottom),
 			[padding-inline]: var(--input-spacing-left)
@@ -75,7 +81,7 @@ $vv-input-text: (
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
-					text-overlow: ellipsis,
+					text-overflow: ellipsis,
 				),
 				calendar-picker-indicator: (
 					position: absolute,
@@ -102,6 +108,9 @@ $vv-input-text: (
 				inner-spin-button: (
 					display: none,
 				),
+				datetime-edit: (
+					padding: 0,
+				),
 				datetime-edit-fields-wrapper: (
 					padding: 0,
 				),
@@ -118,27 +127,29 @@ $vv-input-text: (
 				),
 			),
 		),
+		input-before: (
+			display: flex,
+			padding-left: var(--input-spacing-left),
+		),
+		input-after: (
+			display: flex,
+			padding-right: var(--input-spacing-right),
+		),
 		number: (
 			_alias: 'input[type="number"]',
 			-moz-appearance: textfield,
 		),
 		icon: (
-			_alias: ':where(svg, [data-icon])',
-			margin: var(--input-spacing-top) var(--input-spacing-right)
-				var(--input-spacing-bottom) var(--input-spacing-left),
-			width: var(--input-icon-width),
-			height: var(--input-icon-height),
-			padding: var(--input-icon-padding),
-		),
-		icon-left: (
 			_alias: '> div > :where(svg, [data-icon])',
 			position: var(--input-icon-position),
+			width: var(--input-icon-width),
+			height: var(--input-min-height),
+			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
 		),
-		icon-right: (
+		icon-after: (
 			_alias: 'input + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
-			pointer-events: var(--input-icon-pointer-events),
 			right: 0,
 		),
 		actions-group: (
@@ -200,10 +211,10 @@ $vv-input-text: (
 		),
 	),
 	modifier: (
-		icon-left: (
+		icon-before: (
 			--input-spacing-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
-		icon-right: (
+		icon-after: (
 			--input-spacing-right: calc(var(--spacing-sm) * 2 + 1em),
 			element: (
 				limit: (
@@ -227,7 +238,7 @@ $vv-input-text: (
 				limit: (
 					color: var(--input-valid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-valid-color),
 				),
 			),
@@ -248,7 +259,7 @@ $vv-input-text: (
 				limit: (
 					color: var(--input-invalid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-invalid-color),
 				),
 			),

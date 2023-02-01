@@ -1,4 +1,5 @@
 @use '../context' as *;
+@use 'sass:string';
 
 :where(:host, :root, .theme) {
 	// animation
@@ -27,11 +28,16 @@
 		// transition
 		@each $property, $value in $transition-property {
 			@if $property != 'none' {
-				--transition-#{$property}: var(
-						--transition-property-#{$property}
-					)
-					var(--duration-300)
-					var(--ease-in-out);
+				$transition: '';
+				@each $prop in str-split($value, ', ') {
+					$transition: $transition +
+						$prop +
+						' var(--duration-300) var(--ease-in-out), ';
+				}
+
+				$transition: string.slice($transition, 1, -3);
+
+				--transition-#{$property}: #{$transition};
 			} @else {
 				--transition-#{$property}: none;
 			}

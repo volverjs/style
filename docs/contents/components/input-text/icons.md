@@ -4,24 +4,24 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 ---
 
 <div class="vv-input-text 
-            vv-input-text--icon-left">
-    <label for="textfield-icon-left">Icon left</label>
+            vv-input-text--icon-before">
+    <label for="textfield-icon-before">Icon left</label>
     <div class="vv-input-text__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
-        <input id="textfield-icon-left" 
+        <input id="textfield-icon-before" 
                type="text" 
-               name="textfield-icon-left" 
+               name="textfield-icon-before" 
                placeholder="Placeholder text" />
     </div>
 </div>
 
 <div class="vv-input-text 
-            vv-input-text--icon-right">
-    <label for="textfield-icon-right">Icon right</label>
+            vv-input-text--icon-after">
+    <label for="textfield-icon-after">Icon right</label>
     <div class="vv-input-text__wrapper">
-        <input id="textfield-icon-right" 
+        <input id="textfield-icon-after" 
                type="text" 
-               name="textfield-icon-right" 
+               name="textfield-icon-after" 
                placeholder="Placeholder text" />
         <IconifyIcon icon="akar-icons:heart" />
     </div>
@@ -29,8 +29,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 
 <div class="vv-input-text 
             vv-input-text--valid 
-            vv-input-text--icon-left 
-            vv-input-text--icon-right">
+            vv-input-text--icon-before 
+            vv-input-text--icon-after">
     <label for="textfield-valid-icon">
         Valid Text Field with left and right icon
     </label>
@@ -51,8 +51,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 
 <div class="vv-input-text
             vv-input-text--invalid 
-            vv-input-text--icon-left 
-            vv-input-text--icon-right">
+            vv-input-text--icon-before 
+            vv-input-text--icon-after">
     <label for="textfield-invalid-icon">
         Invalid Text Field with left and right icon
     </label>

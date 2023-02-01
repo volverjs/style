@@ -5,7 +5,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 
 <div class="vv-input-text 
             vv-input-text--floating 
-            vv-input-text--icon-left">
+            vv-input-text--icon-before">
     <label for="textfield-password">Password</label>
     <div class="vv-input-text__wrapper">
         <IconifyIcon icon="akar-icons:lock-on" />
@@ -24,7 +24,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 <div class="vv-input-text 
             vv-input-text--floating 
             vv-input-text--dirty 
-            vv-input-text--icon-right">
+            vv-input-text--icon-after">
     <label for="textfield-datetime">Datetime</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-datetime" 
@@ -42,7 +42,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 <div class="vv-input-text 
             vv-input-text--floating 
             vv-input-text--dirty 
-            vv-input-text--icon-right">
+            vv-input-text--icon-after">
     <label for="textfield-date">Date</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-date" 
@@ -60,7 +60,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 <div class="vv-input-text 
             vv-input-text--floating 
             vv-input-text--dirty 
-            vv-input-text--icon-right">
+            vv-input-text--icon-after">
     <label for="textfield-time">Time</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-time" 
@@ -77,7 +77,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 
 <div class="vv-input-text 
             vv-input-text--floating 
-            vv-input-text--icon-right">
+            vv-input-text--icon-after">
     <label for="textfield-search">Search</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-search" 
@@ -93,7 +93,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
 </div>
 
 <div class="vv-input-text 
-            vv-input-text--icon-right">
+            vv-input-text--icon-after">
     <label for="textfield-color">Color</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-color" 

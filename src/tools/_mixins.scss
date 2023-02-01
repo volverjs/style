@@ -422,6 +422,7 @@
 					disabled,
 					checked,
 					checked-within,
+					selected,
 					readonly,
 					empty,
 					placeholder-shown,
@@ -569,6 +570,18 @@
 								'#{$modifier}#{$alias}[aria-pressed="true"]'
 							);
 						}
+					} @else if $state == 'selected' {
+						$selectors: list.join(
+							$selectors,
+							'#{$modifier}#{$block-item}[aria-selected="true"]'
+						);
+
+						@if $alias {
+							$selectors: list.join(
+								$selectors,
+								'#{$modifier}#{$alias}[aria-selected="true"]'
+							);
+						}
 					} @else if $state != 'current' {
 						$selectors: list.join(
 							$selectors,
@@ -675,6 +688,7 @@
 			progress-bar,
 			progress-value,
 			progress-inner-element,
+			datetime-edit,
 			datetime-edit-fields-wrapper,
 			datetime-edit-day-field
 		),
@@ -739,6 +753,7 @@
 										progress-value,
 										inner-element,
 										marker,
+										datetime-edit,
 										datetime-edit-fields-wrapper,
 										datetime-edit-day-field,
 										-webkit-progress-bar,

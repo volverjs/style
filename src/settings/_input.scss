@@ -27,10 +27,8 @@ $input: (
 	icon: (
 		position: absolute,
 		width: 1em,
-		height: calc(var(--input-icon-width) * var(--input-line-height)),
-		padding: calc((var(--input-icon-height) - var(--input-icon-width)) / 2)
-			0,
 		pointer-events: none,
+		margin: 0 var(--spacing-sm),
 	),
 	hint: (
 		display: block,

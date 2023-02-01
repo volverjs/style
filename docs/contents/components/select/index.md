@@ -16,4 +16,3 @@ uiVue: true
 </div>
 
 <code-editor resource-folder="select" resource-name="icons" class="mb-lg"></code-editor>
-<code-editor resource-folder="select" resource-name="custom"></code-editor>

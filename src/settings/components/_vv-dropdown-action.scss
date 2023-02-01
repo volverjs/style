@@ -1,0 +1,52 @@
+$vv-dropdown-action: (
+	display: flex,
+	min-width: 0,
+	overflow: hidden,
+	gap: var(--spacing-sm),
+	align-items: center,
+	padding: var(--spacing-sm),
+	state: (
+		disabled: (
+			opacity: var(--opacity-50),
+			cursor: not-allowed,
+			pointer-events: none,
+		),
+		focus-visible: (
+			background-color: var(--color-surface-success),
+			color: var(--color-success),
+			element: (
+				hint: (
+					opacity: var(--opacity-100),
+				),
+			),
+		),
+		selected: (
+			font-weight: var(--font-bold),
+			background-color: var(--color-surface-brand),
+			color: var(--color-brand),
+		),
+	),
+	modifier: (
+		unselectable: (
+			state: (
+				focus-visible: (
+					background-color: var(--color-surface-danger),
+					color: var(--color-danger),
+				),
+			),
+		),
+	),
+	element: (
+		hint: (
+			opacity: var(--opacity-0),
+			transition: var(--transition-opacity),
+			will-change: opacity,
+			margin-left: auto,
+			font-size: 0.8em,
+			font-weight: var(--font-normal),
+			text-overflow: ellipsis,
+			white-space: nowrap,
+			overflow: hidden,
+		),
+	),
+) !default;

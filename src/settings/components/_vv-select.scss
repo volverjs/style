@@ -5,8 +5,8 @@ $vv-select: (
 	margin-bottom: var(--input-gap),
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
-	user-select: none,
 	min-width: var(--input-min-width),
+	user-select: none,
 	element: (
 		label: (
 			_alias: '> label',
@@ -68,19 +68,30 @@ $vv-select: (
 				),
 			),
 		),
+		inner: (
+			position: relative,
+			display: flex,
+			flex: 1,
+			width: 100%,
+		),
 		input: (
 			_alias: 'select',
 			display: flex,
 			align-items: center,
-			flex: 1,
+			flex-grow: 1,
+			flex-shrink: 1,
+			flex-wrap: wrap,
+			min-width: 0,
 			color: var(--input-placeholder-color),
-			[padding]: var(--input-spacing-top) var(--input-spacing-right)
+			[padding]: var(--input-spacing-top)
+				calc(var(--input-spacing-right) * 2 + 1em)
 				var(--input-spacing-bottom) var(--input-spacing-left),
 			background-image: var(--bg-chevron),
 			background-repeat: no-repeat,
 			[background-position]: right var(--input-spacing-right) center,
 			background-size: 1em,
 			min-height: var(--input-min-height),
+			gap: 0.5ch,
 			state: (
 				disabled: (
 					cursor: not-allowed,
@@ -95,20 +106,26 @@ $vv-select: (
 					),
 			),
 		),
+		input-before: (
+			display: flex,
+			padding-left: var(--input-spacing-left),
+		),
+		input-after: (
+			display: flex,
+			padding-right: var(--input-spacing-right),
+		),
 		option: (
 			_alias: 'select > option',
 		),
 		icon: (
-			_alias: ':where(svg, [data-icon])',
-			margin: var(--input-spacing-top) var(--input-spacing-right)
-				var(--input-spacing-bottom) var(--input-spacing-left),
+			_alias: '> div > :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			width: var(--input-icon-width),
-			height: var(--input-icon-height),
-			padding: var(--input-icon-padding),
+			height: var(--input-min-height),
+			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
 		),
-		icon-right: (
+		icon-after: (
 			_alias: 'select + :where(svg, [data-icon])',
 			right: 0,
 		),
@@ -163,10 +180,10 @@ $vv-select: (
 				),
 			),
 		),
-		icon-left: (
+		icon-before: (
 			--input-spacing-left: calc(var(--spacing-sm) * 2 + 1em),
 		),
-		icon-right: (
+		icon-after: (
 			--input-spacing-right: calc(var(--spacing-sm) * 2 + 1em),
 		),
 		valid: (
@@ -182,7 +199,7 @@ $vv-select: (
 				hint: (
 					color: var(--input-valid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-valid-color),
 				),
 			),
@@ -200,7 +217,7 @@ $vv-select: (
 				hint: (
 					color: var(--input-invalid-color),
 				),
-				icon-right: (
+				icon-after: (
 					color: var(--input-invalid-color),
 				),
 			),
