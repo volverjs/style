@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2023-02-03
+
+### Added
+
+*   `vv-dropdown-option` for vv-dropdown combobox;
+*   `base.scss` style with reset and props.
+
+### Fixed
+
+*   `.container` utility and docs;
+*   `vv-dropdown-action` for vv-dropdown menus.
+
+
 ## [0.1.7] - 2023-02-01
 
 ### Fixed
@@ -130,6 +143,8 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.8]: https://github.com/volverjs/style/compare/v0.1.7...v0.1.8
+[0.1.7]: https://github.com/volverjs/style/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/volverjs/style/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/volverjs/style/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/volverjs/style/compare/v0.1.3...v0.1.4

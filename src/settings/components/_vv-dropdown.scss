@@ -6,12 +6,12 @@ $vv-dropdown: (
 	flex-direction: column,
 	box-shadow: var(--shadow-lg),
 	width: 'max-content',
-	overflow: auto,
 	element: (
 		list: (
 			_alias: 'ul',
 			[border-radius]: var(--dropdown-border-radius),
 			background-color: var(--color-surface-1),
+			overflow: auto,
 		),
 		item: (
 			_alias: 'li',

@@ -273,7 +273,7 @@
 				<div>
 					<div
 						v-if="colorHex"
-						class="vv-input-text vv-input-text--icon-right">
+						class="vv-input-text vv-input-text--icon-after">
 						<label for="textfield-color">Change Color</label>
 						<div class="vv-input-text__wrapper">
 							<input

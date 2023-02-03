@@ -14,15 +14,9 @@
 // container
 %container {
 	width: 100%;
-
-	@each $breakpoint, $value in $breakpoints {
-		@if $value > 0 {
-			@include media-breakpoint-up($breakpoint, $breakpoints) {
-				max-width: $value;
-			}
-		}
-	}
+	max-width: var(--breakpoint-value, 100%);
 }
+
 @include wrap-with-where(
 	$selector: '.container',
 	$enabled: $zero-specificity-for-utilities

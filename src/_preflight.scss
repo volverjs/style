@@ -1,16 +1,6 @@
 @use 'sass:map';
 @use 'context' as *;
 
-:where(:host, :root, .theme) {
-	accent-color: var(--color-brand);
-	background: var(--color-surface);
-	caret-color: var(--color-brand);
-	color-scheme: var(--color-scheme);
-	color: var(--color-word);
-	scrollbar-color: var(--color-brand);
-	font-family: var(--font-sans);
-}
-
 :where(.preflight) {
 	:not(.preflight-revert *) {
 		// typography
