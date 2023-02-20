@@ -5,6 +5,7 @@ $vv-dropdown-option: (
 	gap: var(--spacing-sm),
 	align-items: center,
 	padding: var(--spacing-sm),
+	white-space: nowrap,
 	state: (
 		disabled: (
 			opacity: var(--opacity-50),

@@ -18,8 +18,8 @@
 @forward 'typography';
 
 // components
-@forward 'components/vv-accordion-group';
 @forward 'components/vv-accordion';
+@forward 'components/vv-accordion-group';
 @forward 'components/vv-alert';
 @forward 'components/vv-badge';
 @forward 'components/vv-breadcrumb';
@@ -30,10 +30,10 @@
 @forward 'components/vv-dropdown';
 @forward 'components/vv-dropdown-action';
 @forward 'components/vv-dropdown-option';
-@forward 'components/vv-checkbox-group';
 @forward 'components/vv-checkbox';
-@forward 'components/vv-radio-group';
+@forward 'components/vv-checkbox-group';
 @forward 'components/vv-radio';
+@forward 'components/vv-radio-group';
 @forward 'components/vv-avatar';
 @forward 'components/vv-avatar-group';
 @forward 'components/vv-input-text';

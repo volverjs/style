@@ -48,10 +48,10 @@ $vv-input-text: (
 			),
 			state: (
 				hover: (
-					background-color: var(--color-surface-3),
+					background-color: var(--input-background-color-hover),
 				),
 				focus-within: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -64,6 +64,7 @@ $vv-input-text: (
 			position: relative,
 			display: flex,
 			flex: 1,
+			min-width: 0,
 		),
 		input: (
 			_alias: 'input',
@@ -95,7 +96,7 @@ $vv-input-text: (
 					opacity: var(--opacity-0),
 				),
 				color-swatch-wrapper: (
-					padding: 1px,
+					padding: var(--spacing-px),
 				),
 				color-swatch: (
 					height: var(--spacing-20),
@@ -124,6 +125,7 @@ $vv-input-text: (
 				),
 				readonly: (
 					cursor: text,
+					user-select: text,
 				),
 			),
 		),
@@ -142,6 +144,8 @@ $vv-input-text: (
 		icon: (
 			_alias: '> div > :where(svg, [data-icon])',
 			position: var(--input-icon-position),
+			top: 0,
+			left: 0,
 			width: var(--input-icon-width),
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
@@ -151,6 +155,7 @@ $vv-input-text: (
 			_alias: 'input + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			right: 0,
+			left: auto,
 		),
 		actions-group: (
 			display: flex,
@@ -158,26 +163,19 @@ $vv-input-text: (
 			height: var(--input-min-height),
 		),
 		action: (
-			cursor: pointer,
-			state: (
-				focus-visible: (
-					text-shadow: 0 1px 0 var(--color-gray-darken-5),
-				),
-			),
-		),
-		action-chevron: (
-			flex: 1,
+			position: relative,
 			width:
 				calc(
 					var(--input-icon-width) + var(--input-spacing-left) +
 						var(--input-spacing-right)
 				),
-			background-position: center var(--spacing-2),
-			background-size: var(--text-14) auto,
-			background-repeat: no-repeat,
-			background-image: var(--bg-chevron),
+			height: var(--input-min-height),
 			cursor: pointer,
 			state: (
+				disabled: (
+					cursor: not-allowed,
+					opacity: var(--opacity-50),
+				),
 				focus-visible: (
 					background-color: var(--color-surface-3),
 				),
@@ -188,6 +186,13 @@ $vv-input-text: (
 					background-color: var(--color-surface-5),
 				),
 			),
+		),
+		action-chevron: (
+			flex: 1,
+			background-position: center var(--spacing-2),
+			background-size: var(--text-14) auto,
+			background-repeat: no-repeat,
+			background-image: var(--bg-chevron),
 		),
 		action-chevron-up: (
 			transform: rotate(180deg),
@@ -208,6 +213,15 @@ $vv-input-text: (
 			[padding-right]: var(--input-spacing-right),
 			font-size: var(--input-hint-font-size),
 			color: var(--input-hint-color),
+		),
+		unit: (
+			color: var(--input-placeholder-color),
+			display: flex,
+			align-items: center,
+			flex: 0 1 auto,
+			[padding-right]: var(--input-spacing-right),
+			[padding-block]: var(--input-spacing-top)
+				var(--input-spacing-bottom),
 		),
 	),
 	modifier: (
@@ -355,6 +369,45 @@ $vv-input-text: (
 				),
 			),
 		),
+		auto-width: (
+			element: (
+				inner: (
+					[padding-block]: var(--input-spacing-top)
+						var(--input-spacing-bottom),
+					[padding-inline]: var(--input-spacing-left)
+						var(--input-spacing-right),
+					min-height: var(--input-min-height),
+					cursor: text,
+				),
+				input: (
+					padding-block: 0,
+					padding-inline: 0,
+					min-width: 1ch,
+					min-height: 1em,
+					text-align: left,
+				),
+				unit: (
+					padding-right: 0,
+					padding-block: 0,
+				),
+			),
+			state: (
+				dirty: (
+					element: (
+						input: (
+							flex: 0 1 auto,
+						),
+					),
+				),
+				disabled: (
+					element: (
+						inner: (
+							cursor: not-allowed,
+						),
+					),
+				),
+			),
+		),
 	),
 	state: (
 		disabled: (
@@ -363,7 +416,10 @@ $vv-input-text: (
 				wrapper: (
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),
@@ -373,13 +429,19 @@ $vv-input-text: (
 			element: (
 				wrapper: (
 					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
 						after: (
 							opacity: var(--opacity-0),
 						),
 					),
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),

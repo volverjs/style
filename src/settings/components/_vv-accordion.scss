@@ -139,5 +139,13 @@ $vv-accordion: (
 				),
 			),
 		),
+		square: (
+			border-radius: 0,
+			element: (
+				summary: (
+					border-radius: 0,
+				),
+			),
+		),
 	),
 ) !default;

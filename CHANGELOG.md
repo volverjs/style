@@ -2,12 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.9] - 2023-02-03
+
+### Added
+
+*   `vv-input-text__unit` element. A unit label for text input;
+*   `vv-accordion` square modifier;
+*   `vv-accordion-group` condensed modifier.
+  
+### Fixed
+
+*   `wrap-with-where` fix to work properly with List and Map of selectors;
+
 ## [0.1.8] - 2023-02-03
 
 ### Added
 
 *   `vv-dropdown-option` for vv-dropdown combobox;
-*   `base.scss` style with reset and props.
+*   `base.css` style with reset and props.
 
 ### Fixed
 
@@ -143,6 +155,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.9]: https://github.com/volverjs/style/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/volverjs/style/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/volverjs/style/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/volverjs/style/compare/v0.1.5...v0.1.6

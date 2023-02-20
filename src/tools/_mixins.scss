@@ -869,15 +869,9 @@
 // Wrap selector with :where()
 @mixin wrap-with-where($selector, $enabled: true) {
 	@if type-of($selector) == 'map' or type-of($selector) == 'list' {
-		$merged: '';
-		@each $element in $selector {
-			@if $enabled {
-				$merged: '#{$merged}, :where(#{unquote($element)})';
-			} @else {
-				$merged: '#{$merged}, #{unquote($element)}';
-			}
-		}
-	} @else if $enabled {
+		$selector: #{$selector};
+	}
+	@if $enabled {
 		$selector: ':where(#{unquote($selector)})';
 	}
 

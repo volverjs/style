@@ -120,7 +120,8 @@
 	$map: $text-align,
 	$class: text,
 	$attribute: text-align,
-	$zero-specificity: $zero-specificity-for-utilities
+	$zero-specificity: $zero-specificity-for-utilities,
+	$bps: $breakpoints
 );
 
 // text-decorator-line

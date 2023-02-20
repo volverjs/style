@@ -8,6 +8,8 @@ $input: (
 	spacing-left: var(--spacing-sm),
 	color: var(--color-word),
 	background-color: var(--color-surface-1),
+	background-color-hover: var(--color-surface-3),
+	background-color-focus: var(--color-surface-2),
 	gap: var(--spacing-md),
 	line-height: var(--leading-normal),
 	font-size: var(--text-16),

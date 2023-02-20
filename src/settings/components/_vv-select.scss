@@ -48,10 +48,10 @@ $vv-select: (
 			),
 			state: (
 				hover: (
-					background-color: var(--color-surface-3),
+					background-color: var(--input-background-color-hover),
 				),
 				focus-within: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -59,7 +59,7 @@ $vv-select: (
 					),
 				),
 				open: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -302,17 +302,24 @@ $vv-select: (
 		),
 		readonly: (
 			opacity: var(--opacity-100),
+			cursor: text,
 			user-select: text,
 			element: (
 				wrapper: (
 					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
 						after: (
 							opacity: var(--opacity-0),
 						),
 					),
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),
@@ -330,7 +337,10 @@ $vv-select: (
 				wrapper: (
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),
