@@ -10,7 +10,6 @@ $vv-textarea: (
 		label: (
 			_alias: '> label',
 			display: var(--input-label-display),
-			align-items: var(--input-label-align-items),
 			font-size: var(--input-label-font-size),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
