@@ -23,6 +23,8 @@ _Surface colors_ are used for backgrounds and borders. They are defined in the `
   </div>
 </card-example>
 
+<color-palette name="surface"></color-palette>
+
 ### Word Colors
 _Word colors_ are used for text. They are defined in the `--color-word` CSS Custom Property and have 5 shades for each theme.
 
@@ -32,6 +34,8 @@ _Word colors_ are used for text. They are defined in the `--color-word` CSS Cust
     <div v-for="i in 5" :class="`text-word-${i}`" class="py-22">word-{{i}}</div>
   </div>
 </card-example>
+
+<color-palette name="word"></color-palette>
 
 ### Brand Colors
 _Brand colors_ are used for primary actions. They are defined in the `--color-brand` CSS Custom Property and have 10 shades.
