@@ -66,50 +66,37 @@
 		documentElement,
 	)
 
+	const isThemeDark = inject('isThemeDark')
+	watch(isThemeDark, () => {
+		nextTick(() => {
+			if (documentElement.value) {
+				documentElement.value.style = ''
+				nextTick(() => {
+					colorHue.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-hue`)
+					colorSaturation.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-saturation`)
+					colorLightess.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-lightness`)
+				})
+			}
+		})
+	})
+
 	onMounted(() => {
 		documentElement.value = document.documentElement
 		selected.value = props.name
 	})
-
-	const colorHls = computed(() => {
-		return {
-			[`--color-${props.name}-hue`]: colorHue.value,
-			[`--color-${props.name}-saturation`]: colorSaturation.value,
-			[`--color-${props.name}-lightness`]: colorLightess.value,
-		}
-	})
-
-	const getPropertyValue = (property) => {
-		return colorHls.value[property]
-	}
-
-	const getHls = (color) => {
-		const groups = color
-			.replace(/var\((--color-([a-z-]+))\)/g, (match, p1) => {
-				return getPropertyValue(p1)
-			})
-			.replace(
-				/calc\(\s*(\d|.+)%\s*(?:\+|-)\s*(\d|.+)%\s*\*\s*(\d|.[^\s]+)\s*\)/g,
-				(match, p1, p2, p3) => {
-					return `${
-						parseFloat(p1) + parseFloat(p2) * parseFloat(p3)
-					}%`
-				},
-			)
-			.matchAll(
-				/hsla?\(\s*(\d|.+)deg,?\s*(\d|.+)%,?\s*(\d|.+)%(?:\/1)?\)/g,
-			)
-		for (const [element, h, s, l] of groups) {
-			return { h: Math.ceil(h), s: Math.ceil(s), l: Math.ceil(l) }
-		}
-	}
 
 	const selectedHls = ref(undefined)
 	const selectedRgb = ref(undefined)
 	const selectedHex = ref(undefined)
 	const colorsEls = ref([])
 	watchThrottled(
-		[selected, colorHue, colorSaturation, colorLightess],
+		[selected, colorHue, colorSaturation, colorLightess, isThemeDark],
 		() => {
 			if (documentElement.value) {
 				if (colorsEls.value[selected.value]) {
@@ -280,7 +267,7 @@
 							<Transition name="copy-scale">
 								<div
 									v-if="copied"
-									class="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl">
+									class="w-28 h-28 bg-white text-black rounded-full flex items-center justify-center shadow-2xl">
 									<IconifyIcon icon="akar-icons:copy" />
 								</div>
 							</Transition>
