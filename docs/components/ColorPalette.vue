@@ -280,7 +280,7 @@
 							<Transition name="copy-scale">
 								<div
 									v-if="copied"
-									class="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl copy-scale-enter-active">
+									class="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl">
 									<IconifyIcon icon="akar-icons:copy" />
 								</div>
 							</Transition>
