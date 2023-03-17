@@ -36,15 +36,16 @@ const sources = files.map((input) => {
 // build
 await Promise.all(
 	sources.map(({ exportName, name, input, dir, isIndex }) => {
-		exportName = exportName.replace(/\/volver|volver/gm, '')
-		packageJson.exports[
-			`.${exportName ? `/${exportName}` : ``}`
-		] = `./dist/${dir ? `${dir}/` : ``}${name}.css`
+		exportName = exportName
+			.replace(/\/volver|volver/gm, '')
+			.replace('src/', '')
+		const distDir = dir.replace('src', 'dist')
+		packageJson.exports[`.${exportName ? `/${exportName}` : ``}`] = `./${
+			distDir ? `${distDir}/` : ``
+		}${name}.css`
 		packageJson.exports[
 			`./scss${exportName ? `/${exportName}` : ``}`
-		] = `./src/${dir ? `${dir}/` : ``}${name}${
-			isIndex ? '/index.scss' : '.scss'
-		}`
+		] = `./${dir}/${name}${isIndex ? '/index.scss' : '.scss'}`
 
 		return build({
 			plugins: [stylelint()],
@@ -55,7 +56,7 @@ await Promise.all(
 				rollupOptions: {
 					input,
 					output: {
-						dir: `dist/${dir}`,
+						dir: distDir,
 						assetFileNames: `${name}[extname]`,
 					},
 				},
