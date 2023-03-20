@@ -1,154 +1,157 @@
 {
-  "spacing": {
-    "spacing-0": {
-      "value": "0"
-    },
-    "spacing-1": {
-      "value": "0.0625rem"
-    },
-    "spacing-2": {
-      "value": "0.125rem"
-    },
-    "spacing-3": {
-      "value": "0.1875rem"
-    },
-    "spacing-4": {
-      "value": "0.25rem"
-    },
-    "spacing-5": {
-      "value": "0.3125rem"
-    },
-    "spacing-6": {
-      "value": "0.375rem"
-    },
-    "spacing-7": {
-      "value": "0.4375rem"
-    },
-    "spacing-8": {
-      "value": "0.5rem"
-    },
-    "spacing-9": {
-      "value": "0.5625rem"
-    },
-    "spacing-10": {
-      "value": "0.625rem"
-    },
-    "spacing-12": {
-      "value": "0.75rem"
-    },
-    "spacing-14": {
-      "value": "0.875rem"
-    },
-    "spacing-16": {
-      "value": "1rem"
-    },
-    "spacing-18": {
-      "value": "1.125rem"
-    },
-    "spacing-20": {
-      "value": "1.25rem"
-    },
-    "spacing-22": {
-      "value": "1.375rem"
-    },
-    "spacing-24": {
-      "value": "1.5rem"
-    },
-    "spacing-26": {
-      "value": "1.625rem"
-    },
-    "spacing-28": {
-      "value": "1.75rem"
-    },
-    "spacing-32": {
-      "value": "2rem"
-    },
-    "spacing-34": {
-      "value": "2.125rem"
-    },
-    "spacing-36": {
-      "value": "2.25rem"
-    },
-    "spacing-38": {
-      "value": "2.375rem"
-    },
-    "spacing-40": {
-      "value": "2.5rem"
-    },
-    "spacing-44": {
-      "value": "2.75rem"
-    },
-    "spacing-48": {
-      "value": "3rem"
-    },
-    "spacing-50": {
-      "value": "3.125rem"
-    },
-    "spacing-52": {
-      "value": "3.25rem"
-    },
-    "spacing-56": {
-      "value": "3.5rem"
-    },
-    "spacing-64": {
-      "value": "4rem"
-    },
-    "spacing-80": {
-      "value": "5rem"
-    },
-    "spacing-96": {
-      "value": "6rem"
-    },
-    "spacing-100": {
-      "value": "6.25rem"
-    },
-    "spacing-112": {
-      "value": "7rem"
-    },
-    "spacing-128": {
-      "value": "8rem"
-    },
-    "spacing-144": {
-      "value": "9rem"
-    },
-    "spacing-150": {
-      "value": "9.375rem"
-    },
-    "spacing-160": {
-      "value": "10rem"
-    },
-    "spacing-176": {
-      "value": "11rem"
-    },
-    "spacing-192": {
-      "value": "12rem"
-    },
-    "spacing-208": {
-      "value": "13rem"
-    },
-    "spacing-224": {
-      "value": "14rem"
-    },
-    "spacing-240": {
-      "value": "15rem"
-    },
-    "spacing-256": {
-      "value": "16rem"
-    },
-    "spacing-288": {
-      "value": "18rem"
-    },
-    "spacing-300": {
-      "value": "18.75rem"
-    },
-    "spacing-320": {
-      "value": "20rem"
-    },
-    "spacing-384": {
-      "value": "24rem"
-    },
-    "spacing-px": {
-      "value": "1px"
+  "global": {
+    "spacing": {
+      "spacing-0": {
+        "value": "0"
+      },
+      "spacing-1": {
+        "value": "0.0625rem"
+      },
+      "spacing-2": {
+        "value": "0.125rem"
+      },
+      "spacing-3": {
+        "value": "0.1875rem"
+      },
+      "spacing-4": {
+        "value": "0.25rem"
+      },
+      "spacing-5": {
+        "value": "0.3125rem"
+      },
+      "spacing-6": {
+        "value": "0.375rem"
+      },
+      "spacing-7": {
+        "value": "0.4375rem"
+      },
+      "spacing-8": {
+        "value": "0.5rem"
+      },
+      "spacing-9": {
+        "value": "0.5625rem"
+      },
+      "spacing-10": {
+        "value": "0.625rem"
+      },
+      "spacing-12": {
+        "value": "0.75rem"
+      },
+      "spacing-14": {
+        "value": "0.875rem"
+      },
+      "spacing-16": {
+        "value": "1rem"
+      },
+      "spacing-18": {
+        "value": "1.125rem"
+      },
+      "spacing-20": {
+        "value": "1.25rem"
+      },
+      "spacing-22": {
+        "value": "1.375rem"
+      },
+      "spacing-24": {
+        "value": "1.5rem"
+      },
+      "spacing-26": {
+        "value": "1.625rem"
+      },
+      "spacing-28": {
+        "value": "1.75rem"
+      },
+      "spacing-32": {
+        "value": "2rem"
+      },
+      "spacing-34": {
+        "value": "2.125rem"
+      },
+      "spacing-36": {
+        "value": "2.25rem"
+      },
+      "spacing-38": {
+        "value": "2.375rem"
+      },
+      "spacing-40": {
+        "value": "2.5rem"
+      },
+      "spacing-44": {
+        "value": "2.75rem"
+      },
+      "spacing-48": {
+        "value": "3rem"
+      },
+      "spacing-50": {
+        "value": "3.125rem"
+      },
+      "spacing-52": {
+        "value": "3.25rem"
+      },
+      "spacing-56": {
+        "value": "3.5rem"
+      },
+      "spacing-64": {
+        "value": "4rem"
+      },
+      "spacing-80": {
+        "value": "5rem"
+      },
+      "spacing-96": {
+        "value": "6rem"
+      },
+      "spacing-100": {
+        "value": "6.25rem"
+      },
+      "spacing-112": {
+        "value": "7rem"
+      },
+      "spacing-128": {
+        "value": "8rem"
+      },
+      "spacing-144": {
+        "value": "9rem"
+      },
+      "spacing-150": {
+        "value": "9.375rem"
+      },
+      "spacing-160": {
+        "value": "10rem"
+      },
+      "spacing-176": {
+        "value": "11rem"
+      },
+      "spacing-192": {
+        "value": "12rem"
+      },
+      "spacing-208": {
+        "value": "13rem"
+      },
+      "spacing-224": {
+        "value": "14rem"
+      },
+      "spacing-240": {
+        "value": "15rem"
+      },
+      "spacing-256": {
+        "value": "16rem"
+      },
+      "spacing-288": {
+        "value": "18rem"
+      },
+      "spacing-300": {
+        "value": "18.75rem"
+      },
+      "spacing-320": {
+        "value": "20rem"
+      },
+      "spacing-384": {
+        "value": "24rem"
+      },
+      "spacing-px": {
+        "value": "1px"
+      }
     }
-  }
+  },
+  "dark": {}
 }
