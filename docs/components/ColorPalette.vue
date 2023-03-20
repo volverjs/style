@@ -345,6 +345,7 @@
 	.copy-scale-leave-active {
 		transition: var(--transition-all);
 	}
+
 	.copy-scale-enter-from,
 	.copy-scale-leave-to {
 		opacity: var(--opacity-0);

@@ -3,6 +3,9 @@ node_modules
 /dist
 /styleguide
 
+# vite
+.vite-ssg-temp
+
 # local env files
 .env.local
 .env.*.local
