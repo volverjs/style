@@ -31,10 +31,10 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 
 designTokens.global.spacing = Object.keys(exports.spacing).reduce(
 	(acc, key) => {
-		acc[`spacing-${key}`] = { value: exports.spacing[key] }
+		acc[`spacing-${key}`] = { value: exports.spacing[key], type: 'spacing' }
 		return acc
 	},
-	{ type: 'spacing' },
+	{},
 )
 
 fs.writeFileSync('./design-tokens.json', JSON.stringify(designTokens, null, 2))
