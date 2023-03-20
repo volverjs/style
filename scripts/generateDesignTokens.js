@@ -4,7 +4,10 @@ import postcss from 'postcss'
 import sass from 'sass'
 
 // design tokens
-const designTokens = { global: {}, dark: {} }
+const designTokens = {
+	global: {},
+	dark: {},
+}
 const icssExports = extractICSS(
 	postcss.parse(sass.compile('./src/export.scss').css),
 ).icssExports
@@ -31,7 +34,7 @@ designTokens.global.spacing = Object.keys(exports.spacing).reduce(
 		acc[`spacing-${key}`] = { value: exports.spacing[key] }
 		return acc
 	},
-	{},
+	{ type: 'spacing' },
 )
 
 fs.writeFileSync('./design-tokens.json', JSON.stringify(designTokens, null, 2))

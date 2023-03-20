@@ -1,6 +1,7 @@
 {
   "global": {
     "spacing": {
+      "type": "spacing",
       "spacing-0": {
         "value": "0"
       },
