@@ -44,7 +44,7 @@ _Brand colors_ are used for primary actions. They are defined in the `--color-br
 
 
 ### Success Colors
-_Succes colors_ are used for success actions. They are defined in the `--color-success` CSS Custom Property and have 10 shades.
+_Success colors_ are used for success actions. They are defined in the `--color-success` CSS Custom Property and have 10 shades.
 
 <color-palette name="success"></color-palette>
 
