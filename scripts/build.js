@@ -38,13 +38,13 @@ await Promise.all(
 	sources.map(({ exportName, name, input, dir, isIndex }) => {
 		exportName = exportName
 			.replace(/\/volver|volver/gm, '')
-			.replace('src/', '')
+			.replace(/src|src\//gm, '')
 		const distDir = dir.replace('src', 'dist')
-		packageJson.exports[`.${exportName ? `/${exportName}` : ``}`] = `./${
+		packageJson.exports[`.${exportName ? exportName : ``}`] = `./${
 			distDir ? `${distDir}/` : ``
 		}${name}.css`
 		packageJson.exports[
-			`./scss${exportName ? `/${exportName}` : ``}`
+			`./scss${exportName ? exportName : ``}`
 		] = `./${dir}/${name}${isIndex ? '/index.scss' : '.scss'}`
 
 		return build({
