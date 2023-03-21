@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 
 *   `vv-input-text__unit` element. A unit label for text input;
 *   `vv-accordion` square modifier;
+*   `vv-dropdown` docs;
+*   `vv-dropdown-optgroup` component;
 *   `vv-accordion-group` condensed modifier.
   
 ### Fixed
