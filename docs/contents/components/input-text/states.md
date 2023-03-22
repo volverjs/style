@@ -17,6 +17,49 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
+<div class="vv-input-text">
+    <label for="textfield-dirty">Dirty Text Field</label>
+    <div class="vv-input-text__wrapper">
+        <input id="textfield-dirty" 
+               type="text" 
+               value="Lorem ipsum dolor sit amet"
+               name="textfield-dirty" 
+               placeholder="Placeholder text" 
+               aria-describedby="textfield-dirty-hint" />
+    </div>
+    <small id="textfield-dirty-hint" class="vv-input-text__hint">
+        Please fill the input above.
+    </small>
+</div>
+
+<div class="vv-input-text">
+    <label for="textfield-hover">Hover Text Field</label>
+    <div class="vv-input-text__wrapper hover">
+        <input id="textfield-hover" 
+               type="text" 
+               name="textfield-hover" 
+               placeholder="Placeholder text" 
+               aria-describedby="textfield-hover-hint" />
+    </div>
+    <small id="textfield-hover-hint" class="vv-input-text__hint">
+        Please fill the input above.
+    </small>
+</div>
+
+<div class="vv-input-text">
+    <label for="textfield-focus">Focus Text Field</label>
+    <div class="vv-input-text__wrapper focus-within">
+        <input id="textfield-focus" 
+               type="text" 
+               name="textfield-focus" 
+               placeholder="Placeholder text" 
+               aria-describedby="textfield-focus-hint" />
+    </div>
+    <small id="textfield-focus-hint" class="vv-input-text__hint">
+        Please fill the input above.
+    </small>
+</div>
+
 <div class="vv-input-text 
             vv-input-text--disabled">
     <label for="textfield-disabled">Disabled Text Field</label>
@@ -50,19 +93,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 </div>
 
 <div class="vv-input-text 
-            vv-input-text--loading">
-    <label for="textfield-loading">Loading Text Field</label>
-    <div class="vv-input-text__wrapper">
-        <input id="textfield-loading" 
-               type="text" 
-               name="textfield-loading" 
-               placeholder="Placeholder text" 
-               aria-describedby="textfield-loading-hint" />
-    </div>
-    <small id="textfield-loading-hint" class="vv-input-text__hint">Loading...</small>
-</div>
-
-<div class="vv-input-text 
             vv-input-text--valid">
     <label for="textfield-success">Valid Text Field</label>
     <div class="vv-input-text__wrapper">
@@ -92,4 +122,17 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <small id="textfield-invalid-hint" class="vv-input-text__hint">
         There was an error with the input above.
     </small>
+</div>
+
+<div class="vv-input-text 
+            vv-input-text--loading">
+    <label for="textfield-loading">Loading Text Field</label>
+    <div class="vv-input-text__wrapper">
+        <input id="textfield-loading" 
+               type="text" 
+               name="textfield-loading" 
+               placeholder="Placeholder text" 
+               aria-describedby="textfield-loading-hint" />
+    </div>
+    <small id="textfield-loading-hint" class="vv-input-text__hint">Loading...</small>
 </div>

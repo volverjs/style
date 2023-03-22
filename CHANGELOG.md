@@ -14,7 +14,8 @@ All notable changes to this project will be documented in this file.
   
 ### Fixed
 
-*   `wrap-with-where` fix to work properly with List and Map of selectors;
+*   `wrap-with-where` fix to work properly with List and Map of selectors.
+*   `loading` state for inputs has more accessible colors.
 
 ## [0.1.8] - 2023-02-03
 

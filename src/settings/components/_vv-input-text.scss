@@ -281,10 +281,6 @@ $vv-input-text: (
 			element: (
 				wrapper: (
 					pseudo: (
-						before: (
-							height: 2px,
-							background: var(--color-brand-lighten-5),
-						),
 						after: (
 							animation: var(--animation-indeterminate),
 						),
