@@ -12,7 +12,44 @@ const icssExports = extractICSS(
 	postcss.parse(sass.compile('./src/export.scss').css),
 ).icssExports
 
+/**
+ * Split `s` on the last occurrence of `sep` and return both parts
+ * as an array, [left,right]; or return ["",s] if no occurrence was found.
+ */
+const splitLast = (s, sep = ' ') => {
+	let right = s.split(sep).pop()
+	let left = s.substring(0, s.length - right.length - sep.length)
+	return [left, right]
+}
+
 const exports = Object.keys(icssExports).reduce((accumulator, key) => {
+	//#region for dynamic maps
+	// dynamic maps are recognized by at least two '__' as the name of the key
+	const isDynamicMap = key.match(/__/gi).length > 1
+	if (isDynamicMap) {
+		let keyToReturn = ''
+		let [left, right] = splitLast(key, '__')
+		let strLeft = left.replace('__', '-')
+		keyToReturn = strLeft.concat('__', right)
+
+		const splittedKey = keyToReturn.split('__')
+		const value = icssExports[key]
+
+		let current = accumulator
+		splittedKey.forEach((subKey, index) => {
+			if (index < splittedKey.length - 1) {
+				accumulator[subKey] = accumulator[subKey] || {}
+				current = accumulator[subKey]
+			} else {
+				current[subKey] = value
+			}
+		})
+
+		return accumulator
+	}
+	//#endregion for dynamic maps
+
+	//#region for general maps
 	const splittedKey = key.split('__')
 	const value = icssExports[key]
 
@@ -27,6 +64,7 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 	})
 
 	return accumulator
+	//#endregion for general maps
 }, {})
 
 //#region sizing
@@ -92,6 +130,7 @@ designTokens.global['max-height'] = Object.keys(exports['max-height']).reduce(
 //#endregion sizing
 
 //#region spacing
+// spacing
 designTokens.global.spacing = Object.keys(exports.spacing).reduce(
 	(acc, key) => {
 		acc[`spacing-${key}`] = { value: exports.spacing[key], type: 'spacing' }
@@ -99,6 +138,24 @@ designTokens.global.spacing = Object.keys(exports.spacing).reduce(
 	},
 	{},
 )
+
+// spacing-dynamic
+const generateSpacingDynamic = (breakpoint) =>
+	Object.keys(exports[`spacing-dynamic-${breakpoint}`]).reduce((acc, key) => {
+		acc[`spacing-dynamic-${key}`] = {
+			value: exports[`spacing-dynamic-${breakpoint}`][key],
+			type: 'spacing',
+		}
+		return acc
+	}, {})
+
+designTokens.global['spacing-dynamic'] = {
+	xs: generateSpacingDynamic('xs'),
+	sm: generateSpacingDynamic('sm'),
+	md: generateSpacingDynamic('md'),
+	lg: generateSpacingDynamic('lg'),
+	xl: generateSpacingDynamic('xl'),
+}
 //#endregion spacing
 
 //#region border-radius
@@ -179,6 +236,7 @@ designTokens.global['font-weight'] = Object.keys(exports['font-weight']).reduce(
 //#endregion font-weight
 
 //#region font-size
+// font-size
 designTokens.global['font-size'] = Object.keys(exports['font-size']).reduce(
 	(acc, key) => {
 		acc[`font-size-${key}`] = {
@@ -189,6 +247,27 @@ designTokens.global['font-size'] = Object.keys(exports['font-size']).reduce(
 	},
 	{},
 )
+
+// font-size-dynamic
+const generateFontSizeDynamic = (breakpoint) =>
+	Object.keys(exports[`font-size-dynamic-${breakpoint}`]).reduce(
+		(acc, key) => {
+			acc[`font-size-dynamic-${key}`] = {
+				value: exports[`font-size-dynamic-${breakpoint}`][key],
+				type: 'fontSizes',
+			}
+			return acc
+		},
+		{},
+	)
+
+designTokens.global['font-size-dynamic'] = {
+	xs: generateFontSizeDynamic('xs'),
+	sm: generateFontSizeDynamic('sm'),
+	md: generateFontSizeDynamic('md'),
+	lg: generateFontSizeDynamic('lg'),
+	xl: generateFontSizeDynamic('xl'),
+}
 //#endregion font-size
 
 //#region line-height
@@ -274,7 +353,7 @@ designTokens.global['text-underline-offset'] = Object.keys(
 }, {})
 //#endregion text-decoration
 
-//#endregion border
+//#region border
 designTokens.global['border-style'] = Object.keys(
 	exports['border-style'],
 ).reduce((acc, key) => {
