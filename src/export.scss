@@ -280,11 +280,6 @@
 		#{'max-height__' + $key}: $value;
 	}
 
-	// max height
-	@each $key, $value in $max-height {
-		#{'max-height__' + $key}: $value;
-	}
-
 	// #endregion
 
 	// ============================================================== */
