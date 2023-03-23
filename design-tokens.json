@@ -988,32 +988,6 @@
         }
       }
     },
-    "line-height": {
-      "line-height-none": {
-        "value": "1",
-        "type": "lineHeight"
-      },
-      "line-height-tight": {
-        "value": "1.25",
-        "type": "lineHeight"
-      },
-      "line-height-snug": {
-        "value": "1.375",
-        "type": "lineHeight"
-      },
-      "line-height-normal": {
-        "value": "1.5",
-        "type": "lineHeight"
-      },
-      "line-height-relaxed": {
-        "value": "1.625",
-        "type": "lineHeight"
-      },
-      "line-height-loose": {
-        "value": "2",
-        "type": "lineHeight"
-      }
-    },
     "letter-spacing": {
       "letter-spacing-tighter": {
         "value": "-0.05em",
@@ -1055,6 +1029,32 @@
       },
       "text-transform-normal-case": {
         "value": "none",
+        "type": "textCase"
+      }
+    },
+    "text-align": {
+      "text-align-left": {
+        "value": "left",
+        "type": "textCase"
+      },
+      "text-align-center": {
+        "value": "center",
+        "type": "textCase"
+      },
+      "text-align-right": {
+        "value": "right",
+        "type": "textCase"
+      },
+      "text-align-justify": {
+        "value": "justify",
+        "type": "textCase"
+      },
+      "text-align-start": {
+        "value": "start",
+        "type": "textCase"
+      },
+      "text-align-end": {
+        "value": "end",
         "type": "textCase"
       }
     },
@@ -1158,6 +1158,164 @@
         "type": "textDecoration"
       }
     },
+    "line-height": {
+      "line-height-none": {
+        "value": "1",
+        "type": "typography"
+      },
+      "line-height-tight": {
+        "value": "1.25",
+        "type": "typography"
+      },
+      "line-height-snug": {
+        "value": "1.375",
+        "type": "typography"
+      },
+      "line-height-normal": {
+        "value": "1.5",
+        "type": "typography"
+      },
+      "line-height-relaxed": {
+        "value": "1.625",
+        "type": "typography"
+      },
+      "line-height-loose": {
+        "value": "2",
+        "type": "typography"
+      }
+    },
+    "background-image": {
+      "background-image-none": {
+        "value": "none",
+        "type": "assets"
+      },
+      "background-image-chevron": {
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(22, 26, 29)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E\")",
+        "type": "assets"
+      },
+      "background-image-grid": {
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none' stroke='rgb(51 65 85 / 0.25)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E\")",
+        "type": "assets"
+      },
+      "background-image-check": {
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(22, 26, 29)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E\")",
+        "type": "assets"
+      },
+      "background-image-minus": {
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(22, 26, 29)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E\")",
+        "type": "assets"
+      },
+      "background-image-close": {
+        "value": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(22, 26, 29)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20L4 4m16 0L4 20'/%3E%3C/svg%3E\")",
+        "type": "assets"
+      }
+    },
+    "aspect-ratio": {
+      "aspect-ratio-auto": {
+        "value": "auto",
+        "type": "dimension"
+      },
+      "aspect-ratio-square": {
+        "value": "1/1",
+        "type": "dimension"
+      },
+      "aspect-ratio-photo": {
+        "value": "3/2",
+        "type": "dimension"
+      },
+      "aspect-ratio-tv": {
+        "value": "4/3",
+        "type": "dimension"
+      },
+      "aspect-ratio-wide": {
+        "value": "16/9",
+        "type": "dimension"
+      },
+      "aspect-ratio-ultrawide": {
+        "value": "21/9",
+        "type": "dimension"
+      }
+    },
+    "breakpoints": {
+      "breakpoints-xs": {
+        "value": "360px",
+        "type": "dimension"
+      },
+      "breakpoints-sm": {
+        "value": "576px",
+        "type": "dimension"
+      },
+      "breakpoints-md": {
+        "value": "992px",
+        "type": "dimension"
+      },
+      "breakpoints-lg": {
+        "value": "1024px",
+        "type": "dimension"
+      },
+      "breakpoints-xl": {
+        "value": "1280px",
+        "type": "dimension"
+      },
+      "breakpoints-xxl": {
+        "value": "1440px",
+        "type": "dimension"
+      },
+      "breakpoints-xxxl": {
+        "value": "1536px",
+        "type": "dimension"
+      }
+    },
+    "columns": {
+      "columns-1": {
+        "value": "1",
+        "type": "dimension"
+      },
+      "columns-2": {
+        "value": "2",
+        "type": "dimension"
+      },
+      "columns-3": {
+        "value": "3",
+        "type": "dimension"
+      },
+      "columns-4": {
+        "value": "4",
+        "type": "dimension"
+      },
+      "columns-5": {
+        "value": "5",
+        "type": "dimension"
+      },
+      "columns-6": {
+        "value": "6",
+        "type": "dimension"
+      },
+      "columns-7": {
+        "value": "7",
+        "type": "dimension"
+      },
+      "columns-8": {
+        "value": "8",
+        "type": "dimension"
+      },
+      "columns-9": {
+        "value": "9",
+        "type": "dimension"
+      },
+      "columns-10": {
+        "value": "10",
+        "type": "dimension"
+      },
+      "columns-11": {
+        "value": "11",
+        "type": "dimension"
+      },
+      "columns-12": {
+        "value": "12",
+        "type": "dimension"
+      }
+    },
     "border-style": {
       "border-style-solid": {
         "value": "solid",
@@ -1182,6 +1340,274 @@
       "border-style-none": {
         "value": "none",
         "type": "border"
+      }
+    },
+    "position": {
+      "position-static": {
+        "value": "static",
+        "type": "other"
+      },
+      "position-fixed": {
+        "value": "fixed",
+        "type": "other"
+      },
+      "position-absolute": {
+        "value": "absolute",
+        "type": "other"
+      },
+      "position-relative": {
+        "value": "relative",
+        "type": "other"
+      },
+      "position-sticky": {
+        "value": "sticky",
+        "type": "other"
+      }
+    },
+    "placement": {
+      "placement-1_2": {
+        "value": "50%",
+        "type": "other"
+      },
+      "placement-1_3": {
+        "value": "33.3333%",
+        "type": "other"
+      },
+      "placement-2_3": {
+        "value": "66.6667%",
+        "type": "other"
+      },
+      "placement-1_4": {
+        "value": "25%",
+        "type": "other"
+      },
+      "placement-2_4": {
+        "value": "50%",
+        "type": "other"
+      },
+      "placement-3_4": {
+        "value": "75%",
+        "type": "other"
+      },
+      "placement-full": {
+        "value": "100%",
+        "type": "other"
+      },
+      "placement-auto": {
+        "value": "auto",
+        "type": "other"
+      }
+    },
+    "blur": {
+      "blur-none": {
+        "value": "blur(0)",
+        "type": "other"
+      },
+      "blur-sm": {
+        "value": "blur(4px)",
+        "type": "other"
+      },
+      "blur-blur": {
+        "value": "blur(8px)",
+        "type": "other"
+      },
+      "blur-md": {
+        "value": "blur(12px)",
+        "type": "other"
+      },
+      "blur-lg": {
+        "value": "blur(16px)",
+        "type": "other"
+      },
+      "blur-xl": {
+        "value": "blur(24px)",
+        "type": "other"
+      },
+      "blur-xxl": {
+        "value": "blur(40px)",
+        "type": "other"
+      },
+      "blur-xxxl": {
+        "value": "blur(64px)",
+        "type": "other"
+      }
+    },
+    "brightness": {
+      "brightness-0": {
+        "value": "brightness(0)",
+        "type": "other"
+      },
+      "brightness-50": {
+        "value": "brightness(0.5)",
+        "type": "other"
+      },
+      "brightness-75": {
+        "value": "brightness(0.75)",
+        "type": "other"
+      },
+      "brightness-90": {
+        "value": "brightness(0.9)",
+        "type": "other"
+      },
+      "brightness-95": {
+        "value": "brightness(0.95)",
+        "type": "other"
+      },
+      "brightness-100": {
+        "value": "brightness(1)",
+        "type": "other"
+      },
+      "brightness-105": {
+        "value": "brightness(1.05)",
+        "type": "other"
+      },
+      "brightness-110": {
+        "value": "brightness(1.1)",
+        "type": "other"
+      },
+      "brightness-125": {
+        "value": "brightness(1.25)",
+        "type": "other"
+      },
+      "brightness-150": {
+        "value": "brightness(1.5)",
+        "type": "other"
+      },
+      "brightness-200": {
+        "value": "brightness(2)",
+        "type": "other"
+      }
+    },
+    "saturation": {
+      "saturation-0": {
+        "value": "saturate(0)",
+        "type": "other"
+      },
+      "saturation-50": {
+        "value": "saturate(0.5)",
+        "type": "other"
+      },
+      "saturation-100": {
+        "value": "saturate(1)",
+        "type": "other"
+      },
+      "saturation-150": {
+        "value": "saturate(1.5)",
+        "type": "other"
+      },
+      "saturation-200": {
+        "value": "saturate(2)",
+        "type": "other"
+      }
+    },
+    "scale": {
+      "scale-0": {
+        "value": "0",
+        "type": "other"
+      },
+      "scale-50": {
+        "value": "0.5",
+        "type": "other"
+      },
+      "scale-75": {
+        "value": "0.75",
+        "type": "other"
+      },
+      "scale-90": {
+        "value": "0.9",
+        "type": "other"
+      },
+      "scale-95": {
+        "value": "0.95",
+        "type": "other"
+      },
+      "scale-100": {
+        "value": "1",
+        "type": "other"
+      },
+      "scale-105": {
+        "value": "1.05",
+        "type": "other"
+      },
+      "scale-110": {
+        "value": "1.1",
+        "type": "other"
+      },
+      "scale-125": {
+        "value": "1.25",
+        "type": "other"
+      },
+      "scale-150": {
+        "value": "1.5",
+        "type": "other"
+      }
+    },
+    "translate": {
+      "translate-1/2": {
+        "value": "50%",
+        "type": "other"
+      },
+      "translate-1/3": {
+        "value": "33.3333%",
+        "type": "other"
+      },
+      "translate-2/3": {
+        "value": "66.6667%",
+        "type": "other"
+      },
+      "translate-1/4": {
+        "value": "25%",
+        "type": "other"
+      },
+      "translate-2/4": {
+        "value": "50%",
+        "type": "other"
+      },
+      "translate-3/4": {
+        "value": "75%",
+        "type": "other"
+      },
+      "translate-full": {
+        "value": "100%",
+        "type": "other"
+      }
+    },
+    "transform-origin": {
+      "transform-origin-center": {
+        "value": "center",
+        "type": "other"
+      },
+      "transform-origin-top": {
+        "value": "top",
+        "type": "other"
+      },
+      "transform-origin-top-right": {
+        "value": "top right",
+        "type": "other"
+      },
+      "transform-origin-top-left": {
+        "value": "top left",
+        "type": "other"
+      },
+      "transform-origin-bottom": {
+        "value": "bottom",
+        "type": "other"
+      },
+      "transform-origin-bottom-right": {
+        "value": "bottom right",
+        "type": "other"
+      },
+      "transform-origin-bottom-left": {
+        "value": "bottom left",
+        "type": "other"
+      },
+      "transform-origin-right": {
+        "value": "right",
+        "type": "other"
+      },
+      "transform-origin-left": {
+        "value": "left",
+        "type": "other"
       }
     }
   },
