@@ -1,3 +1,7 @@
+@use 'sass:color';
+@use 'sass:map';
+@use './colors';
+
 // box-shadow
 $box-shadow: (
 	sm:
@@ -15,6 +19,29 @@ $box-shadow: (
 	inner:
 		'inset 0 2px 4px 0 hsla(var(--color-shadow-hue) var(--color-shadow-saturation) var(--color-shadow-lightness) / 5%)',
 	none: '0 0 #0000',
+) !default;
+
+// box-shadow without css vars
+$color-shadow-hue: color.hue(colors.$color-shadow);
+$color-shadow-saturation: color.saturation(colors.$color-shadow);
+$color-shadow-lightness: color.lightness(colors.$color-shadow);
+
+$box-shadow-no-vars: (
+	sm:
+		'0 1px 2px 0 hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 5%)',
+	shadow:
+		'0 1px 3px 0 hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%), 0 1px 2px -1px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%)',
+	md:
+		'0 4px 6px -1px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%), 0 2px 4px -2px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%)',
+	lg:
+		'0 10px 15px -3px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%), 0 4px 6px -4px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%)',
+	xl:
+		'0 20px 25px -5px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%), 0 8px 10px -6px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 10%)',
+	2xl:
+		'0 25px 50px -12px hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 25%)',
+	inner:
+		'inset 0 2px 4px 0 hsla(#{$color-shadow-hue} #{$color-shadow-saturation} #{$color-shadow-lightness} / 5%)',
+	none: '0 0 #0000'
 ) !default;
 
 // opacity

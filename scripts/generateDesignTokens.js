@@ -67,10 +67,27 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 	//#endregion for general maps
 }, {})
 
+//#region colors
+// colors computed without css vars
+designTokens.global['colors'] = Object.keys(exports['colors-computed']).reduce(
+	(acc, key) => {
+		acc[`color-${key}`] = {
+			value: exports['colors-computed'][key],
+			type: 'color',
+		}
+		return acc
+	},
+	{},
+)
+//#endregion colors
+
 //#region sizing
 // width
 designTokens.global.width = Object.keys(exports.width).reduce((acc, key) => {
-	acc[`width-${key}`] = { value: exports.width[key], type: 'sizing' }
+	acc[`width-${key.replace('_', '/')}`] = {
+		value: exports.width[key],
+		type: 'sizing',
+	}
 	return acc
 }, {})
 
@@ -100,7 +117,10 @@ designTokens.global['max-width'] = Object.keys(exports['max-width']).reduce(
 
 // height
 designTokens.global.height = Object.keys(exports.height).reduce((acc, key) => {
-	acc[`height-${key}`] = { value: exports.height[key], type: 'sizing' }
+	acc[`height-${key.replace('_', '/')}`] = {
+		value: exports.height[key],
+		type: 'sizing',
+	}
 	return acc
 }, {})
 
@@ -184,19 +204,17 @@ designTokens.global['border-width'] = Object.keys(
 }, {})
 //#endregion border-width
 
-//! box-shadow: all'interno del value ci sono riferimenti ai colori
 //#region box-shadow
 // box-shadow
-designTokens.global['box-shadow'] = Object.keys(exports['box-shadow']).reduce(
-	(acc, key) => {
-		acc[`box-shadow-${key}`] = {
-			value: exports['box-shadow'][key],
-			type: 'boxShadow',
-		}
-		return acc
-	},
-	{},
-)
+designTokens.global['box-shadow'] = Object.keys(
+	exports['box-shadow-no-vars'],
+).reduce((acc, key) => {
+	acc[`box-shadow-${key}`] = {
+		value: exports['box-shadow-no-vars'][key],
+		type: 'boxShadow',
+	}
+	return acc
+}, {})
 //#endregion box-shadow
 
 //#region opacity
@@ -375,8 +393,6 @@ designTokens.global['line-height'] = Object.keys(exports['line-height']).reduce(
 //#endregion typography
 
 //#region assets
-
-//#endregion assets
 // background-image
 designTokens.global['background-image'] = Object.keys(
 	exports['background-image'],
@@ -387,6 +403,8 @@ designTokens.global['background-image'] = Object.keys(
 	}
 	return acc
 }, {})
+//#endregion assets
+
 //#region dimension
 // aspect-ratio
 designTokens.global['aspect-ratio'] = Object.keys(
@@ -438,30 +456,6 @@ designTokens.global['border-style'] = Object.keys(
 //#endregion border
 
 //#region other
-// position
-designTokens.global.position = Object.keys(exports.position).reduce(
-	(acc, key) => {
-		acc[`position-${key}`] = {
-			value: exports.position[key],
-			type: 'other',
-		}
-		return acc
-	},
-	{},
-)
-
-// placement
-designTokens.global.placement = Object.keys(exports.placement).reduce(
-	(acc, key) => {
-		acc[`placement-${key}`] = {
-			value: exports.placement[key],
-			type: 'other',
-		}
-		return acc
-	},
-	{},
-)
-
 // blur
 designTokens.global.blur = Object.keys(exports.blur).reduce((acc, key) => {
 	acc[`blur-${key}`] = {
@@ -494,38 +488,6 @@ designTokens.global.saturation = Object.keys(exports.saturation).reduce(
 	},
 	{},
 )
-
-// scale
-designTokens.global.scale = Object.keys(exports.scale).reduce((acc, key) => {
-	acc[`scale-${key}`] = {
-		value: exports.scale[key],
-		type: 'other',
-	}
-	return acc
-}, {})
-
-// translate
-designTokens.global.translate = Object.keys(exports.translate).reduce(
-	(acc, key) => {
-		acc[`translate-${key}`] = {
-			value: exports.translate[key],
-			type: 'other',
-		}
-		return acc
-	},
-	{},
-)
-
-// transform-origin
-designTokens.global['transform-origin'] = Object.keys(
-	exports['transform-origin'],
-).reduce((acc, key) => {
-	acc[`transform-origin-${key}`] = {
-		value: exports['transform-origin'][key],
-		type: 'other',
-	}
-	return acc
-}, {})
 //#endregion other
 
 fs.writeFileSync('./design-tokens.json', JSON.stringify(designTokens, null, 2))

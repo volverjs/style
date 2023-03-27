@@ -24,6 +24,14 @@ $color-surface-palette: (
 	info: hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
 	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
 ) !default;
+$color-surface-palette-no-vars: (
+	brand: hsl(color.hue($color-brand) color.saturation($color-brand) 90%),
+	accent: hsl(color.hue($color-accent) color.saturation($color-accent) 90%),
+	success: hsl(color.hue($color-success) color.saturation($color-success) 90%),
+	danger: hsl(color.hue($color-danger) color.saturation($color-danger) 90%),
+	info: hsl(color.hue($color-info) color.saturation($color-info) 90%),
+	warning: hsl(color.hue($color-warning) color.saturation($color-warning) 90%),
+) !default;
 $color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
 $color-backdrop: hsla(color.hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsla(0deg 0% 0% / 0%) !default;
@@ -55,4 +63,48 @@ $colors: (
 	shadow: hsla-map($color-shadow, 'shadow'),
 	backdrop: hsla-map($color-backdrop, 'backdrop'),
 	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 5%),
+) !default;
+
+// colors-computed map
+$colors-computed: (
+	scheme: $color-scheme,
+	transparent: $color-transparent,
+	black: hsla-map($color-black, 'black', $noVarExport: true),
+	white: hsla-map($color-white, 'white', $noVarExport: true),
+	shadow: hsla-map($color-shadow, 'shadow', $noVarExport: true),
+	backdrop: hsla-map($color-backdrop, 'backdrop', $noVarExport: true),
+	alpha:
+		color-alpha-map(
+			$color-alpha,
+			'alpha',
+			$steps: 5,
+			$scale: 5%,
+			$noVarExport: true
+		),
+	brand: color-shades-map($color-brand, 'brand', $noVarExport: true),
+	accent: color-shades-map($color-accent, 'accent', $noVarExport: true),
+	success: color-shades-map($color-success, 'success', $noVarExport: true),
+	danger: color-shades-map($color-danger, 'danger', $noVarExport: true),
+	info: color-shades-map($color-info, 'info', $noVarExport: true),
+	warning: color-shades-map($color-warning, 'warning', $noVarExport: true),
+	gray: color-shades-map($color-gray, 'gray', $scale: 15%, $noVarExport: true),
+	word:
+		color-lighten-map(
+			$color-word,
+			'word',
+			$scale: 12%,
+			$fixed: true,
+			$noVarExport: true
+		),
+	surface:
+		map.merge(
+			color-darken-map(
+				$color-surface,
+				'surface',
+				$scale: 2%,
+				$fixed: true,
+				$noVarExport: true
+			),
+			$color-surface-palette-no-vars
+		),
 ) !default;

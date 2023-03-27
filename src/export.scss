@@ -31,6 +31,28 @@
 		}
 	}
 
+	@each $key, $value in $colors-computed {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					@if not
+						str-index($subKey, 'hue') and not
+						str-index($subKey, 'saturation') and not
+						str-index($subKey, 'lightness')
+					{
+						@if '' + $key == $subKey {
+							#{'colors-computed__' + $key}: $subValue;
+						} @else {
+							#{'colors-computed__' + $key + '-' + $subKey}: $subValue;
+						}
+					}
+				}
+			}
+		} @else if $key != 'scheme' {
+			#{'colors-computed__' + $key}: $value;
+		}
+	}
+
 	// #endregion
 
 	// ==============================================================
@@ -414,6 +436,10 @@
 	// box-shadow
 	@each $key, $value in $box-shadow {
 		#{'box-shadow__' + $key}: $value;
+	}
+
+	@each $key, $value in $box-shadow-no-vars {
+		#{'box-shadow-no-vars__' + $key}: $value;
 	}
 
 	// opacity
