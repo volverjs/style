@@ -4,6 +4,7 @@
 
 // context
 @use 'context' as *;
+@use './themes/dark/context' as *;
 
 :export {
 	// ============================================================== */
@@ -31,6 +32,7 @@
 		}
 	}
 
+	// colors exported with no vars
 	@each $key, $value in $colors-computed {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
@@ -50,6 +52,29 @@
 			}
 		} @else if $key != 'scheme' {
 			#{'colors-computed__' + $key}: $value;
+		}
+	}
+
+	// dark colors exported with no vars
+	@each $key, $value in $dark-colors-computed {
+		@if type-of($value) == 'map' {
+			@each $subKey, $subValue in $value {
+				@if type-of($value) not 'map' {
+					@if not
+						str-index($subKey, 'hue') and not
+						str-index($subKey, 'saturation') and not
+						str-index($subKey, 'lightness')
+					{
+						@if '' + $key == $subKey {
+							#{'dark-colors-computed__' + $key}: $subValue;
+						} @else {
+							#{'dark-colors-computed__' + $key + '-' + $subKey}: $subValue;
+						}
+					}
+				}
+			}
+		} @else if $key != 'scheme' {
+			#{'dark-colors-computed__' + $key}: $value;
 		}
 	}
 

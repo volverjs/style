@@ -1871,5 +1871,104 @@
       }
     }
   },
-  "dark": {}
+  "dark": {
+    "colors": {
+      "color-word": {
+        "value": "hsl(209.8378378378, 15%, 85%)",
+        "type": "color"
+      },
+      "color-word-1": {
+        "value": "hsla(209.8378378378, 15%, 85%, 0.73)",
+        "type": "color"
+      },
+      "color-word-2": {
+        "value": "hsla(209.8378378378, 15%, 85%, 0.61)",
+        "type": "color"
+      },
+      "color-word-3": {
+        "value": "hsla(209.8378378378, 15%, 85%, 0.49)",
+        "type": "color"
+      },
+      "color-word-4": {
+        "value": "hsla(209.8378378378, 15%, 85%, 0.37)",
+        "type": "color"
+      },
+      "color-word-5": {
+        "value": "hsla(209.8378378378, 15%, 85%, 0.25)",
+        "type": "color"
+      },
+      "color-surface": {
+        "value": "hsl(209.8378378378, 10%, 5%)",
+        "type": "color"
+      },
+      "color-surface-1": {
+        "value": "hsla(209.8378378378, 10%, 5%, 0.1)",
+        "type": "color"
+      },
+      "color-surface-2": {
+        "value": "hsla(209.8378378378, 10%, 5%, 0.15)",
+        "type": "color"
+      },
+      "color-surface-3": {
+        "value": "hsla(209.8378378378, 10%, 5%, 0.2)",
+        "type": "color"
+      },
+      "color-surface-4": {
+        "value": "hsla(209.8378378378, 10%, 5%, 0.25)",
+        "type": "color"
+      },
+      "color-surface-5": {
+        "value": "hsla(209.8378378378, 10%, 5%, 0.3)",
+        "type": "color"
+      },
+      "color-surface-brand": {
+        "value": "hsl(209.8378378378, 78.7234042553%, 10%)",
+        "type": "color"
+      },
+      "color-surface-accent": {
+        "value": "hsl(291.2408759124, 63.7209302326%, 10%)",
+        "type": "color"
+      },
+      "color-surface-success": {
+        "value": "hsl(134.0186915888, 69.9346405229%, 10%)",
+        "type": "color"
+      },
+      "color-surface-danger": {
+        "value": "hsl(0, 66.6666666667%, 10%)",
+        "type": "color"
+      },
+      "color-surface-info": {
+        "value": "hsl(190.2673796791, 83.1111111111%, 10%)",
+        "type": "color"
+      },
+      "color-surface-warning": {
+        "value": "hsl(43.9572192513, 87.79342723%, 10%)",
+        "type": "color"
+      },
+      "color-alpha": {
+        "value": "hsla(0, 0%, 100%, 0)",
+        "type": "color"
+      },
+      "color-alpha-1": {
+        "value": "hsla(0, 0%, 100%, 0.05)",
+        "type": "color"
+      },
+      "color-alpha-2": {
+        "value": "hsla(0, 0%, 100%, 0.1)",
+        "type": "color"
+      },
+      "color-alpha-3": {
+        "value": "hsla(0, 0%, 100%, 0.15)",
+        "type": "color"
+      },
+      "color-alpha-4": {
+        "value": "hsla(0, 0%, 100%, 0.2)",
+        "type": "color"
+      },
+      "color-alpha-5": {
+        "value": "hsla(0, 0%, 100%, 0.25)",
+        "type": "color"
+      }
+    }
+  }
 }

@@ -79,6 +79,17 @@ designTokens.global['colors'] = Object.keys(exports['colors-computed']).reduce(
 	},
 	{},
 )
+
+// dark colors computed without css vars
+designTokens.dark['colors'] = Object.keys(
+	exports['dark-colors-computed'],
+).reduce((acc, key) => {
+	acc[`color-${key}`] = {
+		value: exports['dark-colors-computed'][key],
+		type: 'color',
+	}
+	return acc
+}, {})
 //#endregion colors
 
 //#region sizing
