@@ -282,6 +282,7 @@ $vv-input-text: (
 				wrapper: (
 					pseudo: (
 						after: (
+							opacity: var(--opacity-100),
 							animation: var(--animation-indeterminate),
 						),
 					),
