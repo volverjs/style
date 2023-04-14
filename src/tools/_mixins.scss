@@ -230,7 +230,8 @@
 					$block: $block,
 					$modifier: $modifier + $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 
@@ -244,7 +245,8 @@
 					$block: $block,
 					$modifier: $modifier + $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 
@@ -254,9 +256,11 @@
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$item},
 					$key: 'breakpoint',
-					$block: $selector,
+					$block: $block,
+					$modifier: $modifier + $selector,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 
@@ -366,7 +370,8 @@
 					$block: $selector,
 					$alias: $alias,
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 
@@ -378,7 +383,8 @@
 					$key: 'breakpoint',
 					$block: list-to-string(($selector, $alias)),
 					$props: $props,
-					$zero-specificity: $zero-specificity
+					$zero-specificity: $zero-specificity,
+					$bps: $bps
 				);
 			}
 		}
@@ -630,7 +636,8 @@
 						$block: $block,
 						$modifier: $selector,
 						$props: $props,
-						$zero-specificity: $zero-specificity
+						$zero-specificity: $zero-specificity,
+						$bps: $bps
 					);
 				}
 			}
@@ -640,16 +647,21 @@
 
 // Transform a map into a list of breakpoints
 @mixin spread-map-into-breakpoints(
+	$original: null,
 	$map: (),
 	$prefix: '',
 	$key: 'breakpoint',
 	$block: null,
+	$modifier: '',
 	$props: true,
+	$zero-specificity: true,
 	$bps: (
 		xxs: 0,
-	),
-	$zero-specificity: true
+	)
 ) {
+	@if not $original {
+		$original: $map;
+	}
 	@if not $block {
 		$block: &;
 	}
@@ -657,12 +669,12 @@
 		@each $breakpoint, $value in map.get($map, $key) {
 			@if map.has-key($bps, $breakpoint) {
 				@include wrap-with-where(
-					$selector: $block,
+					$selector: '#{$modifier}#{$block}',
 					$enabled: $zero-specificity
 				) {
 					@include media-breakpoint-up($breakpoint, $bps) {
 						@include spread-map-into-attrs(
-							$original: $map,
+							$original: $original,
 							$map: $value,
 							$prefix: $prefix,
 							$variant: #{$key}-#{$breakpoint},
@@ -1071,7 +1083,8 @@
 							$ignore: (
 								'element',
 							),
-							$props: $props
+							$props: $props,
+							$bps: $bps
 						);
 					}
 
@@ -1085,7 +1098,8 @@
 							$block: $block,
 							$modifier: $selector,
 							$props: $props,
-							$zero-specificity: $zero-specificity
+							$zero-specificity: $zero-specificity,
+							$bps: $bps
 						);
 					}
 				}
