@@ -18,7 +18,7 @@ wrapperClass: w-full md:w-9/12
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-input-text__hint">
+    <small id="select-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -39,7 +39,7 @@ wrapperClass: w-full md:w-9/12
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-input-text__hint">
+    <small id="select-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>

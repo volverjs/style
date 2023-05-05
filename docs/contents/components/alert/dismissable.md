@@ -1,11 +1,26 @@
 ---
 title: Dismissable
-wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
+wrapperClass: flex flex-1 items-center flex-col gap-md 
 ---
 
-<div class="vv-alert vv-alert--close vv-alert--icon vv-alert--success" role="alert">
-  <button class="vv-alert__close" type="button" aria-label="Close"></button>
-  <IconifyIcon icon="akar-icons:circle-check" />
-  <div class="vv-alert__title">Tip!</div>
-  <div class="vv-alert__content">Indicates an informal message.</div>
+<div class="vv-alert 
+            vv-alert--success 
+            vv-alert--dismissable" role="alert">
+  <div class="vv-alert__header">
+    <IconifyIcon icon="akar-icons:circle-check" />
+    <strong class="vv-alert__title">Success!</strong>
+    <button class="vv-alert__close" type="button" aria-label="Close"></button>
+  </div>
+</div>
+
+
+<div class="vv-alert 
+            vv-alert--notification
+            vv-alert--success 
+            vv-alert--dismissable" role="alert">
+  <div class="vv-alert__header">
+    <IconifyIcon icon="akar-icons:circle-check" />
+    <strong class="vv-alert__title">Success!</strong>
+    <button class="vv-alert__close" type="button" aria-label="Close"></button>
+  </div>
 </div>

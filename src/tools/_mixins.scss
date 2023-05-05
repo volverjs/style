@@ -1048,7 +1048,7 @@
 			@each $state, $value in $states {
 				@if $state in [ 'enter-from', 'enter-active', 'enter-to',
 					'leave-from', 'leave-active', 'leave-to', 'active',
-					'inert' ] and type-of($value) == 'map'
+					'inert'] and type-of($value) == 'map'
 				{
 					$selector: '.#{$transition}';
 

@@ -39,7 +39,9 @@ Or cherry pick what you want.
 ```
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-  <div class="vv-alert__title">Warning</div>
+  <div class="vv-alert__header">
+    <div class="vv-alert__title">Warning</div>
+  </div>
   <div class="vv-alert__content"><code>@volverjs/style/props</code> are required to use <code>@volverjs/style/components</code>.</div>
 </div>
 

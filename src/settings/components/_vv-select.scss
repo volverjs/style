@@ -91,6 +91,8 @@ $vv-select: (
 			background-size: 1em,
 			min-height: var(--input-min-height),
 			gap: 0.5ch,
+			text-overflow: var(--input-text-overflow),
+			white-space: nowrap,
 			state: (
 				disabled: (
 					cursor: not-allowed,
@@ -138,7 +140,6 @@ $vv-select: (
 			white-space: var(--input-hint-white-space),
 			text-overflow: var(--input-hint-text-overflow),
 			overflow: var(--input-hint-overflow),
-			max-width: var(--input-hint-max-width),
 		),
 	),
 	modifier: (
@@ -234,6 +235,7 @@ $vv-select: (
 			),
 		),
 		floating: (
+			position: relative,
 			[margin-left]: var(--input-spacing-left),
 			[margin-right]: var(--input-spacing-right),
 			element: (

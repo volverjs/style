@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-toast);
-$component-map: $vv-toast;
+$component-name: map.get($components-names, vv-alert-group);
+$component-map: $vv-alert-group;
 
 @include spread-map-into-bem(
 	$map: $component-map,

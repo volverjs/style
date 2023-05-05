@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.9] - 2023-02-14
+## [0.1.9] - 2023-05-05
 
 ### Added
 
@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 *   `vv-accordion` square modifier;
 *   `vv-dropdown` docs;
 *   `vv-dropdown-optgroup` component;
+*   `vv-alert-group` component;
+*   `vv-alert` notifications and transitions;
 *   `vv-accordion-group` condensed modifier.
   
 ### Fixed
@@ -18,6 +20,10 @@ All notable changes to this project will be documented in this file.
 *   `breakpoint` keyword in components maps;
 *   `vv-table` empty caption;
 *   `loading` state for inputs has more accessible colors.
+
+### Removed
+
+*   `vv-toast` component;
 
 ## [0.1.8] - 2023-02-03
 

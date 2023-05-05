@@ -33,8 +33,11 @@
 		height: 100%;
 	}
 
-	p > code {
-		color: var(--color-accent);
+	p,
+	li {
+		& > code {
+			color: var(--color-accent);
+		}
 	}
 
 	pre[class*='language-'] {

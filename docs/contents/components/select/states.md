@@ -17,7 +17,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-input-text__hint">
+    <small id="select-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -36,7 +36,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-dirty-hint" class="vv-input-text__hint">
+    <small id="select-dirty-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -55,7 +55,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hover-hint" class="vv-input-text__hint">
+    <small id="select-hover-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -74,7 +74,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-focus-hint" class="vv-input-text__hint">
+    <small id="select-focus-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -94,7 +94,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-disabled-hint" class="vv-input-text__hint">
+    <small id="select-disabled-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -134,7 +134,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-valid-hint" class="vv-input-text__hint">
+    <small id="select-valid-hint" class="vv-select__hint">
         The input above is successful.
     </small>
 </div>
@@ -155,7 +155,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-invalid-hint" class="vv-input-text__hint">
+    <small id="select-invalid-hint" class="vv-select__hint">
         There was an error with the input above.
     </small>
 </div>
@@ -175,7 +175,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-loading-hint" class="vv-input-text__hint">
+    <small id="select-loading-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>

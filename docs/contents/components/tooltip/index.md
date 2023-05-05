@@ -5,7 +5,9 @@ isNew: false
 ---
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-    <div class="vv-alert__title">Warning</div>
+    <div class="vv-alert__header">
+      <div class="vv-alert__title">Warning</div>
+    </div>
     <div class="vv-alert__content">
         Tooltip currently does not working properly on Firefox for lack of <code>:has()</code> support.
         <div class="mt-sm">

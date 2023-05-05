@@ -1,0 +1,171 @@
+$vv-alert-group: (
+	position: relative,
+	z-index: var(--z-notification-alert),
+	display: flex,
+	flex-direction: column,
+	gap: var(--spacing-sm),
+	element: (
+		list: (
+			_alias: '> ul',
+			display: flex,
+			flex-direction: column,
+			gap: var(--spacing-xs),
+		),
+		item: (
+			_alias: '> ul > li',
+			transition: var(--transition-all),
+		),
+		not-first: (
+			_alias: '> ul > li:not(:first-child)',
+		),
+		nth-1: (
+			--alert-counter: 1,
+			_alias: '> ul > li:nth-child(1)',
+		),
+		nth-2: (
+			--alert-counter: 2,
+			_alias: '> ul > li:nth-child(2)',
+		),
+		nth-3: (
+			--alert-counter: 3,
+			_alias: '> ul > li:nth-child(3)',
+		),
+		nth-4: (
+			--alert-counter: 4,
+			_alias: '> ul > li:nth-child(4)',
+		),
+		nth-5: (
+			--alert-counter: 5,
+			_alias: '> ul > li:nth-child(5)',
+		),
+		nth-other: (
+			_alias: '> ul > li:nth-child(n+6)',
+		),
+	),
+	modifier: (
+		fixed: (
+			position: fixed,
+		),
+		absolute: (
+			position: absolute,
+		),
+		reverse: (
+			flex-flow: column-reverse,
+			element: (
+				list: (
+					flex-flow: column-reverse,
+				),
+			),
+		),
+		top-start: (
+			inset-block: var(--spacing-lg) auto,
+			inset-inline: var(--spacing-lg) auto,
+		),
+		top-middle: (
+			inset-block: var(--spacing-lg) auto,
+			inset-inline: 50% auto,
+			transform: translateX(-50%),
+		),
+		top-end: (
+			inset-block: var(--spacing-lg) auto,
+			inset-inline: auto var(--spacing-lg),
+		),
+		center-start: (
+			inset-block: 50% auto,
+			transform: translateY(-50%),
+			inset-inline: var(--spacing-lg) auto,
+		),
+		center-middle: (
+			inset-block: 50% auto,
+			inset-inline: 50% auto,
+			transform: translate(-50%, -50%),
+		),
+		center-end: (
+			inset-block: 50% auto,
+			transform: translateY(-50%),
+			inset-inline: auto var(--spacing-lg),
+		),
+		bottom-start: (
+			inset-block: auto var(--spacing-lg),
+			inset-inline: var(--spacing-lg) auto,
+		),
+		bottom-middle: (
+			inset-block: auto var(--spacing-lg),
+			inset-inline: 50% auto,
+			transform: translateX(-50%),
+		),
+		bottom-end: (
+			inset-block: auto var(--spacing-lg),
+			inset-inline: auto var(--spacing-lg),
+		),
+		full-bleed: (
+			width: clamp(15vw, 20rem, 80vw),
+		),
+		stack: (
+			element: (
+				item: (
+					flex-wrap: nowrap,
+					white-space: nowrap,
+				),
+				nth-1: (
+					z-index: var(--z-notification-alert),
+				),
+				not-first: (
+					[transform]:
+						translateY(calc(-100% * (var(--alert-counter, 1) - 1)))
+						scale(calc(1 - 0.05 * (var(--alert-counter, 1) - 1))),
+					[z-index]:
+						calc(
+							var(--z-notification-alert) -
+								var(--alert-counter, 1)
+						),
+					filter: grayscale(100%),
+				),
+				nth-other: (
+					display: none,
+				),
+			),
+			state: (
+				hover: (
+					element: (
+						item: (
+							flex-wrap: wrap,
+							white-space: wrap,
+						),
+						not-first: (
+							height: auto,
+							transform: none,
+							filter: none,
+						),
+					),
+				),
+			),
+			modifier: (
+				reverse: (
+					element: (
+						not-first: (
+							[transform]:
+								translateY(
+									calc(100% * (var(--alert-counter, 1) - 1))
+								)
+								scale(
+									calc(
+										1 - 0.05 * (var(--alert-counter, 1) - 1)
+									)
+								),
+						),
+					),
+					state: (
+						hover: (
+							element: (
+								not-first: (
+									transform: none,
+								),
+							),
+						),
+					),
+				),
+			),
+		),
+	),
+);

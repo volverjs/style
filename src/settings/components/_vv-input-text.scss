@@ -78,10 +78,10 @@ $vv-input-text: (
 				var(--input-spacing-right),
 			min-width: 0,
 			min-height: var(--input-min-height),
+			text-overflow: var(--input-text-overflow),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
-					text-overflow: ellipsis,
 				),
 				calendar-picker-indicator: (
 					position: absolute,
@@ -206,7 +206,6 @@ $vv-input-text: (
 			white-space: var(--input-hint-white-space),
 			text-overflow: var(--input-hint-text-overflow),
 			overflow: var(--input-hint-overflow),
-			max-width: var(--input-hint-max-width),
 		),
 		limit: (
 			[padding-right]: var(--input-spacing-right),
@@ -290,6 +289,7 @@ $vv-input-text: (
 			),
 		),
 		floating: (
+			position: relative,
 			[margin-left]: var(--input-spacing-left),
 			[margin-right]: var(--input-spacing-right),
 			element: (

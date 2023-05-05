@@ -13,7 +13,7 @@ wrapperClass: flex-1
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-icon-before-hint" class="vv-input-text__hint">
+    <small id="select-icon-before-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>

@@ -1,7 +1,7 @@
 ---
 title: Table
 description: Tables are containers for displaying information.
-uiVue: true
+uiVue: false
 isDraft: true
 ---
 
