@@ -14,25 +14,25 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                 positionBlock: 'top',
                 positionInline: 'end',
                 isVisible: false,
-                timeout: undefined,
                 items: new Map()
             }
         },
         methods: {
           setItem() {
               const id = Math.random().toString(36).substr(2, 9)
-              this.items.set(id, {
+              const toSet = {
                   color: ['success', 'danger', 'warning', 'info'][Math.floor(Math.random() * 4)],
                   icon: ['heart', 'block', 'music', 'key'][Math.floor(Math.random() * 4)],
                   autoClose: this.autoCloseEnabled,
-              })
+              }
               if (this.autoCloseEnabled) {
-                this.timeout = setTimeout(() => {
+                toSet.timeout = setTimeout(() => {
                   if (this.items.has(id)) {
                       this.items.delete(id)
                   }
-              }, 5000)
+                }, 5000)
               }
+              this.items.set(id, toSet)
           },
           deleteItem(id) {
               this.items.delete(id)
@@ -40,6 +40,20 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
           clearItems() {
               this.items.clear()
           },
+          onMouseover(id) {
+            if (this.items.has(id) && this.items.get(id).timeout) {
+              clearTimeout(this.items.get(id).timeout)
+            }
+          },
+          onMouseleave(id) {
+            if (this.items.has(id) && this.items.get(id).autoClose) {
+              this.items.get(id).timeout = setTimeout(() => {
+                if (this.items.has(id)) {
+                    this.items.delete(id)
+                }
+              }, 5000)
+            }
+          }
         },
         computed: {
           transitionName() {
@@ -171,29 +185,33 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             `vv-alert-group--${positionBlock}-${positionInline}`, 
             {'vv-alert-group--stack': stackEnabled, 'vv-alert-group--reverse': reverseEnabled}
           ]">
-      <TransitionGroup tag="ul" :name="transitionName" role="group">
-        <li
+      <TransitionGroup :name="transitionName" role="group">
+        <div
             v-for="item in items"
             :key="item[0]"
-            :class="[`vv-alert--${item[1].color}`, {'vv-alert--notification': notificationEnabled}]"
+            :class="[
+              `vv-alert--${item[1].color}`, {
+                'vv-alert--notification': notificationEnabled, 
+                'vv-alert--auto-close': item[1].autoClose
+              }
+            ]"
+            @mouseover.passive="onMouseover(item[0])"
+		        @mouseleave.passive="onMouseleave(item[0])"
             class="vv-alert 
-                  vv-alert--dismissable
-                  vv-alert--fixed" 
-            aria-live="assertive" 
-            aria-atomic="true"
-            :style="{'--alert-pie-animation-duration': '5s'}">
+                   vv-alert--dismissable" 
+            :style="{'--alert-duration': '5s'}"
+            role="alert">
             <div class="vv-alert__header">
                 <IconifyIcon :icon="`akar-icons:${item[1].icon}`" />
                 <strong class="vv-alert__title">Message!</strong> 
-                <button v-if="item[1].autoClose" type="button" class="vv-alert__pie" @click="deleteItem(item[0])">
-                    <div class="vv-alert__pie-mask"></div>
+                <button type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])">
+                  <div class="vv-alert__close-mask"></div>
                 </button>
-                <button v-else type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])"></button>
             </div>
             <div class="vv-alert__content">
               Lorem ipsum dolor sit amet.
             </div>
-        </li>
+        </div>
       </TransitionGroup>
     </div>
 </template>

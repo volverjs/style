@@ -1,0 +1,94 @@
+$dark-vv-alert: (
+	modifier: (
+		auto-close: (
+			element: (
+				close: (
+					background-color: var(--color-black),
+					pseudo: (
+						after: (
+							background-color: var(--color-black),
+						),
+					),
+				),
+			),
+		),
+		success: (
+			element: (
+				header: (
+					color: var(--color-success-lighten-3),
+				),
+			),
+		),
+		warning: (
+			element: (
+				header: (
+					color: var(--color-warning),
+				),
+			),
+		),
+		danger: (
+			element: (
+				header: (
+					color: var(--color-danger-lighten-5),
+				),
+			),
+		),
+		accent: (
+			element: (
+				header: (
+					color: var(--color-accent-lighten-4),
+				),
+			),
+		),
+		brand: (
+			element: (
+				header: (
+					color: var(--color-brand-lighten-2),
+				),
+			),
+		),
+		info: (
+			element: (
+				header: (
+					color: var(--color-info),
+				),
+			),
+		),
+		notification: (
+			element: (
+				header: (
+					background-color: var(--color-gray-darken-2),
+				),
+			),
+			modifier: (
+				danger: (
+					border-color: var(--color-danger-lighten-3),
+				),
+				brand: (
+					border-color: var(--color-brand-lighten-3),
+				),
+				success: (
+					border-color: var(--color-success-lighten-3),
+				),
+				accent: (
+					border-color: var(--color-accent-lighten-3),
+				),
+				warning: (
+					element: (
+						header: (
+							background-color: var(--color-warning-darken-5),
+						),
+					),
+				),
+				info: (
+					border-color: var(--color-info-darken-2),
+					element: (
+						header: (
+							background-color: var(--color-info-darken-5),
+						),
+					),
+				),
+			),
+		),
+	),
+);

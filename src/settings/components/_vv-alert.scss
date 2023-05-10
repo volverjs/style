@@ -1,5 +1,5 @@
 $vv-alert: (
-	--alert-pie-animation-duration: 3s,
+	--alert-duration: 3s,
 	background-color: var(--color-surface-2),
 	box-shadow: var(--shadow-lg),
 	border-color: var(--color-gray-lighten-4),
@@ -21,9 +21,14 @@ $vv-alert: (
 			gap: var(--spacing-sm),
 			line-height: var(--leading-none),
 			color: var(--color-word),
+			overflow: hidden,
+			text-overflow: ellipsis,
 		),
 		title: (
+			min-width: 0,
 			font-weight: var(--font-bold),
+			overflow: hidden,
+			text-overflow: ellipsis,
 		),
 		content: (
 			line-height: var(--leading-normal),
@@ -45,58 +50,20 @@ $vv-alert: (
 			background-size: 100% auto,
 			background-repeat: no-repeat,
 			align-self: center,
+			border-radius: var(--rounded),
 		),
 		icon: (
 			flex-shrink: 0,
 		),
-		pie: (
-			position: absolute,
-			display: block,
-			right: var(--spacing-10),
-			width: 1.1em,
-			height: 1.1em,
-			background-color: var(--color-white),
-			border: 1px solid var(--color-white),
-			border-radius: 50%,
-			overflow: hidden,
-			opacity: var(--opacity-80),
-			cursor: pointer,
-			pseudo: (
-				before: (
-					position: absolute,
-					top: 0,
-					width: 50%,
-					height: 100%,
-					transform-origin: 100% 50%,
-					background-color: var(--color-gray),
-					border-radius: 100% 0 0 100% / 50% 0 0 50%,
-					will-change: transform,
-					[animation]: spin var(--alert-pie-animation-duration) linear,
-				),
-				after: (
-					position: absolute,
-					top: 0,
-					width: 50%,
-					height: 100%,
-					background-color: var(--color-white),
-					will-change: opacity,
-					border-radius: 100% 0 0 100% / 50% 0 0 50%,
-					[animation]: pie-masks var(--alert-pie-animation-duration)
-						steps(1, end),
-					opacity: var(--opacity-0),
-				),
-			),
-		),
-		pie-mask: (
+		close-mask: (
+			display: none,
 			position: absolute,
 			top: 0,
 			width: 50%,
 			height: 100%,
 			left: 50%,
 			background-color: var(--color-gray),
-			will-change: opacity,
-			[animation]: pie-masks var(--alert-pie-animation-duration)
-				steps(1, end) reverse,
+			[animation]: pie-masks var(--alert-duration) steps(1, end) reverse,
 			z-index: 1,
 		),
 	),
@@ -106,10 +73,10 @@ $vv-alert: (
 			background-color: var(--color-surface-success),
 			element: (
 				icon: (
-					color: var(--color-success),
+					color: var(--color-success-darken-1),
 				),
 				header: (
-					color: var(--color-success),
+					color: var(--color-success-darken-1),
 				),
 			),
 		),
@@ -130,10 +97,10 @@ $vv-alert: (
 			background-color: var(--color-surface-warning),
 			element: (
 				icon: (
-					color: var(--color-warning-darken-2),
+					color: var(--color-warning-darken-5),
 				),
 				header: (
-					color: var(--color-warning-darken-2),
+					color: var(--color-warning-darken-5),
 				),
 			),
 		),
@@ -142,10 +109,10 @@ $vv-alert: (
 			background-color: var(--color-surface-info),
 			element: (
 				icon: (
-					color: var(--color-info-darken-2),
+					color: var(--color-info-darken-5),
 				),
 				header: (
-					color: var(--color-info-darken-2),
+					color: var(--color-info-darken-5),
 				),
 			),
 		),
@@ -166,10 +133,10 @@ $vv-alert: (
 			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand),
+					color: var(--color-brand-darken-2),
 				),
 				header: (
-					color: var(--color-brand),
+					color: var(--color-brand-darken-2),
 				),
 			),
 		),
@@ -177,9 +144,76 @@ $vv-alert: (
 			position: relative,
 			padding-right: calc(var(--spacing-md) * 2 + 1em),
 		),
+		auto-close: (
+			element: (
+				close: (
+					background-color: var(--color-white),
+					border: var(--border) solid var(--color-white),
+					border-radius: 50%,
+					overflow: hidden,
+					opacity: var(--opacity-80),
+					background-image: none,
+					background-size: 70% auto,
+					inline-size: 1.1em,
+					block-size: 1.1em,
+					[animation]: fade-out var(--alert-duration) forwards,
+					pseudo: (
+						before: (
+							position: absolute,
+							top: 0,
+							width: 50%,
+							height: 100%,
+							transform-origin: 100% 50%,
+							background-color: var(--color-gray),
+							border-radius: 100% 0 0 100% / 50% 0 0 50%,
+							[animation]: spin var(--alert-duration) linear,
+						),
+						after: (
+							position: absolute,
+							top: 0,
+							width: 50%,
+							height: 100%,
+							background-color: var(--color-white),
+							border-radius: 100% 0 0 100% / 50% 0 0 50%,
+							[animation]: pie-masks var(--alert-duration)
+								steps(1, end),
+							opacity: var(--opacity-0),
+						),
+					),
+				),
+				close-mask: (
+					display: block,
+				),
+			),
+			state: (
+				hover: (
+					element: (
+						close-mask: (
+							opacity: var(--opacity-0),
+							animation: none,
+						),
+						close: (
+							border-radius: var(--rounded),
+							background-image: var(--bg-close),
+							animation: none,
+							pseudo: (
+								before: (
+									opacity: var(--opacity-0),
+									animation: none,
+								),
+								after: (
+									opacity: var(--opacity-0),
+									animation: none,
+								),
+							),
+						),
+					),
+				),
+			),
+		),
 		notification: (
 			padding: var(--spacing-0),
-			width: clamp(15vw, 20rem, 80vw),
+			width: clamp(15dvw, 20rem, 80dvw),
 			border-color: var(--color-gray),
 			flex-direction: column,
 			align-items: none,
@@ -187,7 +221,7 @@ $vv-alert: (
 			element: (
 				header: (
 					padding: var(--spacing-sm),
-					background-color: var(--color-gray),
+					background-color: var(--color-gray-darken-1),
 					color: var(--color-white),
 				),
 				title: (
@@ -292,7 +326,7 @@ $vv-alert: (
 	transition: (
 		fade-inline-end: (
 			active: (
-				transition: var(--transition-transform),
+				transition: var(--transition-all),
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
@@ -305,7 +339,7 @@ $vv-alert: (
 		),
 		fade-inline-start: (
 			active: (
-				transition: var(--transition-transform),
+				transition: var(--transition-all),
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
@@ -318,7 +352,7 @@ $vv-alert: (
 		),
 		fade-block-top: (
 			active: (
-				transition: var(--transition-transform),
+				transition: var(--transition-all),
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
@@ -331,7 +365,7 @@ $vv-alert: (
 		),
 		fade-block-bottom: (
 			active: (
-				transition: var(--transition-transform),
+				transition: var(--transition-all),
 			),
 			enter-from: (
 				opacity: var(--opacity-0),

@@ -26,8 +26,8 @@ $vv-dialog: (
 			flex-direction: column,
 			position: relative,
 			box-shadow: var(--shadow-lg),
-			width: clamp(30vw, 40rem, 90vw),
-			max-height: 90vh,
+			width: clamp(30dvw, 40rem, 90dvw),
+			max-height: 90dvh,
 			z-index: var(--z-modal),
 			background: var(--color-surface),
 			border-radius: var(--rounded-md),
@@ -145,7 +145,7 @@ $vv-dialog: (
 		small: (
 			element: (
 				wrapper: (
-					width: clamp(10vw, 25rem, 90vw),
+					width: clamp(10dvw, 25rem, 90dvw),
 				),
 			),
 		),

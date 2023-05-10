@@ -4,8 +4,8 @@ wrapperClass: max-w-full
 ---
 
 <div class="vv-alert-group vv-alert-group--stack vv-alert-group--reverse">
-  <ul role="group">
-    <li class="vv-alert 
+  <div role="group">
+    <div class="vv-alert 
                 vv-alert--danger 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
@@ -16,8 +16,8 @@ wrapperClass: max-w-full
       <div class="vv-alert__content">
         Operation not allowed.
       </div>
-    </li>
-    <li class="vv-alert 
+    </div>
+    <div class="vv-alert 
                 vv-alert--success 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
@@ -28,8 +28,8 @@ wrapperClass: max-w-full
       <div class="vv-alert__content">
         Succeeded in saving your changes.
       </div>
-    </li>
-    <li class="vv-alert 
+    </div>
+    <div class="vv-alert 
                 vv-alert--warning 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
@@ -40,6 +40,6 @@ wrapperClass: max-w-full
       <div class="vv-alert__content">
           No more than 5 items can be selected.
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>

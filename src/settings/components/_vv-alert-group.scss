@@ -4,50 +4,58 @@ $vv-alert-group: (
 	display: flex,
 	flex-direction: column,
 	gap: var(--spacing-sm),
+	overflow: hidden,
 	element: (
 		list: (
-			_alias: '> ul',
+			_alias: '> [role="group"]',
 			display: flex,
 			flex-direction: column,
 			gap: var(--spacing-xs),
 		),
 		item: (
-			_alias: '> ul > li',
+			_alias: '> [role="group"] > *',
 			transition: var(--transition-all),
+			flex-shrink: 0,
 		),
 		not-first: (
-			_alias: '> ul > li:not(:first-child)',
+			_alias: '> [role="group"] > *:not(:first-child)',
 		),
 		nth-1: (
 			--alert-counter: 1,
-			_alias: '> ul > li:nth-child(1)',
+			_alias: '> [role="group"] > *:nth-child(1)',
 		),
 		nth-2: (
 			--alert-counter: 2,
-			_alias: '> ul > li:nth-child(2)',
+			_alias: '> [role="group"] > *:nth-child(2)',
 		),
 		nth-3: (
 			--alert-counter: 3,
-			_alias: '> ul > li:nth-child(3)',
+			_alias: '> [role="group"] > *:nth-child(3)',
 		),
 		nth-4: (
 			--alert-counter: 4,
-			_alias: '> ul > li:nth-child(4)',
+			_alias: '> [role="group"] > *:nth-child(4)',
 		),
 		nth-5: (
 			--alert-counter: 5,
-			_alias: '> ul > li:nth-child(5)',
+			_alias: '> [role="group"] > *:nth-child(5)',
 		),
 		nth-other: (
-			_alias: '> ul > li:nth-child(n+6)',
+			_alias: '> [role="group"] > *:nth-child(n+6)',
 		),
 	),
 	modifier: (
 		fixed: (
 			position: fixed,
+			padding: var(--spacing-lg),
+			max-width: var(--w-full),
+			max-height: var(--h-full),
 		),
 		absolute: (
 			position: absolute,
+			padding: var(--spacing-lg),
+			max-width: var(--w-full),
+			max-height: var(--h-full),
 		),
 		reverse: (
 			flex-flow: column-reverse,
@@ -58,22 +66,22 @@ $vv-alert-group: (
 			),
 		),
 		top-start: (
-			inset-block: var(--spacing-lg) auto,
-			inset-inline: var(--spacing-lg) auto,
+			inset-block: 0 auto,
+			inset-inline: 0 auto,
 		),
 		top-middle: (
-			inset-block: var(--spacing-lg) auto,
+			inset-block: 0 auto,
 			inset-inline: 50% auto,
 			transform: translateX(-50%),
 		),
 		top-end: (
-			inset-block: var(--spacing-lg) auto,
-			inset-inline: auto var(--spacing-lg),
+			inset-block: 0 auto,
+			inset-inline: auto 0,
 		),
 		center-start: (
 			inset-block: 50% auto,
 			transform: translateY(-50%),
-			inset-inline: var(--spacing-lg) auto,
+			inset-inline: 0 auto,
 		),
 		center-middle: (
 			inset-block: 50% auto,
@@ -82,24 +90,24 @@ $vv-alert-group: (
 		),
 		center-end: (
 			inset-block: 50% auto,
+			inset-inline: auto 0,
 			transform: translateY(-50%),
-			inset-inline: auto var(--spacing-lg),
 		),
 		bottom-start: (
-			inset-block: auto var(--spacing-lg),
-			inset-inline: var(--spacing-lg) auto,
+			inset-block: auto 0,
+			inset-inline: 0 auto,
 		),
 		bottom-middle: (
-			inset-block: auto var(--spacing-lg),
+			inset-block: auto 0,
 			inset-inline: 50% auto,
 			transform: translateX(-50%),
 		),
 		bottom-end: (
-			inset-block: auto var(--spacing-lg),
-			inset-inline: auto var(--spacing-lg),
+			inset-block: auto 0,
+			inset-inline: auto 0,
 		),
 		full-bleed: (
-			width: clamp(15vw, 20rem, 80vw),
+			width: clamp(15dvw, 20rem, 80dvw),
 		),
 		stack: (
 			element: (
@@ -122,18 +130,13 @@ $vv-alert-group: (
 					filter: grayscale(100%),
 				),
 				nth-other: (
-					display: none,
+					opacity: 0,
 				),
 			),
 			state: (
 				hover: (
 					element: (
-						item: (
-							flex-wrap: wrap,
-							white-space: wrap,
-						),
 						not-first: (
-							height: auto,
 							transform: none,
 							filter: none,
 						),

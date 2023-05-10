@@ -28,7 +28,7 @@ $width: (
 	10\/12: 83.3333%,
 	11\/12: 91.6667%,
 	full: 100%,
-	screen: 100vw,
+	screen: 100dvw,
 	min: min-content,
 	max: max-content,
 	fit: fit-content,
@@ -53,7 +53,7 @@ $height: (
 	4\/6: 66.6667%,
 	5\/6: 83.3333%,
 	full: 100%,
-	screen: 100vh,
+	screen: 100dvh,
 	min: min-content,
 	max: max-content,
 	fit: fit-content,
@@ -73,7 +73,7 @@ $max-width: (
 // max-height
 $max-height: (
 	full: 100%,
-	screen: 100vh,
+	screen: 100dvh,
 	min: min-content,
 	max: max-content,
 	fit: fit-content,
@@ -92,7 +92,7 @@ $min-width: (
 $min-height: (
 	0: 0px,
 	full: 100%,
-	screen: 100vh,
+	screen: 100dvh,
 	min: min-content,
 	max: max-content,
 	fit: fit-content,
