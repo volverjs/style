@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.9] - 2023-05-05
+## [0.1.9] - 2023-05-10
 
 ### Added
 
@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 *   `wrap-with-where` fix to work properly with List and Map of selectors;
 *   `breakpoint` keyword in components maps;
 *   `vv-table` empty caption;
+*   `vv-alert` colors accessibility;
 *   `loading` state for inputs has more accessible colors.
 
 ### Removed
