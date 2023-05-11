@@ -20,39 +20,38 @@
 		Object.keys(shades.value).sort((a, b) => {
 			const aNumber = Number(a.split('-').pop())
 			const bNumber = Number(b.split('-').pop())
+
+			const aDarken = a.includes('darken')
+			const bDarken = b.includes('darken')
+			const aLighten = a.includes('lighten')
+			const bLighten = b.includes('lighten')
+			const aLightenOrDarken = aLighten || aDarken
+			const bLightenOrDarken = bLighten || bDarken
 			if (
-				(!a.includes('lighten') &&
-					!a.includes('darken') &&
-					b.includes('darken')) ||
-				(!b.includes('lighten') &&
-					!b.includes('darken') &&
-					a.includes('lighten'))
+				(!aLightenOrDarken && bDarken) ||
+				(!bLightenOrDarken && aLighten)
 			) {
 				return 1
 			}
 			if (
-				(!a.includes('lighten') &&
-					!a.includes('darken') &&
-					b.includes('lighten')) ||
-				(!b.includes('lighten') &&
-					!b.includes('darken') &&
-					a.includes('darken'))
+				(!aLightenOrDarken && bLighten) ||
+				(!bLightenOrDarken && aDarken)
 			) {
 				return -1
 			}
-			if (a.includes('lighten')) {
-				if (b.includes('darken')) {
+			if (aLighten) {
+				if (bDarken) {
 					return 1
 				}
-				if (b.includes('lighten')) {
+				if (bLighten) {
 					return aNumber - bNumber
 				}
 			}
-			if (a.includes('darken')) {
-				if (b.includes('lighten')) {
+			if (aDarken) {
+				if (bLighten) {
 					return -1
 				}
-				if (b.includes('darken')) {
+				if (bDarken) {
 					return bNumber - aNumber
 				}
 			}
@@ -195,15 +194,20 @@
 			s = 0,
 			l = 0
 
-		// calculate hue
-		// no difference
-		if (delta == 0) h = 0
-		// red is max
-		else if (cmax == r) h = ((g - b) / delta) % 6
-		// green is max
-		else if (cmax == g) h = (b - r) / delta + 2
-		// blue is max
-		else h = (r - g) / delta + 4
+		if (delta !== 0) {
+			// red is max
+			if (cmax === r) {
+				h = ((g - b) / delta) % 6
+			}
+			// green is max
+			else if (cmax === g) {
+				h = (b - r) / delta + 2
+			}
+			// blue is max
+			else {
+				h = (r - g) / delta + 4
+			}
+		}
 
 		h = Math.round(h * 60)
 
@@ -214,7 +218,7 @@
 		l = (cmax + cmin) / 2
 
 		// calculate saturation
-		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+		s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
 
 		// multiply l and s by 100
 		s = +(s * 100).toFixed(1)

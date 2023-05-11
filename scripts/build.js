@@ -40,11 +40,11 @@ await Promise.all(
 			.replace(/\/volver|volver/gm, '')
 			.replace(/src|src\//gm, '')
 		const distDir = dir.replace('src', 'dist')
-		packageJson.exports[`.${exportName ? exportName : ``}`] = `./${
+		packageJson.exports[`.${exportName ? exportName : ''}`] = `./${
 			distDir ? distDir + '/' : ''
 		}${name}.css`
-		packageJson.exports[`./scss${exportName ? exportName : ``}`] =
-			`./${dir}/${name}` + isIndex ? '/index.scss' : '.scss'
+		packageJson.exports[`./scss${exportName ? exportName : ''}`] =
+			`./${dir}/${name}` + (isIndex ? '/index.scss' : '.scss')
 
 		return build({
 			plugins: [stylelint()],
@@ -66,7 +66,15 @@ await Promise.all(
 
 // sort exports
 packageJson.exports = Object.keys(packageJson.exports)
-	.sort((a, b) => (a === '.' ? -1 : b === '.' ? 1 : a > b))
+	.sort((a, b) => {
+		if (a === '.') {
+			return -1
+		}
+		if (b === '.') {
+			return 1
+		}
+		return a > b
+	})
 	.reduce((exports, key) => {
 		exports[key] = packageJson.exports[key]
 		return exports
