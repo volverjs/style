@@ -1,8 +1,8 @@
 @use 'sass:map';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-toast);
-$component-map: $vv-toast;
+$component-name: map.get($components-names, vv-dropdown-optgroup);
+$component-map: $vv-dropdown-optgroup;
 
 @include spread-map-into-bem(
 	$map: $component-map,

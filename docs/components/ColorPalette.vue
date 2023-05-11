@@ -6,7 +6,7 @@
 		},
 	})
 
-	const selected = ref(props.name)
+	const selected = ref()
 	const shades = computed(() =>
 		Object.keys(icssExports['colors']).reduce((acc, key) => {
 			if (typeof key === 'string' && key.startsWith(props.name)) {
@@ -40,19 +40,30 @@
 			) {
 				return -1
 			}
-			if (a.includes('lighten') && b.includes('darken')) {
-				return 1
+			if (a.includes('lighten')) {
+				if (b.includes('darken')) {
+					return 1
+				}
+				if (b.includes('lighten')) {
+					return aNumber - bNumber
+				}
 			}
-			if (a.includes('darken') && b.includes('lighten')) {
-				return -1
-			}
-			if (a.includes('lighten') && b.includes('lighten')) {
-				return aNumber - bNumber
-			}
-			if (a.includes('darken') && b.includes('darken')) {
-				return bNumber - aNumber
+			if (a.includes('darken')) {
+				if (b.includes('lighten')) {
+					return -1
+				}
+				if (b.includes('darken')) {
+					return bNumber - aNumber
+				}
 			}
 		}),
+	)
+	const shadesValues = ref({})
+	const shadesValuesInline = computed(() =>
+		shadesKeys.value.reduce((acc, key) => {
+			acc += `${key}: ${shadesValues.value[key]}\n`
+			return acc
+		}, ''),
 	)
 
 	const documentElement = ref('')
@@ -66,62 +77,76 @@
 		documentElement,
 	)
 
+	const isThemeDark = inject('isThemeDark')
+	watch(isThemeDark, () => {
+		nextTick(() => {
+			if (documentElement.value) {
+				documentElement.value.style = ''
+				nextTick(() => {
+					colorHue.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-hue`)
+					colorSaturation.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-saturation`)
+					colorLightess.value = getComputedStyle(
+						documentElement.value,
+					).getPropertyValue(`--color-${props.name}-lightness`)
+				})
+			}
+		})
+	})
+
 	onMounted(() => {
 		documentElement.value = document.documentElement
-		selectedHls.value = getHls(
-			getComputedStyle(documentElement.value).getPropertyValue(
-				`--color-${selected.value}`,
-			),
-		)
+		selected.value = props.name
 	})
 
-	const colorHls = computed(() => {
-		return {
-			[`--color-${props.name}-hue`]: colorHue.value,
-			[`--color-${props.name}-saturation`]: colorSaturation.value,
-			[`--color-${props.name}-lightness`]: colorLightess.value,
-		}
-	})
-
-	const getPropertyValue = (property) => {
-		return colorHls.value[property]
+	const selectedHls = ref(undefined)
+	const selectedRgb = ref(undefined)
+	const selectedHex = ref(undefined)
+	const colorsEls = ref([])
+	const getComputedStyleRgb = (name) => {
+		const [r, g, b] = window
+			.getComputedStyle(colorsEls.value[name], null)
+			.getPropertyValue('background-color')
+			.replace(/rgb\(|\)/g, '')
+			.split(',')
+			.map((item) => Number(item.trim()))
+		return { r, g, b }
 	}
-
-	const getHls = (color) => {
-		const groups = color
-			.replace(/var\((--color-([a-z-]+))\)/g, (match, p1) => {
-				return getPropertyValue(p1)
-			})
-			.replace(
-				/calc\(\s*(\d|.+)%\s*(?:\+|-)\s*(\d|.+)%\s*\*\s*(\d|.[^\s]+)\s*\)/g,
-				(match, p1, p2, p3) => {
-					return `${
-						parseFloat(p1) + parseFloat(p2) * parseFloat(p3)
-					}%`
-				},
-			)
-			.matchAll(
-				/hsla?\(\s*(\d|.+)deg,?\s*(\d|.+)%,?\s*(\d|.+)%(?:\/1)?\)/g,
-			)
-		for (const [element, h, s, l] of groups) {
-			return { h: Math.ceil(h), s: Math.ceil(s), l: Math.ceil(l) }
-		}
-	}
-
-	const selectedHls = ref('')
 	watchThrottled(
-		[selected, colorHue, colorSaturation, colorLightess],
+		[selected, colorHue, colorSaturation, colorLightess, isThemeDark],
 		() => {
 			if (documentElement.value) {
-				selectedHls.value = getHls(
-					getComputedStyle(documentElement.value).getPropertyValue(
-						`--color-${selected.value}`,
-					),
-				)
+				if (colorsEls.value[selected.value]) {
+					const { r, g, b } = getComputedStyleRgb(selected.value)
+					const { h, s, l } = rgbToHsl(r, g, b)
+					selectedRgb.value = { r, g, b }
+					selectedHls.value = {
+						h: Math.round(h),
+						s: Math.round(s),
+						l: Math.round(l),
+					}
+					selectedHex.value = hslToHex(h, s, l)
+				}
+				shadesKeys.value.forEach((key) => {
+					const rgb = getComputedStyleRgb(key)
+					shadesValues.value[key] = rgbToHex(rgb.r, rgb.g, rgb.b)
+				})
 			}
 		},
 		{ immediate: true, throttle: 500 },
 	)
+
+	const rgbToHex = (r, g, b) =>
+		'#' +
+		[r, g, b]
+			.map((x) => {
+				const hex = x.toString(16)
+				return hex.length === 1 ? '0' + hex : hex
+			})
+			.join('')
 
 	const hslToHex = (h, s, l) => {
 		l /= 100
@@ -136,22 +161,33 @@
 		return `#${f(0)}${f(8)}${f(4)}`
 	}
 
-	const hexToHls = (hex) => {
-		let r = 0,
-			g = 0,
-			b = 0
-		if (hex.length === 4) {
-			r = '0x' + hex[1] + hex[1]
-			g = '0x' + hex[2] + hex[2]
-			b = '0x' + hex[3] + hex[3]
-		} else if (hex.length === 7) {
-			r = '0x' + hex[1] + hex[2]
-			g = '0x' + hex[3] + hex[4]
-			b = '0x' + hex[5] + hex[6]
+	const hexToHsl = (hex) => {
+		const rgb = hexToRgb(hex)
+		if (!rgb) {
+			return undefined
 		}
+		return rgbToHsl(rgb.r, rgb.g, rgb.b)
+	}
+
+	const hexToRgb = (hex) => {
+		const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+		if (!result) {
+			return undefined
+		}
+		return {
+			r: parseInt(result[1], 16),
+			g: parseInt(result[2], 16),
+			b: parseInt(result[3], 16),
+		}
+	}
+
+	const rgbToHsl = (r, g, b) => {
+		// make r, g, and b fractions of 1
 		r /= 255
 		g /= 255
 		b /= 255
+
+		// find greatest and smallest channel values
 		let cmin = Math.min(r, g, b),
 			cmax = Math.max(r, g, b),
 			delta = cmax - cmin,
@@ -159,67 +195,57 @@
 			s = 0,
 			l = 0
 
-		if (delta === 0) h = 0
-		else if (cmax === r) h = ((g - b) / delta) % 6
-		else if (cmax === g) h = (b - r) / delta + 2
+		// calculate hue
+		// no difference
+		if (delta == 0) h = 0
+		// red is max
+		else if (cmax == r) h = ((g - b) / delta) % 6
+		// green is max
+		else if (cmax == g) h = (b - r) / delta + 2
+		// blue is max
 		else h = (r - g) / delta + 4
 
 		h = Math.round(h * 60)
 
+		// make negative hues positive behind 360°
 		if (h < 0) h += 360
 
+		// calculate lightness
 		l = (cmax + cmin) / 2
-		s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+
+		// calculate saturation
+		s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+
+		// multiply l and s by 100
 		s = +(s * 100).toFixed(1)
 		l = +(l * 100).toFixed(1)
+
 		return { h, s, l }
 	}
 
-	const selectedHex = computed(() => {
-		const { h, s, l } = selectedHls.value ?? {}
-		return hslToHex(h, s, l)
-	})
-
-	const hslToRgb = (h, s, l) => {
-		s /= 100
-		l /= 100
-		const k = (n) => (n + h / 30) % 12
-		const a = s * Math.min(l, 1 - l)
-		const f = (n) =>
-			l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)))
-		return {
-			r: Math.ceil(255 * f(0)),
-			g: Math.ceil(255 * f(8)),
-			b: Math.ceil(255 * f(4)),
-		}
-	}
-
-	const selectedRgb = computed(() => {
-		const { h, s, l } = selectedHls.value ?? {}
-		return hslToRgb(h, s, l)
-	})
-
 	const colorHex = computed({
 		get() {
-			if (
-				!colorHue.value ||
-				!colorSaturation.value ||
-				!colorLightess.value
-			) {
-				return ''
-			}
-			return hslToHex(
-				parseFloat(colorHue.value.replace('deg', '')),
-				parseFloat(colorSaturation.value.replace('%', '')),
-				parseFloat(colorLightess.value.replace('%', '')),
-			)
+			return selectedHex.value
 		},
 		set(newValue) {
-			const { h, s, l } = hexToHls(newValue)
-			colorHue.value = `${h}deg`
-			colorSaturation.value = `${s}%`
-			colorLightess.value = `${l}%`
+			const hls = hexToHsl(newValue)
+			if (!hls) {
+				return
+			}
+			colorHue.value = `${hls.h}deg`
+			colorSaturation.value = `${hls.s}%`
+			colorLightess.value = `${hls.l}%`
 		},
+	})
+
+	// copy to clipboard
+	const {
+		copy: copyToClipboard,
+		copied,
+		isSupported: isCopyToClipboardSupported,
+	} = useClipboard({ source: selectedHex })
+	const { copy: copyAllToClipboard, copied: copiedAll } = useClipboard({
+		source: shadesValuesInline,
 	})
 </script>
 
@@ -235,6 +261,11 @@
 				:class="{ 'shade--selected': selected === item }"
 				:style="{ '--bg': `var(--color-${item})` }">
 				<button
+					:ref="
+						(el) => {
+							colorsEls[item] = el
+						}
+					"
 					type="button"
 					:class="`bg-${item}`"
 					class="py-22 cursor-pointer w-full"
@@ -251,19 +282,35 @@
 		<div v-if="selected" class="bg-surface p-md mb-lg shadow-md rounded-lg">
 			<div class="flex flex-col sm:flex-row gap-md flex-1">
 				<div class="flex flex-1 gap-md">
-					<div class="w-100 h-100" :class="`bg-${selected}`"></div>
+					<div
+						class="w-100 h-100 border border-surface-3 relative"
+						:class="`bg-${selected}`">
+						<button
+							v-if="isCopyToClipboardSupported"
+							title="Copy to clipboard"
+							class="inset-0 cursor-pointer absolute flex items-center justify-center"
+							@click.stop="copyToClipboard()">
+							<Transition name="copy-scale">
+								<div
+									v-if="copied"
+									class="w-28 h-28 bg-white text-black rounded-full flex items-center justify-center shadow-2xl">
+									<IconifyIcon icon="akar-icons:copy" />
+								</div>
+							</Transition>
+						</button>
+					</div>
 					<div>
 						<code class="mb-6 block">--color-{{ selected }}</code>
-						<div>
+						<div v-if="selectedHls">
 							<strong class="font-bold">HSL</strong>: hsl({{
 								selectedHls.h
 							}}deg, {{ selectedHls.s }}%, {{ selectedHls.l }}%)
 						</div>
-						<div>
+						<div v-if="selectedHex">
 							<strong class="font-bold">HEX</strong>:
 							{{ selectedHex }}
 						</div>
-						<div>
+						<div v-if="selectedRgb">
 							<strong class="font-bold">RGB</strong>: rgb({{
 								selectedRgb.r
 							}}, {{ selectedRgb.g }}, {{ selectedRgb.b }})
@@ -292,11 +339,28 @@
 					</div>
 				</div>
 			</div>
+			<button
+				v-if="isCopyToClipboardSupported"
+				type="button"
+				class="vv-button vv-button--action-quiet"
+				@click.stop="copyAllToClipboard()">
+				<IconifyIcon icon="akar-icons:copy" /> Copy all shades
+				<Transition name="copy-scale">
+					<span
+						v-if="copiedAll"
+						role="status"
+						class="vv-badge vv-badge--sm vv-badge--rounded vv-badge--success">
+						Copied!
+					</span>
+				</Transition>
+			</button>
 		</div>
 	</div>
 </template>
 
 <style lang="scss">
+	@use '@/context' as *;
+
 	.shade {
 		position: relative;
 		padding-bottom: var(--spacing-10);
@@ -316,5 +380,16 @@
 				border-color: var(--bg) transparent transparent;
 			}
 		}
+	}
+
+	.copy-scale-enter-active,
+	.copy-scale-leave-active {
+		transition: var(--transition-all);
+	}
+
+	.copy-scale-enter-from,
+	.copy-scale-leave-to {
+		opacity: var(--opacity-0);
+		transform: scale(0);
 	}
 </style>

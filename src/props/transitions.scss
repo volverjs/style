@@ -130,6 +130,16 @@
 	}
 }
 
+@keyframes fade-out {
+	95% {
+		opacity: 1;
+	}
+
+	100% {
+		opacity: 0;
+	}
+}
+
 @keyframes shine {
 	to {
 		background-position-x: -200%;

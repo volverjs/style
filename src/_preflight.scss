@@ -340,7 +340,7 @@
 				@extend %vv-textarea--disabled !optional;
 			}
 
-			&:readonly {
+			&:read-only {
 				@extend %vv-textarea--readonly !optional;
 			}
 		}
@@ -395,7 +395,7 @@
 				@extend %vv-input-text--disabled !optional;
 			}
 
-			&:readonly {
+			&:read-only {
 				@extend %vv-input-text--readonly !optional;
 			}
 		}

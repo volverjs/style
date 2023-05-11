@@ -14,6 +14,43 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <small id="textarea-hint" class="vv-textarea__hint">Please fill the
         input above.</small>
 </div>
+
+<div class="vv-textarea">
+    <label for="textarea-dirty">Dirty Textarea</label>
+    <div class="vv-textarea__wrapper">
+        <textarea id="textarea-dirty" 
+                  name="textarea-dirty" 
+                  placeholder="Placeholder text" 
+                  aria-describedby="textarea-dirty-hint">Lorem ipsum dolor sit amet</textarea>
+    </div>
+    <small id="textarea-dirty-hint" class="vv-textarea__hint">Please fill the
+        input above.</small>
+</div>
+
+<div class="vv-textarea">
+    <label for="textarea-hover">Hover Textarea</label>
+    <div class="vv-textarea__wrapper hover">
+        <textarea id="textarea-hover" 
+                  name="textarea-hover" 
+                  placeholder="Placeholder text" 
+                  aria-describedby="textarea-hover-hint"></textarea>
+    </div>
+    <small id="textarea-hover-hint" class="vv-textarea__hint">Please fill the
+        input above.</small>
+</div>
+
+<div class="vv-textarea">
+    <label for="textarea-focus">Focus Textarea</label>
+    <div class="vv-textarea__wrapper focus-within">
+        <textarea id="textarea-focus" 
+                  name="textarea-focus" 
+                  placeholder="Placeholder text" 
+                  aria-describedby="textarea-focus-hint"></textarea>
+    </div>
+    <small id="textarea-focus-hint" class="vv-textarea__hint">Please fill the
+        input above.</small>
+</div>
+
 <div class="vv-textarea 
             vv-textarea--disabled">
     <label for="textarea-disabled">Disabled Textarea</label>
@@ -27,6 +64,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <small id="textarea-disabled-hint" class="vv-textarea__hint">Please
         fill the input above.</small>
 </div>
+
 <div class="vv-textarea 
             vv-textarea--readonly
             vv-textarea--dirty">
@@ -41,6 +79,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
                   tabindex="-1">Lorem ipsum dolor sit amet</textarea>
     </div>
 </div>
+
 <div class="vv-textarea 
             vv-textarea--valid">
     <label for="textarea-success">Valid Textarea</label>
@@ -54,6 +93,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <small id="textarea-success-hint" class="vv-textarea__hint">The
         input above is successful.</small>
 </div>
+
 <div class="vv-textarea 
             vv-textarea--invalid">
     <label for="textarea-invalid">Invalid Textarea</label>
@@ -67,6 +107,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <small id="textarea-invalid-hint" class="vv-textarea__hint">There
         was an error with the input above.</small>
 </div>
+
 <div class="vv-textarea 
             vv-textarea--loading">
     <label for="textarea-loading">Loading Textarea</label>

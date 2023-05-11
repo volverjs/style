@@ -39,7 +39,9 @@ Or cherry pick what you want.
 ```
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-  <div class="vv-alert__title">Warning</div>
+  <div class="vv-alert__header">
+    <div class="vv-alert__title">Warning</div>
+  </div>
   <div class="vv-alert__content"><code>@volverjs/style/props</code> are required to use <code>@volverjs/style/components</code>.</div>
 </div>
 
@@ -60,7 +62,7 @@ Or only *SCSS* context for *variables*, *mixins* and *functions*.
 Alternatively, you can use the [unpkg](https://unpkg.com/) CDN and load the style directly in document `head`.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@volverjs/style" />
+<link rel="stylesheet" href="https://unpkg.com/@volverjs/style" rel="noopener noreferrer" />
 ```
 
 ### Install Manually

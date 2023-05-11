@@ -17,10 +17,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-input-text__hint">
+    <small id="select-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
+
 <div class="vv-select vv-select--dirty">
     <label for="select-dirty">Dirty Select</label>
     <div class="vv-select__wrapper">
@@ -35,10 +36,49 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-dirty-hint" class="vv-input-text__hint">
+    <small id="select-dirty-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
+
+<div class="vv-select">
+    <label for="select-hover">Hover Select</label>
+    <div class="vv-select__wrapper hover">
+        <select id="select-hover"
+                name="select" 
+                aria-describedby="select-hover-hint">
+            <option value="" disabled="disabled" selected="selected">
+                Placeholder text
+            </option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+    </div>
+    <small id="select-hover-hint" class="vv-select__hint">
+        Please fill the input above.
+    </small>
+</div>
+
+<div class="vv-select">
+    <label for="select-focus">Focus Select</label>
+    <div class="vv-select__wrapper focus-within">
+        <select id="select-focus"
+                name="select" 
+                aria-describedby="select-focus-hint">
+            <option value="" disabled="disabled" selected="selected">
+                Placeholder text
+            </option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+    </div>
+    <small id="select-focus-hint" class="vv-select__hint">
+        Please fill the input above.
+    </small>
+</div>
+
 <div class="vv-select">
     <label for="select-disabled">Disabled Select</label>
     <div class="vv-select__wrapper">
@@ -54,10 +94,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-disabled-hint" class="vv-input-text__hint">
+    <small id="select-disabled-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
+
 <div class="vv-select vv-select--readonly vv-select--dirty">
     <label for="select-readonly">Readonly Select</label>
     <div class="vv-select__wrapper">
@@ -75,6 +116,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         </select>
     </div>
 </div>
+
 <div class="vv-select 
             vv-select--dirty
             vv-select--valid">
@@ -92,10 +134,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-valid-hint" class="vv-input-text__hint">
+    <small id="select-valid-hint" class="vv-select__hint">
         The input above is successful.
     </small>
 </div>
+
 <div class="vv-select 
             vv-select--invalid">
     <label for="select-invalid">Invalid Select</label>
@@ -112,10 +155,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-invalid-hint" class="vv-input-text__hint">
+    <small id="select-invalid-hint" class="vv-select__hint">
         There was an error with the input above.
     </small>
 </div>
+
 <div class="vv-select 
             vv-select--loading">
     <label for="select-loading">Loading Select</label>
@@ -131,7 +175,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-loading-hint" class="vv-input-text__hint">
+    <small id="select-loading-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>

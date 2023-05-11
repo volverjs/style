@@ -8,6 +8,11 @@ $vv-table: (
 			_alias: 'caption',
 			caption-side: bottom,
 			[padding]: var(--table-cell-padding),
+			state: (
+				empty: (
+					display: none,
+				),
+			),
 		),
 		tr: (
 			_alias: 'tr',

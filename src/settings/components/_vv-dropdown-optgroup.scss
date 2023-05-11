@@ -1,0 +1,13 @@
+$vv-dropdown-optgroup: (
+	display: flex,
+	min-width: 0,
+	overflow: hidden,
+	gap: var(--spacing-sm),
+	align-items: center,
+	padding: var(--spacing-xs) var(--spacing-sm),
+	white-space: nowrap,
+	text-transform: uppercase,
+	font-size: var(--text-xs),
+	font-weight: var(--font-bold),
+	background-color: var(--color-surface-2),
+);

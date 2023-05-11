@@ -37,7 +37,9 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 ```
 
 <div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-  <div class="vv-alert__title">Warning</div>
+  <div class="vv-alert__header">
+    <div class="vv-alert__title">Warning</div>
+  </div>
   <div class="vv-alert__content">
     Disabling the use of CSS Custom Properties for components will not permit to use themes.
   </div>

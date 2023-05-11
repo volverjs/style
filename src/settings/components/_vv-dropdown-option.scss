@@ -3,7 +3,7 @@ $vv-dropdown-option: (
 	min-width: 0,
 	overflow: hidden,
 	gap: var(--spacing-sm),
-	align-items: center,
+	align-items: flex-end,
 	padding: var(--spacing-sm),
 	state: (
 		disabled: (
@@ -55,6 +55,11 @@ $vv-dropdown-option: (
 			margin-left: auto,
 			font-size: 0.8em,
 			font-weight: var(--font-normal),
+			text-overflow: ellipsis,
+			white-space: nowrap,
+			overflow: hidden,
+		),
+		label: (
 			text-overflow: ellipsis,
 			white-space: nowrap,
 			overflow: hidden,

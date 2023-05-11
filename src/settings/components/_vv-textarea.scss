@@ -10,7 +10,6 @@ $vv-textarea: (
 		label: (
 			_alias: '> label',
 			display: var(--input-label-display),
-			align-items: var(--input-label-align-items),
 			font-size: var(--input-label-font-size),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
@@ -61,10 +60,10 @@ $vv-textarea: (
 			),
 			state: (
 				hover: (
-					background-color: var(--color-surface-3),
+					background-color: var(--input-background-color-hover),
 				),
 				focus-within: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -81,10 +80,10 @@ $vv-textarea: (
 			[padding]: var(--input-spacing-top) var(--input-spacing-right)
 				var(--input-spacing-bottom) var(--input-spacing-left),
 			overflow: auto,
+			text-overflow: var(--input-text-overflow),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),
-					text-overflow: ellipsis,
 				),
 			),
 			state: (
@@ -93,6 +92,7 @@ $vv-textarea: (
 				),
 				readonly: (
 					cursor: text,
+					user-select: text,
 				),
 			),
 		),
@@ -138,7 +138,6 @@ $vv-textarea: (
 			white-space: var(--input-hint-white-space),
 			text-overflow: var(--input-hint-text-overflow),
 			overflow: var(--input-hint-overflow),
-			max-width: var(--input-hint-max-width),
 		),
 	),
 	modifier: (
@@ -201,11 +200,8 @@ $vv-textarea: (
 			element: (
 				wrapper: (
 					pseudo: (
-						before: (
-							height: 2px,
-							background: var(--color-brand-lighten-5),
-						),
 						after: (
+							opacity: var(--opacity-100),
 							animation: var(--animation-indeterminate),
 						),
 					),
@@ -213,6 +209,7 @@ $vv-textarea: (
 			),
 		),
 		floating: (
+			position: relative,
 			[margin-left]: var(--input-spacing-left),
 			[margin-right]: var(--input-spacing-right),
 			element: (
@@ -228,10 +225,9 @@ $vv-textarea: (
 					position: absolute,
 					z-index: 1,
 					min-height: var(--input-min-height),
+					line-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
-					[padding-top]: var(--input-spacing-top),
-					[padding-bottom]: var(--input-spacing-bottom),
 					padding-inline: 0,
 					margin: 0,
 					will-change: 'transform',
@@ -296,7 +292,10 @@ $vv-textarea: (
 				wrapper: (
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),
@@ -306,13 +305,19 @@ $vv-textarea: (
 			element: (
 				wrapper: (
 					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
 						after: (
-							opacity: 0,
+							opacity: var(--opacity-0),
 						),
 					),
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),

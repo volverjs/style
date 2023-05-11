@@ -39,12 +39,14 @@ $vv-radio: (
 	element: (
 		input: (
 			_alias: "> input[type='radio']",
-			border: var(--spacing-2) solid var(--input-color),
+			border-width: var(--spacing-2),
+			border-style: solid,
+			border-color: var(--input-color),
 			min-width: var(--spacing-20),
 			height: var(--spacing-20),
 			border-radius: 50%,
 			margin: 0 var(--input-label-gap) 0 0,
-			background: transparent,
+			background-color: transparent,
 			cursor: pointer,
 			position: relative,
 			pseudo: (
@@ -52,7 +54,7 @@ $vv-radio: (
 					position: absolute,
 					width: 70%,
 					height: 70%,
-					background: var(--input-color),
+					background-color: var(--input-color),
 					inset: 50% 50%,
 					border-radius: 50%,
 					transform: translate(-50%, -50%) scale(0),

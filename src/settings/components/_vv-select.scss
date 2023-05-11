@@ -11,7 +11,6 @@ $vv-select: (
 		label: (
 			_alias: '> label',
 			display: var(--input-label-display),
-			align-items: var(--input-label-align-items),
 			font-size: var(--input-label-font-size),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
@@ -48,10 +47,10 @@ $vv-select: (
 			),
 			state: (
 				hover: (
-					background-color: var(--color-surface-3),
+					background-color: var(--input-background-color-hover),
 				),
 				focus-within: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -59,7 +58,7 @@ $vv-select: (
 					),
 				),
 				open: (
-					background-color: var(--color-surface-2),
+					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
 							transform: scaleX(1),
@@ -92,6 +91,8 @@ $vv-select: (
 			background-size: 1em,
 			min-height: var(--input-min-height),
 			gap: 0.5ch,
+			text-overflow: var(--input-text-overflow),
+			white-space: nowrap,
 			state: (
 				disabled: (
 					cursor: not-allowed,
@@ -139,7 +140,6 @@ $vv-select: (
 			white-space: var(--input-hint-white-space),
 			text-overflow: var(--input-hint-text-overflow),
 			overflow: var(--input-hint-overflow),
-			max-width: var(--input-hint-max-width),
 		),
 	),
 	modifier: (
@@ -226,11 +226,8 @@ $vv-select: (
 			element: (
 				wrapper: (
 					pseudo: (
-						before: (
-							height: 2px,
-							background: var(--color-brand-lighten-5),
-						),
 						after: (
+							opacity: var(--opacity-100),
 							animation: var(--animation-indeterminate),
 						),
 					),
@@ -238,6 +235,7 @@ $vv-select: (
 			),
 		),
 		floating: (
+			position: relative,
 			[margin-left]: var(--input-spacing-left),
 			[margin-right]: var(--input-spacing-right),
 			element: (
@@ -253,10 +251,9 @@ $vv-select: (
 					position: absolute,
 					z-index: 1,
 					min-height: var(--input-min-height),
+					line-height: var(--input-min-height),
 					pointer-events: none,
 					font-size: inherit,
-					[padding-top]: var(--input-spacing-top),
-					[padding-bottom]: var(--input-spacing-bottom),
 					padding-inline: 0,
 					margin: 0,
 					will-change: 'transform',
@@ -302,17 +299,24 @@ $vv-select: (
 		),
 		readonly: (
 			opacity: var(--opacity-100),
+			cursor: text,
 			user-select: text,
 			element: (
 				wrapper: (
 					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
 						after: (
 							opacity: var(--opacity-0),
 						),
 					),
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),
@@ -330,7 +334,10 @@ $vv-select: (
 				wrapper: (
 					state: (
 						hover: (
-							background-color: var(--color-surface-1),
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
 						),
 					),
 				),

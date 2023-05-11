@@ -102,7 +102,9 @@
 					v-if="breakpoints"
 					class="vv-alert vv-alert--callout vv-alert--brand mb-lg"
 					role="alert">
-					<div class="vv-alert__title">Breakpoints</div>
+					<div class="vv-alert__header">
+						<div class="vv-alert__title">Breakpoints</div>
+					</div>
 					<div class="vv-alert__content">
 						<p class="mb-12">
 							This set of utilities can be used with breakpoint
@@ -129,7 +131,9 @@
 					v-if="colors"
 					class="vv-alert vv-alert--callout vv-alert--accent mb-lg"
 					role="alert">
-					<div class="vv-alert__title">Colors</div>
+					<div class="vv-alert__header">
+						<div class="vv-alert__title">Colors</div>
+					</div>
 					<div class="vv-alert__content">
 						<p class="mb-12">
 							This set of utilities use the color palette.
@@ -153,7 +157,9 @@
 					v-if="spacing"
 					class="vv-alert vv-alert--callout vv-alert--gray mb-lg"
 					role="alert">
-					<div class="vv-alert__title">Spacing</div>
+					<div class="vv-alert__header">
+						<div class="vv-alert__title">Spacing</div>
+					</div>
 					<div class="vv-alert__content">
 						<p class="mb-12">
 							This set of utilities use the static and dynamic

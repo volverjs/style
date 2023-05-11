@@ -24,6 +24,7 @@ $vv-nav: (
 			will-change: background-color color,
 			transition: var(--transition-all),
 			color: var(--color-word-3),
+			cursor: pointer,
 			[padding]: var(--nav-item-padding),
 			state: (
 				hover: (
