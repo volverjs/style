@@ -40,17 +40,21 @@
 			) {
 				return -1
 			}
-			if (a.includes('lighten') && b.includes('darken')) {
-				return 1
+			if (a.includes('lighten')) {
+				if (b.includes('darken')) {
+					return 1
+				}
+				if (b.includes('lighten')) {
+					return aNumber - bNumber
+				}
 			}
-			if (a.includes('darken') && b.includes('lighten')) {
-				return -1
-			}
-			if (a.includes('lighten') && b.includes('lighten')) {
-				return aNumber - bNumber
-			}
-			if (a.includes('darken') && b.includes('darken')) {
-				return bNumber - aNumber
+			if (a.includes('darken')) {
+				if (b.includes('lighten')) {
+					return -1
+				}
+				if (b.includes('darken')) {
+					return bNumber - aNumber
+				}
 			}
 		}),
 	)

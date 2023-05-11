@@ -62,7 +62,7 @@ Or only *SCSS* context for *variables*, *mixins* and *functions*.
 Alternatively, you can use the [unpkg](https://unpkg.com/) CDN and load the style directly in document `head`.
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@volverjs/style" />
+<link rel="stylesheet" href="https://unpkg.com/@volverjs/style" rel="noopener noreferrer" />
 ```
 
 ### Install Manually

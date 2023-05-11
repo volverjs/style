@@ -3,7 +3,7 @@ title: Colors
 wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
 ---
 
-<div class="vv-alert" role="alert">
+<div class="vv-alert vv-alert--nowrap" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:heart" />
     <strong class="vv-alert__title">Tip!</strong>
@@ -13,7 +13,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--success" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--success" role="alert">
   <div class="vv-alert__header">
 <IconifyIcon icon="akar-icons:check" />
     <strong class="vv-alert__title">Success!</strong>
@@ -23,7 +23,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--danger" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--danger" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:block" />
     <strong class="vv-alert__title">Danger!</strong>
@@ -33,7 +33,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--warning" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--warning" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:triangle-alert" />
     <strong class="vv-alert__title">Warning!</strong>
@@ -43,7 +43,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--info" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--info" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:music" />
     <strong class="vv-alert__title">Info!</strong>
@@ -53,7 +53,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--accent" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--accent" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:key" />
     <strong class="vv-alert__title">Accent!</strong>
@@ -63,7 +63,7 @@ wrapperClass: flex flex-1 flex-col gap-md overflow-hidden
   </div>
 </div>
 
-<div class="vv-alert vv-alert--brand" role="alert">
+<div class="vv-alert vv-alert--nowrap vv-alert--brand" role="alert">
   <div class="vv-alert__header">
     <IconifyIcon icon="akar-icons:trophy" />
     <strong class="vv-alert__title">Brand!</strong>

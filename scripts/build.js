@@ -41,11 +41,10 @@ await Promise.all(
 			.replace(/src|src\//gm, '')
 		const distDir = dir.replace('src', 'dist')
 		packageJson.exports[`.${exportName ? exportName : ``}`] = `./${
-			distDir ? `${distDir}/` : ``
+			distDir ? distDir + '/' : ''
 		}${name}.css`
-		packageJson.exports[
-			`./scss${exportName ? exportName : ``}`
-		] = `./${dir}/${name}${isIndex ? '/index.scss' : '.scss'}`
+		packageJson.exports[`./scss${exportName ? exportName : ``}`] =
+			`./${dir}/${name}` + isIndex ? '/index.scss' : '.scss'
 
 		return build({
 			plugins: [stylelint()],

@@ -19,7 +19,7 @@ $vv-alert: (
 			display: flex,
 			align-items: center,
 			gap: var(--spacing-sm),
-			line-height: var(--leading-none),
+			line-height: var(--leading-normal),
 			color: var(--color-word),
 			overflow: hidden,
 			text-overflow: ellipsis,
@@ -144,6 +144,14 @@ $vv-alert: (
 			position: relative,
 			padding-right: calc(var(--spacing-md) * 2 + 1em),
 		),
+		nowrap: (
+			breakpoint: (
+				sm: (
+					flex-wrap: nowrap,
+					white-space: nowrap,
+				),
+			),
+		),
 		auto-close: (
 			element: (
 				close: (
@@ -220,7 +228,7 @@ $vv-alert: (
 			gap: var(--spacing-0),
 			element: (
 				header: (
-					padding: var(--spacing-sm),
+					padding: var(--spacing-xs) var(--spacing-sm),
 					background-color: var(--color-gray-darken-1),
 					color: var(--color-white),
 				),

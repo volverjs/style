@@ -72,6 +72,9 @@
 		<table
 			v-if="Object.keys(items).length"
 			class="vv-table vv-table--inline-spacing">
+			<caption>
+				<slot name="caption" />
+			</caption>
 			<thead class="sticky z-sticky top-0 bg-surface-1">
 				<tr>
 					<th v-if="!hideClass">{{ labelClass }}</th>

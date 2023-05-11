@@ -13,7 +13,9 @@
 
 <template>
 	<div class="flex flex-col h-full relative">
-		<nav class="flex border-b border-surface-3 p-16 items-center">
+		<nav
+			class="flex border-b border-surface-3 p-16 items-center"
+			aria-label="Top navigation">
 			<button
 				type="button"
 				class="vv-button vv-button--action-quiet mr-sm md:none"
@@ -50,6 +52,7 @@
 				<a
 					href="https://github.com/volverjs/style"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="vv-button vv-button--action-quiet"
 					title="GitHub">
 					<IconifyIcon icon="akar-icons:github-fill" />
@@ -65,7 +68,9 @@
 					@click.stop="toggleAside()"></div>
 				<div
 					class="w-288 h-full border-r border-surface-3 off-canvas__aside bg-surface h-full overflow-y-auto">
-					<nav class="vv-nav vv-nav--sidebar p-lg">
+					<nav
+						class="vv-nav vv-nav--sidebar p-lg"
+						aria-label="Main menu">
 						<ul class="vv-nav__menu" role="menu">
 							<template
 								v-for="(section, sectionIndex) in mainMenu"
@@ -150,10 +155,7 @@
 
 		&__overlay {
 			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
+			inset: 0;
 			z-index: 1;
 			will-change: opacity;
 			transition: var(--transition-opacity);

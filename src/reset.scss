@@ -43,7 +43,7 @@
 
 /* removes spacing between cells in tables */
 :where(table) {
-	border-accordion: accordion;
+	border-collapse: collapse;
 }
 
 /* Safari - solving issue when using user-select:none on the <body> text input doesn't working */

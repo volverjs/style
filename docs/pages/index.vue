@@ -20,6 +20,7 @@
 				<a
 					href="https://github.com/volverjs/style"
 					target="_blank"
+					rel="noopener noreferrer"
 					class="ml-auto">
 					<IconifyIcon
 						class="text-32 p-4"
@@ -40,6 +41,7 @@
 					<a
 						href="https://github.com/volverjs/style"
 						class="font-normal"
+						rel="noopener noreferrer"
 						target="_blank"
 						>@volverjs/style</a
 					>
@@ -47,6 +49,7 @@
 					<a
 						href="https://github.com/volverjs/ui-vue"
 						class="font-normal"
+						rel="noopener noreferrer"
 						target="_blank"
 						>@volverjs/ui-vue</a
 					>
