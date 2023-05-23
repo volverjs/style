@@ -16,13 +16,13 @@ The `menu` role is used for lists of choices to the user.
 
 <code-editor resource-folder="dropdown" resource-name="menu"></code-editor>
 
-<!-- ### Mobile Listbox
-The `listbox` role is used for lists from which a user may select one or more items.
+### Dialog
+With `dialog` modifer, the dropdown will be rendered as a dialog.
 
-<code-editor resource-folder="dropdown" resource-name="mobile-listbox"></code-editor> -->
+<code-editor resource-folder="dropdown" resource-name="dialog"></code-editor> 
 
-<!-- 
-### Mobile menu
-The `menu` role is used for lists of choices to the user.
-
-<code-editor resource-folder="dropdown" resource-name="mobile-menu"></code-editor> -->
+<div class="vv-alert vv-alert--callout vv-alert--info mb-lg">
+  <div class="vv-alert__content">
+    The same effect can be achieved on mobile by using the <code>mobile</code> modifier.
+  </div>
+</div>

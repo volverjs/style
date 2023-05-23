@@ -10,7 +10,6 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                 transition: 'fade-block',
                 size: 'standard',
                 open: false,
-                openAttribute: false,
             }
         },
         computed: {
@@ -23,7 +22,11 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
                 this.open = !this.open;
             },
             toggleOpenAttribute() {
-                this.openAttribute = !this.openAttribute;
+                if (this.open) {
+                    this.$refs.dialog.showModal();
+                } else {
+                    this.$refs.dialog.close()
+                }
             },
         }
     }
@@ -100,7 +103,7 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
         Open Dialog
     </button>
     <Transition :name="transitionName" @after-leave="toggleOpenAttribute" @before-enter="toggleOpenAttribute">
-        <dialog v-show="open" id="dialog" ref="dialog" class="vv-dialog" :class="`vv-dialog--${size}`" :open="openAttribute">
+        <dialog v-show="open" id="dialog" ref="dialog" class="vv-dialog" :class="`vv-dialog--${size}`">
             <article class="vv-dialog__wrapper">
                 <header class="vv-dialog__header">
                     Dialog title 

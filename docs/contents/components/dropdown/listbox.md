@@ -2,7 +2,7 @@
 title: Listbox
 wrapperClass: flex flex-1 flex-wrap gap-md items-center justify-center
 ---
-<div class="vv-dropdown vv-dropdown--mobile-options">
+<div class="vv-dropdown">
   <ul class="vv-dropdown__list" role="listbox">
     <li class="vv-dropdown-optgroup" 
       role="presentation" 
