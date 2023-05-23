@@ -1,5 +1,6 @@
 $vv-dropdown: (
 	--dropdown-border-radius: 0px,
+	--dropdown-custom-position: false,
 	position: relative,
 	z-index: var(--z-dropdown),
 	display: flex,
@@ -105,6 +106,67 @@ $vv-dropdown: (
 			element: (
 				item: (
 					min-width: 20ch,
+				),
+			),
+		),
+		mobile-actions: (
+			--dropdown-custom-position: true,
+			position: fixed,
+			inset: 0,
+			z-index: var(--z-fixed),
+			width: auto,
+			top: auto,
+			breakpoint: (
+				sm: (
+					--dropdown-custom-position: false,
+					position: relative,
+					inset: unset,
+					z-index: var(--z-dropdown),
+					width: 'max-content',
+					top: unset,
+				),
+			),
+		),
+		mobile-options: (
+			--dropdown-custom-position: true,
+			position: fixed,
+			z-index: var(--z-fixed),
+			width: 100vw,
+			height: 100vh,
+			backdrop-filter: brightness(0.5),
+			top: 0,
+			breakpoint: (
+				sm: (
+					--dropdown-custom-position: false,
+					height: unset,
+					position: relative,
+					z-index: var(--z-dropdown),
+					display: flex,
+					flex-direction: column,
+					box-shadow: var(--shadow-lg),
+					width: 'max-content',
+				),
+			),
+			element: (
+				list: (
+					position: fixed,
+					z-index: var(--z-fixed),
+					left: 50%,
+					transform: translate(-50%, -50%),
+					top: 50%,
+					breakpoint: (
+						sm: (
+							_alias: 'ul',
+							[border-radius]: var(--dropdown-border-radius),
+							background-color: var(--color-surface-1),
+							overflow: auto,
+							left: unset,
+							inset: unset,
+							z-index: unset,
+							transform: unset,
+							top: unset,
+						),
+					),
 				),
 			),
 		),
