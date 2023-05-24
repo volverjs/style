@@ -1,5 +1,6 @@
 $vv-dropdown: (
 	--dropdown-border-radius: 0px,
+	--dropdown-custom-position: false,
 	position: relative,
 	z-index: var(--z-dropdown),
 	display: flex,
@@ -105,6 +106,88 @@ $vv-dropdown: (
 			element: (
 				item: (
 					min-width: 20ch,
+				),
+			),
+		),
+		dialog: (
+			--dropdown-border-radius: var(--rounded-lg),
+			--dropdown-custom-position: true,
+			position: fixed,
+			display: flex,
+			inset: 0,
+			width: auto,
+			height: auto,
+			z-index: var(--z-modal-backdrop),
+			background-color: var(--color-backdrop),
+			backdrop-filter: var(--blur-sm),
+			justify-content: flex-end,
+			align-items: center,
+			padding: var(--spacing-lg),
+			gap: var(--spacing-md),
+			state: (
+				close: (
+					display: none,
+				),
+			),
+			element: (
+				list: (
+					max-width: clamp(30dvw, 40rem, 90dvw),
+					z-index: var(--z-modal),
+				),
+			),
+		),
+		mobile: (
+			breakpoint: (
+				down-xs: (
+					--dropdown-border-radius: var(--rounded-lg),
+					--dropdown-custom-position: true,
+					position: fixed,
+					inset: 0,
+					width: auto,
+					height: auto,
+					z-index: var(--z-modal-backdrop),
+					background-color: var(--color-backdrop),
+					backdrop-filter: var(--blur-sm),
+					justify-content: flex-end,
+					padding: var(--spacing-lg),
+					gap: var(--spacing-md),
+				),
+			),
+			element: (
+				list: (
+					breakpoint: (
+						down-xs: (
+							z-index: var(--z-modal),
+						),
+					),
+				),
+			),
+		),
+	),
+	transition: (
+		fade-block: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					list: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			enter-from: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						transform: translateY(100%),
+					),
+				),
+			),
+			leave-to: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						transform: translateY(100%),
+					),
 				),
 			),
 		),
