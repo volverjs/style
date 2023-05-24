@@ -10,6 +10,7 @@ permissions:
     contents: read
     pages: write
     id-token: write
+    pull-requests: read
 
 # Allow one concurrent deployment
 concurrency:
@@ -17,42 +18,17 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
+    # Sonarcloud analysis
+    analysis:
+        uses: ./.github/workflows/sonarcloud.yml
+        secrets: inherit
+
+    # Build package and pages
     build:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: pnpm/action-setup@v2.2.2
-              with:
-                  version: 7
-            - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
-              with:
-                  node-version: ${{ matrix.node-version }}
-                  cache: 'pnpm'
-            - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
-            - name: Build release
-              run: pnpm build
-            - name: Bump version with release tag name
-              run: pnpm version --no-git-tag-version ${{ github.event.release.tag_name }}
-            - name: Pack package
-              run: pnpm pack
-            - name: Upload artifact
-              uses: actions/upload-artifact@v3
-              with:
-                  name: package
-                  path: '*.tgz'
-            - name: Build stileguide
-              run: pnpm styleguide
-            - name: Setup GitHub Pages
-              uses: actions/configure-pages@v2
-            - name: Upload styleguide
-              uses: actions/upload-pages-artifact@v1
-              with:
-                  path: './styleguide'
+        uses: ./.github/workflows/build.yml
 
     publish-npm:
-        needs: build
+        needs: [build, analysis]
         runs-on: ubuntu-latest
         steps:
             - name: Download artifact
@@ -68,7 +44,7 @@ jobs:
                   NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
     publish-gpr:
-        needs: build
+        needs: [build, analysis]
         runs-on: ubuntu-latest
         permissions:
             contents: read
@@ -87,11 +63,11 @@ jobs:
                   NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     deploy:
+        needs: [build, analysis]
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
-        needs: build
         steps:
             - name: Deploy to GitHub Pages
               id: deployment
