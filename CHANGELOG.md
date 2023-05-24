@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.11] - 2023-05-12
+## [0.1.11] - 2023-05-24
+
+### Added
+
+- `vv-dropdown` `mobile` modifier
 
 ### Fixed
 
