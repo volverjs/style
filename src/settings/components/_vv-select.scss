@@ -73,6 +73,11 @@ $vv-select: (
 			flex: 1,
 			width: 100%,
 		),
+		value: (
+			text-overflow: var(--input-text-overflow),
+			white-space: nowrap,
+			overflow: hidden,
+		),
 		input: (
 			_alias: 'select',
 			display: flex,

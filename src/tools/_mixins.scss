@@ -667,7 +667,68 @@
 	}
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $breakpoint, $value in map.get($map, $key) {
-			@if map.has-key($bps, $breakpoint) {
+			@if string.index($breakpoint, '-') {
+				$operator: list.nth(string.split($breakpoint, '-'), 1);
+				$bp: list.nth(string.split($breakpoint, '-'), 2);
+
+				@if map.has-key($bps, $bp) {
+					@if $operator == 'up' {
+						@include wrap-with-where(
+							$selector: '#{$modifier}#{$block}',
+							$enabled: $zero-specificity
+						) {
+							@include media-breakpoint-up($bp, $bps) {
+								@include spread-map-into-attrs(
+									$original: $original,
+									$map: $value,
+									$prefix: $prefix,
+									$variant: #{$key}-#{$breakpoint},
+									$deep: true,
+									$props: $props
+								);
+							}
+						}
+					}
+					@if $operator == 'down' {
+						@include wrap-with-where(
+							$selector: '#{$modifier}#{$block}',
+							$enabled: $zero-specificity
+						) {
+							@include media-breakpoint-down($bp, $bps) {
+								@include spread-map-into-attrs(
+									$original: $original,
+									$map: $value,
+									$prefix: $prefix,
+									$variant: #{$key}-#{$breakpoint},
+									$deep: true,
+									$props: $props
+								);
+							}
+						}
+					}
+					@if map.has-key($bps, $operator) {
+						@include wrap-with-where(
+							$selector: '#{$modifier}#{$block}',
+							$enabled: $zero-specificity
+						) {
+							@include media-breakpoint-between(
+								$operator,
+								$bp,
+								$bps
+							) {
+								@include spread-map-into-attrs(
+									$original: $original,
+									$map: $value,
+									$prefix: $prefix,
+									$variant: #{$key}-#{$breakpoint},
+									$deep: true,
+									$props: $props
+								);
+							}
+						}
+					}
+				}
+			} @else if map.has-key($bps, $breakpoint) {
 				@include wrap-with-where(
 					$selector: '#{$modifier}#{$block}',
 					$enabled: $zero-specificity
