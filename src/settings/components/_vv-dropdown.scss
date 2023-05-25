@@ -158,6 +158,7 @@ $vv-dropdown: (
 					breakpoint: (
 						down-xs: (
 							z-index: var(--z-modal),
+							margin-bottom: auto,
 						),
 					),
 				),
