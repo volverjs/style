@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Depfu](https://badges.depfu.com/badges/bb76a99db33bb40379950c71c172e7da/status.svg)](https://depfu.com) [![Depfu](https://badges.depfu.com/badges/bb76a99db33bb40379950c71c172e7da/overview.svg)](https://depfu.com/github/volverjs/style?project_id=38570)
+
 <div align="center">
 
 [![volverjs](public/volverjs.svg)](https://volverjs.github.io/style)
