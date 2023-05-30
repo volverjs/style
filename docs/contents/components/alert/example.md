@@ -1,6 +1,6 @@
 ---
 title: Example
-wrapperClass: flex flex-1 flex-wrap gap-md items-center
+wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
 ---
 
 <script>
@@ -185,33 +185,35 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             `vv-alert-group--${positionBlock}-${positionInline}`, 
             {'vv-alert-group--stack': stackEnabled, 'vv-alert-group--reverse': reverseEnabled}
           ]">
-      <TransitionGroup :name="transitionName" role="group">
-        <div
-            v-for="item in items"
-            :key="item[0]"
-            :class="[
-              `vv-alert--${item[1].color}`, {
-                'vv-alert--notification': notificationEnabled, 
-                'vv-alert--auto-close': item[1].autoClose
-              }
-            ]"
-            @mouseover.passive="onMouseover(item[0])"
-		        @mouseleave.passive="onMouseleave(item[0])"
-            class="vv-alert 
-                   vv-alert--dismissable" 
-            :style="{'--alert-duration': '5s'}"
-            role="alert">
-            <div class="vv-alert__header">
-                <IconifyIcon :icon="`akar-icons:${item[1].icon}`" />
-                <strong class="vv-alert__title">Message!</strong> 
-                <button type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])">
-                  <div class="vv-alert__close-mask"></div>
-                </button>
-            </div>
-            <div class="vv-alert__content">
-              Lorem ipsum dolor sit amet.
-            </div>
-        </div>
-      </TransitionGroup>
+      <div role="group">
+        <TransitionGroup :name="transitionName" role="group">
+          <div
+              v-for="item in items"
+              :key="item[0]"
+              :class="[
+                `vv-alert--${item[1].color}`, {
+                  'vv-alert--notification': notificationEnabled, 
+                  'vv-alert--auto-close': item[1].autoClose
+                }
+              ]"
+              @mouseover.passive="onMouseover(item[0])"
+              @mouseleave.passive="onMouseleave(item[0])"
+              class="vv-alert 
+                    vv-alert--dismissable" 
+              :style="{'--alert-duration': '5s'}"
+              role="alert">
+              <div class="vv-alert__header">
+                  <IconifyIcon :icon="`akar-icons:${item[1].icon}`" />
+                  <strong class="vv-alert__title">Message!</strong> 
+                  <button type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])">
+                    <div class="vv-alert__close-mask"></div>
+                  </button>
+              </div>
+              <div class="vv-alert__content">
+                Lorem ipsum dolor sit amet.
+              </div>
+          </div>
+        </TransitionGroup>
+      </div>
     </div>
 </template>

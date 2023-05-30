@@ -149,7 +149,7 @@
 			left: 0;
 			will-change: transform;
 			transition: var(--transition-transform);
-			transform: translateX(-100%);
+			translate: -100%;
 			z-index: 1;
 		}
 
@@ -168,7 +168,7 @@
 			inset: 0;
 
 			.off-canvas__aside {
-				transform: translateX(0);
+				translate: 0;
 				box-shadow: var(--shadow-xl);
 			}
 
@@ -182,7 +182,7 @@
 
 			.off-canvas__aside {
 				position: relative;
-				transform: none;
+				translate: 0;
 			}
 		}
 	}

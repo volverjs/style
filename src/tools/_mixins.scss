@@ -640,6 +640,21 @@
 						$bps: $bps
 					);
 				}
+
+				// breakpoints
+				@if map.get($value, 'breakpoint') {
+					@include spread-map-into-breakpoints(
+						$original: $original,
+						$map: $value,
+						$prefix: #{$prefix}-#{$key}-#{$state},
+						$key: 'breakpoint',
+						$block: $block,
+						$modifier: $selector,
+						$props: $props,
+						$zero-specificity: $zero-specificity,
+						$bps: $bps
+					);
+				}
 			}
 		}
 	}

@@ -6,7 +6,7 @@ Scale an element by a given factor.
 
 <table-utility prefix="scale" property="scale" attribute="transform" class="mb-lg">
   <template #value="{ value }">
-    transform: scale({{ value }});
+    scale: {{ value }};
   </template>
 </table-utility>
 
@@ -15,7 +15,7 @@ Scale an element by a given factor on the X axis.
 
 <table-utility prefix="scale-x" property="scale" attribute="transform" class="mb-lg">
   <template #value="{ value }">
-    transform: scaleX({{ value }});
+    scale: {{ value }} 1;
   </template>
 </table-utility>
 
@@ -24,6 +24,6 @@ Scale an element by a given factor on the Y axis.
 
 <table-utility prefix="scale-y" property="scale" attribute="transform">
   <template #value="{ value }">
-    transform: scaleY({{ value }});
+    scale: 1 {{ value }};
   </template>
 </table-utility>

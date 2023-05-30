@@ -4,13 +4,13 @@ description: Utilities for translating elements with transform.
 ---
 <table-utility prefix="translate" property="translate" class="mb-lg">
   <template #value="{ value }">
-    transform: translate({{ value }}, {{ value }});
+    translate: {{ value }} {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate" property="translate" class="mb-lg">
   <template #value="{ value }">
-    transform: translate(-{{ value }}, -{{ value }});
+    translate: -{{ value }} -{{ value }};
   </template>
 </table-utility>
 
@@ -19,13 +19,13 @@ Translate an element by a given factor on the X axis.
 
 <table-utility prefix="translate-x" property="translate" class="mb-lg">
   <template #value="{ value }">
-      transform: translateX({{ value }});
+      translate: {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate-x" property="translate" class="mb-lg">
   <template #value="{ value }">
-      transform: translateX(-{{ value }});
+      translate: -{{ value }};
   </template>
 </table-utility>
 
@@ -34,12 +34,12 @@ Translate an element by a given factor on the Y axis.
 
 <table-utility prefix="translate-y" property="translate">
     <template #value="{ value }">
-      transform: translateY({{ value }});
+      translate: 0 {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate-y" property="translate">
     <template #value="{ value }">
-      transform: translateY(-{{ value }});
+      translate: 0 -{{ value }};
   </template>
 </table-utility>

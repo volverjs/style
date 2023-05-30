@@ -55,7 +55,7 @@ $input: (
 		padding-bottom: calc(var(--input-spacing-bottom) - 0.55em),
 		label: (
 			font-size: var(--text-12),
-			transform: translateY(-0.8em),
+			translate: 0 -0.8em,
 		),
 	),
 ) !default;

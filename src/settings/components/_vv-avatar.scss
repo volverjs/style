@@ -30,7 +30,7 @@ $vv-avatar: (
 			position: absolute,
 			top: 0,
 			right: 0,
-			transform: translate(50%, -33.3%),
+			translate: 50% -33.3%,
 			box-shadow: var(--shadow-sm),
 		),
 		badge-bottom: (
@@ -38,7 +38,7 @@ $vv-avatar: (
 			position: absolute,
 			bottom: 0,
 			right: 0,
-			transform: translate(50%, 33.3%),
+			translate: 50% 33.3%,
 			box-shadow: var(--shadow-sm),
 		),
 		image: (

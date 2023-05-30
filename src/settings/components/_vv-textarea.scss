@@ -52,7 +52,7 @@ $vv-textarea: (
 					height: var(--spacing-2),
 					inset: auto 0 0 0,
 					background: var(--color-brand),
-					transform: scaleX(0),
+					scale: 0 1,
 					transform-origin: left,
 					will-change: transform,
 					transition: var(--transition-transform),
@@ -66,7 +66,7 @@ $vv-textarea: (
 					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -160,7 +160,7 @@ $vv-textarea: (
 					pseudo: (
 						after: (
 							background: var(--input-valid-color),
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -181,7 +181,7 @@ $vv-textarea: (
 					pseudo: (
 						after: (
 							background: var(--input-invalid-color),
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -249,7 +249,7 @@ $vv-textarea: (
 				focus-within: (
 					element: (
 						label: (
-							transform: var(--input-floating-label-transform),
+							translate: var(--input-floating-label-translate),
 							font-size: var(--input-floating-label-font-size),
 						),
 						input: (
@@ -267,7 +267,7 @@ $vv-textarea: (
 				dirty: (
 					element: (
 						label: (
-							transform: var(--input-floating-label-transform),
+							translate: var(--input-floating-label-translate),
 							font-size: var(--input-floating-label-font-size),
 						),
 						input: (

@@ -376,7 +376,7 @@
 				position: absolute;
 				bottom: 0;
 				left: 50%;
-				transform: translateX(-50%);
+				translate: -50%;
 				width: 0;
 				height: 0;
 				border-style: solid;
@@ -394,6 +394,6 @@
 	.copy-scale-enter-from,
 	.copy-scale-leave-to {
 		opacity: var(--opacity-0);
-		transform: scale(0);
+		scale: 0;
 	}
 </style>

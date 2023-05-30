@@ -13,7 +13,7 @@ $vv-accordion: (
 					background-color: var(--color-surface-2),
 					pseudo: (
 						before: (
-							transform: rotate(0),
+							rotate: 0,
 						),
 					),
 				),
@@ -34,6 +34,7 @@ $vv-accordion: (
 			_alias: '> summary',
 			position: relative,
 			cursor: pointer,
+			user-select: none,
 			[padding-top]: var(--accordion-padding-top),
 			[padding-right]: var(--accordion-padding-right),
 			[padding-bottom]: var(--accordion-padding-bottom),
@@ -61,9 +62,9 @@ $vv-accordion: (
 					background-position: center,
 					background-size: 1em,
 					background-repeat: no-repeat,
-					will-change: transform,
+					will-change: rotate,
 					transition: var(--transition-transform),
-					transform: rotate(-90deg),
+					rotate: -90deg,
 				),
 				marker: (
 					display: none,
@@ -102,7 +103,7 @@ $vv-accordion: (
 						before: (
 							left: auto,
 							[right]: var(--accordion-padding-right),
-							transform: rotate(0def),
+							rotate: 0,
 						),
 					),
 				),
@@ -113,7 +114,7 @@ $vv-accordion: (
 						summary: (
 							pseudo: (
 								before: (
-									transform: rotate(-180deg),
+									rotate: -180deg,
 								),
 							),
 						),

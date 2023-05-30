@@ -2,11 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.12] - 2023-05-30
+
+### Fixed
+
+*   `vv-alert` auto close radius;
+*   From `transform` to `translate`, `rotate` and `scale` separated properties;
+*   `breakpoint` for states.
+
 ## [0.1.11] - 2023-05-24
 
 ### Added
 
-- `vv-dropdown` `mobile` modifier
+*   `vv-dropdown` `mobile` modifier
 
 ### Fixed
 
@@ -177,6 +185,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.12]: https://github.com/volverjs/style/compare/v0.1.11...v0.1.12
 [0.1.11]: https://github.com/volverjs/style/compare/v0.1.10...v0.1.11
 [0.1.10]: https://github.com/volverjs/style/compare/v0.1.9...v0.1.10
 [0.1.9]: https://github.com/volverjs/style/compare/v0.1.8...v0.1.9
