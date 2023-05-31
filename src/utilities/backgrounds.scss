@@ -3,7 +3,7 @@
 // background-attachment
 @include spread-map-into-utilities(
 	$map: $background-attachment,
-	$class: 'bg',
+	$class: bg,
 	$attribute: 'background-attachment',
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -11,7 +11,7 @@
 // background-clip
 @include spread-map-into-utilities(
 	$map: $background-clip,
-	$class: 'bg-clip',
+	$class: bg-clip,
 	$attribute: 'background-clip',
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -19,7 +19,7 @@
 // background-origin
 @include spread-map-into-utilities(
 	$map: $background-origin,
-	$class: 'bg-origin',
+	$class: bg-origin,
 	$attribute: 'background-origin',
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -27,7 +27,7 @@
 // background-position
 @include spread-map-into-utilities(
 	$map: $background-position,
-	$class: 'bg',
+	$class: bg,
 	$attribute: 'background-position',
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -53,5 +53,14 @@
 	$map: $background-image,
 	$class: bg,
 	$attribute: background-image,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+// background gradients
+@include spread-map-into-utilities(
+	$map: $gradient,
+	$class: bg-gradient,
+	$attribute: background-image,
+	$prop: gradient,
 	$zero-specificity: $zero-specificity-for-utilities
 );

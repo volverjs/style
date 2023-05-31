@@ -247,19 +247,6 @@
 
 	// #endregion
 
-	// #region GRADIENT
-	@each $size, $value in $gradient {
-		gradient__#{$size}: $value;
-	}
-	@each $size, $value in $noise {
-		noise__#{$size}: $value;
-	}
-	@each $size, $value in $noise-filter {
-		noise-filter__#{$size}: $value;
-	}
-
-	// #endregion
-
 	// ============================================================== */
 	// #region SPACING
 	// spacing & spacing-dynamic
@@ -458,6 +445,10 @@
 		#{'background-image__' + $key}: $value;
 	}
 
+	@each $key, $value in $gradient {
+		#{'gradient__' + $key}: $value;
+	}
+
 	// #endregion
 
 	// ============================================================== */
@@ -507,6 +498,11 @@
 	// brightness
 	@each $key, $value in $brightness {
 		#{'brightness__' + $key}: $value;
+	}
+
+	// contrast
+	@each $key, $value in $contrast {
+		#{'contrast__' + $key}: $value;
 	}
 
 	// saturation

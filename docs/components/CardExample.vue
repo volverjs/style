@@ -1,8 +1,12 @@
 <script setup>
-	defineProps({
+	const props = defineProps({
 		title: {
 			type: String,
 			default: 'Example',
+		},
+		property: {
+			type: String,
+			default: undefined,
 		},
 	})
 
@@ -12,6 +16,10 @@
 		isPreviewInDarkMode.value = value
 	})
 	const toggleDarkMode = useToggle(isPreviewInDarkMode)
+
+	const items = computed(() => {
+		return icssExports[props.property] ?? []
+	})
 </script>
 
 <template>
@@ -46,7 +54,7 @@
 					'theme theme--light': !isPreviewInDarkMode && isThemeDark,
 				},
 			]">
-			<slot />
+			<slot v-bind="{ items }" />
 		</div>
 	</div>
 </template>

@@ -37,9 +37,11 @@ $vv-dropdown: (
 			display: block,
 			min-width: 0,
 			align-items: center,
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			background-color: var(--color-surface-2),
-			padding: var(--spacing-sm),
+			padding: var(--input-spacing-top) var(--input-spacing-right)
+				var(--input-spacing-bottom) var(--input-spacing-left),
+			font-size: var(--input-font-size),
 			pseudo: (
 				search-cancel-button: (
 					-webkit-appearance: none,

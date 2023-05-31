@@ -58,4 +58,230 @@ $background-image: (
 		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'%3E%3C/line%3E%3C/svg%3E"),
 	close:
 		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(#{hex-to-rgb($color-word)})' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 20L4 4m16 0L4 20'/%3E%3C/svg%3E"),
+	noise-1:
+		url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.005' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+	noise-2:
+		url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+	noise-3:
+		url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.25' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+	noise-4:
+		url("data:image/svg+xml,%3Csvg viewBox='0 0 2056 2056' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+	noise-5:
+		url("data:image/svg+xml,%3Csvg viewBox='0 0 2056 2056' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+) !default;
+
+// gradient
+$gradient: (
+	brand:
+		linear-gradient(
+			to bottom right,
+			var(--color-brand-darken-3),
+			var(--color-brand),
+			var(--color-brand-lighten-3)
+		),
+	accent:
+		linear-gradient(
+			to bottom right,
+			var(--color-accent-darken-3),
+			var(--color-accent),
+			var(--color-accent-lighten-3)
+		),
+	info:
+		linear-gradient(
+			to bottom right,
+			var(--color-info-darken-3),
+			var(--color-info),
+			var(--color-info-lighten-3)
+		),
+	success:
+		linear-gradient(
+			to bottom right,
+			var(--color-success-darken-3),
+			var(--color-success),
+			var(--color-success-lighten-3)
+		),
+	warning:
+		linear-gradient(
+			to bottom right,
+			var(--color-warning-darken-3),
+			var(--color-warning),
+			var(--color-warning-lighten-3)
+		),
+	danger:
+		linear-gradient(
+			to bottom right,
+			var(--color-danger-darken-3),
+			var(--color-danger),
+			var(--color-danger-lighten-3)
+		),
+	gray:
+		linear-gradient(
+			to bottom right,
+			var(--color-gray-darken-3),
+			var(--color-gray),
+			var(--color-gray-lighten-3)
+		),
+	1:
+		linear-gradient(
+			to bottom right,
+			#1f005c,
+			#5b0060,
+			#870160,
+			#ac255e,
+			#ca485c,
+			#e16b5c,
+			#f39060,
+			#ffb56b
+		),
+	2: linear-gradient(to bottom right, #48005c, #8300e2, #a269ff),
+	3: #{radial-gradient(
+			circle at top right,
+			hsl(180deg 100% 50%),
+			hsl(180deg 100% 50% / 0%)
+		),
+	radial-gradient(
+			circle at bottom left,
+			hsl(328deg 100% 54%),
+			hsl(328deg 100% 54% / 0%)
+		)},
+	4: linear-gradient(to bottom right, #00f5a0, #00d9f5),
+	5: conic-gradient(from -270deg at 75% 110%, fuchsia, floralwhite),
+	6: conic-gradient(from -90deg at top left, black, white),
+	7: linear-gradient(to bottom right, #72c6ef, #004e8f),
+	8: conic-gradient(from 90deg at 50% 0%, #111, 50%, #222, #111),
+	9: conic-gradient(from 0.5turn at bottom center, lightblue, white),
+	10:
+		conic-gradient(
+			from 90deg at 40% -25%,
+			#ffd700,
+			#f79d03,
+			#ee6907,
+			#e6390a,
+			#de0d0d,
+			#d61039,
+			#cf1261,
+			#c71585,
+			#cf1261,
+			#d61039,
+			#de0d0d,
+			#ee6907,
+			#f79d03,
+			#ffd700,
+			#ffd700,
+			#ffd700
+		),
+	11: conic-gradient(at bottom left, deeppink, cyan),
+	12:
+		conic-gradient(
+			from 90deg at 25% -10%,
+			#ff4500,
+			#d3f340,
+			#7bee85,
+			#afeeee,
+			#7bee85
+		),
+	13:
+		radial-gradient(
+			circle at 50% 200%,
+			#000142,
+			#3b0083,
+			#b300c3,
+			#ff059f,
+			#ff4661,
+			#ffad86,
+			#fff3c7
+		),
+	14: conic-gradient(at top right, lime, cyan),
+	15: linear-gradient(to bottom right, #c7d2fe, #fecaca, #fef3c7),
+	16: radial-gradient(circle at 50% -250%, #374151, #111827, #000),
+	17: conic-gradient(from -90deg at 50% -25%, blue, blueviolet),
+	18: #{linear-gradient(
+			0deg,
+			hsla(0deg 100% 50% / 80%),
+			hsla(0deg 100% 50% / 0%) 75%
+		),
+	linear-gradient(
+		60deg,
+		hsla(60deg 100% 50% / 80%),
+		hsla(60deg 100% 50% / 0%) 75%,
+	),
+	linear-gradient(
+		120deg,
+		hsla(120deg 100% 50% / 80%),
+		hsla(120deg 100% 50% / 0%) 75%,
+	),
+	linear-gradient(
+		180deg,
+		hsla(180deg 100% 50% / 80%),
+		hsla(180deg 100% 50% / 0%) 75%,
+	),
+	linear-gradient(
+		240deg,
+		hsla(240deg 100% 50% / 80%),
+		hsla(240deg 100% 50% / 0%) 75%,
+	),
+	linear-gradient(
+			300deg,
+			hsla(300deg 100% 50% / 80%),
+			hsla(300deg 100% 50% / 0%) 75%
+		)},
+	19: linear-gradient(to bottom right, #ffe259, #ffa751),
+	20:
+		conic-gradient(
+			from -135deg at -10% center,
+			#ffa500,
+			#ff7715,
+			#ff522a,
+			#ff3f47,
+			#ff5482,
+			#ff69b4
+		),
+	21:
+		conic-gradient(
+			from -90deg at 25% 115%,
+			#f00,
+			#f06,
+			#f0c,
+			#c0f,
+			#60f,
+			#00f,
+			#00f,
+			#00f,
+			#00f
+		),
+	22: linear-gradient(to bottom right, #acb6e5, #86fde8),
+	23: linear-gradient(to bottom right, #536976, #292e49),
+	24:
+		conic-gradient(
+			from 0.5turn at 0% 0%,
+			#00c476,
+			10%,
+			#82b0ff,
+			90%,
+			#00c476
+		),
+	25: conic-gradient(at 125% 50%, #b78cf7, #ff7c94, #ffcf0d, #ff7c94, #b78cf7),
+	26: linear-gradient(to bottom right, #9796f0, #fbc7d4),
+	27: conic-gradient(from 0.5turn at bottom left, deeppink, rebeccapurple),
+	28: conic-gradient(from -90deg at 50% 105%, white, orchid),
+	29: #{radial-gradient(
+			circle at top right,
+			hsl(250deg 100% 85%),
+			hsl(250deg 100% 85% / 0%)
+		),
+	radial-gradient(
+			circle at bottom left,
+			hsl(220deg 90% 75%),
+			hsl(220deg 90% 75% / 0%)
+		)},
+	30: #{radial-gradient(
+			circle at top right,
+			hsl(150deg 100% 50%),
+			hsl(150deg 100% 50% / 0%)
+		),
+	radial-gradient(
+			circle at bottom left,
+			hsl(150deg 100% 84%),
+			hsl(150deg 100% 84% / 0%)
+		)},
 ) !default;
