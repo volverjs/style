@@ -2,6 +2,7 @@
 	import CardExample from '../../../components/CardExample.vue'
 	import TableUtility from '../../../components/TableUtility.vue'
 	import ColorHelper from '../../../components/ColorHelper.vue'
+	import GradientBackgrounds from '../../../components/GradientBackgrounds.vue'
 
 	const route = useRoute()
 	const router = useRouter()
@@ -27,6 +28,7 @@
 					TableUtility,
 					ColorHelper,
 					CardExample,
+					GradientBackgrounds,
 				})
 			})
 			.catch(() => {

@@ -247,6 +247,19 @@
 
 	// #endregion
 
+	// #region GRADIENT
+	@each $size, $value in $gradient {
+		gradient__#{$size}: $value;
+	}
+	@each $size, $value in $noise {
+		noise__#{$size}: $value;
+	}
+	@each $size, $value in $noise-filter {
+		noise-filter__#{$size}: $value;
+	}
+
+	// #endregion
+
 	// ============================================================== */
 	// #region SPACING
 	// spacing & spacing-dynamic

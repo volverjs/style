@@ -114,6 +114,10 @@ export const mainMenu = [
 		children: getUtilitiesGroup('backgrounds'),
 	},
 	{
+		name: 'Gradients',
+		children: getUtilitiesGroup('gradient'),
+	},
+	{
 		name: 'Borders',
 		children: getUtilitiesGroup('borders'),
 	},

@@ -1,0 +1,11 @@
+@use 'sass:map';
+@use '../context' as *;
+
+// background gradients
+@include spread-map-into-utilities(
+	$map: $gradient,
+	$class: bg-gradient,
+	$attribute: background,
+	$prop: gradient,
+	$zero-specificity: $zero-specificity-for-utilities
+);
