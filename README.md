@@ -1,6 +1,6 @@
 <div align="center">
 
-[![volverjs](public/volverjs.svg)](https://volverjs.github.io/style)
+[![volverjs](public/volverjs-style.svg)](https://volverjs.github.io/style)
 
 ## @volverjs/style
 
@@ -12,7 +12,7 @@
 
 <br>
 
-#### proudly powered by
+maintained with ❤️ by
 
 <br>
 
