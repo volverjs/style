@@ -10,7 +10,7 @@
 </script>
 
 <template>
-	<div class="code-layout flex flex-col">
+	<div class="code-layout flex flex-col z-1">
 		<div
 			class="code-layout__preview flex-1 flex items-center justify-center p-24"
 			:class="[

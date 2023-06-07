@@ -13,6 +13,21 @@ $vv-dropdown: (
 			[border-radius]: var(--dropdown-border-radius),
 			background-color: var(--color-surface-1),
 			overflow: auto,
+			pseudo: (
+				-webkit-scrollbar: (
+						width: var(--spacing-2),
+						height: var(--spacing-2),
+					),
+				-webkit-scrollbar-thumb: (
+						background-color: var(--color-brand-lighten-4),
+						border: var(--spacing-0) solid transparent,
+						background-clip: content-box,
+					),
+				-webkit-scrollbar-track: (
+						background-color: transparent,
+						padding: 0,
+					),
+			),
 		),
 		item: (
 			_alias: 'li',
@@ -161,6 +176,14 @@ $vv-dropdown: (
 						down-xs: (
 							z-index: var(--z-modal),
 							margin-bottom: auto,
+							[border-radius]: var(--dropdown-border-radius),
+						),
+					),
+				),
+				search: (
+					breakpoint: (
+						down-xs: (
+							[border-radius]: var(--dropdown-border-radius),
 						),
 					),
 				),
@@ -175,6 +198,9 @@ $vv-dropdown: (
 					list: (
 						transition: var(--transition-transform),
 					),
+					search: (
+						transition: var(--transition-transform),
+					),
 				),
 			),
 			enter-from: (
@@ -183,6 +209,9 @@ $vv-dropdown: (
 					list: (
 						translate: 0 100%,
 					),
+					search: (
+						translate: 0 -100%,
+					),
 				),
 			),
 			leave-to: (
@@ -190,6 +219,60 @@ $vv-dropdown: (
 				element: (
 					list: (
 						translate: 0 100%,
+					),
+					search: (
+						translate: 0 -100%,
+					),
+				),
+			),
+		),
+		mobile-fade-block: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					list: (
+						transition: var(--transition-transform),
+					),
+					search: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			enter-from: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 100%,
+							),
+						),
+					),
+					search: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 -100%,
+							),
+						),
+					),
+				),
+			),
+			leave-to: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 100%,
+							),
+						),
+					),
+					search: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 -100%,
+							),
+						),
 					),
 				),
 			),

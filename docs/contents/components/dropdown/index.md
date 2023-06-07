@@ -3,7 +3,6 @@ title: Dropdown
 description: Dropdown is used to choose an item from a collection of options.
 uiVue: true
 isNew: false
-isDraft: true
 ---
 
 ### Listbox

@@ -1,10 +1,10 @@
 $vv-accordion: (
 	--accordion-marker-size:
 		calc(var(--spacing-sm) + var(--leading-normal) * 1em),
-	--accordion-padding-top: var(--spacing-xs),
-	--accordion-padding-right: var(--spacing-xs),
-	--accordion-padding-bottom: var(--spacing-xs),
-	--accordion-padding-left: var(--spacing-xs),
+	--accordion-padding-top: var(--spacing-14),
+	--accordion-padding-right: var(--spacing-14),
+	--accordion-padding-bottom: var(--spacing-14),
+	--accordion-padding-left: var(--spacing-14),
 	overflow: hidden,
 	state: (
 		open: (
@@ -46,7 +46,6 @@ $vv-accordion: (
 			color: var(--color-word-2),
 			will-change: background-color,
 			transition: var(--transition-colors),
-			font-size: var(--text-sm),
 			border-radius: var(--rounded-lg),
 			-webkit-tap-highlight-color: transparent,
 			outline: none,

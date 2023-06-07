@@ -1,7 +1,6 @@
 ---
 title: Navigation
 description: Navigation is a set of links that allow users to navigate between pages or sections of a website.
-uiVue: true
 isNew: false
 ---
 
