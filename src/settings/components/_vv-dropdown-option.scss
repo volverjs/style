@@ -13,7 +13,7 @@ $vv-dropdown-option: (
 		),
 		focus-visible: (
 			background-color: var(--color-surface-success),
-			color: var(--color-success),
+			color: var(--color-success-darken-1),
 			element: (
 				hint: (
 					opacity: var(--opacity-100),
@@ -23,7 +23,7 @@ $vv-dropdown-option: (
 		selected: (
 			font-weight: var(--font-bold),
 			background-color: var(--color-surface-brand),
-			color: var(--color-brand),
+			color: var(--color-brand-darken-1),
 		),
 	),
 	modifier: (

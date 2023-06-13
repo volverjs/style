@@ -24,6 +24,8 @@
 						} @else {
 							#{'colors__' + $key + '-' + $subKey}: $subValue;
 						}
+					} @else {
+						#{'colors-values__' + $key + '-' + $subKey}: $subValue;
 					}
 				}
 			}
@@ -32,8 +34,7 @@
 		}
 	}
 
-	// colors exported with no vars
-	@each $key, $value in $colors-computed {
+	@each $key, $value in $dark-colors {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
 				@if type-of($value) not 'map' {
@@ -43,38 +44,17 @@
 						str-index($subKey, 'lightness')
 					{
 						@if '' + $key == $subKey {
-							#{'colors-computed__' + $key}: $subValue;
+							#{'dark-colors__' + $key}: $subValue;
 						} @else {
-							#{'colors-computed__' + $key + '-' + $subKey}: $subValue;
+							#{'dark-colors__' + $key + '-' + $subKey}: $subValue;
 						}
+					} @else {
+						#{'dark-colors-values__' + $key + '-' + $subKey}: $subValue;
 					}
 				}
 			}
 		} @else if $key != 'scheme' {
-			#{'colors-computed__' + $key}: $value;
-		}
-	}
-
-	// dark colors exported with no vars
-	@each $key, $value in $dark-colors-computed {
-		@if type-of($value) == 'map' {
-			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
-					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
-					{
-						@if '' + $key == $subKey {
-							#{'dark-colors-computed__' + $key}: $subValue;
-						} @else {
-							#{'dark-colors-computed__' + $key + '-' + $subKey}: $subValue;
-						}
-					}
-				}
-			}
-		} @else if $key != 'scheme' {
-			#{'dark-colors-computed__' + $key}: $value;
+			#{'dark-colors__' + $key}: $value;
 		}
 	}
 
@@ -465,10 +445,6 @@
 	// box-shadow
 	@each $key, $value in $box-shadow {
 		#{'box-shadow__' + $key}: $value;
-	}
-
-	@each $key, $value in $box-shadow-no-vars {
-		#{'box-shadow-no-vars__' + $key}: $value;
 	}
 
 	// opacity

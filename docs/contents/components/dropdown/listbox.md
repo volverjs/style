@@ -3,10 +3,10 @@ title: Listbox
 wrapperClass: flex flex-1 flex-wrap gap-md items-center justify-center
 ---
 <div class="vv-dropdown">
-  <ul class="vv-dropdown__list" role="listbox">
+  <ul class="vv-dropdown__list" role="listbox" aria-labelledby="vv-dropdown-group">
     <li class="vv-dropdown-optgroup" 
-      role="presentation" 
-      tabindex="-1">
+      id="vv-dropdown-group"
+      role="presentation">
       <span class="vv-dropdown-option__label">Option group</span>
     </li>
     <li class="vv-dropdown-option" 

@@ -27,6 +27,9 @@
 			const bLighten = b.includes('lighten')
 			const aLightenOrDarken = aLighten || aDarken
 			const bLightenOrDarken = bLighten || bDarken
+			if (!aLightenOrDarken && !bLightenOrDarken) {
+				return aNumber - bNumber
+			}
 			if (
 				(!aLightenOrDarken && bDarken) ||
 				(!bLightenOrDarken && aLighten)

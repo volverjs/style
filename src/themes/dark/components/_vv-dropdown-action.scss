@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-dropdown-action);
+$component-map: $dark-vv-dropdown-action;
+
+@mixin theme-dark-vv-dropdown-action {
+	@include spread-map-into-props(
+		$map: $component-map,
+		$prefix: $component-name
+	);
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-vv-dropdown-action;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-vv-dropdown-action;
+}

@@ -16,6 +16,12 @@ wrapperClass: flex flex-1 justify-center
         tabindex="0">
       MR
   </span>
+  <span class="vv-avatar vv-avatar--ring vv-avatar--success" 
+        role="img" 
+        aria-label="Mario Rossi" 
+        tabindex="0">
+      MR
+  </span>
   <span class="vv-avatar vv-avatar--ring vv-avatar--warning" 
         role="img" 
         aria-label="Mario Rossi" 

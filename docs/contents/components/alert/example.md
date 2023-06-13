@@ -184,9 +184,8 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
          :class="[
             `vv-alert-group--${positionBlock}-${positionInline}`, 
             {'vv-alert-group--stack': stackEnabled, 'vv-alert-group--reverse': reverseEnabled}
-          ]">
-      <div role="group">
-        <TransitionGroup :name="transitionName" role="group">
+          ]" role="group">
+        <TransitionGroup :name="transitionName">
           <div
               v-for="item in items"
               :key="item[0]"
@@ -214,6 +213,5 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
               </div>
           </div>
         </TransitionGroup>
-      </div>
     </div>
 </template>

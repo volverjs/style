@@ -5,6 +5,11 @@ $vv-alert-group: (
 	flex-direction: column,
 	gap: var(--spacing-sm),
 	overflow: hidden,
+	state: (
+		empty: (
+			display: none,
+		),
+	),
 	element: (
 		list: (
 			_alias: '> [role="group"]',

@@ -12,35 +12,26 @@
 	const stackblitzExample = ref('')
 	const permalinks = ref([])
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/settings/${route.params.name}.md`
-	const MainContent = defineAsyncComponent(() =>
-		import(`../../contents/settings/${route.params.name}.md`)
-			.then(({ attributes, toc, VueComponentWith }) => {
-				title.value = attributes.title
-				description.value = attributes.description
-				stackblitzExample.value = attributes.stackblitzExample
-				permalinks.value = toc.map(({ content }) =>
-					permalinkToPath(content),
-				)
-				return VueComponentWith({
-					CodeEditor,
-					ColorPalette,
-					TableUtility,
-					CardExample,
-				})
-			})
-			.catch(() => {
-				router.replace({ name: 'index' })
-			}),
-	)
+	let MainContent
+	try {
+		const { attributes, toc, VueComponentWith } = await import(
+			`../../contents/settings/${route.params.name}.md`
+		)
+		title.value = attributes.title
+		description.value = attributes.description
+		stackblitzExample.value = attributes.stackblitzExample
+		permalinks.value = toc.map(({ content }) => permalinkToPath(content))
+		MainContent = VueComponentWith({
+			CodeEditor,
+			ColorPalette,
+			TableUtility,
+			CardExample,
+		})
+	} catch (error) {
+		router.replace({ name: 'index' })
+	}
 	const scrollIntoView = (hash) => {
-		const el = document.querySelector(hash)
-		if (el) {
-			el.scrollIntoView({
-				behavior: 'smooth',
-				block: 'start',
-			})
-			router.replace({ ...route, hash })
-		}
+		router.replace({ ...route, hash })
 	}
 	useHead({
 		title,
@@ -125,8 +116,8 @@
 			class="none xl:block xl:w-2/12 py-16 px-24 right-0">
 			<div class="my-lg fixed">
 				<nav class="vv-nav vv-nav--aside">
-					<ul class="vv-nav__menu" role="menu">
-						<li class="vv-nav__item" role="presentation">
+					<ul class="vv-nav__menu">
+						<li class="vv-nav__item">
 							<span
 								id="in-this-page-heading"
 								class="vv-nav__heading-label"
@@ -142,9 +133,11 @@
 										{ label, hash }, index
 									) in permalinks"
 									:key="index"
-									class="vv-nav__item">
+									class="vv-nav__item"
+									role="presentation">
 									<a
 										class="vv-nav__item-label"
+										role="menuitem"
 										tabindex="0"
 										:href="hash"
 										:class="{

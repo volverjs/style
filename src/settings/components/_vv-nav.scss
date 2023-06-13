@@ -23,7 +23,7 @@ $vv-nav: (
 			align-items: center,
 			will-change: background-color color,
 			transition: var(--transition-all),
-			color: var(--color-word-3),
+			color: var(--color-word-2),
 			cursor: pointer,
 			[padding]: var(--nav-item-padding),
 			state: (
@@ -50,14 +50,14 @@ $vv-nav: (
 				item-label: (
 					border-radius: var(--rounded-md),
 					state: (
-						hover: (
-							background-color: var(--color-surface-2),
-						),
 						active: (
 							background-color: var(--color-surface-3),
 						),
-						current: (
+						hover: (
 							background-color: var(--color-surface-2),
+						),
+						current: (
+							background-color: var(--color-surface-1),
 						),
 					),
 				),
@@ -116,7 +116,7 @@ $vv-nav: (
 						),
 						current: (
 							color: var(--color-brand),
-							border-color: var(--color-brand),
+							border-color: currentcolor,
 							background-color:
 								hsla(
 									var(--color-brand-hue)

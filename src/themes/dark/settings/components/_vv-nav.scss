@@ -1,0 +1,15 @@
+$dark-vv-nav: (
+	modifier: (
+		tabs: (
+			element: (
+				item-label: (
+					state: (
+						current: (
+							color: var(--color-brand-lighten-3),
+						),
+					),
+				),
+			),
+		),
+	),
+);

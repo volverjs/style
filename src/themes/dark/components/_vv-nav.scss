@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-nav);
+$component-map: $dark-vv-nav;
+
+@mixin theme-dark-vv-nav {
+	@include spread-map-into-props(
+		$map: $component-map,
+		$prefix: $component-name
+	);
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-vv-nav;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-vv-nav;
+}

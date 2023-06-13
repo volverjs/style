@@ -12,27 +12,25 @@
 	const customProperties = ref(false)
 	const spacing = ref(false)
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/utilities/${route.params.group}/${route.params.name}.md`
-	const MainContent = defineAsyncComponent(() =>
-		import(
+	let MainContent
+	try {
+		const { attributes, toc, VueComponentWith } = await import(
 			`../../../contents/utilities/${route.params.group}/${route.params.name}.md`
 		)
-			.then(({ attributes, VueComponentWith }) => {
-				title.value = attributes.title
-				description.value = attributes.description
-				breakpoints.value = attributes.breakpoints
-				colors.value = attributes.colors
-				customProperties.value = attributes.customProperties
-				spacing.value = attributes.spacing
-				return VueComponentWith({
-					TableUtility,
-					ColorHelper,
-					CardExample,
-				})
-			})
-			.catch(() => {
-				router.replace({ name: 'index' })
-			}),
-	)
+		title.value = attributes.title
+		description.value = attributes.description
+		breakpoints.value = attributes.breakpoints
+		colors.value = attributes.colors
+		customProperties.value = attributes.customProperties
+		spacing.value = attributes.spacing
+		MainContent = VueComponentWith({
+			TableUtility,
+			ColorHelper,
+			CardExample,
+		})
+	} catch (error) {
+		router.replace({ name: 'index' })
+	}
 	useHead({
 		title,
 		meta: [

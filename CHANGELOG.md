@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file.
 *   `vv-alert` auto close radius;
 *   From `transform` to `translate`, `rotate` and `scale` separated properties;
 *   Mobile improvements;
+*   A11y review;
+*   Update figma design tokens;
 *   `breakpoint` for states.
 
 ## [0.1.11] - 2023-05-24

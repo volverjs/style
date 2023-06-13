@@ -132,10 +132,10 @@ $vv-alert: (
 			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand-darken-2),
+					color: var(--color-brand-darken-3),
 				),
 				header: (
-					color: var(--color-brand-darken-2),
+					color: var(--color-brand-darken-3),
 				),
 			),
 		),
@@ -214,18 +214,18 @@ $vv-alert: (
 					),
 				),
 				warning: (
-					border-color: var(--color-warning),
+					border-color: var(--color-warning-darken-5),
 					element: (
 						header: (
-							background-color: var(--color-warning),
+							background-color: var(--color-warning-darken-5),
 						),
 					),
 				),
 				info: (
-					border-color: var(--color-info),
+					border-color: var(--color-info-darken-5),
 					element: (
 						header: (
-							background-color: var(--color-info),
+							background-color: var(--color-info-darken-5),
 						),
 					),
 				),

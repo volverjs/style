@@ -9,7 +9,7 @@ wrapperClass: w-full md:w-9/12
     <div class="vv-select__wrapper">
         <select id="select"
                 name="select" 
-                aria-describedby="select-hint">
+                aria-describedby="select-floating-hint">
             <option value="" disabled="disabled" selected="selected">
                 Placeholder text
             </option>
@@ -18,7 +18,7 @@ wrapperClass: w-full md:w-9/12
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-select__hint">
+    <small id="select-floating-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -30,7 +30,7 @@ wrapperClass: w-full md:w-9/12
     <div class="vv-select__wrapper">
         <select id="select"
                 name="select" 
-                aria-describedby="select-hint">
+                aria-describedby="select-floating-dirty-hint">
             <option value="" disabled="disabled">
                 Placeholder text
             </option>
@@ -39,7 +39,7 @@ wrapperClass: w-full md:w-9/12
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-select__hint">
+    <small id="select-floating-dirty-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>

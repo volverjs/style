@@ -1,0 +1,19 @@
+$dark-vv-dropdown-option: (
+	state: (
+		focus-visible: (
+			color: var(--color-success-lighten-3),
+		),
+		selected: (
+			color: var(--color-brand-lighten-3),
+		),
+	),
+	modifier: (
+		unselectable: (
+			state: (
+				focus-visible: (
+					color: var(--color-danger-lighten-5),
+				),
+			),
+		),
+	),
+);

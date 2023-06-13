@@ -102,4 +102,15 @@
 			background-color: var(--color-surface-1);
 		}
 	}
+
+	// default transitions
+	.v-enter-active,
+	.v-leave-active {
+		transition: var(--transition-opacity);
+	}
+
+	.v-enter-from,
+	.v-leave-to {
+		opacity: 0;
+	}
 </style>

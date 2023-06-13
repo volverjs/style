@@ -33,7 +33,9 @@
 				<img
 					src="/volverjs.svg"
 					alt="Volver"
-					class="w-208 md:w-256 mb-24" />
+					class="w-208 md:w-256 mb-24"
+					width="256"
+					height="256" />
 				<h1 class="text-22 text-word font-semibold mb-16">
 					@volverjs/style
 				</h1>
