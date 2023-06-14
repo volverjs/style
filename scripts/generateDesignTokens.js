@@ -8,7 +8,10 @@ const varRegex = /var\(([a-z-0-9,\s]+)\)/
 const calcRegex = /calc\(([a-z-0-9+\-*/%.,\s]+)\)/
 
 // design tokens
-const designTokens = {}
+const designTokens = {
+	volver: {},
+	'volver-dark': {},
+}
 const icssExports = extractICSS(
 	postcss.parse(compile('./src/export.scss').css),
 ).icssExports
@@ -65,57 +68,14 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 }, {})
 
 // colors
-designTokens['colors'] = Object.keys(exports['colors']).reduce((acc, key) => {
-	let value = exports['colors'][key]
-	let match
-	while ((match = varRegex.exec(value)) !== null) {
-		value = value.replace(
-			match[0],
-			exports['colors-values'][match[1].replace('--color-', '')],
-		)
-	}
-	while ((match = calcRegex.exec(value)) !== null) {
-		value = value.replace(match[0], calc(match[0]))
-	}
-	const group = key.split('-')[0]
-	if (
-		[
-			'brand',
-			'danger',
-			'success',
-			'info',
-			'accent',
-			'warning',
-			'gray',
-			'word',
-			'alpha',
-			'surface',
-		].includes(group)
-	) {
-		acc[group] = acc[group] || {}
-		acc[group][key] = { value, type: 'color' }
-		return acc
-	}
-	acc[key] = {
-		value,
-		type: 'color',
-	}
-	return acc
-}, {})
-
-designTokens['dark-colors'] = Object.keys(exports['dark-colors']).reduce(
+designTokens.volver['colors'] = Object.keys(exports['colors']).reduce(
 	(acc, key) => {
-		let value = exports['dark-colors'][key]
+		let value = exports['colors'][key]
 		let match
 		while ((match = varRegex.exec(value)) !== null) {
 			value = value.replace(
 				match[0],
-				exports['dark-colors-values']?.[
-					match[1].replace('--color-', '')
-				] ??
-					exports['colors-values']?.[
-						match[1].replace('--color-', '')
-					],
+				exports['colors-values'][match[1].replace('--color-', '')],
 			)
 		}
 		while ((match = calcRegex.exec(value)) !== null) {
@@ -149,14 +109,58 @@ designTokens['dark-colors'] = Object.keys(exports['dark-colors']).reduce(
 	{},
 )
 
-// spacing
-designTokens.spacing = Object.keys(exports.spacing).reduce((acc, key) => {
-	acc[key] = { value: exports.spacing[key], type: 'spacing' }
+designTokens['volver-dark']['colors'] = Object.keys(
+	exports['dark-colors'],
+).reduce((acc, key) => {
+	let value = exports['dark-colors'][key]
+	let match
+	while ((match = varRegex.exec(value)) !== null) {
+		value = value.replace(
+			match[0],
+			exports['dark-colors-values']?.[match[1].replace('--color-', '')] ??
+				exports['colors-values']?.[match[1].replace('--color-', '')],
+		)
+	}
+	while ((match = calcRegex.exec(value)) !== null) {
+		value = value.replace(match[0], calc(match[0]))
+	}
+	const group = key.split('-')[0]
+	if (
+		[
+			'brand',
+			'danger',
+			'success',
+			'info',
+			'accent',
+			'warning',
+			'gray',
+			'word',
+			'alpha',
+			'surface',
+		].includes(group)
+	) {
+		acc[group] = acc[group] || {}
+		acc[group][key] = { value, type: 'color' }
+		return acc
+	}
+	acc[key] = {
+		value,
+		type: 'color',
+	}
 	return acc
 }, {})
 
+// spacing
+designTokens.volver.spacing = Object.keys(exports.spacing).reduce(
+	(acc, key) => {
+		acc[key] = { value: exports.spacing[key], type: 'spacing' }
+		return acc
+	},
+	{},
+)
+
 // sizing
-designTokens.sizing = Object.keys(exports.spacing).reduce((acc, key) => {
+designTokens.volver.sizing = Object.keys(exports.spacing).reduce((acc, key) => {
 	acc[key] = { value: exports.spacing[key], type: 'sizing' }
 	return acc
 }, {})
@@ -171,7 +175,7 @@ const generateSpacingDynamic = (breakpoint) =>
 		return acc
 	}, {})
 
-designTokens['spacing-dynamic'] = {
+designTokens.volver['spacing-dynamic'] = {
 	'breakpoint-xs': generateSpacingDynamic('xs'),
 	'breakpoint-sm': generateSpacingDynamic('sm'),
 	'breakpoint-md': generateSpacingDynamic('md'),
@@ -180,40 +184,41 @@ designTokens['spacing-dynamic'] = {
 }
 
 // border-radius
-designTokens['border-radius'] = Object.keys(exports['border-radius']).reduce(
-	(acc, key) => {
-		acc[key] = {
-			value: exports['border-radius'][key],
-			type: 'borderRadius',
-		}
-		return acc
-	},
-	{},
-)
-
-// border-width
-designTokens['border-width'] = Object.keys(exports['border-width']).reduce(
-	(acc, key) => {
-		acc[key] = {
-			value: exports['border-width'][key],
-			type: 'borderWidth',
-		}
-		return acc
-	},
-	{},
-)
-
-// opacity
-designTokens.opacity = Object.keys(exports.opacity).reduce((acc, key) => {
+designTokens.volver['border-radius'] = Object.keys(
+	exports['border-radius'],
+).reduce((acc, key) => {
 	acc[key] = {
-		value: exports.opacity[key],
-		type: 'opacity',
+		value: exports['border-radius'][key],
+		type: 'borderRadius',
 	}
 	return acc
 }, {})
 
+// border-width
+designTokens.volver['border-width'] = Object.keys(
+	exports['border-width'],
+).reduce((acc, key) => {
+	acc[key] = {
+		value: exports['border-width'][key],
+		type: 'borderWidth',
+	}
+	return acc
+}, {})
+
+// opacity
+designTokens.volver.opacity = Object.keys(exports.opacity).reduce(
+	(acc, key) => {
+		acc[key] = {
+			value: exports.opacity[key],
+			type: 'opacity',
+		}
+		return acc
+	},
+	{},
+)
+
 // font-weight
-designTokens['font-weight'] = Object.keys(exports['font-weight']).reduce(
+designTokens.volver['font-weight'] = Object.keys(exports['font-weight']).reduce(
 	(acc, key) => {
 		acc[key] = {
 			value: exports['font-weight'][key],
@@ -225,7 +230,7 @@ designTokens['font-weight'] = Object.keys(exports['font-weight']).reduce(
 )
 
 // font-size
-designTokens['font-size'] = Object.keys(exports['font-size']).reduce(
+designTokens.volver['font-size'] = Object.keys(exports['font-size']).reduce(
 	(acc, key) => {
 		acc[key] = {
 			value: exports['font-size'][key],
@@ -249,7 +254,7 @@ const generateFontSizeDynamic = (breakpoint) =>
 		{},
 	)
 
-designTokens['font-size-dynamic'] = {
+designTokens.volver['font-size-dynamic'] = {
 	'breakpoint-xs': generateFontSizeDynamic('xs'),
 	'breakpoint-sm': generateFontSizeDynamic('sm'),
 	'breakpoint-md': generateFontSizeDynamic('md'),
@@ -258,19 +263,18 @@ designTokens['font-size-dynamic'] = {
 }
 
 // text-transform
-designTokens['text-transform'] = Object.keys(exports['text-transform']).reduce(
-	(acc, key) => {
-		acc[key] = {
-			value: exports['text-transform'][key],
-			type: 'textCase',
-		}
-		return acc
-	},
-	{},
-)
+designTokens.volver['text-transform'] = Object.keys(
+	exports['text-transform'],
+).reduce((acc, key) => {
+	acc[key] = {
+		value: exports['text-transform'][key],
+		type: 'textCase',
+	}
+	return acc
+}, {})
 
 // line-height
-designTokens['line-height'] = Object.keys(exports['line-height']).reduce(
+designTokens.volver['line-height'] = Object.keys(exports['line-height']).reduce(
 	(acc, key) => {
 		acc[key] = {
 			value: parseFloat(exports['line-height'][key]) * 100 + '%',
@@ -282,11 +286,11 @@ designTokens['line-height'] = Object.keys(exports['line-height']).reduce(
 )
 
 // breakpoints
-designTokens.breakpoints = Object.keys(exports.breakpoints).reduce(
+designTokens.volver.breakpoints = Object.keys(exports.breakpoints).reduce(
 	(acc, key) => {
 		acc[key] = {
 			value: exports.breakpoints[key],
-			type: 'other',
+			type: 'sizing',
 		}
 		return acc
 	},
