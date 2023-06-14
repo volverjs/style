@@ -1,6 +1,7 @@
 <template>
-	<div class="border-t border-alpha-1 border-solid text-word-2 text-14 p-16">
-		maintained with ♥️ by
+	<div
+		class="border-t border-alpha-1 border-solid text-word-2 text-14 p-16 leading-relaxed">
+		maintained with <span class="text-10">♥️</span> by
 		<a
 			href="https://24consulting.it"
 			rel="noopener noreferrer"

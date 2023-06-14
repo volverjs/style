@@ -267,7 +267,7 @@
 			// map modifiers
 			@if map.get($value, 'modifier') {
 				@include spread-map-into-modifiers(
-					$original: $value,
+					$original: $original,
 					$map: $value,
 					$prefix: #{$prefix}-#{$key}-#{$item},
 					$key: 'modifier',

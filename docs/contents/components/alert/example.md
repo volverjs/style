@@ -181,10 +181,11 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
     </fieldset>
     <button class="vv-button" @click="setItem">Add Alert</button>
     <div class="vv-alert-group vv-alert-group--fixed" 
-         :class="[
-            `vv-alert-group--${positionBlock}-${positionInline}`, 
-            {'vv-alert-group--stack': stackEnabled, 'vv-alert-group--reverse': reverseEnabled}
-          ]" role="group">
+        :class="[
+          `vv-alert-group--${positionBlock}-${positionInline}`, 
+          {'vv-alert-group--stack': stackEnabled, 'vv-alert-group--reverse': reverseEnabled}
+        ]">
+      <div role="group">
         <TransitionGroup :name="transitionName">
           <div
               v-for="item in items"
@@ -213,5 +214,6 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
               </div>
           </div>
         </TransitionGroup>
+      </div>
     </div>
 </template>

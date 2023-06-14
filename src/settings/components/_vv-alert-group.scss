@@ -5,22 +5,24 @@ $vv-alert-group: (
 	flex-direction: column,
 	gap: var(--spacing-sm),
 	overflow: hidden,
-	state: (
-		empty: (
-			display: none,
-		),
-	),
+	pointer-events: none,
 	element: (
 		list: (
 			_alias: '> [role="group"]',
 			display: flex,
 			flex-direction: column,
 			gap: var(--spacing-xs),
+			state: (
+				empty: (
+					display: none,
+				),
+			),
 		),
 		item: (
 			_alias: '> [role="group"] > *',
 			transition: var(--transition-all),
 			flex-shrink: 0,
+			pointer-events: auto,
 		),
 		not-first: (
 			_alias: '> [role="group"] > *:not(:first-child)',
@@ -63,10 +65,10 @@ $vv-alert-group: (
 			max-height: var(--h-full),
 		),
 		reverse: (
-			flex-flow: column-reverse,
+			flex-direction: column-reverse,
 			element: (
 				list: (
-					flex-flow: column-reverse,
+					flex-direction: column-reverse,
 				),
 			),
 		),

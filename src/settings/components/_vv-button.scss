@@ -159,7 +159,7 @@ $vv-button: (
 			border-width: var(--border-0),
 			padding: 0,
 			color: var(--color-brand-darken-1),
-			font-weight: var(--font-normal),
+			font-weight: inherit,
 			text-shadow: none,
 			state: (
 				focus-visible: (
