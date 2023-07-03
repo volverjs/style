@@ -60,7 +60,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-input-text 
+<div class="vv-input-text
             vv-input-text--disabled">
     <label for="textfield-disabled">Disabled Text Field</label>
     <div class="vv-input-text__wrapper">
@@ -76,9 +76,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-input-text 
-            vv-input-text--readonly
-            vv-input-text--dirty">
+<div class="vv-input-text
+            vv-input-text--readonly">
     <label for="textfield-readonly">Readonly Text Field</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-readonly" 

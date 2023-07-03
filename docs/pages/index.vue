@@ -12,11 +12,9 @@
 </script>
 
 <template>
-	<header
-		class="bg-surface-1 h-full"
-		style="overflow-y: auto; overflow-x: hidden">
-		<div class="container h-full flex flex-col px-16 mx-auto">
-			<nav class="flex py-16">
+	<header class="bg-surface-1">
+		<div class="container h-screen flex flex-col px-16 mx-auto relative">
+			<nav class="flex py-16 absolute inset-x-0">
 				<a
 					href="https://github.com/volverjs/style"
 					target="_blank"
@@ -27,19 +25,18 @@
 						icon="akar-icons:github-fill" />
 				</a>
 			</nav>
-
 			<div
-				class="flex flex-col flex-1 justify-center items-center text-center">
+				class="flex flex-col flex-1 justify-center items-center text-center h-screen">
 				<img
 					src="/volverjs.svg"
 					alt="Volver"
 					class="w-208 md:w-256 mb-24"
 					width="256"
 					height="256" />
-				<h1 class="text-22 text-word font-semibold mb-16">
+				<h1 class="vv-text vv-text--headline vv-text--size-2 mb-16">
 					@volverjs/style
 				</h1>
-				<h2 class="font-light leading-normal max-w-320 text-word-3">
+				<p class="font-light leading-relaxed max-w-384 text-word-3">
 					<a
 						href="https://github.com/volverjs/style"
 						class="font-normal"
@@ -56,7 +53,7 @@
 						>@volverjs/ui-vue</a
 					>
 					and static webpages as well.
-				</h2>
+				</p>
 				<div class="vv-button-group mt-32">
 					<RouterLink
 						:to="{
@@ -76,7 +73,27 @@
 					</RouterLink>
 				</div>
 			</div>
-			<FooterNotes class="text-center mt-32" />
 		</div>
 	</header>
+	<main>
+		<section class="py-lg">
+			<h1 class="vv-text vv-text--headline vv-text--size-1 text-center">
+				Come back to basics.
+			</h1>
+			<h2
+				class="vv-text vv-text--copy vv-text--size-3 text-word-3 text-center mb-xl">
+				CSS custom property based utility library.
+			</h2>
+			<div class="grid grid-cols-3 gap-sm w-8/12 mx-auto">
+				<div class="h-320 col-span-2 bg-gradient-30 rounded-xxl"></div>
+				<div class="h-320 flex flex-col gap-sm">
+					<div class="flex-1 bg-surface-2 rounded-xxl"></div>
+					<div class="flex-1 bg-surface-2 rounded-xxl"></div>
+				</div>
+				<div class="h-320 bg-surface-2 rounded-xxl"></div>
+				<div class="h-320 col-span-2 bg-gradient-30 rounded-xxl"></div>
+			</div>
+		</section>
+	</main>
+	<FooterNotes class="text-center mt-32" />
 </template>

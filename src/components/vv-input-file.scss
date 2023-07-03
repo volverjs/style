@@ -2,9 +2,9 @@
 @use 'sass:list';
 @use '../context' as *;
 
-$component-name: map.get($components-names, vv-select);
-$component-map: $vv-select;
-$component-selector: '.#{ $component-name}';
+$component-name: map.get($components-names, vv-input-file);
+$component-map: $vv-input-file;
+$component-selector: '.#{$component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -14,9 +14,9 @@ $component-selector: '.#{ $component-name}';
 	$bps: $breakpoints
 );
 
-// disabled
-@each $state in ('disabled') {
-	$selector: '#{$component-selector}:has(select[#{$state}])';
+// disabled and readonly
+@each $state in ('disabled', 'readonly') {
+	$selector: '#{$component-selector}:has(input[#{$state}])';
 	@include wrap-with-where(
 		$selector: $selector,
 		$enabled: $zero-specificity-for-components

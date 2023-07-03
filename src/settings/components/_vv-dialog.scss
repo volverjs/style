@@ -18,6 +18,9 @@ $vv-dialog: (
 		close: (
 			display: none,
 		),
+		open: (
+			overflow: hidden,
+		),
 	),
 	element: (
 		wrapper: (

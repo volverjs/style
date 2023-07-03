@@ -22,6 +22,7 @@ $vv-alert: (
 			color: var(--color-word),
 			overflow: hidden,
 			text-overflow: ellipsis,
+			flex-shrink: 0,
 		),
 		title: (
 			min-width: 0,
