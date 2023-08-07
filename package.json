@@ -48,7 +48,7 @@
         "@vueuse/core": "^10.1.2",
         "@vueuse/head": "^1.1.26",
         "eslint": "^8.42.0",
-        "eslint-config-prettier": "^8.8.0",
+        "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-vue": "^9.14.1",
         "glob": "^10.2.7",
         "icss-utils": "^5.1.0",
