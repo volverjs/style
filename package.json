@@ -78,7 +78,7 @@
         "vite-plugin-handlebars": "^1.6.0",
         "vite-plugin-markdown": "^2.1.0",
         "vite-plugin-pages": "^0.31.0",
-        "vite-plugin-stylelint": "^4.3.0",
+        "vite-plugin-stylelint": "^5.0.0",
         "vite-plugin-vue-layouts": "^0.8.0",
         "vite-ssg": "^0.23.0",
         "vite-ssg-sitemap": "^0.5.1",
