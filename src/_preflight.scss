@@ -90,6 +90,10 @@
 			@extend %font-mono !optional;
 		}
 
+		&:where(p > code) {
+			@extend %whitespace-nowrap !optional;
+		}
+
 		&:where(sub) {
 			@extend %align-sub !optional;
 			@extend %text-smaller !optional;
