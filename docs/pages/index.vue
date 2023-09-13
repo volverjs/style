@@ -3,6 +3,7 @@
 	import CodeEditor from '../components/CodeEditor.vue'
 	import FooterNotes from '../components/FooterNotes.vue'
 	import CopyCode from '../components/CopyCode.vue'
+	import Logo from '../components/Logo.vue'
 	import { VueComponentWith } from '../contents/home/index.md'
 
 	useHead({
@@ -17,6 +18,7 @@
 	})
 
 	const MainContent = VueComponentWith({
+		Logo,
 		CodeEditor,
 		FooterNotes,
 		RouterLink,

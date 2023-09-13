@@ -1,7 +1,7 @@
 <header>
     <div class="flex flex-col mx-auto px-16 py-xl relative">
         <div class="flex flex-col flex-1 justify-center items-center text-center mb-xl">
-            <img src="/volverjs.svg" alt="Volver" class="w-208 md:w-256 h-auto" width="256" height="256" />
+            <Logo alt="Volver" class="w-208 md:w-256 h-auto" width="256" height="256"></Logo>
             <h1 class="vv-text vv-text--headline text-48 tracking-tighter md:text-60 font-black my-md">
                 The Easy Way to Style
             </h1>
@@ -99,7 +99,7 @@
                   params: { name: 'customization' },
                   hash: '#zero-specificity',
                   }" class="vv-button vv-button--rounded vv-button--full-bleed">
-                  Learn more
+                  Learn more about specificity
               </router-link>
         </div>
     </section>
@@ -135,7 +135,7 @@
                   params: { name: 'customization' },
                   hash: '#css-custom-properties',
                   }" class="vv-button vv-button--rounded vv-button--full-bleed">
-                  Learn more
+                  Customize your style
               </router-link>
         </div>
     </section>
@@ -165,7 +165,7 @@
               params: { name: 'customization' },
               hash: '#components',
             }" class="vv-button vv-button--rounded vv-button--full-bleed">
-            Learn more
+            Make your own components
           </router-link>
         </div>
     </section>
