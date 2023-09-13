@@ -1,7 +1,7 @@
 ---
 title: Input File
 description: File Fields allow users to input custom file entries. 
-uiVue: true
+isDraft: true
 ---
 
 ### States
@@ -20,6 +20,11 @@ Use `vv-input-text--icon-before` modifier to show an icon before the input and `
 Use `vv-input-file__drop-area` to show a drop area.
 
 <code-editor resource-folder="input-file" resource-name="drop-area"></code-editor>
+
+### Preview
+Use `vv-input-file__preview` to show a preview of the file.
+
+<code-editor resource-folder="input-file" resource-name="preview"></code-editor>
 
 ### File list
 Use `vv-input-file__list` to show a file list.

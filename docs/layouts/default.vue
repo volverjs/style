@@ -1,7 +1,7 @@
 <script setup>
 	const route = useRoute()
-	const isThemeDark = inject('isThemeDark')
 	const isAsideOpen = ref(false)
+	const isThemeDark = inject('isThemeDark')
 	const toggleDark = useToggle(isThemeDark)
 	const toggleAside = useToggle(isAsideOpen)
 	const mainEl = ref(null)
@@ -44,6 +44,7 @@
 			class="flex border-b border-surface-3 p-16 items-center"
 			aria-label="Top navigation">
 			<button
+				v-if="!route.meta.hiddenSidebar"
 				type="button"
 				class="vv-button vv-button--action-quiet mr-sm md:none"
 				title="Toggle menu"
@@ -60,7 +61,7 @@
 					width="26"
 					height="26"
 					class="w-26 block mr-10" />
-				<span class="text-18 font-semibold">volverjs/style</span>
+				<span class="text-18 font-semibold">@volverjs/style</span>
 			</RouterLink>
 			<span class="text-xs text-word-3 px-sm ml-auto">
 				v{{ appVersion }}
@@ -90,6 +91,7 @@
 		</nav>
 		<div class="flex flex-1 min-h-0">
 			<div
+				v-if="!route.meta.hiddenSidebar"
 				class="off-canvas min-h-0"
 				:class="{ 'off-canvas--open': isAsideOpen }">
 				<div
@@ -151,7 +153,7 @@
 								</li>
 								<li
 									v-if="sectionIndex < mainMenu.length - 1"
-									class="vv-nav__divider"
+									class="vv-nav__separator"
 									aria-hidden="true"></li>
 							</template>
 						</ul>

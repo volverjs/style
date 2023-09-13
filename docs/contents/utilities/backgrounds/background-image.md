@@ -7,7 +7,7 @@ customProperties: true
 <card-example class="mb-lg" v-slot="{ items }" property="background-image">
 	<div class="grid grid-cols-3 md:grid-cols-5 gap-sm">
 		<div v-for="(value, key) in items"
-          :key="key" class="aspect-square relative bg-white bg-center" 
+          :key="key" class="aspect-square relative bg-surface bg-center" 
           :class="[`bg-${key}`, key === 'grid' ? 'bg-auto bg-repeat' : 'bg-cover bg-no-repeat' ]">
       <div
         class="vv-badge vv-badge--rounded vv-badge--white absolute bottom-xs right-xs">

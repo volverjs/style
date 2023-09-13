@@ -69,13 +69,16 @@
 	)
 
 	const documentElement = ref('')
-	const colorHue = useCssVar(`--color-${props.name}-hue`, documentElement)
+	const colorHue = useCssVar(
+		computed(() => `--color-${props.name}-hue`),
+		documentElement,
+	)
 	const colorSaturation = useCssVar(
-		`--color-${props.name}-saturation`,
+		computed(() => `--color-${props.name}-saturation`),
 		documentElement,
 	)
 	const colorLightess = useCssVar(
-		`--color-${props.name}-lightness`,
+		computed(() => `--color-${props.name}-lightness`),
 		documentElement,
 	)
 

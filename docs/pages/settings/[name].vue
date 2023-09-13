@@ -158,5 +158,5 @@
 
 <route lang="yaml">
 meta:
-    layout: sidebarNavigation
+    layout: default
 </route>

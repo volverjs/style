@@ -36,7 +36,7 @@ wrapperClass: flex-1 border border-surface-4 border-solid rounded-lg overflow-hi
                         </li>
                     </ul>
                 </li>
-                <li class="vv-nav__divider"></li>
+                <li class="vv-nav__separator"></li>
                 <li class="vv-nav__item">
                     <span
                         id="sidebar-label-2"
@@ -100,7 +100,7 @@ wrapperClass: flex-1 border border-surface-4 border-solid rounded-lg overflow-hi
                                     Aside item 2
                                 </a>
                             </li>
-                            <li class="vv-nav__divider" role="separator"></li>
+                            <li class="vv-nav__separator" role="separator"></li>
                             <li class="vv-nav__item" role="presentation">
                                 <a
                                     class="vv-nav__item-label current"

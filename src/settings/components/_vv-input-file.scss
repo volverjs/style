@@ -11,6 +11,7 @@ $vv-input-file: (
 			_alias: '> label',
 			display: var(--input-label-display),
 			font-size: var(--input-label-font-size),
+			font-weight: var(--input-label-font-weight),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
 			white-space: var(--input-label-white-space),
@@ -151,6 +152,8 @@ $vv-input-file: (
 			margin-bottom: var(--input-label-gap),
 			cursor: pointer,
 			transition: var(--transition-all),
+			overflow: hidden,
+			text-overflow: ellipsis,
 			pseudo: (
 				after: (
 					position: absolute,
@@ -168,6 +171,18 @@ $vv-input-file: (
 					color: var(--input-color),
 				),
 			),
+		),
+		preview: (
+			position: absolute,
+			display: flex,
+			inset: var(--spacing-4),
+			font-size: var(--text-xl),
+			align-items: center,
+			justify-content: center,
+			object-fit: contain,
+			object-position: center,
+			background: var(--bg-chessboard),
+			overflow: hidden,
 		),
 		progress: (
 			position: absolute,
@@ -382,6 +397,29 @@ $vv-input-file: (
 							border-color: var(--color-brand),
 						),
 					),
+				),
+			),
+		),
+		square: (
+			element: (
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
+				),
+			),
+		),
+		circle: (
+			element: (
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
+					border-radius: var(--rounded-full),
+					pseudo: (
+						after: (
+							border-radius: var(--rounded-full),
+						),
+					),
+				),
+				preview: (
+					border-radius: var(--rounded-full),
 				),
 			),
 		),
