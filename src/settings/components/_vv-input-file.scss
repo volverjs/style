@@ -1,4 +1,4 @@
-$vv-input-text: (
+$vv-input-file: (
 	display: var(--input-display),
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
@@ -67,56 +67,25 @@ $vv-input-text: (
 			min-width: 0,
 		),
 		input: (
-			_alias: 'input',
-			display: flex,
+			_alias: 'input[type="file"]',
 			flex: 1,
-			align-items: center,
+			white-space: nowrap,
+			cursor: pointer,
 			color: var(--input-color),
-			line-height: var(--leading-normal),
-			[padding-block]: var(--input-spacing-top)
-				var(--input-spacing-bottom),
+			[padding-block]: var(--input-spacing-top) 0,
 			[padding-inline]: var(--input-spacing-left)
 				var(--input-spacing-right),
 			min-width: 0,
 			min-height: var(--input-min-height),
 			text-overflow: var(--input-text-overflow),
 			pseudo: (
-				placeholder: (
-					color: var(--input-placeholder-color),
-				),
-				calendar-picker-indicator: (
-					position: absolute,
-					padding: var(--spacing-sm),
-					top: 0,
-					right: 0,
-					opacity: var(--opacity-0),
-				),
-				search-cancel-button: (
-					-webkit-appearance: none,
-					opacity: var(--opacity-0),
-				),
-				color-swatch-wrapper: (
-					padding: var(--spacing-px),
-				),
-				color-swatch: (
-					height: var(--spacing-20),
-					border-radius: var(--spacing-4),
-					padding: 0,
-				),
-				outer-spin-button: (
-					display: none,
-				),
-				inner-spin-button: (
-					display: none,
-				),
-				datetime-edit: (
-					padding: 0,
-				),
-				datetime-edit-fields-wrapper: (
-					padding: 0,
-				),
-				datetime-edit-day-field: (
-					padding: 0,
+				file-selector-button: (
+					appearance: none,
+					border: none,
+					background: transparent,
+					cursor: pointer,
+					text-decoration: underline,
+					color: var(--input-color),
 				),
 			),
 			state: (
@@ -126,6 +95,12 @@ $vv-input-text: (
 				readonly: (
 					cursor: text,
 					user-select: text,
+					pointer-events: none,
+					pseudo: (
+						file-selector-button: (
+							opacity: var(--opacity-50),
+						),
+					),
 				),
 			),
 		),
@@ -136,10 +111,6 @@ $vv-input-text: (
 		input-after: (
 			display: flex,
 			padding-right: var(--input-spacing-right),
-		),
-		number: (
-			_alias: 'input[type="number"]',
-			-moz-appearance: textfield,
 		),
 		icon: (
 			_alias: '> div > :where(svg, [data-icon])',
@@ -157,46 +128,6 @@ $vv-input-text: (
 			right: 0,
 			left: auto,
 		),
-		actions-group: (
-			display: flex,
-			flex-direction: column,
-			height: var(--input-min-height),
-		),
-		action: (
-			position: relative,
-			width:
-				calc(
-					var(--input-icon-width) + var(--input-spacing-left) +
-						var(--input-spacing-right)
-				),
-			height: var(--input-min-height),
-			cursor: pointer,
-			state: (
-				disabled: (
-					cursor: not-allowed,
-					opacity: var(--opacity-50),
-				),
-				focus-visible: (
-					background-color: var(--color-surface-3),
-				),
-				hover: (
-					background-color: var(--color-surface-4),
-				),
-				active: (
-					background-color: var(--color-surface-5),
-				),
-			),
-		),
-		action-chevron: (
-			flex: 1,
-			background-position: center var(--spacing-2),
-			background-size: var(--text-14) auto,
-			background-repeat: no-repeat,
-			background-image: var(--bg-chevron),
-		),
-		action-chevron-up: (
-			rotate: 180deg,
-		),
 		hint: (
 			_alias: '> small',
 			display: var(--input-hint-display),
@@ -208,19 +139,137 @@ $vv-input-text: (
 			text-overflow: var(--input-hint-text-overflow),
 			overflow: var(--input-hint-overflow),
 		),
-		limit: (
-			[padding-right]: var(--input-spacing-right),
-			font-size: var(--input-hint-font-size),
+		drop-area: (
+			position: relative,
+			background-color: var(--input-background-color),
 			color: var(--input-hint-color),
-		),
-		unit: (
-			color: var(--input-placeholder-color),
+			min-height: var(--spacing-100),
+			padding: var(--spacing-16),
 			display: flex,
+			text-align: center,
 			align-items: center,
-			flex: 0 1 auto,
-			[padding-right]: var(--input-spacing-right),
-			[padding-block]: var(--input-spacing-top)
-				var(--input-spacing-bottom),
+			justify-content: center,
+			margin-bottom: var(--input-label-gap),
+			cursor: pointer,
+			transition: var(--transition-all),
+			overflow: hidden,
+			text-overflow: ellipsis,
+			pseudo: (
+				after: (
+					position: absolute,
+					inset: 0,
+					opacity: var(--opacity-100),
+					border-width: var(--border-2),
+					border-style: dashed,
+					border-color: var(--color-word-5),
+					transition: var(--transition-all),
+				),
+			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+					color: var(--input-color),
+				),
+			),
+		),
+		preview: (
+			position: absolute,
+			display: flex,
+			inset: var(--spacing-4),
+			font-size: var(--text-xl),
+			align-items: center,
+			justify-content: center,
+			object-fit: contain,
+			object-position: center,
+			background: var(--bg-chessboard),
+			overflow: hidden,
+		),
+		progress: (
+			position: absolute,
+			width: 100%,
+			height: var(--border-2),
+			bottom: 0,
+			left: 0,
+			z-index: 1,
+			pseudo: (
+				-webkit-progress-bar: (
+						background-color: transparent,
+					),
+				-moz-progress-bar: (
+						background-color: var(--color-brand),
+						transition: var(--transition-all),
+					),
+				-webkit-progress-value: (
+						background-color: var(--color-brand),
+						transition: var(--transition-all),
+					),
+			),
+		),
+		list: (
+			display: flex,
+			flex-direction: column,
+			gap: var(--input-label-gap),
+			margin-top: var(--input-label-gap),
+			state: (
+				empty: (
+					display: none,
+				),
+			),
+		),
+		item: (
+			display: flex,
+			font-size: var(--input-label-font-size),
+			align-items: center,
+			gap: var(--spacing-8),
+			background-color: var(--input-background-color),
+			padding: var(--spacing-8),
+		),
+		item-name: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
+		),
+		item-info: (
+			font-size: smaller,
+			white-space: nowrap,
+			color: var(--color-word-5),
+			align-self: flex-end,
+		),
+		item-link: (
+			cursor: pointer,
+			text-decoration: underline,
+		),
+		item-icon: (
+			flex-shrink: 0,
+		),
+		item-remove: (
+			flex-shrink: 0,
+			background-image: var(--bg-close),
+			width: 1.4em,
+			height: 1.4em,
+			background-size: 0.8em,
+			background-repeat: no-repeat,
+			background-position: center,
+			border-radius: var(--rounded-full),
+			background-color: var(--color-surface-3),
+			margin-inline-start: auto,
+			cursor: pointer,
+			transition: var(--transition-colors),
+			state: (
+				hover: (
+					background-color: var(--color-surface-4),
+				),
+				active: (
+					background-color: var(--color-surface-5),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				disabled: (
+					cursor: not-allowed,
+					opacity: var(--opacity-50),
+				),
+			),
 		),
 	),
 	modifier: (
@@ -232,6 +281,23 @@ $vv-input-text: (
 			element: (
 				limit: (
 					margin-left: calc((var(--spacing-sm) + 1em) * -1),
+				),
+			),
+		),
+		with-progress: (
+			element: (
+				drop-area: (
+					cursor: not-allowed,
+					height: var(--spacing-2),
+					min-height: 0,
+					padding-block: 0,
+					color: var(--color-transparent),
+					background-color: var(--color-surface-3),
+					pseudo: (
+						after: (
+							opacity: var(--opacity-0),
+						),
+					),
 				),
 			),
 		),
@@ -254,6 +320,13 @@ $vv-input-text: (
 				icon-after: (
 					color: var(--input-valid-color),
 				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--input-valid-color),
+						),
+					),
+				),
 			),
 		),
 		invalid: (
@@ -275,6 +348,13 @@ $vv-input-text: (
 				icon-after: (
 					color: var(--input-invalid-color),
 				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--input-invalid-color),
+						),
+					),
+				),
 			),
 		),
 		loading: (
@@ -287,120 +367,59 @@ $vv-input-text: (
 						),
 					),
 				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--color-brand),
+							animation: var(--animation-clippath),
+						),
+					),
+				),
 			),
 		),
-		floating: (
-			position: relative,
-			[margin-left]: var(--input-spacing-left),
-			[margin-right]: var(--input-spacing-right),
+		hidden: (
 			element: (
 				wrapper: (
-					[margin-left]: calc(var(--input-spacing-left) * -1),
-					[margin-right]: calc(var(--input-spacing-right) * -1),
+					display: none,
 				),
-				hint: (
-					[margin-left]: calc(var(--input-spacing-left) * -1),
-					[margin-right]: calc(var(--input-spacing-right) * -1),
-				),
-				label: (
-					position: absolute,
-					z-index: 1,
-					min-height: var(--input-min-height),
-					line-height: var(--input-min-height),
-					pointer-events: none,
-					font-size: inherit,
-					padding-inline: 0,
-					margin: 0,
-					will-change: 'transform',
-					transition: var(--transition-all),
-				),
-				input: (
-					will-change: 'transform',
-					transition: var(--transition-all),
-					pseudo: (
-						placeholder: (
-							will-change: 'opacity',
-							transition: var(--transition-opacity),
-							opacity: var(--opacity-0),
-						),
-					),
+				drop-area: (
+					margin-bottom: var(--spacing-0),
 				),
 			),
-			state: (
-				focus-within: (
-					element: (
-						label: (
-							translate: var(--input-floating-label-translate),
-							font-size: var(--input-floating-label-font-size),
-						),
-						input: (
-							[padding-top]: var(--input-floating-padding-top),
-							[padding-bottom]:
-								var(--input-floating-padding-bottom),
-							pseudo: (
-								placeholder: (
-									opacity: var(--opacity-100),
-								),
-							),
-						),
-					),
-				),
-				dirty: (
-					element: (
-						label: (
-							translate: var(--input-floating-label-translate),
-							font-size: var(--input-floating-label-font-size),
-						),
-						input: (
-							[padding-top]: var(--input-floating-padding-top),
-							[padding-bottom]:
-								var(--input-floating-padding-bottom),
-							pseudo: (
-								placeholder: (
-									opacity: var(--opacity-100),
-								),
-							),
+		),
+		dragging: (
+			element: (
+				drop-area: (
+					background-color: var(--color-surface-2),
+					color: var(--input-color),
+					pseudo: (
+						after: (
+							border-color: var(--color-brand),
 						),
 					),
 				),
 			),
 		),
-		auto-width: (
+		square: (
 			element: (
-				inner: (
-					[padding-block]: var(--input-spacing-top)
-						var(--input-spacing-bottom),
-					[padding-inline]: var(--input-spacing-left)
-						var(--input-spacing-right),
-					min-height: var(--input-min-height),
-					cursor: text,
-				),
-				input: (
-					padding-block: 0,
-					padding-inline: 0,
-					min-width: 1ch,
-					min-height: 1em,
-					text-align: left,
-				),
-				unit: (
-					padding-right: 0,
-					padding-block: 0,
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
 				),
 			),
-			state: (
-				dirty: (
-					element: (
-						input: (
-							flex: 0 1 auto,
+		),
+		circle: (
+			element: (
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
+					border-radius: var(--rounded-full),
+					pseudo: (
+						after: (
+							border-radius: var(--rounded-full),
 						),
 					),
 				),
-				disabled: (
-					element: (
-						inner: (
-							cursor: not-allowed,
-						),
-					),
+				preview: (
+					border-radius: var(--rounded-full),
 				),
 			),
 		),
@@ -418,6 +437,11 @@ $vv-input-text: (
 							background-color: var(--input-background-color),
 						),
 					),
+				),
+				drop-area: (
+					cursor: not-allowed,
+					background-color: var(--input-background-color),
+					color: var(--input-hint-color),
 				),
 			),
 		),
@@ -440,6 +464,9 @@ $vv-input-text: (
 							background-color: var(--input-background-color),
 						),
 					),
+				),
+				drop-area: (
+					display: none,
 				),
 			),
 		),

@@ -9,10 +9,10 @@
 	const stackblitzExample = ref('')
 	const permalinks = ref([])
 	let MainContent
-	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/getting-started/${route.params.name}.md`
+	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/get-started/${route.params.name}.md`
 	try {
 		const { attributes, toc, VueComponentWith } = await import(
-			`../../contents/getting-started/${route.params.name}.md`
+			`../../contents/get-started/${route.params.name}.md`
 		)
 		title.value = attributes.title
 		description.value = attributes.description
@@ -153,5 +153,5 @@
 
 <route lang="yaml">
 meta:
-    layout: sidebarNavigation
+    layout: default
 </route>

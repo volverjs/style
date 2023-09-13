@@ -32,7 +32,7 @@ pnpm add @volverjs/style
 yarn add @volverjs/style
 
 # npm 
-npm install @volverjs/style --save
+npm i -s @volverjs/style
 ```
 
 ## Usage
@@ -73,7 +73,7 @@ All attributes have a [custom properties](https://developer.mozilla.org/en-US/do
 
 ### 😱 Utility-first + BEM
 
-You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) or use components (*vv-\** for ex. *vv-button*) written with [BEM](http://getbem.com/introduction/).
+You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) and use components (*vv-\** for ex. *vv-button*) written with [BEM](http://getbem.com/introduction/).
 
 ## Basic personalization
 

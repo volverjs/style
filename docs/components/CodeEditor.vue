@@ -1,7 +1,7 @@
 <script setup>
 	import CodeLayout from './CodeLayout.vue'
 	import { VueLive } from 'vue-live'
-	import { nextTick, watch } from 'vue'
+	import { nextTick, provide, watch } from 'vue'
 
 	// props
 	const props = defineProps({
@@ -24,6 +24,18 @@
 		forceSource: {
 			type: Boolean,
 			default: false,
+		},
+		hidePreview: {
+			type: Boolean,
+			default: false,
+		},
+		hideActions: {
+			type: Boolean,
+			default: false,
+		},
+		layout: {
+			type: Object,
+			default: () => CodeLayout,
 		},
 	})
 
@@ -49,9 +61,11 @@
 		},
 		{ immediate: true },
 	)
+	const emit = defineEmits(['update:code'])
 	const onChange = (newCode) => {
 		if (typeof newCode === 'string') {
 			editedCode.value = newCode
+			emit('update:code', newCode)
 		}
 	}
 
@@ -63,7 +77,14 @@
 	watch(isThemeDark, (value) => {
 		isPreviewInDarkMode.value = value
 	})
-	provide('showSource', props.forceSource || showSource)
+	provide(
+		'showSource',
+		computed(() => props.forceSource || showSource.value),
+	)
+	provide(
+		'showPreview',
+		computed(() => !props.hidePreview),
+	)
 	provide('isPreviewInDarkMode', isPreviewInDarkMode)
 	provide('metadata', metadata)
 	const toggleSource = useToggle(showSource)
@@ -91,6 +112,7 @@
 <template>
 	<div ref="root" class="vv-card">
 		<div
+			v-if="!hideActions"
 			class="vv-card__header bg-surface flex items-center preflight-revert">
 			<span v-if="metadata.title">{{ metadata.title }}</span>
 			<div class="vv-button-group ml-auto">
@@ -135,7 +157,7 @@
 		<VueLive
 			v-if="editedCode"
 			:code="editedCode"
-			:layout="CodeLayout"
+			:layout="layout"
 			@change="onChange" />
 	</div>
 </template>

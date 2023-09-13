@@ -20,6 +20,9 @@ The style of each class can be overwritten easily without `!important` or comple
 .font-sans {
   font-family: "Open Sans", sans-serif;
 }
+
+// the library not override your style
+@import '@volverjs/style';
 ```
 
 ### CSS Custom Properties

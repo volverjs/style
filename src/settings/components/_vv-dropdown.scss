@@ -9,7 +9,7 @@ $vv-dropdown: (
 	width: 'max-content',
 	element: (
 		list: (
-			_alias: 'ul',
+			_alias: 'div:is([role="menu"],[role="list-box"])',
 			[border-radius]: var(--dropdown-border-radius),
 			background-color: var(--color-surface-1),
 			overflow: auto,
@@ -30,20 +30,21 @@ $vv-dropdown: (
 			),
 		),
 		item: (
-			_alias: 'li',
+			_alias: ':is([role="option"],[role="presentation"])',
 		),
 		item-first: (
-			_alias: 'li:first-child',
+			_alias: ':is([role="option"],[role="presentation"]):first-child',
 			[border-top-left-radius]: var(--dropdown-border-radius),
 			[border-top-right-radius]: var(--dropdown-border-radius),
 		),
 		item-last: (
-			_alias: 'li:last-child',
+			_alias: ':is([role="option"],[role="presentation"]):last-child',
 			[border-bottom-left-radius]: var(--dropdown-border-radius),
 			[border-bottom-right-radius]: var(--dropdown-border-radius),
 		),
 		item-not-last: (
-			_alias: 'li:not(:last-child)',
+			_alias:
+				':is([role="option"],[role="presentation"]):not(:last-child)',
 			border-width: 0 0 var(--border) 0,
 			border-color: var(--color-surface-3),
 			border-style: solid,

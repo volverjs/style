@@ -195,6 +195,16 @@
 	@extend %text-clip;
 }
 
+%text-balance {
+	text-wrap: balance;
+}
+@include wrap-with-where(
+	$selector: '.text-balance',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %text-balance;
+}
+
 // word break
 %break-normal {
 	overflow-wrap: normal;

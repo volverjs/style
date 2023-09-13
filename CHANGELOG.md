@@ -13,6 +13,13 @@ All notable changes to this project will be documented in this file.
 *   Update figma design tokens;
 *   `breakpoint` for states.
 
+### Changed
+*   `vv-nav__divider` is now `vv-nav__separator`.
+
+### Added
+*   `.text-balance` utility;
+*   `vv-input-file` component.
+
 ## [0.1.11] - 2023-05-24
 
 ### Added

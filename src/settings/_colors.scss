@@ -15,7 +15,7 @@ $color-info: #31ccec !default;
 $color-warning: #e7b735 !default;
 $color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
 $color-word: hsl(color.hue($color-brand) 15% 10%) !default;
-$color-surface: hsl(color.hue($color-brand) 10% 98%) !default;
+$color-surface: hsl(color.hue($color-brand) 10% 100%) !default;
 $color-surface-palette: (
 	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
 	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),

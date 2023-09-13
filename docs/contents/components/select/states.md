@@ -79,7 +79,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-select">
+<div class="vv-select
+            vv-select--disabled">
     <label for="select-disabled">Disabled Select</label>
     <div class="vv-select__wrapper">
         <select id="select-disabled"
@@ -99,7 +100,9 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-select vv-select--readonly vv-select--dirty">
+<div class="vv-select 
+            vv-select--readonly 
+            vv-select--dirty">
     <label for="select-readonly">Readonly Select</label>
     <div class="vv-select__wrapper">
         <select id="select-readonly"
