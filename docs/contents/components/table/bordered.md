@@ -1,9 +1,9 @@
 ---
-title: Inline spacing
+title: Bordered 
 wrapperClass: w-full
 ---
 
-<table class="vv-table vv-table--inline-spacing">
+<table class="vv-table vv-table--bordered">
      <caption>
           Table Caption
      </caption>

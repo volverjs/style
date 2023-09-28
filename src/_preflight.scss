@@ -57,6 +57,10 @@
 			@extend %list-decimal !optional;
 		}
 
+		&:where(li > p) {
+			@extend %inline-block !optional;
+		}
+
 		&:where(b, strong, th) {
 			@extend %font-bold !optional;
 		}
@@ -217,6 +221,7 @@
 		// table
 		&:where(table) {
 			@extend %vv-table !optional;
+			@extend %vv-table--bordered !optional;
 
 			:where(tr) {
 				@extend %vv-table__tr !optional;
@@ -224,10 +229,16 @@
 
 			:where(td) {
 				@extend %vv-table__td !optional;
+				@extend %vv-table-modifier-bordered__td !optional;
 			}
 
 			:where(th) {
 				@extend %vv-table__th !optional;
+				@extend %vv-table-modifier-bordered__th !optional;
+			}
+
+			:where(caption) {
+				@extend %vv-table__caption !optional;
 			}
 		}
 
