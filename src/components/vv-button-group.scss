@@ -48,7 +48,7 @@ $button-component-selector: '.' + $button-component-name;
 				#{$button-component-selector} {
 					// clear top border-radius for first child
 					@include wrap-with-where(
-						$selector: '&:not(:first-child)',
+						$selector: '&:not(:first-of-type)',
 						$enabled: $zero-specificity-for-components
 					) {
 						border-top-right-radius: 0;
@@ -57,7 +57,7 @@ $button-component-selector: '.' + $button-component-name;
 
 					// clear bottom border-radius for last child
 					@include wrap-with-where(
-						$selector: '&:not(:last-child)',
+						$selector: '&:not(:last-of-type)',
 						$enabled: $zero-specificity-for-components
 					) {
 						border-bottom-right-radius: 0;
@@ -67,7 +67,7 @@ $button-component-selector: '.' + $button-component-name;
 					// clear margin for inner children
 					@if map.get($vv-button, '--button-border-width') {
 						@include wrap-with-where(
-							$selector: '&:not(:last-child, :last-child)',
+							$selector: '&:not(:first-of-type, :last-of-type)',
 							$enabled: $zero-specificity-for-components
 						) {
 							margin-block: calc(var(--button-border-width) * -1);
@@ -81,7 +81,7 @@ $button-component-selector: '.' + $button-component-name;
 			#{$button-component-selector} {
 				// clear left border-radius for first child
 				@include wrap-with-where(
-					$selector: '&:not(:first-child)',
+					$selector: '&:not(:first-of-type)',
 					$enabled: $zero-specificity-for-components
 				) {
 					border-top-left-radius: 0;
@@ -90,7 +90,7 @@ $button-component-selector: '.' + $button-component-name;
 
 				// clear right border-radius for first child
 				@include wrap-with-where(
-					$selector: '&:not(:last-child)',
+					$selector: '&:not(:last-of-type)',
 					$enabled: $zero-specificity-for-components
 				) {
 					border-top-right-radius: 0;
@@ -100,7 +100,7 @@ $button-component-selector: '.' + $button-component-name;
 				// clear margin for inner children
 				@if map.get($vv-button, '--button-border-width') {
 					@include wrap-with-where(
-						$selector: '&:not(:last-child, :last-child)',
+						$selector: '&:not(:first-of-type, :last-of-type)',
 						$enabled: $zero-specificity-for-components
 					) {
 						margin-inline: calc(var(--button-border-width) * -1);
