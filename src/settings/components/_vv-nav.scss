@@ -18,7 +18,7 @@ $vv-nav: (
 			[padding]: var(--nav-item-padding),
 		),
 		item-label: (
-			_alias: 'li > a',
+			_alias: 'li > :is(a, button)',
 			display: flex,
 			align-items: center,
 			will-change: background-color color,
