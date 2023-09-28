@@ -29,6 +29,10 @@ $vv-table: (
 				),
 			),
 		),
+		tfoot-tr: (
+			_alias: 'tfoot > tr',
+			border-width: 1px 0 0 0,
+		),
 		th: (
 			_alias: 'th',
 			font-weight: var(--font-semibold),
@@ -48,7 +52,21 @@ $vv-table: (
 	modifier: (
 		inline-spacing: (
 			--table-cell-padding: var(--spacing-md),
-			border-width: 0,
+		),
+		bordered: (
+			--table-cell-padding: var(--spacing-md),
+			element: (
+				th: (
+					border-width: 1px,
+					border-style: solid,
+					border-color: var(--color-surface-5),
+				),
+				td: (
+					border-width: 1px,
+					border-style: solid,
+					border-color: var(--color-surface-5),
+				),
+			),
 		),
 	),
 ) !default;

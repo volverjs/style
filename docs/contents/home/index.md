@@ -1,11 +1,11 @@
 <header>
     <div class="flex flex-col mx-auto px-16 py-xl relative">
-        <div class="flex flex-col flex-1 justify-center items-center text-center mb-xl">
+        <div class="flex flex-col flex-1 justify-center items-center text-center mb-48">
             <Logo alt="Volver" class="w-208 md:w-256 h-auto" width="256" height="256"></Logo>
-            <h1 class="vv-text vv-text--headline text-48 tracking-tighter md:text-60 font-black my-md">
+            <h1 class="vv-text vv-text--headline text-34 md:text-48 tracking-tighter md:text-60 font-black my-md">
                 The Easy Way to Style
             </h1>
-            <h2 class="vv-text text-balance vv-text--size-2 text-word-3 mt-0 mb-lg">
+            <h2 class="vv-text text-balance text-18 md:text-24 text-word-3 mt-0 mb-lg">
                 An highly customizable CSS library with components and
                 utilities.
             </h2>
@@ -14,12 +14,12 @@
                 <router-link :to="{
 								name: 'get-started-name',
 								params: { name: 'installation' },
-							}" class="vv-button vv-button--primary vv-button--full-bleed vv-button--rounded">
+							}" class="vv-button vv-button--primary vv-button--rounded">
                     Get Started
                     <iconify-icon icon="akar-icons:arrow-right" />
                 </router-link>
                 <a href="https://github.com/volverjs/style" target="_blank" rel="noopener noreferrer"
-                    class="vv-button vv-button--secondary vv-button--full-bleed vv-button--rounded">
+                    class="vv-button vv-button--secondary vv-button--rounded">
                     GitHub
                     <iconify-icon icon="akar-icons:octocat-fill" />
                 </a>

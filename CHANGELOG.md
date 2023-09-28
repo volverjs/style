@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 *   Mobile improvements;
 *   A11y review;
 *   Update figma design tokens;
+*   `bordered` modifier for `vv-table`;
 *   `breakpoint` for states.
 
 ### Changed

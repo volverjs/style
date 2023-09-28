@@ -11,10 +11,10 @@ $input: (
 	line-height: var(--leading-normal),
 	min-height: var(--spacing-52),
 	min-width: 0,
+	spacing-top: var(--spacing-sm),
+	spacing-right: var(--spacing-sm),
 	spacing-bottom: var(--spacing-sm),
 	spacing-left: var(--spacing-sm),
-	spacing-right: var(--spacing-sm),
-	spacing-top: var(--spacing-sm),
 	text-overflow: ellipsis,
 	label: (
 		color: var(--color-word-2),
