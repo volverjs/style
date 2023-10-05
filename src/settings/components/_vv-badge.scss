@@ -21,6 +21,7 @@ $vv-badge: (
 	line-height: var(--leading-none),
 	overflow: hidden,
 	flex-shrink: 0,
+	vertical-align: middle,
 	state: (
 		empty: (
 			font-size: inherit,

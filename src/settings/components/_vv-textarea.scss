@@ -116,6 +116,7 @@ $vv-textarea: (
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
+			flex-shrink: 0,
 		),
 		icon-after: (
 			_alias: 'textarea + :where(svg, [data-icon])',

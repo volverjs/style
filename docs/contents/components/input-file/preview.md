@@ -1,6 +1,6 @@
 ---
 title: Preview
-wrapperClass: flex-1 grid md:grid-cols-5 gap-md items-start
+wrapperClass: flex-1 grid grid-cols-2 md:grid-cols-5 gap-md items-start
 ---
 
 <div class="vv-input-file 

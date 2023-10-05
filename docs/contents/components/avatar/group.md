@@ -1,22 +1,21 @@
 ---
 title: Group
-wrapperClass: flex flex-1 justify-center
 ---
 
-<div class="flex gap-24">
+<div class="flex flex-wrap items-end justify-center gap-24">
   <span class="vv-avatar-group vv-avatar-group--tight">
     <img class="vv-avatar 
                 vv-avatar--rounded 
                 vv-avatar--surface
                 vv-avatar--md"
-          src="https://avatars.dicebear.com/api/pixel-art-neutral/random.svg" 
+          src="https://api.dicebear.com/7.x/pixel-art/svg" 
           alt="avatar" 
           tabindex="0" />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
-          <img src="https://avatars.dicebear.com/v2/identicon/random.svg" 
+          <img src="https://api.dicebear.com/7.x/identicon/svg" 
               alt="avatar" 
               tabindex="0">
       </span>
@@ -44,14 +43,14 @@ wrapperClass: flex flex-1 justify-center
                 vv-avatar--bordered
                 vv-avatar--surface
                 vv-avatar--md"
-          src="https://avatars.dicebear.com/api/pixel-art-neutral/random.svg" 
+          src="https://api.dicebear.com/7.x/pixel-art/svg" 
           alt="avatar" 
           tabindex="0" />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
-          <img src="https://avatars.dicebear.com/v2/identicon/random.svg" 
+          <img src="https://api.dicebear.com/7.x/identicon/svg" 
               alt="avatar" 
               tabindex="0">
       </span>
@@ -79,14 +78,14 @@ wrapperClass: flex flex-1 justify-center
                 vv-avatar--rounded 
                 vv-avatar--surface
                 vv-avatar--md"
-          src="https://avatars.dicebear.com/api/pixel-art-neutral/random.svg" 
+          src="https://api.dicebear.com/7.x/pixel-art/svg" 
           alt="avatar" 
           tabindex="0" />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
-          <img src="https://avatars.dicebear.com/v2/identicon/random.svg" 
+          <img src="https://api.dicebear.com/7.x/identicon/svg" 
               alt="avatar" 
               tabindex="0">
       </span>

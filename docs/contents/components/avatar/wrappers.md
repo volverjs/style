@@ -1,15 +1,14 @@
 ---
 title: Wrappers
-wrapperClass: flex flex-1 justify-center
 ---
 
 <div class="flex gap-24 items-end">
-   <img class="vv-avatar"
-        src="https://avatars.dicebear.com/api/pixel-art-neutral/random.svg" 
+   <img class="vv-avatar vv-avatar--surface"
+        src="https://api.dicebear.com/7.x/pixel-art/svg" 
         alt="avatar" 
         tabindex="0" />
     <span class="vv-avatar vv-avatar--surface">
-        <img src="https://avatars.dicebear.com/v2/identicon/random.svg" 
+        <img src="https://api.dicebear.com/7.x/identicon/svg" 
              alt="avatar" 
              tabindex="0">
     </span>

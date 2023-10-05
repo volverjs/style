@@ -150,6 +150,7 @@ $vv-input-text: (
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
+			flex-shrink: 0,
 		),
 		icon-after: (
 			_alias: 'input + :where(svg, [data-icon])',

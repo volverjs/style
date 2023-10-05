@@ -62,7 +62,7 @@
 	}
 
 	%translate-x-#{$size} {
-		translate: #{$value};
+		translate: #{$value} 0;
 	}
 	@include wrap-with-where(
 		$selector: '.translate-x-#{$size}',
@@ -92,7 +92,7 @@
 	}
 
 	%-translate-x-#{$size} {
-		translate: -#{$value};
+		translate: -#{$value} 0;
 	}
 	@include wrap-with-where(
 		$selector: '.-translate-x-#{$size}',

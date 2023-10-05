@@ -36,6 +36,8 @@
 		&:where(p) {
 			@extend %vv-text !optional;
 			@extend %vv-text--copy !optional;
+			@extend %overflow-hidden !optional;
+			@extend %text-ellipsis !optional;
 		}
 
 		&:where(blockquote) {

@@ -14,6 +14,7 @@ $vv-avatar: (
 	background-size: contain,
 	background-repeat: no-repeat,
 	object-fit: contain,
+	flex-shrink: 0,
 	state: (
 		focus: (
 			outline: var(--spacing-px) solid var(--color-brand),
@@ -82,7 +83,7 @@ $vv-avatar: (
 			background-color: var(--color-transparent),
 		),
 		surface: (
-			background-color: var(--color-surface-1),
+			background-color: var(--color-surface-2),
 			border-color: var(--color-surface-3),
 			color: var(--color-word-2),
 		),

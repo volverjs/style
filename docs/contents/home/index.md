@@ -67,7 +67,7 @@
     </div>
 </header>
 <main>
-    <section class="py-lg px-16 relative shadow-inner" id="zero-specificity">
+    <section class="py-32 px-16 relative shadow-inner" id="zero-specificity">
         <div class="inset-0 bg-gradient-3 opacity-10 absolute"></div>
         <div class="inset-0 bg-grid bg-blend-darken opacity-10 absolute"></div>
         <div class="relative">
@@ -103,7 +103,7 @@
               </router-link>
         </div>
     </section>
-    <section class="py-lg px-16 relative" id="custom-properties">
+    <section class="py-32 px-16 relative" id="custom-properties">
         <h1 class="vv-text vv-text--headline vv-text--size-1 text-center">
             🎨 Custom properties
         </h1>
@@ -139,7 +139,7 @@
               </router-link>
         </div>
     </section>
-    <section class="py-lg px-16 relative shadow-inner" id="utility-bem">
+    <section class="py-32 px-16 relative shadow-inner" id="utility-bem">
         <div class="inset-0 bg-gradient-12 opacity-10 absolute"></div>
         <div class="inset-0 bg-grid bg-blend-darken opacity-10 absolute"></div>
         <h1 class="vv-text vv-text--headline vv-text--size-1 text-center">

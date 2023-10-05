@@ -72,11 +72,12 @@ $vv-input-file: (
 			white-space: nowrap,
 			cursor: pointer,
 			color: var(--input-color),
-			[padding-block]: var(--input-spacing-top) 0,
 			[padding-inline]: var(--input-spacing-left)
 				var(--input-spacing-right),
 			min-width: 0,
 			min-height: var(--input-min-height),
+			display: flex,
+			align-items: center,
 			text-overflow: var(--input-text-overflow),
 			pseudo: (
 				file-selector-button: (
@@ -86,6 +87,7 @@ $vv-input-file: (
 					cursor: pointer,
 					text-decoration: underline,
 					color: var(--input-color),
+					min-height: var(--input-min-height),
 				),
 			),
 			state: (
@@ -121,6 +123,7 @@ $vv-input-file: (
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
+			flex-shrink: 0,
 		),
 		icon-after: (
 			_alias: 'input + :where(svg, [data-icon])',
@@ -217,6 +220,8 @@ $vv-input-file: (
 			),
 		),
 		item: (
+			position: relative,
+			overflow: hidden,
 			display: flex,
 			font-size: var(--input-label-font-size),
 			align-items: center,

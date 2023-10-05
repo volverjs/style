@@ -1,9 +1,8 @@
 ---
 title: Bordered
-wrapperClass: flex flex-1 justify-center
 ---
 
-<div class="flex gap-24 items-end">
+<div class="flex gap-24 items-end justify-center flex-wrap">
   <span class="vv-avatar vv-avatar--bordered" 
         role="img" 
         aria-label="Mario Rossi" 
