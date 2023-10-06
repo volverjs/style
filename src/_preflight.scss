@@ -60,7 +60,7 @@
 		}
 
 		&:where(li > p) {
-			@extend %inline-block !optional;
+			@extend %inline !optional;
 		}
 
 		&:where(b, strong, th) {
