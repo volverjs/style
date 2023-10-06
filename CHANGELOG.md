@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 *   A11y review;
 *   Update figma design tokens;
 *   `bordered` modifier for `vv-table`;
+*   Add `min-w-{spacing}` and `min-h-{spacing}` utilities;
 *   `breakpoint` for states.
 
 ### Changed
