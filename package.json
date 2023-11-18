@@ -72,7 +72,7 @@
         "stylelint-config-standard-scss": "^11.0.0",
         "unplugin-auto-import": "^0.16.6",
         "unplugin-vue-components": "^0.25.2",
-        "vite": "^4.4.11",
+        "vite": "^5.0.0",
         "vite-plugin-css-export": "^2.0.0",
         "vite-plugin-eslint": "^1.8.1",
         "vite-plugin-handlebars": "^1.6.0",
