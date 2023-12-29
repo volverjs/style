@@ -1,4 +1,4 @@
-import icssExports from '../../src/export.scss?export'
+import icssExports from '../../src/export.scss?inline&export'
 
 const icssExportsString = Object.keys(icssExports).reduce(
 	(accumulator, key) => {

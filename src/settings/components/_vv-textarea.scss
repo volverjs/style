@@ -225,7 +225,7 @@ $vv-textarea: (
 				),
 				label: (
 					position: absolute,
-					z-index: 1,
+					z-index: var(--z-1),
 					min-height: var(--input-min-height),
 					line-height: var(--input-min-height),
 					pointer-events: none,

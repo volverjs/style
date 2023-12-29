@@ -233,6 +233,7 @@
 	@each $size, $value in $spacing {
 		spacing__#{$size}: $value;
 	}
+
 	@each $size, $value in $spacing-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
@@ -247,6 +248,7 @@
 	@each $size, $value in $font-size {
 		font-size__#{$size}: $value;
 	}
+
 	@each $size, $value in $font-size-dynamic {
 		@if type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {

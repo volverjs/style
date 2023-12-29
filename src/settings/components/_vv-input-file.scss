@@ -175,6 +175,12 @@ $vv-input-file: (
 				),
 			),
 		),
+		drop-area-action: (
+			position: absolute,
+			top: var(--spacing-8),
+			right: var(--spacing-8),
+			z-index: var(--z-1),
+		),
 		preview: (
 			position: absolute,
 			display: flex,
@@ -193,7 +199,7 @@ $vv-input-file: (
 			height: var(--border-2),
 			bottom: 0,
 			left: 0,
-			z-index: 1,
+			z-index: var(--z-1),
 			pseudo: (
 				-webkit-progress-bar: (
 						background-color: transparent,
@@ -228,6 +234,11 @@ $vv-input-file: (
 			gap: var(--spacing-8),
 			background-color: var(--input-background-color),
 			padding: var(--spacing-8),
+			state: (
+				active: (
+					background-color: var(--color-surface-2),
+				),
+			),
 		),
 		item-name: (
 			white-space: nowrap,
@@ -241,14 +252,22 @@ $vv-input-file: (
 			align-self: flex-end,
 		),
 		item-link: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
 			cursor: pointer,
 			text-decoration: underline,
 		),
 		item-icon: (
 			flex-shrink: 0,
 		),
+		item-action: (
+			flex-shrink: 0,
+			cursor: pointer,
+		),
 		item-remove: (
 			flex-shrink: 0,
+			cursor: pointer,
 			background-image: var(--bg-close),
 			width: 1.4em,
 			height: 1.4em,
@@ -258,7 +277,6 @@ $vv-input-file: (
 			border-radius: var(--rounded-full),
 			background-color: var(--color-surface-3),
 			margin-inline-start: auto,
-			cursor: pointer,
 			transition: var(--transition-colors),
 			state: (
 				hover: (

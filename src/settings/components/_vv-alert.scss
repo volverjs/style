@@ -64,7 +64,7 @@ $vv-alert: (
 			left: 50%,
 			background-color: var(--color-gray),
 			[animation]: pie-masks var(--alert-duration) steps(1, end) reverse,
-			z-index: 1,
+			z-index: var(--z-1),
 		),
 	),
 	modifier: (
