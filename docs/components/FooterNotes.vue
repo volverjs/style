@@ -17,7 +17,7 @@
 			rel="noopener noreferrer"
 			target="_blank"
 			class="vv-button vv-button--link"
-			>24/Consulting</a
+			>8 Wave</a
 		>
 	</div>
 </template>
