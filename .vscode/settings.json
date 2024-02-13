@@ -5,10 +5,10 @@
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
   "stylelint.validate": ["css", "scss", "vue"],
   "eslint.validate": ["javascript", "vue"],

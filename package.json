@@ -1,7 +1,7 @@
 {
   "name": "@volverjs/style",
   "description": "@volverjs/style is a lightweight responsive CSS utility library to accompany @volverjs/ui-* and static webpages as well.",
-  "author": "24/Consulting",
+  "author": "8 Wave",
   "license": "MIT",
   "keywords": [
     "css",
