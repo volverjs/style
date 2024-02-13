@@ -27,6 +27,9 @@
 			const bLighten = b.includes('lighten')
 			const aLightenOrDarken = aLighten || aDarken
 			const bLightenOrDarken = bLighten || bDarken
+			if (!aLightenOrDarken && !bLightenOrDarken) {
+				return aNumber - bNumber
+			}
 			if (
 				(!aLightenOrDarken && bDarken) ||
 				(!bLightenOrDarken && aLighten)
@@ -66,13 +69,16 @@
 	)
 
 	const documentElement = ref('')
-	const colorHue = useCssVar(`--color-${props.name}-hue`, documentElement)
+	const colorHue = useCssVar(
+		computed(() => `--color-${props.name}-hue`),
+		documentElement,
+	)
 	const colorSaturation = useCssVar(
-		`--color-${props.name}-saturation`,
+		computed(() => `--color-${props.name}-saturation`),
 		documentElement,
 	)
 	const colorLightess = useCssVar(
-		`--color-${props.name}-lightness`,
+		computed(() => `--color-${props.name}-lightness`),
 		documentElement,
 	)
 
@@ -376,7 +382,7 @@
 				position: absolute;
 				bottom: 0;
 				left: 50%;
-				transform: translateX(-50%);
+				translate: -50%;
 				width: 0;
 				height: 0;
 				border-style: solid;
@@ -394,6 +400,6 @@
 	.copy-scale-enter-from,
 	.copy-scale-leave-to {
 		opacity: var(--opacity-0);
-		transform: scale(0);
+		scale: 0;
 	}
 </style>

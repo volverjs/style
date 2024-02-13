@@ -1,4 +1,4 @@
-const gettingStarted = import.meta.glob('../contents/getting-started/*.md', {
+const getStarted = import.meta.glob('../contents/get-started/*.md', {
 	eager: true,
 	import: 'attributes',
 })
@@ -39,17 +39,17 @@ function getUtilitiesGroup(group) {
 
 export const mainMenu = [
 	{
-		name: 'Getting Started',
-		children: Object.keys(gettingStarted)
+		name: 'Get Started',
+		children: Object.keys(getStarted)
 			.map((key) => {
 				const name = key.split('/').pop().split('.').shift()
 				return {
-					index: gettingStarted[key].index,
-					name: gettingStarted[key].label,
-					isNew: gettingStarted[key].isNew,
-					isDraft: gettingStarted[key].isDraft ?? false,
+					index: getStarted[key].index,
+					name: getStarted[key].label,
+					isNew: getStarted[key].isNew,
+					isDraft: getStarted[key].isDraft ?? false,
 					to: {
-						name: 'getting-started-name',
+						name: 'get-started-name',
 						params: { name },
 					},
 				}
@@ -112,6 +112,10 @@ export const mainMenu = [
 	{
 		name: 'Backgrounds',
 		children: getUtilitiesGroup('backgrounds'),
+	},
+	{
+		name: 'Gradients',
+		children: getUtilitiesGroup('gradient'),
 	},
 	{
 		name: 'Borders',

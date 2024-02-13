@@ -51,7 +51,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         input above.</small>
 </div>
 
-<div class="vv-textarea 
+<div class="vv-textarea
             vv-textarea--disabled">
     <label for="textarea-disabled">Disabled Textarea</label>
     <div class="vv-textarea__wrapper">
@@ -65,7 +65,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         fill the input above.</small>
 </div>
 
-<div class="vv-textarea 
+<div class="vv-textarea
             vv-textarea--readonly
             vv-textarea--dirty">
     <label for="textarea-readonly">Readonly Textarea</label>

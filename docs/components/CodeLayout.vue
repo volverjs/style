@@ -1,5 +1,6 @@
 <script setup>
-	const showSource = inject('showSource')
+	const showSource = inject('showSource', false)
+	const showPreview = inject('showPreview', false)
 	const isPreviewInDarkMode = inject('isPreviewInDarkMode')
 	const metadata = inject('metadata')
 	const isThemeDark = inject('isThemeDark')
@@ -10,8 +11,9 @@
 </script>
 
 <template>
-	<div class="code-layout flex flex-col">
+	<div class="code-layout flex flex-1 flex-col z-1">
 		<div
+			v-if="showPreview"
 			class="code-layout__preview flex-1 flex items-center justify-center p-24"
 			:class="[
 				{
@@ -29,7 +31,8 @@
 		</div>
 		<div
 			v-if="showSource"
-			class="code-layout__source flex-1 bg-surface-1 border-t border-surface-4 p-24 font-mono text-xs">
+			class="code-layout__source flex-1 bg-surface-1 p-24 font-mono text-xs"
+			:class="{ 'border-t border-surface-4': showPreview }">
 			<slot name="editor"></slot>
 		</div>
 	</div>

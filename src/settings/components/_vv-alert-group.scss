@@ -5,17 +5,24 @@ $vv-alert-group: (
 	flex-direction: column,
 	gap: var(--spacing-sm),
 	overflow: hidden,
+	pointer-events: none,
 	element: (
 		list: (
 			_alias: '> [role="group"]',
 			display: flex,
 			flex-direction: column,
 			gap: var(--spacing-xs),
+			state: (
+				empty: (
+					display: none,
+				),
+			),
 		),
 		item: (
 			_alias: '> [role="group"] > *',
 			transition: var(--transition-all),
 			flex-shrink: 0,
+			pointer-events: auto,
 		),
 		not-first: (
 			_alias: '> [role="group"] > *:not(:first-child)',
@@ -58,10 +65,10 @@ $vv-alert-group: (
 			max-height: var(--h-full),
 		),
 		reverse: (
-			flex-flow: column-reverse,
+			flex-direction: column-reverse,
 			element: (
 				list: (
-					flex-flow: column-reverse,
+					flex-direction: column-reverse,
 				),
 			),
 		),
@@ -72,7 +79,7 @@ $vv-alert-group: (
 		top-middle: (
 			inset-block: 0 auto,
 			inset-inline: 50% auto,
-			transform: translateX(-50%),
+			translate: -50%,
 		),
 		top-end: (
 			inset-block: 0 auto,
@@ -80,18 +87,18 @@ $vv-alert-group: (
 		),
 		center-start: (
 			inset-block: 50% auto,
-			transform: translateY(-50%),
+			translate: 0 -50%,
 			inset-inline: 0 auto,
 		),
 		center-middle: (
 			inset-block: 50% auto,
 			inset-inline: 50% auto,
-			transform: translate(-50%, -50%),
+			translate: -50% -50%,
 		),
 		center-end: (
 			inset-block: 50% auto,
 			inset-inline: auto 0,
-			transform: translateY(-50%),
+			translate: 0 -50%,
 		),
 		bottom-start: (
 			inset-block: auto 0,
@@ -100,7 +107,7 @@ $vv-alert-group: (
 		bottom-middle: (
 			inset-block: auto 0,
 			inset-inline: 50% auto,
-			transform: translateX(-50%),
+			translate: -50%,
 		),
 		bottom-end: (
 			inset-block: auto 0,
@@ -119,9 +126,8 @@ $vv-alert-group: (
 					z-index: var(--z-notification-alert),
 				),
 				not-first: (
-					[transform]:
-						translateY(calc(-100% * (var(--alert-counter, 1) - 1)))
-						scale(calc(1 - 0.05 * (var(--alert-counter, 1) - 1))),
+					[translate]: 0 calc(-100% * (var(--alert-counter, 1) - 1)),
+					[scale]: calc(1 - 0.05 * (var(--alert-counter, 1) - 1)),
 					[z-index]:
 						calc(
 							var(--z-notification-alert) -
@@ -137,7 +143,8 @@ $vv-alert-group: (
 				hover: (
 					element: (
 						not-first: (
-							transform: none,
+							translate: 0,
+							scale: 1,
 							filter: none,
 						),
 					),
@@ -147,22 +154,18 @@ $vv-alert-group: (
 				reverse: (
 					element: (
 						not-first: (
-							[transform]:
-								translateY(
-									calc(100% * (var(--alert-counter, 1) - 1))
-								)
-								scale(
-									calc(
-										1 - 0.05 * (var(--alert-counter, 1) - 1)
-									)
-								),
+							[translate]: 0
+								calc(100% * (var(--alert-counter, 1) - 1)),
+							[scale]:
+								calc(1 - 0.05 * (var(--alert-counter, 1) - 1)),
 						),
 					),
 					state: (
 						hover: (
 							element: (
 								not-first: (
-									transform: none,
+									translate: 0,
+									scale: 1,
 								),
 							),
 						),

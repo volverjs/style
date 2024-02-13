@@ -35,6 +35,7 @@ export default ({ mode }) => {
 					.use(MarkdownItAnchor, {
 						permalink: MarkdownItAnchor.permalink.ariaHidden({
 							placement: 'before',
+							renderAttrs: () => ({ tabindex: -1 }),
 						}),
 					}),
 			}),

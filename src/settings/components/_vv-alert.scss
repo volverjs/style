@@ -12,7 +12,6 @@ $vv-alert: (
 	gap: var(--spacing-sm),
 	min-width: 0,
 	overflow: hidden,
-	font-size: var(--text-sm),
 	padding: var(--spacing-sm),
 	element: (
 		header: (
@@ -23,6 +22,7 @@ $vv-alert: (
 			color: var(--color-word),
 			overflow: hidden,
 			text-overflow: ellipsis,
+			flex-shrink: 0,
 		),
 		title: (
 			min-width: 0,
@@ -64,7 +64,7 @@ $vv-alert: (
 			left: 50%,
 			background-color: var(--color-gray),
 			[animation]: pie-masks var(--alert-duration) steps(1, end) reverse,
-			z-index: 1,
+			z-index: var(--z-1),
 		),
 	),
 	modifier: (
@@ -133,10 +133,10 @@ $vv-alert: (
 			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand-darken-2),
+					color: var(--color-brand-darken-3),
 				),
 				header: (
-					color: var(--color-brand-darken-2),
+					color: var(--color-brand-darken-3),
 				),
 			),
 		),
@@ -149,6 +149,117 @@ $vv-alert: (
 				sm: (
 					flex-wrap: nowrap,
 					white-space: nowrap,
+				),
+			),
+		),
+		notification: (
+			padding: var(--spacing-0),
+			width: clamp(15dvw, 20rem, 80dvw),
+			border-color: var(--color-gray),
+			flex-direction: column,
+			align-items: none,
+			gap: var(--spacing-0),
+			element: (
+				header: (
+					padding: var(--spacing-xs) var(--spacing-sm),
+					background-color: var(--color-gray-darken-1),
+					color: var(--color-white),
+				),
+				title: (
+					font-weight: var(--font-normal),
+					margin-right: auto,
+				),
+				icon: (
+					color: var(--color-white),
+				),
+				content: (
+					padding: var(--spacing-sm),
+					font-size: var(--text-14),
+				),
+				footer: (
+					padding: 0 var(--spacing-sm) var(--spacing-sm)
+						var(--spacing-sm),
+				),
+				close: (
+					background-color: var(--color-surface-2),
+					border-radius: var(--rounded),
+					background-size: 70% auto,
+					inline-size: 1.1em,
+					block-size: 1.1em,
+				),
+			),
+			modifier: (
+				dismissable: (
+					padding-right: 0,
+					element: (
+						header: (
+							position: relative,
+							padding-right: calc(var(--spacing-md) * 2 + 1em),
+						),
+					),
+				),
+				success: (
+					border-color: var(--color-success),
+					element: (
+						header: (
+							background-color: var(--color-success),
+						),
+					),
+				),
+				danger: (
+					border-color: var(--color-danger),
+					element: (
+						header: (
+							background-color: var(--color-danger),
+						),
+					),
+				),
+				warning: (
+					border-color: var(--color-warning-darken-5),
+					element: (
+						header: (
+							background-color: var(--color-warning-darken-5),
+						),
+					),
+				),
+				info: (
+					border-color: var(--color-info-darken-5),
+					element: (
+						header: (
+							background-color: var(--color-info-darken-5),
+						),
+					),
+				),
+				accent: (
+					border-color: var(--color-accent),
+					element: (
+						header: (
+							background-color: var(--color-accent),
+						),
+					),
+				),
+				brand: (
+					border-color: var(--color-brand),
+					element: (
+						header: (
+							background-color: var(--color-brand),
+						),
+					),
+				),
+			),
+		),
+		callout: (
+			box-shadow: none,
+			border-radius: var(--rounded-none),
+			border-width: 0 0 0 var(--spacing-4),
+			flex-direction: column,
+			align-items: none,
+			element: (
+				title: (
+					text-transform: uppercase,
+				),
+				content: (
+					line-height: var(--leading-normal),
 				),
 			),
 		),
@@ -219,117 +330,6 @@ $vv-alert: (
 				),
 			),
 		),
-		notification: (
-			padding: var(--spacing-0),
-			width: clamp(15dvw, 20rem, 80dvw),
-			border-color: var(--color-gray),
-			flex-direction: column,
-			align-items: none,
-			gap: var(--spacing-0),
-			element: (
-				header: (
-					padding: var(--spacing-xs) var(--spacing-sm),
-					background-color: var(--color-gray-darken-1),
-					color: var(--color-white),
-				),
-				title: (
-					font-weight: var(--font-normal),
-					margin-right: auto,
-				),
-				icon: (
-					color: var(--color-white),
-				),
-				content: (
-					padding: var(--spacing-sm),
-					font-size: var(--text-xs),
-				),
-				footer: (
-					padding: 0 var(--spacing-sm) var(--spacing-sm)
-						var(--spacing-sm),
-				),
-				close: (
-					background-color: var(--color-surface-2),
-					border-radius: var(--rounded),
-					background-size: 70% auto,
-					inline-size: 1.1em,
-					block-size: 1.1em,
-				),
-			),
-			modifier: (
-				dismissable: (
-					padding-right: 0,
-					element: (
-						header: (
-							position: relative,
-							padding-right: calc(var(--spacing-md) * 2 + 1em),
-						),
-					),
-				),
-				success: (
-					border-color: var(--color-success),
-					element: (
-						header: (
-							background-color: var(--color-success),
-						),
-					),
-				),
-				danger: (
-					border-color: var(--color-danger),
-					element: (
-						header: (
-							background-color: var(--color-danger),
-						),
-					),
-				),
-				warning: (
-					border-color: var(--color-warning),
-					element: (
-						header: (
-							background-color: var(--color-warning),
-						),
-					),
-				),
-				info: (
-					border-color: var(--color-info),
-					element: (
-						header: (
-							background-color: var(--color-info),
-						),
-					),
-				),
-				accent: (
-					border-color: var(--color-accent),
-					element: (
-						header: (
-							background-color: var(--color-accent),
-						),
-					),
-				),
-				brand: (
-					border-color: var(--color-brand),
-					element: (
-						header: (
-							background-color: var(--color-brand),
-						),
-					),
-				),
-			),
-		),
-		callout: (
-			box-shadow: none,
-			border-radius: var(--rounded-none),
-			border-width: 0 0 0 var(--spacing-4),
-			flex-direction: column,
-			align-items: none,
-			element: (
-				title: (
-					text-transform: uppercase,
-				),
-				content: (
-					line-height: var(--leading-normal),
-				),
-			),
-		),
 	),
 	transition: (
 		fade-inline-end: (
@@ -338,11 +338,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				transform: translateX(100%),
+				translate: 100%,
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				transform: translateX(100%),
+				translate: 100%,
 			),
 		),
 		fade-inline-start: (
@@ -351,11 +351,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				transform: translateX(-100%),
+				translate: -100%,
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				transform: translateX(-100%),
+				translate: -100%,
 			),
 		),
 		fade-block-top: (
@@ -364,11 +364,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				transform: translateY(-100%),
+				translate: 0 -100%,
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				transform: translateY(-100%),
+				translate: 0 -100%,
 			),
 		),
 		fade-block-bottom: (
@@ -377,11 +377,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				transform: translateY(100%),
+				translate: 0 100%,
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				transform: translateY(100%),
+				translate: 0 100%,
 			),
 		),
 		fade: (

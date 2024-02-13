@@ -31,6 +31,8 @@
 	body,
 	#app {
 		height: 100%;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
 	}
 
 	p,
@@ -85,21 +87,28 @@
 		}
 	}
 
-	section {
-		& > ::-webkit-scrollbar {
-			width: 5px;
-			height: 0px;
-			border: 1px solid var(--color-surface-1);
-		}
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 0px;
+		border: 1px solid var(--color-surface-1);
+	}
 
-		& > ::-webkit-scrollbar-thumb {
-			border-radius: 0.25rem;
-			background-color: var(--color-surface-2);
-		}
+	::-webkit-scrollbar-thumb {
+		background-color: var(--color-brand);
+	}
 
-		& > ::-webkit-scrollbar-track {
-			border-radius: 5px;
-			background-color: var(--color-surface-1);
-		}
+	::-webkit-scrollbar-track {
+		background-color: var(--color-surface-1);
+	}
+
+	// default transitions
+	.v-enter-active,
+	.v-leave-active {
+		transition: var(--transition-opacity);
+	}
+
+	.v-enter-from,
+	.v-leave-to {
+		opacity: 0;
 	}
 </style>

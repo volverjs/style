@@ -93,7 +93,7 @@ $vv-checkbox: (
 							background-image: none,
 							pseudo: (
 								after: (
-									transform: translateX(50%),
+									translate: 50%,
 								),
 							),
 						),
@@ -102,7 +102,7 @@ $vv-checkbox: (
 							background-color: var(--color-brand),
 							pseudo: (
 								after: (
-									transform: translateX(100%),
+									translate: 100%,
 								),
 							),
 						),

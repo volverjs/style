@@ -42,17 +42,17 @@ To use *Preflight* just add `preflight` class to the wrapper element.
 
 ### Form fields
 
-<code-editor resource-type="getting-started" resource-folder="examples" resource-name="preflight-form" class="mb-lg">
+<code-editor resource-type="get-started" resource-folder="examples" resource-name="preflight-form" class="mb-lg">
 </code-editor>
 
 ### Typography
-<code-editor resource-type="getting-started" resource-folder="examples" resource-name="preflight-typography" class="mb-lg">
+<code-editor resource-type="get-started" resource-folder="examples" resource-name="preflight-typography" class="mb-lg">
 </code-editor>
 
 ### Buttons
-<code-editor resource-type="getting-started" resource-folder="examples" resource-name="preflight-buttons" class="mb-lg">
+<code-editor resource-type="get-started" resource-folder="examples" resource-name="preflight-buttons" class="mb-lg">
 </code-editor>
 
 ### Tables
-<code-editor resource-type="getting-started" resource-folder="examples" resource-name="preflight-table">
+<code-editor resource-type="get-started" resource-folder="examples" resource-name="preflight-table">
 </code-editor>

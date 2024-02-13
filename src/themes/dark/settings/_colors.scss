@@ -4,10 +4,8 @@
 @use '../../../settings/colors' as *;
 
 $dark-color-scheme: dark !default;
-$dark-color-brand: #1976d2 !default;
-$dark-color-word: hsl(color.hue($dark-color-brand) 15% 85%) !default;
-$dark-color-surface: hsl(color.hue($dark-color-brand) 10% 5%) !default;
-$dark-color-alpha: hsla(0deg 0% 100% / 0%) !default;
+$dark-color-word: hsl(color.hue($color-brand) 15% 85%) !default;
+$dark-color-surface: hsl(color.hue($color-brand) 10% 5%) !default;
 $dark-color-surface-palette: (
 	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
 	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
@@ -35,41 +33,9 @@ $dark-colors: (
 				$dark-color-surface,
 				'surface',
 				$scale: 5%,
-				$fixed: true
+				$fixed: true,
+				$inverted: false
 			),
 			$dark-color-surface-palette
-		),
-	alpha: color-alpha-map($dark-color-alpha, 'alpha', $steps: 5, $scale: 5%),
-) !default;
-
-// dark-colors computed map
-$dark-colors-computed: (
-	scheme: $dark-color-scheme,
-	word:
-		color-darken-map(
-			$dark-color-word,
-			'word',
-			$scale: 12%,
-			$fixed: true,
-			$noVarExport: true
-		),
-	surface:
-		map.merge(
-			color-lighten-map(
-				$dark-color-surface,
-				'surface',
-				$scale: 5%,
-				$fixed: true,
-				$noVarExport: true
-			),
-			$dark-color-surface-palette-no-vars
-		),
-	alpha:
-		color-alpha-map(
-			$dark-color-alpha,
-			'alpha',
-			$steps: 5,
-			$scale: 5%,
-			$noVarExport: true
 		),
 ) !default;

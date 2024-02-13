@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:list';
 @use '../context' as *;
 
 $component-name: map.get($components-names, vv-select);
@@ -15,34 +16,76 @@ $component-selector: '.#{ $component-name}';
 
 // disabled
 @each $state in ('disabled') {
+	$selector: '#{$component-selector}:has(select[#{$state}])';
 	@include wrap-with-where(
-		$selector: '#{$component-selector}:has(select:#{$state})',
+		$selector: $selector,
 		$enabled: $zero-specificity-for-components
 	) {
 		@extend %#{$component-name}--#{$state} !optional;
 	}
 
+	// element
 	@if map.get($component-map, 'state', $state, 'element') {
 		@each $element,
 			$map in map.get($component-map, 'state', $state, 'element')
 		{
+			$element-selector: (
+				'#{$selector} #{$component-selector}__#{$element}'
+			);
+			$alias: map.get($component-map, 'element', $element, '_alias');
+			@if $alias {
+				$element-selector: list.append(
+					$element-selector,
+					('#{$selector} #{$alias}')
+				);
+			}
+
 			@include wrap-with-where(
-				$selector:
-					'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}',
+				$selector: $element-selector,
 				$enabled: $zero-specificity-for-components
 			) {
 				@extend %#{$component-name}-state-#{$state}__#{$element}
 						!optional;
 			}
 
+			// element state
 			@each $elementState, $elementMap in map.get($map, 'state') {
-				@include wrap-with-where(
-					$selector:
-						'#{$component-selector}:has(select:#{$state}) #{$component-selector}__#{$element}:#{$elementState}',
-					$enabled: $zero-specificity-for-components
-				) {
-					@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
-							!optional;
+				@if $elementState {
+					$element-selector-state: ();
+					@each $item in $element-selector {
+						$element-selector-state: list.append(
+							$element-selector-state,
+							('#{$item}:#{$elementState}')
+						);
+					}
+
+					@include wrap-with-where(
+						$selector: $element-selector-state,
+						$enabled: $zero-specificity-for-components
+					) {
+						@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$elementState}
+								!optional;
+					}
+				}
+			}
+
+			// element pseudo
+			@each $pseudo, $pseudoMap in map.get($map, 'pseudo') {
+				@if $pseudo {
+					$element-selector-pseudo: ();
+					@each $item in $element-selector {
+						$element-selector-pseudo: list.append(
+							$element-selector-pseudo,
+							('#{$item}::#{$pseudo}')
+						);
+					}
+					@include wrap-with-where(
+						$selector: $element-selector-pseudo,
+						$enabled: $zero-specificity-for-components
+					) {
+						@extend %#{$component-name}-state-#{$state}-element-#{$element}--#{$pseudo}
+								!optional;
+					}
 				}
 			}
 		}

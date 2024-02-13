@@ -48,39 +48,39 @@
 // keyframes
 @keyframes indeterminate {
 	0% {
-		transform: scaleX(0);
+		scale: 0 1;
 	}
 
 	50% {
-		transform: scaleX(1);
+		scale: 1;
 		transform-origin: left;
 	}
 
 	51% {
-		transform: scaleX(1);
+		scale: 1;
 		transform-origin: center right;
 	}
 
 	100% {
-		transform: scaleX(0);
+		scale: 0 1;
 		transform-origin: center right;
 	}
 }
 
 @keyframes spin {
 	from {
-		transform: rotate(0deg);
+		rotate: 0deg;
 	}
 
 	to {
-		transform: rotate(360deg);
+		rotate: 360deg;
 	}
 }
 
 @keyframes ping {
 	75%,
 	100% {
-		transform: scale(2);
+		scale: 2;
 		opacity: 0;
 	}
 }
@@ -99,12 +99,12 @@
 @keyframes bounce {
 	0%,
 	100% {
-		transform: translateY(-25%);
+		translate: 0 -25%;
 		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
 	}
 
 	50% {
-		transform: translateY(0);
+		translate: 0;
 		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 	}
 }
@@ -143,5 +143,24 @@
 @keyframes shine {
 	to {
 		background-position-x: -200%;
+	}
+}
+
+@keyframes clippath {
+	0%,
+	100% {
+		clip-path: inset(0 0 95% 0);
+	}
+
+	25% {
+		clip-path: inset(0 95% 0 0);
+	}
+
+	50% {
+		clip-path: inset(95% 0 0 0);
+	}
+
+	75% {
+		clip-path: inset(0 0 0 95%);
 	}
 }

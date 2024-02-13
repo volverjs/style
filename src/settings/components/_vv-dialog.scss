@@ -18,6 +18,9 @@ $vv-dialog: (
 		close: (
 			display: none,
 		),
+		open: (
+			overflow: hidden,
+		),
 	),
 	element: (
 		wrapper: (
@@ -83,7 +86,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						transform: translateY(100%),
+						translate: 0 100%,
 					),
 				),
 			),
@@ -91,7 +94,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						transform: translateY(-100%),
+						translate: 0 -100%,
 					),
 				),
 			),
@@ -109,7 +112,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						transform: translateX(-100%),
+						translate: -100%,
 					),
 				),
 			),
@@ -117,7 +120,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						transform: translateX(100%),
+						translate: 100%,
 					),
 				),
 			),
@@ -135,7 +138,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						transform: scale(0%),
+						scale: 0,
 					),
 				),
 			),

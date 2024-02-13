@@ -8,33 +8,24 @@
 	const description = ref('')
 	const stackblitzExample = ref('')
 	const permalinks = ref([])
-	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/getting-started/${route.params.name}.md`
-	const MainContent = defineAsyncComponent(() =>
-		import(`../../contents/getting-started/${route.params.name}.md`)
-			.then(({ attributes, toc, VueComponentWith }) => {
-				title.value = attributes.title
-				description.value = attributes.description
-				stackblitzExample.value = attributes.stackblitzExample
-				permalinks.value = toc.map(({ content }) =>
-					permalinkToPath(content),
-				)
-				return VueComponentWith({
-					CodeEditor,
-				})
-			})
-			.catch(() => {
-				router.replace({ name: 'index' })
-			}),
-	)
+	let MainContent
+	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/get-started/${route.params.name}.md`
+	try {
+		const { attributes, toc, VueComponentWith } = await import(
+			`../../contents/get-started/${route.params.name}.md`
+		)
+		title.value = attributes.title
+		description.value = attributes.description
+		stackblitzExample.value = attributes.stackblitzExample
+		permalinks.value = toc.map(({ content }) => permalinkToPath(content))
+		MainContent = VueComponentWith({
+			CodeEditor,
+		})
+	} catch (error) {
+		router.replace({ name: 'index' })
+	}
 	const scrollIntoView = (hash) => {
-		const el = document.querySelector(hash)
-		if (el) {
-			el.scrollIntoView({
-				behavior: 'smooth',
-				block: 'start',
-			})
-			router.replace({ ...route, hash })
-		}
+		router.replace({ ...route, hash })
 	}
 	useHead({
 		title,
@@ -45,10 +36,11 @@
 			},
 		],
 	})
+	const wrapperEl = ref()
 </script>
 
 <template>
-	<div class="flex flex-1 justify-center">
+	<div ref="wrapperEl" class="flex flex-1 justify-center">
 		<div class="w-full lg:w-10/12 xl:w-9/12 xxl:w-7/12 pr-3/12">
 			<div class="p-16">
 				<header class="my-lg">
@@ -119,8 +111,8 @@
 			class="none xl:block xl:w-2/12 py-16 px-24 right-0">
 			<div class="my-lg fixed">
 				<nav class="vv-nav vv-nav--aside">
-					<ul class="vv-nav__menu" role="menu">
-						<li class="vv-nav__item" role="presentation">
+					<ul class="vv-nav__menu">
+						<li class="vv-nav__item">
 							<span
 								id="in-this-page-heading"
 								class="vv-nav__heading-label"
@@ -136,9 +128,11 @@
 										{ label, hash }, index
 									) in permalinks"
 									:key="index"
+									role="presentation"
 									class="vv-nav__item">
 									<a
 										class="vv-nav__item-label"
+										role="menuitem"
 										tabindex="0"
 										:href="hash"
 										:class="{
@@ -159,5 +153,5 @@
 
 <route lang="yaml">
 meta:
-    layout: sidebarNavigation
+    layout: default
 </route>

@@ -142,12 +142,15 @@ $vv-button: (
 				),
 				hover: (
 					background: var(--color-gray-lighten-5),
+					color: var(--color-word-2),
 				),
 				active: (
 					background: var(--color-gray-lighten-4),
+					color: var(--color-word-2),
 				),
 				pressed: (
 					background: var(--color-gray-lighten-4),
+					color: var(--color-word-2),
 				),
 			),
 		),
@@ -156,7 +159,7 @@ $vv-button: (
 			border-width: var(--border-0),
 			padding: 0,
 			color: var(--color-brand-darken-1),
-			font-weight: var(--font-normal),
+			font-weight: inherit,
 			text-shadow: none,
 			state: (
 				focus-visible: (
@@ -244,11 +247,12 @@ $vv-button: (
 				),
 				active: (
 					background: var(--color-surface-5),
+					color: var(--color-word),
 				),
 				pressed: (
 					color: var(--color-white),
-					background: var(--color-gray),
-					border-color: var(--color-gray),
+					background: var(--color-gray-darken-1),
+					border-color: var(--color-gray-darken-1),
 				),
 			),
 			element: (
@@ -282,11 +286,12 @@ $vv-button: (
 				active: (
 					background: var(--color-surface-5),
 					border-color: var(--color-surface-5),
+					color: var(--color-word),
 				),
 				pressed: (
 					color: var(--color-white),
-					background: var(--color-gray),
-					border-color: var(--color-gray),
+					background: var(--color-gray-darken-1),
+					border-color: var(--color-gray-darken-1),
 				),
 			),
 			element: (

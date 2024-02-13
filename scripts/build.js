@@ -14,6 +14,8 @@ packageJson.exports = {
 	'./scss/mixins': './src/tools/_mixins.scss',
 	'./scss/settings': './src/settings/_index.scss',
 	'./scss/preflight': './src/_preflight.scss',
+	'./scss/themes/dark/context': './src/themes/dark/_context.scss',
+	'./scss/themes/dark/settings': './src/themes/dark/settings/_index.scss',
 }
 
 // get scss files

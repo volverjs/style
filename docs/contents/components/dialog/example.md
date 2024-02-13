@@ -1,6 +1,6 @@
 ---
 title: Example
-wrapperClass: flex flex-1 flex-wrap gap-md items-center 
+wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center 
 ---
 
 <script>

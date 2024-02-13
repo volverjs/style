@@ -12,6 +12,7 @@ $vv-select: (
 			_alias: '> label',
 			display: var(--input-label-display),
 			font-size: var(--input-label-font-size),
+			font-weight: var(--input-label-font-weight),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
 			white-space: var(--input-label-white-space),
@@ -39,7 +40,7 @@ $vv-select: (
 					height: var(--spacing-2),
 					inset: auto 0 0 0,
 					background: var(--color-brand),
-					transform: scaleX(0),
+					scale: 0 1,
 					transform-origin: left,
 					will-change: transform,
 					transition: var(--transition-transform),
@@ -53,7 +54,7 @@ $vv-select: (
 					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -61,7 +62,7 @@ $vv-select: (
 					background-color: var(--input-background-color-focus),
 					pseudo: (
 						after: (
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -72,6 +73,7 @@ $vv-select: (
 			display: flex,
 			flex: 1,
 			width: 100%,
+			min-width: 0,
 		),
 		value: (
 			text-overflow: var(--input-text-overflow),
@@ -130,6 +132,7 @@ $vv-select: (
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
 			pointer-events: var(--input-icon-pointer-events),
+			flex-shrink: 0,
 		),
 		icon-after: (
 			_alias: 'select + :where(svg, [data-icon])',
@@ -197,7 +200,7 @@ $vv-select: (
 					pseudo: (
 						after: (
 							background: var(--input-valid-color),
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -215,7 +218,7 @@ $vv-select: (
 					pseudo: (
 						after: (
 							background: var(--input-invalid-color),
-							transform: scaleX(1),
+							scale: 1,
 						),
 					),
 				),
@@ -254,7 +257,7 @@ $vv-select: (
 				),
 				label: (
 					position: absolute,
-					z-index: 1,
+					z-index: var(--z-1),
 					min-height: var(--input-min-height),
 					line-height: var(--input-min-height),
 					pointer-events: none,
@@ -273,7 +276,7 @@ $vv-select: (
 				focus-within: (
 					element: (
 						label: (
-							transform: var(--input-floating-label-transform),
+							translate: var(--input-floating-label-translate),
 							font-size: var(--input-floating-label-font-size),
 						),
 						input: (
@@ -289,7 +292,7 @@ $vv-select: (
 				dirty: (
 					element: (
 						label: (
-							transform: var(--input-floating-label-transform),
+							translate: var(--input-floating-label-translate),
 							font-size: var(--input-floating-label-font-size),
 						),
 						input: (

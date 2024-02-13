@@ -428,6 +428,7 @@
 					disabled,
 					checked,
 					checked-within,
+					multiple,
 					selected,
 					readonly,
 					empty,
@@ -514,7 +515,14 @@
 								'#{$modifier}#{$alias}:not(:has(*:placeholder-shown))'
 							);
 						}
-					} @else if $state == 'disabled' or $state == 'readonly' {
+					} @else if
+						$state ==
+						'disabled' or
+						$state ==
+						'readonly' or
+						$state ==
+						'multiple'
+					{
 						$selectors: list.join(
 							$selectors,
 							'#{$modifier}#{$block-item}[#{$state}]'
@@ -633,6 +641,21 @@
 						$map: $value,
 						$prefix: #{$prefix}-#{$key}-#{$state},
 						$key: 'element',
+						$block: $block,
+						$modifier: $selector,
+						$props: $props,
+						$zero-specificity: $zero-specificity,
+						$bps: $bps
+					);
+				}
+
+				// breakpoints
+				@if map.get($value, 'breakpoint') {
+					@include spread-map-into-breakpoints(
+						$original: $original,
+						$map: $value,
+						$prefix: #{$prefix}-#{$key}-#{$state},
+						$key: 'breakpoint',
 						$block: $block,
 						$modifier: $selector,
 						$props: $props,
@@ -829,6 +852,8 @@
 										datetime-edit,
 										datetime-edit-fields-wrapper,
 										datetime-edit-day-field,
+										backdrop,
+										file-selector-button,
 										-webkit-progress-bar,
 										-webkit-progress-value,
 										-webkit-inner-element,
@@ -836,7 +861,9 @@
 										-moz-progress-value,
 										-moz-inner-element,
 										-webkit-details-marker,
-										-webkit-scrollbar
+										-webkit-scrollbar,
+										-webkit-scrollbar-track,
+										-webkit-scrollbar-thumb
 									),
 									$pseudo-element
 								)
@@ -1156,6 +1183,21 @@
 							$map: $value,
 							$prefix: #{$prefix}-#{$key}-#{$transition}-#{$state},
 							$key: 'element',
+							$block: $block,
+							$modifier: $selector,
+							$props: $props,
+							$zero-specificity: $zero-specificity,
+							$bps: $bps
+						);
+					}
+
+					// map breakpoints
+					@if map.get($value, 'breakpoint') {
+						@include spread-map-into-breakpoints(
+							$original: $map,
+							$map: $value,
+							$prefix: #{$prefix}-#{$key}-#{$transition}-#{$state},
+							$key: 'breakpoint',
 							$block: $block,
 							$modifier: $selector,
 							$props: $props,

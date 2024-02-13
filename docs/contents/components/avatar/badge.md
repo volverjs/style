@@ -1,9 +1,8 @@
 ---
 title: Badge
-wrapperClass: flex flex-1 justify-center
 ---
 
-<div class="flex gap-24 items-end">
+<div class="flex gap-24 items-end flex-wrap justify-center">
     <span class="vv-avatar" 
            role="img" 
            aria-label="Mario Rossi" 

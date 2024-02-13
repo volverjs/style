@@ -1,10 +1,31 @@
 @use 'sass:map';
 @use '../context' as *;
 
-// grid template columns
+// cursor
 @include spread-map-into-utilities(
 	$map: $cursor,
 	$class: cursor,
 	$attribute: cursor,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+// pointer events
+%pointer-events-none {
+	pointer-events: none;
+}
+@include wrap-with-where(
+	$selector: '.pointer-events-none',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %pointer-events-none;
+}
+
+%pointer-events-auto {
+	pointer-events: auto;
+}
+@include wrap-with-where(
+	$selector: '.pointer-events-auto',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %pointer-events-auto;
+}

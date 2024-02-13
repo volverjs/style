@@ -6,33 +6,37 @@ wrapperClass: flex flex-1 flex-col w-100 gap-lg
 <nav class="vv-nav 
             vv-nav--tabs">
     <ul class="vv-nav__menu" role="menu">
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 1
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label current"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 2
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 3
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 4
@@ -45,33 +49,37 @@ wrapperClass: flex flex-1 flex-col w-100 gap-lg
             vv-nav--tabs 
             vv-nav--full">
     <ul class="vv-nav__menu" role="menu">
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 1
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label current"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 2
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 3
             </a>
         </li>
-        <li class="vv-nav__item">
+        <li class="vv-nav__item" role="presentation">
             <a
                 class="vv-nav__item-label"
+                role="menuitem"
                 tabindex="0"
                 href="#">
                 Tab item 4
