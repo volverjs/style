@@ -9,6 +9,7 @@ $vv-alert-group: (
 	element: (
 		list: (
 			_alias: '> [role="group"]',
+			_combinator: '>',
 			display: flex,
 			flex-direction: column,
 			gap: var(--spacing-xs),
@@ -130,8 +131,10 @@ $vv-alert-group: (
 					[scale]: calc(1 - 0.05 * (var(--alert-counter, 1) - 1)),
 					[z-index]:
 						calc(
-							var(--z-notification-alert) -
-								var(--alert-counter, 1)
+							var(--z-notification-alert) - var(
+									--alert-counter,
+									1
+								)
 						),
 					filter: grayscale(100%),
 				),

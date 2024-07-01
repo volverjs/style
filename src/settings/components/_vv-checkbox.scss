@@ -42,6 +42,7 @@ $vv-checkbox: (
 		),
 		hint: (
 			_alias: '> small',
+			_combinator: '>',
 			flex-basis: 100%,
 			display: var(--input-hint-display),
 			font-size: var(--input-hint-font-size),

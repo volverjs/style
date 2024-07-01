@@ -32,6 +32,7 @@ $vv-accordion: (
 	element: (
 		summary: (
 			_alias: '> summary',
+			_combinator: '>',
 			position: relative,
 			cursor: pointer,
 			user-select: none,

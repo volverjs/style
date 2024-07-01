@@ -1,7 +1,7 @@
 $vv-accordion-group: (
 	display: flex,
 	flex-direction: column,
-	gap: var(--spacing-sm),
+	[gap]: var(--spacing-sm),
 	element: (
 		not-last-child: (
 			_alias: '> details:not(:last-child)',
@@ -9,7 +9,7 @@ $vv-accordion-group: (
 	),
 	modifier: (
 		condensed: (
-			gap: 0,
+			gap: var(--spacing-0),
 			element: (
 				not-last-child: (
 					border-bottom-width: 0,
