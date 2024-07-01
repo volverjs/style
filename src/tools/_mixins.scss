@@ -11,6 +11,7 @@
 @mixin assert-ascending($map, $map-name) {
 	$prev-key: null;
 	$prev-num: null;
+
 	@each $key, $num in $map {
 		@if not $prev-num or unit($num) == '%' {
 			// Do nothing
@@ -30,6 +31,7 @@
 @mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
 	$values: map.values($map);
 	$first-value: list.nth($values, 1);
+
 	@if $first-value != 0 {
 		@warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
 	}
@@ -39,6 +41,7 @@
 @mixin spread-map-into-props($map: (), $prefix: '', $old-key: '', $deep: true) {
 	@each $key, $value in $map {
 		$name: meta.inspect($key);
+
 		@if $name == meta.inspect($old-key) {
 			$name: $prefix;
 		} @else if $prefix != '' and meta.inspect($prefix) != meta.inspect($key)
@@ -87,10 +90,12 @@
 			@if $breakpoint-value > 0 {
 				$prefix: $breakpoint + '\\:';
 			}
+
 			@each $key, $value in $map {
 				@if $name != '' and meta.inspect($key) != meta.inspect($name) {
 					$key: #{$name}-#{meta.inspect($key)};
 				}
+
 				@if type-of($value) == 'map' and $deep {
 					@include spread-map-into-utilities(
 						$map: $value,
@@ -146,6 +151,7 @@
 							@if type-of($attribute) != 'list' {
 								$attribute: ($attribute);
 							}
+
 							@each $attr in $attribute {
 								@if $default {
 									@if $var != '' {
@@ -159,6 +165,7 @@
 							}
 						}
 					}
+
 					@include wrap-with-where(
 						$selector: '.' + $prefix + $class-name,
 						$enabled: $zero-specificity
@@ -188,9 +195,11 @@
 	@if not $original {
 		$original: $map;
 	}
+
 	@if not $block {
 		$block: &;
 	}
+
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $item, $value in map.get($map, $key) {
 			$selector: $block + '--' + $item;
@@ -306,10 +315,11 @@
 
 			@if $modifier {
 				$selectors: ();
+
 				@each $item in selector.parse($modifier) {
 					$selectors: list.join(
 						$selectors,
-						selector.nest($item, $selector)
+						selector.nest('#{$item} > ', $selector)
 					);
 				}
 
@@ -326,6 +336,7 @@
 			@if $alias {
 				@if $modifier {
 					$aliases: ();
+
 					@each $item in selector.parse($modifier) {
 						$aliases: list.join(
 							$aliases,
@@ -685,9 +696,11 @@
 	@if not $original {
 		$original: $map;
 	}
+
 	@if not $block {
 		$block: &;
 	}
+
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $breakpoint, $value in map.get($map, $key) {
 			@if string.index($breakpoint, '-') {
@@ -712,6 +725,7 @@
 							}
 						}
 					}
+
 					@if $operator == 'down' {
 						@include wrap-with-where(
 							$selector: '#{$modifier}#{$block}',
@@ -729,6 +743,7 @@
 							}
 						}
 					}
+
 					@if map.has-key($bps, $operator) {
 						@include wrap-with-where(
 							$selector: '#{$modifier}#{$block}',
@@ -831,6 +846,7 @@
 					@if $postfix != '' {
 						$key: #{$postfix}-#{$key};
 					}
+
 					@if $key == 'pseudo' {
 						@each $pseudo-element, $pseudo-map in $value {
 							@if type-of($pseudo-map) == 'map' {
@@ -971,6 +987,7 @@
 	@if type-of($selector) == 'map' or type-of($selector) == 'list' {
 		$selector: #{$selector};
 	}
+
 	@if $enabled {
 		$selector: ':where(#{unquote($selector)})';
 	}
@@ -1028,6 +1045,7 @@
 				// content
 				@content;
 			}
+
 			@include wrap-with-where(
 				$selector: $selector,
 				$enabled: $zero-specificity
@@ -1131,6 +1149,7 @@
 	@if not $block {
 		$block: &;
 	}
+
 	@if type-of(map.get($map, $key)) == 'map' {
 		@each $transition, $states in map.get($map, $key) {
 			@each $state, $value in $states {

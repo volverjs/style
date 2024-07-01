@@ -444,6 +444,11 @@ $vv-input-file: (
 				preview: (
 					border-radius: var(--rounded-full),
 				),
+				drop-area-action: (
+					position: relative,
+					top: auto,
+					right: auto,
+				),
 			),
 		),
 	),

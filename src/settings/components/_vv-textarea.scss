@@ -82,6 +82,7 @@ $vv-textarea: (
 				var(--input-spacing-bottom) var(--input-spacing-left),
 			overflow: auto,
 			text-overflow: var(--input-text-overflow),
+			min-height: var(--input-min-height),
 			pseudo: (
 				placeholder: (
 					color: var(--input-placeholder-color),

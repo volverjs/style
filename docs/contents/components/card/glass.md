@@ -5,7 +5,7 @@ wrapperClass: flex-1
 
 <div class="relative theme theme--light n-24 p-24 overflow-hidden">
     <picture>
-        <img class="object-cover absolute inset-0 max-w-none" src="https://source.unsplash.com/featured/300×300/?ocean" alt="Card picture">
+        <img class="object-cover absolute inset-0 max-w-none w-full" src="https://unsplash.it/800/400" alt="Card picture">
     </picture>
     <article class="vv-card vv-card--glass lg:w-9/12 mx-auto">
         <header class="vv-card__header">Header</header>

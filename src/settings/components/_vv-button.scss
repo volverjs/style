@@ -18,6 +18,7 @@ $vv-button: (
 	transition: var(--transition-all),
 	will-change: all,
 	min-width: 0,
+	pointer-events: auto,
 	state: (
 		focus-visible: (
 			outline-offset: var(--spacing-4),
