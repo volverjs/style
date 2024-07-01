@@ -34,6 +34,7 @@
 %italic {
 	font-style: italic;
 }
+
 @include wrap-with-where(
 	$selector: '.italic',
 	$enabled: $zero-specificity-for-utilities
@@ -44,6 +45,7 @@
 %non-italic {
 	font-style: normal;
 }
+
 @include wrap-with-where(
 	$selector: '.non-italic',
 	$enabled: $zero-specificity-for-utilities
@@ -56,6 +58,7 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 @include wrap-with-where(
 	$selector: '.antialiased',
 	$enabled: $zero-specificity-for-utilities
@@ -67,6 +70,7 @@
 	-webkit-font-smoothing: auto;
 	-moz-osx-font-smoothing: auto;
 }
+
 @include wrap-with-where(
 	$selector: '.subpixel-antialiased',
 	$enabled: $zero-specificity-for-utilities
@@ -168,6 +172,7 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
 @include wrap-with-where(
 	$selector: '.truncate',
 	$enabled: $zero-specificity-for-utilities
@@ -178,6 +183,7 @@
 %text-ellipsis {
 	text-overflow: ellipsis;
 }
+
 @include wrap-with-where(
 	$selector: '.text-ellipsis',
 	$enabled: $zero-specificity-for-utilities
@@ -188,6 +194,7 @@
 %text-clip {
 	text-overflow: clip;
 }
+
 @include wrap-with-where(
 	$selector: '.text-clip',
 	$enabled: $zero-specificity-for-utilities
@@ -198,6 +205,7 @@
 %text-balance {
 	text-wrap: balance;
 }
+
 @include wrap-with-where(
 	$selector: '.text-balance',
 	$enabled: $zero-specificity-for-utilities
@@ -210,6 +218,7 @@
 	overflow-wrap: normal;
 	word-break: normal;
 }
+
 @include wrap-with-where(
 	$selector: '.break-normal',
 	$enabled: $zero-specificity-for-utilities
@@ -220,6 +229,7 @@
 %break-words {
 	overflow-wrap: break-word;
 }
+
 @include wrap-with-where(
 	$selector: '.break-words',
 	$enabled: $zero-specificity-for-utilities
@@ -230,6 +240,7 @@
 %break-all {
 	word-break: break-all;
 }
+
 @include wrap-with-where(
 	$selector: '.break-all',
 	$enabled: $zero-specificity-for-utilities

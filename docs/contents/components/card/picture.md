@@ -5,7 +5,7 @@ wrapperClass: md:w-9/12
 
 <article class="vv-card">
     <picture>
-        <img class="vv-card__picture aspect-photo" src="https://source.unsplash.com/featured/300×300/?city,night" alt="Card picture">
+        <img class="vv-card__picture aspect-photo" src="https://unsplash.it/800/600" alt="Card picture">
     </picture>
     <div class="vv-card__content">
         Fugiat excepteur velit laborum Lorem voluptate commodo et aute
