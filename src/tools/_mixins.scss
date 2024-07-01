@@ -313,13 +313,24 @@
 		@each $element, $value in map.get($map, $key) {
 			$selector: $block + '__' + $element;
 
+			// combinator
+			$combinator: map.get($value, '_combinator');
+
+			@if not $combinator {
+				$combinator: map.get($original, $key, $element, '_combinator');
+			}
+
 			@if $modifier {
 				$selectors: ();
 
 				@each $item in selector.parse($modifier) {
+					@if $combinator {
+						$item: '#{$item} #{$combinator}';
+					}
+
 					$selectors: list.join(
 						$selectors,
-						selector.nest('#{$item} > ', $selector)
+						selector.nest($item, $selector)
 					);
 				}
 

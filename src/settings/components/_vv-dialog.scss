@@ -25,6 +25,7 @@ $vv-dialog: (
 	element: (
 		wrapper: (
 			_alias: '> article',
+			_combinator: '>',
 			display: flex,
 			flex-direction: column,
 			position: relative,

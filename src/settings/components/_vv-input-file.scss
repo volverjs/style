@@ -9,6 +9,7 @@ $vv-input-file: (
 	element: (
 		label: (
 			_alias: '> label',
+			_combinator: '>',
 			display: var(--input-label-display),
 			font-size: var(--input-label-font-size),
 			font-weight: var(--input-label-font-weight),

@@ -9,6 +9,7 @@ $vv-textarea: (
 	element: (
 		label: (
 			_alias: '> label',
+			_combinator: '>',
 			display: var(--input-label-display),
 			font-size: var(--input-label-font-size),
 			font-weight: var(--input-label-font-weight),
@@ -133,6 +134,7 @@ $vv-textarea: (
 		),
 		hint: (
 			_alias: '> small',
+			_combinator: '>',
 			display: var(--input-hint-display),
 			font-size: var(--input-hint-font-size),
 			color: var(--input-hint-color),

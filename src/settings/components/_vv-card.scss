@@ -18,6 +18,7 @@ $vv-card: (
 	element: (
 		header: (
 			_alias: '> header',
+			_combinator: '>',
 			overflow: hidden,
 			padding: var(--spacing-md),
 			background-color: var(--color-surface-1),
@@ -40,6 +41,7 @@ $vv-card: (
 		),
 		footer: (
 			_alias: '> footer',
+			_combinator: '>',
 			border-top: var(--border) solid var(--color-surface-4),
 			padding: var(--spacing-md),
 		),
