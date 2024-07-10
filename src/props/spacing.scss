@@ -10,12 +10,12 @@
 	// dynamic
 	@each $name, $sizes in $spacing-dynamic {
 		@each $breakpoint, $size in $sizes {
-			@if map-has-key($breakpoints, $breakpoint) {
+			@if map.has-key($breakpoints, $breakpoint) {
 				@include media-breakpoint-up($breakpoint, $breakpoints) {
 					$var: $size;
 
 					// if is a static spacing
-					@if map-has-key($spacing, $size) {
+					@if map.has-key($spacing, $size) {
 						$var: var(--spacing-#{$size});
 					}
 

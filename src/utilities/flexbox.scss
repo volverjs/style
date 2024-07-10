@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../context' as *;
 
 // flex direction
@@ -34,6 +35,7 @@
 		%#{$prefix}#{$postfix} {
 			#{$prop}: #{$value};
 		}
+
 		@include wrap-with-where(
 			$selector: '.#{$prefix}#{$postfix}',
 			$enabled: $zero-specificity-for-utilities
@@ -57,7 +59,7 @@
 	$default: null;
 
 	// check if value is not a map (spacing-dynamic)
-	@if type-of($value) != 'map' {
+	@if meta.type-of($value) != 'map' {
 		$default: $value;
 	}
 
@@ -67,6 +69,7 @@
 	%gap-#{$size} {
 		gap: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.gap-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -78,6 +81,7 @@
 	%gap-x-#{$size} {
 		column-gap: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.gap-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -89,6 +93,7 @@
 	%gap-y-#{$size} {
 		row-gap: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.gap-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities

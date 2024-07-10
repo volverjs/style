@@ -3,6 +3,7 @@
 @use 'sass:string';
 @use 'sass:meta';
 @use 'sass:selector';
+@use 'sass:math';
 @use 'functions' as *;
 @use 'breakpoints' as *;
 
@@ -13,9 +14,9 @@
 	$prev-num: null;
 
 	@each $key, $num in $map {
-		@if not $prev-num or unit($num) == '%' {
+		@if not $prev-num or math.unit($num) == '%' {
 			// Do nothing
-		} @else if not comparable($prev-num, $num) {
+		} @else if not compatible($prev-num, $num) {
 			@warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
 		} @else if $prev-num >= $num {
 			@warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
@@ -59,7 +60,7 @@
 			string.slice(meta.inspect($key), 1, 1) !=
 			'['
 		{
-			@if type-of($value) == 'map' {
+			@if meta.type-of($value) == 'map' {
 				@if $deep {
 					@include spread-map-into-props($value, $name, $key);
 				}
@@ -84,7 +85,9 @@
 	$prefix: '',
 	$zero-specificity: false
 ) {
-	@if (type-of($map) == 'map' or type-of($map) == 'list') and $attribute != ''
+	@if (meta.type-of($map) == 'map' or meta.type-of($map) == 'list') and
+		$attribute !=
+		''
 	{
 		@each $breakpoint, $breakpoint-value in $bps {
 			@if $breakpoint-value > 0 {
@@ -96,7 +99,7 @@
 					$key: #{$name}-#{meta.inspect($key)};
 				}
 
-				@if type-of($value) == 'map' and $deep {
+				@if meta.type-of($value) == 'map' and $deep {
 					@include spread-map-into-utilities(
 						$map: $value,
 						$class: $class,
@@ -130,25 +133,25 @@
 					$var: str-replace($var, '\\/', '-');
 
 					// check if value is not a map (spacing-dynamic)
-					@if type-of($value) != 'map' {
+					@if meta.type-of($value) != 'map' {
 						$default: $value;
 					}
 
 					// check if map is a list
-					@if type-of($map) ==
+					@if meta.type-of($map) ==
 						'list' and
 						(not $default or $default == '')
 					{
 						$default: $key;
 					}
 
-					@if type-of($default) == 'string' {
+					@if meta.type-of($default) == 'string' {
 						$default: string.unquote($default);
 					}
 
 					%#{$prefix}#{$class-name} {
 						@include media-breakpoint-up($breakpoint, $bps) {
-							@if type-of($attribute) != 'list' {
+							@if meta.type-of($attribute) != 'list' {
 								$attribute: ($attribute);
 							}
 
@@ -200,7 +203,7 @@
 		$block: &;
 	}
 
-	@if type-of(map.get($map, $key)) == 'map' {
+	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $item, $value in map.get($map, $key) {
 			$selector: $block + '--' + $item;
 
@@ -309,7 +312,7 @@
 		$block: &;
 	}
 
-	@if type-of(map.get($map, $key)) == 'map' {
+	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $element, $value in map.get($map, $key) {
 			$selector: $block + '__' + $element;
 
@@ -436,7 +439,7 @@
 		$blocks: &;
 	}
 
-	@if type-of(map.get($map, $key)) == 'map' {
+	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $state, $value in map.get($map, $key) {
 			@if list.index(
 				(
@@ -712,7 +715,7 @@
 		$block: &;
 	}
 
-	@if type-of(map.get($map, $key)) == 'map' {
+	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $breakpoint, $value in map.get($map, $key) {
 			@if string.index($breakpoint, '-') {
 				$operator: list.nth(string.split($breakpoint, '-'), 1);
@@ -844,10 +847,13 @@
 		xxs: 0,
 	)
 ) {
-	@if type-of($map) == 'map' and $prefix != '' {
+	@if meta.type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
 			@if not list.index($ignore, $key) {
-				@if type-of($value) == 'map' and ($deep or $key == 'pseudo') {
+				@if meta.type-of($value) ==
+					'map' and
+					($deep or $key == 'pseudo')
+				{
 					$original: map.get($original, $key);
 
 					@if not $original {
@@ -860,7 +866,7 @@
 
 					@if $key == 'pseudo' {
 						@each $pseudo-element, $pseudo-map in $value {
-							@if type-of($pseudo-map) == 'map' {
+							@if meta.type-of($pseudo-map) == 'map' {
 								@if list.index(
 									(
 										before,
@@ -943,7 +949,7 @@
 						);
 					}
 				} @else if
-					type-of($value) !=
+					meta.type-of($value) !=
 					'map' and
 					(string.slice(meta.inspect($key), 1, 1) != '_')
 				{
@@ -995,7 +1001,7 @@
 
 // Wrap selector with :where()
 @mixin wrap-with-where($selector, $enabled: true) {
-	@if type-of($selector) == 'map' or type-of($selector) == 'list' {
+	@if meta.type-of($selector) == 'map' or meta.type-of($selector) == 'list' {
 		$selector: #{$selector};
 	}
 
@@ -1028,7 +1034,7 @@
 	$custom-transitions: false,
 	$bps: (xxs: 0)
 ) {
-	@if type-of($map) == 'map' and $block != '' {
+	@if meta.type-of($map) == 'map' and $block != '' {
 		$selector: '.' + $block;
 
 		// custom props
@@ -1161,12 +1167,12 @@
 		$block: &;
 	}
 
-	@if type-of(map.get($map, $key)) == 'map' {
+	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $transition, $states in map.get($map, $key) {
 			@each $state, $value in $states {
 				@if $state in [ 'enter-from', 'enter-active', 'enter-to',
 					'leave-from', 'leave-active', 'leave-to', 'active',
-					'inert'] and type-of($value) == 'map'
+					'inert'] and meta.type-of($value) == 'map'
 				{
 					$selector: '.#{$transition}';
 

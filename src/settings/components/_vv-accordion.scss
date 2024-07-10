@@ -84,6 +84,7 @@ $vv-accordion: (
 		),
 		content: (
 			_alias: '> summary + *',
+			_combinator: '>',
 			padding-block: var(--spacing-sm),
 			[padding-inline]: var(--accordion-padding-left)
 				var(--accordion-padding-right),

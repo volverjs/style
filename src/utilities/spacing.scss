@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../context' as *;
 
 @each $prefix, $prop in (m: margin, p: padding, n: margin) {
@@ -6,7 +7,7 @@
 		$var: var(--spacing-#{$size});
 
 		// check if value is not a map (spacing-dynamic)
-		@if type-of($value) != 'map' {
+		@if meta.type-of($value) != 'map' {
 			$var: var(--spacing-#{$size}, #{$value});
 		}
 
@@ -19,6 +20,7 @@
 		%#{$prefix}#{$size} {
 			#{$prop}: #{$var};
 		}
+
 		@include wrap-with-where(
 			$selector: '.#{$prefix}-#{$size}',
 			$enabled: $zero-specificity-for-utilities
@@ -30,6 +32,7 @@
 		%#{$prefix}x-#{$size} {
 			#{$prop}-inline: #{$var};
 		}
+
 		@include wrap-with-where(
 			$selector: '.#{$prefix}x-#{$size}',
 			$enabled: $zero-specificity-for-utilities
@@ -41,6 +44,7 @@
 		%#{$prefix}y-#{$size} {
 			#{$prop}-block: #{$var};
 		}
+
 		@include wrap-with-where(
 			$selector: '.#{$prefix}y-#{$size}',
 			$enabled: $zero-specificity-for-utilities
@@ -55,6 +59,7 @@
 			%#{$prefix}#{$direction-prefix}-#{$size} {
 				#{$prop}-#{$direction}: #{$var};
 			}
+
 			@include wrap-with-where(
 				$selector: '.#{$prefix}#{$direction-prefix}-#{$size}',
 				$enabled: $zero-specificity-for-utilities
@@ -69,6 +74,7 @@
 %m-auto {
 	margin: auto;
 }
+
 @include wrap-with-where(
 	$selector: '.m-auto',
 	$enabled: $zero-specificity-for-utilities
@@ -79,6 +85,7 @@
 %mx-auto {
 	margin-inline: auto;
 }
+
 @include wrap-with-where(
 	$selector: '.mx-auto',
 	$enabled: $zero-specificity-for-utilities
@@ -89,6 +96,7 @@
 %my-auto {
 	margin-block: auto;
 }
+
 @include wrap-with-where(
 	$selector: '.my-auto',
 	$enabled: $zero-specificity-for-utilities
@@ -100,6 +108,7 @@
 	%m#{$direction-prefix}-auto {
 		margin-#{$direction}: auto;
 	}
+
 	@include wrap-with-where(
 		$selector: '.m#{$direction-prefix}-auto',
 		$enabled: $zero-specificity-for-utilities
