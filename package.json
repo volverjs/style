@@ -50,7 +50,7 @@
     "@vueuse/head": "^2.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.26.0",
-    "glob": "^10.4.2",
+    "glob": "^11.0.0",
     "icss-utils": "^5.1.0",
     "markdown-it-anchor": "^9.0.1",
     "markdown-it-prism": "^2.3.0",
