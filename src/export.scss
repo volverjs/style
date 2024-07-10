@@ -11,9 +11,9 @@
 	// #region CUSTOMIZATION
 	// colors
 	@each $key, $value in $colors {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					@if not
 						str-index($subKey, 'hue') and not
 						str-index($subKey, 'saturation') and not
@@ -35,9 +35,9 @@
 	}
 
 	@each $key, $value in $dark-colors {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					@if not
 						str-index($subKey, 'hue') and not
 						str-index($subKey, 'saturation') and not
@@ -235,9 +235,9 @@
 	}
 
 	@each $size, $value in $spacing-dynamic {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					spacing-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
@@ -250,9 +250,9 @@
 	}
 
 	@each $size, $value in $font-size-dynamic {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					font-size-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}

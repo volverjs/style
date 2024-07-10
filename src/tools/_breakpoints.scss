@@ -19,9 +19,10 @@
 	$bps-names: map.keys($bps)
 ) {
 	$n: list.index($bps-names, $name);
+
 	@return if(
-		$n != null and $n < length($bps-names),
-		nth($bps-names, $n + 1),
+		$n != null and $n < list.length($bps-names),
+		list.nth($bps-names, $n + 1),
 		null
 	);
 }
@@ -31,6 +32,7 @@
 //    576px
 @function breakpoint-min($name, $bps) {
 	$min: map.get($bps, $name);
+
 	@return if($min != 0, $min, null);
 }
 
@@ -44,6 +46,7 @@
 //    767.98px
 @function breakpoint-max($name, $bps) {
 	$next: breakpoint-next($name, $bps);
+
 	@return if($next, breakpoint-min($next, $bps) - 0.02, null);
 }
 
@@ -61,12 +64,17 @@
 // Makes the @content apply to the given breakpoint and wider.
 @mixin media-breakpoint-up($name, $bps) {
 	$min: breakpoint-min($name, $bps);
+
 	@if $min {
 		@media (min-width: $min) {
-			@content;
+			& {
+				@content;
+			}
 		}
 	} @else {
-		@content;
+		& {
+			@content;
+		}
 	}
 }
 
@@ -74,6 +82,7 @@
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin media-breakpoint-down($name, $bps) {
 	$max: breakpoint-max($name, $bps);
+
 	@if $max {
 		@media (max-width: $max) {
 			@content;

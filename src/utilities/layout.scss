@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../context' as *;
 
 // aspect
@@ -135,11 +136,11 @@
 {
 	$var: $value;
 
-	@if not map-has-key($placement, $size) {
+	@if not map.has-key($placement, $size) {
 		// check if value is not a map (spacing-dynamic)
 		$var: var(--spacing-#{$size});
 
-		@if type-of($value) != 'map' {
+		@if meta.type-of($value) != 'map' {
 			$var: var(--spacing-#{$size}, #{$value});
 		}
 	}

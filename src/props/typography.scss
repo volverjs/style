@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../context' as *;
 
 :where(:host, :root, .theme) {
@@ -21,12 +22,12 @@
 	// font-size dynamic
 	@each $name, $sizes in $font-size-dynamic {
 		@each $breakpoint, $size in $sizes {
-			@if map-has-key($breakpoints, $breakpoint) {
+			@if map.has-key($breakpoints, $breakpoint) {
 				@include media-breakpoint-up($breakpoint, $breakpoints) {
 					$var: $size;
 
 					// if is a static font-size
-					@if map-has-key($font-size, $size) {
+					@if map.has-key($font-size, $size) {
 						$var: var(--text-#{$size});
 					}
 
