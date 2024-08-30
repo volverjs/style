@@ -15,9 +15,9 @@
 			@each $subKey, $subValue in $value {
 				@if meta.type-of($value) not 'map' {
 					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
+						string.index($subKey, 'hue') and not
+						string.index($subKey, 'saturation') and not
+						string.index($subKey, 'lightness')
 					{
 						@if '' + $key == $subKey {
 							#{'colors__' + $key}: $subValue;
@@ -39,9 +39,9 @@
 			@each $subKey, $subValue in $value {
 				@if meta.type-of($value) not 'map' {
 					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
+						string.index($subKey, 'hue') and not
+						string.index($subKey, 'saturation') and not
+						string.index($subKey, 'lightness')
 					{
 						@if '' + $key == $subKey {
 							#{'dark-colors__' + $key}: $subValue;

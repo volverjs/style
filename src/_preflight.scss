@@ -55,8 +55,24 @@
 			@extend %list-disc !optional;
 		}
 
-		&:where(ol) {
+		&:where(ol, ol[type='1']) {
 			@extend %list-decimal !optional;
+		}
+
+		&:where(ol[type='a']) {
+			@extend %list-lower-latin !optional;
+		}
+
+		&:where(ol[type='A']) {
+			@extend %list-upper-latin !optional;
+		}
+
+		&:where(ol[type='i']) {
+			@extend %list-lower-roman !optional;
+		}
+
+		&:where(ol[type='I']) {
+			@extend %list-upper-roman !optional;
 		}
 
 		&:where(li > p) {
@@ -90,6 +106,7 @@
 		&:where(abbr) {
 			@extend %underline !optional;
 			@extend %decoration-dotted !optional;
+			@extend %cursor-help !optional;
 		}
 
 		&:where(code) {

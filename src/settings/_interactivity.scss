@@ -37,3 +37,17 @@ $cursor: (
 	zoom-in: zoom-in,
 	zoom-out: zoom-out,
 ) !default;
+
+// pointer events
+$pointer-events: (
+	none: none,
+	auto: auto,
+) !default;
+
+// user select
+$user-select: (
+	none: none,
+	text: text,
+	all: all,
+	auto: auto,
+) !default;
