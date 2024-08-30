@@ -10,22 +10,17 @@
 );
 
 // pointer events
-%pointer-events-none {
-	pointer-events: none;
-}
-@include wrap-with-where(
-	$selector: '.pointer-events-none',
-	$enabled: $zero-specificity-for-utilities
-) {
-	@extend %pointer-events-none;
-}
+@include spread-map-into-utilities(
+	$map: $pointer-events,
+	$class: pointer-events,
+	$attribute: pointer-events,
+	$zero-specificity: $zero-specificity-for-utilities
+);
 
-%pointer-events-auto {
-	pointer-events: auto;
-}
-@include wrap-with-where(
-	$selector: '.pointer-events-auto',
-	$enabled: $zero-specificity-for-utilities
-) {
-	@extend %pointer-events-auto;
-}
+// user select
+@include spread-map-into-utilities(
+	$map: $user-select,
+	$class: user-select,
+	$attribute: user-select,
+	$zero-specificity: $zero-specificity-for-utilities
+);

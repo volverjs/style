@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.12] - 2023-05-30
+## [0.1.12] - 2024-08-30
 
 ### Fixed
 
@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 *   `.text-balance` utility;
+*   `user-select` utilities;
 *   `vv-input-file` component.
 
 ## [0.1.11] - 2023-05-24

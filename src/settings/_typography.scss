@@ -114,7 +114,15 @@ $font-variant-numeric: (
 ) !default;
 
 // list-style-type
-$list-style-type: (none, disc, decimal) !default;
+$list-style-type: (
+	none,
+	disc,
+	decimal,
+	lower-latin,
+	upper-latin,
+	lower-roman,
+	upper-roman
+) !default;
 
 // list-style-position
 $list-style-position: (inside, outside) !default;
