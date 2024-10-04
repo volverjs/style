@@ -1,10 +1,10 @@
 $vv-accordion: (
 	--accordion-marker-size:
 		calc(var(--spacing-sm) + var(--leading-normal) * 1em),
-	--accordion-padding-top: var(--spacing-xs),
-	--accordion-padding-right: var(--spacing-xs),
-	--accordion-padding-bottom: var(--spacing-xs),
-	--accordion-padding-left: var(--spacing-xs),
+	--accordion-padding-top: var(--spacing-14),
+	--accordion-padding-right: var(--spacing-14),
+	--accordion-padding-bottom: var(--spacing-14),
+	--accordion-padding-left: var(--spacing-14),
 	overflow: hidden,
 	state: (
 		open: (
@@ -13,7 +13,7 @@ $vv-accordion: (
 					background-color: var(--color-surface-2),
 					pseudo: (
 						before: (
-							transform: rotate(0),
+							rotate: 0,
 						),
 					),
 				),
@@ -32,8 +32,10 @@ $vv-accordion: (
 	element: (
 		summary: (
 			_alias: '> summary',
+			_combinator: '>',
 			position: relative,
 			cursor: pointer,
+			user-select: none,
 			[padding-top]: var(--accordion-padding-top),
 			[padding-right]: var(--accordion-padding-right),
 			[padding-bottom]: var(--accordion-padding-bottom),
@@ -45,7 +47,6 @@ $vv-accordion: (
 			color: var(--color-word-2),
 			will-change: background-color,
 			transition: var(--transition-colors),
-			font-size: var(--text-sm),
 			border-radius: var(--rounded-lg),
 			-webkit-tap-highlight-color: transparent,
 			outline: none,
@@ -61,9 +62,9 @@ $vv-accordion: (
 					background-position: center,
 					background-size: 1em,
 					background-repeat: no-repeat,
-					will-change: transform,
+					will-change: rotate,
 					transition: var(--transition-transform),
-					transform: rotate(-90deg),
+					rotate: -90deg,
 				),
 				marker: (
 					display: none,
@@ -83,6 +84,7 @@ $vv-accordion: (
 		),
 		content: (
 			_alias: '> summary + *',
+			_combinator: '>',
 			padding-block: var(--spacing-sm),
 			[padding-inline]: var(--accordion-padding-left)
 				var(--accordion-padding-right),
@@ -102,7 +104,7 @@ $vv-accordion: (
 						before: (
 							left: auto,
 							[right]: var(--accordion-padding-right),
-							transform: rotate(0def),
+							rotate: 0,
 						),
 					),
 				),
@@ -113,7 +115,7 @@ $vv-accordion: (
 						summary: (
 							pseudo: (
 								before: (
-									transform: rotate(-180deg),
+									rotate: -180deg,
 								),
 							),
 						),

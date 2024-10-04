@@ -1,20 +1,22 @@
 <div align="center">
 
-[![volverjs](public/volverjs.svg)](https://volverjs.github.io/style)
+[![volverjs](public/volverjs-style.svg)](https://volverjs.github.io/style)
 
 ## @volverjs/style
 
 `backgrounds` `border` `colors` `aspect ratios` `typography`\
 `easings` `animations` `sizes` `borders` `z-indexes` `media-queries`\
 `layout` `spacing` `flexbox` `grid` `custom properties` `scss`
+  
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=volverjs_style&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=volverjs_style) [![Depfu](https://badges.depfu.com/badges/bb76a99db33bb40379950c71c172e7da/status.svg)](https://depfu.com) [![Depfu](https://badges.depfu.com/badges/bb76a99db33bb40379950c71c172e7da/overview.svg)](https://depfu.com/github/volverjs/style?project_id=38570)
 
 <br>
 
-#### proudly powered by
+maintained with ❤️ by
 
 <br>
 
-[![24/Consulting](public/24consulting.svg)](https://24consulting.it)
+[![8 Wave](public/8wave.svg)](https://8wave.it)
 
 <br>
 
@@ -30,7 +32,7 @@ pnpm add @volverjs/style
 yarn add @volverjs/style
 
 # npm 
-npm install @volverjs/style --save
+npm i -s @volverjs/style
 ```
 
 ## Usage
@@ -71,7 +73,7 @@ All attributes have a [custom properties](https://developer.mozilla.org/en-US/do
 
 ### 😱 Utility-first + BEM
 
-You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) or use components (*vv-\** for ex. *vv-button*) written with [BEM](http://getbem.com/introduction/).
+You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax) and use components (*vv-\** for ex. *vv-button*) written with [BEM](http://getbem.com/introduction/).
 
 ## Basic personalization
 

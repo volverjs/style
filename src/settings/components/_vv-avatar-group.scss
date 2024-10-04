@@ -5,6 +5,7 @@ $vv-avatar-group: (
 	element: (
 		item: (
 			_alias: '> *',
+			_combinator: '>',
 			box-shadow: var(--shadow-md),
 		),
 		item-not-first: (

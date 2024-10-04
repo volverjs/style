@@ -1,0 +1,503 @@
+$vv-input-file: (
+	display: var(--input-display),
+	flex: var(--input-flex),
+	flex-direction: var(--input-flex-direction),
+	margin-bottom: var(--input-gap),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
+	element: (
+		label: (
+			_alias: '> label',
+			_combinator: '>',
+			display: var(--input-label-display),
+			font-size: var(--input-label-font-size),
+			font-weight: var(--input-label-font-weight),
+			color: var(--input-label-color),
+			margin: 0 0 var(--input-label-gap) 0,
+			white-space: var(--input-label-white-space),
+			text-overflow: var(--input-label-text-overflow),
+			overflow: var(--input-label-overflow),
+			max-width: var(--input-label-max-width),
+		),
+		wrapper: (
+			position: relative,
+			display: flex,
+			align-items: center,
+			flex: 1,
+			overflow: hidden,
+			background-color: var(--input-background-color),
+			will-change: background-color,
+			transition: var(--transition-colors),
+			pseudo: (
+				before: (
+					position: absolute,
+					height: var(--spacing-1),
+					inset: auto 0 0 0,
+					background: var(--color-word-5),
+				),
+				after: (
+					position: absolute,
+					height: var(--spacing-2),
+					inset: auto 0 0 0,
+					background: var(--color-brand),
+					scale: 0 1,
+					transform-origin: left,
+					will-change: transform,
+					transition: var(--transition-transform),
+				),
+			),
+			state: (
+				hover: (
+					background-color: var(--input-background-color-hover),
+				),
+				focus-within: (
+					background-color: var(--input-background-color-focus),
+					pseudo: (
+						after: (
+							scale: 1,
+						),
+					),
+				),
+			),
+		),
+		inner: (
+			position: relative,
+			display: flex,
+			flex: 1,
+			min-width: 0,
+		),
+		input: (
+			_alias: 'input[type="file"]',
+			flex: 1,
+			white-space: nowrap,
+			cursor: pointer,
+			color: var(--input-color),
+			[padding-inline]: var(--input-spacing-left)
+				var(--input-spacing-right),
+			min-width: 0,
+			min-height: var(--input-min-height),
+			display: flex,
+			align-items: center,
+			text-overflow: var(--input-text-overflow),
+			pseudo: (
+				file-selector-button: (
+					appearance: none,
+					border: none,
+					background: transparent,
+					cursor: pointer,
+					text-decoration: underline,
+					color: var(--input-color),
+					min-height: var(--input-min-height),
+				),
+			),
+			state: (
+				disabled: (
+					cursor: not-allowed,
+				),
+				readonly: (
+					cursor: text,
+					user-select: text,
+					pointer-events: none,
+					pseudo: (
+						file-selector-button: (
+							opacity: var(--opacity-50),
+						),
+					),
+				),
+			),
+		),
+		input-before: (
+			display: flex,
+			padding-left: var(--input-spacing-left),
+		),
+		input-after: (
+			display: flex,
+			padding-right: var(--input-spacing-right),
+		),
+		icon: (
+			_alias: '> div > :where(svg, [data-icon])',
+			position: var(--input-icon-position),
+			top: 0,
+			left: 0,
+			width: var(--input-icon-width),
+			height: var(--input-min-height),
+			margin: var(--input-icon-margin),
+			pointer-events: var(--input-icon-pointer-events),
+			flex-shrink: 0,
+		),
+		icon-after: (
+			_alias: 'input + :where(svg, [data-icon])',
+			position: var(--input-icon-position),
+			right: 0,
+			left: auto,
+		),
+		hint: (
+			_alias: '> small',
+			display: var(--input-hint-display),
+			font-size: var(--input-hint-font-size),
+			color: var(--input-hint-color),
+			padding-top: var(--input-hint-gap),
+			padding-inline: var(--spacing-xs),
+			white-space: var(--input-hint-white-space),
+			text-overflow: var(--input-hint-text-overflow),
+			overflow: var(--input-hint-overflow),
+		),
+		drop-area: (
+			position: relative,
+			background-color: var(--input-background-color),
+			color: var(--input-hint-color),
+			min-height: var(--spacing-100),
+			padding: var(--spacing-16),
+			display: flex,
+			text-align: center,
+			align-items: center,
+			justify-content: center,
+			margin-bottom: var(--input-label-gap),
+			cursor: pointer,
+			transition: var(--transition-all),
+			overflow: hidden,
+			text-overflow: ellipsis,
+			pseudo: (
+				after: (
+					position: absolute,
+					inset: 0,
+					opacity: var(--opacity-100),
+					border-width: var(--border-2),
+					border-style: dashed,
+					border-color: var(--color-word-5),
+					transition: var(--transition-all),
+				),
+			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+					color: var(--input-color),
+				),
+			),
+		),
+		drop-area-action: (
+			position: absolute,
+			top: var(--spacing-8),
+			right: var(--spacing-8),
+			z-index: var(--z-1),
+		),
+		preview: (
+			position: absolute,
+			display: flex,
+			inset: var(--spacing-4),
+			font-size: var(--text-xl),
+			align-items: center,
+			justify-content: center,
+			object-fit: contain,
+			object-position: center,
+			background: var(--bg-chessboard),
+			overflow: hidden,
+		),
+		progress: (
+			position: absolute,
+			width: 100%,
+			height: var(--border-2),
+			bottom: 0,
+			left: 0,
+			z-index: var(--z-1),
+			pseudo: (
+				-webkit-progress-bar: (
+						background-color: transparent,
+					),
+				-moz-progress-bar: (
+						background-color: var(--color-brand),
+						transition: var(--transition-all),
+					),
+				-webkit-progress-value: (
+						background-color: var(--color-brand),
+						transition: var(--transition-all),
+					),
+			),
+		),
+		list: (
+			display: flex,
+			flex-direction: column,
+			gap: var(--input-label-gap),
+			margin-top: var(--input-label-gap),
+			state: (
+				empty: (
+					display: none,
+				),
+			),
+		),
+		item: (
+			position: relative,
+			overflow: hidden,
+			display: flex,
+			font-size: var(--input-label-font-size),
+			align-items: center,
+			gap: var(--spacing-8),
+			background-color: var(--input-background-color),
+			padding: var(--spacing-8),
+			state: (
+				active: (
+					background-color: var(--color-surface-2),
+				),
+			),
+		),
+		item-name: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
+		),
+		item-info: (
+			font-size: smaller,
+			white-space: nowrap,
+			color: var(--color-word-5),
+			align-self: flex-end,
+		),
+		item-link: (
+			white-space: nowrap,
+			text-overflow: ellipsis,
+			overflow: hidden,
+			cursor: pointer,
+			text-decoration: underline,
+		),
+		item-icon: (
+			flex-shrink: 0,
+		),
+		item-action: (
+			flex-shrink: 0,
+			cursor: pointer,
+		),
+		item-remove: (
+			flex-shrink: 0,
+			cursor: pointer,
+			background-image: var(--bg-close),
+			width: 1.4em,
+			height: 1.4em,
+			background-size: 0.8em,
+			background-repeat: no-repeat,
+			background-position: center,
+			border-radius: var(--rounded-full),
+			background-color: var(--color-surface-3),
+			margin-inline-start: auto,
+			transition: var(--transition-colors),
+			state: (
+				hover: (
+					background-color: var(--color-surface-4),
+				),
+				active: (
+					background-color: var(--color-surface-5),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+				),
+				disabled: (
+					cursor: not-allowed,
+					opacity: var(--opacity-50),
+				),
+			),
+		),
+	),
+	modifier: (
+		icon-before: (
+			--input-spacing-left: calc(var(--spacing-sm) * 2 + 1em),
+		),
+		icon-after: (
+			--input-spacing-right: calc(var(--spacing-sm) * 2 + 1em),
+			element: (
+				limit: (
+					margin-left: calc((var(--spacing-sm) + 1em) * -1),
+				),
+			),
+		),
+		with-progress: (
+			element: (
+				drop-area: (
+					cursor: not-allowed,
+					height: var(--spacing-2),
+					min-height: 0,
+					padding-block: 0,
+					color: var(--color-transparent),
+					background-color: var(--color-surface-3),
+					pseudo: (
+						after: (
+							opacity: var(--opacity-0),
+						),
+					),
+				),
+			),
+		),
+		valid: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--input-valid-color),
+							scale: 1,
+						),
+					),
+				),
+				hint: (
+					color: var(--input-valid-color),
+				),
+				limit: (
+					color: var(--input-valid-color),
+				),
+				icon-after: (
+					color: var(--input-valid-color),
+				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--input-valid-color),
+						),
+					),
+				),
+			),
+		),
+		invalid: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							background: var(--input-invalid-color),
+							scale: 1,
+						),
+					),
+				),
+				hint: (
+					color: var(--input-invalid-color),
+				),
+				limit: (
+					color: var(--input-invalid-color),
+				),
+				icon-after: (
+					color: var(--input-invalid-color),
+				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--input-invalid-color),
+						),
+					),
+				),
+			),
+		),
+		loading: (
+			element: (
+				wrapper: (
+					pseudo: (
+						after: (
+							opacity: var(--opacity-100),
+							animation: var(--animation-indeterminate),
+						),
+					),
+				),
+				drop-area: (
+					pseudo: (
+						after: (
+							border-color: var(--color-brand),
+							animation: var(--animation-clippath),
+						),
+					),
+				),
+			),
+		),
+		hidden: (
+			element: (
+				wrapper: (
+					display: none,
+				),
+				drop-area: (
+					margin-bottom: var(--spacing-0),
+				),
+			),
+		),
+		dragging: (
+			element: (
+				drop-area: (
+					background-color: var(--color-surface-2),
+					color: var(--input-color),
+					pseudo: (
+						after: (
+							border-color: var(--color-brand),
+						),
+					),
+				),
+			),
+		),
+		square: (
+			element: (
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
+				),
+			),
+		),
+		circle: (
+			element: (
+				drop-area: (
+					aspect-ratio: var(--aspect-square),
+					border-radius: var(--rounded-full),
+					pseudo: (
+						after: (
+							border-radius: var(--rounded-full),
+						),
+					),
+				),
+				preview: (
+					border-radius: var(--rounded-full),
+				),
+				drop-area-action: (
+					position: relative,
+					top: auto,
+					right: auto,
+				),
+			),
+		),
+	),
+	state: (
+		disabled: (
+			opacity: var(--opacity-50),
+			element: (
+				wrapper: (
+					state: (
+						hover: (
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
+						),
+					),
+				),
+				drop-area: (
+					cursor: not-allowed,
+					background-color: var(--input-background-color),
+					color: var(--input-hint-color),
+				),
+			),
+		),
+		readonly: (
+			element: (
+				wrapper: (
+					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
+						after: (
+							opacity: var(--opacity-0),
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
+						),
+					),
+				),
+				drop-area: (
+					display: none,
+				),
+			),
+		),
+	),
+) !default;

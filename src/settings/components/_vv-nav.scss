@@ -18,12 +18,12 @@ $vv-nav: (
 			[padding]: var(--nav-item-padding),
 		),
 		item-label: (
-			_alias: 'li > a',
+			_alias: 'li > :is(a, button)',
 			display: flex,
 			align-items: center,
 			will-change: background-color color,
 			transition: var(--transition-all),
-			color: var(--color-word-3),
+			color: var(--color-word-2),
 			cursor: pointer,
 			[padding]: var(--nav-item-padding),
 			state: (
@@ -35,7 +35,7 @@ $vv-nav: (
 				),
 			),
 		),
-		divider: (
+		separator: (
 			_alias: 'li[role="separator"]',
 			display: block,
 			margin-block: var(--spacing-16),
@@ -50,14 +50,14 @@ $vv-nav: (
 				item-label: (
 					border-radius: var(--rounded-md),
 					state: (
-						hover: (
-							background-color: var(--color-surface-2),
-						),
 						active: (
 							background-color: var(--color-surface-3),
 						),
-						current: (
+						hover: (
 							background-color: var(--color-surface-2),
+						),
+						current: (
+							background-color: var(--color-surface-1),
 						),
 					),
 				),
@@ -84,7 +84,7 @@ $vv-nav: (
 						),
 					),
 				),
-				divider: (
+				separator: (
 					margin-block: var(--spacing-8),
 				),
 			),
@@ -116,7 +116,7 @@ $vv-nav: (
 						),
 						current: (
 							color: var(--color-brand),
-							border-color: var(--color-brand),
+							border-color: currentcolor,
 							background-color:
 								hsla(
 									var(--color-brand-hue)
@@ -135,6 +135,7 @@ $vv-nav: (
 				),
 				item-label: (
 					display: block,
+					width: 100%,
 					text-align: center,
 				),
 			),

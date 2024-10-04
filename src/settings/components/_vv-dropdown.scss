@@ -9,26 +9,42 @@ $vv-dropdown: (
 	width: 'max-content',
 	element: (
 		list: (
-			_alias: 'ul',
+			_alias: 'div:is([role="menu"],[role="list-box"])',
 			[border-radius]: var(--dropdown-border-radius),
 			background-color: var(--color-surface-1),
 			overflow: auto,
+			pseudo: (
+				-webkit-scrollbar: (
+						width: var(--spacing-2),
+						height: var(--spacing-2),
+					),
+				-webkit-scrollbar-thumb: (
+						background-color: var(--color-brand-lighten-4),
+						border: var(--spacing-0) solid transparent,
+						background-clip: content-box,
+					),
+				-webkit-scrollbar-track: (
+						background-color: transparent,
+						padding: 0,
+					),
+			),
 		),
 		item: (
-			_alias: 'li',
+			_alias: ':is([role="option"],[role="presentation"])',
 		),
 		item-first: (
-			_alias: 'li:first-child',
+			_alias: ':is([role="option"],[role="presentation"]):first-child',
 			[border-top-left-radius]: var(--dropdown-border-radius),
 			[border-top-right-radius]: var(--dropdown-border-radius),
 		),
 		item-last: (
-			_alias: 'li:last-child',
+			_alias: ':is([role="option"],[role="presentation"]):last-child',
 			[border-bottom-left-radius]: var(--dropdown-border-radius),
 			[border-bottom-right-radius]: var(--dropdown-border-radius),
 		),
 		item-not-last: (
-			_alias: 'li:not(:last-child)',
+			_alias:
+				':is([role="option"],[role="presentation"]):not(:last-child)',
 			border-width: 0 0 var(--border) 0,
 			border-color: var(--color-surface-3),
 			border-style: solid,
@@ -37,9 +53,11 @@ $vv-dropdown: (
 			display: block,
 			min-width: 0,
 			align-items: center,
-			min-height: var(--spacing-50),
+			min-height: var(--input-min-height),
 			background-color: var(--color-surface-2),
-			padding: var(--spacing-sm),
+			padding: var(--input-spacing-top) var(--input-spacing-right)
+				var(--input-spacing-bottom) var(--input-spacing-left),
+			font-size: var(--input-font-size),
 			pseudo: (
 				search-cancel-button: (
 					-webkit-appearance: none,
@@ -159,6 +177,14 @@ $vv-dropdown: (
 						down-xs: (
 							z-index: var(--z-modal),
 							margin-bottom: auto,
+							[border-radius]: var(--dropdown-border-radius),
+						),
+					),
+				),
+				search: (
+					breakpoint: (
+						down-xs: (
+							[border-radius]: var(--dropdown-border-radius),
 						),
 					),
 				),
@@ -173,13 +199,19 @@ $vv-dropdown: (
 					list: (
 						transition: var(--transition-transform),
 					),
+					search: (
+						transition: var(--transition-transform),
+					),
 				),
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
 				element: (
 					list: (
-						transform: translateY(100%),
+						translate: 0 100%,
+					),
+					search: (
+						translate: 0 -100%,
 					),
 				),
 			),
@@ -187,7 +219,61 @@ $vv-dropdown: (
 				opacity: var(--opacity-0),
 				element: (
 					list: (
-						transform: translateY(100%),
+						translate: 0 100%,
+					),
+					search: (
+						translate: 0 -100%,
+					),
+				),
+			),
+		),
+		mobile-fade-block: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					list: (
+						transition: var(--transition-transform),
+					),
+					search: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			enter-from: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 100%,
+							),
+						),
+					),
+					search: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 -100%,
+							),
+						),
+					),
+				),
+			),
+			leave-to: (
+				opacity: var(--opacity-0),
+				element: (
+					list: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 100%,
+							),
+						),
+					),
+					search: (
+						breakpoint: (
+							down-xs: (
+								translate: 0 -100%,
+							),
+						),
 					),
 				),
 			),

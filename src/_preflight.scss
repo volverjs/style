@@ -36,6 +36,8 @@
 		&:where(p) {
 			@extend %vv-text !optional;
 			@extend %vv-text--copy !optional;
+			@extend %overflow-hidden !optional;
+			@extend %text-ellipsis !optional;
 		}
 
 		&:where(blockquote) {
@@ -53,8 +55,28 @@
 			@extend %list-disc !optional;
 		}
 
-		&:where(ol) {
+		&:where(ol, ol[type='1']) {
 			@extend %list-decimal !optional;
+		}
+
+		&:where(ol[type='a']) {
+			@extend %list-lower-latin !optional;
+		}
+
+		&:where(ol[type='A']) {
+			@extend %list-upper-latin !optional;
+		}
+
+		&:where(ol[type='i']) {
+			@extend %list-lower-roman !optional;
+		}
+
+		&:where(ol[type='I']) {
+			@extend %list-upper-roman !optional;
+		}
+
+		&:where(li > p) {
+			@extend %inline !optional;
 		}
 
 		&:where(b, strong, th) {
@@ -84,10 +106,15 @@
 		&:where(abbr) {
 			@extend %underline !optional;
 			@extend %decoration-dotted !optional;
+			@extend %cursor-help !optional;
 		}
 
 		&:where(code) {
 			@extend %font-mono !optional;
+		}
+
+		&:where(p > code) {
+			@extend %whitespace-nowrap !optional;
 		}
 
 		&:where(sub) {
@@ -213,6 +240,7 @@
 		// table
 		&:where(table) {
 			@extend %vv-table !optional;
+			@extend %vv-table--bordered !optional;
 
 			:where(tr) {
 				@extend %vv-table__tr !optional;
@@ -220,10 +248,16 @@
 
 			:where(td) {
 				@extend %vv-table__td !optional;
+				@extend %vv-table-modifier-bordered__td !optional;
 			}
 
 			:where(th) {
 				@extend %vv-table__th !optional;
+				@extend %vv-table-modifier-bordered__th !optional;
+			}
+
+			:where(caption) {
+				@extend %vv-table__caption !optional;
 			}
 		}
 

@@ -35,6 +35,7 @@ export default ({ mode }) => {
 					.use(MarkdownItAnchor, {
 						permalink: MarkdownItAnchor.permalink.ariaHidden({
 							placement: 'before',
+							renderAttrs: () => ({ tabindex: -1 }),
 						}),
 					}),
 			}),
@@ -85,6 +86,13 @@ export default ({ mode }) => {
 		},
 		optimizeDeps: {
 			include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: 'modern',
+				},
+			},
 		},
 	})
 }

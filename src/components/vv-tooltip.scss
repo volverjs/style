@@ -14,7 +14,7 @@ $component-selector: '.#{ $component-name}';
 );
 
 @include wrap-with-where(
-	$selector: '*:has(#{$component-selector})',
+	$selector: '*:has(> #{$component-selector})',
 	$enabled: $zero-specificity-for-components
 ) {
 	position: relative;

@@ -5,7 +5,7 @@ wrapperClass: flex-1
 
 <div class="relative theme theme--light n-24 p-24 overflow-hidden">
     <picture>
-        <img class="object-cover absolute inset-0 max-w-none" src="https://source.unsplash.com/featured/300×300/?ocean" alt="Card picture">
+        <img class="object-cover absolute inset-0 max-w-none w-full" src="https://unsplash.it/800/400" alt="Card picture">
     </picture>
     <article class="vv-card vv-card--glass lg:w-9/12 mx-auto">
         <header class="vv-card__header">Header</header>
@@ -17,13 +17,13 @@ wrapperClass: flex-1
         <footer class="vv-card__footer flex justify-between items-center">
             <span>Lorem ipsum dolor</span>
             <div class="vv-button-group" role="group">
-                <button type="button" class="vv-button vv-button--action-quiet">
+                <button type="button" class="vv-button vv-button--action-quiet" aria-label="Copy">
                     <IconifyIcon icon="akar-icons:copy" />
                 </button>
-                <button type="button" class="vv-button vv-button--action-quiet">
+                <button type="button" class="vv-button vv-button--action-quiet" aria-label="Edit">
                     <IconifyIcon icon="akar-icons:pencil" />
                 </button>
-                <button type="button" class="vv-button vv-button--action-quiet">
+                <button type="button" class="vv-button vv-button--action-quiet" aria-label="Delete">
                     <IconifyIcon icon="akar-icons:trash-bin" />
                 </button>
             </div>

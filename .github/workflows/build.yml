@@ -7,20 +7,19 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: pnpm/action-setup@v2.2.2
-              with:
-                  version: 7
+            - uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
 
             - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: 'pnpm'
 
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
-            
+
             - name: Build release
               run: pnpm build
 
@@ -31,7 +30,7 @@ jobs:
               run: pnpm pack
 
             - name: Upload artifact
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: package
                   path: '*.tgz'
@@ -40,9 +39,9 @@ jobs:
               run: pnpm styleguide
 
             - name: Setup GitHub Pages
-              uses: actions/configure-pages@v2
-              
+              uses: actions/configure-pages@v5
+
             - name: Upload styleguide
-              uses: actions/upload-pages-artifact@v1
+              uses: actions/upload-pages-artifact@v3
               with:
                   path: './styleguide'

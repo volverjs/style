@@ -23,6 +23,21 @@ $brightness: (
 	125: brightness(1.25),
 	150: brightness(1.5),
 	200: brightness(2),
+	250: brightness(2.5),
+	500: brightness(5),
+	1000: brightness(10),
+) !default;
+
+// contrast
+$contrast: (
+	0: contrast(0),
+	50: contrast(0.5),
+	75: contrast(0.75),
+	100: contrast(1),
+	125: contrast(1.25),
+	150: contrast(1.5),
+	200: brightness(2),
+	300: brightness(3),
 ) !default;
 
 // saturation

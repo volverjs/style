@@ -13,6 +13,11 @@ $vv-checkbox: (
 		disabled: (
 			opacity: var(--opacity-30),
 			cursor: not-allowed,
+			element: (
+				input: (
+					cursor: not-allowed,
+				),
+			),
 		),
 	),
 	element: (
@@ -42,6 +47,7 @@ $vv-checkbox: (
 		),
 		hint: (
 			_alias: '> small',
+			_combinator: '>',
 			flex-basis: 100%,
 			display: var(--input-hint-display),
 			font-size: var(--input-hint-font-size),
@@ -93,7 +99,7 @@ $vv-checkbox: (
 							background-image: none,
 							pseudo: (
 								after: (
-									transform: translateX(50%),
+									translate: 50%,
 								),
 							),
 						),
@@ -102,7 +108,7 @@ $vv-checkbox: (
 							background-color: var(--color-brand),
 							pseudo: (
 								after: (
-									transform: translateX(100%),
+									translate: 100%,
 								),
 							),
 						),

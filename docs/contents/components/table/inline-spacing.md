@@ -1,5 +1,5 @@
 ---
-title: Inline spacing variant
+title: Inline spacing
 wrapperClass: w-full
 ---
 

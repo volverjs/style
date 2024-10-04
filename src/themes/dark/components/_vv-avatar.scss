@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-avatar);
+$component-map: $dark-vv-avatar;
+
+@mixin theme-dark-vv-avatar {
+	@include spread-map-into-props(
+		$map: $component-map,
+		$prefix: $component-name
+	);
+}
+
+:where(:host, :root, .theme):not(.theme--light) {
+	@media (prefers-color-scheme: dark) {
+		@include theme-dark-vv-avatar;
+	}
+}
+
+:where(.theme.theme--dark) {
+	@include theme-dark-vv-avatar;
+}

@@ -6,8 +6,10 @@ $vv-checkbox-group: (
 	element: (
 		legend: (
 			_alias: '> legend',
+			_combinator: '>',
 			display: var(--input-label-display),
 			font-size: var(--input-label-font-size),
+			font-weight: var(--input-label-font-weight),
 			color: var(--input-label-color),
 			margin: 0 0 var(--input-label-gap) 0,
 			white-space: var(--input-label-white-space),
@@ -23,6 +25,7 @@ $vv-checkbox-group: (
 		),
 		hint: (
 			_alias: '> small',
+			_combinator: '>',
 			display: var(--input-hint-display),
 			font-size: var(--input-hint-font-size),
 			color: var(--input-hint-color),

@@ -15,6 +15,7 @@ $vv-breadcrumb: (
 	element: (
 		list: (
 			_alias: '> ol',
+			_combinator: '>',
 			position: relative,
 			overflow: auto hidden,
 			overscroll-behavior-x: contain,
@@ -49,7 +50,7 @@ $vv-breadcrumb: (
 					background-position: center,
 					background-size: 1em,
 					background-repeat: no-repeat,
-					transform: rotate(-90deg),
+					rotate: -90deg,
 				),
 			),
 		),

@@ -7,7 +7,7 @@ wrapperClass: w-full md:w-9/12 mx-auto
   <details id="accordion-item-1" class="vv-accordion">
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-1"
+      aria-controls="accordion-item-1"
       aria-expanded="false">
       Lorem Ipsum
     </summary>
@@ -21,7 +21,7 @@ wrapperClass: w-full md:w-9/12 mx-auto
   <details id="accordion-item-2" class="vv-accordion">
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-2"
+      aria-controls="accordion-item-2"
       aria-expanded="false">
       Lorem Ipsum
     </summary>
@@ -35,7 +35,7 @@ wrapperClass: w-full md:w-9/12 mx-auto
   <details id="accordion-item-3" class="vv-accordion" open="">
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-3"
+      aria-controls="accordion-item-3"
       aria-expanded="true">
       Lorem Ipsum
     </summary>

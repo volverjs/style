@@ -1,0 +1,50 @@
+$dark-vv-badge: (
+	modifier: (
+		outline: (
+			color: var(--color-brand-lighten-3),
+			modifier: (
+				danger: (
+					color: var(--color-danger-lighten-3),
+				),
+				success: (
+					color: var(--color-success-lighten-3),
+				),
+				warning: (
+					color: var(--color-warning),
+				),
+				info: (
+					color: var(--color-info),
+				),
+				accent: (
+					color: var(--color-accent-lighten-3),
+				),
+				gray: (
+					color: var(--color-gray-lighten-3),
+				),
+			),
+		),
+		ghost: (
+			color: var(--color-brand-lighten-3),
+			modifier: (
+				danger: (
+					color: var(--color-danger-lighten-3),
+				),
+				success: (
+					color: var(--color-success-lighten-3),
+				),
+				warning: (
+					color: var(--color-warning),
+				),
+				info: (
+					color: var(--color-info),
+				),
+				accent: (
+					color: var(--color-accent-lighten-3),
+				),
+				gray: (
+					color: var(--color-gray-lighten-3),
+				),
+			),
+		),
+	),
+);

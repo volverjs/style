@@ -8,7 +8,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <div class="vv-select__wrapper">
         <select id="select"
                 name="select" 
-                aria-describedby="select-hint">
+                aria-describedby="select-standard-hint">
             <option value="" disabled="disabled" selected="selected">
                 Placeholder text
             </option>
@@ -17,7 +17,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
-    <small id="select-hint" class="vv-select__hint">
+    <small id="select-standard-hint" class="vv-select__hint">
         Please fill the input above.
     </small>
 </div>
@@ -79,7 +79,8 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-select">
+<div class="vv-select
+            vv-select--disabled">
     <label for="select-disabled">Disabled Select</label>
     <div class="vv-select__wrapper">
         <select id="select-disabled"
@@ -99,7 +100,9 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-select vv-select--readonly vv-select--dirty">
+<div class="vv-select 
+            vv-select--readonly 
+            vv-select--dirty">
     <label for="select-readonly">Readonly Select</label>
     <div class="vv-select__wrapper">
         <select id="select-readonly"

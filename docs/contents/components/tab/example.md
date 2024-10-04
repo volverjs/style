@@ -17,9 +17,10 @@ wrapperClass: flex-1 w-100
     <div class="vv-tab">
         <nav class="vv-nav vv-nav--tabs vv-nav--full">
             <ul class="vv-nav__menu" role="menu">
-                <li class="vv-nav__item">
+                <li class="vv-nav__item" role="presentation">
                     <a
                         class="vv-nav__item-label"
+                        role="menuitem"
                         tabindex="0"
                         href="#tab-panel-1"
                         :class="{'current': activeTab === 1}"
@@ -27,9 +28,10 @@ wrapperClass: flex-1 w-100
                         Sidebar item 1
                     </a>
                 </li>
-                <li class="vv-nav__item">
+                <li class="vv-nav__item" role="presentation">
                     <a
                         class="vv-nav__item-label"
+                        role="menuitem"
                         tabindex="0"
                         href="#tab-panel-2"
                         :class="{'current': activeTab === 2}"
@@ -37,9 +39,10 @@ wrapperClass: flex-1 w-100
                         Sidebar item 2
                     </a>
                 </li>
-                <li class="vv-nav__item">
+                <li class="vv-nav__item" role="presentation">
                     <a
                         class="vv-nav__item-label"
+                        role="menuitem"
                         tabindex="0"
                         href="#tab-panel-3"
                         :class="{'current': activeTab === 3}"
@@ -47,9 +50,10 @@ wrapperClass: flex-1 w-100
                         Sidebar item 3
                     </a>
                 </li>
-                <li class="vv-nav__item">
+                <li class="vv-nav__item" role="presentation">
                     <a
                         class="vv-nav__item-label"
+                        role="menuitem"
                         tabindex="0"
                         href="#tab-panel-4"
                         :class="{'current': activeTab === 4}"

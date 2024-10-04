@@ -2,11 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.12] - 2024-10-04
+
+### Fixed
+
+*   `vv-alert` auto close radius;
+*   From `transform` to `translate`, `rotate` and `scale` separated properties;
+*   Mobile improvements;
+*   A11y review;
+*   Update figma design tokens;
+*   `bordered` modifier for `vv-table`;
+*   Add `min-w-{spacing}` and `min-h-{spacing}` utilities;
+*   `breakpoint` for states;
+*   replace deprecated `sass` functions;
+
+### Changed
+
+*   `vv-nav__divider` is now `vv-nav__separator`.
+
+### Added
+
+*   `.text-balance` utility;
+*   `user-select` utilities;
+*   `vv-input-file` component.
+
 ## [0.1.11] - 2023-05-24
 
 ### Added
 
-- `vv-dropdown` `mobile` modifier
+*   `vv-dropdown` `mobile` modifier
 
 ### Fixed
 
@@ -177,6 +201,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.12]: https://github.com/volverjs/style/compare/v0.1.11...v0.1.12
 [0.1.11]: https://github.com/volverjs/style/compare/v0.1.10...v0.1.11
 [0.1.10]: https://github.com/volverjs/style/compare/v0.1.9...v0.1.10
 [0.1.9]: https://github.com/volverjs/style/compare/v0.1.8...v0.1.9

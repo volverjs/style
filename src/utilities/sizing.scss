@@ -1,9 +1,17 @@
 @use 'sass:map';
 @use '../context' as *;
 
-// width / height / max-width / max-height
+// width / height / max-width / max-height / min-width / min-height
 @each $class,
-	$attribute in(w: width, h: height, max-w: max-width, max-h: max-height)
+	$attribute
+		in(
+			w: width,
+			h: height,
+			max-w: max-width,
+			max-h: max-height,
+			min-w: min-width,
+			min-h: min-height
+		)
 {
 	@include spread-map-into-utilities(
 		$map: map.merge($spacing, $spacing-dynamic),

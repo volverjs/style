@@ -1,13 +1,10 @@
 $vv-badge: (
 	--badge-font-size: 0.7rem,
-	--badge-color: var(--color-white),
-	--badge-background-color: var(--color-brand),
-	--badge-border-width: 0,
 	[font-size]: var(--badge-font-size),
-	[background-color]: var(--badge-background-color),
-	[color]: var(--badge-color),
-	[border-width]: var(--badge-border-width),
-	[border-color]: var(--badge-background-color),
+	border-width: 0,
+	background-color: var(--color-brand),
+	border-color: var(--color-brand),
+	color: var(--color-white),
 	border-style: solid,
 	border-radius: 0.5em,
 	min-height: 2em,
@@ -24,6 +21,7 @@ $vv-badge: (
 	line-height: var(--leading-none),
 	overflow: hidden,
 	flex-shrink: 0,
+	vertical-align: middle,
 	state: (
 		empty: (
 			font-size: inherit,
@@ -36,12 +34,13 @@ $vv-badge: (
 		),
 		focus-within: (
 			outline-offset: var(--spacing-4),
-			[outline]: var(--spacing-px) solid var(--badge-background-color),
+			outline: var(--spacing-px) solid currentcolor,
 		),
 	),
 	element: (
 		button: (
 			_alias: '> button',
+			_combinator: '>',
 			cursor: pointer,
 			padding: 0 0.5em,
 			margin: 0 -0.5em,
@@ -67,48 +66,89 @@ $vv-badge: (
 		rounded: (
 			border-radius: 1em,
 		),
-		outline: (
-			--badge-border-width: var(--border),
-			[background-color]: transparent,
-			[color]: var(--badge-background-color),
-		),
-		ghost: (
-			[background-color]: transparent,
-			[color]: var(--badge-background-color),
-		),
 		white: (
-			--badge-background-color:
+			background-color:
 				hsla(
 					var(--color-white-hue) var(--color-white-saturation)
 						var(--color-white-lightness) / 80%
 				),
-			--badge-color: var(--color-black),
+			color: var(--color-black),
 		),
 		black: (
-			--badge-background-color:
+			background-color:
 				hsla(
 					var(--color-black-hue) var(--color-black-saturation)
 						var(--color-black-lightness) / 80%
 				),
-			--badge-color: var(--color-white),
+			color: var(--color-white),
 		),
 		danger: (
-			--badge-background-color: var(--color-danger),
+			background-color: var(--color-danger),
 		),
 		success: (
-			--badge-background-color: var(--color-success),
+			background-color: var(--color-success),
 		),
 		warning: (
-			--badge-background-color: var(--color-warning),
+			background-color: var(--color-warning-darken-5),
 		),
 		info: (
-			--badge-background-color: var(--color-info),
+			background-color: var(--color-info-darken-5),
 		),
 		accent: (
-			--badge-background-color: var(--color-accent),
+			background-color: var(--color-accent),
 		),
 		gray: (
-			--badge-background-color: var(--color-gray),
+			background-color: var(--color-gray-darken-1),
+		),
+		outline: (
+			border-width: var(--border),
+			color: var(--color-brand),
+			border-color: currentcolor,
+			background-color: transparent,
+			modifier: (
+				danger: (
+					color: var(--color-danger),
+				),
+				success: (
+					color: var(--color-success),
+				),
+				warning: (
+					color: var(--color-warning-darken-5),
+				),
+				info: (
+					color: var(--color-info-darken-5),
+				),
+				accent: (
+					color: var(--color-accent),
+				),
+				gray: (
+					color: var(--color-gray-darken-1),
+				),
+			),
+		),
+		ghost: (
+			background-color: transparent,
+			color: var(--color-brand),
+			modifier: (
+				danger: (
+					color: var(--color-danger),
+				),
+				success: (
+					color: var(--color-success),
+				),
+				warning: (
+					color: var(--color-warning-darken-5),
+				),
+				info: (
+					color: var(--color-info-darken-5),
+				),
+				accent: (
+					color: var(--color-accent),
+				),
+				gray: (
+					color: var(--color-gray-darken-1),
+				),
+			),
 		),
 	),
 ) !default;

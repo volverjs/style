@@ -1,10 +1,26 @@
 @use 'sass:map';
 @use '../context' as *;
 
-// grid template columns
+// cursor
 @include spread-map-into-utilities(
 	$map: $cursor,
 	$class: cursor,
 	$attribute: cursor,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+// pointer events
+@include spread-map-into-utilities(
+	$map: $pointer-events,
+	$class: pointer-events,
+	$attribute: pointer-events,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+// user select
+@include spread-map-into-utilities(
+	$map: $user-select,
+	$class: user-select,
+	$attribute: user-select,
 	$zero-specificity: $zero-specificity-for-utilities
 );

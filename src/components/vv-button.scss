@@ -42,19 +42,8 @@ $component-selector: '.#{ $component-name}';
 				input[type='button'],
 				input[type='submit'],
 				input[type='reset']
-			),
-		&::file-selector-button {
+			) {
 			@extend %#{$component-name};
-		}
-
-		// input file
-		@if map.get($component-map, 'gap') {
-			&::file-selector-button {
-				margin-inline-end: var(
-					--vv-button-gap,
-					map.get($component-map, 'gap')
-				);
-			}
 		}
 	}
 }

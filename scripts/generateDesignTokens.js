@@ -1,15 +1,19 @@
 import { extractICSS } from 'icss-utils'
 import fs from 'fs'
 import postcss from 'postcss'
-import sass from 'sass'
+import { compile } from 'sass'
+import calc from 'reduce-css-calc'
+
+const varRegex = /var\(([a-z-0-9,\s]+)\)/
+const calcRegex = /calc\(([a-z-0-9+\-*/%.,\s]+)\)/
 
 // design tokens
 const designTokens = {
-	global: {},
-	dark: {},
+	volver: {},
+	'volver-dark': {},
 }
 const icssExports = extractICSS(
-	postcss.parse(sass.compile('./src/export.scss').css),
+	postcss.parse(compile('./src/export.scss').css),
 ).icssExports
 
 /**
@@ -23,7 +27,6 @@ const splitLast = (s, sep = ' ') => {
 }
 
 const exports = Object.keys(icssExports).reduce((accumulator, key) => {
-	//#region for dynamic maps
 	// dynamic maps are recognized by at least two '__' as the name of the key
 	const isDynamicMap = key.match(/__/gi).length > 1
 	if (isDynamicMap) {
@@ -47,11 +50,9 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 
 		return accumulator
 	}
-	//#endregion for dynamic maps
 
-	//#region for general maps
 	const splittedKey = key.split('__')
-	const value = icssExports[key]
+	const value = icssExports[key].replace(/\s\s+/g, ' ')
 
 	let current = accumulator
 	splittedKey.forEach((subKey, index) => {
@@ -64,15 +65,43 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 	})
 
 	return accumulator
-	//#endregion for general maps
 }, {})
 
-//#region colors
-// colors computed without css vars
-designTokens.global['colors'] = Object.keys(exports['colors-computed']).reduce(
+// colors
+designTokens.volver['colors'] = Object.keys(exports['colors']).reduce(
 	(acc, key) => {
-		acc[`color-${key}`] = {
-			value: exports['colors-computed'][key],
+		let value = exports['colors'][key]
+		let match
+		while ((match = varRegex.exec(value)) !== null) {
+			value = value.replace(
+				match[0],
+				exports['colors-values'][match[1].replace('--color-', '')],
+			)
+		}
+		while ((match = calcRegex.exec(value)) !== null) {
+			value = value.replace(match[0], calc(match[0]))
+		}
+		const group = key.split('-')[0]
+		if (
+			[
+				'brand',
+				'danger',
+				'success',
+				'info',
+				'accent',
+				'warning',
+				'gray',
+				'word',
+				'alpha',
+				'surface',
+			].includes(group)
+		) {
+			acc[group] = acc[group] || {}
+			acc[group][key] = { value, type: 'color' }
+			return acc
+		}
+		acc[key] = {
+			value,
 			type: 'color',
 		}
 		return acc
@@ -80,159 +109,106 @@ designTokens.global['colors'] = Object.keys(exports['colors-computed']).reduce(
 	{},
 )
 
-// dark colors computed without css vars
-designTokens.dark['colors'] = Object.keys(
-	exports['dark-colors-computed'],
+designTokens['volver-dark']['colors'] = Object.keys(
+	exports['dark-colors'],
 ).reduce((acc, key) => {
-	acc[`color-${key}`] = {
-		value: exports['dark-colors-computed'][key],
+	let value = exports['dark-colors'][key]
+	let match
+	while ((match = varRegex.exec(value)) !== null) {
+		value = value.replace(
+			match[0],
+			exports['dark-colors-values']?.[match[1].replace('--color-', '')] ??
+				exports['colors-values']?.[match[1].replace('--color-', '')],
+		)
+	}
+	while ((match = calcRegex.exec(value)) !== null) {
+		value = value.replace(match[0], calc(match[0]))
+	}
+	const group = key.split('-')[0]
+	if (
+		[
+			'brand',
+			'danger',
+			'success',
+			'info',
+			'accent',
+			'warning',
+			'gray',
+			'word',
+			'alpha',
+			'surface',
+		].includes(group)
+	) {
+		acc[group] = acc[group] || {}
+		acc[group][key] = { value, type: 'color' }
+		return acc
+	}
+	acc[key] = {
+		value,
 		type: 'color',
 	}
 	return acc
 }, {})
-//#endregion colors
 
-//#region sizing
-// width
-designTokens.global.width = Object.keys(exports.width).reduce((acc, key) => {
-	acc[`width-${key.replace('_', '/')}`] = {
-		value: exports.width[key],
-		type: 'sizing',
-	}
-	return acc
-}, {})
-
-// min-Width
-designTokens.global['min-width'] = Object.keys(exports['min-width']).reduce(
-	(acc, key) => {
-		acc[`min-width-${key}`] = {
-			value: exports['min-width'][key],
-			type: 'sizing',
-		}
-		return acc
-	},
-	{},
-)
-
-// max-Width
-designTokens.global['max-width'] = Object.keys(exports['max-width']).reduce(
-	(acc, key) => {
-		acc[`max-width-${key}`] = {
-			value: exports['max-width'][key],
-			type: 'sizing',
-		}
-		return acc
-	},
-	{},
-)
-
-// height
-designTokens.global.height = Object.keys(exports.height).reduce((acc, key) => {
-	acc[`height-${key.replace('_', '/')}`] = {
-		value: exports.height[key],
-		type: 'sizing',
-	}
-	return acc
-}, {})
-
-// min-Height
-designTokens.global['min-height'] = Object.keys(exports['min-height']).reduce(
-	(acc, key) => {
-		acc[`min-height-${key}`] = {
-			value: exports['min-height'][key],
-			type: 'sizing',
-		}
-		return acc
-	},
-	{},
-)
-
-// max-Height
-designTokens.global['max-height'] = Object.keys(exports['max-height']).reduce(
-	(acc, key) => {
-		acc[`max-height-${key}`] = {
-			value: exports['max-height'][key],
-			type: 'sizing',
-		}
-		return acc
-	},
-	{},
-)
-//#endregion sizing
-
-//#region spacing
 // spacing
-designTokens.global.spacing = Object.keys(exports.spacing).reduce(
+designTokens.volver.spacing = Object.keys(exports.spacing).reduce(
 	(acc, key) => {
-		acc[`spacing-${key}`] = { value: exports.spacing[key], type: 'spacing' }
+		acc[key] = { value: exports.spacing[key], type: 'spacing' }
 		return acc
 	},
 	{},
 )
+
+// sizing
+designTokens.volver.sizing = Object.keys(exports.spacing).reduce((acc, key) => {
+	acc[key] = { value: exports.spacing[key], type: 'sizing' }
+	return acc
+}, {})
 
 // spacing-dynamic
 const generateSpacingDynamic = (breakpoint) =>
 	Object.keys(exports[`spacing-dynamic-${breakpoint}`]).reduce((acc, key) => {
-		acc[`spacing-dynamic-${key}`] = {
+		acc[key] = {
 			value: exports[`spacing-dynamic-${breakpoint}`][key],
 			type: 'spacing',
 		}
 		return acc
 	}, {})
 
-designTokens.global['spacing-dynamic'] = {
-	xs: generateSpacingDynamic('xs'),
-	sm: generateSpacingDynamic('sm'),
-	md: generateSpacingDynamic('md'),
-	lg: generateSpacingDynamic('lg'),
-	xl: generateSpacingDynamic('xl'),
+designTokens.volver['spacing-dynamic'] = {
+	'breakpoint-xs': generateSpacingDynamic('xs'),
+	'breakpoint-sm': generateSpacingDynamic('sm'),
+	'breakpoint-md': generateSpacingDynamic('md'),
+	'breakpoint-lg': generateSpacingDynamic('lg'),
+	'breakpoint-xl': generateSpacingDynamic('xl'),
 }
-//#endregion spacing
 
-//#region border-radius
 // border-radius
-designTokens.global['border-radius'] = Object.keys(
+designTokens.volver['border-radius'] = Object.keys(
 	exports['border-radius'],
 ).reduce((acc, key) => {
-	acc[`border-radius-${key}`] = {
+	acc[key] = {
 		value: exports['border-radius'][key],
 		type: 'borderRadius',
 	}
 	return acc
 }, {})
-//#endregion border-radius
 
-//#region border-width
 // border-width
-designTokens.global['border-width'] = Object.keys(
+designTokens.volver['border-width'] = Object.keys(
 	exports['border-width'],
 ).reduce((acc, key) => {
-	acc[`border-width-${key}`] = {
+	acc[key] = {
 		value: exports['border-width'][key],
 		type: 'borderWidth',
 	}
 	return acc
 }, {})
-//#endregion border-width
 
-//#region box-shadow
-// box-shadow
-designTokens.global['box-shadow'] = Object.keys(
-	exports['box-shadow-no-vars'],
-).reduce((acc, key) => {
-	acc[`box-shadow-${key}`] = {
-		value: exports['box-shadow-no-vars'][key],
-		type: 'boxShadow',
-	}
-	return acc
-}, {})
-//#endregion box-shadow
-
-//#region opacity
 // opacity
-designTokens.global.opacity = Object.keys(exports.opacity).reduce(
+designTokens.volver.opacity = Object.keys(exports.opacity).reduce(
 	(acc, key) => {
-		acc[`opacity-${key}`] = {
+		acc[key] = {
 			value: exports.opacity[key],
 			type: 'opacity',
 		}
@@ -240,27 +216,11 @@ designTokens.global.opacity = Object.keys(exports.opacity).reduce(
 	},
 	{},
 )
-//#endregion opacity
 
-//#region font-family
-// font-family
-designTokens.global['font-family'] = Object.keys(exports['font-family']).reduce(
-	(acc, key) => {
-		acc[`font-family-${key}`] = {
-			value: exports['font-family'][key],
-			type: 'fontFamilies',
-		}
-		return acc
-	},
-	{},
-)
-//#endregion font-family
-
-//#region font-weight
 // font-weight
-designTokens.global['font-weight'] = Object.keys(exports['font-weight']).reduce(
+designTokens.volver['font-weight'] = Object.keys(exports['font-weight']).reduce(
 	(acc, key) => {
-		acc[`font-weight-${key}`] = {
+		acc[key] = {
 			value: exports['font-weight'][key],
 			type: 'fontWeights',
 		}
@@ -268,13 +228,11 @@ designTokens.global['font-weight'] = Object.keys(exports['font-weight']).reduce(
 	},
 	{},
 )
-//#endregion font-weight
 
-//#region font-size
 // font-size
-designTokens.global['font-size'] = Object.keys(exports['font-size']).reduce(
+designTokens.volver['font-size'] = Object.keys(exports['font-size']).reduce(
 	(acc, key) => {
-		acc[`font-size-${key}`] = {
+		acc[key] = {
 			value: exports['font-size'][key],
 			type: 'fontSizes',
 		}
@@ -287,7 +245,7 @@ designTokens.global['font-size'] = Object.keys(exports['font-size']).reduce(
 const generateFontSizeDynamic = (breakpoint) =>
 	Object.keys(exports[`font-size-dynamic-${breakpoint}`]).reduce(
 		(acc, key) => {
-			acc[`font-size-dynamic-${key}`] = {
+			acc[key] = {
 				value: exports[`font-size-dynamic-${breakpoint}`][key],
 				type: 'fontSizes',
 			}
@@ -296,209 +254,47 @@ const generateFontSizeDynamic = (breakpoint) =>
 		{},
 	)
 
-designTokens.global['font-size-dynamic'] = {
-	xs: generateFontSizeDynamic('xs'),
-	sm: generateFontSizeDynamic('sm'),
-	md: generateFontSizeDynamic('md'),
-	lg: generateFontSizeDynamic('lg'),
-	xl: generateFontSizeDynamic('xl'),
+designTokens.volver['font-size-dynamic'] = {
+	'breakpoint-xs': generateFontSizeDynamic('xs'),
+	'breakpoint-sm': generateFontSizeDynamic('sm'),
+	'breakpoint-md': generateFontSizeDynamic('md'),
+	'breakpoint-lg': generateFontSizeDynamic('lg'),
+	'breakpoint-xl': generateFontSizeDynamic('xl'),
 }
-//#endregion font-size
 
-//#region letter-spacing
-// letter-spacing
-designTokens.global['letter-spacing'] = Object.keys(
-	exports['letter-spacing'],
-).reduce((acc, key) => {
-	acc[`letter-spacing-${key}`] = {
-		value: exports['letter-spacing'][key],
-		type: 'letterSpacing',
-	}
-	return acc
-}, {})
-//#endregion letter-spacing
-
-//#region text-case
 // text-transform
-designTokens.global['text-transform'] = Object.keys(
+designTokens.volver['text-transform'] = Object.keys(
 	exports['text-transform'],
 ).reduce((acc, key) => {
-	acc[`text-transform-${key}`] = {
+	acc[key] = {
 		value: exports['text-transform'][key],
 		type: 'textCase',
 	}
 	return acc
 }, {})
 
-// text-align
-designTokens.global['text-align'] = Object.keys(exports['text-align']).reduce(
-	(acc, key) => {
-		acc[`text-align-${key}`] = {
-			value: exports['text-align'][key],
-			type: 'textCase',
-		}
-		return acc
-	},
-	{},
-)
-//#endregion text-case
-
-//#region text-decoration
-// text-decorator-line
-designTokens.global['text-decorator-line'] = Object.keys(
-	exports['text-decorator-line'],
-).reduce((acc, key) => {
-	acc[`text-decorator-line-${key}`] = {
-		value: exports['text-decorator-line'][key],
-		type: 'textDecoration',
-	}
-	return acc
-}, {})
-
-// text-decorator-style
-designTokens.global['text-decorator-style'] = Object.keys(
-	exports['text-decorator-style'],
-).reduce((acc, key) => {
-	acc[`text-decorator-style-${key}`] = {
-		value: exports['text-decorator-style'][key],
-		type: 'textDecoration',
-	}
-	return acc
-}, {})
-
-// text-decorator-thickness
-designTokens.global['text-decorator-thickness'] = Object.keys(
-	exports['text-decorator-thickness'],
-).reduce((acc, key) => {
-	acc[`text-decorator-thickness-${key}`] = {
-		value: exports['text-decorator-thickness'][key],
-		type: 'textDecoration',
-	}
-	return acc
-}, {})
-
-// text-underline-offset
-designTokens.global['text-underline-offset'] = Object.keys(
-	exports['text-underline-offset'],
-).reduce((acc, key) => {
-	acc[`text-underline-offset-${key}`] = {
-		value: exports['text-underline-offset'][key],
-		type: 'textDecoration',
-	}
-	return acc
-}, {})
-//#endregion text-decoration
-
-//#region typography
 // line-height
-designTokens.global['line-height'] = Object.keys(exports['line-height']).reduce(
+designTokens.volver['line-height'] = Object.keys(exports['line-height']).reduce(
 	(acc, key) => {
-		acc[`line-height-${key}`] = {
-			value: exports['line-height'][key],
-			type: 'typography',
+		acc[key] = {
+			value: parseFloat(exports['line-height'][key]) * 100 + '%',
+			type: 'lineHeights',
 		}
 		return acc
 	},
 	{},
 )
-//#endregion typography
-
-//#region assets
-// background-image
-designTokens.global['background-image'] = Object.keys(
-	exports['background-image'],
-).reduce((acc, key) => {
-	acc[`background-image-${key}`] = {
-		value: exports['background-image'][key],
-		type: 'assets',
-	}
-	return acc
-}, {})
-//#endregion assets
-
-//#region dimension
-// aspect-ratio
-designTokens.global['aspect-ratio'] = Object.keys(
-	exports['aspect-ratio'],
-).reduce((acc, key) => {
-	acc[`aspect-ratio-${key}`] = {
-		value: exports['aspect-ratio'][key],
-		type: 'dimension',
-	}
-	return acc
-}, {})
 
 // breakpoints
-designTokens.global.breakpoints = Object.keys(exports.breakpoints).reduce(
+designTokens.volver.breakpoints = Object.keys(exports.breakpoints).reduce(
 	(acc, key) => {
-		acc[`breakpoints-${key}`] = {
+		acc[key] = {
 			value: exports.breakpoints[key],
-			type: 'dimension',
+			type: 'sizing',
 		}
 		return acc
 	},
 	{},
 )
-
-// columns
-designTokens.global.columns = Object.keys(exports.columns).reduce(
-	(acc, key) => {
-		acc[`columns-${key}`] = {
-			value: exports.columns[key],
-			type: 'dimension',
-		}
-		return acc
-	},
-	{},
-)
-//#endregion dimension
-
-//#region border
-// border-style
-designTokens.global['border-style'] = Object.keys(
-	exports['border-style'],
-).reduce((acc, key) => {
-	acc[`border-style-${key}`] = {
-		value: exports['border-style'][key],
-		type: 'border',
-	}
-	return acc
-}, {})
-//#endregion border
-
-//#region other
-// blur
-designTokens.global.blur = Object.keys(exports.blur).reduce((acc, key) => {
-	acc[`blur-${key}`] = {
-		value: exports.blur[key],
-		type: 'other',
-	}
-	return acc
-}, {})
-
-// brightness
-designTokens.global.brightness = Object.keys(exports.brightness).reduce(
-	(acc, key) => {
-		acc[`brightness-${key}`] = {
-			value: exports.brightness[key],
-			type: 'other',
-		}
-		return acc
-	},
-	{},
-)
-
-// saturation
-designTokens.global.saturation = Object.keys(exports.saturation).reduce(
-	(acc, key) => {
-		acc[`saturation-${key}`] = {
-			value: exports.saturation[key],
-			type: 'other',
-		}
-		return acc
-	},
-	{},
-)
-//#endregion other
 
 fs.writeFileSync('./design-tokens.json', JSON.stringify(designTokens, null, 2))

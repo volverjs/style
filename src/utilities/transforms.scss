@@ -3,7 +3,7 @@
 // scale
 @each $size, $value in $scale {
 	%scale-#{$size} {
-		transform: scale(#{$value});
+		scale: #{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.scale-#{$size}',
@@ -13,7 +13,7 @@
 	}
 
 	%scale-x-#{$size} {
-		transform: scaleX(#{$value});
+		scale: #{$value} 1;
 	}
 	@include wrap-with-where(
 		$selector: '.scale-x-#{$size}',
@@ -23,7 +23,7 @@
 	}
 
 	%scale-y-#{$size} {
-		transform: scaleY(#{$value});
+		scale: 1 #{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.scale-y-#{$size}',
@@ -52,7 +52,7 @@
 // translate
 @each $size, $value in $translate {
 	%translate-#{$size} {
-		transform: translate(#{$value}, #{$value});
+		translate: #{$value} #{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.translate-#{$size}',
@@ -62,7 +62,7 @@
 	}
 
 	%translate-x-#{$size} {
-		transform: translateX(#{$value});
+		translate: #{$value} 0;
 	}
 	@include wrap-with-where(
 		$selector: '.translate-x-#{$size}',
@@ -72,7 +72,7 @@
 	}
 
 	%translate-y-#{$size} {
-		transform: translateY(#{$value});
+		translate: 0 #{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.translate-y-#{$size}',
@@ -82,7 +82,7 @@
 	}
 
 	%-translate-#{$size} {
-		transform: translate(-#{$value}, -#{$value});
+		translate: -#{$value} -#{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.-translate-#{$size}',
@@ -92,7 +92,7 @@
 	}
 
 	%-translate-x-#{$size} {
-		transform: translateX(-#{$value});
+		translate: -#{$value} 0;
 	}
 	@include wrap-with-where(
 		$selector: '.-translate-x-#{$size}',
@@ -102,7 +102,7 @@
 	}
 
 	%-translate-y-#{$size} {
-		transform: translateY(-#{$value});
+		translate: 0 -#{$value};
 	}
 	@include wrap-with-where(
 		$selector: '.-translate-y-#{$size}',

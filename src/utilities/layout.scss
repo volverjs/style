@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../context' as *;
 
 // aspect
@@ -63,7 +64,6 @@
 	$attribute: display,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $display-with-breakpoints,
 	$attribute: display,
@@ -135,10 +135,12 @@
 	$value in map.merge($placement, map.merge($spacing, $spacing-dynamic))
 {
 	$var: $value;
-	@if not map-has-key($placement, $size) {
+
+	@if not map.has-key($placement, $size) {
 		// check if value is not a map (spacing-dynamic)
 		$var: var(--spacing-#{$size});
-		@if type-of($value) != 'map' {
+
+		@if meta.type-of($value) != 'map' {
 			$var: var(--spacing-#{$size}, #{$value});
 		}
 	}
@@ -147,6 +149,7 @@
 	%inset-#{$size} {
 		inset: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.inset-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -158,6 +161,7 @@
 	%inset-x-#{$size} {
 		inset-inline: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.inset-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -169,6 +173,7 @@
 	%inset-y-#{$size} {
 		inset-block: #{$var};
 	}
+
 	@include wrap-with-where(
 		$selector: '.inset-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -181,6 +186,7 @@
 		%#{$direction}-#{$size} {
 			#{$direction}: #{$var};
 		}
+
 		@include wrap-with-where(
 			$selector: '.#{$direction}-#{$size}',
 			$enabled: $zero-specificity-for-utilities

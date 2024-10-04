@@ -5,11 +5,11 @@ wrapperClass: w-full md:w-9/12 mx-auto
 
 <div class="vv-accordion-group">
   <details
-    id="accordion-item-bordered-1"
+    id="accordion-item-disabled-1"
     class="vv-accordion" disabled>
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-bordered-1"
+      aria-controls="accordion-item-disabled-1"
       aria-expanded="false">
       Lorem Ipsum
     </summary>
@@ -21,11 +21,11 @@ wrapperClass: w-full md:w-9/12 mx-auto
     </div>
   </details>
   <details
-    id="accordion-item-bordered-2"
+    id="accordion-item-disabled-2"
     class="vv-accordion">
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-bordered-2"
+      aria-controls="accordion-item-disabled-2"
       aria-expanded="false">
       Lorem Ipsum
     </summary>
@@ -37,12 +37,12 @@ wrapperClass: w-full md:w-9/12 mx-auto
     </div>
   </details>
   <details
-    id="accordion-item-bordered-3"
+    id="accordion-item-disabled-3"
     class="vv-accordion"
     open>
     <summary
       class="vv-accordion__summary"
-      aria-controls="#accordion-item-bordered-3"
+      aria-controls="accordion-item-disabled-3"
       aria-expanded="true">
       Lorem Ipsum
     </summary>

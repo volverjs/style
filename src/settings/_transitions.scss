@@ -6,7 +6,7 @@ $transition-property: (
 		'color, background-color, border-color, text-decoration-color, fill, stroke',
 	opacity: opacity,
 	shadow: box-shadow,
-	transform: transform,
+	transform: 'transform, scale, rotate, translate, skew',
 ) !default;
 
 // transition duration and transition delay
@@ -39,4 +39,5 @@ $animation: (
 	pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite,
 	bounce: bounce 1s infinite,
 	shine: shine 1.5s infinite,
+	clippath: clippath 3s infinite,
 ) !default;

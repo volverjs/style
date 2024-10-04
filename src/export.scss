@@ -11,19 +11,21 @@
 	// #region CUSTOMIZATION
 	// colors
 	@each $key, $value in $colors {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
+						string.index($subKey, 'hue') and not
+						string.index($subKey, 'saturation') and not
+						string.index($subKey, 'lightness')
 					{
 						@if '' + $key == $subKey {
 							#{'colors__' + $key}: $subValue;
 						} @else {
 							#{'colors__' + $key + '-' + $subKey}: $subValue;
 						}
+					} @else {
+						#{'colors-values__' + $key + '-' + $subKey}: $subValue;
 					}
 				}
 			}
@@ -32,49 +34,27 @@
 		}
 	}
 
-	// colors exported with no vars
-	@each $key, $value in $colors-computed {
-		@if type-of($value) == 'map' {
+	@each $key, $value in $dark-colors {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
+						string.index($subKey, 'hue') and not
+						string.index($subKey, 'saturation') and not
+						string.index($subKey, 'lightness')
 					{
 						@if '' + $key == $subKey {
-							#{'colors-computed__' + $key}: $subValue;
+							#{'dark-colors__' + $key}: $subValue;
 						} @else {
-							#{'colors-computed__' + $key + '-' + $subKey}: $subValue;
+							#{'dark-colors__' + $key + '-' + $subKey}: $subValue;
 						}
+					} @else {
+						#{'dark-colors-values__' + $key + '-' + $subKey}: $subValue;
 					}
 				}
 			}
 		} @else if $key != 'scheme' {
-			#{'colors-computed__' + $key}: $value;
-		}
-	}
-
-	// dark colors exported with no vars
-	@each $key, $value in $dark-colors-computed {
-		@if type-of($value) == 'map' {
-			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
-					@if not
-						str-index($subKey, 'hue') and not
-						str-index($subKey, 'saturation') and not
-						str-index($subKey, 'lightness')
-					{
-						@if '' + $key == $subKey {
-							#{'dark-colors-computed__' + $key}: $subValue;
-						} @else {
-							#{'dark-colors-computed__' + $key + '-' + $subKey}: $subValue;
-						}
-					}
-				}
-			}
-		} @else if $key != 'scheme' {
-			#{'dark-colors-computed__' + $key}: $value;
+			#{'dark-colors__' + $key}: $value;
 		}
 	}
 
@@ -253,10 +233,11 @@
 	@each $size, $value in $spacing {
 		spacing__#{$size}: $value;
 	}
+
 	@each $size, $value in $spacing-dynamic {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					spacing-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
@@ -267,10 +248,11 @@
 	@each $size, $value in $font-size {
 		font-size__#{$size}: $value;
 	}
+
 	@each $size, $value in $font-size-dynamic {
-		@if type-of($value) == 'map' {
+		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if type-of($value) not 'map' {
+				@if meta.type-of($value) not 'map' {
 					font-size-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
@@ -445,6 +427,10 @@
 		#{'background-image__' + $key}: $value;
 	}
 
+	@each $key, $value in $gradient {
+		#{'gradient__' + $key}: $value;
+	}
+
 	// #endregion
 
 	// ============================================================== */
@@ -461,10 +447,6 @@
 	// box-shadow
 	@each $key, $value in $box-shadow {
 		#{'box-shadow__' + $key}: $value;
-	}
-
-	@each $key, $value in $box-shadow-no-vars {
-		#{'box-shadow-no-vars__' + $key}: $value;
 	}
 
 	// opacity
@@ -494,6 +476,11 @@
 	// brightness
 	@each $key, $value in $brightness {
 		#{'brightness__' + $key}: $value;
+	}
+
+	// contrast
+	@each $key, $value in $contrast {
+		#{'contrast__' + $key}: $value;
 	}
 
 	// saturation

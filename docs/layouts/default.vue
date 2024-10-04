@@ -1,12 +1,39 @@
 <script setup>
 	const route = useRoute()
-	const isThemeDark = inject('isThemeDark')
 	const isAsideOpen = ref(false)
+	const isThemeDark = inject('isThemeDark')
 	const toggleDark = useToggle(isThemeDark)
 	const toggleAside = useToggle(isAsideOpen)
+	const mainEl = ref(null)
 	watch(route, () => {
 		isAsideOpen.value = false
+		if (route.hash) {
+			const el = document.querySelector(route.hash)
+			if (el) {
+				el.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start',
+				})
+				return
+			}
+		}
+		if (mainEl.value) {
+			mainEl.value.scrollTop = 0
+		}
 	})
+	const onResolve = () => {
+		setTimeout(() => {
+			if (route.hash) {
+				const el = document.querySelector(route.hash)
+				if (el) {
+					el.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start',
+					})
+				}
+			}
+		}, 500)
+	}
 	/* eslint-disable-next-line */
 	const appVersion = __APP_VERSION__
 </script>
@@ -17,6 +44,7 @@
 			class="flex border-b border-surface-3 p-16 items-center"
 			aria-label="Top navigation">
 			<button
+				v-if="!route.meta.hiddenSidebar"
 				type="button"
 				class="vv-button vv-button--action-quiet mr-sm md:none"
 				title="Toggle menu"
@@ -30,10 +58,12 @@
 				<img
 					src="/volverjs.svg"
 					alt="Volver"
+					width="26"
+					height="26"
 					class="w-26 block mr-10" />
-				<span class="text-18 font-semibold">volverjs/style</span>
+				<span class="text-18 font-semibold">@volverjs/style</span>
 			</RouterLink>
-			<span class="text-xs text-word-4 px-sm ml-auto">
+			<span class="text-xs text-word-3 px-sm ml-auto">
 				v{{ appVersion }}
 			</span>
 			<div class="vv-button-group">
@@ -61,6 +91,7 @@
 		</nav>
 		<div class="flex flex-1 min-h-0">
 			<div
+				v-if="!route.meta.hiddenSidebar"
 				class="off-canvas min-h-0"
 				:class="{ 'off-canvas--open': isAsideOpen }">
 				<div
@@ -71,32 +102,33 @@
 					<nav
 						class="vv-nav vv-nav--sidebar p-lg"
 						aria-label="Main menu">
-						<ul class="vv-nav__menu" role="menu">
+						<ul class="vv-nav__menu">
 							<template
 								v-for="(section, sectionIndex) in mainMenu"
 								:key="sectionIndex">
-								<li class="vv-nav__item" role="presentation">
+								<li class="vv-nav__item">
 									<span
 										:id="`section-${sectionIndex}`"
-										class="vv-nav__heading-label"
-										aria-hidden="true">
+										class="vv-nav__heading-label">
 										{{ section.name }}
 									</span>
 									<ul
 										v-if="section.children"
 										class="vv-nav__menu"
-										role="group"
+										role="menu"
 										:aria-labelledby="`section-${sectionIndex}`">
 										<li
 											v-for="(
 												child, childIndex
 											) in section.children"
 											:key="childIndex"
+											role="presentation"
 											class="vv-nav__item">
 											<RouterLink
 												class="vv-nav__item-label"
 												:to="child.to"
-												tabindex="0">
+												tabindex="0"
+												role="menuitem">
 												{{ child.name }}
 												<div
 													v-if="
@@ -111,7 +143,7 @@
 													>
 													<span
 														v-if="child.isDraft"
-														class="vv-badge vv-badge--sm vv-badge--warning"
+														class="vv-badge vv-badge--sm vv-badge--gray"
 														>draft</span
 													>
 												</div>
@@ -121,15 +153,26 @@
 								</li>
 								<li
 									v-if="sectionIndex < mainMenu.length - 1"
-									class="vv-nav__divider"
-									role="separator"></li>
+									class="vv-nav__separator"
+									aria-hidden="true"></li>
 							</template>
 						</ul>
 					</nav>
 				</div>
 			</div>
-			<main class="bg-surface-1 flex-1 overflow-y-auto">
-				<RouterView :key="route.path" />
+			<main ref="mainEl" class="bg-surface-1 flex-1 overflow-y-auto">
+				<RouterView v-slot="{ Component }" :key="route.path">
+					<template v-if="Component">
+						<Transition mode="out-in">
+							<KeepAlive>
+								<Suspense @resolve="onResolve">
+									<!-- main content -->
+									<component :is="Component"></component>
+								</Suspense>
+							</KeepAlive>
+						</Transition>
+					</template>
+				</RouterView>
 			</main>
 		</div>
 	</div>
@@ -149,7 +192,7 @@
 			left: 0;
 			will-change: transform;
 			transition: var(--transition-transform);
-			transform: translateX(-100%);
+			translate: -100%;
 			z-index: 1;
 		}
 
@@ -168,7 +211,7 @@
 			inset: 0;
 
 			.off-canvas__aside {
-				transform: translateX(0);
+				translate: 0;
 				box-shadow: var(--shadow-xl);
 			}
 
@@ -182,7 +225,7 @@
 
 			.off-canvas__aside {
 				position: relative;
-				transform: none;
+				translate: 0;
 			}
 		}
 	}
