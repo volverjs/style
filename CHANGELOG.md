@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.12] - 2024-08-30
+## [0.1.12] - 2024-10-04
 
 ### Fixed
 
@@ -13,7 +13,8 @@ All notable changes to this project will be documented in this file.
 *   Update figma design tokens;
 *   `bordered` modifier for `vv-table`;
 *   Add `min-w-{spacing}` and `min-h-{spacing}` utilities;
-*   `breakpoint` for states.
+*   `breakpoint` for states;
+*   replace deprecated `sass` functions;
 
 ### Changed
 *   `vv-nav__divider` is now `vv-nav__separator`.

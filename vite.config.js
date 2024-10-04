@@ -87,5 +87,12 @@ export default ({ mode }) => {
 		optimizeDeps: {
 			include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
 		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: 'modern',
+				},
+			},
+		},
 	})
 }

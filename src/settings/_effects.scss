@@ -22,9 +22,9 @@ $box-shadow: (
 ) !default;
 
 // box-shadow without css vars
-$color-shadow-hue: color.hue(colors.$color-shadow);
-$color-shadow-saturation: color.saturation(colors.$color-shadow);
-$color-shadow-lightness: color.lightness(colors.$color-shadow);
+$color-shadow-hue: color-hue(colors.$color-shadow);
+$color-shadow-saturation: color-saturation(colors.$color-shadow);
+$color-shadow-lightness: color-lightness(colors.$color-shadow);
 
 // opacity
 $opacity: (

@@ -4,8 +4,8 @@
 @use '../../../settings/colors' as *;
 
 $dark-color-scheme: dark !default;
-$dark-color-word: hsl(color.hue($color-brand) 15% 85%) !default;
-$dark-color-surface: hsl(color.hue($color-brand) 10% 5%) !default;
+$dark-color-word: hsl(color-hue($color-brand) 15% 85%) !default;
+$dark-color-surface: hsl(color-hue($color-brand) 10% 5%) !default;
 $dark-color-surface-palette: (
 	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
 	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
@@ -15,12 +15,12 @@ $dark-color-surface-palette: (
 	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 10%),
 ) !default;
 $dark-color-surface-palette-no-vars: (
-	brand: hsl(color.hue($color-brand) color.saturation($color-brand) 10%),
-	accent: hsl(color.hue($color-accent) color.saturation($color-accent) 10%),
-	success: hsl(color.hue($color-success) color.saturation($color-success) 10%),
-	danger: hsl(color.hue($color-danger) color.saturation($color-danger) 10%),
-	info: hsl(color.hue($color-info) color.saturation($color-info) 10%),
-	warning: hsl(color.hue($color-warning) color.saturation($color-warning) 10%),
+	brand: hsl(color-hue($color-brand) color-saturation($color-brand) 10%),
+	accent: hsl(color-hue($color-accent) color-saturation($color-accent) 10%),
+	success: hsl(color-hue($color-success) color-saturation($color-success) 10%),
+	danger: hsl(color-hue($color-danger) color-saturation($color-danger) 10%),
+	info: hsl(color-hue($color-info) color-saturation($color-info) 10%),
+	warning: hsl(color-hue($color-warning) color-saturation($color-warning) 10%),
 ) !default;
 
 // color map

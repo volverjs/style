@@ -13,9 +13,9 @@ $color-success: #178230 !default;
 $color-danger: #af2323 !default;
 $color-info: #31ccec !default;
 $color-warning: #e7b735 !default;
-$color-gray: hsl(color.hue($color-brand) 15% 50%) !default;
-$color-word: hsl(color.hue($color-brand) 15% 10%) !default;
-$color-surface: hsl(color.hue($color-brand) 10% 100%) !default;
+$color-gray: hsl(color-hue($color-brand) 15% 50%) !default;
+$color-word: hsl(color-hue($color-brand) 15% 10%) !default;
+$color-surface: hsl(color-hue($color-brand) 10% 100%) !default;
 $color-surface-palette: (
 	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
 	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
@@ -25,15 +25,15 @@ $color-surface-palette: (
 	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
 ) !default;
 $color-surface-palette-no-vars: (
-	brand: hsl(color.hue($color-brand) color.saturation($color-brand) 90%),
-	accent: hsl(color.hue($color-accent) color.saturation($color-accent) 90%),
-	success: hsl(color.hue($color-success) color.saturation($color-success) 90%),
-	danger: hsl(color.hue($color-danger) color.saturation($color-danger) 90%),
-	info: hsl(color.hue($color-info) color.saturation($color-info) 90%),
-	warning: hsl(color.hue($color-warning) color.saturation($color-warning) 90%),
+	brand: hsl(color-hue($color-brand) color-saturation($color-brand) 90%),
+	accent: hsl(color-hue($color-accent) color-saturation($color-accent) 90%),
+	success: hsl(color-hue($color-success) color-saturation($color-success) 90%),
+	danger: hsl(color-hue($color-danger) color-saturation($color-danger) 90%),
+	info: hsl(color-hue($color-info) color-saturation($color-info) 90%),
+	warning: hsl(color-hue($color-warning) color-saturation($color-warning) 90%),
 ) !default;
-$color-shadow: hsl(color.hue($color-brand) 50% 20%) !default;
-$color-backdrop: hsla(color.hue($color-brand) 50% 20% / 20%) !default;
+$color-shadow: hsl(color-hue($color-brand) 50% 20%) !default;
+$color-backdrop: hsla(color-hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsl(0deg 0% 0% / 0%) !default;
 
 // colors map

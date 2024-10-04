@@ -13,6 +13,11 @@ $vv-checkbox: (
 		disabled: (
 			opacity: var(--opacity-30),
 			cursor: not-allowed,
+			element: (
+				input: (
+					cursor: not-allowed,
+				),
+			),
 		),
 	),
 	element: (
