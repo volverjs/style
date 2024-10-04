@@ -17,9 +17,11 @@ All notable changes to this project will be documented in this file.
 *   replace deprecated `sass` functions;
 
 ### Changed
+
 *   `vv-nav__divider` is now `vv-nav__separator`.
 
 ### Added
+
 *   `.text-balance` utility;
 *   `user-select` utilities;
 *   `vv-input-file` component.
