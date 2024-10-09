@@ -27,13 +27,21 @@
 	);
 }
 
+@function bp-next($name, $bps: $breakpoints, $bps-names: map.keys($bps)) {
+	@return breakpoint-next($name, $bps, $bps-names);
+}
+
 // Minimum breakpoint width. Null for the smallest (first) breakpoint.
 //    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    576px
-@function breakpoint-min($name, $bps) {
+@function breakpoint-min($name, $bps: $breakpoints) {
 	$min: map.get($bps, $name);
 
 	@return if($min != 0, $min, null);
+}
+
+@function bp-min($name, $bps: $breakpoints) {
+	@return breakpoint-min($name, $bps);
 }
 
 // Maximum breakpoint width. Null for the largest (last) breakpoint.
@@ -44,10 +52,14 @@
 // See https://bugs.webkit.org/show_bug.cgi?id=178261
 //    >> breakpoint-max(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    767.98px
-@function breakpoint-max($name, $bps) {
+@function breakpoint-max($name, $bps: $breakpoints) {
 	$next: breakpoint-next($name, $bps);
 
 	@return if($next, breakpoint-min($next, $bps) - 0.02, null);
+}
+
+@function bp-max($name, $bps: $breakpoints) {
+	@return breakpoint-max($name, $bps);
 }
 
 // Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
@@ -56,13 +68,17 @@
 //    ""  (Returns a blank string)
 //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    "-sm"
-@function breakpoint-infix($name, $bps) {
+@function breakpoint-infix($name, $bps: $breakpoints) {
 	@return if(breakpoint-min($name, $bps) == null, '', '-#{$name}');
+}
+
+@function bp-infix($name, $bps: $breakpoints) {
+	@return breakpoint-infix($name, $bps);
 }
 
 // Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
 // Makes the @content apply to the given breakpoint and wider.
-@mixin media-breakpoint-up($name, $bps) {
+@mixin media-breakpoint-up($name, $bps: $breakpoints) {
 	$min: breakpoint-min($name, $bps);
 
 	@if $min {
@@ -78,23 +94,39 @@
 	}
 }
 
+@mixin bp-up($name, $bps: $breakpoints) {
+	@include media-breakpoint-up($name, $bps) {
+		@content;
+	}
+}
+
 // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
 // Makes the @content apply to the given breakpoint and narrower.
-@mixin media-breakpoint-down($name, $bps) {
+@mixin media-breakpoint-down($name, $bps: $breakpoints) {
 	$max: breakpoint-max($name, $bps);
 
 	@if $max {
 		@media (max-width: $max) {
-			@content;
+			& {
+				@content;
+			}
 		}
 	} @else {
+		& {
+			@content;
+		}
+	}
+}
+
+@mixin bp-down($name, $bps: $breakpoints) {
+	@include media-breakpoint-down($name, $bps) {
 		@content;
 	}
 }
 
 // Media that spans multiple breakpoint widths.
 // Makes the @content apply between the min and max breakpoints
-@mixin media-breakpoint-between($lower, $upper, $bps) {
+@mixin media-breakpoint-between($lower, $upper, $bps: $breakpoints) {
 	$min: breakpoint-min($lower, $bps);
 	$max: breakpoint-max($upper, $bps);
 
@@ -113,10 +145,16 @@
 	}
 }
 
+@mixin bp-between($lower, $upper, $bps: $breakpoints) {
+	@include media-breakpoint-between($lower, $upper, $bps) {
+		@content;
+	}
+}
+
 // Media between the breakpoint's minimum and maximum widths.
 // No minimum for the smallest breakpoint, and no maximum for the largest one.
 // Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
-@mixin media-breakpoint-only($name, $bps) {
+@mixin media-breakpoint-only($name, $bps: $breakpoints) {
 	$min: breakpoint-min($name, $bps);
 	$max: breakpoint-max($name, $bps);
 
@@ -132,5 +170,11 @@
 		@include media-breakpoint-down($name, $bps) {
 			@content;
 		}
+	}
+}
+
+@mixin bp-only($name, $bps: $breakpoints) {
+	@include media-breakpoint-only($name, $bps) {
+		@content;
 	}
 }
