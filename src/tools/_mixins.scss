@@ -978,15 +978,9 @@
 						$prop-to-replace-with: #{$prop-to-replace-with}-#{$key};
 
 						@if map.get($original, $key) {
-							& {
-								#{$prop-to-replace}: var(
-									#{$prop-to-replace-with}
-								);
-							}
+							#{$prop-to-replace}: var(#{$prop-to-replace-with});
 						} @else {
-							& {
-								#{$key}: var(#{$prop-to-replace-with});
-							}
+							#{$key}: var(#{$prop-to-replace-with});
 						}
 					} @else {
 						@if string.slice(meta.inspect($key), 1, 1) == '[' {
@@ -997,9 +991,7 @@
 							);
 						}
 
-						& {
-							#{$key}: $value;
-						}
+						#{$key}: $value;
 					}
 				}
 			}

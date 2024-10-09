@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.13] - 2024-10-09
+
+### Fixed
+
+*   Components classes duplication;
+*   Remove alerts for Firefox `:has()` lack of support;
+
 ## [0.1.12] - 2024-10-04
 
 ### Fixed
