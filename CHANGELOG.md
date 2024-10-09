@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 *   Components classes duplication;
 *   Remove alerts for Firefox `:has()` lack of support;
 
+### Added
+
+*   `bp-up`, `bp-down`, `bp-only` and `bp-between` shorthand for `breakpoint` mixin;
+
 ## [0.1.12] - 2024-10-04
 
 ### Fixed

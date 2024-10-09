@@ -45,19 +45,23 @@ Volver Style includes a set of SCSS mixins that can be used to create responsive
 ```scss
 @use '@volverjs/style/scss/context'
 
-@include media-breakpoint-up('md', $breakpoints) {
+// shorthand for media-breakpoint-up('md', $breakpoints)
+@include bp-up('md') {
   // ...
 }
 
-@include media-breakpoint-down('md', $breakpoints) {
+// shorthand for media-breakpoint-down('md', $breakpoints)
+@include bp-down('md') {
   // ...
 }
 
-@include media-breakpoint-between('md', 'lg', $breakpoints) {
+// shorthand for media-breakpoint-between('md', 'lg', $breakpoints)
+@include bp-between('md', 'lg') {
   // ...
 }
 
-@include media-breakpoint-only('md', $breakpoints) {
+// shorthand for media-breakpoint-only('md', $breakpoints)
+@include bp-only('md') {
   // ...
 }
 ```
