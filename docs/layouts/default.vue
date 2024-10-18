@@ -35,7 +35,7 @@
 		}, 500)
 	}
 	/* eslint-disable-next-line */
-	const appVersion = __APP_VERSION__
+    const appVersion = __APP_VERSION__
 </script>
 
 <template>
