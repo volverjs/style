@@ -6,23 +6,45 @@ description: Use native HTML tags semantic keeping the code simple. The perfect 
 ---
 
 ### Usage
-*Preflight* is already included in compliled *CSS*. In a custom build keep preflight import at the end. 
-
-```scss
-@use '@volverjs/style/scss/reset';
-@use '@volverjs/style/scss/props';
-@use '@volverjs/style/scss/components';
-@use '@volverjs/style/scss/utilities';
-/* keep at the end */
-@import '@volverjs/style/scss/preflight';
-```
-
-To use *Preflight* just add `preflight` class to the wrapper element.
+*Preflight* is already included in compliled *CSS* and default *SCSS* export. To use *Preflight* just add `preflight` class to the wrapper element.
 
 ```html
 <div class="preflight">
   ...
 </div>
+```
+
+### Disable Preflight
+To disable *Preflight* in a section of your page you can use the `preflight-revert` class.
+
+```html
+<div class="preflight">
+  ...
+  <div class="preflight-revert">
+    ...
+  </div>
+</div>
+```
+
+To completely disable *Preflight* just set the `$preflight` variable to `false`.
+
+```scss
+// disable preflight
+@use '@volverjs/style/scss/context' with (
+  $preflight: false
+);
+
+@use '@volverjs/style/scss';
+```
+
+### Custom Build
+In a custom build `components` and `utilities` scss modules are included in `preflight` *SCSS* module.
+
+```scss
+// reset and custom properties
+@use '@volverjs/style/scss/base';
+// components and utilities are included in preflight
+@use '@volverjs/style/scss/preflight';
 ```
 
 ### Form fields

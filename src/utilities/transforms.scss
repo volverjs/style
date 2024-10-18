@@ -1,10 +1,11 @@
-@import '../context';
+@use '../context' as *;
 
 // scale
 @each $size, $value in $scale {
 	%scale-#{$size} {
 		scale: #{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.scale-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -15,6 +16,7 @@
 	%scale-x-#{$size} {
 		scale: #{$value} 1;
 	}
+
 	@include wrap-with-where(
 		$selector: '.scale-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -25,6 +27,7 @@
 	%scale-y-#{$size} {
 		scale: 1 #{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.scale-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -54,6 +57,7 @@
 	%translate-#{$size} {
 		translate: #{$value} #{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.translate-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -64,6 +68,7 @@
 	%translate-x-#{$size} {
 		translate: #{$value} 0;
 	}
+
 	@include wrap-with-where(
 		$selector: '.translate-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -74,6 +79,7 @@
 	%translate-y-#{$size} {
 		translate: 0 #{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.translate-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -84,6 +90,7 @@
 	%-translate-#{$size} {
 		translate: -#{$value} -#{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.-translate-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -94,6 +101,7 @@
 	%-translate-x-#{$size} {
 		translate: -#{$value} 0;
 	}
+
 	@include wrap-with-where(
 		$selector: '.-translate-x-#{$size}',
 		$enabled: $zero-specificity-for-utilities
@@ -104,6 +112,7 @@
 	%-translate-y-#{$size} {
 		translate: 0 -#{$value};
 	}
+
 	@include wrap-with-where(
 		$selector: '.-translate-y-#{$size}',
 		$enabled: $zero-specificity-for-utilities

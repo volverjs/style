@@ -1,11 +1,7 @@
+@use 'sass:meta';
+
 // base
 @use 'base';
 
-// components
-@use 'components';
-
-// utilities
-@use 'utilities';
-
-// preflight
-@import 'preflight';
+// preflight (components and utilities are included here)
+@use 'preflight';

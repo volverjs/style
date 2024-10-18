@@ -43,13 +43,13 @@
 	}
 
 	pre[class*='language-'] {
-		@extend %vv-card;
+		@extend %vv-card !optional;
 
 		margin-bottom: var(--spacing-lg);
 	}
 
 	code[class*='language-'] {
-		@extend %vv-card__content;
+		@extend %vv-card__content !optional;
 
 		font-family: var(--font-mono);
 		font-size: var(--text-14);

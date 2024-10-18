@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.14] - 2024-10-18
+
+### Fixed
+
+*  Remove `@import` statements;
+*  Input `label` display property;
+*  `string.unquote()` function;
+
+### Added
+
+*  `$preflight` variable to disable `preflight` module;
+
 ## [0.1.13] - 2024-10-09
 
 ### Fixed

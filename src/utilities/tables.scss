@@ -1,4 +1,4 @@
-@import '../context';
+@use '../context' as *;
 
 // border-collapse
 @include spread-map-into-utilities(

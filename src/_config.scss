@@ -10,6 +10,9 @@ $zero-specificity-for-utilities: true !default;
 // components prefix
 $components-prefix: vv !default;
 
+// preflight 
+$preflight: true !default;
+
 // components names
 $components-names: (
 	vv-accordion-group: $components-prefix + -accordion-group,

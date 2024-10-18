@@ -1006,7 +1006,7 @@
 	}
 
 	@if $enabled {
-		$selector: ':where(#{unquote($selector)})';
+		$selector: ':where(#{string.unquote($selector)})';
 	}
 
 	#{$selector} {
