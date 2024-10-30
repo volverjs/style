@@ -83,7 +83,7 @@
     "vite-plugin-pages": "^0.32.3",
     "vite-plugin-stylelint": "^5.3.1",
     "vite-plugin-vue-layouts": "^0.11.0",
-    "vite-ssg": "^0.23.8",
+    "vite-ssg": "^0.24.0",
     "vite-ssg-sitemap": "^0.8.1",
     "vue": "^3.5.12",
     "vue-live": "^2.5.4",
