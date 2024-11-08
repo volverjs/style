@@ -31,7 +31,6 @@
 	$prop: w,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $height,
 	$class: h,
@@ -40,18 +39,18 @@
 	$prop: h,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $max-width,
 	$class: max-w,
 	$attribute: max-width,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $max-height,
 	$class: max-h,
 	$attribute: max-height,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -60,6 +59,7 @@
 		%max-w-screen-#{$breakpoint} {
 			max-width: $breakpoint-value;
 		}
+
 		@include wrap-with-where(
 			$selector: '.max-w-screen-#{$breakpoint}',
 			$enabled: $zero-specificity-for-utilities
@@ -74,12 +74,13 @@
 	$map: $min-width,
 	$class: min-w,
 	$attribute: min-width,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $min-height,
 	$class: min-h,
 	$attribute: min-height,
+	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
