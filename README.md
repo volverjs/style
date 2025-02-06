@@ -16,7 +16,7 @@ maintained with ❤️ by
 
 <br>
 
-[![8 Wave](public/8wave.svg)](https://8wave.it)
+[![8 wave](public/8wave.svg)](https://8wave.it)
 
 <br>
 

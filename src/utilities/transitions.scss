@@ -36,6 +36,7 @@
 		$enabled: $zero-specificity-for-utilities
 	) {
 		transition-property: string.unquote($value);
+
 		@if $property != 'none' {
 			transition-duration: map.get($transition-duration-delay, 300);
 			transition-timing-function: map.get(

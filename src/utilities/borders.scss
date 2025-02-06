@@ -44,7 +44,6 @@
 	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $border-width,
 	$class: border-x,
@@ -56,7 +55,6 @@
 	$prop: border,
 	$zero-specificity: $zero-specificity-for-utilities
 );
-
 @include spread-map-into-utilities(
 	$map: $border-width,
 	$class: border-y,
