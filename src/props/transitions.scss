@@ -29,6 +29,7 @@
 		@each $property, $value in $transition-property {
 			@if $property != 'none' {
 				$transition: '';
+
 				@each $prop in str-split($value, ', ') {
 					$transition: $transition +
 						$prop +

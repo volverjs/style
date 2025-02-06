@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.16] - 2025-02-06
+
+### Fixed
+*  Border width for `vv-card` component;
+
+## [0.1.15] - 2024-11-08
+
+### Added
+*  Breakpoints for `min-w`, `max-w`, `min-h`, `max-h`, for example `md:min-w-288` or `xl:max-h-56`;
+
 ## [0.1.14] - 2024-10-18
 
 ### Fixed
@@ -224,6 +234,9 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.16]: https://github.com/volverjs/style/compare/v0.1.15...v0.1.16
+[0.1.15]: https://github.com/volverjs/style/compare/v0.1.14...v0.1.15
+[0.1.14]: https://github.com/volverjs/style/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/volverjs/style/compare/v0.1.12...v0.1.13
 [0.1.12]: https://github.com/volverjs/style/compare/v0.1.11...v0.1.12
 [0.1.11]: https://github.com/volverjs/style/compare/v0.1.10...v0.1.11

@@ -17,7 +17,7 @@
 			rel="noopener noreferrer"
 			target="_blank"
 			class="vv-button vv-button--link"
-			>8 Wave</a
+			>8 wave</a
 		>
 	</div>
 </template>
