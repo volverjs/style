@@ -17,6 +17,7 @@ $component-selector: '.#{$component-name}';
 // disabled and readonly
 @each $state in ('disabled', 'readonly') {
 	$selector: '#{$component-selector}:has(input[#{$state}])';
+
 	@include wrap-with-where(
 		$selector: $selector,
 		$enabled: $zero-specificity-for-components
@@ -33,6 +34,7 @@ $component-selector: '.#{$component-name}';
 				'#{$selector} #{$component-selector}__#{$element}'
 			);
 			$alias: map.get($component-map, 'element', $element, '_alias');
+
 			@if $alias {
 				$element-selector: list.append(
 					$element-selector,
@@ -52,6 +54,7 @@ $component-selector: '.#{$component-name}';
 			@each $elementState, $elementMap in map.get($map, 'state') {
 				@if $elementState {
 					$element-selector-state: ();
+
 					@each $item in $element-selector {
 						$element-selector-state: list.append(
 							$element-selector-state,
@@ -73,12 +76,14 @@ $component-selector: '.#{$component-name}';
 			@each $pseudo, $pseudoMap in map.get($map, 'pseudo') {
 				@if $pseudo {
 					$element-selector-pseudo: ();
+
 					@each $item in $element-selector {
 						$element-selector-pseudo: list.append(
 							$element-selector-pseudo,
 							('#{$item}::#{$pseudo}')
 						);
 					}
+
 					@include wrap-with-where(
 						$selector: $element-selector-pseudo,
 						$enabled: $zero-specificity-for-components

@@ -297,6 +297,13 @@
     "onWatcherCleanup": true,
     "useId": true,
     "useModel": true,
-    "useTemplateRef": true
+    "useTemplateRef": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onElementRemoval": true,
+    "useCountdown": true,
+    "usePreferredReducedTransparency": true,
+    "useSSRWidth": true
   }
 }
