@@ -307,6 +307,23 @@ $vv-select: (
 				),
 			),
 		),
+	),
+	state: (
+		disabled: (
+			opacity: var(--opacity-50),
+			element: (
+				wrapper: (
+					state: (
+						hover: (
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
+						),
+					),
+				),
+			),
+		),
 		readonly: (
 			opacity: var(--opacity-100),
 			cursor: text,
@@ -333,23 +350,6 @@ $vv-select: (
 				input: (
 					background-image: none,
 					cursor: 'text',
-				),
-			),
-		),
-	),
-	state: (
-		disabled: (
-			opacity: var(--opacity-50),
-			element: (
-				wrapper: (
-					state: (
-						hover: (
-							background-color: var(--input-background-color),
-						),
-						focus-within: (
-							background-color: var(--input-background-color),
-						),
-					),
 				),
 			),
 		),
