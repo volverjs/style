@@ -33,6 +33,11 @@ $vv-nav: (
 				current: (
 					color: var(--color-word-1),
 				),
+				disabled: (
+					opacity: var(--opacity-50),
+					cursor: not-allowed,
+					pointer-events: none,			
+				),
 			),
 		),
 		separator: (
