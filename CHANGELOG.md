@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.17] - 2025-02-26
+
+### Fixed
+*  `vv-select` readonly with loading;
+
+### Added
+*  `vv-nav__item-label` disabled state;
+
 ## [0.1.16] - 2025-02-06
 
 ### Fixed
@@ -234,6 +242,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.17]: https://github.com/volverjs/style/compare/v0.1.16...v0.1.17
 [0.1.16]: https://github.com/volverjs/style/compare/v0.1.15...v0.1.16
 [0.1.15]: https://github.com/volverjs/style/compare/v0.1.14...v0.1.15
 [0.1.14]: https://github.com/volverjs/style/compare/v0.1.13...v0.1.14

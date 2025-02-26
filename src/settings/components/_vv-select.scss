@@ -153,6 +153,35 @@ $vv-select: (
 		),
 	),
 	modifier: (
+		readonly: (
+			opacity: var(--opacity-100),
+			cursor: text,
+			user-select: text,
+			element: (
+				wrapper: (
+					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
+						after: (
+							opacity: var(--opacity-0),
+						),
+					),
+					state: (
+						hover: (
+							background-color: var(--input-background-color),
+						),
+						focus-within: (
+							background-color: var(--input-background-color),
+						),
+					),
+				),
+				input: (
+					background-image: none,
+					cursor: 'text',
+				),
+			),
+		),
 		dirty: (
 			element: (
 				input: (
@@ -321,35 +350,6 @@ $vv-select: (
 							background-color: var(--input-background-color),
 						),
 					),
-				),
-			),
-		),
-		readonly: (
-			opacity: var(--opacity-100),
-			cursor: text,
-			user-select: text,
-			element: (
-				wrapper: (
-					pseudo: (
-						before: (
-							opacity: var(--opacity-0),
-						),
-						after: (
-							opacity: var(--opacity-0),
-						),
-					),
-					state: (
-						hover: (
-							background-color: var(--input-background-color),
-						),
-						focus-within: (
-							background-color: var(--input-background-color),
-						),
-					),
-				),
-				input: (
-					background-image: none,
-					cursor: 'text',
 				),
 			),
 		),
