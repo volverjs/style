@@ -46,7 +46,7 @@ $vv-card: (
 	modifier: (
 		glass: (
 			background-color:
-				hsla(
+				hsl(
 					var(--color-surface-hue) var(--color-surface-saturation)
 						var(--color-surface-lightness) / 60%
 				),
@@ -54,7 +54,7 @@ $vv-card: (
 			element: (
 				header: (
 					background-color:
-						hsla(
+						hsl(
 							var(--color-surface-hue)
 								var(--color-surface-saturation)
 								var(--color-surface-lightness) / 30%
@@ -62,7 +62,7 @@ $vv-card: (
 				),
 				footer: (
 					background-color:
-						hsla(
+						hsl(
 							var(--color-surface-hue)
 								var(--color-surface-saturation)
 								var(--color-surface-lightness) / 30%
