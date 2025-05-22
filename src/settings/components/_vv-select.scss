@@ -129,6 +129,8 @@ $vv-select: (
 		icon: (
 			_alias: '> div > :where(svg, [data-icon])',
 			position: var(--input-icon-position),
+			top: 0,
+			left: 0,
 			width: var(--input-icon-width),
 			height: var(--input-min-height),
 			margin: var(--input-icon-margin),
@@ -137,7 +139,9 @@ $vv-select: (
 		),
 		icon-after: (
 			_alias: 'select + :where(svg, [data-icon])',
+			position: var(--input-icon-position),
 			right: 0,
+			left: auto,
 		),
 		action: (
 			position: relative,
