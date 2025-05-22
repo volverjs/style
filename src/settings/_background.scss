@@ -199,33 +199,33 @@ $gradient: (
 	17: conic-gradient(from -90deg at 50% -25%, blue, blueviolet),
 	18: #{linear-gradient(
 			0deg,
-			hsla(0deg 100% 50% / 80%),
-			hsla(0deg 100% 50% / 0%) 75%
+			hsl(0deg 100% 50% / 80%),
+			hsl(0deg 100% 50% / 0%) 75%
 		),
 	linear-gradient(
 		60deg,
-		hsla(60deg 100% 50% / 80%),
-		hsla(60deg 100% 50% / 0%) 75%,
+		hsl(60deg 100% 50% / 80%),
+		hsl(60deg 100% 50% / 0%) 75%,
 	),
 	linear-gradient(
 		120deg,
-		hsla(120deg 100% 50% / 80%),
-		hsla(120deg 100% 50% / 0%) 75%,
+		hsl(120deg 100% 50% / 80%),
+		hsl(120deg 100% 50% / 0%) 75%,
 	),
 	linear-gradient(
 		180deg,
-		hsla(180deg 100% 50% / 80%),
-		hsla(180deg 100% 50% / 0%) 75%,
+		hsl(180deg 100% 50% / 80%),
+		hsl(180deg 100% 50% / 0%) 75%,
 	),
 	linear-gradient(
 		240deg,
-		hsla(240deg 100% 50% / 80%),
-		hsla(240deg 100% 50% / 0%) 75%,
+		hsl(240deg 100% 50% / 80%),
+		hsl(240deg 100% 50% / 0%) 75%,
 	),
 	linear-gradient(
 			300deg,
-			hsla(300deg 100% 50% / 80%),
-			hsla(300deg 100% 50% / 0%) 75%
+			hsl(300deg 100% 50% / 80%),
+			hsl(300deg 100% 50% / 0%) 75%
 		)},
 	19: linear-gradient(to bottom right, #ffe259, #ffa751),
 	20:

@@ -1,3 +1,4 @@
+import globals from 'globals'
 import pluginJs from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
@@ -25,6 +26,10 @@ export default [
             ...autoImports,
             ecmaVersion: 'latest',
             sourceType: 'module',
+            globals: {
+                ...autoImports.globals,
+                ...globals.browser
+            }
         },
         rules: {
             'no-debugger': 'warn',

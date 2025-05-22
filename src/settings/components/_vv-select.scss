@@ -139,6 +139,31 @@ $vv-select: (
 			_alias: 'select + :where(svg, [data-icon])',
 			right: 0,
 		),
+		action: (
+			position: relative,
+			width:
+				calc(
+					var(--input-icon-width) + var(--input-spacing-left) +
+						var(--input-spacing-right)
+				),
+			height: var(--input-min-height),
+			cursor: pointer,
+			state: (
+				disabled: (
+					cursor: not-allowed,
+					opacity: var(--opacity-50),
+				),
+				focus-visible: (
+					background-color: var(--color-surface-3),
+				),
+				hover: (
+					background-color: var(--color-surface-4),
+				),
+				active: (
+					background-color: var(--color-surface-5),
+				),
+			),
+		),
 		hint: (
 			_alias: '> small',
 			_combinator: '>',
@@ -340,6 +365,7 @@ $vv-select: (
 	state: (
 		disabled: (
 			opacity: var(--opacity-50),
+			cursor: not-allowed,
 			element: (
 				wrapper: (
 					state: (
@@ -348,6 +374,14 @@ $vv-select: (
 						),
 						focus-within: (
 							background-color: var(--input-background-color),
+						),
+					),
+					pseudo: (
+						before: (
+							opacity: var(--opacity-0),
+						),
+						after: (
+							opacity: var(--opacity-0),
 						),
 					),
 				),

@@ -68,7 +68,7 @@ $vv-badge: (
 		),
 		white: (
 			background-color:
-				hsla(
+				hsl(
 					var(--color-white-hue) var(--color-white-saturation)
 						var(--color-white-lightness) / 80%
 				),
@@ -76,7 +76,7 @@ $vv-badge: (
 		),
 		black: (
 			background-color:
-				hsla(
+				hsl(
 					var(--color-black-hue) var(--color-black-saturation)
 						var(--color-black-lightness) / 80%
 				),
