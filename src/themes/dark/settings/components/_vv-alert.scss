@@ -55,11 +55,7 @@ $dark-vv-alert: (
 			),
 		),
 		notification: (
-			element: (
-				header: (
-					background-color: var(--color-gray-darken-2),
-				),
-			),
+			border-color: var(--color-gray-lighten-3),
 			modifier: (
 				danger: (
 					border-color: var(--color-danger-lighten-3),

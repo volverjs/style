@@ -2,7 +2,7 @@ import globals from 'globals'
 import pluginJs from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
-import autoImports from './.eslintrc-auto-import.json' assert { type: 'json' }
+import autoImports from './.eslintrc-auto-import.json' with { type: 'json' }
 
 export default [
     {

@@ -157,7 +157,7 @@ $vv-alert: (
 			width: clamp(15dvw, 20rem, 80dvw),
 			border-color: var(--color-gray),
 			flex-direction: column,
-			align-items: none,
+			align-items: normal,
 			gap: var(--spacing-0),
 			element: (
 				header: (
@@ -253,7 +253,7 @@ $vv-alert: (
 			border-radius: var(--rounded-none),
 			border-width: 0 0 0 var(--spacing-4),
 			flex-direction: column,
-			align-items: none,
+			align-items: normal,
 			element: (
 				title: (
 					text-transform: uppercase,
