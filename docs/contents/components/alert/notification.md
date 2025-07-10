@@ -1,5 +1,5 @@
 ---
-title: Toast
+title: Notification
 wrapperClass: flex flex-1 items-center flex-col gap-md 
 ---
 

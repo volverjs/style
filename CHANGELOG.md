@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.20] - 2025-07-10
+
+### Fixed
+*  Dependencies updates;
+
+## [0.1.19] - 2025-05-22
+
+### Fixed
+*  Select and textarea icon positioning;
+
+## [0.1.18] - 2025-05-22
+
+### Fixed
+*  Dependencies updates;
+
 ## [0.1.17] - 2025-02-26
 
 ### Fixed
@@ -242,6 +257,9 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.20]: https://github.com/volverjs/style/compare/v0.1.19...v0.1.20
+[0.1.19]: https://github.com/volverjs/style/compare/v0.1.18...v0.1.19
+[0.1.18]: https://github.com/volverjs/style/compare/v0.1.17...v0.1.18
 [0.1.17]: https://github.com/volverjs/style/compare/v0.1.16...v0.1.17
 [0.1.16]: https://github.com/volverjs/style/compare/v0.1.15...v0.1.16
 [0.1.15]: https://github.com/volverjs/style/compare/v0.1.14...v0.1.15

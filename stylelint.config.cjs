@@ -17,5 +17,7 @@ module.exports = {
 		'length-zero-no-unit': null,
 		// conflict with :export
 		'selector-pseudo-class-no-unknown': null,
+		// mixins
+		'scss/at-mixin-pattern': null,
 	},
 }
