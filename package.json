@@ -86,7 +86,7 @@
     "vite-plugin-stylelint": "^6.0.2",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vite-ssg": "^28.0.0",
-    "vite-ssg-sitemap": "^0.9.0",
+    "vite-ssg-sitemap": "^0.10.0",
     "vue": "^3.5.17",
     "vue-live": "^2.5.4",
     "vue-router": "^4.5.1"
