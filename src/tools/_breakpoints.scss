@@ -1,5 +1,6 @@
-@use 'sass:map';
-@use 'sass:list';
+@use "sass:map";
+@use "sass:list";
+@use "../settings/breakpoints" as *;
 
 // Breakpoint viewport sizes and media queries.
 // Breakpoints are defined as a map of (name: minimum width), order from small to large:
@@ -13,18 +14,10 @@
 //    md
 //    >> breakpoint-next(sm, $bps-names: (xs sm md lg xl))
 //    md
-@function breakpoint-next(
-	$name,
-	$bps: $breakpoints,
-	$bps-names: map.keys($bps)
-) {
+@function breakpoint-next($name, $bps: $breakpoints, $bps-names: map.keys($bps)) {
 	$n: list.index($bps-names, $name);
 
-	@return if(
-		$n != null and $n < list.length($bps-names),
-		list.nth($bps-names, $n + 1),
-		null
-	);
+	@return if($n != null and $n < list.length($bps-names), list.nth($bps-names, $n + 1), null);
 }
 
 @function bp-next($name, $bps: $breakpoints, $bps-names: map.keys($bps)) {
@@ -69,7 +62,7 @@
 //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    "-sm"
 @function breakpoint-infix($name, $bps: $breakpoints) {
-	@return if(breakpoint-min($name, $bps) == null, '', '-#{$name}');
+	@return if(breakpoint-min($name, $bps) == null, "", "-#{$name}");
 }
 
 @function bp-infix($name, $bps: $breakpoints) {
@@ -83,14 +76,10 @@
 
 	@if $min {
 		@media (min-width: $min) {
-			& {
-				@content;
-			}
-		}
-	} @else {
-		& {
 			@content;
 		}
+	} @else {
+		@content;
 	}
 }
 
@@ -107,14 +96,10 @@
 
 	@if $max {
 		@media (max-width: $max) {
-			& {
-				@content;
-			}
-		}
-	} @else {
-		& {
 			@content;
 		}
+	} @else {
+		@content;
 	}
 }
 

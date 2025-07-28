@@ -4,8 +4,9 @@
 // configuration
 @forward 'config';
 
+// settings
+@forward 'settings';
+
 // tools (mixins, functions, recipes)
 @forward 'tools';
 
-// settings
-@forward 'settings';

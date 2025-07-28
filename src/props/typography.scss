@@ -31,7 +31,9 @@
 						$var: var(--text-#{$size});
 					}
 
-					--text-#{$name}: #{$var};
+					& {
+						--text-#{$name}: #{$var};
+					}
 				}
 			}
 		}
