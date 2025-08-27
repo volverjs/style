@@ -70,7 +70,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-lint": "^10.0.1",
-    "sass-embedded": "1.90.0",
+    "sass-embedded": "1.91.0",
     "stylelint": "^16.22.0",
     "stylelint-config-recommended-scss": "^16.0.0",
     "stylelint-config-recommended-vue": "^1.6.1",
