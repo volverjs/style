@@ -14,8 +14,9 @@ import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import generateSitemap from 'vite-ssg-sitemap'
 import packageJson from './package.json' with { type: 'json' }
+import { fileURLToPath } from 'url'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig(({ mode }) => ({
 		plugins: [
