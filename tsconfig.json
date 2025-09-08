@@ -32,5 +32,5 @@
         "verbatimModuleSyntax": true,
         "skipLibCheck": true
     },
-    "include": ["src/**/*", "docss/**/*", "vite.config.ts", "components.d.ts"]
+    "include": ["src/**/*", "docs/**/*", "vite.config.ts", "components.d.ts", "auto-imports.d.ts"]
 }

@@ -43,6 +43,7 @@ export default defineConfig(({ mode }) => ({
 				imports: ['vue', 'vue-router', '@vueuse/head', '@vueuse/core'],
 				dirs: ['docs/settings', 'docs/utils'],
 				vueTemplate: true,
+				dts: 'auto-imports.d.ts',
 				eslintrc: {
 					enabled: true,
 				},
