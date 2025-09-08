@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.22] - 2025-09-08
+
+### Fixed
+*  Dependencies updates.
+
 ## [0.1.21] - 2025-07-10
 
 ### Fixed
@@ -263,6 +268,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.22]: https://github.com/volverjs/style/compare/v0.1.21...v0.1.22
 [0.1.21]: https://github.com/volverjs/style/compare/v0.1.20...v0.1.21
 [0.1.20]: https://github.com/volverjs/style/compare/v0.1.19...v0.1.20
 [0.1.19]: https://github.com/volverjs/style/compare/v0.1.18...v0.1.19
