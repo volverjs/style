@@ -2,8 +2,8 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import CSSExports from 'vite-plugin-css-export'
-import ESLint from 'vite-plugin-eslint'
-import { plugin as Markdown } from 'vite-plugin-markdown'
+import ESLint from '@nabla/vite-plugin-eslint'
+import { plugin as Markdown, Mode } from 'vite-plugin-markdown'
 import Stylelint from 'vite-plugin-stylelint'
 import MarkdownIt from 'markdown-it'
 import MarkdownItPrism from 'markdown-it-prism'
@@ -13,15 +13,15 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import generateSitemap from 'vite-ssg-sitemap'
+import packageJson from './package.json' with { type: 'json' }
+import { fileURLToPath } from 'url'
 
-export default ({ mode }) => {
-	return defineConfig({
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+export default defineConfig(({ mode }) => ({
 		plugins: [
-			Vue({
-				// https://vuejs.org/guide/extras/reactivity-transform.html
-				reactivityTransform: true,
-			}),
-			// https://github.com/gxmari007/vite-plugin-eslint
+			Vue(),
+			// https://github.com/nabla/vite-plugin-eslint
 			ESLint(),
 			// https://github.com/ModyQyW/vite-plugin-stylelint
 			Stylelint(),
@@ -29,7 +29,7 @@ export default ({ mode }) => {
 			CSSExports(),
 			// https://github.com/hmsk/vite-plugin-markdown
 			Markdown({
-				mode: ['html', 'vue', 'toc'],
+				mode: [Mode.HTML, Mode.VUE, Mode.TOC],
 				markdownIt: MarkdownIt({ html: true, linkify: true })
 					.use(MarkdownItPrism)
 					.use(MarkdownItAnchor, {
@@ -44,6 +44,7 @@ export default ({ mode }) => {
 				imports: ['vue', 'vue-router', '@vueuse/head', '@vueuse/core'],
 				dirs: ['docs/settings', 'docs/utils'],
 				vueTemplate: true,
+				dts: 'auto-imports.d.ts',
 				eslintrc: {
 					enabled: true,
 				},
@@ -82,17 +83,9 @@ export default ({ mode }) => {
 			},
 		},
 		define: {
-			__APP_VERSION__: JSON.stringify(require('./package.json').version),
+			__APP_VERSION__: JSON.stringify(packageJson.version),
 		},
 		optimizeDeps: {
 			include: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
 		},
-		css: {
-			preprocessorOptions: {
-				scss: {
-					api: 'modern',
-				},
-			},
-		},
-	})
-}
+	}))
