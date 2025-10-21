@@ -48,8 +48,9 @@ $vv-accordion: (
 			will-change: background-color,
 			transition: var(--transition-colors),
 			border-radius: var(--rounded-lg),
-			-webkit-tap-highlight-color: transparent,
 			outline: none,
+			list-style-type: none,	
+			-webkit-tap-highlight-color: transparent,
 			pseudo: (
 				before: (
 					display: block,
