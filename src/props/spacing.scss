@@ -19,9 +19,7 @@
 						$var: var(--spacing-#{$size});
 					}
 
-					& {
-						--spacing-#{$name}: #{$var};
-					}
+					--spacing-#{$name}: #{$var};
 				}
 			}
 		}

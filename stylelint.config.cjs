@@ -8,6 +8,7 @@ module.exports = {
 		'selector-class-pattern': null,
 		'function-no-unknown': null,
 		'custom-property-pattern': null,
+		'nesting-selector-no-missing-scoping-root': null,
 		// vendor prefix are usefull in some cases
 		'property-no-vendor-prefix': null,
 		'value-no-vendor-prefix': null,
