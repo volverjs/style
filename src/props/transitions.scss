@@ -3,6 +3,36 @@
 
 @include layer(props, $use-css-layers, $layer-prefix) {
 	:where(:host, :root, .theme) {
+		// Default values for reduced-motion users
+		// These ensure variables are always defined but with no animation
+
+		// duration - set all to 0s for reduced motion
+		@each $key, $value in $transition-duration-delay {
+			--duration-#{$key}: 0s;
+		}
+
+		// ease - keep timing functions but they won't matter with 0s duration
+		@include spread-map-into-props(
+			$transition-timing-function,
+			$prefix: ease
+		);
+
+		// transition-property - define properties but transitions will be none
+		@include spread-map-into-props(
+			$transition-property,
+			$prefix: transition-property
+		);
+
+		// transition - set all to none for reduced motion
+		@each $property, $value in $transition-property {
+			--transition-#{$property}: none;
+		}
+
+		// animation - set all to none for reduced motion
+		@each $key, $value in $animation {
+			--animation-#{$key}: none;
+		}
+
 		// animation
 		@media (prefers-reduced-motion: no-preference) {
 			// transition-property

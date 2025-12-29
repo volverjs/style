@@ -542,9 +542,6 @@
 	@each $key, $value in $translate {
 		$name: meta.inspect($key);
 
-		// Keep the escaped slash for CSS property names
-		$name: str-replace($name, '\\/', '\\/');
-
 		#{'translate__' + $name}: $value;
 	}
 

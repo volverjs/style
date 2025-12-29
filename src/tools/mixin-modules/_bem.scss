@@ -535,13 +535,13 @@ $-valid-states: (
 	} @else if $state == 'focus-visible' {
 		$selectors: list.join(
 			$selectors,
-			'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
+			'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state}'
 		);
 
 		@if $alias {
 			$selectors: list.join(
 				$selectors,
-				'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]:not([aria-disabled="true"])):#{$state}'
+				'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state}'
 			);
 		}
 	} @else if $state == 'checked' {
@@ -686,7 +686,7 @@ $-valid-states: (
 	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $transition, $states in map.get($map, $key) {
 			@each $state, $value in $states {
-				@if $state in ['enter-from', 'enter-active', 'enter-to', 'leave-from', 'leave-active', 'leave-to', 'active', 'inert'] and
+				@if list.index(('enter-from', 'enter-active', 'enter-to', 'leave-from', 'leave-active', 'leave-to', 'active', 'inert'), $state) and
 					meta.type-of($value) == 'map'
 				{
 					$selector: '.#{$transition}';

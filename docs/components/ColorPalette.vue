@@ -127,14 +127,36 @@
 		}
 
 		// Handle oklch format - convert via canvas
-		const canvas = document.createElement('canvas')
-		canvas.width = 1
-		canvas.height = 1
-		const ctx = canvas.getContext('2d')
-		ctx.fillStyle = bgColor
-		ctx.fillRect(0, 0, 1, 1)
-		const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
-		return { r, g, b }
+		try {
+			// Try regular canvas first
+			const canvas = document.createElement('canvas')
+			canvas.width = 1
+			canvas.height = 1
+			const ctx = canvas.getContext('2d')
+			if (!ctx) {
+				// Try OffscreenCanvas if available
+				if (typeof OffscreenCanvas !== 'undefined') {
+					const offscreen = new OffscreenCanvas(1, 1)
+					const offscreenCtx = offscreen.getContext('2d')
+					if (offscreenCtx) {
+						offscreenCtx.fillStyle = bgColor
+						offscreenCtx.fillRect(0, 0, 1, 1)
+						const imageData = offscreenCtx.getImageData(0, 0, 1, 1)
+						const [r, g, b] = imageData.data
+						return { r, g, b }
+					}
+				}
+				// No context available, return default
+				return { r: 0, g: 0, b: 0 }
+			}
+			ctx.fillStyle = bgColor
+			ctx.fillRect(0, 0, 1, 1)
+			const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
+			return { r, g, b }
+		} catch {
+			// Canvas operations failed, return safe default
+			return { r: 0, g: 0, b: 0 }
+		}
 	}
 	watchThrottled(
 		[selected, colorVar, isThemeDark],
