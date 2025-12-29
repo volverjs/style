@@ -101,7 +101,7 @@
 		const el = colorsEls.value[name]
 		if (!el) return { r: 0, g: 0, b: 0 }
 
-		const bgColor = window
+		const bgColor = globalThis
 			.getComputedStyle(el, null)
 			.getPropertyValue('background-color')
 
@@ -120,9 +120,9 @@
 		)
 		if (colorMatch) {
 			return {
-				r: Math.round(parseFloat(colorMatch[1]) * 255),
-				g: Math.round(parseFloat(colorMatch[2]) * 255),
-				b: Math.round(parseFloat(colorMatch[3]) * 255),
+				r: Math.round(Number.parseFloat(colorMatch[1]) * 255),
+				g: Math.round(Number.parseFloat(colorMatch[2]) * 255),
+				b: Math.round(Number.parseFloat(colorMatch[3]) * 255),
 			}
 		}
 
