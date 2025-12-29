@@ -116,7 +116,7 @@
 
 		// Handle color() format (e.g., color(srgb 0.5 0.5 0.5))
 		const colorMatch = bgColor.match(
-			/color\([^)]+\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)/,
+			/color\(\s*\w+\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)/,
 		)
 		if (colorMatch) {
 			return {
