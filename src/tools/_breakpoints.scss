@@ -17,7 +17,11 @@
 @function breakpoint-next($name, $bps: $breakpoints, $bps-names: map.keys($bps)) {
 	$n: list.index($bps-names, $name);
 
-	@return if($n != null and $n < list.length($bps-names), list.nth($bps-names, $n + 1), null);
+	@if $n != null and $n < list.length($bps-names) {
+		@return list.nth($bps-names, $n + 1);
+	} @else {
+		@return null;
+	}
 }
 
 @function bp-next($name, $bps: $breakpoints, $bps-names: map.keys($bps)) {
@@ -30,7 +34,11 @@
 @function breakpoint-min($name, $bps: $breakpoints) {
 	$min: map.get($bps, $name);
 
-	@return if($min != 0, $min, null);
+	@if $min != 0 {
+		@return $min;
+	} @else {
+		@return null;
+	}
 }
 
 @function bp-min($name, $bps: $breakpoints) {
@@ -48,7 +56,11 @@
 @function breakpoint-max($name, $bps: $breakpoints) {
 	$next: breakpoint-next($name, $bps);
 
-	@return if($next, breakpoint-min($next, $bps) - 0.02, null);
+	@if $next {
+		@return breakpoint-min($next, $bps) - 0.02;
+	} @else {
+		@return null;
+	}
 }
 
 @function bp-max($name, $bps: $breakpoints) {
@@ -62,7 +74,11 @@
 //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    "-sm"
 @function breakpoint-infix($name, $bps: $breakpoints) {
-	@return if(breakpoint-min($name, $bps) == null, "", "-#{$name}");
+	@if breakpoint-min($name, $bps) == null {
+		@return "";
+	} @else {
+		@return "-#{$name}";
+	}
 }
 
 @function bp-infix($name, $bps: $breakpoints) {

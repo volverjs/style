@@ -1,6 +1,13 @@
 // use custom props for components
 $use-custom-props-for-components: true !default;
 
+// use CSS @layer for cascade management
+$use-css-layers: false !default;
+
+// layer names (order matters - later = higher priority)
+$layer-order: (reset, props, utilities, components, themes) !default;
+$layer-prefix: 'volver' !default;
+
 // enable zero specificity for components
 $zero-specificity-for-components: true !default;
 
