@@ -541,7 +541,6 @@
 	// translate
 	@each $key, $value in $translate {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
 
 		#{'translate__' + $name}: $value;
 	}

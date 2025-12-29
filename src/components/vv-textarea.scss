@@ -2,6 +2,7 @@
 @use 'sass:list';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-textarea);
 $component-map: $vv-textarea;
 $component-selector: '.#{ $component-name}';
@@ -95,4 +96,6 @@ $component-selector: '.#{ $component-name}';
 			}
 		}
 	}
+}
+
 }

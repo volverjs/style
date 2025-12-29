@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.24] - 2025-12-29
+
+### Added
+* **CSS Relative Color Syntax support**: New color generation system using native CSS `hsl(from color h s calc(...))`. Brand/accent colors use proportional scaling (`l * 1.1`), while surface/word colors use fixed steps (`l + 12`). This significantly reduces the number of CSS variables, improving Chrome DevTools inspector performance.
+* **CSS `@layer` support**: Optional cascade layers for better CSS specificity management.
+* **Components without CSS custom properties**: Option to generate components with hardcoded values instead of CSS variables for maximum performance.
+* New configuration options:
+  - `$use-color-mix: true` - Enable/disable Relative Color Syntax mode (default: `true`)
+  - `$use-css-layers: false` - Enable/disable CSS @layer cascade management (default: `false`)
+  - `$layer-order` - Define layer priority order
+  - `$layer-prefix` - Prefix for layer names (default: `volver`)
+  - `$use-custom-props-for-components: true` - Enable/disable CSS variables in components (default: `true`)
+* New color functions: `relative-color-value()`, `color-mix-shades-map()`, `color-mix-darken-map()`, `color-mix-lighten-map()`, `color-mix-alpha-map()`
+
+### Changed
+* Migrated `if()` function calls to new Sass CSS-compatible syntax (`if(sass($condition): $value; else: $fallback)`)
+* Color shades now use single `--color-{name}` variable with Relative Color Syntax instead of separate `-hue`, `-saturation`, `-lightness` variables
+* Updated box-shadow, glass effects, and component modifiers to use modern CSS color functions
+
+### Fixed
+* Reduced CSS output size and number of CSS custom properties for better browser DevTools performance
+
 ## [0.1.23] - 2025-10-21
 
 ### Fixed
@@ -273,6 +295,7 @@ All notable changes to this project will be documented in this file.
 *   `vv-card` component;
 *   `vv-text` component.
 
+[0.1.24]: https://github.com/volverjs/style/compare/v0.1.23...v0.1.24
 [0.1.23]: https://github.com/volverjs/style/compare/v0.1.22...v0.1.23
 [0.1.22]: https://github.com/volverjs/style/compare/v0.1.21...v0.1.22
 [0.1.21]: https://github.com/volverjs/style/compare/v0.1.20...v0.1.21

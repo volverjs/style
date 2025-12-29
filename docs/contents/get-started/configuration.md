@@ -36,16 +36,6 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 @use '@volverjs/style/scss';
 ```
 
-<div class="vv-alert vv-alert--callout vv-alert--warning mb-lg">
-  <div class="vv-alert__header">
-    <div class="vv-alert__title">Warning</div>
-  </div>
-  <div class="vv-alert__content">
-    Disabling the use of CSS Custom Properties for components will not permit to use themes.
-  </div>
-</div>
-
-
 ### Components Names
 By default all components are defined with [BEM](https://getbem.com/) methodology and the they have a `vv-` prefix. If you want to change the prefix you can set the `$components-prefix` variable.
 
@@ -81,3 +71,49 @@ context.$components-names: map.deep-merge(
 // now vv-button class is btn
 // example: btn, btn--primary, btn__icon
 ```
+
+### CSS Layers
+
+CSS `@layer` is a modern CSS feature that allows you to define the order of cascade for your styles. This is useful to avoid specificity conflicts and to make your styles more predictable.
+
+By default Volver Style doesn't use CSS layers. If you want to enable them you can set the `$use-css-layers` variable to `true`.
+
+```scss
+@use '@volverjs/style/scss/context' with (
+  // enable CSS layers
+  $use-css-layers: true
+);
+@use '@volverjs/style/scss';
+```
+
+When enabled, Volver Style will wrap all styles in layers with this order (from lowest to highest priority):
+
+1. `reset` - CSS reset styles
+2. `preflight` - Volver preflight/normalization styles  
+3. `props` - CSS custom properties
+4. `components` - Component styles
+5. `themes` - Theme overrides (dark mode, etc.)
+6. `utilities` - Utility classes (highest priority)
+
+The layers are prefixed with `volver.` by default, so the full layer names are: `volver.reset`, `volver.preflight`, `volver.props`, etc.
+
+#### Customizing Layer Order
+
+You can customize the layer order and prefix:
+
+```scss
+@use '@volverjs/style/scss/context' with (
+  $use-css-layers: true,
+  // custom layer order (later = higher priority)
+  $layer-order: (reset, preflight, props, components, themes, utilities),
+  // custom layer prefix
+  $layer-prefix: 'my-app'
+);
+@use '@volverjs/style/scss';
+
+// layers will be: my-app.reset, my-app.preflight, my-app.props, etc.
+```
+
+#### Browser Support
+
+CSS `@layer` is supported in all modern browsers (Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+). For older browsers, you may need to disable this feature or use a polyfill.

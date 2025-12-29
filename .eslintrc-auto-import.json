@@ -103,7 +103,6 @@
     "refWithControl": true,
     "resolveComponent": true,
     "resolveRef": true,
-    "resolveUnref": true,
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,

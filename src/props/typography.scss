@@ -1,37 +1,39 @@
 @use 'sass:map';
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	// font-family
-	@include spread-map-into-props($font-family, $prefix: font);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		// font-family
+		@include spread-map-into-props($font-family, $prefix: font);
 
-	// font-weight
-	@include spread-map-into-props($font-weight, $prefix: font);
+		// font-weight
+		@include spread-map-into-props($font-weight, $prefix: font);
 
-	// line-height
-	@include spread-map-into-props($line-height, $prefix: leading);
+		// line-height
+		@include spread-map-into-props($line-height, $prefix: leading);
 
-	// letter-spacing
-	@include spread-map-into-props($letter-spacing, $prefix: tracking);
+		// letter-spacing
+		@include spread-map-into-props($letter-spacing, $prefix: tracking);
 
-	// font-size
-	@each $size, $value in $font-size {
-		--text-#{$size}: #{$value};
-	}
+		// font-size
+		@each $size, $value in $font-size {
+			--text-#{$size}: #{$value};
+		}
 
-	// font-size dynamic
-	@each $name, $sizes in $font-size-dynamic {
-		@each $breakpoint, $size in $sizes {
-			@if map.has-key($breakpoints, $breakpoint) {
-				@include media-breakpoint-up($breakpoint, $breakpoints) {
-					$var: $size;
+		// font-size dynamic
+		@each $name, $sizes in $font-size-dynamic {
+			@each $breakpoint, $size in $sizes {
+				@if map.has-key($breakpoints, $breakpoint) {
+					@include media-breakpoint-up($breakpoint, $breakpoints) {
+						$var: $size;
 
-					// if is a static font-size
-					@if map.has-key($font-size, $size) {
-						$var: var(--text-#{$size});
+						// if is a static font-size
+						@if map.has-key($font-size, $size) {
+							$var: var(--text-#{$size});
+						}
+
+						--text-#{$name}: #{$var};
 					}
-
-					--text-#{$name}: #{$var};
 				}
 			}
 		}

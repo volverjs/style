@@ -94,25 +94,32 @@ body {
 }
 ```
 
-Colors properties are splitted in hue, saturation and lightness. You can use them to create your own shades.
+Color shades are generated using CSS Relative Color Syntax with two algorithms:
+
+- **Proportional scaling** for brand/accent colors: `calc(l * 1.1)` multiplies lightness
+- **Fixed steps** for surface/word colors: `calc(l + 12)` adds to lightness
+
+You can create custom shades:
 
 ```css
 @import '@volverjs/style';
 
 :root {
-  --color-surface-6: hsl(var(--color-surface-hue), var(--color-surface-saturation), 86%);
+  /* Surface uses fixed steps (addition/subtraction) */
+  --color-surface-6: hsl(from var(--color-surface) h s calc(l - 12));
+  
+  /* Brand uses proportional scaling (multiplication) */
+  --color-brand-lighten-6: hsl(from var(--color-brand) h s calc(l * 1.6));
 }
 ```
 
-Overriding hue, saturation and lightness properties you can create your own color palette.
+Override the base color to update all shades automatically:
 
 ```css
 @import '@volverjs/style';
 
 :root {
-  --color-brand-hue: 149deg;
-  --color-brand-saturation: 56%;
-  --color-brand-lightness: 53%;
+  --color-brand: #45cb85;
 }
 ```
 

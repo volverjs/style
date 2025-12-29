@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // grid template columns
 @include spread-map-into-utilities(
 	$map: $grid-template-columns,
@@ -81,4 +82,6 @@
 		$bps: $breakpoints,
 		$zero-specificity: $zero-specificity-for-utilities
 	);
+}
+
 }

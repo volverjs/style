@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // background-color
 @include spread-map-into-utilities(
 	$map: $colors,
@@ -35,3 +36,5 @@
 	$prop: color,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

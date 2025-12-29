@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-button-group);
 $component-map: $vv-button-group;
 $component-selector: '.#{ $component-name}';
@@ -109,4 +110,6 @@ $button-component-selector: '.' + $button-component-name;
 			}
 		}
 	}
+}
+
 }

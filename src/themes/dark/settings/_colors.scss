@@ -1,41 +1,55 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
 @use '../../../tools/functions' as *;
 @use '../../../settings/colors' as *;
+@use '../../../config' as config;
 
 $dark-color-scheme: dark !default;
 $dark-color-word: hsl(color-hue($color-brand) 15% 85%) !default;
 $dark-color-surface: hsl(color-hue($color-brand) 10% 5%) !default;
-$dark-color-surface-palette: (
-	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
-	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
-	success: hsl(var(--color-success-hue) var(--color-success-saturation) 10%),
-	danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 10%),
-	info: hsl(var(--color-info-hue) var(--color-info-saturation) 10%),
-	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 10%),
-) !default;
-$dark-color-surface-palette-no-vars: (
-	brand: hsl(color-hue($color-brand) color-saturation($color-brand) 10%),
-	accent: hsl(color-hue($color-accent) color-saturation($color-accent) 10%),
-	success: hsl(color-hue($color-success) color-saturation($color-success) 10%),
-	danger: hsl(color-hue($color-danger) color-saturation($color-danger) 10%),
-	info: hsl(color-hue($color-info) color-saturation($color-info) 10%),
-	warning: hsl(color-hue($color-warning) color-saturation($color-warning) 10%),
+
+// Surface palette for dark theme
+$dark-color-surface-palette: if(
+	sass(config.$use-color-mix):
+		(
+			brand: string.unquote('hsl(from var(--color-brand) h s 10%)'),
+			accent: string.unquote('hsl(from var(--color-accent) h s 10%)'),
+			success: string.unquote('hsl(from var(--color-success) h s 10%)'),
+			danger: string.unquote('hsl(from var(--color-danger) h s 10%)'),
+			info: string.unquote('hsl(from var(--color-info) h s 10%)'),
+			warning: string.unquote('hsl(from var(--color-warning) h s 10%)'),
+		);
+	else:
+		(
+			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
+			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
+			success: hsl(var(--color-success-hue) var(--color-success-saturation) 10%),
+			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 10%),
+			info: hsl(var(--color-info-hue) var(--color-info-saturation) 10%),
+			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 10%),
+		)
 ) !default;
 
 // color map
-$dark-colors: (
-	scheme: $dark-color-scheme,
-	word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
-	surface:
-		map.merge(
-			color-lighten-map(
-				$dark-color-surface,
-				'surface',
-				$scale: 5%,
-				$fixed: true,
-				$inverted: false
+$dark-colors: if(
+	sass(config.$use-color-mix):
+		(
+			scheme: $dark-color-scheme,
+			word: color-mix-darken-map($dark-color-word, 'word', $steps: 5, $scale: 12%),
+			surface: map.merge(
+				color-mix-lighten-map($dark-color-surface, 'surface', $steps: 5, $scale: 5%),
+				$dark-color-surface-palette
 			),
-			$dark-color-surface-palette
-		),
+		);
+	else:
+		(
+			scheme: $dark-color-scheme,
+			word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
+			surface: map.merge(
+				color-lighten-map($dark-color-surface, 'surface', $scale: 5%, $fixed: true, $inverted: false),
+				$dark-color-surface-palette
+			),
+		)
 ) !default;

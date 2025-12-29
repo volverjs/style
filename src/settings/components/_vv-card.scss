@@ -45,28 +45,14 @@ $vv-card: (
 	),
 	modifier: (
 		glass: (
-			background-color:
-				hsl(
-					var(--color-surface-hue) var(--color-surface-saturation)
-						var(--color-surface-lightness) / 60%
-				),
+			background-color: color-mix(in srgb, var(--color-surface), transparent 40%),
 			backdrop-filter: var(--blur-md),
 			element: (
 				header: (
-					background-color:
-						hsl(
-							var(--color-surface-hue)
-								var(--color-surface-saturation)
-								var(--color-surface-lightness) / 30%
-						),
+					background-color: color-mix(in srgb, var(--color-surface), transparent 70%),
 				),
 				footer: (
-					background-color:
-						hsl(
-							var(--color-surface-hue)
-								var(--color-surface-saturation)
-								var(--color-surface-lightness) / 30%
-						),
+					background-color: color-mix(in srgb, var(--color-surface), transparent 70%),
 				),
 			),
 		),
