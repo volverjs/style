@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // scale
 @each $size, $value in $scale {
 	%scale-#{$size} {
@@ -121,4 +122,6 @@
 	) {
 		@extend %-translate-y-#{$size};
 	}
+}
+
 }

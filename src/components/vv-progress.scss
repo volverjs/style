@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-progress);
 $component-map: $vv-progress;
 
@@ -11,3 +12,5 @@ $component-map: $vv-progress;
 	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
+
+}

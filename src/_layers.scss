@@ -1,0 +1,4 @@
+@use 'context' as *;
+
+// Define CSS layer order first (if enabled)
+@include define-layers($use-css-layers, $layer-order, $layer-prefix);

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-skeleton);
 $component-map: $vv-skeleton;
 $component-selector: '.#{ $component-name}';
@@ -12,3 +13,5 @@ $component-selector: '.#{ $component-name}';
 	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
+
+}

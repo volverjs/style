@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-tooltip);
 $component-map: $vv-tooltip;
 $component-selector: '.#{ $component-name}';
@@ -30,4 +31,6 @@ $component-selector: '.#{ $component-name}';
 	&.focus-visible {
 		@extend %vv-tooltip--visible !optional;
 	}
+}
+
 }

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // border-radius
 @include spread-map-into-utilities(
 	$map: $border-radius,
@@ -88,3 +89,5 @@
 	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

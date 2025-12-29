@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // border-collapse
 @include spread-map-into-utilities(
 	$map: $border-collapse,
@@ -15,3 +16,5 @@
 	$attribute: table-layout,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

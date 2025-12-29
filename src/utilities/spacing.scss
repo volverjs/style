@@ -2,6 +2,7 @@
 @use 'sass:meta';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 @each $prefix, $prop in (m: margin, p: padding, n: margin) {
 	@each $size, $value in map.merge($spacing, $spacing-dynamic) {
 		$var: var(--spacing-#{$size});
@@ -115,4 +116,6 @@
 	) {
 		@extend %m#{$direction-prefix}-auto;
 	}
+}
+
 }

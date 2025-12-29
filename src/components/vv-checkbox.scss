@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-checkbox);
 $component-map: $vv-checkbox;
 $component-selector: '.#{ $component-name}';
@@ -26,4 +27,6 @@ $component-selector: '.#{ $component-name}';
 	$enabled: $zero-specificity-for-components
 ) {
 	@extend %#{$component-name}--indeterminate !optional;
+}
+
 }

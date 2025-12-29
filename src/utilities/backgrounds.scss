@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // background-attachment
 @include spread-map-into-utilities(
 	$map: $background-attachment,
@@ -65,3 +66,5 @@
 	$prop: gradient,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

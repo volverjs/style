@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-accordion-group);
 $component-map: $vv-accordion-group;
 
@@ -11,3 +12,5 @@ $component-map: $vv-accordion-group;
 	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
+
+}

@@ -1,25 +1,27 @@
 @use 'sass:map';
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	// static
-	@each $size, $value in $spacing {
-		--spacing-#{$size}: #{$value};
-	}
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		// static
+		@each $size, $value in $spacing {
+			--spacing-#{$size}: #{$value};
+		}
 
-	// dynamic
-	@each $name, $sizes in $spacing-dynamic {
-		@each $breakpoint, $size in $sizes {
-			@if map.has-key($breakpoints, $breakpoint) {
-				@include media-breakpoint-up($breakpoint, $breakpoints) {
-					$var: $size;
+		// dynamic
+		@each $name, $sizes in $spacing-dynamic {
+			@each $breakpoint, $size in $sizes {
+				@if map.has-key($breakpoints, $breakpoint) {
+					@include media-breakpoint-up($breakpoint, $breakpoints) {
+						$var: $size;
 
-					// if is a static spacing
-					@if map.has-key($spacing, $size) {
-						$var: var(--spacing-#{$size});
+						// if is a static spacing
+						@if map.has-key($spacing, $size) {
+							$var: var(--spacing-#{$size});
+						}
+
+						--spacing-#{$name}: #{$var};
 					}
-
-					--spacing-#{$name}: #{$var};
 				}
 			}
 		}

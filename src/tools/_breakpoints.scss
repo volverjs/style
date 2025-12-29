@@ -74,7 +74,7 @@
 //    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
 //    "-sm"
 @function breakpoint-infix($name, $bps: $breakpoints) {
-	@if breakpoint-min($name, $bps) == null {
+	@if not breakpoint-min($name, $bps) {
 		@return "";
 	} @else {
 		@return "-#{$name}";

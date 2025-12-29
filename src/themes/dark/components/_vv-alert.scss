@@ -2,21 +2,25 @@
 @use '../context' as *;
 
 $component-name: map.get($components-names, vv-alert);
-$component-map: $dark-vv-alert;
 
 @mixin theme-dark-vv-alert {
-	@include spread-map-into-props(
-		$map: $component-map,
-		$prefix: $component-name
+	@include spread-theme-component(
+		$base-map: $vv-alert,
+		$theme-map: $dark-vv-alert,
+		$component-name: $component-name,
+		$bps: $breakpoints,
+		$use-custom-props: $use-custom-props-for-components
 	);
 }
 
-:where(:host, :root, .theme):not(.theme--light) {
-	@media (prefers-color-scheme: dark) {
+@include layer(themes, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme):not(.theme--light) {
+		@media (prefers-color-scheme: dark) {
+			@include theme-dark-vv-alert;
+		}
+	}
+
+	:where(.theme.theme--dark) {
 		@include theme-dark-vv-alert;
 	}
-}
-
-:where(.theme.theme--dark) {
-	@include theme-dark-vv-alert;
 }

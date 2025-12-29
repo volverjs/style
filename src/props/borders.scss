@@ -1,6 +1,8 @@
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	@include spread-map-into-props($border-radius, $prefix: rounded);
-	@include spread-map-into-props($border-width, $prefix: border);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		@include spread-map-into-props($border-radius, $prefix: rounded);
+		@include spread-map-into-props($border-width, $prefix: border);
+	}
 }

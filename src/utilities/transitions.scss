@@ -2,6 +2,7 @@
 @use 'sass:string';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // transition property
 @include spread-map-into-utilities(
 	$map: $transition-property,
@@ -45,4 +46,6 @@
 			);
 		}
 	}
+}
+
 }
