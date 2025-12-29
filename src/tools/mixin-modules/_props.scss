@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
+@use '../functions' as *;
+
+// ============================================
+// CSS Custom Properties (Variables) Mixin
+// ============================================
+
+// Transform a map into a list of CSS custom properties
+// @param {Map} $map - The map to transform
+// @param {String} $prefix - Variable name prefix
+// @param {String} $old-key - Previous key for recursion
+// @param {Bool} $deep - Whether to recurse into nested maps
+@mixin spread-map-into-props($map: (), $prefix: '', $old-key: '', $deep: true) {
+	@each $key, $value in $map {
+		$name: meta.inspect($key);
+
+		@if $name == meta.inspect($old-key) {
+			$name: $prefix;
+		} @else if $prefix != '' and meta.inspect($prefix) != meta.inspect($key) {
+			$name: $prefix + '-' + $key;
+		}
+
+		// fix name
+		$name: str-replace($name, '\\/', '-');
+
+		@if string.slice(meta.inspect($key), 1, 1) != '_' and
+			string.slice(meta.inspect($key), 1, 2) != '--' and
+			string.slice(meta.inspect($key), 1, 1) != '['
+		{
+			@if meta.type-of($value) == 'map' {
+				@if $deep {
+					@include spread-map-into-props($value, $name, $key);
+				}
+			} @else {
+				#{'--' + $name}: #{$value};
+			}
+		}
+	}
+}

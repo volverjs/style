@@ -1,0 +1,121 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use '../functions' as *;
+@use '../breakpoints' as *;
+@use 'helpers' as *;
+
+// ============================================
+// Utilities Mixin
+// Generates utility classes from maps
+// ============================================
+
+// Transform a map into a list of utility classes
+// @param {Map|List} $map - The map or list to transform
+// @param {String} $class - Base class name
+// @param {String|List} $attribute - CSS attribute(s) to set
+// @param {String} $prop - CSS custom property name
+// @param {String} $name - Name for nested recursion
+// @param {Bool} $deep - Whether to recurse into nested maps
+// @param {Map} $bps - Breakpoints map
+// @param {String} $prefix - Class prefix for breakpoints
+// @param {Bool} $zero-specificity - Whether to wrap in :where()
+@mixin spread-map-into-utilities(
+	$map: (),
+	$class: '',
+	$attribute: '',
+	$prop: '',
+	$name: '',
+	$deep: true,
+	$bps: (xxs: 0),
+	$prefix: '',
+	$zero-specificity: false
+) {
+	@if (meta.type-of($map) == 'map' or meta.type-of($map) == 'list') and $attribute != '' {
+		@each $breakpoint, $breakpoint-value in $bps {
+			@if $breakpoint-value > 0 {
+				$prefix: $breakpoint + '\\:';
+			}
+
+			@each $key, $value in $map {
+				@if $name != '' and meta.inspect($key) != meta.inspect($name) {
+					$key: #{$name}-#{meta.inspect($key)};
+				}
+
+				@if meta.type-of($value) == 'map' and $deep {
+					@include spread-map-into-utilities(
+						$map: $value,
+						$class: $class,
+						$attribute: $attribute,
+						$prop: $prop,
+						$name: $key,
+						$bps: $bps,
+						$prefix: $prefix,
+						$zero-specificity: $zero-specificity
+					);
+				} @else {
+					$default: null;
+					$class-name: $class;
+					$key: meta.inspect($key);
+					$var: $prop;
+
+					// fix class name
+					@if $class-name != $key and $prop != $key {
+						@if $class-name != '' {
+							$class-name: $class-name + '-';
+						}
+
+						$class-name: $class-name + $key;
+					}
+
+					// fix variable name
+					@if $var != '' and $var != $key {
+						$var: $var + '-' + $key;
+					}
+
+					$var: str-replace($var, '\\/', '-');
+
+					// check if value is not a map (spacing-dynamic)
+					@if meta.type-of($value) != 'map' {
+						$default: $value;
+					}
+
+					// check if map is a list
+					@if meta.type-of($map) == 'list' and (not $default or $default == '') {
+						$default: $key;
+					}
+
+					@if meta.type-of($default) == 'string' {
+						$default: string.unquote($default);
+					}
+
+					%#{$prefix}#{$class-name} {
+						@include media-breakpoint-up($breakpoint, $bps) {
+							@if meta.type-of($attribute) != 'list' {
+								$attribute: ($attribute);
+							}
+
+							@each $attr in $attribute {
+								@if $default {
+									@if $var != '' {
+										#{$attr}: var(--#{$var}, $default);
+									} @else {
+										#{$attr}: $default;
+									}
+								} @else if $var != '' {
+									#{$attr}: var(--#{$var});
+								}
+							}
+						}
+					}
+
+					@include wrap-with-where(
+						$selector: '.' + $prefix + $class-name,
+						$enabled: $zero-specificity
+					) {
+						@extend %#{$prefix}#{$class-name};
+					}
+				}
+			}
+		}
+	}
+}

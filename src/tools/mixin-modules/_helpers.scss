@@ -1,0 +1,23 @@
+@use 'sass:meta';
+@use 'sass:string';
+
+// ============================================
+// Utility Helpers
+// ============================================
+
+// Wrap selector with :where() for zero specificity
+// @param {String|List} $selector - The selector to wrap
+// @param {Bool} $enabled - Whether to wrap in :where()
+@mixin wrap-with-where($selector, $enabled: true) {
+	@if meta.type-of($selector) == 'map' or meta.type-of($selector) == 'list' {
+		$selector: #{$selector};
+	}
+
+	@if $enabled {
+		$selector: ':where(#{string.unquote($selector)})';
+	}
+
+	#{$selector} {
+		@content;
+	}
+}

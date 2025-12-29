@@ -1,0 +1,354 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'props' as *;
+@use 'attrs' as *;
+
+// ============================================
+// Theme component utilities
+// Generates CSS for theme overrides without @extend
+// (needed to work inside media queries)
+// ============================================
+
+// Extract values from base-map that match the keys in theme-map
+// This is used to generate light reset rules
+// @param {Map} $base-map - Original component map with light values
+// @param {Map} $theme-map - Theme override map (used to determine which keys to extract)
+// @return {Map|null} - Map with light values for keys modified in theme-map, or null if empty
+@function extract-light-values($base-map, $theme-map) {
+	$result: ();
+
+	@each $key, $value in $theme-map {
+		@if map.has-key($base-map, $key) {
+			$base-value: map.get($base-map, $key);
+
+			@if meta.type-of($value) == 'map' and meta.type-of($base-value) == 'map' {
+				// Recursively extract nested maps
+				$nested: extract-light-values($base-value, $value);
+
+				@if $nested and list.length(map.keys($nested)) > 0 {
+					$result: map.set($result, $key, $nested);
+				}
+			} @else {
+				// Direct value - use the base (light) value
+				$result: map.set($result, $key, $base-value);
+			}
+		}
+	}
+
+	// Return null if empty map
+	@if list.length(map.keys($result)) == 0 {
+		@return null;
+	}
+
+	@return $result;
+}
+
+// Apply theme overrides to a component
+// - With $use-custom-props: true  → generates CSS variables only
+// - With $use-custom-props: false → generates CSS attributes directly
+// @param {Map} $base-map - Original component map (e.g., $vv-button)
+// @param {Map} $theme-map - Theme override map (e.g., $dark-vv-button)
+// @param {String} $component-name - Component name (e.g., 'vv-button')
+// @param {Map} $bps - Breakpoints map
+// @param {Bool} $use-custom-props - Whether to use CSS custom properties
+// @param {Bool} $generate-light-reset - Auto-generate light reset from base-map (default: true)
+// @param {String} $light-reset-selector - Selector for light reset (default: '.theme.theme--light')
+@mixin spread-theme-component(
+	$base-map,
+	$theme-map,
+	$component-name,
+	$bps: (xxs: 0),
+	$use-custom-props: true,
+	$generate-light-reset: true,
+	$light-reset-selector: '.theme.theme--light'
+) {
+	// Calculate light reset map from base-map if needed
+	$light-reset-map: null;
+
+	@if $generate-light-reset {
+		$light-reset-map: extract-light-values($base-map, $theme-map);
+	}
+
+	@if $use-custom-props {
+		// Generate CSS variables only (themes override variables)
+		@include spread-map-into-props(
+			$map: $theme-map,
+			$prefix: $component-name
+		);
+
+		// Light reset with custom props
+		@if $light-reset-map and $generate-light-reset {
+			#{$light-reset-selector} {
+				@include spread-map-into-props(
+					$map: $light-reset-map,
+					$prefix: $component-name
+				);
+			}
+		}
+	} @else {
+		// Generate CSS attributes directly for theme overrides
+		$selector: '.' + $component-name;
+
+		// Block styles (base attributes, ignoring nested structures)
+		#{$selector} {
+			@include spread-map-into-attrs(
+				$map: $theme-map,
+				$prefix: $component-name,
+				$props: false,
+				$ignore: (modifier, element, state, breakpoint, transition)
+			);
+		}
+
+		// Process modifiers recursively
+		@if map.has-key($theme-map, 'modifier') {
+			@include _theme-spread-modifiers(
+				$map: map.get($theme-map, 'modifier'),
+				$prefix: $component-name,
+				$block: $selector,
+				$bps: $bps
+			);
+		}
+
+		// Process elements
+		@if map.has-key($theme-map, 'element') {
+			@include _theme-spread-elements(
+				$map: map.get($theme-map, 'element'),
+				$prefix: $component-name,
+				$block: $selector,
+				$bps: $bps
+			);
+		}
+
+		// Process states at block level
+		@if map.has-key($theme-map, 'state') {
+			@include _theme-spread-states(
+				$map: map.get($theme-map, 'state'),
+				$prefix: $component-name,
+				$block: $selector,
+				$parent-selector: $selector,
+				$bps: $bps
+			);
+		}
+
+		// Generate light reset rules if enabled
+		@if $light-reset-map and $generate-light-reset {
+			#{$light-reset-selector} {
+				@include _theme-generate-all(
+					$map: $light-reset-map,
+					$prefix: $component-name,
+					$block: $selector,
+					$bps: $bps
+				);
+			}
+		}
+	}
+}
+
+// Helper to generate all theme rules (block, modifiers, elements, states)
+@mixin _theme-generate-all($map, $prefix, $block, $bps) {
+	// Block styles
+	#{$block} {
+		@include spread-map-into-attrs(
+			$map: $map,
+			$prefix: $prefix,
+			$props: false,
+			$ignore: (modifier, element, state, breakpoint, transition)
+		);
+	}
+
+	// Process modifiers
+	@if map.has-key($map, 'modifier') {
+		@include _theme-spread-modifiers(
+			$map: map.get($map, 'modifier'),
+			$prefix: $prefix,
+			$block: $block,
+			$bps: $bps
+		);
+	}
+
+	// Process elements
+	@if map.has-key($map, 'element') {
+		@include _theme-spread-elements(
+			$map: map.get($map, 'element'),
+			$prefix: $prefix,
+			$block: $block,
+			$bps: $bps
+		);
+	}
+
+	// Process states
+	@if map.has-key($map, 'state') {
+		@include _theme-spread-states(
+			$map: map.get($map, 'state'),
+			$prefix: $prefix,
+			$block: $block,
+			$parent-selector: $block,
+			$bps: $bps
+		);
+	}
+}
+
+// ============================================
+// Private helper mixins for theme spreading
+// ============================================
+
+// Spread modifiers for theme (no @extend)
+@mixin _theme-spread-modifiers($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+	@each $mod-name, $mod-value in $map {
+		$mod-selector: '#{$block}#{$block}--#{$mod-name}';
+
+		@if $parent-selector {
+			$mod-selector: '#{$parent-selector}#{$block}--#{$mod-name}';
+		}
+
+		// Modifier base styles
+		#{$mod-selector} {
+			@include spread-map-into-attrs(
+				$map: $mod-value,
+				$prefix: $prefix,
+				$props: false,
+				$ignore: (modifier, element, state, breakpoint)
+			);
+		}
+
+		// States inside modifier
+		@if map.has-key($mod-value, 'state') {
+			@include _theme-spread-states(
+				$map: map.get($mod-value, 'state'),
+				$prefix: $prefix,
+				$block: $block,
+				$parent-selector: $mod-selector,
+				$bps: $bps
+			);
+		}
+
+		// Elements inside modifier
+		@if map.has-key($mod-value, 'element') {
+			@include _theme-spread-elements(
+				$map: map.get($mod-value, 'element'),
+				$prefix: $prefix,
+				$block: $block,
+				$parent-selector: $mod-selector,
+				$bps: $bps
+			);
+		}
+
+		// Nested modifiers
+		@if map.has-key($mod-value, 'modifier') {
+			@include _theme-spread-modifiers(
+				$map: map.get($mod-value, 'modifier'),
+				$prefix: $prefix,
+				$block: $block,
+				$parent-selector: $mod-selector,
+				$bps: $bps
+			);
+		}
+	}
+}
+
+// Spread elements for theme (no @extend)
+@mixin _theme-spread-elements($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+	@each $el-name, $el-value in $map {
+		$el-selector: '#{$block}__#{$el-name}';
+		$full-selector: $el-selector;
+
+		@if $parent-selector {
+			$full-selector: '#{$parent-selector} #{$el-selector}';
+		}
+
+		// Element base styles
+		#{$full-selector} {
+			@include spread-map-into-attrs(
+				$map: $el-value,
+				$prefix: $prefix,
+				$props: false,
+				$ignore: (modifier, element, state, breakpoint)
+			);
+		}
+
+		// States inside element
+		@if map.has-key($el-value, 'state') {
+			@include _theme-spread-states(
+				$map: map.get($el-value, 'state'),
+				$prefix: $prefix,
+				$block: $el-selector,
+				$parent-selector: $parent-selector,
+				$bps: $bps
+			);
+		}
+	}
+}
+
+// Spread states for theme (no @extend)
+@mixin _theme-spread-states($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+	$state-list: (
+		active, focus, hover, focus-within, target, visited, focus-visible,
+		disabled, checked, checked-within, multiple, selected, readonly,
+		empty, placeholder-shown, dirty, valid, invalid, indeterminate,
+		first-child, last-child, open, close, determinate, pressed, current
+	);
+
+	@each $state-name, $state-value in $map {
+		@if list.index($state-list, $state-name) {
+			$base: $block;
+
+			@if $parent-selector {
+				$base: $parent-selector;
+			}
+
+			// BEM modifier style: .block--state
+			#{$base}#{$block}--#{$state-name},
+			// Class style: .block.state
+			#{$base}.#{$state-name} {
+				@include spread-map-into-attrs(
+					$map: $state-value,
+					$prefix: $prefix,
+					$props: false,
+					$ignore: (modifier, element, state, breakpoint)
+				);
+			}
+
+			// Pseudo-class style based on state type
+			@if $state-name == 'disabled' or $state-name == 'readonly' or $state-name == 'multiple' {
+				#{$base}[#{$state-name}] {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'focus-visible' {
+				#{$base}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state-name} {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name != 'current' {
+				#{$base}:not([disabled]):#{$state-name} {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			}
+
+			// Elements inside state
+			@if map.has-key($state-value, 'element') {
+				@include _theme-spread-elements(
+					$map: map.get($state-value, 'element'),
+					$prefix: $prefix,
+					$block: $block,
+					$parent-selector: '#{$base}#{$block}--#{$state-name}',
+					$bps: $bps
+				);
+			}
+		}
+	}
+}

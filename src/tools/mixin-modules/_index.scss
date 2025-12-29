@@ -1,0 +1,25 @@
+// ============================================
+// Mixins Index
+// Re-exports all mixins for easy importing
+// ============================================
+
+// Core helpers (wrap-with-where)
+@forward 'helpers';
+
+// CSS Custom Properties (spread-map-into-props)
+@forward 'props';
+
+// CSS Attributes (spread-map-into-attrs)
+@forward 'attrs';
+
+// CSS Layers (layer, define-layers)
+@forward 'layers';
+
+// Utilities (spread-map-into-utilities)
+@forward 'utilities';
+
+// BEM structure (spread-map-into-bem, modifiers, elements, states, breakpoints, transitions)
+@forward 'bem';
+
+// Theme utilities (spread-theme-component)
+@forward 'theme';

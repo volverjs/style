@@ -22,15 +22,10 @@ $component-selector: '.#{ $component-name}';
 }
 
 @include wrap-with-where(
-	$selector: '*:has(> #{$component-selector})',
+	$selector: '*:has(> #{$component-selector}):hover > #{$component-selector}, *:has(> #{$component-selector}):focus-visible > #{$component-selector}, *:has(> #{$component-selector}).hover > #{$component-selector}, *:has(> #{$component-selector}).focus-visible > #{$component-selector}',
 	$enabled: $zero-specificity-for-components
 ) {
-	&:hover,
-	&:focus-visible,
-	&.hover,
-	&.focus-visible {
-		@extend %vv-tooltip--visible !optional;
-	}
+	@extend %vv-tooltip--visible !optional;
 }
 
 }

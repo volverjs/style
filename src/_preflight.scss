@@ -9,6 +9,7 @@
 // utilities
 @use 'utilities';
 
+@include layer(preflight, $use-css-layers, $layer-prefix) {
 @if $preflight {
 	:where(.preflight) {
 		:not(.preflight-revert *) {
@@ -447,4 +448,5 @@
 			}
 		}
 	}
+}
 }

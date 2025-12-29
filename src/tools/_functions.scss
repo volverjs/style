@@ -106,6 +106,163 @@
 	@return $result;
 }
 
+// ============================================
+// Color Mix Functions (CSS native color-mix())
+// ============================================
+
+// Generate a single color value - returns the base color as-is
+// @param {Color} $color - Any valid CSS color (hex, rgb, hsl, oklch, etc.)
+// @param {String} $name - Color name for the CSS variable
+// @return {Map} Map with just the base color
+@function color-base-map($color, $name) {
+	@return (
+		#{$name}: #{$color}
+	);
+}
+
+// Generate a relative color syntax expression for CSS
+// Uses hsl(from color h s calc(l * X)) or hsl(from color h s calc(l +/- X)) to modify only lightness
+// In CSS Relative Color Syntax, h/s/l are numbers:
+// - h: 0-360 (degrees)
+// - s: 0-100 (not a percentage unit, just a number)
+// - l: 0-100 (not a percentage unit, just a number)
+// @param {String} $name - Color variable name
+// @param {Number} $lightness-change - Lightness change as percentage (e.g., 10%)
+// @param {Boolean} $fixed - If true, use addition (l + X). If false, use multiplication (l * X)
+// @return {String} CSS relative color syntax expression
+@function relative-color-value($name, $lightness-change, $fixed: false) {
+	@if $fixed {
+		// Fixed mode: use addition/subtraction (for surface, word colors)
+		// Convert percentage to plain number (2% -> 2)
+		$number-change: math.div($lightness-change, 1%);
+
+		@if $lightness-change > 0 {
+			@return string.unquote('hsl(from var(--color-#{$name}) h s calc(l + #{$number-change}))');
+		} @else {
+			@return string.unquote('hsl(from var(--color-#{$name}) h s calc(l - #{math.abs($number-change)}))');
+		}
+	} @else {
+		// Proportional mode: use multiplication (for brand, accent, etc.)
+		// Convert percentage to multiplier (10% -> 1.1 for lighten, 0.9 for darken)
+		$scale-factor: math.div($lightness-change, 100%);
+		$multiplier: 1 + $scale-factor;
+
+		@return string.unquote('hsl(from var(--color-#{$name}) h s calc(l * #{$multiplier}))');
+	}
+}
+
+// Generate shades map using CSS Relative Color Syntax
+// @param {Color} $color - Base color in any format
+// @param {String} $name - Color name for CSS variables
+// @param {Number} $steps - Number of lighten/darken steps (default: 5)
+// @param {Number} $scale - Lightness increment per step (default: 10%)
+// @return {Map} Complete shades map with base + lighten + darken variants
+@function color-mix-shades-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 10%
+) {
+	// Start with base color
+	$result: color-base-map($color, $name);
+
+	// Generate lighten shades
+	@for $i from 1 through $steps {
+		$key: 'lighten-#{$i}';
+		$change: $scale * $i;
+		$result: map.merge($result, (#{$key}: relative-color-value($name, $change)));
+	}
+
+	// Generate darken shades
+	@for $i from 1 through $steps {
+		$key: 'darken-#{$i}';
+		$change: $scale * $i * -1;
+		$result: map.merge($result, (#{$key}: relative-color-value($name, $change)));
+	}
+
+	@return $result;
+}
+
+// Generate darken shades only using CSS Relative Color Syntax
+// Used for surface colors that need numeric keys (1, 2, 3...)
+// Uses fixed addition (l - X) for consistent step sizes
+// @param {Color} $color - Base color
+// @param {String} $name - Color name
+// @param {Number} $steps - Number of darken steps (default: 5)
+// @param {Number} $scale - Lightness decrement per step (default: 2%)
+// @return {Map} Darken variants map with numeric keys
+@function color-mix-darken-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 2%
+) {
+	// Start with base color
+	$result: color-base-map($color, $name);
+
+	// Generate darken shades with numeric keys (using fixed addition)
+	@for $i from 1 through $steps {
+		$change: $scale * $i * -1;
+		$result: map.merge($result, (#{$i}: relative-color-value($name, $change, $fixed: true)));
+	}
+
+	@return $result;
+}
+
+// Generate lighten shades only using CSS Relative Color Syntax
+// Used for colors that need numeric keys with lighten effect
+// Uses fixed addition (l + X) for consistent step sizes
+// @param {Color} $color - Base color
+// @param {String} $name - Color name
+// @param {Number} $steps - Number of lighten steps (default: 5)
+// @param {Number} $scale - Lightness increment per step (default: 12%)
+// @return {Map} Lighten variants map with numeric keys
+@function color-mix-lighten-map(
+	$color,
+	$name,
+	$steps: 5,
+	$scale: 12%
+) {
+	// Start with base color
+	$result: color-base-map($color, $name);
+
+	// Generate lighten shades with numeric keys (using fixed addition)
+	@for $i from 1 through $steps {
+		$change: $scale * $i;
+		$result: map.merge($result, (#{$i}: relative-color-value($name, $change, $fixed: true)));
+	}
+
+	@return $result;
+}
+
+// Generate alpha variants using CSS color-mix()
+// @param {Color} $color - Base color
+// @param {String} $name - Color name
+// @param {Number} $steps - Number of alpha steps (default: 9)
+// @param {Number} $scale - Alpha increment per step (default: 0.1)
+// @return {Map} Alpha variants map
+@function color-mix-alpha-map(
+	$color,
+	$name,
+	$steps: 9,
+	$scale: 0.1
+) {
+	$result: color-base-map($color, $name);
+
+	@for $i from 1 through $steps {
+		$key: '#{$i}';
+		$percentage: 100% - ($scale * $i * 100%);
+
+		// Mix with transparent to get alpha
+		$result: map.merge($result, (#{$key}: string.unquote('color-mix(in srgb, var(--color-#{$name}), transparent #{$percentage})')));
+	}
+
+	@return $result;
+}
+
+// ============================================
+// Legacy Color Functions (HSL channel-based)
+// ============================================
 @function color-shades-map(
 	$color,
 	$name,

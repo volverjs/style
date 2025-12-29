@@ -17,7 +17,9 @@
 
 <style lang="scss">
 	@use '@/context' as * with (
-		$font-family-sans: "'Open Sans', sans-serif"
+		$font-family-sans: "'Open Sans', sans-serif",
+		$use-custom-props-for-components: false,
+		$use-css-layers: true
 	);
 	@use '@/volver';
 	@use '@/themes/dark/volver' as volverDark;

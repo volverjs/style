@@ -67,19 +67,11 @@ $vv-badge: (
 			border-radius: 1em,
 		),
 		white: (
-			background-color:
-				hsl(
-					var(--color-white-hue) var(--color-white-saturation)
-						var(--color-white-lightness) / 80%
-				),
+			background-color: color-mix(in srgb, var(--color-white), transparent 20%),
 			color: var(--color-black),
 		),
 		black: (
-			background-color:
-				hsl(
-					var(--color-black-hue) var(--color-black-saturation)
-						var(--color-black-lightness) / 80%
-				),
+			background-color: color-mix(in srgb, var(--color-black), transparent 20%),
 			color: var(--color-white),
 		),
 		danger: (

@@ -122,12 +122,7 @@ $vv-nav: (
 						current: (
 							color: var(--color-brand),
 							border-color: currentcolor,
-							background-color:
-								hsl(
-									var(--color-brand-hue)
-										var(--color-brand-saturation)
-										var(--color-brand-lightness) / 5%
-								),
+							background-color: color-mix(in srgb, var(--color-brand), transparent 95%),
 						),
 					),
 				),
