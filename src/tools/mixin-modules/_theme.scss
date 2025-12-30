@@ -3,6 +3,7 @@
 @use 'sass:meta';
 @use 'props' as *;
 @use 'attrs' as *;
+@use 'helpers' as *;
 
 // ============================================
 // Theme component utilities
@@ -54,6 +55,7 @@
 // @param {Bool} $use-custom-props - Whether to use CSS custom properties
 // @param {Bool} $generate-light-reset - Auto-generate light reset from base-map (default: true)
 // @param {String} $light-reset-selector - Selector for light reset (default: '.theme.theme--light')
+// @param {Bool} $zero-specificity - Whether to wrap selectors in :where()
 @mixin spread-theme-component(
 	$base-map,
 	$theme-map,
@@ -61,7 +63,8 @@
 	$bps: (xxs: 0),
 	$use-custom-props: true,
 	$generate-light-reset: true,
-	$light-reset-selector: '.theme.theme--light'
+	$light-reset-selector: '.theme.theme--light',
+	$zero-specificity: true
 ) {
 	// Calculate light reset map from base-map if needed
 	$light-reset-map: null;
@@ -91,11 +94,11 @@
 		$selector: '.' + $component-name;
 
 		// Block styles (base attributes, ignoring nested structures)
-		#{$selector} {
+		@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 			@include spread-map-into-attrs(
 				$map: $theme-map,
 				$prefix: $component-name,
-				$props: false,
+				$use-custom-props: false,
 				$ignore: (modifier, element, state, breakpoint, transition)
 			);
 		}
@@ -106,7 +109,8 @@
 				$map: map.get($theme-map, 'modifier'),
 				$prefix: $component-name,
 				$block: $selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 
@@ -116,7 +120,8 @@
 				$map: map.get($theme-map, 'element'),
 				$prefix: $component-name,
 				$block: $selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 
@@ -127,7 +132,8 @@
 				$prefix: $component-name,
 				$block: $selector,
 				$parent-selector: $selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 
@@ -138,7 +144,8 @@
 					$map: $light-reset-map,
 					$prefix: $component-name,
 					$block: $selector,
-					$bps: $bps
+					$bps: $bps,
+					$zero-specificity: $zero-specificity
 				);
 			}
 		}
@@ -146,13 +153,13 @@
 }
 
 // Helper to generate all theme rules (block, modifiers, elements, states)
-@mixin _theme-generate-all($map, $prefix, $block, $bps) {
+@mixin _theme-generate-all($map, $prefix, $block, $bps, $zero-specificity: true) {
 	// Block styles
-	#{$block} {
+	@include wrap-with-where($selector: $block, $enabled: $zero-specificity) {
 		@include spread-map-into-attrs(
 			$map: $map,
 			$prefix: $prefix,
-			$props: false,
+			$use-custom-props: false,
 			$ignore: (modifier, element, state, breakpoint, transition)
 		);
 	}
@@ -163,7 +170,8 @@
 			$map: map.get($map, 'modifier'),
 			$prefix: $prefix,
 			$block: $block,
-			$bps: $bps
+			$bps: $bps,
+			$zero-specificity: $zero-specificity
 		);
 	}
 
@@ -173,7 +181,8 @@
 			$map: map.get($map, 'element'),
 			$prefix: $prefix,
 			$block: $block,
-			$bps: $bps
+			$bps: $bps,
+			$zero-specificity: $zero-specificity
 		);
 	}
 
@@ -184,7 +193,8 @@
 			$prefix: $prefix,
 			$block: $block,
 			$parent-selector: $block,
-			$bps: $bps
+			$bps: $bps,
+			$zero-specificity: $zero-specificity
 		);
 	}
 }
@@ -194,7 +204,7 @@
 // ============================================
 
 // Spread modifiers for theme (no @extend)
-@mixin _theme-spread-modifiers($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+@mixin _theme-spread-modifiers($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
 	@each $mod-name, $mod-value in $map {
 		$mod-selector: '#{$block}#{$block}--#{$mod-name}';
 
@@ -203,11 +213,11 @@
 		}
 
 		// Modifier base styles
-		#{$mod-selector} {
+		@include wrap-with-where($selector: $mod-selector, $enabled: $zero-specificity) {
 			@include spread-map-into-attrs(
 				$map: $mod-value,
 				$prefix: $prefix,
-				$props: false,
+				$use-custom-props: false,
 				$ignore: (modifier, element, state, breakpoint)
 			);
 		}
@@ -219,7 +229,8 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 
@@ -230,7 +241,8 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 
@@ -241,14 +253,15 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 	}
 }
 
 // Spread elements for theme (no @extend)
-@mixin _theme-spread-elements($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+@mixin _theme-spread-elements($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
 	@each $el-name, $el-value in $map {
 		$el-selector: '#{$block}__#{$el-name}';
 		$full-selector: $el-selector;
@@ -258,11 +271,11 @@
 		}
 
 		// Element base styles
-		#{$full-selector} {
+		@include wrap-with-where($selector: $full-selector, $enabled: $zero-specificity) {
 			@include spread-map-into-attrs(
 				$map: $el-value,
 				$prefix: $prefix,
-				$props: false,
+				$use-custom-props: false,
 				$ignore: (modifier, element, state, breakpoint)
 			);
 		}
@@ -274,14 +287,15 @@
 				$prefix: $prefix,
 				$block: $el-selector,
 				$parent-selector: $parent-selector,
-				$bps: $bps
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
 			);
 		}
 	}
 }
 
 // Spread states for theme (no @extend)
-@mixin _theme-spread-states($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0)) {
+@mixin _theme-spread-states($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
 	$state-list: (
 		active, focus, hover, focus-within, target, visited, focus-visible,
 		disabled, checked, checked-within, multiple, selected, readonly,
@@ -298,42 +312,46 @@
 			}
 
 			// BEM modifier style: .block--state
-			#{$base}#{$block}--#{$state-name},
 			// Class style: .block.state
-			#{$base}.#{$state-name} {
+			$state-selectors: (
+				'#{$base}#{$block}--#{$state-name}',
+				'#{$base}.#{$state-name}'
+			);
+
+			@include wrap-with-where($selector: $state-selectors, $enabled: $zero-specificity) {
 				@include spread-map-into-attrs(
 					$map: $state-value,
 					$prefix: $prefix,
-					$props: false,
+					$use-custom-props: false,
 					$ignore: (modifier, element, state, breakpoint)
 				);
 			}
 
 			// Pseudo-class style based on state type
 			@if $state-name == 'disabled' or $state-name == 'readonly' or $state-name == 'multiple' {
-				#{$base}[#{$state-name}] {
+				@include wrap-with-where($selector: '#{$base}[#{$state-name}]', $enabled: $zero-specificity) {
 					@include spread-map-into-attrs(
 						$map: $state-value,
 						$prefix: $prefix,
-						$props: false,
+						$use-custom-props: false,
 						$ignore: (modifier, element, state, breakpoint)
 					);
 				}
 			} @else if $state-name == 'focus-visible' {
-				#{$base}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state-name} {
+				@include wrap-with-where($selector: '#{$base}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state-name}', $enabled: $zero-specificity) {
 					@include spread-map-into-attrs(
 						$map: $state-value,
 						$prefix: $prefix,
-						$props: false,
+						$use-custom-props: false,
 						$ignore: (modifier, element, state, breakpoint)
 					);
 				}
 			} @else if $state-name != 'current' {
-				#{$base}:not([disabled]):#{$state-name} {
+				@include wrap-with-where($selector: '#{$base}:not([disabled]):#{$state-name}', $enabled: $zero-specificity) {
 					@include spread-map-into-attrs(
 						$map: $state-value,
 						$prefix: $prefix,
-						$props: false,
+						$use-custom-props: false,
 						$ignore: (modifier, element, state, breakpoint)
 					);
 				}
@@ -346,7 +364,8 @@
 					$prefix: $prefix,
 					$block: $block,
 					$parent-selector: '#{$base}#{$block}--#{$state-name}',
-					$bps: $bps
+					$bps: $bps,
+					$zero-specificity: $zero-specificity
 				);
 			}
 		}

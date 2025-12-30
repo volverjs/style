@@ -1,5 +1,6 @@
 $vv-dialog: (
 	display: flex,
+	user-select: text,
 	z-index: var(--z-modal-backdrop),
 	position: fixed,
 	inset: 0,

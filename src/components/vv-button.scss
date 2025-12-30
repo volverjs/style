@@ -9,7 +9,7 @@ $component-selector: '.#{ $component-name}';
 @include spread-map-into-bem(
 	$map: $component-map,
 	$block: $component-name,
-	$props: $use-custom-props-for-components,
+	$use-custom-props: $use-custom-props-for-components,
 	$zero-specificity: $zero-specificity-for-components,
 	$custom-block: true,
 	$bps: $breakpoints
@@ -29,7 +29,7 @@ $component-selector: '.#{ $component-name}';
 		@include spread-map-into-attrs(
 			$map: $component-map,
 			$prefix: $component-name,
-			$props: $use-custom-props-for-components
+			$use-custom-props: $use-custom-props-for-components
 		);
 	}
 

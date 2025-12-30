@@ -64,7 +64,7 @@ $-pseudo-elements: (
 // @param {String} $postfix - Postfix for CSS variable naming
 // @param {Bool} $deep - Whether to recurse into nested maps
 // @param {List} $ignore - Keys to ignore
-// @param {Bool} $props - Whether to use CSS custom properties
+// @param {Bool} $use-custom-props - Whether to use CSS custom properties
 // @param {Map} $bps - Breakpoints map
 @mixin spread-map-into-attrs(
 	$original: (),
@@ -74,7 +74,7 @@ $-pseudo-elements: (
 	$postfix: '',
 	$deep: false,
 	$ignore: (),
-	$props: true,
+	$use-custom-props: true,
 	$bps: (xxs: 0)
 ) {
 	@if meta.type-of($map) == 'map' and $prefix != '' {
@@ -114,7 +114,7 @@ $-pseudo-elements: (
 											$variant: $variant,
 											$postfix: $key,
 											$deep: true,
-											$props: $props
+											$use-custom-props: $use-custom-props
 										);
 									}
 								}
@@ -128,11 +128,11 @@ $-pseudo-elements: (
 							$variant: $variant,
 							$postfix: $key,
 							$deep: true,
-							$props: $props
+							$use-custom-props: $use-custom-props
 						);
 					}
 				} @else if meta.type-of($value) != 'map' and string.slice(meta.inspect($key), 1, 1) != '_' {
-					@if $props and
+					@if $use-custom-props and
 						$key != 'content' and
 						string.slice(meta.inspect($key), 1, 2) != '--' and
 						string.slice(meta.inspect($key), 1, 1) != '['
