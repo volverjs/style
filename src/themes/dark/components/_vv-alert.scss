@@ -9,7 +9,8 @@ $component-name: map.get($components-names, vv-alert);
 		$theme-map: $dark-vv-alert,
 		$component-name: $component-name,
 		$bps: $breakpoints,
-		$use-custom-props: $use-custom-props-for-components
+		$use-custom-props: $use-custom-props-for-components,
+		$zero-specificity: $zero-specificity-for-components
 	);
 }
 

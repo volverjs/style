@@ -9,7 +9,8 @@ $component-name: map.get($components-names, vv-avatar);
 		$theme-map: $dark-vv-avatar,
 		$component-name: $component-name,
 		$bps: $breakpoints,
-		$use-custom-props: $use-custom-props-for-components
+		$use-custom-props: $use-custom-props-for-components,
+		$zero-specificity: $zero-specificity-for-components
 	);
 }
 

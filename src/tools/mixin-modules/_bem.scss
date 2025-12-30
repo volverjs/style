@@ -34,7 +34,7 @@ $-valid-states: (
 // @param {String} $states-key - Key for states in map
 // @param {String} $breakpoints-key - Key for breakpoints in map
 // @param {String} $transitions-key - Key for transitions in map
-// @param {Bool} $props - Whether to use CSS custom properties
+// @param {Bool} $use-custom-props - Whether to use CSS custom properties
 // @param {Bool} $zero-specificity - Whether to wrap in :where()
 // @param {Bool} $custom-* - Flags to skip specific parts
 // @param {Map} $bps - Breakpoints map
@@ -46,7 +46,7 @@ $-valid-states: (
 	$states-key: 'state',
 	$breakpoints-key: 'breakpoint',
 	$transitions-key: 'transition',
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$custom-props: false,
 	$custom-block: false,
@@ -62,7 +62,7 @@ $-valid-states: (
 
 		// custom props
 		@if not $custom-props {
-			@if $props {
+			@if $use-custom-props {
 				:where(:host, :root, .theme) {
 					@include spread-map-into-props(
 						$map: $map,
@@ -79,7 +79,7 @@ $-valid-states: (
 				@include spread-map-into-attrs(
 					$map: $map,
 					$prefix: $block,
-					$props: $props
+					$use-custom-props: $use-custom-props
 				);
 
 				@content;
@@ -100,7 +100,7 @@ $-valid-states: (
 					$prefix: $block,
 					$key: $elements-key,
 					$block: $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -115,7 +115,7 @@ $-valid-states: (
 					$prefix: $block,
 					$key: $states-key,
 					$block: $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -130,7 +130,7 @@ $-valid-states: (
 					$prefix: $block,
 					$key: $modifiers-key,
 					$block: $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -145,7 +145,7 @@ $-valid-states: (
 					$prefix: $block,
 					$key: $transitions-key,
 					$block: $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -160,7 +160,7 @@ $-valid-states: (
 					$prefix: $block,
 					$key: $breakpoints-key,
 					$block: $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -180,7 +180,7 @@ $-valid-states: (
 	$key: 'modifier',
 	$block: null,
 	$modifier: '',
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$bps: (xxs: 0)
 ) {
@@ -204,7 +204,7 @@ $-valid-states: (
 					$variant: #{$key}-#{$item},
 					$deep: true,
 					$ignore: ('state', 'breakpoint', 'element', 'modifier'),
-					$props: $props
+					$use-custom-props: $use-custom-props
 				);
 			}
 
@@ -224,7 +224,7 @@ $-valid-states: (
 					$key: 'element',
 					$block: $block,
 					$modifier: $modifier + $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -239,7 +239,7 @@ $-valid-states: (
 					$key: 'state',
 					$block: $block,
 					$modifier: $modifier + $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -253,7 +253,7 @@ $-valid-states: (
 					$key: 'breakpoint',
 					$block: $block,
 					$modifier: $modifier + $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -268,7 +268,7 @@ $-valid-states: (
 					$key: 'modifier',
 					$block: $block,
 					$modifier: $modifier + $selector,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -288,7 +288,7 @@ $-valid-states: (
 	$key: 'element',
 	$block: null,
 	$modifier: null,
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$bps: (xxs: 0)
 ) {
@@ -349,7 +349,7 @@ $-valid-states: (
 					$variant: #{$key}-#{$element},
 					$deep: true,
 					$ignore: ('state', 'breakpoint'),
-					$props: $props
+					$use-custom-props: $use-custom-props
 				);
 			}
 
@@ -368,7 +368,7 @@ $-valid-states: (
 					$key: 'state',
 					$block: $selector,
 					$alias: $alias,
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -381,7 +381,7 @@ $-valid-states: (
 					$prefix: #{$prefix}-#{$key}-#{$element},
 					$key: 'breakpoint',
 					$block: list-to-string(($selector, $alias)),
-					$props: $props,
+					$use-custom-props: $use-custom-props,
 					$zero-specificity: $zero-specificity,
 					$bps: $bps
 				);
@@ -402,7 +402,7 @@ $-valid-states: (
 	$block: null,
 	$modifier: '',
 	$alias: null,
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$bps: (xxs: 0)
 ) {
@@ -449,7 +449,7 @@ $-valid-states: (
 						$variant: #{$key}-#{$state},
 						$ignore: ('element'),
 						$deep: true,
-						$props: $props
+						$use-custom-props: $use-custom-props
 					);
 				}
 
@@ -466,7 +466,7 @@ $-valid-states: (
 						$key: 'element',
 						$block: $block,
 						$modifier: $selector,
-						$props: $props,
+						$use-custom-props: $use-custom-props,
 						$zero-specificity: $zero-specificity,
 						$bps: $bps
 					);
@@ -481,7 +481,7 @@ $-valid-states: (
 						$key: 'breakpoint',
 						$block: $block,
 						$modifier: $selector,
-						$props: $props,
+						$use-custom-props: $use-custom-props,
 						$zero-specificity: $zero-specificity,
 						$bps: $bps
 					);
@@ -584,7 +584,7 @@ $-valid-states: (
 	$key: 'breakpoint',
 	$block: null,
 	$modifier: '',
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$bps: (xxs: 0)
 ) {
@@ -612,7 +612,7 @@ $-valid-states: (
 									$prefix: $prefix,
 									$variant: #{$key}-#{$breakpoint},
 									$deep: true,
-									$props: $props
+									$use-custom-props: $use-custom-props
 								);
 							}
 						}
@@ -627,7 +627,7 @@ $-valid-states: (
 									$prefix: $prefix,
 									$variant: #{$key}-#{$breakpoint},
 									$deep: true,
-									$props: $props
+									$use-custom-props: $use-custom-props
 								);
 							}
 						}
@@ -642,7 +642,7 @@ $-valid-states: (
 									$prefix: $prefix,
 									$variant: #{$key}-#{$breakpoint},
 									$deep: true,
-									$props: $props
+									$use-custom-props: $use-custom-props
 								);
 							}
 						}
@@ -657,7 +657,7 @@ $-valid-states: (
 							$prefix: $prefix,
 							$variant: #{$key}-#{$breakpoint},
 							$deep: true,
-							$props: $props
+							$use-custom-props: $use-custom-props
 						);
 					}
 				}
@@ -675,7 +675,7 @@ $-valid-states: (
 	$prefix: '',
 	$key: 'transition',
 	$block: null,
-	$props: true,
+	$use-custom-props: true,
 	$zero-specificity: true,
 	$bps: (xxs: 0)
 ) {
@@ -710,7 +710,7 @@ $-valid-states: (
 							$variant: #{$key}-#{$transition}-#{$state},
 							$deep: true,
 							$ignore: ('element'),
-							$props: $props,
+							$use-custom-props: $use-custom-props,
 							$bps: $bps
 						);
 					}
@@ -724,7 +724,7 @@ $-valid-states: (
 							$key: 'element',
 							$block: $block,
 							$modifier: $selector,
-							$props: $props,
+							$use-custom-props: $use-custom-props,
 							$zero-specificity: $zero-specificity,
 							$bps: $bps
 						);
@@ -739,7 +739,7 @@ $-valid-states: (
 							$key: 'breakpoint',
 							$block: $block,
 							$modifier: $selector,
-							$props: $props,
+							$use-custom-props: $use-custom-props,
 							$zero-specificity: $zero-specificity,
 							$bps: $bps
 						);
