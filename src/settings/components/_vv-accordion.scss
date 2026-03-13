@@ -13,7 +13,7 @@ $vv-accordion: (
 					background-color: var(--color-surface-2),
 					pseudo: (
 						before: (
-							rotate: 0,
+							rotate: 0deg,
 						),
 					),
 				),
@@ -105,7 +105,7 @@ $vv-accordion: (
 						before: (
 							left: auto,
 							[right]: var(--accordion-padding-right),
-							rotate: 0,
+							rotate: 0deg,
 						),
 					),
 				),
