@@ -346,6 +346,60 @@
 						$ignore: (modifier, element, state, breakpoint)
 					);
 				}
+			} @else if $state-name == 'selected' {
+				@include wrap-with-where($selector: '#{$base}[aria-selected="true"]', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'pressed' {
+				@include wrap-with-where($selector: '#{$base}[aria-pressed="true"]', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'checked-within' {
+				@include wrap-with-where($selector: '#{$base}:has(input:checked)', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'open' {
+				@include wrap-with-where($selector: '#{$base}[open]', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'close' {
+				@include wrap-with-where($selector: '#{$base}:not([open])', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
+			} @else if $state-name == 'dirty' {
+				@include wrap-with-where($selector: '#{$base}:not(:has(*:placeholder-shown))', $enabled: $zero-specificity) {
+					@include spread-map-into-attrs(
+						$map: $state-value,
+						$prefix: $prefix,
+						$use-custom-props: false,
+						$ignore: (modifier, element, state, breakpoint)
+					);
+				}
 			} @else if $state-name != 'current' {
 				@include wrap-with-where($selector: '#{$base}:not([disabled]):#{$state-name}', $enabled: $zero-specificity) {
 					@include spread-map-into-attrs(
