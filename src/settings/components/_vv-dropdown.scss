@@ -6,7 +6,7 @@ $vv-dropdown: (
 	display: flex,
 	flex-direction: column,
 	box-shadow: var(--shadow-lg),
-	width: 'max-content',
+	width: max-content,
 	element: (
 		list: (
 			_alias: 'div:is([role="menu"],[role="list-box"])',
