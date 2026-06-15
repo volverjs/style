@@ -83,7 +83,7 @@ packageJson.exports = Object.keys(packageJson.exports)
 		if (b === '.') {
 			return 1
 		}
-		return a > b
+		return a.localeCompare(b)
 	})
 	.reduce((exports, key) => {
 		exports[key] = packageJson.exports[key]

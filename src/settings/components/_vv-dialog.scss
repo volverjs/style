@@ -41,7 +41,7 @@ $vv-dialog: (
 		header: (
 			_alias: '> article > header',
 			display: flex,
-			flex-wrap: no-wrap,
+			flex-wrap: nowrap,
 			justify-content: space-between,
 			align-items: center,
 			font-size: var(--text-md),

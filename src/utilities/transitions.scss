@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use 'sass:string';
 @use '../context' as *;
 
@@ -39,11 +38,8 @@
 		transition-property: string.unquote($value);
 
 		@if $property != 'none' {
-			transition-duration: map.get($transition-duration-delay, 300);
-			transition-timing-function: map.get(
-				$transition-timing-function,
-				'in-out'
-			);
+			transition-duration: var(--duration-300);
+			transition-timing-function: var(--ease-in-out);
 		}
 	}
 }

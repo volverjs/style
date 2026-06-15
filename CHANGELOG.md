@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.24] - 2026-03-13
+## [0.1.24] - 2026-06-15
 
 ### Added
 * **CSS Relative Color Syntax support**: New color generation system using native CSS `hsl(from color h s calc(...))`. Brand/accent colors use proportional scaling (`l * 1.1`), while surface/word colors use fixed steps (`l + 12`). This significantly reduces the number of CSS variables, improving Chrome DevTools inspector performance.
@@ -15,14 +15,20 @@ All notable changes to this project will be documented in this file.
   - `$layer-prefix` - Prefix for layer names (default: `volver`)
   - `$use-custom-props-for-components: true` - Enable/disable CSS variables in components (default: `true`)
 * New color functions: `relative-color-value()`, `color-mix-shades-map()`, `color-mix-darken-map()`, `color-mix-lighten-map()`, `color-mix-alpha-map()`
+* `contrast` filter props (`--contrast-*`) and utility classes (`.contrast-*`).
+* `design-tokens.json` is now regenerated on build and shipped with the package.
 
 ### Changed
 * Migrated `if()` function calls to new Sass CSS-compatible syntax (`if(sass($condition): $value; else: $fallback)`)
 * Color shades now use single `--color-{name}` variable with Relative Color Syntax instead of separate `-hue`, `-saturation`, `-lightness` variables
 * Updated box-shadow, glass effects, and component modifiers to use modern CSS color functions
+* `.transition-*` utilities now use the `--duration-*` / `--ease-*` custom properties so they react to theming.
 
 ### Fixed
 * Reduced CSS output size and number of CSS custom properties for better browser DevTools performance
+* Invalid `flex-wrap: no-wrap` value in `vv-breadcrumb` and `vv-dialog`.
+* `:export` color tokens not being emitted due to a wrong type check.
+* Aligned focus and disabled states between `vv-avatar`, `vv-radio` and `vv-tab`.
 
 ## [0.1.23] - 2025-10-21
 

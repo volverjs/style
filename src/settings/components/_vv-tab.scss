@@ -1,6 +1,7 @@
 $vv-tab: (
 	display: flex,
 	flex-direction: column,
+	min-width: 0,
 	element: (
 		panel: (
 			display: none,

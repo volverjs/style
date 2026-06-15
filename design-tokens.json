@@ -6,442 +6,442 @@
         "type": "color"
       },
       "shadow": {
-        "value": "hsla(209.8203592814deg, 50%, 20%, 1)",
+        "value": "hsl(209.8203592814, 50%, 20%)",
         "type": "color"
       },
       "backdrop": {
-        "value": "hsla(209.8203592814deg, 50%, 20%, 0.2)",
+        "value": "hsla(209.8203592814, 50%, 20%, 0.2)",
         "type": "color"
       },
       "black": {
-        "value": "hsla(0deg, 0%, 0%, 1)",
+        "value": "#000",
         "type": "color"
       },
       "white": {
-        "value": "hsla(0deg, 0%, 100%, 1)",
+        "value": "#fff",
         "type": "color"
       },
       "word": {
         "word": {
-          "value": "hsla(209.8203592814deg, 15%, 10%, 1)",
+          "value": "hsl(209.8203592814, 15%, 10%)",
           "type": "color"
         },
         "word-1": {
-          "value": "hsl(209.8203592814deg, 15%, 22%)",
+          "value": "hsl(from var(--color-word) h s calc(l + 12))",
           "type": "color"
         },
         "word-2": {
-          "value": "hsl(209.8203592814deg, 15%, 34%)",
+          "value": "hsl(from var(--color-word) h s calc(l + 24))",
           "type": "color"
         },
         "word-3": {
-          "value": "hsl(209.8203592814deg, 15%, 46%)",
+          "value": "hsl(from var(--color-word) h s calc(l + 36))",
           "type": "color"
         },
         "word-4": {
-          "value": "hsl(209.8203592814deg, 15%, 58%)",
+          "value": "hsl(from var(--color-word) h s calc(l + 48))",
           "type": "color"
         },
         "word-5": {
-          "value": "hsl(209.8203592814deg, 15%, 70%)",
+          "value": "hsl(from var(--color-word) h s calc(l + 60))",
           "type": "color"
         }
       },
       "surface": {
         "surface": {
-          "value": "hsla(209.8203592814deg, 10%, 98%, 1)",
+          "value": "hsl(209.8203592814, 10%, 100%)",
           "type": "color"
         },
         "surface-1": {
-          "value": "hsl(209.8203592814deg, 10%, 96%)",
+          "value": "hsl(from var(--color-surface) h s calc(l - 2))",
           "type": "color"
         },
         "surface-2": {
-          "value": "hsl(209.8203592814deg, 10%, 94%)",
+          "value": "hsl(from var(--color-surface) h s calc(l - 4))",
           "type": "color"
         },
         "surface-3": {
-          "value": "hsl(209.8203592814deg, 10%, 92%)",
+          "value": "hsl(from var(--color-surface) h s calc(l - 6))",
           "type": "color"
         },
         "surface-4": {
-          "value": "hsl(209.8203592814deg, 10%, 90%)",
+          "value": "hsl(from var(--color-surface) h s calc(l - 8))",
           "type": "color"
         },
         "surface-5": {
-          "value": "hsl(209.8203592814deg, 10%, 88%)",
+          "value": "hsl(from var(--color-surface) h s calc(l - 10))",
           "type": "color"
         },
         "surface-brand": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 90%)",
+          "value": "hsl(from var(--color-brand) h s 90%)",
           "type": "color"
         },
         "surface-accent": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 90%)",
+          "value": "hsl(from var(--color-accent) h s 90%)",
           "type": "color"
         },
         "surface-success": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 90%)",
+          "value": "hsl(from var(--color-success) h s 90%)",
           "type": "color"
         },
         "surface-danger": {
-          "value": "hsl(0deg, 66.6666666667%, 90%)",
+          "value": "hsl(from var(--color-danger) h s 90%)",
           "type": "color"
         },
         "surface-info": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 90%)",
+          "value": "hsl(from var(--color-info) h s 90%)",
           "type": "color"
         },
         "surface-warning": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 90%)",
+          "value": "hsl(from var(--color-warning) h s 90%)",
           "type": "color"
         }
       },
       "alpha": {
         "alpha": {
-          "value": "hsla(0deg, 0%, 0%, 0)",
+          "value": "hsla(0, 0%, 0%, 0)",
           "type": "color"
         },
         "alpha-1": {
-          "value": "hsla(0deg, 0%, 0%, 0.05)",
+          "value": "color-mix(in srgb, var(--color-alpha), transparent 95%)",
           "type": "color"
         },
         "alpha-2": {
-          "value": "hsla(0deg, 0%, 0%, 0.1)",
+          "value": "color-mix(in srgb, var(--color-alpha), transparent 90%)",
           "type": "color"
         },
         "alpha-3": {
-          "value": "hsla(0deg, 0%, 0%, 0.15)",
+          "value": "color-mix(in srgb, var(--color-alpha), transparent 85%)",
           "type": "color"
         },
         "alpha-4": {
-          "value": "hsla(0deg, 0%, 0%, 0.2)",
+          "value": "color-mix(in srgb, var(--color-alpha), transparent 80%)",
           "type": "color"
         },
         "alpha-5": {
-          "value": "hsla(0deg, 0%, 0%, 0.25)",
+          "value": "color-mix(in srgb, var(--color-alpha), transparent 75%)",
           "type": "color"
         }
       },
       "brand": {
         "brand": {
-          "value": "hsla(209.8203592814deg, 79.1469194313%, 41.3725490196%, 1)",
-          "type": "color"
-        },
-        "brand-lighten-5": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 62.05882%)",
-          "type": "color"
-        },
-        "brand-lighten-4": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 57.92157%)",
-          "type": "color"
-        },
-        "brand-lighten-3": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 53.78431%)",
-          "type": "color"
-        },
-        "brand-lighten-2": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 49.64706%)",
+          "value": "#166abd",
           "type": "color"
         },
         "brand-lighten-1": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 45.5098%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "brand-lighten-2": {
+          "value": "hsl(from var(--color-brand) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "brand-lighten-3": {
+          "value": "hsl(from var(--color-brand) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "brand-lighten-4": {
+          "value": "hsl(from var(--color-brand) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "brand-lighten-5": {
+          "value": "hsl(from var(--color-brand) h s calc(l * 1.5))",
           "type": "color"
         },
         "brand-darken-1": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 37.23529%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 0.9))",
           "type": "color"
         },
         "brand-darken-2": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 33.09804%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 0.8))",
           "type": "color"
         },
         "brand-darken-3": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 28.96078%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 0.7))",
           "type": "color"
         },
         "brand-darken-4": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 24.82353%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 0.6))",
           "type": "color"
         },
         "brand-darken-5": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 20.68627%)",
+          "value": "hsl(from var(--color-brand) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "accent": {
         "accent": {
-          "value": "hsla(291.2408759124deg, 63.7209302326%, 42.1568627451%, 1)",
-          "type": "color"
-        },
-        "accent-lighten-5": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 63.23529%)",
-          "type": "color"
-        },
-        "accent-lighten-4": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 59.01961%)",
-          "type": "color"
-        },
-        "accent-lighten-3": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 54.80392%)",
-          "type": "color"
-        },
-        "accent-lighten-2": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 50.58824%)",
+          "value": "#9c27b0",
           "type": "color"
         },
         "accent-lighten-1": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 46.37255%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "accent-lighten-2": {
+          "value": "hsl(from var(--color-accent) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "accent-lighten-3": {
+          "value": "hsl(from var(--color-accent) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "accent-lighten-4": {
+          "value": "hsl(from var(--color-accent) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "accent-lighten-5": {
+          "value": "hsl(from var(--color-accent) h s calc(l * 1.5))",
           "type": "color"
         },
         "accent-darken-1": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 37.94118%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 0.9))",
           "type": "color"
         },
         "accent-darken-2": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 33.72549%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 0.8))",
           "type": "color"
         },
         "accent-darken-3": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 29.5098%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 0.7))",
           "type": "color"
         },
         "accent-darken-4": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 25.29412%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 0.6))",
           "type": "color"
         },
         "accent-darken-5": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 21.07843%)",
+          "value": "hsl(from var(--color-accent) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "success": {
         "success": {
-          "value": "hsla(134.0186915888deg, 69.9346405229%, 30%, 1)",
-          "type": "color"
-        },
-        "success-lighten-5": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 45%)",
-          "type": "color"
-        },
-        "success-lighten-4": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 42%)",
-          "type": "color"
-        },
-        "success-lighten-3": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 39%)",
-          "type": "color"
-        },
-        "success-lighten-2": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 36%)",
+          "value": "#178230",
           "type": "color"
         },
         "success-lighten-1": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 33%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "success-lighten-2": {
+          "value": "hsl(from var(--color-success) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "success-lighten-3": {
+          "value": "hsl(from var(--color-success) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "success-lighten-4": {
+          "value": "hsl(from var(--color-success) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "success-lighten-5": {
+          "value": "hsl(from var(--color-success) h s calc(l * 1.5))",
           "type": "color"
         },
         "success-darken-1": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 27%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 0.9))",
           "type": "color"
         },
         "success-darken-2": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 24%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 0.8))",
           "type": "color"
         },
         "success-darken-3": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 21%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 0.7))",
           "type": "color"
         },
         "success-darken-4": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 18%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 0.6))",
           "type": "color"
         },
         "success-darken-5": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 15%)",
+          "value": "hsl(from var(--color-success) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "danger": {
         "danger": {
-          "value": "hsla(0deg, 66.6666666667%, 41.1764705882%, 1)",
-          "type": "color"
-        },
-        "danger-lighten-5": {
-          "value": "hsl(0deg, 66.6666666667%, 61.76471%)",
-          "type": "color"
-        },
-        "danger-lighten-4": {
-          "value": "hsl(0deg, 66.6666666667%, 57.64706%)",
-          "type": "color"
-        },
-        "danger-lighten-3": {
-          "value": "hsl(0deg, 66.6666666667%, 53.52941%)",
-          "type": "color"
-        },
-        "danger-lighten-2": {
-          "value": "hsl(0deg, 66.6666666667%, 49.41176%)",
+          "value": "#af2323",
           "type": "color"
         },
         "danger-lighten-1": {
-          "value": "hsl(0deg, 66.6666666667%, 45.29412%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "danger-lighten-2": {
+          "value": "hsl(from var(--color-danger) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "danger-lighten-3": {
+          "value": "hsl(from var(--color-danger) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "danger-lighten-4": {
+          "value": "hsl(from var(--color-danger) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "danger-lighten-5": {
+          "value": "hsl(from var(--color-danger) h s calc(l * 1.5))",
           "type": "color"
         },
         "danger-darken-1": {
-          "value": "hsl(0deg, 66.6666666667%, 37.05882%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 0.9))",
           "type": "color"
         },
         "danger-darken-2": {
-          "value": "hsl(0deg, 66.6666666667%, 32.94118%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 0.8))",
           "type": "color"
         },
         "danger-darken-3": {
-          "value": "hsl(0deg, 66.6666666667%, 28.82353%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 0.7))",
           "type": "color"
         },
         "danger-darken-4": {
-          "value": "hsl(0deg, 66.6666666667%, 24.70588%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 0.6))",
           "type": "color"
         },
         "danger-darken-5": {
-          "value": "hsl(0deg, 66.6666666667%, 20.58824%)",
+          "value": "hsl(from var(--color-danger) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "info": {
         "info": {
-          "value": "hsla(190.2673796791deg, 83.1111111111%, 55.8823529412%, 1)",
-          "type": "color"
-        },
-        "info-lighten-5": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 83.82353%)",
-          "type": "color"
-        },
-        "info-lighten-4": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 78.23529%)",
-          "type": "color"
-        },
-        "info-lighten-3": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 72.64706%)",
-          "type": "color"
-        },
-        "info-lighten-2": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 67.05882%)",
+          "value": "#31ccec",
           "type": "color"
         },
         "info-lighten-1": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 61.47059%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "info-lighten-2": {
+          "value": "hsl(from var(--color-info) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "info-lighten-3": {
+          "value": "hsl(from var(--color-info) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "info-lighten-4": {
+          "value": "hsl(from var(--color-info) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "info-lighten-5": {
+          "value": "hsl(from var(--color-info) h s calc(l * 1.5))",
           "type": "color"
         },
         "info-darken-1": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 50.29412%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 0.9))",
           "type": "color"
         },
         "info-darken-2": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 44.70588%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 0.8))",
           "type": "color"
         },
         "info-darken-3": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 39.11765%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 0.7))",
           "type": "color"
         },
         "info-darken-4": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 33.52941%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 0.6))",
           "type": "color"
         },
         "info-darken-5": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 27.94118%)",
+          "value": "hsl(from var(--color-info) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "warning": {
         "warning": {
-          "value": "hsla(43.8202247191deg, 78.7610619469%, 55.6862745098%, 1)",
-          "type": "color"
-        },
-        "warning-lighten-5": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 83.52941%)",
-          "type": "color"
-        },
-        "warning-lighten-4": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 77.96078%)",
-          "type": "color"
-        },
-        "warning-lighten-3": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 72.39216%)",
-          "type": "color"
-        },
-        "warning-lighten-2": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 66.82353%)",
+          "value": "#e7b735",
           "type": "color"
         },
         "warning-lighten-1": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 61.2549%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 1.1))",
+          "type": "color"
+        },
+        "warning-lighten-2": {
+          "value": "hsl(from var(--color-warning) h s calc(l * 1.2))",
+          "type": "color"
+        },
+        "warning-lighten-3": {
+          "value": "hsl(from var(--color-warning) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "warning-lighten-4": {
+          "value": "hsl(from var(--color-warning) h s calc(l * 1.4))",
+          "type": "color"
+        },
+        "warning-lighten-5": {
+          "value": "hsl(from var(--color-warning) h s calc(l * 1.5))",
           "type": "color"
         },
         "warning-darken-1": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 50.11765%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 0.9))",
           "type": "color"
         },
         "warning-darken-2": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 44.54902%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 0.8))",
           "type": "color"
         },
         "warning-darken-3": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 38.98039%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 0.7))",
           "type": "color"
         },
         "warning-darken-4": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 33.41176%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 0.6))",
           "type": "color"
         },
         "warning-darken-5": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 27.84314%)",
+          "value": "hsl(from var(--color-warning) h s calc(l * 0.5))",
           "type": "color"
         }
       },
       "gray": {
         "gray": {
-          "value": "hsla(209.8203592814deg, 15%, 50%, 1)",
-          "type": "color"
-        },
-        "gray-lighten-5": {
-          "value": "hsl(209.8203592814deg, 15%, 87.5%)",
-          "type": "color"
-        },
-        "gray-lighten-4": {
-          "value": "hsl(209.8203592814deg, 15%, 80%)",
-          "type": "color"
-        },
-        "gray-lighten-3": {
-          "value": "hsl(209.8203592814deg, 15%, 72.5%)",
-          "type": "color"
-        },
-        "gray-lighten-2": {
-          "value": "hsl(209.8203592814deg, 15%, 65%)",
+          "value": "hsl(209.8203592814, 15%, 50%)",
           "type": "color"
         },
         "gray-lighten-1": {
-          "value": "hsl(209.8203592814deg, 15%, 57.5%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 1.15))",
+          "type": "color"
+        },
+        "gray-lighten-2": {
+          "value": "hsl(from var(--color-gray) h s calc(l * 1.3))",
+          "type": "color"
+        },
+        "gray-lighten-3": {
+          "value": "hsl(from var(--color-gray) h s calc(l * 1.45))",
+          "type": "color"
+        },
+        "gray-lighten-4": {
+          "value": "hsl(from var(--color-gray) h s calc(l * 1.6))",
+          "type": "color"
+        },
+        "gray-lighten-5": {
+          "value": "hsl(from var(--color-gray) h s calc(l * 1.75))",
           "type": "color"
         },
         "gray-darken-1": {
-          "value": "hsl(209.8203592814deg, 15%, 42.5%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 0.85))",
           "type": "color"
         },
         "gray-darken-2": {
-          "value": "hsl(209.8203592814deg, 15%, 35%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 0.7))",
           "type": "color"
         },
         "gray-darken-3": {
-          "value": "hsl(209.8203592814deg, 15%, 27.5%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 0.55))",
           "type": "color"
         },
         "gray-darken-4": {
-          "value": "hsl(209.8203592814deg, 15%, 20%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 0.4))",
           "type": "color"
         },
         "gray-darken-5": {
-          "value": "hsl(209.8203592814deg, 15%, 12.5%)",
+          "value": "hsl(from var(--color-gray) h s calc(l * 0.25))",
           "type": "color"
         }
       }
@@ -1351,77 +1351,77 @@
     "colors": {
       "word": {
         "word": {
-          "value": "hsla(209.8203592814deg, 15%, 85%, 1)",
+          "value": "hsl(209.8203592814, 15%, 85%)",
           "type": "color"
         },
         "word-1": {
-          "value": "hsl(209.8203592814deg, 15%, 73%)",
+          "value": "hsl(from var(--color-word) h s calc(l - 12))",
           "type": "color"
         },
         "word-2": {
-          "value": "hsl(209.8203592814deg, 15%, 61%)",
+          "value": "hsl(from var(--color-word) h s calc(l - 24))",
           "type": "color"
         },
         "word-3": {
-          "value": "hsl(209.8203592814deg, 15%, 49%)",
+          "value": "hsl(from var(--color-word) h s calc(l - 36))",
           "type": "color"
         },
         "word-4": {
-          "value": "hsl(209.8203592814deg, 15%, 37%)",
+          "value": "hsl(from var(--color-word) h s calc(l - 48))",
           "type": "color"
         },
         "word-5": {
-          "value": "hsl(209.8203592814deg, 15%, 25%)",
+          "value": "hsl(from var(--color-word) h s calc(l - 60))",
           "type": "color"
         }
       },
       "surface": {
         "surface": {
-          "value": "hsla(209.8203592814deg, 10%, 5%, 1)",
+          "value": "hsl(209.8203592814, 10%, 5%)",
           "type": "color"
         },
         "surface-1": {
-          "value": "hsl(209.8203592814deg, 10%, 10%)",
+          "value": "hsl(from var(--color-surface) h s calc(l + 5))",
           "type": "color"
         },
         "surface-2": {
-          "value": "hsl(209.8203592814deg, 10%, 15%)",
+          "value": "hsl(from var(--color-surface) h s calc(l + 10))",
           "type": "color"
         },
         "surface-3": {
-          "value": "hsl(209.8203592814deg, 10%, 20%)",
+          "value": "hsl(from var(--color-surface) h s calc(l + 15))",
           "type": "color"
         },
         "surface-4": {
-          "value": "hsl(209.8203592814deg, 10%, 25%)",
+          "value": "hsl(from var(--color-surface) h s calc(l + 20))",
           "type": "color"
         },
         "surface-5": {
-          "value": "hsl(209.8203592814deg, 10%, 30%)",
+          "value": "hsl(from var(--color-surface) h s calc(l + 25))",
           "type": "color"
         },
         "surface-brand": {
-          "value": "hsl(209.8203592814deg, 79.1469194313%, 10%)",
+          "value": "hsl(from var(--color-brand) h s 10%)",
           "type": "color"
         },
         "surface-accent": {
-          "value": "hsl(291.2408759124deg, 63.7209302326%, 10%)",
+          "value": "hsl(from var(--color-accent) h s 10%)",
           "type": "color"
         },
         "surface-success": {
-          "value": "hsl(134.0186915888deg, 69.9346405229%, 10%)",
+          "value": "hsl(from var(--color-success) h s 10%)",
           "type": "color"
         },
         "surface-danger": {
-          "value": "hsl(0deg, 66.6666666667%, 10%)",
+          "value": "hsl(from var(--color-danger) h s 10%)",
           "type": "color"
         },
         "surface-info": {
-          "value": "hsl(190.2673796791deg, 83.1111111111%, 10%)",
+          "value": "hsl(from var(--color-info) h s 10%)",
           "type": "color"
         },
         "surface-warning": {
-          "value": "hsl(43.8202247191deg, 78.7610619469%, 10%)",
+          "value": "hsl(from var(--color-warning) h s 10%)",
           "type": "color"
         }
       }
