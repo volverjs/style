@@ -1,12 +1,19 @@
 @use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
 @use '../tools/functions' as *;
+@use '../config' as config;
 
-// color variables
+// ============================================
+// Color Variables
+// ============================================
 $color-scheme: light !default;
 $color-transparent: transparent !default;
 $color-black: #000 !default;
 $color-white: #fff !default;
+
+// Primary colors - accepts any CSS color format (hex, rgb, hsl, oklch, etc.)
 $color-brand: #166abd !default;
 $color-accent: #9c27b0 !default;
 $color-success: #178230 !default;
@@ -16,58 +23,81 @@ $color-warning: #e7b735 !default;
 $color-gray: hsl(color-hue($color-brand) 15% 50%) !default;
 $color-word: hsl(color-hue($color-brand) 15% 10%) !default;
 $color-surface: hsl(color-hue($color-brand) 10% 100%) !default;
-$color-surface-palette: (
-	brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
-	accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
-	success: hsl(var(--color-success-hue) var(--color-success-saturation) 90%),
-	danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
-	info: hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
-	warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
-) !default;
-$color-surface-palette-no-vars: (
-	brand: hsl(color-hue($color-brand) color-saturation($color-brand) 90%),
-	accent: hsl(color-hue($color-accent) color-saturation($color-accent) 90%),
-	success: hsl(color-hue($color-success) color-saturation($color-success) 90%),
-	danger: hsl(color-hue($color-danger) color-saturation($color-danger) 90%),
-	info: hsl(color-hue($color-info) color-saturation($color-info) 90%),
-	warning: hsl(color-hue($color-warning) color-saturation($color-warning) 90%),
-) !default;
 $color-shadow: hsl(color-hue($color-brand) 50% 20%) !default;
 $color-backdrop: hsla(color-hue($color-brand) 50% 20% / 20%) !default;
 $color-alpha: hsl(0deg 0% 0% / 0%) !default;
 
-// colors map
-$colors: (
-	scheme: $color-scheme,
-	transparent: $color-transparent,
-	shadow: hsla-map($color-shadow, 'shadow'),
-	backdrop: hsla-map($color-backdrop, 'backdrop'),
-	black: hsla-map($color-black, 'black'),
-	white: hsla-map($color-white, 'white'),
-	word:
-		color-lighten-map(
-			$color-word,
-			'word',
-			$scale: 12%,
-			$fixed: true,
-			$inverted: false
-		),
-	surface:
-		map.merge(
-			color-darken-map(
-				$color-surface,
-				'surface',
-				$scale: 2%,
-				$fixed: true
+// ============================================
+// Surface Palette (semantic surface colors)
+// ============================================
+$color-surface-palette: if(
+	sass(config.$use-color-mix):
+		(
+			brand: string.unquote('hsl(from var(--color-brand) h s 90%)'),
+			accent: string.unquote('hsl(from var(--color-accent) h s 90%)'),
+			success: string.unquote('hsl(from var(--color-success) h s 90%)'),
+			danger: string.unquote('hsl(from var(--color-danger) h s 90%)'),
+			info: string.unquote('hsl(from var(--color-info) h s 90%)'),
+			warning: string.unquote('hsl(from var(--color-warning) h s 90%)'),
+		);
+	else:
+		(
+			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
+			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
+			success: hsl(var(--color-success-hue) var(--color-success-saturation) 90%),
+			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
+			info: hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
+			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
+		)
+) !default;
+
+// ============================================
+// Colors Map
+// Override this map or use map.merge() to customize
+// ============================================
+$colors: if(
+	sass(config.$use-color-mix):
+		(
+			scheme: $color-scheme,
+			transparent: $color-transparent,
+			shadow: color-base-map($color-shadow, 'shadow'),
+			backdrop: color-base-map($color-backdrop, 'backdrop'),
+			black: color-base-map($color-black, 'black'),
+			white: color-base-map($color-white, 'white'),
+			word: color-mix-lighten-map($color-word, 'word', $steps: 5, $scale: 12%),
+			surface: map.merge(
+				color-mix-darken-map($color-surface, 'surface', $steps: 5, $scale: 2%),
+				$color-surface-palette
 			),
-			$color-surface-palette
-		),
-	alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
-	brand: color-shades-map($color-brand, 'brand'),
-	accent: color-shades-map($color-accent, 'accent'),
-	success: color-shades-map($color-success, 'success'),
-	danger: color-shades-map($color-danger, 'danger'),
-	info: color-shades-map($color-info, 'info'),
-	warning: color-shades-map($color-warning, 'warning'),
-	gray: color-shades-map($color-gray, 'gray', $scale: 15%),
+			alpha: color-mix-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
+			brand: color-mix-shades-map($color-brand, 'brand'),
+			accent: color-mix-shades-map($color-accent, 'accent'),
+			success: color-mix-shades-map($color-success, 'success'),
+			danger: color-mix-shades-map($color-danger, 'danger'),
+			info: color-mix-shades-map($color-info, 'info'),
+			warning: color-mix-shades-map($color-warning, 'warning'),
+			gray: color-mix-shades-map($color-gray, 'gray', $scale: 15%),
+		);
+	else:
+		(
+			scheme: $color-scheme,
+			transparent: $color-transparent,
+			shadow: hsla-map($color-shadow, 'shadow'),
+			backdrop: hsla-map($color-backdrop, 'backdrop'),
+			black: hsla-map($color-black, 'black'),
+			white: hsla-map($color-white, 'white'),
+			word: color-lighten-map($color-word, 'word', $scale: 12%, $fixed: true, $inverted: false),
+			surface: map.merge(
+				color-darken-map($color-surface, 'surface', $scale: 2%, $fixed: true),
+				$color-surface-palette
+			),
+			alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
+			brand: color-shades-map($color-brand, 'brand'),
+			accent: color-shades-map($color-accent, 'accent'),
+			success: color-shades-map($color-success, 'success'),
+			danger: color-shades-map($color-danger, 'danger'),
+			info: color-shades-map($color-info, 'info'),
+			warning: color-shades-map($color-warning, 'warning'),
+			gray: color-shades-map($color-gray, 'gray', $scale: 15%),
+		)
 ) !default;

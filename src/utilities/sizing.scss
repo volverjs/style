@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // width / height / max-width / max-height / min-width / min-height
 @each $class,
 	$attribute
@@ -84,3 +85,5 @@
 	$bps: $breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

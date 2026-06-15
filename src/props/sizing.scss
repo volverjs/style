@@ -1,6 +1,8 @@
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	@include spread-map-into-props($width, $prefix: w);
-	@include spread-map-into-props($height, $prefix: h);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		@include spread-map-into-props($width, $prefix: w);
+		@include spread-map-into-props($height, $prefix: h);
+	}
 }

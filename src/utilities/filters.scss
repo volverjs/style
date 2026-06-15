@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // blur
 @include spread-map-into-utilities(
 	$map: $blur,
@@ -12,6 +13,14 @@
 @include spread-map-into-utilities(
 	$map: $brightness,
 	$class: brightness,
+	$attribute: filter,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
+// contrast
+@include spread-map-into-utilities(
+	$map: $contrast,
+	$class: contrast,
 	$attribute: filter,
 	$zero-specificity: $zero-specificity-for-utilities
 );
@@ -31,3 +40,5 @@
 	$attribute: backdrop-filter,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

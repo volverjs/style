@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // font-family
 @include spread-map-into-utilities(
 	$map: $font-family,
@@ -263,3 +264,5 @@
 	$attribute: white-space,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

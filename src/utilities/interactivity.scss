@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // cursor
 @include spread-map-into-utilities(
 	$map: $cursor,
@@ -24,3 +25,5 @@
 	$attribute: user-select,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

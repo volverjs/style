@@ -59,19 +59,41 @@ $dark-vv-alert: (
 			modifier: (
 				danger: (
 					border-color: var(--color-danger-lighten-3),
+					element: (
+						header: (
+							color: var(--color-white)
+						),
+					),
 				),
 				brand: (
 					border-color: var(--color-brand-lighten-3),
+					element: (
+						header: (
+							color: var(--color-white)
+						),
+					),
 				),
 				success: (
 					border-color: var(--color-success-lighten-3),
+					element: (
+						header: (
+							color: var(--color-white)
+						),
+					),
 				),
 				accent: (
 					border-color: var(--color-accent-lighten-3),
-				),
-				warning: (
 					element: (
 						header: (
+							color: var(--color-white)
+						),
+					),
+				),
+				warning: (
+					border-color: var(--color-warning-darken-5),
+					element: (
+						header: (
+							color: var(--color-white),
 							background-color: var(--color-warning-darken-5),
 						),
 					),
@@ -80,6 +102,7 @@ $dark-vv-alert: (
 					border-color: var(--color-info-darken-2),
 					element: (
 						header: (
+							color: var(--color-white),
 							background-color: var(--color-info-darken-5),
 						),
 					),

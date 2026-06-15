@@ -1,167 +1,199 @@
 @use '../context' as *;
 @use 'sass:string';
 
-:where(:host, :root, .theme) {
-	// animation
-	@media (prefers-reduced-motion: no-preference) {
-		// transition-property
-		@include spread-map-into-props(
-			$transition-property,
-			$prefix: transition-property
-		);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		// Default values for reduced-motion users
+		// These ensure variables are always defined but with no animation
 
-		// duration
-		@include spread-map-into-props(
-			$transition-duration-delay,
-			$prefix: duration
-		);
+		// duration - set all to 0s for reduced motion
+		@each $key, $value in $transition-duration-delay {
+			--duration-#{$key}: 0s;
+		}
 
-		// ease
+		// ease - keep timing functions but they won't matter with 0s duration
 		@include spread-map-into-props(
 			$transition-timing-function,
 			$prefix: ease
 		);
 
-		// animation
-		@include spread-map-into-props($animation, animation);
+		// transition-property - define properties but transitions will be none
+		@include spread-map-into-props(
+			$transition-property,
+			$prefix: transition-property
+		);
 
-		// transition
+		// transition - set all to none for reduced motion
 		@each $property, $value in $transition-property {
-			@if $property != 'none' {
-				$transition: '';
+			--transition-#{$property}: none;
+		}
 
-				@each $prop in str-split($value, ', ') {
-					$transition: $transition +
-						$prop +
-						' var(--duration-300) var(--ease-in-out), ';
+		// animation - set all to none for reduced motion
+		@each $key, $value in $animation {
+			--animation-#{$key}: none;
+		}
+
+		// animation
+		@media (prefers-reduced-motion: no-preference) {
+			// transition-property
+			@include spread-map-into-props(
+				$transition-property,
+				$prefix: transition-property
+			);
+
+			// duration
+			@include spread-map-into-props(
+				$transition-duration-delay,
+				$prefix: duration
+			);
+
+			// ease
+			@include spread-map-into-props(
+				$transition-timing-function,
+				$prefix: ease
+			);
+
+			// animation
+			@include spread-map-into-props($animation, animation);
+
+			// transition
+			@each $property, $value in $transition-property {
+				@if $property != 'none' {
+					$transition: '';
+
+					@each $prop in str-split($value, ', ') {
+						$transition: $transition +
+							$prop +
+							' var(--duration-300) var(--ease-in-out), ';
+					}
+
+					$transition: string.slice($transition, 1, -3);
+
+					--transition-#{$property}: #{$transition};
+				} @else {
+					--transition-#{$property}: none;
 				}
-
-				$transition: string.slice($transition, 1, -3);
-
-				--transition-#{$property}: #{$transition};
-			} @else {
-				--transition-#{$property}: none;
 			}
 		}
 	}
-}
 
-// keyframes
-@keyframes indeterminate {
-	0% {
-		scale: 0 1;
+	// keyframes
+	@keyframes indeterminate {
+		0% {
+			scale: 0 1;
+		}
+
+		50% {
+			scale: 1;
+			transform-origin: left;
+		}
+
+		51% {
+			scale: 1;
+			transform-origin: center right;
+		}
+
+		100% {
+			scale: 0 1;
+			transform-origin: center right;
+		}
 	}
 
-	50% {
-		scale: 1;
-		transform-origin: left;
+	@keyframes spin {
+		from {
+			rotate: 0deg;
+		}
+
+		to {
+			rotate: 360deg;
+		}
 	}
 
-	51% {
-		scale: 1;
-		transform-origin: center right;
+	@keyframes ping {
+		75%,
+		100% {
+			scale: 2;
+			opacity: 0;
+		}
 	}
 
-	100% {
-		scale: 0 1;
-		transform-origin: center right;
-	}
-}
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
 
-@keyframes spin {
-	from {
-		rotate: 0deg;
-	}
-
-	to {
-		rotate: 360deg;
-	}
-}
-
-@keyframes ping {
-	75%,
-	100% {
-		scale: 2;
-		opacity: 0;
-	}
-}
-
-@keyframes pulse {
-	0%,
-	100% {
-		opacity: 1;
+		50% {
+			opacity: 0.5;
+		}
 	}
 
-	50% {
-		opacity: 0.5;
-	}
-}
+	@keyframes bounce {
+		0%,
+		100% {
+			translate: 0 -25%;
+			animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+		}
 
-@keyframes bounce {
-	0%,
-	100% {
-		translate: 0 -25%;
-		animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-	}
-
-	50% {
-		translate: 0;
-		animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-	}
-}
-
-@keyframes progress-indeterminate {
-	0% {
-		background-position: 200% 0;
+		50% {
+			translate: 0;
+			animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+		}
 	}
 
-	100% {
-		background-position: -200% 0;
-	}
-}
+	@keyframes progress-indeterminate {
+		0% {
+			background-position: 200% 0;
+		}
 
-@keyframes pie-masks {
-	0% {
-		opacity: 1;
-	}
-
-	50%,
-	100% {
-		opacity: 0;
-	}
-}
-
-@keyframes fade-out {
-	95% {
-		opacity: 1;
+		100% {
+			background-position: -200% 0;
+		}
 	}
 
-	100% {
-		opacity: 0;
-	}
-}
+	@keyframes pie-masks {
+		0% {
+			opacity: 1;
+		}
 
-@keyframes shine {
-	to {
-		background-position-x: -200%;
-	}
-}
-
-@keyframes clippath {
-	0%,
-	100% {
-		clip-path: inset(0 0 95% 0);
+		50%,
+		100% {
+			opacity: 0;
+		}
 	}
 
-	25% {
-		clip-path: inset(0 95% 0 0);
+	@keyframes fade-out {
+		95% {
+			opacity: 1;
+		}
+
+		100% {
+			opacity: 0;
+		}
 	}
 
-	50% {
-		clip-path: inset(95% 0 0 0);
+	@keyframes shine {
+		to {
+			background-position-x: -200%;
+		}
 	}
 
-	75% {
-		clip-path: inset(0 0 0 95%);
+	@keyframes clippath {
+		0%,
+		100% {
+			clip-path: inset(0 0 95% 0);
+		}
+
+		25% {
+			clip-path: inset(0 95% 0 0);
+		}
+
+		50% {
+			clip-path: inset(95% 0 0 0);
+		}
+
+		75% {
+			clip-path: inset(0 0 0 95%);
+		}
 	}
 }

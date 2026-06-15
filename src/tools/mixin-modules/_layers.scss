@@ -1,0 +1,42 @@
+// ============================================
+// CSS @layer utilities
+// ============================================
+
+// Wrap content in a CSS @layer
+// @param {String} $name - Layer name (reset, props, utilities, components, themes)
+// @param {Bool} $enabled - Whether to wrap in @layer (default: false)
+// @param {String} $prefix - Layer prefix (default: 'volver')
+@mixin layer($name, $enabled: false, $prefix: 'volver') {
+	@if $enabled {
+		/* stylelint-disable-next-line layer-name-pattern */
+		@layer #{$prefix + '.' + $name} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+// Define layer order (call once at the start of your stylesheet)
+// This establishes the cascade priority: later layers win
+// @param {Bool} $enabled - Whether to output @layer declaration
+// @param {List} $order - Layer order list
+// @param {String} $prefix - Layer prefix
+@mixin define-layers($enabled: false, $order: (reset, props, utilities, components, themes), $prefix: 'volver') {
+	@if $enabled {
+		$layers: null;
+
+		@each $name in $order {
+			$layer-name: $prefix + '.' + $name;
+
+			@if $layers {
+				$layers: $layers + ', ' + $layer-name;
+			} @else {
+				$layers: $layer-name;
+			}
+		}
+
+		/* stylelint-disable-next-line layer-name-pattern */
+		@layer #{$layers};
+	}
+}

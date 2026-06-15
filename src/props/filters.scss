@@ -1,7 +1,10 @@
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	@include spread-map-into-props($blur, $prefix: blur);
-	@include spread-map-into-props($brightness, $prefix: brightness);
-	@include spread-map-into-props($saturation, $prefix: saturate);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		@include spread-map-into-props($blur, $prefix: blur);
+		@include spread-map-into-props($brightness, $prefix: brightness);
+		@include spread-map-into-props($contrast, $prefix: contrast);
+		@include spread-map-into-props($saturation, $prefix: saturate);
+	}
 }

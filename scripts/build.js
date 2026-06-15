@@ -41,7 +41,7 @@ await Promise.all(
 		exportName = exportName
 			.replace(/\/volver|volver/gm, '')
 			.replace(/src|src\//gm, '')
-		const distDir = dir.replace('src', 'dist')
+		const distDir = dir.replace('src', 'dist') || 'dist'
 		packageJson.exports[`.${exportName ? exportName : ''}`] = `./${
 			distDir ? distDir + '/' : ''
 		}${name}.css`
@@ -52,9 +52,17 @@ await Promise.all(
 			plugins: [stylelint()],
 			configFile: false,
 			publicDir: false,
+			css: {
+				lightningcss: {
+					customPseudoClasses: ['export'],
+				},
+			},
 			build: {
 				emptyOutDir: false,
-				rollupOptions: {
+				rolldownOptions: {
+					checks: {
+						pluginTimings: false,
+					},
 					input,
 					output: {
 						dir: distDir,
@@ -75,7 +83,7 @@ packageJson.exports = Object.keys(packageJson.exports)
 		if (b === '.') {
 			return 1
 		}
-		return a > b
+		return a.localeCompare(b)
 	})
 	.reduce((exports, key) => {
 		exports[key] = packageJson.exports[key]

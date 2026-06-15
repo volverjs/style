@@ -4,6 +4,7 @@
 	@include spread-map-into-props($dark-background-image, 'bg');
 }
 
+@include layer(themes, $use-css-layers, $layer-prefix) {
 :where(:host, :root, .theme):not(.theme--light) {
 	@media (prefers-color-scheme: dark) {
 		@include theme-dark-bg;
@@ -12,4 +13,6 @@
 
 :where(.theme.theme--dark) {
 	@include theme-dark-bg;
+}
+
 }

@@ -13,7 +13,7 @@
 	@each $key, $value in $colors {
 		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if meta.type-of($value) not 'map' {
+				@if meta.type-of($subValue) != 'map' {
 					@if not
 						string.index($subKey, 'hue') and not
 						string.index($subKey, 'saturation') and not
@@ -37,7 +37,7 @@
 	@each $key, $value in $dark-colors {
 		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if meta.type-of($value) not 'map' {
+				@if meta.type-of($subValue) != 'map' {
 					@if not
 						string.index($subKey, 'hue') and not
 						string.index($subKey, 'saturation') and not
@@ -237,7 +237,7 @@
 	@each $size, $value in $spacing-dynamic {
 		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if meta.type-of($value) not 'map' {
+				@if meta.type-of($subValue) != 'map' {
 					spacing-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
@@ -252,7 +252,7 @@
 	@each $size, $value in $font-size-dynamic {
 		@if meta.type-of($value) == 'map' {
 			@each $subKey, $subValue in $value {
-				@if meta.type-of($value) not 'map' {
+				@if meta.type-of($subValue) != 'map' {
 					font-size-dynamic__#{$size}__#{$subKey}: $subValue;
 				}
 			}
@@ -541,7 +541,6 @@
 	// translate
 	@each $key, $value in $translate {
 		$name: meta.inspect($key);
-		$name: str-replace($name, '\\/', '/');
 
 		#{'translate__' + $name}: $value;
 	}

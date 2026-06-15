@@ -69,16 +69,8 @@
 	)
 
 	const documentElement = ref('')
-	const colorHue = useCssVar(
-		computed(() => `--color-${props.name}-hue`),
-		documentElement,
-	)
-	const colorSaturation = useCssVar(
-		computed(() => `--color-${props.name}-saturation`),
-		documentElement,
-	)
-	const colorLightess = useCssVar(
-		computed(() => `--color-${props.name}-lightness`),
+	const colorVar = useCssVar(
+		computed(() => `--color-${props.name}`),
 		documentElement,
 	)
 
@@ -88,15 +80,9 @@
 			if (documentElement.value) {
 				documentElement.value.style = ''
 				nextTick(() => {
-					colorHue.value = getComputedStyle(
+					colorVar.value = getComputedStyle(
 						documentElement.value,
-					).getPropertyValue(`--color-${props.name}-hue`)
-					colorSaturation.value = getComputedStyle(
-						documentElement.value,
-					).getPropertyValue(`--color-${props.name}-saturation`)
-					colorLightess.value = getComputedStyle(
-						documentElement.value,
-					).getPropertyValue(`--color-${props.name}-lightness`)
+					).getPropertyValue(`--color-${props.name}`)
 				})
 			}
 		})
@@ -112,16 +98,68 @@
 	const selectedHex = ref(undefined)
 	const colorsEls = ref([])
 	const getComputedStyleRgb = (name) => {
-		const [r, g, b] = window
-			.getComputedStyle(colorsEls.value[name], null)
+		const el = colorsEls.value[name]
+		if (!el) return { r: 0, g: 0, b: 0 }
+
+		const bgColor = globalThis
+			.getComputedStyle(el, null)
 			.getPropertyValue('background-color')
-			.replace(/rgb\(|\)/g, '')
-			.split(',')
-			.map((item) => Number(item.trim()))
-		return { r, g, b }
+
+		// Handle rgb/rgba format
+		const rgbMatch = bgColor.match(/rgba?\(([^)]+)\)/)
+		if (rgbMatch) {
+			const values = rgbMatch[1]
+				.split(',')
+				.map((item) => Number(item.trim()))
+			return { r: values[0] || 0, g: values[1] || 0, b: values[2] || 0 }
+		}
+
+		// Handle color() format (e.g., color(srgb 0.5 0.5 0.5))
+		const colorMatch = bgColor.match(
+			/color\(\s*\w+\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)/,
+		)
+		if (colorMatch) {
+			return {
+				r: Math.round(Number.parseFloat(colorMatch[1]) * 255),
+				g: Math.round(Number.parseFloat(colorMatch[2]) * 255),
+				b: Math.round(Number.parseFloat(colorMatch[3]) * 255),
+			}
+		}
+
+		// Handle oklch format - convert via canvas
+		try {
+			// Try regular canvas first
+			const canvas = document.createElement('canvas')
+			canvas.width = 1
+			canvas.height = 1
+			const ctx = canvas.getContext('2d')
+			if (!ctx) {
+				// Try OffscreenCanvas if available
+				if (typeof OffscreenCanvas !== 'undefined') {
+					const offscreen = new OffscreenCanvas(1, 1)
+					const offscreenCtx = offscreen.getContext('2d')
+					if (offscreenCtx) {
+						offscreenCtx.fillStyle = bgColor
+						offscreenCtx.fillRect(0, 0, 1, 1)
+						const imageData = offscreenCtx.getImageData(0, 0, 1, 1)
+						const [r, g, b] = imageData.data
+						return { r, g, b }
+					}
+				}
+				// No context available, return default
+				return { r: 0, g: 0, b: 0 }
+			}
+			ctx.fillStyle = bgColor
+			ctx.fillRect(0, 0, 1, 1)
+			const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
+			return { r, g, b }
+		} catch {
+			// Canvas operations failed, return safe default
+			return { r: 0, g: 0, b: 0 }
+		}
 	}
 	watchThrottled(
-		[selected, colorHue, colorSaturation, colorLightess, isThemeDark],
+		[selected, colorVar, isThemeDark],
 		() => {
 			if (documentElement.value) {
 				if (colorsEls.value[selected.value]) {
@@ -238,13 +276,8 @@
 			return selectedHex.value
 		},
 		set(newValue) {
-			const hls = hexToHsl(newValue)
-			if (!hls) {
-				return
-			}
-			colorHue.value = `${hls.h}deg`
-			colorSaturation.value = `${hls.s}%`
-			colorLightess.value = `${hls.l}%`
+			// Set the color directly as hex value
+			colorVar.value = newValue
 		},
 	})
 

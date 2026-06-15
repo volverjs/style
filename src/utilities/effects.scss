@@ -1,5 +1,6 @@
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // box shadow
 @include spread-map-into-utilities(
 	$map: $box-shadow,
@@ -31,3 +32,5 @@
 	$attribute: background-blend-mode,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

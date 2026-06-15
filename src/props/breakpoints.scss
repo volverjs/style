@@ -1,16 +1,18 @@
 @use 'sass:map';
 @use '../context' as *;
 
-:where(:host, :root, .theme) {
-	@include spread-map-into-props(
-		$map: map.remove($breakpoints, 'xxs'),
-		$prefix: breakpoint
-	);
+@include layer(props, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme) {
+		@include spread-map-into-props(
+			$map: map.remove($breakpoints, 'xxs'),
+			$prefix: breakpoint
+		);
 
-	@each $breakpoint, $breakpoint-value in $breakpoints {
-		@media screen and (min-width: $breakpoint-value) {
-			--breakpoint-key: #{$breakpoint};
-			--breakpoint-value: #{$breakpoint-value};
+		@each $breakpoint, $breakpoint-value in $breakpoints {
+			@media screen and (min-width: $breakpoint-value) {
+				--breakpoint-key: #{$breakpoint};
+				--breakpoint-value: #{$breakpoint-value};
+			}
 		}
 	}
 }

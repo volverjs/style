@@ -2,6 +2,7 @@
 @use 'sass:meta';
 @use '../context' as *;
 
+@include layer(utilities, $use-css-layers, $layer-prefix) {
 // aspect
 @include spread-map-into-utilities(
 	$map: $aspect-ratio,
@@ -204,3 +205,5 @@
 	$prop: z,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+}

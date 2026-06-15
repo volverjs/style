@@ -108,6 +108,36 @@ You can style utility-first (with [tailwindcss](https://tailwindcss.com) syntax)
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 ```
 
+### Relative Color Syntax Mode
+
+By default, `@volverjs/style` uses CSS Relative Color Syntax for generating color shades. This reduces the number of CSS variables and improves browser DevTools performance.
+
+```scss
+@use '@volverjs/style/scss/context' with (
+  // Enable/disable Relative Color Syntax mode (default: true)
+  $use-color-mix: true
+);
+@use '@volverjs/style/scss';
+```
+
+With this mode enabled, color shades are generated using:
+```css
+/* Brand colors use proportional scaling (multiplication) */
+--color-brand-lighten-1: hsl(from var(--color-brand) h s calc(l * 1.1));
+--color-brand-darken-1: hsl(from var(--color-brand) h s calc(l * 0.9));
+
+/* Surface/word colors use fixed steps (addition) */
+--color-surface-1: hsl(from var(--color-surface) h s calc(l - 2));
+--color-word-1: hsl(from var(--color-word) h s calc(l + 12));
+```
+
+To use the legacy HSL-based system with separate hue/saturation/lightness variables:
+```scss
+@use '@volverjs/style/scss/context' with (
+  $use-color-mix: false
+);
+```
+
 ## Deep override
 
 All components are written through SCSS maps.

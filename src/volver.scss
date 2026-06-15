@@ -1,4 +1,5 @@
-@use 'sass:meta';
+// Define CSS layer order (must be first)
+@use 'layers';
 
 // base
 @use 'base';

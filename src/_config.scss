@@ -1,6 +1,18 @@
 // use custom props for components
 $use-custom-props-for-components: true !default;
 
+// use CSS Relative Color Syntax for color shades (modern browsers)
+// When true: uses hsl(from var(--color) h s calc(l +/- X)) with a single base variable
+// When false: uses legacy HSL channel separation (hue, saturation, lightness)
+$use-color-mix: true !default;
+
+// use CSS @layer for cascade management
+$use-css-layers: false !default;
+
+// layer names (order matters - later = higher priority)
+$layer-order: (reset, preflight, props, components, themes, utilities) !default;
+$layer-prefix: 'volver' !default;
+
 // enable zero specificity for components
 $zero-specificity-for-components: true !default;
 
