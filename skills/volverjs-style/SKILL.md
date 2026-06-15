@@ -332,6 +332,11 @@ Dynamic sizes: sm, md, lg, xl (responsive, adapt per breakpoint)
 **Transition:** `transition-none`, `transition-all`, `transition-colors`, `transition-opacity`, `transition-shadow`, `transition-transform`
 **Duration:** `duration-{75,100,150,200,300,500,700}`
 **Timing:** `ease-linear`, `ease-in`, `ease-out`, `ease-in-out`
+**Blur:** `blur` (default 8px), `blur-{none,sm,md,lg,xl,xxl,xxxl}`
+**Backdrop blur:** `backdrop-blur-{none,sm,blur,md,lg,xl,xxl,xxxl}`
+**Brightness:** `brightness-{0,50,75,90,95,100,105,110,125,150,200,250,500,1000}`
+**Contrast:** `contrast-{0,50,75,100,125,150,200,300}`
+**Saturation:** `saturate-{0,50,100,150,200}`
 
 ---
 
