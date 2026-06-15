@@ -1,5 +1,6 @@
 $vv-breadcrumb: (
 	position: relative,
+	min-width: 0,
 	pseudo: (
 		after: (
 			position: absolute,
@@ -23,7 +24,7 @@ $vv-breadcrumb: (
 			scroll-snap-type: x mandatory,
 			scrollbar-width: none,
 			display: flex,
-			flex-wrap: no-wrap,
+			flex-wrap: nowrap,
 			list-style: none,
 			padding: 0,
 			background: var(--color-surface),

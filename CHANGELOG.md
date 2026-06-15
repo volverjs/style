@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.25] - 2026-06-15
+
+### Added
+
+* `contrast` filter props (`--contrast-*`) and utility classes (`.contrast-*`).
+* `design-tokens.json` is now regenerated on build and shipped with the package.
+
+### Fixed
+
+* Invalid `flex-wrap: no-wrap` value in `vv-breadcrumb` and `vv-dialog`.
+* `:export` color tokens not being emitted due to a wrong type check.
+* `.transition-*` utilities now use the `--duration-*` / `--ease-*` custom properties so they react to theming.
+* Aligned focus and disabled states between `vv-avatar`, `vv-radio` and `vv-tab`.
+
 ## [0.1.24] - 2026-03-13
 
 ### Added

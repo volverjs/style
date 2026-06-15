@@ -17,6 +17,14 @@
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
+// contrast
+@include spread-map-into-utilities(
+	$map: $contrast,
+	$class: contrast,
+	$attribute: filter,
+	$zero-specificity: $zero-specificity-for-utilities
+);
+
 // saturation
 @include spread-map-into-utilities(
 	$map: $saturation,
