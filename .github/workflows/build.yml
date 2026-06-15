@@ -27,12 +27,15 @@ jobs:
               run: pnpm stylelint:dist
 
             - name: Bump version with release tag name
+              if: github.event_name == 'release'
               run: pnpm version --no-git-tag-version ${{ github.event.release.tag_name }}
 
             - name: Pack package
+              if: github.event_name == 'release'
               run: pnpm pack
 
             - name: Upload artifact
+              if: github.event_name == 'release'
               uses: actions/upload-artifact@v4
               with:
                   name: package
