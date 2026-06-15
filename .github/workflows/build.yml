@@ -11,10 +11,10 @@ jobs:
 
             - uses: pnpm/action-setup@v4
 
-            - name: Use Node.js ${{ matrix.node-version }}
+            - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: ${{ matrix.node-version }}
+                  node-version: 24
                   cache: 'pnpm'
 
             - name: Install dependencies
@@ -45,9 +45,11 @@ jobs:
               run: pnpm styleguide
 
             - name: Setup GitHub Pages
+              if: github.event_name == 'release'
               uses: actions/configure-pages@v5
 
             - name: Upload styleguide
+              if: github.event_name == 'release'
               uses: actions/upload-pages-artifact@v3
               with:
                   path: './styleguide'
