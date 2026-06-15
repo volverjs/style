@@ -1,11 +1,39 @@
 import { extractICSS } from 'icss-utils'
 import fs from 'fs'
 import postcss from 'postcss'
-import { compile } from 'sass'
+import { compile } from 'sass-embedded'
 import calc from 'reduce-css-calc'
 
 const varRegex = /var\(([a-z-0-9,\s]+)\)/
 const calcRegex = /calc\(([a-z-0-9+\-*/%.,\s]+)\)/
+
+/**
+ * Resolve `var(--color-*)` / `calc(...)` references against the channel lookup
+ * tables emitted in legacy (non color-mix) mode. When no table is available
+ * (CSS Relative Color Syntax mode) the compiled value is already a valid CSS
+ * color, so it is kept as-is.
+ */
+const resolveColorValue = (value, tables) => {
+	const available = tables.filter(Boolean)
+	if (!available.length) {
+		return value
+	}
+	let match
+	while ((match = varRegex.exec(value)) !== null) {
+		const name = match[1].replace('--color-', '')
+		const resolved = available
+			.map((table) => table[name])
+			.find((entry) => entry !== undefined)
+		if (resolved === undefined) {
+			break
+		}
+		value = value.replace(match[0], resolved)
+	}
+	while ((match = calcRegex.exec(value)) !== null) {
+		value = value.replace(match[0], calc(match[0]))
+	}
+	return value
+}
 
 // design tokens
 const designTokens = {
@@ -70,17 +98,9 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 // colors
 designTokens.volver['colors'] = Object.keys(exports['colors']).reduce(
 	(acc, key) => {
-		let value = exports['colors'][key]
-		let match
-		while ((match = varRegex.exec(value)) !== null) {
-			value = value.replace(
-				match[0],
-				exports['colors-values'][match[1].replace('--color-', '')],
-			)
-		}
-		while ((match = calcRegex.exec(value)) !== null) {
-			value = value.replace(match[0], calc(match[0]))
-		}
+		const value = resolveColorValue(exports['colors'][key], [
+			exports['colors-values'],
+		])
 		const group = key.split('-')[0]
 		if (
 			[
@@ -112,18 +132,10 @@ designTokens.volver['colors'] = Object.keys(exports['colors']).reduce(
 designTokens['volver-dark']['colors'] = Object.keys(
 	exports['dark-colors'],
 ).reduce((acc, key) => {
-	let value = exports['dark-colors'][key]
-	let match
-	while ((match = varRegex.exec(value)) !== null) {
-		value = value.replace(
-			match[0],
-			exports['dark-colors-values']?.[match[1].replace('--color-', '')] ??
-				exports['colors-values']?.[match[1].replace('--color-', '')],
-		)
-	}
-	while ((match = calcRegex.exec(value)) !== null) {
-		value = value.replace(match[0], calc(match[0]))
-	}
+	const value = resolveColorValue(exports['dark-colors'][key], [
+		exports['dark-colors-values'],
+		exports['colors-values'],
+	])
 	const group = key.split('-')[0]
 	if (
 		[
