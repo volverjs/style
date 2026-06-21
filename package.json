@@ -52,7 +52,7 @@
   "devDependencies": {
     "@iconify/vue": "^5.0.1",
     "@nabla/vite-plugin-eslint": "^3.0.1",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.0.0",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vueuse/core": "^14.3.0",
     "@vueuse/head": "^2.0.0",
