@@ -7,9 +7,9 @@ description: Utilities for controlling the stack order of an element.
 	<card-example>
 		<div class="relative container rounded-md bg-surface-1 p-24">
 			<div class="absolute inset-0 bg-grid mix-blend-plus-lighter"></div>
-			<div class="relative h-80 mx-auto w-11/12 bg-brand-lighten-5 z-dropdown"></div>
-			<div class="relative h-80 nt-40 mx-auto w-10/12 bg-brand-lighten-4 z-sticky"></div>
-			<div class="relative h-80 nt-40 mx-auto w-9/12 bg-brand-lighten-3 z-fixed"></div>
+			<div class="relative h-80 mx-auto w-11/12 bg-brand-lighten-5 z-sticky"></div>
+			<div class="relative h-80 nt-40 mx-auto w-10/12 bg-brand-lighten-4 z-fixed"></div>
+			<div class="relative h-80 nt-40 mx-auto w-9/12 bg-brand-lighten-3 z-dropdown"></div>
 			<div class="relative h-80 nt-40 mx-auto w-8/12 bg-brand-lighten-2 z-modal-backdrop"></div>
 			<div class="relative h-80 nt-40 mx-auto w-7/12 bg-brand-lighten-1 z-modal"></div>
 			<div class="relative h-80 nt-40 mx-auto w-6/12 bg-brand z-confirm-backdrop"></div>

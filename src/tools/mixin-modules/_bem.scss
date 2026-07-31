@@ -19,7 +19,8 @@ $-valid-states: (
 	active, focus, hover, focus-within, target, visited, focus-visible,
 	disabled, checked, checked-within, multiple, selected, readonly,
 	empty, placeholder-shown, dirty, valid, invalid, indeterminate,
-	first-child, last-child, open, close, determinate, pressed, current
+	first-child, last-child, open, close, determinate, pressed, current,
+	popover, popover-open
 );
 
 // ============================================
@@ -511,6 +512,20 @@ $-valid-states: (
 
 		@if $alias {
 			$selectors: list.join($selectors, '#{$modifier}#{$alias}:not([open])');
+		}
+	} @else if $state == 'popover' {
+		// Element promoted to the top layer through the Popover API: the rules
+		// apply whether the popover is open or not
+		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[popover]');
+
+		@if $alias {
+			$selectors: list.join($selectors, '#{$modifier}#{$alias}[popover]');
+		}
+	} @else if $state == 'popover-open' {
+		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:popover-open');
+
+		@if $alias {
+			$selectors: list.join($selectors, '#{$modifier}#{$alias}:popover-open');
 		}
 	} @else if $state == 'dirty' {
 		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:not(:has(*:placeholder-shown))');

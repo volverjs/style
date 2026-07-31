@@ -113,11 +113,13 @@ $visibility: (
 ) !default;
 
 // z-index
+// Floating layers (dropdown, popover, tooltip) sit above the app chrome
+// (sticky, fixed): a menu anchored to a fixed header has to cover it.
 $z-index: (
 	1: 1,
-	dropdown: 1000,
 	sticky: 1010,
 	fixed: 1020,
+	dropdown: 1025,
 	modal-backdrop: 1030,
 	modal: 1040,
 	confirm-backdrop: 1050,
