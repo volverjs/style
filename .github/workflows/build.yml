@@ -26,9 +26,15 @@ jobs:
             - name: Validate compiled CSS
               run: pnpm stylelint:dist
 
+            # `pnpm version` refuses to run on an unclean working tree, and the
+            # tree is expected to be unclean at this point: the install can
+            # refresh the lockfile and the build regenerates design-tokens.json.
+            # `npm pkg set` only rewrites the field, with no git checks.
             - name: Bump version with release tag name
               if: github.event_name == 'release'
-              run: pnpm version --no-git-tag-version ${{ github.event.release.tag_name }}
+              env:
+                  TAG_NAME: ${{ github.event.release.tag_name }}
+              run: npm pkg set version="${TAG_NAME#v}"
 
             - name: Pack package
               if: github.event_name == 'release'
