@@ -23,6 +23,29 @@ $-valid-states: (
 	popover, popover-open
 );
 
+// Selector suffixes appended to the block, and to its alias when there is one,
+// for the states that are not plain pseudo-classes. A state can need more than
+// one suffix: "disabled" also matches the aria attribute. States missing here
+// fall back to ":not([disabled]):<state>", while "current" adds no suffix at
+// all and keeps only the BEM selectors built by the caller.
+$-state-suffixes: (
+	checked: ':checked',
+	checked-within: ':has(input:checked)',
+	close: ':not([open])',
+	dirty: ':not(:has(*:placeholder-shown))',
+	disabled: ('[disabled]', '[aria-disabled="true"]'),
+	focus-visible: ':not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):focus-visible',
+	multiple: '[multiple]',
+	open: '[open]',
+	// Element promoted to the top layer through the Popover API: "popover"
+	// matches it whether it is open or not, "popover-open" only when it is
+	popover: '[popover]',
+	popover-open: ':popover-open',
+	pressed: '[aria-pressed="true"]',
+	readonly: '[readonly]',
+	selected: '[aria-selected="true"]',
+);
+
 // ============================================
 // Main BEM mixin
 // ============================================
@@ -495,93 +518,17 @@ $-valid-states: (
 // Helper to add state-specific selectors
 // Returns the updated selectors list
 @function -add-state-selectors($state, $block-item, $modifier, $alias, $selectors) {
-	@if $state == 'checked-within' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:has(input:checked)');
+	@if $state == 'current' {
+		@return $selectors;
+	}
+
+	$suffixes: map.get($-state-suffixes, $state) or ':not([disabled]):#{$state}';
+
+	@each $suffix in $suffixes {
+		$selectors: list.join($selectors, '#{$modifier}#{$block-item}#{$suffix}');
 
 		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:has(input:checked)');
-		}
-	} @else if $state == 'open' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[open]');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}[open]');
-		}
-	} @else if $state == 'close' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:not([open])');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:not([open])');
-		}
-	} @else if $state == 'popover' {
-		// Element promoted to the top layer through the Popover API: the rules
-		// apply whether the popover is open or not
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[popover]');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}[popover]');
-		}
-	} @else if $state == 'popover-open' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:popover-open');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:popover-open');
-		}
-	} @else if $state == 'dirty' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:not(:has(*:placeholder-shown))');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:not(:has(*:placeholder-shown))');
-		}
-	} @else if $state == 'disabled' or $state == 'readonly' or $state == 'multiple' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[#{$state}]');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}[#{$state}]');
-		}
-
-		@if $state == 'disabled' {
-			$selectors: list.join($selectors, '#{$modifier}#{$block-item}[aria-disabled="true"]');
-
-			@if $alias {
-				$selectors: list.join($selectors, '#{$modifier}#{$alias}[aria-disabled="true"]');
-			}
-		}
-	} @else if $state == 'focus-visible' {
-		$selectors: list.join(
-			$selectors,
-			'#{$modifier}#{$block-item}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state}'
-		);
-
-		@if $alias {
-			$selectors: list.join(
-				$selectors,
-				'#{$modifier}#{$alias}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state}'
-			);
-		}
-	} @else if $state == 'checked' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:#{$state}');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:#{$state}');
-		}
-	} @else if $state == 'pressed' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[aria-pressed="true"]');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}[aria-pressed="true"]');
-		}
-	} @else if $state == 'selected' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}[aria-selected="true"]');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}[aria-selected="true"]');
-		}
-	} @else if $state != 'current' {
-		$selectors: list.join($selectors, '#{$modifier}#{$block-item}:not([disabled]):#{$state}');
-
-		@if $alias {
-			$selectors: list.join($selectors, '#{$modifier}#{$alias}:not([disabled]):#{$state}');
+			$selectors: list.join($selectors, '#{$modifier}#{$alias}#{$suffix}');
 		}
 	}
 
