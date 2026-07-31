@@ -7,6 +7,20 @@ $vv-dropdown: (
 	flex-direction: column,
 	box-shadow: var(--shadow-lg),
 	width: max-content,
+	state: (
+		// Neutralize the user agent styles applied to [popover] elements, so a
+		// dropdown promoted to the top layer keeps the coordinates it gets from
+		// its positioning library instead of being centered in the viewport
+		popover: (
+			inset: auto,
+			margin: 0,
+			padding: 0,
+			border: 0,
+			overflow: visible,
+			background: transparent,
+			color: inherit,
+		),
+	),
 	element: (
 		list: (
 			_alias: 'div:is([role="menu"],[role="list-box"])',
