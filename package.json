@@ -61,7 +61,7 @@
     "eslint-plugin-vue": "^10.9.2",
     "glob": "^13.0.6",
     "icss-utils": "^5.1.0",
-    "markdown-it": "^14.2.0",
+    "markdown-it": "^15.0.0",
     "markdown-it-anchor": "^9.2.0",
     "markdown-it-prism": "^3.0.1",
     "postcss": "^8.5.15",
