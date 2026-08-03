@@ -22,6 +22,11 @@ jobs:
             # install silently resolved the new ranges and rewrote the lockfile
             # in the job. Every dependency bump landed on develop with a stale
             # lockfile, and the release build broke on it.
+            #
+            # No `--ignore-scripts` on purpose: pnpm already refuses to run the
+            # scripts of any dependency that is not listed under `allowBuilds`
+            # in pnpm-workspace.yaml, and the four packages listed there need
+            # their build step.
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
