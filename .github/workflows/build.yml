@@ -37,9 +37,9 @@ jobs:
               run: pnpm stylelint:dist
 
             # `pnpm version` refuses to run on an unclean working tree, and the
-            # tree is expected to be unclean at this point: the install can
-            # refresh the lockfile and the build regenerates design-tokens.json.
-            # `npm pkg set` only rewrites the field, with no git checks.
+            # tree is expected to be unclean at this point: the build regenerates
+            # design-tokens.json, which is a tracked file. `npm pkg set` only
+            # rewrites the field, with no git checks.
             - name: Bump version with release tag name
               if: github.event_name == 'release'
               env:
