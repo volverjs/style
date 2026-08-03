@@ -9,6 +9,7 @@ export default [
         ignores: [
             'eslint.config.js',
             'stylelint.config.cjs',
+            'stylelint.dist.config.cjs',
             'postcss.config.cjs',
             'vite.config.js',
             '**/dist/*',
