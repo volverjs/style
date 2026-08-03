@@ -17,8 +17,13 @@ jobs:
                   node-version: 24
                   cache: 'pnpm'
 
+            # Keep the lockfile frozen: with `--no-frozen-lockfile` a pull
+            # request that changes package.json alone still went green, the
+            # install silently resolved the new ranges and rewrote the lockfile
+            # in the job. Every dependency bump landed on develop with a stale
+            # lockfile, and the release build broke on it.
             - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
+              run: pnpm install --frozen-lockfile
 
             - name: Build release
               run: pnpm build
