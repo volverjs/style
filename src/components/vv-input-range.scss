@@ -13,7 +13,9 @@ $component-map: $vv-input-range;
 	$bps: $breakpoints
 );
 
-// disabled, which is also how a readonly field freezes the control
+// A range input has no readonly state in HTML, so `disabled` is the only
+// attribute that can style the field without the modifier class, and the
+// readonly modifier is what the field uses to undo that look.
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,

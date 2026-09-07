@@ -6,10 +6,6 @@ $vv-input-range: (
 	font-size: var(--input-font-size),
 	line-height: var(--input-line-height),
 	min-width: var(--input-min-width),
-	// The native slider is drawn by the browser: `accent-color` is inherited,
-	// so declaring it on the block colors the track and the thumb, and a
-	// modifier or a single instance can recolor the field with one property.
-	accent-color: var(--input-range-accent-color),
 	element: (
 		label: (
 			_alias: '> label',
@@ -25,62 +21,97 @@ $vv-input-range: (
 			max-width: var(--input-label-max-width),
 		),
 		wrapper: (
-			position: relative,
 			display: flex,
 			align-items: center,
+			gap: var(--spacing-sm),
+			min-height: var(--input-min-height),
+		),
+		input-before: (
+			display: flex,
+			align-items: center,
+		),
+		input-after: (
+			display: flex,
+			align-items: center,
+		),
+		// Everything reading an --input-range-* token is written as a plain
+		// declaration: a var() inside a custom property is substituted where
+		// that property is declared, so wrapping these in the generated
+		// --vv-input-range-* props would freeze them at the :root values and
+		// the fill, the accent overrides and the hover halo would never move.
+		input: (
+			_alias: 'input[type="range"]',
+			-webkit-appearance: none,
+			appearance: none,
 			flex: 1,
-			background-color: var(--input-background-color),
-			will-change: background-color,
-			transition: var(--transition-colors),
+			min-width: 0,
+			[height]: var(--input-range-thumb-size),
+			margin: 0,
+			padding: 0,
+			background: transparent,
+			cursor: pointer,
 			pseudo: (
-				before: (
-					position: absolute,
-					height: var(--spacing-1),
-					inset: auto 0 0 0,
-					background: var(--color-word-5),
+				-webkit-slider-runnable-track: (
+					[height]: var(--input-range-track-height),
+					border-radius: var(--rounded-full),
+					[background]:
+						linear-gradient(
+							to right,
+							var(--input-range-accent-color)
+								var(--input-range-progress),
+							var(--input-range-track-color)
+								var(--input-range-progress)
+						),
 				),
-				after: (
-					position: absolute,
-					height: var(--spacing-2),
-					inset: auto 0 0 0,
-					background: var(--color-brand),
-					scale: 0 1,
-					transform-origin: left,
-					will-change: transform,
-					transition: var(--transition-transform),
+				-webkit-slider-thumb: (
+					-webkit-appearance: none,
+					appearance: none,
+					[width]: var(--input-range-thumb-size),
+					[height]: var(--input-range-thumb-size),
+					[margin-top]:
+						calc(
+							(
+									var(--input-range-track-height) -
+										var(--input-range-thumb-size)
+								) / 2
+						),
+					border: var(--border-2) solid var(--color-surface),
+					border-radius: var(--rounded-full),
+					[background]: var(--input-range-accent-color),
+					[box-shadow]: var(--input-range-thumb-shadow),
+					will-change: box-shadow,
+					transition: var(--transition-shadow),
+				),
+				-moz-range-track: (
+					[height]: var(--input-range-track-height),
+					border-radius: var(--rounded-full),
+					[background]: var(--input-range-track-color),
+				),
+				-moz-range-progress: (
+					[height]: var(--input-range-track-height),
+					border-radius: var(--rounded-full),
+					[background]: var(--input-range-accent-color),
+				),
+				-moz-range-thumb: (
+					[width]: var(--input-range-thumb-size),
+					[height]: var(--input-range-thumb-size),
+					border: var(--border-2) solid var(--color-surface),
+					border-radius: var(--rounded-full),
+					[background]: var(--input-range-accent-color),
+					[box-shadow]: var(--input-range-thumb-shadow),
+					will-change: box-shadow,
+					transition: var(--transition-shadow),
 				),
 			),
 			state: (
 				hover: (
-					background-color: var(--input-background-color-hover),
+					--input-range-thumb-shadow:
+						var(--input-range-thumb-shadow-hover),
 				),
-				focus-within: (
-					background-color: var(--input-background-color-focus),
-					pseudo: (
-						after: (
-							scale: 1,
-						),
-					),
+				focus-visible: (
+					outline: var(--border-2) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
 				),
-			),
-		),
-		input: (
-			_alias: 'input[type="range"]',
-			// The reset drops every user agent style with `all: unset`, which
-			// also switches the appearance off: the slider has to be turned
-			// back on to be drawn, the same way the reset does it for `meter`.
-			// `auto` and not `revert`, because a CSS-wide keyword read back
-			// from a custom property leaves the property with its initial
-			// value, and the slider would stay invisible.
-			appearance: auto,
-			flex: 1,
-			min-width: 0,
-			min-height: var(--input-min-height),
-			margin: 0,
-			[padding-inline]: var(--input-spacing-left)
-				var(--input-spacing-right),
-			cursor: pointer,
-			state: (
 				disabled: (
 					cursor: not-allowed,
 				),
@@ -89,27 +120,22 @@ $vv-input-range: (
 		value: (
 			display: flex,
 			align-items: baseline,
-			justify-content: flex-end,
+			justify-content: center,
 			gap: var(--spacing-2),
 			flex: 0 0 auto,
-			min-width: var(--spacing-40),
-			[padding-right]: var(--input-spacing-right),
-			[padding-block]: var(--input-spacing-top)
-				var(--input-spacing-bottom),
-			color: var(--input-color),
+			min-width: var(--spacing-64),
+			padding: var(--spacing-4) var(--spacing-sm),
+			font-size: var(--text-14),
 			font-variant-numeric: tabular-nums,
+			color: var(--input-color),
+			background-color: var(--input-background-color),
+			border: var(--border) solid var(--color-surface-3),
+			border-radius: var(--rounded-md),
+			text-align: center,
 		),
 		unit: (
 			color: var(--input-placeholder-color),
-			font-size: var(--input-hint-font-size),
-		),
-		input-before: (
-			display: flex,
-			padding-left: var(--input-spacing-left),
-		),
-		input-after: (
-			display: flex,
-			padding-right: var(--input-spacing-right),
+			font-size: var(--text-12),
 		),
 		hint: (
 			_alias: '> small',
@@ -126,103 +152,38 @@ $vv-input-range: (
 	),
 	modifier: (
 		valid: (
-			accent-color: var(--input-valid-color),
+			--input-range-accent-color: var(--input-valid-color),
 			element: (
-				wrapper: (
-					pseudo: (
-						after: (
-							background: var(--input-valid-color),
-							scale: 1,
-						),
-					),
-				),
 				hint: (
 					color: var(--input-valid-color),
+				),
+				value: (
+					border-color: var(--input-valid-color),
 				),
 			),
 		),
 		invalid: (
-			accent-color: var(--input-invalid-color),
+			--input-range-accent-color: var(--input-invalid-color),
 			element: (
-				wrapper: (
-					pseudo: (
-						after: (
-							background: var(--input-invalid-color),
-							scale: 1,
-						),
-					),
-				),
 				hint: (
 					color: var(--input-invalid-color),
 				),
-			),
-		),
-		loading: (
-			element: (
-				wrapper: (
-					pseudo: (
-						after: (
-							opacity: var(--opacity-100),
-							animation: var(--animation-indeterminate),
-						),
-					),
+				value: (
+					border-color: var(--input-invalid-color),
 				),
 			),
 		),
-		// HTML has no readonly for a range, so the field freezes the control
-		// with the disabled attribute, like a select does, and this modifier
-		// undoes the disabled look.
 		readonly: (
+			--input-range-accent-color: var(--color-word-4),
 			opacity: var(--opacity-100),
-			element: (
-				wrapper: (
-					pseudo: (
-						before: (
-							opacity: var(--opacity-0),
-						),
-						after: (
-							opacity: var(--opacity-0),
-						),
-					),
-					state: (
-						hover: (
-							background-color: var(--input-background-color),
-						),
-						focus-within: (
-							background-color: var(--input-background-color),
-						),
-					),
-				),
-				input: (
-					cursor: default,
-				),
-			),
+			cursor: default,
+			pointer-events: none,
 		),
 	),
 	state: (
 		disabled: (
+			--input-range-accent-color: var(--color-word-4),
 			opacity: var(--opacity-50),
-			cursor: not-allowed,
-			element: (
-				wrapper: (
-					pseudo: (
-						before: (
-							opacity: var(--opacity-0),
-						),
-						after: (
-							opacity: var(--opacity-0),
-						),
-					),
-					state: (
-						hover: (
-							background-color: var(--input-background-color),
-						),
-						focus-within: (
-							background-color: var(--input-background-color),
-						),
-					),
-				),
-			),
 		),
 	),
 ) !default;
