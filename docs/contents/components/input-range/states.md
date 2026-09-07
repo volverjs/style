@@ -40,7 +40,6 @@ wrapperClass: flex-1
                 Please move the slider above.
             </small>
         </div>
-
         <div class="vv-input-range" 
              :style="{ '--input-range-progress': `${values.disabled}%` }">
             <label for="range-disabled">Disabled Range</label>
@@ -55,7 +54,6 @@ wrapperClass: flex-1
                 <div class="vv-input-range__value">{{ values.disabled }}</div>
             </div>
         </div>
-
         <div class="vv-input-range 
                     vv-input-range--readonly" 
              :style="{ '--input-range-progress': `${values.readonly}%` }">
@@ -72,7 +70,6 @@ wrapperClass: flex-1
                 <div class="vv-input-range__value">{{ values.readonly }}</div>
             </div>
         </div>
-
         <div class="vv-input-range 
                     vv-input-range--valid" 
              :style="{ '--input-range-progress': `${values.valid}%` }">
@@ -92,7 +89,6 @@ wrapperClass: flex-1
                 The value above is in the recommended range.
             </small>
         </div>
-
         <div class="vv-input-range 
                     vv-input-range--invalid" 
              :style="{ '--input-range-progress': `${values.invalid}%` }">
