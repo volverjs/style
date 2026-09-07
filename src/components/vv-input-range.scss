@@ -4,7 +4,6 @@
 @include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-input-range);
 $component-map: $vv-input-range;
-$component-selector: '.#{$component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -14,20 +13,14 @@ $component-selector: '.#{$component-name}';
 	$bps: $breakpoints
 );
 
-// A range input has no readonly state in HTML, so `disabled` is the only
-// attribute that can style the field without the modifier class. The
-// readonly modifier is excluded on purpose: it needs that same attribute to
-// freeze the control, and without the exclusion it would be dimmed like a
-// disabled field. Source order alone would not settle it, because with
-// `$zero-specificity-for-components: false` `:has(input[disabled])` carries
-// the specificity of its argument and outweighs the modifier.
-@include wrap-with-where(
-	$selector: (
-		'#{$component-selector}:not(#{$component-selector}--readonly):has(input[disabled])'
-	),
-	$enabled: $zero-specificity-for-components
-) {
-	@extend %#{$component-name}--disabled !optional;
-}
+// disabled, which is also how a readonly field freezes the control
+@include spread-map-into-control-states(
+	$map: $component-map,
+	$block: $component-name,
+	$control: 'input',
+	$states: ('disabled'),
+	$except-modifiers: ('readonly'),
+	$zero-specificity: $zero-specificity-for-components
+);
 
 }

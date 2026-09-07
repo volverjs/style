@@ -61,14 +61,5 @@ $input: (
 	),
 	range: (
 		accent-color: var(--color-brand),
-		track-color: var(--color-surface-3),
-		track-height: var(--spacing-6),
-		thumb-size: var(--spacing-20),
-		thumb-shadow: var(--shadow-sm),
-		thumb-shadow-hover: 0 0 0 var(--spacing-4) var(--color-surface-brand),
-		// Share of the track that is filled. A range input exposes no such
-		// value to CSS, so the component writes it inline on the block and
-		// this default keeps static markup from breaking the gradient.
-		progress: 0%,
 	),
 ) !default;
