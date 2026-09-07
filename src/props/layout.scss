@@ -4,5 +4,24 @@
 	:where(:host, :root, .theme) {
 		@include spread-map-into-props($map: $aspect-ratio, $prefix: aspect);
 		@include spread-map-into-props($map: $z-index, $prefix: z);
+
+		// Sign of the inline axis: 1 where it runs left to right, -1 where it
+		// runs the other way. CSS has logical properties for the box, but none
+		// for `translate`, `rotate` or `scale`, so a component that moves an
+		// element along the inline axis multiplies its offset by this instead
+		// of naming a physical direction. It is declared on the `dir`
+		// attribute rather than through `:dir()` so that an island of one
+		// direction inside a document of the other flips with its container,
+		// and every declaration reading it passes a `1` fallback, so a
+		// cherry-picked component keeps working without this file.
+		--direction: 1;
+	}
+
+	:where([dir='rtl']) {
+		--direction: -1;
+	}
+
+	:where([dir='ltr']) {
+		--direction: 1;
 	}
 }

@@ -4,7 +4,7 @@ $vv-tooltip: (
 	position: absolute,
 	inset-inline: 100% auto,
 	top: 50%,
-	translate: var(--spacing-10) -50%,
+	[translate]: calc(var(--spacing-10) * var(--direction, 1)) -50%,
 	z-index: var(--z-tooltip),
 	inline-size: max-content,
 	max-inline-size: 25ch,
@@ -24,7 +24,8 @@ $vv-tooltip: (
 			z-index: -1,
 			inset-inline: 0 auto,
 			inset-block: 50% auto,
-			translate: -100% -50%,
+			[translate]: calc(-100% * var(--direction, 1)) -50%,
+			[scale]: var(--direction, 1) 1,
 			border-width: var(--spacing-8),
 			border-style: solid,
 			border-color: transparent var(--color-gray-darken-4) transparent
@@ -38,12 +39,13 @@ $vv-tooltip: (
 		top: (
 			inset-inline: 50% 0,
 			inset-block: auto 100%,
-			translate: -50% calc(var(--spacing-10) * -1),
+			[translate]: calc(-50% * var(--direction, 1))
+				calc(var(--spacing-10) * -1),
 			pseudo: (
 				after: (
 					inset-inline: 50% auto,
 					inset-block: 100% auto,
-					translate: -50%,
+					[translate]: calc(-50% * var(--direction, 1)),
 					rotate: -90deg,
 				),
 			),
@@ -51,24 +53,24 @@ $vv-tooltip: (
 		bottom: (
 			inset-inline: 50% 0,
 			inset-block: 100% auto,
-			translate: -50% var(--spacing-10),
+			[translate]: calc(-50% * var(--direction, 1)) var(--spacing-10),
 			pseudo: (
 				after: (
 					inset-inline: 50% auto,
 					inset-block: 0 auto,
-					translate: -50% -100%,
+					[translate]: calc(-50% * var(--direction, 1)) -100%,
 					rotate: 90deg,
 				),
 			),
 		),
 		left: (
 			inset-inline: auto 100%,
-			translate: calc(var(--spacing-10) * -1) -50%,
+			[translate]: calc(var(--spacing-10) * -1 * var(--direction, 1)) -50%,
 			pseudo: (
 				after: (
 					position: absolute,
 					inset-inline: auto 0,
-					translate: 100% -50%,
+					[translate]: calc(100% * var(--direction, 1)) -50%,
 					rotate: 180deg,
 				),
 			),
