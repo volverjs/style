@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-input-range);
+$component-map: $vv-input-range;
+$component-selector: '.#{$component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// A range input has no readonly state in HTML, so `disabled` is the only
+// attribute that can style the field without the modifier class.
+@include wrap-with-where(
+	$selector: '#{$component-selector}:has(input[disabled])',
+	$enabled: $zero-specificity-for-components
+) {
+	@extend %#{$component-name}--disabled !optional;
+}
+
+}
