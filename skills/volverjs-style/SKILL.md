@@ -124,13 +124,15 @@ Exception: `current` (nav, tab) is class only.
 **Form fields share one skeleton and one token set.** A block `<div>` with a direct-child
 `<label>`, a `__wrapper` around the control, a direct-child `<small class="…__hint">`.
 `valid`, `invalid`, `loading`, `floating`, `icon-before`, `icon-after` are modifiers on
-the block. `disabled` always propagates from the control's attribute through `:has()`, and
-so does `readonly` on the three controls HTML gives the attribute to (text, textarea,
-file). A `select`, a range, a checkbox and a radio take no `readonly` attribute at all:
-there the recipe is the same for all four, disable the control, add `tabindex="-1"` and the
-`--readonly` modifier, which undoes the disabled dimming. A disabled control submits
-nothing, so add a hidden input when the value has to reach the server. Restyle all fields
-at once with `--input-*` tokens.
+the block. `disabled` always propagates from the control's attribute through a `:has()`
+rule naming that component's own control: `:has(input[disabled])` for a text, file or range
+field, `:has(textarea[disabled])` for a textarea, `:has(select[disabled])` for a select.
+`readonly`
+propagates the same way, but HTML only gives the attribute to a text-type input and a
+textarea, so only `vv-input-text` and `vv-textarea` can use it. Everywhere else the recipe
+is the same: disable the control, add `tabindex="-1"` and the `--readonly` modifier, which
+undoes the disabled dimming. A disabled control submits nothing, so add a hidden input when
+the value has to reach the server. Restyle all fields at once with `--input-*` tokens.
 
 ```html
 <button type="button" class="vv-button vv-button--primary">Save</button>

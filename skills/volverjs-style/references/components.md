@@ -41,15 +41,25 @@ On these components:
 
 - `valid`, `invalid`, `loading`, `floating`, `icon-before`, `icon-after` are **modifier
   classes** on the block. `aria-invalid` is good a11y but styles nothing.
-- `disabled` propagates from the attribute on the control through a `:has(input[disabled])`
-  rule, so no class is needed (`vv-input-text--disabled` also works). `readonly` does the
-  same on the controls that accept the attribute: `vv-input-text`, `vv-textarea` and
-  `vv-input-file`. HTML gives no `readonly` attribute to a `select`, a range, a checkbox
-  or a radio: on `vv-select`, `vv-input-range`, `vv-checkbox` and `vv-radio` the recipe is
-  the same for all four, disable the control, add `tabindex="-1"` and the `--readonly`
-  modifier, which undoes the disabled dimming and restores the read-only look. A disabled
-  control contributes nothing to form submission, so pair it with a hidden input carrying
-  the same name when the value has to reach the server.
+- `disabled` propagates from the attribute on the control, through a `:has()` rule naming
+  that component's own control, so no class is needed (`vv-input-text--disabled` also
+  works). The rule is `:has(input[disabled])` for `vv-input-text`, `vv-input-file` and
+  `vv-input-range`, `:has(textarea[disabled])` for `vv-textarea` and
+  `:has(select[disabled])` for `vv-select`.
+- `readonly` propagates the same way, but only where HTML has the attribute, which is a
+  text-type input and a textarea: `vv-input-text` and `vv-textarea`, through
+  `:has(input[readonly])` and `:has(textarea[readonly])`.
+
+  Everywhere else the attribute does not exist, so the read-only look is a modifier and the
+  recipe is the same for all of them: disable the control, add `tabindex="-1"` and
+  `--readonly`, which undoes the disabled dimming. It applies to `vv-select`,
+  `vv-input-range`, `vv-checkbox`, `vv-radio` and `vv-input-file`, whose readonly state
+  hides the drop area and freezes the wrapper background. `vv-input-file` does carry a
+  `:has(input[readonly])` hook, but `readonly` is not valid on a file input, so reach it
+  through the modifier rather than writing the attribute.
+
+  A disabled control contributes nothing to form submission, so pair it with a hidden input
+  carrying the same name when the value has to reach the server.
 - Their look comes from the shared `--input-*` tokens (`--input-background-color`,
   `--input-color`, `--input-min-height`, `--input-label-*`, `--input-hint-*`,
   `--input-valid-color`, `--input-invalid-color`); override those to restyle every field

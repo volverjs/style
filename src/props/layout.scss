@@ -4,19 +4,28 @@
 	:where(:host, :root, .theme) {
 		@include spread-map-into-props($map: $aspect-ratio, $prefix: aspect);
 		@include spread-map-into-props($map: $z-index, $prefix: z);
+	}
 
-		// Sign of the inline axis: 1 where it runs left to right, -1 where it
-		// runs the other way. CSS has logical properties for the box, but none
-		// for `translate`, `rotate` or `scale`, so a component that moves an
-		// element along the inline axis multiplies its offset by this instead
-		// of naming a physical direction. It is declared on the `dir`
-		// attribute rather than through `:dir()` so that an island of one
-		// direction inside a document of the other flips with its container,
-		// and every declaration reading it passes a `1` fallback, so a
-		// cherry-picked component keeps working without this file.
+	// Sign of the inline axis: 1 where it runs left to right, -1 where it runs
+	// the other way. CSS has logical properties for the box, but none for
+	// `translate`, `rotate` or `scale`, so a component that moves an element
+	// along the inline axis multiplies its offset by this instead of naming a
+	// physical direction.
+
+	// The default is declared on the document root alone, and not on the
+	// `:host` and `.theme` scopes the props above share: those sit inside the
+	// document and inherit a direction from their ancestors, so re-declaring
+	// the default there would replace it, and a themed section of a
+	// right-to-left document would move its components the other way. Nothing
+	// can be inherited at the root, so the default belongs there and nowhere
+	// else. Every declaration reading the token passes a `1` fallback anyway,
+	// so a cherry-picked component keeps working without this file.
+	:where(:root) {
 		--direction: 1;
 	}
 
+	// The `dir` attribute rather than `:dir()`, so that an island of one
+	// direction inside a document of the other turns with its container.
 	:where([dir='rtl']) {
 		--direction: -1;
 	}
