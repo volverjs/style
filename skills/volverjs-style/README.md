@@ -20,7 +20,7 @@ This adds the skill to your Claude Code configuration.
 
 ## Layout
 
-```
+```text
 volverjs-style/
 ├── SKILL.md                  workflow, Tailwind differences, essentials
 └── references/

@@ -124,8 +124,13 @@ Exception: `current` (nav, tab) is class only.
 **Form fields share one skeleton and one token set.** A block `<div>` with a direct-child
 `<label>`, a `__wrapper` around the control, a direct-child `<small class="…__hint">`.
 `valid`, `invalid`, `loading`, `floating`, `icon-before`, `icon-after` are modifiers on
-the block; `disabled`/`readonly` propagate from the control's attribute through `:has()`.
-Restyle all fields at once with `--input-*` tokens.
+the block. `disabled` always propagates from the control's attribute through `:has()`, and
+so does `readonly` on the three controls HTML gives the attribute to (text, textarea,
+file). A `select`, a range, a checkbox and a radio take no `readonly` attribute at all:
+there the recipe is the same for all four, disable the control, add `tabindex="-1"` and the
+`--readonly` modifier, which undoes the disabled dimming. A disabled control submits
+nothing, so add a hidden input when the value has to reach the server. Restyle all fields
+at once with `--input-*` tokens.
 
 ```html
 <button type="button" class="vv-button vv-button--primary">Save</button>
@@ -223,7 +228,7 @@ docs use `useDark({ attribute: 'class', valueDark: 'theme theme--dark', valueLig
 
 - Every class you wrote is in the references or was confirmed with grep.
 - Responsive prefixes only on groups that support them; spacing uses dynamic tokens.
-- Disabled and readonly come from attributes; hints are linked with `aria-describedby`;
-  labels have `for`.
+- Disabled comes from the attribute, and readonly too where HTML has one; elsewhere
+  readonly is the modifier. Hints are linked with `aria-describedby`, labels have `for`.
 - Dialogs have the `__wrapper` article; range inputs have `--input-range-progress`.
 - Colors are tokens, not hex, so the dark theme keeps working.
