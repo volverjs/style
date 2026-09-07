@@ -231,12 +231,13 @@
 		b /= 255
 
 		// find greatest and smallest channel values
+		// `s` and `l` are always computed below, before they are read
 		let cmin = Math.min(r, g, b),
 			cmax = Math.max(r, g, b),
 			delta = cmax - cmin,
 			h = 0,
-			s = 0,
-			l = 0
+			s,
+			l
 
 		if (delta !== 0) {
 			// red is max

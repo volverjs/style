@@ -17,8 +17,18 @@ jobs:
                   node-version: 24
                   cache: 'pnpm'
 
+            # Keep the lockfile frozen: with `--no-frozen-lockfile` a pull
+            # request that changes package.json alone still went green, the
+            # install silently resolved the new ranges and rewrote the lockfile
+            # in the job. Every dependency bump landed on develop with a stale
+            # lockfile, and the release build broke on it.
+            #
+            # No `--ignore-scripts` on purpose: pnpm already refuses to run the
+            # scripts of any dependency that is not listed under `allowBuilds`
+            # in pnpm-workspace.yaml, and the four packages listed there need
+            # their build step.
             - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
+              run: pnpm install --frozen-lockfile
 
             - name: Build release
               run: pnpm build
@@ -27,9 +37,9 @@ jobs:
               run: pnpm stylelint:dist
 
             # `pnpm version` refuses to run on an unclean working tree, and the
-            # tree is expected to be unclean at this point: the install can
-            # refresh the lockfile and the build regenerates design-tokens.json.
-            # `npm pkg set` only rewrites the field, with no git checks.
+            # tree is expected to be unclean at this point: the build regenerates
+            # design-tokens.json, which is a tracked file. `npm pkg set` only
+            # rewrites the field, with no git checks.
             - name: Bump version with release tag name
               if: github.event_name == 'release'
               env:

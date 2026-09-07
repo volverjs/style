@@ -114,7 +114,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						translate: -100%,
+						[translate]: calc(-100% * var(--direction, 1)),
 					),
 				),
 			),
@@ -122,7 +122,7 @@ $vv-dialog: (
 				opacity: var(--opacity-0),
 				element: (
 					wrapper: (
-						translate: 100%,
+						[translate]: calc(100% * var(--direction, 1)),
 					),
 				),
 			),
@@ -145,6 +145,24 @@ $vv-dialog: (
 				),
 			),
 		),
+		slide-inline-end: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			inert: (
+				opacity: var(--opacity-0),
+				element: (
+					wrapper: (
+						[translate]: calc(100% * var(--direction, 1)),
+					),
+				),
+			),
+		),
 	),
 	modifier: (
 		small: (
@@ -158,11 +176,46 @@ $vv-dialog: (
 			padding: 0,
 			element: (
 				wrapper: (
-					border-radius: var(--rounded-0),
+					border-radius: var(--rounded-none),
 					max-width: auto,
 					max-height: auto,
 					width: 100%,
 					height: 100%,
+				),
+			),
+		),
+		// Side panel anchored to the inline end, pair it with the
+		// slide-inline-end transition. Full width below sm.
+		drawer: (
+			padding: 0,
+			align-items: stretch,
+			justify-content: flex-end,
+			element: (
+				wrapper: (
+					width: 100%,
+					max-height: 100dvh,
+					border-radius: var(--rounded-none),
+					breakpoint: (
+						up-sm: (
+							width: min(75dvw, 32rem),
+						),
+					),
+				),
+				// Flat header and footer: on a full height panel the filled
+				// bands read as heavy. The footer keeps its divider because
+				// the content above it scrolls.
+				header: (
+					font-weight: var(--font-bold),
+					background: var(--color-transparent),
+					border-bottom: 0,
+				),
+				// Without the divider the header padding already spaces the
+				// title from the first field, so drop the duplicate.
+				content: (
+					padding-top: 0,
+				),
+				footer: (
+					background: var(--color-transparent),
 				),
 			),
 		),

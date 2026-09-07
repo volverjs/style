@@ -58,10 +58,8 @@ const exports = Object.keys(icssExports).reduce((accumulator, key) => {
 	// dynamic maps are recognized by at least two '__' as the name of the key
 	const isDynamicMap = key.match(/__/gi).length > 1
 	if (isDynamicMap) {
-		let keyToReturn = ''
-		let [left, right] = splitLast(key, '__')
-		let strLeft = left.replace('__', '-')
-		keyToReturn = strLeft.concat('__', right)
+		const [left, right] = splitLast(key, '__')
+		const keyToReturn = left.replace('__', '-').concat('__', right)
 
 		const splittedKey = keyToReturn.split('__')
 		const value = icssExports[key]
