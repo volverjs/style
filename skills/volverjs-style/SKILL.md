@@ -1,582 +1,229 @@
 ---
 name: volverjs-style
 description: >
-  Use @volverjs/style design system library for CSS/SCSS styling. Covers component markup (BEM classes like vv-button, vv-card, vv-input-text), utility classes (spacing, layout, flexbox, grid, typography), design tokens (colors, spacing, breakpoints), SCSS customization, theming, and CSS custom properties.
-  USE FOR: styling with @volverjs/style, writing HTML with vv-* component classes, using volver utility classes (m-*, p-*, flex-*, grid-*, text-*), customizing design tokens, creating themes, extending components, SCSS configuration with context, responsive design with breakpoints, dark mode, vv-button/vv-card/vv-input-text/vv-alert/vv-dialog markup, CSS custom properties, zero-specificity overrides.
-  DO NOT USE FOR: building @volverjs/ui-vue component logic (use Vue skills), general CSS without @volverjs/style, Tailwind CSS (similar concepts but different implementation).
+  Style HTML and Vue templates with the @volverjs/style design system: vv-* BEM components (vv-button, vv-input-text, vv-card, vv-dialog, vv-alert, vv-select, vv-input-range…), utility classes (p-md, flex, grid-cols-3, text-brand, bg-surface-1), design tokens (--color-*, --spacing-*, --vv-button-*), SCSS context configuration, component maps and the dark theme.
+  The vocabulary looks like Tailwind but diverges in dozens of places (bare flex/grid/none, no responsive spacing, rounded-xxl, z-modal), so consult this skill before writing or reviewing ANY class name in a project that depends on @volverjs/style or @volverjs/ui-vue, even when the user only says "add spacing", "make it a grid", "style this form", "add dark mode" or "change the brand color". Also use it to pick valid modifiers for @volverjs/ui-vue components.
+  Not for Tailwind projects, CSS unrelated to @volverjs/style, or @volverjs/ui-vue component logic (props, events, composables: volverjs-ui-vue skill).
 ---
 
-# @volverjs/style Design System
+# @volverjs/style
 
-A lightweight, responsive CSS/SCSS design system with utility-first classes, BEM components, design tokens, and zero-specificity via `:where()`.
+A CSS/SCSS design system: BEM components (`.vv-button`, `.vv-button__label`,
+`.vv-button--primary`), Tailwind-like utilities (`p-md`, `flex`, `grid-cols-3`), design
+tokens as CSS custom properties, and an SCSS layer that generates all of it from maps.
+Every selector is wrapped in `:where()`, so it has zero specificity and any CSS you write
+wins without `!important`.
 
-## Key Principles
+The vocabulary is close enough to Tailwind that guessing feels safe. It is not: a class
+that does not exist fails silently, and about a third of the classes an agent tends to
+guess (`display-flex`, `md:p-16`, `z-10`, `rounded-2xl`, `text-uppercase`, `hidden`) are
+not in this library. Work from the reference files, not from memory.
 
-- **Zero Specificity** — All component and utility selectors wrapped in `:where()`, so your custom CSS always wins without `!important`
-- **CSS Custom Properties** — Every token and component attribute exposed as CSS variables for easy overrides
-- **Hybrid approach** — Utility-first classes (like Tailwind) + BEM-based components (`.vv-button`, `.vv-button__icon`, `.vv-button--primary`)
-- **Responsive by default** — Dynamic spacing and typography that adapt across breakpoints
+## Workflow
 
-## Installation
+1. **Locate the installed library.** In a consuming project it is
+   `node_modules/@volverjs/style/` (the package ships `src/`, `dist/` and
+   `design-tokens.json`). Inside the library repo itself use `./src` and `./dist`
+   (`pnpm build` regenerates `dist`).
+2. **Read the reference for what you are about to write** (all in `references/`):
+   - [utilities.md](references/utilities.md): every utility class with its exact value
+     set and whether it has responsive variants.
+   - [components.md](references/components.md): canonical markup, elements, modifiers and
+     states for all 32 components, plus how states are expressed.
+   - [tokens.md](references/tokens.md): custom properties, CSS-only overrides, dark theme.
+   - [scss.md](references/scss.md): import paths, context configuration, extending and
+     creating components, mixins, cascade layers.
+3. **Verify anything not in the references** against the compiled CSS before using it:
 
-```bash
-# npm / yarn / pnpm
-pnpm add @volverjs/style
+   ```bash
+   # does a utility exist? (responsive form: escape the colon)
+   grep -c -F '.gap-md' node_modules/@volverjs/style/dist/utilities.css
+   grep -c -F '.md\:grid-cols-3' node_modules/@volverjs/style/dist/utilities.css
+   # which modifiers does a component have?
+   grep -oE '\.vv-alert--[a-z-]+' node_modules/@volverjs/style/dist/components/vv-alert.css | sort -u
+   # the full map of a component (elements, modifiers, states, aliases)
+   cat node_modules/@volverjs/style/src/settings/components/_vv-alert.scss
+   ```
+
+4. **Prefer the library's idiom over custom CSS**: a token override or a modifier from the
+   map beats a new rule, and stays coherent with the dark theme.
+
+## Where it differs from Tailwind
+
+These are the mistakes that recur. Each row is verified against the compiled CSS.
+
+| Habit | In @volverjs/style |
+|---|---|
+| `display-flex`, `hidden` | Bare names: `flex` `grid` `block` `inline-flex` `none` (there is no `hidden`) |
+| `relative`, `absolute` | Same bare names, fine |
+| `md:p-16`, `lg:gap-8` | Spacing and gap have **no responsive variants**. Use the dynamic tokens `xs sm md lg xl` (`p-md`, `gap-lg`), which grow with the viewport by themselves |
+| `xxs:` prefix, `2xl:` | Prefixes are `xs: sm: md: lg: xl: xxl: xxxl:` (360, 576, 992, 1024, 1280, 1440, 1536px) and only display, position, visibility, flex/grid, sizing, text size/align, border width/style, aspect and columns accept them |
+| `hover:bg-…`, `dark:text-…`, `focus:` | No state or theme variants at all. Use component states, tokens, or your own CSS |
+| `max-w-md`, `max-w-2xl` | `max-w-screen-md` … `max-w-screen-xxxl`, `max-w-prose`, or `container` |
+| `z-10` … `z-50` | Semantic: `z-sticky` `z-fixed` `z-dropdown` `z-modal-backdrop` `z-modal` `z-popover` `z-tooltip` `z-toast` (plus `z-1`, `z-auto`) |
+| `aspect-video` | `aspect-wide` (16/9); also `square` `photo` `tv` `ultrawide` |
+| `rounded-2xl`, `rounded-3xl` | `rounded-xxl`, `rounded-xxxl` (shadows do use `shadow-2xl`) |
+| `text-xl`, `text-4xl`, `text-40` | Dynamic `text-xs`…`text-xl` (responsive by design) or static `text-12 14 16 18 20 22 24 26 28 30 32 34 36 48 60 72 96 128`. No 40, 44, 56, 64, 80 |
+| `font-italic`, `text-uppercase`, `tracking-loose` | Bare `italic` `non-italic` `uppercase` `lowercase` `capitalize`; `tracking-tighter/tight/normal/wide/wider/widest` |
+| `text-blue-500`, `bg-gray-100` | Semantic palette: `text-brand` `text-word` `text-word-2` `bg-surface-1` `border-surface-3` `bg-surface-brand` `text-danger-darken-1` |
+| `space-y-4`, `divide-y` | Not available: use `flex flex-col gap-md` |
+| `w-1/2` | Exists, written literally: `w-1/2`, `col-span-6` |
+| `border-none` to remove a border | `border-0` (`border-none` is `border-style: none`) |
+| `p-30`, `m-11` | The scale has no 11, 15, 30, 60, 72: see the list in utilities.md |
+
+Color semantics: `word` is text (`word-1`…`word-5` progressively fainter), `surface` is
+background (`surface-1`…`surface-5` progressively deeper), `surface-{brand,success,…}`
+are tinted backgrounds for badges and callouts, `alpha-*` are translucent overlays.
+Every palette color has `-lighten-1..5` and `-darken-1..5`.
+
+## Layout recipes (verified)
+
+```html
+<main class="container mx-auto px-md py-lg">…</main>
+
+<div class="grid md:grid-cols-2 xl:grid-cols-3 gap-lg">…</div>
+
+<div class="grid lg:grid-cols-12 gap-lg">
+  <aside class="lg:col-span-3">…</aside>
+  <section class="lg:col-span-9">…</section>
+</div>
+
+<div class="flex items-center justify-between gap-sm flex-wrap">…</div>   <!-- toolbar -->
+<div class="flex flex-col gap-md">…</div>                                  <!-- stack -->
+<div class="flex items-center justify-center min-h-screen">…</div>         <!-- centered -->
+<nav class="none md:flex gap-sm">…</nav>                                    <!-- desktop only -->
+
+<h2 class="text-lg font-semibold text-word">Title</h2>
+<p class="text-14 text-word-2 leading-relaxed">Secondary copy</p>
+<span class="truncate">Long text</span>
 ```
 
-### Full Import
+## Components
 
-```scss
-// CSS (pre-built)
-@import '@volverjs/style';
+Naming: block `.vv-{name}`, element `.vv-{name}__{el}`, modifier `.vv-{name}--{mod}`.
+Available: `vv-button` `vv-button-group` `vv-input-text` `vv-textarea` `vv-select`
+`vv-checkbox` `vv-radio` `vv-checkbox-group` `vv-radio-group` `vv-input-file`
+`vv-input-range` `vv-card` `vv-dialog` `vv-alert` `vv-alert-group` `vv-dropdown`
+`vv-dropdown-action` `vv-dropdown-option` `vv-dropdown-optgroup` `vv-nav` `vv-tab`
+`vv-accordion` `vv-accordion-group` `vv-table` `vv-badge` `vv-avatar` `vv-avatar-group`
+`vv-tooltip` `vv-progress` `vv-skeleton` `vv-breadcrumb` `vv-text`.
 
-// SCSS (with customization)
-@use '@volverjs/style/scss';
+Three facts shape the markup; components.md has the full structure of each component.
+
+**Semantic children replace element classes.** Most elements have an alias, so the
+natural tag is styled with no class: `.vv-input-text > label`, `.vv-button > svg`,
+`.vv-card > header`, `.vv-dialog > article`, `.vv-accordion > summary`. Elements without
+an alias (`__wrapper`, `__content`, `__close`, `__hint` on a `<small>`) need the class.
+
+**States come from the DOM, not from classes.** Each state also has a natural selector:
+`[disabled]` or `[aria-disabled="true"]`, `[readonly]`, `[open]`, `[aria-pressed="true"]`,
+`[aria-selected="true"]`, `:hover`, `:focus-visible`. Write `<button class="vv-button"
+disabled>`; the `--disabled`/`.disabled` classes exist only to freeze a look in docs.
+Exception: `current` (nav, tab) is class only.
+
+**Form fields share one skeleton and one token set.** A block `<div>` with a direct-child
+`<label>`, a `__wrapper` around the control, a direct-child `<small class="…__hint">`.
+`valid`, `invalid`, `loading`, `floating`, `icon-before`, `icon-after` are modifiers on
+the block; `disabled`/`readonly` propagate from the control's attribute through `:has()`.
+Restyle all fields at once with `--input-*` tokens.
+
+```html
+<button type="button" class="vv-button vv-button--primary">Save</button>
+<button type="button" class="vv-button vv-button--icon-only vv-button--rounded" aria-label="Edit"><svg>…</svg></button>
+
+<div class="vv-input-text vv-input-text--invalid">
+  <label for="email">Email</label>
+  <div class="vv-input-text__wrapper">
+    <input id="email" type="email" name="email" aria-invalid="true" aria-describedby="email-hint" />
+  </div>
+  <small id="email-hint" class="vv-input-text__hint">Enter a valid address</small>
+</div>
+
+<article class="vv-card">
+  <header>Title</header>
+  <div class="vv-card__content">…</div>
+  <footer class="flex justify-end gap-sm">…</footer>
+</article>
+
+<dialog class="vv-dialog vv-dialog--small">
+  <article class="vv-dialog__wrapper">
+    <header class="vv-dialog__header">Title <button type="button" class="vv-dialog__close" aria-label="Close"></button></header>
+    <div class="vv-dialog__content">…</div>
+    <footer class="vv-dialog__footer"><div class="vv-button-group" role="group">…</div></footer>
+  </article>
+</dialog>
+
+<div class="vv-alert vv-alert--success vv-alert--dismissable" role="alert">
+  <div class="vv-alert__header">
+    <svg>…</svg><strong class="vv-alert__title">Saved</strong>
+    <button type="button" class="vv-alert__close" aria-label="Close"></button>
+  </div>
+  <div class="vv-alert__content">Your changes are live.</div>
+</div>
 ```
 
-### Cherry-Pick (recommended for production)
+Button modifiers: `primary` `secondary` `danger` `ghost` `link` `action` `action-quiet`
+`static-light` `static-dark` `icon-only` `rounded` `block` `reverse` `column` `full-bleed`.
+The default button is the brand accent; there is no `accent`, `loading` or size modifier.
 
-```scss
-@use '@volverjs/style/scss/reset';
-@use '@volverjs/style/scss/props/colors';
-@use '@volverjs/style/scss/props/spacing';
-@use '@volverjs/style/scss/utilities/spacing';
-@use '@volverjs/style/scss/utilities/layout';
-@use '@volverjs/style/scss/components/vv-button';
+Traps: `vv-dialog` needs the `<article class="vv-dialog__wrapper">` panel (the
+`<dialog>` itself is the backdrop) and has no `__title`; `vv-alert` has no
+`__description`/`__action`, icon and title live in `__header`; `vv-card__picture` goes
+on the `<img>`; `vv-alert-group` wraps its alerts in `<div role="group">`; the checkbox
+switch is `vv-checkbox--switch`; `vv-input-range` needs
+`style="--input-range-progress: 45%"` on the block or the track renders empty.
+
+## Tokens and theming
+
+Tokens live on `:where(:host, :root, .theme)`, so `:root { --color-brand: #45cb85 }`
+recolors the whole palette (shades derive with relative color syntax; there are no
+`--color-brand-hue/saturation/lightness` channels). Component properties are prefixed
+with the block: `--vv-button-background`, `--vv-button-state-hover-background`,
+`--vv-button-modifier-primary-background`. Fields share `--input-*`.
+
+```css
+:root { --color-brand: #45cb85; --rounded: 0.5rem; --input-min-height: var(--spacing-44); }
+.vv-button--success { --vv-button-background: var(--color-success); --vv-button-border-color: var(--color-success); }
 ```
 
-### SCSS Customization via Context
+Dark theme is a separate stylesheet (`@import '@volverjs/style/themes/dark'` or
+`@use '@volverjs/style/scss/themes/dark'`) loaded after the base. With it loaded the page
+follows `prefers-color-scheme`; force with `class="theme theme--dark"` or
+`class="theme theme--light"` on `<html>` or on any subtree. Both classes are required;
+there is no `data-theme`. Keep custom colors as `var(--color-…)` so they follow the theme.
 
-Override design tokens before importing the library:
+## SCSS
 
 ```scss
 @use '@volverjs/style/scss/context' with (
   $color-brand: #45cb85,
-  $color-accent: #e040fb,
-  $font-family-sans: 'Inter', sans-serif,
-  $use-color-mix: true,           // modern relative color syntax
-  $use-css-layers: false,         // CSS @layer support
-  $components-prefix: vv,         // component class prefix
-  $zero-specificity-for-components: true,
-  $zero-specificity-for-utilities: true
+  $font-family-sans: "'Inter', sans-serif",   // one quoted string, or it will not compile
+  $use-css-layers: true
 );
 @use '@volverjs/style/scss';
+@use '@volverjs/style/scss/themes/dark';
 ```
 
-### CSS-Only Customization
-
-```css
-:root {
-  --color-brand-hue: 149deg;
-  --color-brand-saturation: 56%;
-  --color-brand-lightness: 53%;
-  --font-sans: 'Inter', sans-serif;
-}
-```
-
----
-
-## Components
-
-All components follow BEM naming: `.vv-{name}`, `.vv-{name}__{element}`, `.vv-{name}--{modifier}`.
-
-### Available Components
-
-**Form:** vv-input-text, vv-input-range, vv-input-file, vv-textarea, vv-checkbox, vv-radio, vv-select, vv-dropdown
-**Display:** vv-button, vv-badge, vv-alert, vv-avatar, vv-progress, vv-tooltip, vv-skeleton, vv-text
-**Layout:** vv-card, vv-dialog, vv-nav, vv-table, vv-breadcrumb, vv-tab
-**Interactive:** vv-accordion, vv-dropdown-action, vv-dropdown-option, vv-dropdown-optgroup
-**Grouped:** vv-button-group, vv-checkbox-group, vv-radio-group, vv-alert-group, vv-avatar-group, vv-accordion-group
-
-### Component Markup Patterns
-
-#### vv-button
-
-```html
-<!-- Base -->
-<button class="vv-button">Label</button>
-
-<!-- With modifier -->
-<button class="vv-button vv-button--primary">Primary</button>
-<button class="vv-button vv-button--secondary">Secondary</button>
-<button class="vv-button vv-button--danger">Danger</button>
-<button class="vv-button vv-button--ghost">Ghost</button>
-<button class="vv-button vv-button--link">Link</button>
-
-<!-- With elements -->
-<button class="vv-button">
-  <svg class="vv-button__icon">…</svg>
-  <span class="vv-button__label">Click me</span>
-</button>
-
-<!-- Icon only -->
-<button class="vv-button vv-button--icon-only">
-  <svg class="vv-button__icon">…</svg>
-</button>
-
-<!-- Layout modifiers -->
-<button class="vv-button vv-button--block">Full width</button>
-<button class="vv-button vv-button--rounded">Rounded</button>
-
-<!-- Anchor as button -->
-<a href="/path" class="vv-button vv-button--primary">Link Button</a>
-```
-
-**Button modifiers:** primary, secondary, danger, ghost, link, static-light, static-dark, action, action-quiet, rounded, block, reverse, column, full-bleed
-
-#### vv-input-text
-
-```html
-<div class="vv-input-text">
-  <label class="vv-input-text__label" for="name">Name</label>
-  <div class="vv-input-text__wrapper">
-    <div class="vv-input-text__inner">
-      <input class="vv-input-text__input" id="name" type="text" />
-    </div>
-  </div>
-  <small class="vv-input-text__hint">Helper text</small>
-</div>
-
-<!-- With icon -->
-<div class="vv-input-text vv-input-text--icon-before">
-  <label class="vv-input-text__label" for="search">Search</label>
-  <div class="vv-input-text__wrapper">
-    <div class="vv-input-text__inner">
-      <svg class="vv-input-text__icon">…</svg>
-      <input class="vv-input-text__input" id="search" type="text" />
-    </div>
-  </div>
-</div>
-
-<!-- Floating label -->
-<div class="vv-input-text vv-input-text--floating">
-  <div class="vv-input-text__wrapper">
-    <div class="vv-input-text__inner">
-      <input class="vv-input-text__input" id="email" type="email" placeholder=" " />
-      <label class="vv-input-text__label" for="email">Email</label>
-    </div>
-  </div>
-</div>
-
-<!-- Validation states -->
-<div class="vv-input-text vv-input-text--valid">…</div>
-<div class="vv-input-text vv-input-text--invalid">…</div>
-```
-
-**Input elements:** label, wrapper, inner, input, input-before, input-after, icon, actions-group, action, hint, limit, unit, number
-**Input modifiers:** icon-before, icon-after, valid, invalid, loading, floating, auto-width
-
-#### vv-input-range
-
-CSS cannot read the value of a range input, so the filled part of the track is
-drawn from `--input-range-progress`. Set it on the block, as a percentage of
-`(value - min) / (max - min)`, or the track renders empty.
-
-```html
-<div class="vv-input-range" style="--input-range-progress: 45%">
-  <label for="temperature">Temperature</label>
-  <div class="vv-input-range__wrapper">
-    <input id="temperature" type="range" name="temperature" min="0" max="40" value="18" />
-    <div class="vv-input-range__value">
-      18
-      <span class="vv-input-range__unit">°C</span>
-    </div>
-  </div>
-  <small class="vv-input-range__hint">Drag to set the target temperature</small>
-</div>
-
-<!-- Disabled needs no modifier: :has(input[disabled]) picks it up -->
-<div class="vv-input-range" style="--input-range-progress: 45%">
-  <div class="vv-input-range__wrapper">
-    <input type="range" name="disabled-range" min="0" max="40" value="18" disabled />
-  </div>
-</div>
-
-<!-- HTML has no readonly range: disable the input and add the modifier,
-     which restores the read-only look -->
-<div class="vv-input-range vv-input-range--readonly" style="--input-range-progress: 45%">
-  <div class="vv-input-range__wrapper">
-    <input type="range" name="readonly-range" min="0" max="40" value="18" disabled tabindex="-1" />
-  </div>
-</div>
-```
-
-**Range elements:** label, wrapper, input-before, input, input-after, value, unit, hint
-**Range modifiers:** valid, invalid, readonly (`disabled` comes from the class or from the attribute)
-
-#### vv-card
-
-```html
-<div class="vv-card">
-  <div class="vv-card__header">Title</div>
-  <div class="vv-card__picture">
-    <img src="…" alt="…" />
-  </div>
-  <div class="vv-card__content">Content here</div>
-  <div class="vv-card__footer">Footer actions</div>
-</div>
-
-<!-- Glass effect -->
-<div class="vv-card vv-card--glass">…</div>
-```
-
-#### vv-alert
-
-```html
-<div class="vv-alert">
-  <svg class="vv-alert__icon">…</svg>
-  <div class="vv-alert__content">
-    <strong class="vv-alert__title">Alert title</strong>
-    <p class="vv-alert__description">Alert description</p>
-  </div>
-  <button class="vv-alert__action">Dismiss</button>
-</div>
-
-<!-- Grouped alerts -->
-<div class="vv-alert-group">
-  <div class="vv-alert">…</div>
-  <div class="vv-alert">…</div>
-</div>
-```
-
-#### vv-dialog
-
-```html
-<dialog class="vv-dialog">
-  <div class="vv-dialog__header">
-    <h2 class="vv-dialog__title">Dialog Title</h2>
-    <button class="vv-dialog__close">✕</button>
-  </div>
-  <div class="vv-dialog__content">Content</div>
-  <div class="vv-dialog__footer">
-    <button class="vv-button vv-button--secondary">Cancel</button>
-    <button class="vv-button vv-button--primary">Confirm</button>
-  </div>
-</dialog>
-```
-
-For the full list of component elements, modifiers, and states, read the component settings files at `src/settings/components/_vv-{name}.scss` in the workspace.
-
----
-
-## Utility Classes
-
-Utility classes follow Tailwind-like naming and support responsive breakpoint prefixes.
-
-### Responsive Prefixes
-
-All utilities support breakpoint prefixes: `xxs:`, `xs:`, `sm:`, `md:`, `lg:`, `xl:`, `xxl:`, `xxxl:`
-
-```html
-<div class="p-8 sm:p-12 md:p-16 lg:p-24">Responsive padding</div>
-<div class="display-block md:display-flex">Block on mobile, flex on desktop</div>
-```
-
-### Spacing
-
-**Margin:** `m-{size}`, `mx-{size}`, `my-{size}`, `mt-{size}`, `mr-{size}`, `mb-{size}`, `ml-{size}`
-**Padding:** `p-{size}`, `px-{size}`, `py-{size}`, `pt-{size}`, `pr-{size}`, `pb-{size}`, `pl-{size}`
-**Negative margin:** `n-{size}`, `nx-{size}`, `ny-{size}`, `nt-{size}`, etc.
-**Auto:** `m-auto`, `mx-auto`, `my-auto`, `mt-auto`, etc.
-
-Sizes: 0, px (1px), 1–8, 10, 12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 288, 320, 384
-Dynamic sizes: sm, md, lg, xl (responsive, adapt per breakpoint)
-
-```html
-<div class="m-16 p-24 mb-32">Spaced element</div>
-<div class="mx-auto max-w-md">Centered container</div>
-```
-
-### Layout
-
-**Display:** `display-block`, `display-flex`, `display-grid`, `display-inline`, `display-inline-flex`, `display-none`, etc.
-**Position:** `position-relative`, `position-absolute`, `position-fixed`, `position-sticky`
-**Inset:** `inset-{size}`, `inset-x-{size}`, `inset-y-{size}`, `top-{size}`, `right-{size}`, `bottom-{size}`, `left-{size}`
-**Z-index:** `z-{value}` (0, 10, 20, 30, 40, 50, auto)
-**Overflow:** `overflow-auto`, `overflow-hidden`, `overflow-visible`, `overflow-x-auto`, etc.
-**Container:** `container` (responsive max-width)
-**Aspect Ratio:** `aspect-auto`, `aspect-square`, `aspect-video`
-**Visibility:** `visibility-visible`, `visibility-hidden`
-**Object Fit:** `object-contain`, `object-cover`, `object-fill`, `object-none`
-
-### Flexbox
-
-**Flex container:** `display-flex`, `display-inline-flex`
-**Direction:** `flex-row`, `flex-col`, `flex-row-reverse`, `flex-col-reverse`
-**Wrap:** `flex-wrap`, `flex-nowrap`, `flex-wrap-reverse`
-**Justify:** `justify-start`, `justify-end`, `justify-center`, `justify-between`, `justify-around`, `justify-evenly`
-**Align items:** `items-start`, `items-end`, `items-center`, `items-baseline`, `items-stretch`
-**Align self:** `self-auto`, `self-start`, `self-end`, `self-center`, `self-stretch`
-**Gap:** `gap-{size}`, `gap-x-{size}`, `gap-y-{size}`
-**Flex grow/shrink:** `flex-1`, `flex-auto`, `flex-initial`, `flex-none`, `grow`, `grow-0`, `shrink`, `shrink-0`
-**Order:** `order-{n}` (1–12, first, last, none)
-
-```html
-<div class="display-flex flex-wrap gap-16 justify-between items-center">
-  <div class="flex-1">Grows</div>
-  <div class="flex-none">Fixed</div>
-</div>
-```
-
-### Grid
-
-**Grid container:** `display-grid`, `display-inline-grid`
-**Columns:** `grid-cols-{1-12}`, `grid-cols-none`
-**Rows:** `grid-rows-{1-6}`, `grid-rows-none`
-**Span:** `col-span-{1-12}`, `col-span-full`, `row-span-{1-6}`, `row-span-full`
-**Start/End:** `col-start-{1-13}`, `col-end-{1-13}`, `row-start-{1-7}`, `row-end-{1-7}`
-**Flow:** `grid-flow-row`, `grid-flow-col`, `grid-flow-dense`
-**Gap:** `gap-{size}`, `gap-x-{size}`, `gap-y-{size}`
-
-```html
-<div class="display-grid grid-cols-1 md:grid-cols-3 gap-24">
-  <div class="col-span-2">Wide column</div>
-  <div>Normal column</div>
-</div>
-```
-
-### Typography
-
-**Font family:** `font-sans`, `font-serif`, `font-mono`
-**Font weight:** `font-thin` (100), `font-extralight` (200), `font-light` (300), `font-normal` (400), `font-medium` (500), `font-semibold` (600), `font-bold` (700), `font-extrabold` (800), `font-black` (900)
-**Font size:** `text-{size}` — static: 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, 44, 48, 56, 64, 80, 96, 128; dynamic: xs, sm, md, lg, xl
-**Text align:** `text-left`, `text-center`, `text-right`, `text-justify`
-**Line height:** `leading-none`, `leading-tight`, `leading-normal`, `leading-relaxed`, `leading-loose`
-**Letter spacing:** `tracking-tight`, `tracking-normal`, `tracking-loose`, `tracking-wide`
-**Font style:** `font-italic`, `font-not-italic`
-**Text transform:** `text-uppercase`, `text-lowercase`, `text-capitalize`, `text-normal-case`
-**Text decoration:** `underline`, `overline`, `line-through`, `no-underline`
-**Whitespace:** `whitespace-normal`, `whitespace-nowrap`, `whitespace-pre`, `whitespace-pre-wrap`
-**Word break:** `break-normal`, `break-words`, `break-all`, `truncate`
-
-### Colors
-
-**Text color:** `text-{color}` — brand, accent, success, danger, info, warning, gray, word, surface, white, black
-**Background:** `bg-{color}` — same palette
-**Shade variants:** `text-brand-darken-1` … `text-brand-darken-5`, `text-brand-lighten-1` … `text-brand-lighten-5`
-**Surface variants:** `bg-surface-1` … `bg-surface-5`
-
-### Borders
-
-**Border width:** `border`, `border-0`, `border-2`, `border-4`, `border-8`
-**Border sides:** `border-t-{width}`, `border-r-{width}`, `border-b-{width}`, `border-l-{width}`
-**Border radius:** `rounded`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xl`, `rounded-3xl`, `rounded-full`, `rounded-none`
-**Border color:** `border-{color}`
-
-### Effects & Transitions
-
-**Shadow:** `shadow-sm`, `shadow`, `shadow-md`, `shadow-lg`, `shadow-xl`, `shadow-2xl`, `shadow-none`
-**Opacity:** `opacity-{0,5,10,20,25,30,40,50,60,70,75,80,90,95,100}`
-**Transition:** `transition-none`, `transition-all`, `transition-colors`, `transition-opacity`, `transition-shadow`, `transition-transform`
-**Duration:** `duration-{75,100,150,200,300,500,700}`
-**Timing:** `ease-linear`, `ease-in`, `ease-out`, `ease-in-out`
-**Blur:** `blur` (default 8px), `blur-{none,sm,md,lg,xl,xxl,xxxl}`
-**Backdrop blur:** `backdrop-blur-{none,sm,blur,md,lg,xl,xxl,xxxl}`
-**Brightness:** `brightness-{0,50,75,90,95,100,105,110,125,150,200,250,500,1000}`
-**Contrast:** `contrast-{0,50,75,100,125,150,200,300}`
-**Saturation:** `saturate-{0,50,100,150,200}`
-
----
-
-## Design Tokens (CSS Custom Properties)
-
-All values are exposed as CSS variables, prefixed by category:
-
-```css
-/* Colors */
---color-brand, --color-brand-darken-1, --color-brand-lighten-1
---color-accent, --color-success, --color-danger, --color-info, --color-warning
---color-gray, --color-word, --color-surface, --color-surface-1 … --color-surface-5
-
-/* Spacing */
---spacing-0 … --spacing-384
---spacing-sm, --spacing-md, --spacing-lg, --spacing-xl  /* dynamic/responsive */
-
-/* Typography */
---font-sans, --font-serif, --font-mono
---text-14, --text-16, …
---text-sm, --text-md, --text-lg  /* dynamic */
-
-/* Borders */
---rounded, --rounded-sm, --rounded-md, --rounded-lg, …
---border-0 … --border-8
-
-/* Breakpoints */
---breakpoint-xxs (0), --breakpoint-xs (360px), --breakpoint-sm (576px),
---breakpoint-md (992px), --breakpoint-lg (1024px), --breakpoint-xl (1280px),
---breakpoint-xxl (1440px), --breakpoint-xxxl (1536px)
-
-/* Effects */
---shadow-sm, --shadow, --shadow-md, --shadow-lg
---opacity-0 … --opacity-100
-
-/* Form fields (shared by every vv-input-*) */
---input-background-color, --input-color, --input-min-height, --input-label-*, --input-hint-*
---input-range-progress            /* per instance: the filled share of a range track */
---input-range-accent-color, --input-range-track-color
---input-range-track-height, --input-range-thumb-size, --input-range-thumb-shadow
-```
-
----
-
-## Theming
-
-### Dark Mode
-
-```scss
-// SCSS setup
-@use '@volverjs/style/scss/themes/dark/context' with (
-  $color-brand: #45cb85
-);
-@use '@volverjs/style/scss';
-```
-
-```html
-<!-- Activate dark theme on a container or body -->
-<body class="theme" data-theme="dark">…</body>
-```
-
-Theme variables are scoped to `:where(:host, :root, .theme)` so they cascade naturally.
-
-### Custom Theme
-
-Override color variables at root or component level:
-
-```css
-/* Brand override */
-:root {
-  --color-brand: #e040fb;
-}
-
-/* Component-level override */
-.my-special-section {
-  --button-background: var(--color-accent);
-  --button-border-color: transparent;
-}
-```
-
----
-
-## Extending Components (SCSS)
-
-To add custom modifiers or override default styles:
-
-```scss
-@use 'sass:map';
-@use '@volverjs/style/scss/context' as ctx;
-
-// Deep merge custom styles into the component map
-ctx.$vv-button: map.deep-merge(
-  ctx.$vv-button,
-  (
-    modifier: (
-      success: (
-        background: var(--color-success),
-        color: var(--color-white),
-        state: (
-          hover: (background: var(--color-success-darken-1))
-        )
-      )
-    )
-  )
-);
-
-@use '@volverjs/style/scss';
-```
-
-This creates `.vv-button--success` with hover state.
-
-### Creating Custom Components
-
-Use the same BEM mixin system:
-
-```scss
-@use '@volverjs/style/scss/context' as ctx;
-
-$my-component: (
-  display: flex,
-  padding: var(--spacing-16),
-  background: var(--color-surface-1),
-  element: (
-    title: (font-weight: var(--font-bold)),
-    body: (flex: 1),
-  ),
-  modifier: (
-    compact: (padding: var(--spacing-8)),
-  ),
-  state: (
-    hover: (background: var(--color-surface-2)),
-  ),
-);
-
-@include ctx.spread-map-into-bem(
-  $map: $my-component,
-  $block: my-component,
-  $use-custom-props: true,
-  $zero-specificity: true,
-  $bps: ctx.$breakpoints
-);
-```
-
----
-
-## SCSS Mixins & Functions
-
-### `spread-map-into-bem($map, $block, ...)`
-Generates full BEM structure (block, elements, modifiers, states) from an SCSS map.
-
-### `spread-map-into-utilities($map, $class, $attribute, ...)`
-Generates utility classes from a map with optional responsive variants.
-
-### `spread-map-into-props($map, $prefix)`
-Generates CSS custom properties from a map. Recurses nested maps.
-
-### `media-breakpoint-up($breakpoint)`
-Mobile-first media query shortcut:
-```scss
-@include ctx.media-breakpoint-up(md) {
-  .my-class { display: grid; }
-}
-```
-
-### `wrap-with-where($selector, $enabled)`
-Wraps a selector in `:where()` for zero specificity.
-
----
-
-## Vue.js Integration Notes
-
-When using with `@volverjs/ui-vue`, the CSS classes are applied automatically by the Vue components. You typically:
-1. Import `@volverjs/style` in your main entry file
-2. Use `<VvButton>`, `<VvInputText>`, etc. — they render the correct BEM classes
-3. Pass modifiers as props: `<VvButton modifiers="primary">` → `.vv-button--primary`
-4. Override styles via CSS custom properties or SCSS context
-
-For static HTML or other frameworks, apply the classes manually as shown above.
-
----
-
-## CSS Cascade Layers
-
-When `$use-css-layers: true`:
-
-```
-@layer reset, preflight, props, components, themes, utilities;
-```
-
-Layer order ensures utilities always win over components, and themes override base styles.
-
----
-
-## Quick Reference
-
-| Need | Pattern |
-|------|---------|
-| Button | `<button class="vv-button vv-button--primary">…</button>` |
-| Input | `<div class="vv-input-text"><label class="vv-input-text__label">…</label><div class="vv-input-text__wrapper"><div class="vv-input-text__inner"><input class="vv-input-text__input" /></div></div></div>` |
-| Card | `<div class="vv-card"><div class="vv-card__content">…</div></div>` |
-| Flex row | `<div class="display-flex gap-16 items-center">…</div>` |
-| Grid 3 cols | `<div class="display-grid grid-cols-3 gap-24">…</div>` |
-| Responsive | `class="p-8 md:p-16 lg:p-24"` |
-| Centering | `class="display-flex justify-center items-center"` |
-| Override token | `--color-brand: #e040fb;` in `:root` |
+Extend a component by deep-merging its map before the library is emitted
+(`ctx.$vv-button: map.deep-merge(ctx.$vv-button, (modifier: (success: (…))))`), create
+one with `spread-map-into-bem`, and query breakpoints with `@include ctx.bp-up(md)`.
+When cherry-picking, alias modules that share a basename (`props/spacing` and
+`utilities/spacing` collide) and take `scss/props` whole with any component. Layers are
+emitted as `volver.reset`, `volver.utilities`, … Details and signatures in scss.md.
+
+## With @volverjs/ui-vue
+
+Vue components render these classes; `modifiers="primary"` becomes `.vv-button--primary`,
+so valid modifier names are the ones in components.md. Utilities go on wrappers and
+slots as usual (`<VvCard class="mb-lg">`). Import `@volverjs/style` once in the entry
+file and the dark theme next to it; toggle `theme theme--dark` on `<html>` (the library
+docs use `useDark({ attribute: 'class', valueDark: 'theme theme--dark', valueLight: 'theme theme--light' })`).
+
+## Before you finish
+
+- Every class you wrote is in the references or was confirmed with grep.
+- Responsive prefixes only on groups that support them; spacing uses dynamic tokens.
+- Disabled and readonly come from attributes; hints are linked with `aria-describedby`;
+  labels have `for`.
+- Dialogs have the `__wrapper` article; range inputs have `--input-range-progress`.
+- Colors are tokens, not hex, so the dark theme keeps working.
