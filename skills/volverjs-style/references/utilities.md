@@ -23,7 +23,7 @@ before using it.
 
 **Static spacing scale** (used by margin, padding, gap, inset, sizing):
 
-```
+```text
 0 px 1 2 3 4 5 6 7 8 9 10 12 14 16 18 20 22 24 26 28 32 34 36 38 40 44 48 50 52 56 64
 80 96 100 112 128 144 150 160 176 192 208 224 240 256 288 300 320 384
 ```
@@ -47,7 +47,7 @@ variants, so `md:p-16` does nothing: the dynamic tokens are how spacing adapts.
 
 **Color names** (used by `text-`, `bg-`, `border-`, `decoration-`):
 
-```
+```text
 brand accent success danger info warning gray      each also -lighten-1..5 and -darken-1..5
 word word-1..word-5                                 text colors, from strongest to faintest
 surface surface-1..surface-5                        backgrounds, from page to deepest inset

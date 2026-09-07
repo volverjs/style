@@ -117,3 +117,65 @@ You can customize the layer order and prefix:
 #### Browser Support
 
 CSS `@layer` is supported in all modern browsers (Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+). For older browsers, you may need to disable this feature or use a polyfill.
+
+### Writing Direction
+
+CSS has logical properties for the box: `inset-inline`, `padding-inline` and
+`margin-inline` follow the writing direction, and the library uses them
+throughout. It has none for `translate`, `rotate` or `scale`, so a component
+that moves an element along the inline axis cannot express the movement
+logically.
+
+`--direction` carries the sign of that axis. It is `1` where the inline axis
+runs left to right and `-1` where it runs the other way, and a declaration
+multiplies its offset by it:
+
+```scss
+// slides in from the inline start, whichever side that is
+[translate]: calc(-100% * var(--direction, 1)),
+```
+
+The token is declared on the `dir` attribute, so it follows the document and
+also an island that sets its own direction:
+
+```html
+<html lang="ar" dir="rtl">
+  <!-- everything here moves toward the left -->
+  <div dir="ltr">
+    <!-- and everything here moves toward the right again -->
+  </div>
+</html>
+```
+
+Set `dir` on `<html>` for the whole document. Without it the token stays `1`,
+which is what a left-to-right document needs, and every declaration reading it
+passes a `1` fallback, so a cherry-picked component keeps its movement even
+without `props/layout`.
+
+#### Writing a Direction-Aware Component
+
+Reach for the token whenever a value would otherwise name a physical side.
+Because a `var()` inside a custom property is substituted where that property is
+declared, the declaration has to be written in brackets so that it is emitted
+plainly instead of being wrapped in a generated `--vv-*` property. Wrapped, it
+would read the token at the `:root` and freeze it there, and an island of the
+other direction would not turn.
+
+```scss
+$my-drawer: (
+  position: fixed,
+  inset-inline: auto 0,
+  // plain declaration: --direction is read on the element
+  [translate]: calc(100% * var(--direction, 1)),
+);
+```
+
+An arrow or a glyph that points sideways is mirrored rather than offset, which
+`scale` does in one declaration:
+
+```scss
+[scale]: var(--direction, 1) 1,
+```
+
+A `rotate` on the block axis, and a `translate` on it, are the same in both
+directions and need nothing.

@@ -82,7 +82,8 @@ $vv-checkbox: (
 							height: var(--spacing-20),
 							border-radius: 50%,
 							position: absolute,
-							inset: var(--spacing-2) 0 0 var(--spacing-2),
+							inset-block: var(--spacing-2) 0,
+							inset-inline: var(--spacing-2) 0,
 							background: var(--color-white),
 							will-change: transform,
 							transition: var(--transition-transform),
@@ -99,7 +100,7 @@ $vv-checkbox: (
 							background-image: none,
 							pseudo: (
 								after: (
-									translate: 50%,
+									[translate]: calc(50% * var(--direction, 1)),
 								),
 							),
 						),
@@ -108,7 +109,8 @@ $vv-checkbox: (
 							background-color: var(--color-brand),
 							pseudo: (
 								after: (
-									translate: 100%,
+									[translate]:
+										calc(100% * var(--direction, 1)),
 								),
 							),
 						),

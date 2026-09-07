@@ -41,8 +41,25 @@ On these components:
 
 - `valid`, `invalid`, `loading`, `floating`, `icon-before`, `icon-after` are **modifier
   classes** on the block. `aria-invalid` is good a11y but styles nothing.
-- `disabled` and `readonly` propagate from the attribute on the control through a
-  `:has(input[disabled])` rule, so no class is needed. `vv-input-text--disabled` also works.
+- `disabled` propagates from the attribute on the control, through a `:has()` rule naming
+  that component's own control, so no class is needed (`vv-input-text--disabled` also
+  works). The rule is `:has(input[disabled])` for `vv-input-text`, `vv-input-file` and
+  `vv-input-range`, `:has(textarea[disabled])` for `vv-textarea` and
+  `:has(select[disabled])` for `vv-select`.
+- `readonly` propagates the same way, but only where HTML has the attribute, which is a
+  text-type input and a textarea: `vv-input-text` and `vv-textarea`, through
+  `:has(input[readonly])` and `:has(textarea[readonly])`.
+
+  Everywhere else the attribute does not exist, so the read-only look is a modifier and the
+  recipe is the same for all of them: disable the control, add `tabindex="-1"` and
+  `--readonly`, which undoes the disabled dimming. It applies to `vv-select`,
+  `vv-input-range`, `vv-checkbox`, `vv-radio` and `vv-input-file`, whose readonly state
+  hides the drop area and freezes the wrapper background. `vv-input-file` does carry a
+  `:has(input[readonly])` hook, but `readonly` is not valid on a file input, so reach it
+  through the modifier rather than writing the attribute.
+
+  A disabled control contributes nothing to form submission, so pair it with a hidden input
+  carrying the same name when the value has to reach the server.
 - Their look comes from the shared `--input-*` tokens (`--input-background-color`,
   `--input-color`, `--input-min-height`, `--input-label-*`, `--input-hint-*`,
   `--input-valid-color`, `--input-invalid-color`); override those to restyle every field
@@ -230,17 +247,21 @@ percent. Without it the track renders empty.
 <div class="vv-input-range" style="--input-range-progress: 45%">
   <label for="temp">Temperature</label>
   <div class="vv-input-range__wrapper">
-    <input id="temp" type="range" name="temp" min="0" max="40" value="18" />
+    <input id="temp" type="range" name="temp" min="0" max="40" value="18"
+           aria-describedby="temp-hint" />
     <div class="vv-input-range__value">18 <span class="vv-input-range__unit">°C</span></div>
   </div>
-  <small class="vv-input-range__hint">Drag to set the target</small>
+  <small id="temp-hint" class="vv-input-range__hint">Drag to set the target</small>
 </div>
 
-<!-- HTML has no readonly range: disable the input and add the modifier -->
+<!-- HTML has no readonly range: disable the input, drop it out of the tab order and
+     add the modifier, which undoes the disabled dimming. The hidden input carries the
+     value to the server, which a disabled control never does. -->
 <div class="vv-input-range vv-input-range--readonly" style="--input-range-progress: 45%">
   <div class="vv-input-range__wrapper">
     <input type="range" min="0" max="40" value="18" disabled tabindex="-1" />
   </div>
+  <input type="hidden" name="temp" value="18" />
 </div>
 ```
 

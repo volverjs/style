@@ -22,6 +22,7 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 | Borders | `--border` (1px), `--border-{0,2,4,8}`, `--rounded`, `--rounded-{none,sm,md,lg,xl,xxl,xxxl,full}` |
 | Breakpoints | `--breakpoint-{xs,sm,md,lg,xl,xxl,xxxl}` (no xxs); `--breakpoint-key` and `--breakpoint-value` are re-declared inside each media query and always hold the current breakpoint |
 | Layout | `--z-{1,sticky,fixed,dropdown,modal-backdrop,modal,confirm-backdrop,confirm,popover,tooltip,toast,notification-alert,auto}`, `--aspect-*`, `--w-*`, `--h-*` |
+| Direction | `--direction`: `1` where the inline axis runs left to right, `-1` where it runs the other way |
 | Effects | `--shadow`, `--shadow-{sm,md,lg,xl,2xl,inner,none}`, `--opacity-{0..100 step 5}`, `--blur*`, `--brightness-*`, `--contrast-*`, `--saturate-*` |
 | Motion | `--duration-{75..1000}`, `--ease-{linear,in,out,in-out}`, `--transition-{none,all,colors,opacity,shadow,transform}`, `--transition-property-*`, `--animation-{none,indeterminate,progress-indeterminate,spin,ping,pulse,bounce,shine,clippath}` |
 | Backgrounds | `--bg-*` (patterns and glyphs such as `--bg-close`, `--bg-chevron`), `--gradient-*` |
@@ -30,6 +31,15 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 
 Motion tokens (`--duration-*`, `--transition-*`) are `0s`/`none` unless the user has
 `prefers-reduced-motion: no-preference`; motion respects the OS setting for free.
+
+`--direction` is set from the `dir` attribute, so it follows the document and any
+subtree that declares its own direction. Components multiply inline offsets by it,
+because CSS has logical properties for the box (`inset-inline`, `padding-inline`) but
+none for `translate`, `rotate` or `scale`. Writing a component that moves along the
+inline axis, reach for it the same way: `calc(100% * var(--direction, 1))` to offset,
+`var(--direction, 1) 1` as a `scale` to mirror a sideways arrow. Block-axis movement
+needs nothing. Set `dir="rtl"` on `<html>` and the library mirrors itself; without it
+the token is `1`.
 
 Component properties follow the settings map one to one: every key in
 `src/settings/components/_vv-button.scss` becomes `--vv-button-…`. Examples from the

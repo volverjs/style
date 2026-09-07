@@ -338,11 +338,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				translate: 100%,
+				[translate]: calc(100% * var(--direction, 1)),
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				translate: 100%,
+				[translate]: calc(100% * var(--direction, 1)),
 			),
 		),
 		fade-inline-start: (
@@ -351,11 +351,11 @@ $vv-alert: (
 			),
 			enter-from: (
 				opacity: var(--opacity-0),
-				translate: -100%,
+				[translate]: calc(-100% * var(--direction, 1)),
 			),
 			leave-to: (
 				opacity: var(--opacity-0),
-				translate: -100%,
+				[translate]: calc(-100% * var(--direction, 1)),
 			),
 		),
 		fade-block-top: (
