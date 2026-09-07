@@ -168,12 +168,13 @@ All components follow BEM naming: `.vv-{name}`, `.vv-{name}__{element}`, `.vv-{n
 
 #### vv-input-range
 
-CSS cannot read the value of a range input, so the filled part of the track is
-drawn from `--input-range-progress`. Set it on the block, as a percentage of
-`(value - min) / (max - min)`, or the track renders empty.
+The slider is the native control, drawn by the browser: there is no track or
+thumb element, the filled part follows the thumb by itself and `accent-color`
+colors both. The empty track keeps its light grey in the dark theme, and a
+readonly field shows the greyed slider of the disabled control.
 
 ```html
-<div class="vv-input-range" style="--input-range-progress: 45%">
+<div class="vv-input-range">
   <label for="temperature">Temperature</label>
   <div class="vv-input-range__wrapper">
     <input id="temperature" type="range" name="temperature" min="0" max="40" value="18" />
@@ -186,7 +187,7 @@ drawn from `--input-range-progress`. Set it on the block, as a percentage of
 </div>
 
 <!-- Disabled needs no modifier: :has(input[disabled]) picks it up -->
-<div class="vv-input-range" style="--input-range-progress: 45%">
+<div class="vv-input-range">
   <div class="vv-input-range__wrapper">
     <input type="range" name="disabled-range" min="0" max="40" value="18" disabled />
   </div>
@@ -194,7 +195,7 @@ drawn from `--input-range-progress`. Set it on the block, as a percentage of
 
 <!-- HTML has no readonly range: disable the input and add the modifier,
      which restores the read-only look -->
-<div class="vv-input-range vv-input-range--readonly" style="--input-range-progress: 45%">
+<div class="vv-input-range vv-input-range--readonly">
   <div class="vv-input-range__wrapper">
     <input type="range" name="readonly-range" min="0" max="40" value="18" disabled tabindex="-1" />
   </div>
@@ -202,7 +203,7 @@ drawn from `--input-range-progress`. Set it on the block, as a percentage of
 ```
 
 **Range elements:** label, wrapper, input-before, input, input-after, value, unit, hint
-**Range modifiers:** valid, invalid, readonly (`disabled` comes from the class or from the attribute)
+**Range modifiers:** valid, invalid, loading, readonly (`disabled` comes from the class or from the attribute)
 
 #### vv-card
 
@@ -412,9 +413,7 @@ All values are exposed as CSS variables, prefixed by category:
 
 /* Form fields (shared by every vv-input-*) */
 --input-background-color, --input-color, --input-min-height, --input-label-*, --input-hint-*
---input-range-progress            /* per instance: the filled share of a range track */
---input-range-accent-color, --input-range-track-color
---input-range-track-height, --input-range-thumb-size, --input-range-thumb-shadow
+--input-range-accent-color        /* track and thumb of every range field */
 ```
 
 ---
