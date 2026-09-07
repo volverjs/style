@@ -14,7 +14,7 @@ This adds the skill to your Claude Code configuration.
 
 The skill is specialized for real `@volverjs/style` implementation patterns:
 
-- **BEM Components**: `vv-button`, `vv-card`, `vv-input-text`, `vv-alert`, `vv-dialog`, `vv-select`, `vv-dropdown`, and grouped components like `vv-button-group`.
+- **BEM Components**: `vv-button`, `vv-card`, `vv-input-text`, `vv-input-range`, `vv-alert`, `vv-dialog`, `vv-select`, `vv-dropdown`, and grouped components like `vv-button-group`.
 - **Utility Classes**: spacing (`m-*`, `p-*`), layout (`display-*`, `position-*`), flexbox/grid, typography (`text-*`, `font-*`), borders, effects, and transitions.
 - **Responsive Utilities**: breakpoint-prefixed classes (`xxs:` through `xxxl:`) for adaptive layouts.
 - **Design Tokens**: CSS custom properties for colors, spacing, typography, breakpoints, borders, and effects.

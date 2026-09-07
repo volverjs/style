@@ -82,7 +82,7 @@ All components follow BEM naming: `.vv-{name}`, `.vv-{name}__{element}`, `.vv-{n
 
 ### Available Components
 
-**Form:** vv-input-text, vv-input-file, vv-textarea, vv-checkbox, vv-radio, vv-select, vv-dropdown
+**Form:** vv-input-text, vv-input-range, vv-input-file, vv-textarea, vv-checkbox, vv-radio, vv-select, vv-dropdown
 **Display:** vv-button, vv-badge, vv-alert, vv-avatar, vv-progress, vv-tooltip, vv-skeleton, vv-text
 **Layout:** vv-card, vv-dialog, vv-nav, vv-table, vv-breadcrumb, vv-tab
 **Interactive:** vv-accordion, vv-dropdown-action, vv-dropdown-option, vv-dropdown-optgroup
@@ -165,6 +165,44 @@ All components follow BEM naming: `.vv-{name}`, `.vv-{name}__{element}`, `.vv-{n
 
 **Input elements:** label, wrapper, inner, input, input-before, input-after, icon, actions-group, action, hint, limit, unit, number
 **Input modifiers:** icon-before, icon-after, valid, invalid, loading, floating, auto-width
+
+#### vv-input-range
+
+CSS cannot read the value of a range input, so the filled part of the track is
+drawn from `--input-range-progress`. Set it on the block, as a percentage of
+`(value - min) / (max - min)`, or the track renders empty.
+
+```html
+<div class="vv-input-range" style="--input-range-progress: 45%">
+  <label for="temperature">Temperature</label>
+  <div class="vv-input-range__wrapper">
+    <input id="temperature" type="range" name="temperature" min="0" max="40" value="18" />
+    <div class="vv-input-range__value">
+      18
+      <span class="vv-input-range__unit">°C</span>
+    </div>
+  </div>
+  <small class="vv-input-range__hint">Drag to set the target temperature</small>
+</div>
+
+<!-- Disabled needs no modifier: :has(input[disabled]) picks it up -->
+<div class="vv-input-range" style="--input-range-progress: 45%">
+  <div class="vv-input-range__wrapper">
+    <input type="range" name="disabled-range" min="0" max="40" value="18" disabled />
+  </div>
+</div>
+
+<!-- HTML has no readonly range: disable the input and add the modifier,
+     which restores the read-only look -->
+<div class="vv-input-range vv-input-range--readonly" style="--input-range-progress: 45%">
+  <div class="vv-input-range__wrapper">
+    <input type="range" name="readonly-range" min="0" max="40" value="18" disabled tabindex="-1" />
+  </div>
+</div>
+```
+
+**Range elements:** label, wrapper, input-before, input, input-after, value, unit, hint
+**Range modifiers:** valid, invalid, readonly (`disabled` comes from the class or from the attribute)
 
 #### vv-card
 
@@ -371,6 +409,12 @@ All values are exposed as CSS variables, prefixed by category:
 /* Effects */
 --shadow-sm, --shadow, --shadow-md, --shadow-lg
 --opacity-0 … --opacity-100
+
+/* Form fields (shared by every vv-input-*) */
+--input-background-color, --input-color, --input-min-height, --input-label-*, --input-hint-*
+--input-range-progress            /* per instance: the filled share of a range track */
+--input-range-accent-color, --input-range-track-color
+--input-range-track-height, --input-range-thumb-size, --input-range-thumb-shadow
 ```
 
 ---
