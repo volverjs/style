@@ -20,8 +20,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-input-range 
-            vv-input-range--disabled" 
+<div class="vv-input-range" 
      style="--input-range-progress: 30%">
     <label for="range-disabled">Disabled Range</label>
     <div class="vv-input-range__wrapper">
