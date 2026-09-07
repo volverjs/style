@@ -53,7 +53,9 @@ $-pseudo-elements: (
 	-webkit-progress-bar, -webkit-progress-value, -webkit-inner-element,
 	-moz-progress-bar, -moz-progress-value, -moz-inner-element,
 	-webkit-details-marker, -webkit-scrollbar,
-	-webkit-scrollbar-track, -webkit-scrollbar-thumb
+	-webkit-scrollbar-track, -webkit-scrollbar-thumb,
+	-webkit-slider-runnable-track, -webkit-slider-thumb,
+	-moz-range-track, -moz-range-progress, -moz-range-thumb
 );
 
 // Transform a map into a list of CSS attributes
@@ -81,38 +83,50 @@ $-pseudo-elements: (
 		@each $key, $value in $map {
 			@if not list.index($ignore, $key) {
 				@if meta.type-of($value) == 'map' and ($deep or $key == 'pseudo') {
-					$original: map.get($original, $key);
+					// Sass assignment reaches the enclosing scope, so the
+					// reference map and the property name of a nested map are
+					// kept in their own variables: reusing $original and $key
+					// left every key after the first one looking itself up in
+					// the wrong map.
+					$nested-original: map.get($original, $key);
 
-					@if not $original {
-						$original: ();
+					@if not $nested-original {
+						$nested-original: ();
 					}
+
+					$nested-key: $key;
 
 					@if $postfix != '' {
-						$key: #{$postfix}-#{$key};
+						$nested-key: #{$postfix}-#{$key};
 					}
 
+					// The test is on the map key, not on the postfixed name: a
+					// pseudo map nested one level down would otherwise be
+					// spread as plain declarations on the parent selector.
 					@if $key == 'pseudo' {
 						@each $pseudo-element, $pseudo-map in $value {
 							@if meta.type-of($pseudo-map) == 'map' {
 								@if list.index($-pseudo-elements, $pseudo-element) {
-									$original: map.get($original, $pseudo-element);
-									$key: pseudo-#{$pseudo-element};
+									$pseudo-original: (
+										map.get($nested-original, $pseudo-element)
+									);
+									$pseudo-key: pseudo-#{$pseudo-element};
 
 									@include pseudo-element-placeholder($pseudo-element) {
-										@if not $original {
+										@if not $pseudo-original {
 											@if not map.has-key($pseudo-map, 'content') {
 												content: '';
 											}
 
-											$original: ();
+											$pseudo-original: ();
 										}
 
 										@include spread-map-into-attrs(
-											$original: $original,
+											$original: $pseudo-original,
 											$map: $pseudo-map,
 											$prefix: $prefix,
 											$variant: $variant,
-											$postfix: $key,
+											$postfix: $pseudo-key,
 											$deep: true,
 											$use-custom-props: $use-custom-props
 										);
@@ -122,11 +136,11 @@ $-pseudo-elements: (
 						}
 					} @else {
 						@include spread-map-into-attrs(
-							$original: $original,
+							$original: $nested-original,
 							$map: $value,
 							$prefix: $prefix,
 							$variant: $variant,
-							$postfix: $key,
+							$postfix: $nested-key,
 							$deep: true,
 							$use-custom-props: $use-custom-props
 						);

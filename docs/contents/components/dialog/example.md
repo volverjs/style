@@ -64,6 +64,15 @@ wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center
                     value="scale" />
                 scale
             </label>
+            <label class="vv-radio" for="slide-inline-end">
+                <input
+                    v-model="transition"
+                    id="slide-inline-end"
+                    type="radio"
+                    name="transition"
+                    value="slide-inline-end" />
+                slide-inline-end
+            </label>
         </div>
     </fieldset>
     <fieldset class="vv-radio-group">
@@ -96,6 +105,15 @@ wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center
                     name="size" 
                     value="fullscreen" />
                 fullscreen
+            </label>
+            <label class="vv-radio" for="drawer">
+                <input
+                    v-model="size"
+                    id="drawer"
+                    type="radio"
+                    name="size"
+                    value="drawer" />
+                drawer
             </label>
         </div>
     </fieldset>

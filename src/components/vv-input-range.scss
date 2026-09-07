@@ -2,8 +2,8 @@
 @use '../context' as *;
 
 @include layer(components, $use-css-layers, $layer-prefix) {
-$component-name: map.get($components-names, vv-input-file);
-$component-map: $vv-input-file;
+$component-name: map.get($components-names, vv-input-range);
+$component-map: $vv-input-range;
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -13,12 +13,15 @@ $component-map: $vv-input-file;
 	$bps: $breakpoints
 );
 
-// disabled and readonly
+// A range input has no readonly state in HTML, so `disabled` is the only
+// attribute that can style the field without the modifier class, and the
+// readonly modifier is what the field uses to undo that look.
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
 	$control: 'input',
-	$states: ('disabled', 'readonly'),
+	$states: ('disabled'),
+	$except-modifiers: ('readonly'),
 	$zero-specificity: $zero-specificity-for-components
 );
 

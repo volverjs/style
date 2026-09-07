@@ -1,6 +1,6 @@
 # Volver Style Skill for Claude Code
 
-Agent skill that helps Claude Code style interfaces with [@volverjs/style](https://github.com/volverjs/style), the CSS/SCSS design system with utilities, BEM components, and design tokens.
+Agent skill that helps Claude Code style interfaces with [@volverjs/style](https://github.com/volverjs/style), the CSS/SCSS design system with utilities, BEM components and design tokens.
 
 ## Installation
 
@@ -10,60 +10,68 @@ npx skills add volverjs/style
 
 This adds the skill to your Claude Code configuration.
 
-## What This Skill Covers
+## What this skill covers
 
-The skill is specialized for real `@volverjs/style` implementation patterns:
+- **Where the vocabulary differs from Tailwind**: bare `flex`/`grid`/`none`, spacing without responsive variants (dynamic `sm`/`md`/`lg` tokens instead), semantic `z-*`, `rounded-xxl`, the real text-size scale, the semantic `word`/`surface` palette.
+- **BEM components**: canonical markup for all 32 `vv-*` components, their elements, modifiers and states, alias children that need no class, and how states map to attributes.
+- **Utility classes**: every class with its exact value set and whether it accepts breakpoint prefixes.
+- **Design tokens**: CSS custom properties, CSS-only overrides, component `--vv-*` properties, the dark theme and its `theme theme--dark` activation.
+- **SCSS**: import paths, `@use '@volverjs/style/scss/context' with (…)`, component map extension, custom components, mixins and cascade layers.
 
-- **BEM Components**: `vv-button`, `vv-card`, `vv-input-text`, `vv-alert`, `vv-dialog`, `vv-select`, `vv-dropdown`, and grouped components like `vv-button-group`.
-- **Utility Classes**: spacing (`m-*`, `p-*`), layout (`display-*`, `position-*`), flexbox/grid, typography (`text-*`, `font-*`), borders, effects, and transitions.
-- **Responsive Utilities**: breakpoint-prefixed classes (`xxs:` through `xxxl:`) for adaptive layouts.
-- **Design Tokens**: CSS custom properties for colors, spacing, typography, breakpoints, borders, and effects.
-- **SCSS Customization**: context overrides (`@use .../context with (...)`), component map extension, and custom component generation via mixins.
-- **Theming**: dark theme setup and scoped token overrides.
-- **Zero Specificity Strategy**: `:where()` wrapping behavior and CSS cascade layering.
+## Layout
+
+```
+volverjs-style/
+├── SKILL.md                  workflow, Tailwind differences, essentials
+└── references/
+    ├── utilities.md          full utility catalogue
+    ├── components.md         markup and maps for every component
+    ├── tokens.md             custom properties, CSS overrides, dark theme
+    └── scss.md               imports, context, extending, mixins, layers
+```
+
+Everything in the reference files is verified against the library source and its compiled CSS.
 
 ## Usage
 
-Once installed, Claude Code should automatically use this skill when you ask to:
+Once installed, Claude Code uses this skill when you ask to:
 
-- Build UI markup using `vv-*` BEM classes.
-- Apply utility-first styling with responsive variants.
-- Customize design tokens and theme variables.
-- Extend or override component styles using SCSS context and maps.
-- Compose layouts with flex/grid utilities while preserving design system conventions.
+- Build markup with `vv-*` BEM classes.
+- Lay out pages with utility classes and responsive variants.
+- Customize tokens, brand colors, or the dark theme.
+- Extend or override component styles through the SCSS context and maps.
+- Pick valid modifiers for `@volverjs/ui-vue` components.
 
-### Example Prompts
+### Example prompts
 
 ```text
-Create a login form layout using `vv-input-text`, `vv-checkbox`, and `vv-button vv-button--primary` with utility spacing classes.
+Create a login form with vv-input-text, vv-checkbox and a primary vv-button, spaced with utility classes.
 ```
 
 ```text
-Show how to override brand colors and typography using `@use '@volverjs/style/scss/context' with (...)`.
+Override brand color and font family with @use '@volverjs/style/scss/context' with (...).
 ```
 
 ```text
-Build a responsive dashboard section with `display-grid`, `md:grid-cols-3`, and `gap-*` utilities.
+Build a responsive dashboard: a grid that goes from one column to three at md, with gap-lg.
 ```
 
 ```text
-Create a card and alert pattern with BEM elements/modifiers and token-based overrides.
+Add a success modifier to vv-button through the SCSS map.
 ```
 
 ```text
-Extend `vv-button` with a custom `success` modifier via SCSS map deep merge.
+Add dark mode to the app and make sure the custom hero section follows it.
 ```
 
-## Source of Truth
+## Source of truth
 
-When coding, verify implementation details directly from the library source:
+The package ships its SCSS source, so in a consuming project the skill verifies details against:
 
-- `src/components/` (all `vv-*` component styles)
-- `src/utilities/` (utility class generators)
-- `src/props/` (design token property maps)
-- `src/settings/` (component/theme configuration maps)
-- `src/themes/` (theme contexts)
-- `src/tools/` (SCSS mixins and helpers)
+- `node_modules/@volverjs/style/dist/` (compiled CSS, the ground truth for class names)
+- `node_modules/@volverjs/style/src/settings/components/_vv-*.scss` (component maps)
+- `node_modules/@volverjs/style/src/settings/` and `src/props/` (scales and tokens)
+- `node_modules/@volverjs/style/design-tokens.json` (machine-readable tokens)
 
 ## Documentation
 
