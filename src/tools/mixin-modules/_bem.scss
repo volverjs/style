@@ -711,3 +711,120 @@ $-state-suffixes: (
 		}
 	}
 }
+
+// ============================================
+// Control states
+// ============================================
+// A field component is a wrapper element around a native control, so its own
+// `state` maps generate selectors (`.vv-input-text:disabled`) that can never
+// match. This re-applies those placeholders on the control's attribute
+// instead, through `:has()`, block first and then element by element.
+
+// `$states` are read from the map's `state` key and must name an attribute of
+// the control: `disabled` and `readonly` for a text field, `disabled` alone
+// where HTML has no readonly (`select`, `input[type="range"]`). Components
+// that spell readonly as a modifier because they freeze the control with the
+// disabled attribute list that modifier in `$except-modifiers`, otherwise the
+// hook would dim a readonly field: `:has()` carries the specificity of its
+// argument, so with `$zero-specificity: false` it outweighs the modifier and
+// source order alone would not settle it.
+@mixin spread-map-into-control-states(
+	$map,
+	$block,
+	$control: 'input',
+	$states: ('disabled', 'readonly'),
+	$except-modifiers: (),
+	$zero-specificity: true
+) {
+	$component-selector: '.#{$block}';
+	$exception: '';
+
+	@each $modifier in $except-modifiers {
+		$exception: '#{$exception}:not(#{$component-selector}--#{$modifier})';
+	}
+
+	@each $state in $states {
+		$selector: (
+			'#{$component-selector}#{$exception}:has(#{$control}[#{$state}])'
+		);
+
+		@include wrap-with-where(
+			$selector: $selector,
+			$enabled: $zero-specificity
+		) {
+			@extend %#{$block}--#{$state} !optional;
+		}
+
+		// element
+		@if map.get($map, 'state', $state, 'element') {
+			@each $element, $element-map
+				in map.get($map, 'state', $state, 'element')
+			{
+				$element-selector: (
+					'#{$selector} #{$component-selector}__#{$element}'
+				);
+				$alias: map.get($map, 'element', $element, '_alias');
+
+				@if $alias {
+					$element-selector: list.append(
+						$element-selector,
+						('#{$selector} #{$alias}')
+					);
+				}
+
+				@include wrap-with-where(
+					$selector: $element-selector,
+					$enabled: $zero-specificity
+				) {
+					@extend %#{$block}-state-#{$state}__#{$element} !optional;
+				}
+
+				// element state
+				@each $element-state, $state-map
+					in map.get($element-map, 'state')
+				{
+					@if $element-state {
+						$element-selector-state: ();
+
+						@each $item in $element-selector {
+							$element-selector-state: list.append(
+								$element-selector-state,
+								('#{$item}:#{$element-state}')
+							);
+						}
+
+						@include wrap-with-where(
+							$selector: $element-selector-state,
+							$enabled: $zero-specificity
+						) {
+							@extend %#{$block}-state-#{$state}-element-#{$element}--#{$element-state}
+									!optional;
+						}
+					}
+				}
+
+				// element pseudo
+				@each $pseudo, $pseudo-map in map.get($element-map, 'pseudo') {
+					@if $pseudo {
+						$element-selector-pseudo: ();
+
+						@each $item in $element-selector {
+							$element-selector-pseudo: list.append(
+								$element-selector-pseudo,
+								('#{$item}::#{$pseudo}')
+							);
+						}
+
+						@include wrap-with-where(
+							$selector: $element-selector-pseudo,
+							$enabled: $zero-specificity
+						) {
+							@extend %#{$block}-state-#{$state}-element-#{$element}--#{$pseudo}
+									!optional;
+						}
+					}
+				}
+			}
+		}
+	}
+}
