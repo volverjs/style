@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 * The BEM generator accepts the pseudo-elements of a range input: `-webkit-slider-runnable-track`, `-webkit-slider-thumb`, `-moz-range-track`, `-moz-range-progress` and `-moz-range-thumb`.
 * `vv-dialog` gains a `drawer` modifier and a `slide-inline-end` transition: a side panel anchored to the inline end, full width below `sm` and `min(75dvw, 32rem)` above it. Its header and footer are flat, because the filled bands read as heavy on a panel that spans the whole height, and the footer keeps its divider, because the content above it scrolls. The dialog example in the styleguide offers both.
 
+### Changed
+
+* Development dependencies updated, among them `stylelint` to 17.15.0, `sass-embedded` to 1.104.0, `vite` to 8.2.2, `postcss-preset-env` to 11.5.2, `markdown-it-anchor` to 10.0.0, `vue` to 3.5.42 and `vue-router` to 5.3.1. `eslint` becomes a direct development dependency instead of being resolved through the plugins that peer on it, and `packageManager` moves to pnpm 12.3.4.
+
 ### Fixed
 
 * `vv-dialog` read `var(--rounded-0)` for the square corners of the `fullscreen` modifier, a token that does not exist. The declaration was invalid at computed-value time, which resolves `border-radius` to its initial `0`, so it worked by accident. It is `var(--rounded-none)`, the token the rest of the library uses, and the new `drawer` modifier follows.
