@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.27] - 2026-09-08
+
+### Fixed
+
+* Three places in the BEM generator suffixed a selector list as if it were a single selector. A list glued with commas reaches its last entry alone: the suffix lands there, and every entry before it stays in the rule bare, matching more than it was meant to or nothing at all. Each of them now walks the list and suffixes one entry at a time.
+
+  `spread-map-into-control-states` appended the `_alias` of an element to its BEM selector with `list.append`, and a list of one has no separator, so Sass fell back to a space and the two compiled to a descendant selector instead of two alternatives: the `:has()` rule for a state on an aliased element came out as `.vv-input-text:has(input[disabled]) .vv-input-text__input .vv-input-text:has(input[disabled]) input`, four levels deep and matching nothing, and its `state` and `pseudo` variants inherited the same chain. The override the rule carried was dropped rather than applied. The three selectors now pass through `list-to-string`, the way the rest of the generator emits a selector list.
+
+  `spread-map-into-states` interpolated the alias whole while it walked the block selectors one by one. Under a state of the block, where the parent expands to four selectors, the alias arrives as four selectors too, so `.vv-select__option, select > option.checked` put the state on the last one and left the others as unconditional element selectors, repeated once per block selector. Block and alias are built side by side by `spread-map-into-elements`, one entry per selector of the parent, so they are now walked by index and each alias is paired with the block selector it was nested under.
+
+  `spread-map-into-breakpoints` compounded the block onto the modifier as `#{$modifier}#{$block}`. A modifier is a single selector, but a state and a transition hand down their whole selector list, so `state.<name>.breakpoint` scoped only its last entry to the block and `transition.<name>.active.breakpoint` only its second. The two are now compounded pair by pair.
+
+  No component map in the library reaches any of the three branches, so `volver.scss` and the dark theme compile identical byte for byte: every element carrying a `state` or `pseudo` map under a state of the block is one without an alias, and the only `breakpoint` maps sit under a modifier or under an element, where the modifier is empty or a single selector.
+
 ## [0.1.26] - 2026-09-07
 
 ### Added
