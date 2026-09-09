@@ -322,6 +322,10 @@ $-state-suffixes: (
 
 	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $element, $value in map.get($map, $key) {
+			// `$block` is the block selector alone, threaded down unchanged
+			// from `spread-map-into-bem`: what a state or a transition
+			// expands to travels in `$modifier` instead. Passing a selector
+			// list here would suffix its last entry alone.
 			$selector: $block + '__' + $element;
 
 			// combinator
@@ -354,6 +358,10 @@ $-state-suffixes: (
 
 			@if $alias {
 				@if $modifier {
+					// One entry per selector of the modifier, in the same
+					// order as `$selector` above: `spread-map-into-states`
+					// pairs the two lists by index, so an `_alias` has to be
+					// a single selector, not a list of them.
 					$aliases: ();
 
 					@each $item in selector.parse($modifier) {
@@ -442,15 +450,35 @@ $-state-suffixes: (
 		@each $state, $value in map.get($map, $key) {
 			@if list.index($-valid-states, $state) {
 				$selectors: ();
+				$block-items: selector.parse($block);
+				$alias-items: ();
 
-				@each $block-item in selector.parse($block) {
+				// `$block` and `$alias` are built side by side by the caller,
+				// one entry per selector of the parent, so they are walked by
+				// index: the alias belongs to the block item it was nested
+				// under. Suffixing the list as a whole would reach its last
+				// entry alone and leave the ones before it in the rule bare.
+				@if $alias {
+					$alias-items: selector.parse($alias);
+				}
+
+				$i: 0;
+
+				@each $block-item in $block-items {
+					$i: $i + 1;
+					$alias-item: null;
+
+					@if $i <= list.length($alias-items) {
+						$alias-item: list.nth($alias-items, $i);
+					}
+
 					$selectors: list.join(
 						$selectors,
 						('#{$modifier}#{$block-item}--#{$state}', '#{$modifier}#{$block-item}.#{$state}')
 					);
 
-					@if $alias {
-						$selectors: list.join($selectors, '#{$modifier}#{$alias}.#{$state}');
+					@if $alias-item {
+						$selectors: list.join($selectors, '#{$modifier}#{$alias-item}.#{$state}');
 					}
 
 					// Special state handling - use function to get updated selectors
@@ -458,7 +486,7 @@ $-state-suffixes: (
 						$state: $state,
 						$block-item: $block-item,
 						$modifier: $modifier,
-						$alias: $alias,
+						$alias: $alias-item,
 						$selectors: $selectors
 					);
 				}
@@ -558,6 +586,27 @@ $-state-suffixes: (
 		$block: &;
 	}
 
+	// A state and a transition hand their whole selector list down as the
+	// modifier, so the block is compounded onto each of its entries: written
+	// as one interpolation it would reach the last entry alone and leave the
+	// ones before it in the rule unscoped.
+	$selector: '#{$modifier}#{$block}';
+
+	@if $modifier and $modifier != '' and $block {
+		$selectors: ();
+
+		@each $modifier-item in selector.parse($modifier) {
+			@each $block-item in selector.parse($block) {
+				$selectors: list.join(
+					$selectors,
+					'#{$modifier-item}#{$block-item}'
+				);
+			}
+		}
+
+		$selector: list-to-string($selectors);
+	}
+
 	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $breakpoint, $value in map.get($map, $key) {
 			@if string.index($breakpoint, '-') {
@@ -566,7 +615,7 @@ $-state-suffixes: (
 
 				@if map.has-key($bps, $bp) {
 					@if $operator == 'up' {
-						@include wrap-with-where($selector: '#{$modifier}#{$block}', $enabled: $zero-specificity) {
+						@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 							@include media-breakpoint-up($bp, $bps) {
 								@include spread-map-into-attrs(
 									$original: $original,
@@ -581,7 +630,7 @@ $-state-suffixes: (
 					}
 
 					@if $operator == 'down' {
-						@include wrap-with-where($selector: '#{$modifier}#{$block}', $enabled: $zero-specificity) {
+						@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 							@include media-breakpoint-down($bp, $bps) {
 								@include spread-map-into-attrs(
 									$original: $original,
@@ -596,7 +645,7 @@ $-state-suffixes: (
 					}
 
 					@if map.has-key($bps, $operator) {
-						@include wrap-with-where($selector: '#{$modifier}#{$block}', $enabled: $zero-specificity) {
+						@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 							@include media-breakpoint-between($operator, $bp, $bps) {
 								@include spread-map-into-attrs(
 									$original: $original,
@@ -611,7 +660,7 @@ $-state-suffixes: (
 					}
 				}
 			} @else if map.has-key($bps, $breakpoint) {
-				@include wrap-with-where($selector: '#{$modifier}#{$block}', $enabled: $zero-specificity) {
+				@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 					@include media-breakpoint-up($breakpoint, $bps) {
 						@include spread-map-into-attrs(
 							$original: $original,
@@ -765,6 +814,11 @@ $-state-suffixes: (
 				);
 				$alias: map.get($map, 'element', $element, '_alias');
 
+				// The alias is a second selector for the same element, not a
+				// descendant of the first, so the list is glued with a comma
+				// before it is emitted: interpolating it would join the two
+				// with a space and compile them to one selector that matches
+				// a `.vv-input-text` nested inside its own element.
 				@if $alias {
 					$element-selector: list.append(
 						$element-selector,
@@ -773,7 +827,7 @@ $-state-suffixes: (
 				}
 
 				@include wrap-with-where(
-					$selector: $element-selector,
+					$selector: list-to-string($element-selector),
 					$enabled: $zero-specificity
 				) {
 					@extend %#{$block}-state-#{$state}__#{$element} !optional;
@@ -794,7 +848,7 @@ $-state-suffixes: (
 						}
 
 						@include wrap-with-where(
-							$selector: $element-selector-state,
+							$selector: list-to-string($element-selector-state),
 							$enabled: $zero-specificity
 						) {
 							@extend %#{$block}-state-#{$state}-element-#{$element}--#{$element-state}
@@ -816,7 +870,7 @@ $-state-suffixes: (
 						}
 
 						@include wrap-with-where(
-							$selector: $element-selector-pseudo,
+							$selector: list-to-string($element-selector-pseudo),
 							$enabled: $zero-specificity
 						) {
 							@extend %#{$block}-state-#{$state}-element-#{$element}--#{$pseudo}
