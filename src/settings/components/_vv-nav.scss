@@ -152,7 +152,14 @@ $vv-nav: (
 					flex: 1 1 0%,
 				),
 				item-label: (
-					display: block,
+					// Still a flex container: as a block it puts the icon of a
+					// voice back on the baseline, where `align-self` is inert and
+					// the `gap` between the icon and the label is dropped, and the
+					// first line offset the icon carries becomes a nudge of its
+					// own. `justify-content` centres the icon and the label
+					// together, `text-align` the lines of a label that wraps.
+					display: flex,
+					justify-content: center,
 					width: 100%,
 					text-align: center,
 				),
