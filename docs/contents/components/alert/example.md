@@ -203,7 +203,7 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
               :style="{'--alert-duration': '5s'}"
               role="alert">
               <div class="vv-alert__header">
-                  <IconifyIcon :icon="`akar-icons:${item[1].icon}`" />
+                  <IconifyIcon class="vv-alert__icon" :icon="`akar-icons:${item[1].icon}`" />
                   <strong class="vv-alert__title">Message!</strong> 
                   <button type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])">
                     <div class="vv-alert__close-mask"></div>

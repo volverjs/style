@@ -1,6 +1,8 @@
 $vv-accordion: (
-	--accordion-marker-size:
-		calc(var(--spacing-sm) + var(--leading-normal) * 1em),
+	// `1lh` is resolved where the token is read, on the summary, so the reserved
+	// space follows the line box of the summary rather than a line height
+	// spelled out a second time here.
+	--accordion-marker-size: calc(var(--spacing-sm) + 1lh),
 	--accordion-padding-top: var(--spacing-14),
 	--accordion-padding-right: var(--spacing-14),
 	--accordion-padding-bottom: var(--spacing-14),
@@ -57,8 +59,8 @@ $vv-accordion: (
 					position: absolute,
 					[top]: var(--accordion-padding-top),
 					[left]: var(--accordion-padding-left),
-					width: calc(var(--leading-normal) * 1em),
-					height: calc(var(--leading-normal) * 1em),
+					width: 1lh,
+					height: 1lh,
 					background-image: var(--bg-chevron),
 					background-position: center,
 					background-size: 1em,

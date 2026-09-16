@@ -28,6 +28,13 @@
   "engines": {
     "node": ">= 20.x"
   },
+  "browserslist": [
+    "chrome >= 133",
+    "edge >= 133",
+    "firefox >= 128",
+    "safari >= 16.4",
+    "ios_saf >= 16.4"
+  ],
   "packageManager": "pnpm@12.3.4",
   "scripts": {
     "dev": "vite --port 3000 --open",

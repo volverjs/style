@@ -136,4 +136,31 @@
 	);
 }
 
+// Optically aligns an icon with the first line of a wrapping label instead of
+// with the centre of the whole block. `align-self: center` centres the icon on
+// the flex line, which is the whole block once the label wraps, and
+// `align-self: flex-start` drops the half leading of the first line. The offset
+// is half the difference between the line box and the icon, so it holds at any
+// font size and any icon size. The offset itself is never zero: on a label that
+// does not wrap it puts the icon exactly where `align-self: center` would, since
+// the first line is then the whole block, which is why the class is safe to
+// apply unconditionally and needs no breakpoint variant.
+// https://ishadeed.com/article/aligning-list-icons/
+// `--icon-size` is the rendered size of the icon and defaults to the `1em` an
+// inline SVG carries. `transform` and not `translate`, because components of
+// the library move their own elements with `translate` and the two would
+// overwrite each other.
+%self-first-line {
+	flex-shrink: 0;
+	align-self: flex-start;
+	transform: translateY(calc((1lh - var(--icon-size, 1em)) / 2));
+}
+
+@include wrap-with-where(
+	$selector: '.self-first-line',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %self-first-line;
+}
+
 }

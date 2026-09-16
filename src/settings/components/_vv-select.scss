@@ -26,6 +26,11 @@ $vv-select: (
 			display: flex,
 			align-items: center,
 			flex: 1,
+			// No `overflow: hidden` here, unlike the wrapper of `vv-input-text`,
+			// `vv-textarea` and `vv-input-file`: this wrapper also hosts the
+			// dropdown of a combobox, which a clip would cut off whenever the
+			// positioning strategy is not `fixed`. The ellipsis of a long value
+			// is clipped by the `value` element instead.
 			background-color: var(--input-background-color),
 			will-change: background-color,
 			transition: var(--transition-colors),

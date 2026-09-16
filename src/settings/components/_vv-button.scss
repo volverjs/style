@@ -49,7 +49,14 @@ $vv-button: (
 			inline-size: 1.1em,
 			margin: 0,
 			flex-shrink: 0,
-			[min-height]: calc(1em * var(--button-line-height)),
+			// The box is 1.1em wide and at least one line tall, so it is not
+			// square. An `<svg>` centres itself in it, an icon painted as a
+			// background does not: these three are inert for the first and
+			// place the second. The `_alias` claims to take both.
+			background-position: center,
+			background-repeat: no-repeat,
+			background-size: contain,
+			[min-height]: 1lh,
 		),
 		label: (
 			white-space: nowrap,
@@ -259,8 +266,8 @@ $vv-button: (
 			element: (
 				icon: (
 					margin-inline: -0.125ch,
-					block-size: calc(1em * var(--leading-snug)),
-					inline-size: calc(1em * var(--leading-snug)),
+					block-size: 1lh,
+					inline-size: 1lh,
 				),
 			),
 		),
@@ -298,8 +305,8 @@ $vv-button: (
 			element: (
 				icon: (
 					margin-inline: -0.125ch,
-					block-size: calc(1em * var(--leading-snug)),
-					inline-size: calc(1em * var(--leading-snug)),
+					block-size: 1lh,
+					inline-size: 1lh,
 				),
 			),
 		),

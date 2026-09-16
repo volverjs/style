@@ -138,6 +138,18 @@ To use the legacy HSL-based system with separate hue/saturation/lightness variab
 );
 ```
 
+## Browser support
+
+The `browserslist` field of `package.json` is the baseline the compiled CSS is written
+against: Chrome and Edge 133, Firefox 128, Safari and iOS Safari 16.4.
+
+Two features set it. Relative Color Syntax (`hsl(from ...)`), the default for colour
+shades, needs Safari 16.4 and Firefox 128, and can be turned off with
+`$use-color-mix: false`. The `lh` unit, which several components use to size an icon or
+a marker to the line box it sits on, needs Chrome 133 and cannot be turned off: it is
+how the library avoids restating a line height as a number, and a component that reads
+it stays correct when a consumer changes `line-height` with a utility class.
+
 ## Deep override
 
 All components are written through SCSS maps.
