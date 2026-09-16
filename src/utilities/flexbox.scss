@@ -141,8 +141,10 @@
 // the flex line, which is the whole block once the label wraps, and
 // `align-self: flex-start` drops the half leading of the first line. The offset
 // is half the difference between the line box and the icon, so it holds at any
-// font size and any icon size, and it comes out as zero on a label that does
-// not wrap: there the class needs no breakpoint variant.
+// font size and any icon size. The offset itself is never zero: on a label that
+// does not wrap it puts the icon exactly where `align-self: center` would, since
+// the first line is then the whole block, which is why the class is safe to
+// apply unconditionally and needs no breakpoint variant.
 // https://ishadeed.com/article/aligning-list-icons/
 // `--icon-size` is the rendered size of the icon and defaults to the `1em` an
 // inline SVG carries. `transform` and not `translate`, because components of

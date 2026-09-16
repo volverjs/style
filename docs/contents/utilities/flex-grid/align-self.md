@@ -16,7 +16,7 @@ The `justify-self` property aligns grid items along the inline (row) axis of the
 ### Self First Line
 `self-first-line` aligns an icon with the first line of a label that wraps, instead of with the centre of the whole block. `self-center` centres the icon on the flex line, which is the whole block once the label wraps, and `self-start` drops the half leading that sits above the first line. This class starts the icon at the top and pushes it down by half the difference between the line box and the icon, so it holds at any font size and at any icon size.
 
-Set `--icon-size` to the rendered size of the icon. It defaults to `1em`, the size an inline SVG carries. On a label that fits on one line the offset comes out as zero, which is why the class needs no breakpoint variant.
+Set `--icon-size` to the rendered size of the icon. It defaults to `1em`, the size an inline SVG carries. The offset itself is never zero, but on a label that fits on one line it places the icon exactly where `self-center` would, because the first line is then the whole block. That is why the class is safe to apply at every width and needs no breakpoint variant.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
   <table class="vv-table vv-table--inline-spacing">
