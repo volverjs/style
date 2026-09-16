@@ -45,7 +45,11 @@ $vv-radio: (
 		label: (
 			// See `vv-checkbox`: an anonymous flex item cannot be kept beside
 			// the control once the label wraps.
-			_alias: '> span',
+			// Only a span without a class of its own, for plain markup: a
+			// badge or an icon written next to the label is a span too, and
+			// `flex: 1` would stretch it. Anything carrying a class takes
+			// `vv-radio__label` to be the label.
+			_alias: '> span:not([class])',
 			flex: 1,
 			min-width: 0,
 		),

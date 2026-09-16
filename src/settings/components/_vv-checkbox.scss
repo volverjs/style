@@ -59,7 +59,11 @@ $vv-checkbox: (
 			// whose max-content width does not fit starts a new flex line:
 			// a long label dropped below the control instead of sitting next
 			// to it. `@volverjs/ui-vue` renders the span this reaches.
-			_alias: '> span',
+			// Only a span without a class of its own, for plain markup: a
+			// badge or an icon written next to the label is a span too, and
+			// `flex: 1` would stretch it. Anything carrying a class takes
+			// `vv-checkbox__label` to be the label.
+			_alias: '> span:not([class])',
 			flex: 1,
 			min-width: 0,
 		),
@@ -88,7 +92,9 @@ $vv-checkbox: (
 				input: (
 					--input-control-size: var(--spacing-24),
 					border: 0,
-					[min-width]: var(--spacing-44),
+					// Not a plain declaration: this one reads no token of the
+					// control, so it keeps its generated custom property.
+					min-width: var(--spacing-44),
 					border-radius: var(--spacing-12),
 					background-color: var(--color-word-5),
 					position: relative,

@@ -40,8 +40,9 @@ $vv-badge: (
 	element: (
 		icon: (
 			// A descendant selector, not a child one: the icon of an action
-			// badge sits inside the button.
-			_alias: ':where(svg, [data-icon])',
+			// badge sits inside the button. `svg:not(svg *)` leaves the parts
+			// of a composite icon to the icon itself.
+			_alias: ':where(svg:not(svg *), [data-icon])',
 			aspect-ratio: 1,
 			inline-size: 1lh,
 			block-size: auto,
