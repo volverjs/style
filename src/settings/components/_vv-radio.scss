@@ -42,13 +42,28 @@ $vv-radio: (
 		),
 	),
 	element: (
+		label: (
+			// See `vv-checkbox`: an anonymous flex item cannot be kept beside
+			// the control once the label wraps.
+			// Only a span without a class of its own, for plain markup: a
+			// badge or an icon written next to the label is a span too, and
+			// `flex: 1` would stretch it. Anything carrying a class takes
+			// `vv-radio__label` to be the label.
+			_alias: '> span:not([class])',
+			flex: 1,
+			min-width: 0,
+		),
 		input: (
 			_alias: "> input[type='radio']",
 			border-width: var(--spacing-2),
 			border-style: solid,
 			border-color: currentcolor,
-			min-width: var(--spacing-20),
-			height: var(--spacing-20),
+			// Plain declarations for the same reason as `vv-checkbox`: the
+			// size is read on the control, not at the root.
+			[min-width]: var(--input-control-size),
+			[height]: var(--input-control-size),
+			align-self: flex-start,
+			[translate]: 0 calc((1lh - var(--input-control-size)) / 2),
 			border-radius: 50%,
 			margin: 0 var(--input-label-gap) 0 0,
 			background-color: transparent,

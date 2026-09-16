@@ -8,7 +8,7 @@ $vv-alert: (
 	border-width: var(--border),
 	display: flex,
 	flex-wrap: wrap,
-	align-items: center,
+	align-items: flex-start,
 	gap: var(--spacing-sm),
 	min-width: 0,
 	overflow: hidden,
@@ -16,13 +16,13 @@ $vv-alert: (
 	element: (
 		header: (
 			display: flex,
-			align-items: center,
+			align-items: flex-start,
 			gap: var(--spacing-sm),
 			line-height: var(--leading-normal),
 			color: var(--color-word),
 			overflow: hidden,
 			text-overflow: ellipsis,
-			flex-shrink: 0,
+			min-width: 0,
 		),
 		title: (
 			min-width: 0,
@@ -53,7 +53,12 @@ $vv-alert: (
 			border-radius: var(--rounded),
 		),
 		icon: (
+			--alert-icon-size: 1.1em,
+			[inline-size]: var(--alert-icon-size),
+			block-size: auto,
+			aspect-ratio: 1,
 			flex-shrink: 0,
+			[translate]: 0 calc((1lh - var(--alert-icon-size)) / 2),
 		),
 		close-mask: (
 			display: none,

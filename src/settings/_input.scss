@@ -59,6 +59,14 @@ $input: (
 			translate: 0 -0.8em,
 		),
 	),
+	// Block size of a checkbox, a radio or the pill of a switch: the side of
+	// the square, and the figure the offset that keeps the control on the
+	// first line of a wrapping label is derived from. It was written twice per
+	// component, once as `min-width` and once as `height`, and the switch
+	// spelled a third value.
+	control: (
+		size: var(--spacing-20),
+	),
 	range: (
 		accent-color: var(--color-brand),
 		track-color: var(--color-surface-3),

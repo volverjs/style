@@ -18,6 +18,35 @@ import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const markdownIt = MarkdownIt({ html: true, linkify: true })
+	.use(MarkdownItPrism)
+	.use(MarkdownItAnchor, {
+		permalink: MarkdownItAnchor.permalink.ariaHidden({
+			placement: 'before',
+			renderAttrs: () => ({ tabindex: -1 }),
+		}),
+	})
+
+// `markdown-it-prism` 4 no longer copies the language class onto the `<pre>`:
+// `markdown-it` writes `language-*` on the `<code>` alone. The styleguide reads
+// it on the `<pre>` (the card around a snippet in `App.vue`, the Prism themes),
+// so a fenced block lost its container and inherited the `text-center` of the
+// section it sits in. Put the class back, the way version 3 did.
+const renderFence = markdownIt.renderer.rules.fence
+markdownIt.renderer.rules.fence = (tokens, index, options, env, self) => {
+	const rendered = renderFence
+		? renderFence(tokens, index, options, env, self)
+		: self.renderToken(tokens, index, options)
+	const [language] = tokens[index].info.trim().split(/\s+/)
+	if (!language) {
+		return rendered
+	}
+	return rendered.replace(
+		/^<pre(?![^>]*\sclass=)/,
+		`<pre class="${options.langPrefix}${language}"`,
+	)
+}
+
 export default defineConfig(({ mode }) => ({
 	plugins: [
 		Vue(),
@@ -30,14 +59,7 @@ export default defineConfig(({ mode }) => ({
 		// https://github.com/hmsk/vite-plugin-markdown
 		Markdown({
 			mode: [Mode.HTML, Mode.VUE, Mode.TOC],
-			markdownIt: MarkdownIt({ html: true, linkify: true })
-				.use(MarkdownItPrism)
-				.use(MarkdownItAnchor, {
-					permalink: MarkdownItAnchor.permalink.ariaHidden({
-						placement: 'before',
-						renderAttrs: () => ({ tabindex: -1 }),
-					}),
-				}),
+			markdownIt,
 		}),
 		// https://github.com/antfu/unplugin-auto-import
 		AutoImport({

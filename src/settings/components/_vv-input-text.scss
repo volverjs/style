@@ -25,6 +25,9 @@ $vv-input-text: (
 			display: flex,
 			align-items: center,
 			flex: 1,
+			// The wrapper clips its content: the `::after` bars run along the
+			// bottom edge and the input never paints outside the box. The
+			// `vv-select` wrapper does not clip, on purpose: see its map.
 			overflow: hidden,
 			background-color: var(--input-background-color),
 			will-change: background-color,

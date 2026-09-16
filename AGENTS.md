@@ -104,9 +104,30 @@ outputs: that is what tells you which rules moved.
   where it is read. A declaration that has to follow a token written further down the tree
   (`--input-range-progress`, `--direction`) is emitted as a plain declaration, wrapped in
   `[brackets]` in the map, instead of going through the generated `--vv-*` property.
+- **A relative unit inside a custom property is resolved where the property is read**, which is
+  the opposite of the rule above. `1lh` and `1em` travel as a token stream and compute against
+  the element that uses them, even when the property is declared at the root: measured in
+  Chrome 152 and Firefox 155, `--x: 1lh` declared at `:root` and read on an element whose line
+  box is 64px gives 64px, not the root's 24px. That is what lets `--accordion-marker-size` stay
+  a token on the block and still follow the line box of the summary, which is the element that
+  consumes it. So a declaration whose value carries only relative units needs no `[brackets]`,
+  while one that reads a token another element declares still does.
+- **`.preflight` dresses every bare `<button>` as `%vv-button`**, so a component that owns a
+  bare button is restyled inside a `.preflight` container. `.vv-badge__button` of an action
+  badge comes out with the brand background, a 2px border and 7px by 16px of padding, which
+  takes the badge from 46.7px to 77.1px wide. This predates the icon work of 0.1.28 and is not
+  fixed there. The escape hatch today is `.preflight-revert`; the fix is to exclude the buttons
+  a component owns from the bare button selector in `src/_preflight.scss`.
 
 ## Conventions
 
+- **The first line offset is spelled out, not factored out.** Five declarations centre an icon
+  on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`
+  and the `self-first-line` utility, each as `calc((1lh - <the size>) / 2)`. The component maps
+  are data and none of them calls a Sass function, so a helper would mean importing `tools` into
+  the settings files in order to hide a formula from the map that prints it. If the formula has
+  to change it changes in those five places, and `self-first-line` in `src/utilities/flexbox.scss`
+  is the one to read first.
 - Write everything that lands in the repository in English: commits, comments, changelog.
 - Prose carries no em dashes or en dashes.
 - Every fix gets a `CHANGELOG.md` entry under the release it ships in, written as prose that

@@ -38,10 +38,26 @@ $vv-badge: (
 		),
 	),
 	element: (
+		icon: (
+			// A descendant selector, not a child one: the icon of an action
+			// badge sits inside the button. `svg:not(svg *)` leaves the parts
+			// of a composite icon to the icon itself.
+			_alias: ':where(svg:not(svg *), [data-icon])',
+			aspect-ratio: 1,
+			inline-size: 1lh,
+			block-size: auto,
+			flex-shrink: 0,
+			background-position: center,
+			background-repeat: no-repeat,
+			background-size: contain,
+		),
 		button: (
 			_alias: '> button',
 			_combinator: '>',
 			cursor: pointer,
+			display: inline-flex,
+			align-items: center,
+			justify-content: center,
 			padding: 0 0.5em,
 			margin: 0 -0.5em,
 			min-height: 2em,
@@ -58,7 +74,11 @@ $vv-badge: (
 	),
 	modifier: (
 		action: (
-			gap: calc(0.5ch + 0.5em),
+			// The same gap as a badge that holds its icon directly. The button
+			// widens its hit area toward the text with a negative margin and
+			// puts the drawing back with an equal padding, so the extra 0.5em
+			// this gap used to carry only pushed the icon away from the label.
+			gap: 0.5ch,
 		),
 		sm: (
 			--badge-font-size: 0.6rem,
