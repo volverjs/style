@@ -22,7 +22,12 @@ $zero-specificity-for-utilities: true !default;
 // components prefix
 $components-prefix: vv !default;
 
-// preflight 
+// preflight: bare form controls under `.preflight` take the look of their
+// component through `@extend` of its placeholders, the block-level state
+// placeholders included. A `state.disabled` or `state.readonly` override in a
+// component map therefore reaches every bare disabled or readonly control on
+// the page, not only the ones inside a `.vv-*` block, and only the compiled
+// CSS shows it. Overrides on the `element` maps of a state stay in the block.
 $preflight: true !default;
 
 // components names
