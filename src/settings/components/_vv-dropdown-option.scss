@@ -3,7 +3,10 @@ $vv-dropdown-option: (
 	min-width: 0,
 	overflow: hidden,
 	gap: var(--spacing-sm),
-	align-items: flex-end,
+	// The hint is smaller than the label: `baseline` is what keeps the two
+	// sitting on the same line of text. `flex-end` aligned their bottom edges
+	// instead, which drifts with the descenders of the font.
+	align-items: baseline,
 	padding: var(--spacing-sm),
 	state: (
 		disabled: (

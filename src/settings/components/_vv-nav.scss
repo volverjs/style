@@ -21,6 +21,7 @@ $vv-nav: (
 			_alias: 'li > :is(a, button)',
 			display: flex,
 			align-items: center,
+			gap: 0.5ch,
 			will-change: background-color color,
 			transition: var(--transition-all),
 			color: var(--color-word-2),
@@ -39,6 +40,23 @@ $vv-nav: (
 					pointer-events: none,			
 				),
 			),
+		),
+		icon: (
+			_alias: 'li > :is(a, button) > :where(svg, [data-icon])',
+			--nav-icon-size: 1.1em,
+			// `align-self` and not `align-items` on the item: the label of a
+			// voice can wrap, and the icon belongs to its first line, while
+			// everything else in the item (a counter badge, a chevron) stays
+			// centred on the whole voice.
+			align-self: flex-start,
+			flex-shrink: 0,
+			[inline-size]: var(--nav-icon-size),
+			block-size: auto,
+			aspect-ratio: 1,
+			background-position: center,
+			background-repeat: no-repeat,
+			background-size: contain,
+			[translate]: 0 calc((1lh - var(--nav-icon-size)) / 2),
 		),
 		separator: (
 			_alias: 'li[role="separator"]',
