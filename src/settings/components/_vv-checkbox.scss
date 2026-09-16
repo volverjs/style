@@ -24,8 +24,17 @@ $vv-checkbox: (
 		input: (
 			_alias: "> input[type='checkbox']",
 			border: var(--spacing-2) solid var(--input-color),
-			min-width: var(--spacing-20),
-			height: var(--spacing-20),
+			// Plain declarations, so the size is read on the control: the
+			// `switch` modifier overrides the token, and a `var()` inside a
+			// generated custom property would have been substituted at the
+			// root and frozen at the default.
+			[min-width]: var(--input-control-size),
+			[height]: var(--input-control-size),
+			// The control belongs to the first line of the label, not to the
+			// centre of a label that wraps. `align-self` rather than
+			// `align-items` on the block, so the hint keeps its own alignment.
+			align-self: flex-start,
+			[translate]: 0 calc((1lh - var(--input-control-size)) / 2),
 			margin: 0 var(--input-label-gap) 0 0,
 			background-position: center,
 			background-size: var(--text-12) auto,
@@ -44,6 +53,15 @@ $vv-checkbox: (
 					outline-offset: var(--spacing-2),
 				),
 			),
+		),
+		label: (
+			// Without an element the label is an anonymous flex item, and one
+			// whose max-content width does not fit starts a new flex line:
+			// a long label dropped below the control instead of sitting next
+			// to it. `@volverjs/ui-vue` renders the span this reaches.
+			_alias: '> span',
+			flex: 1,
+			min-width: 0,
 		),
 		hint: (
 			_alias: '> small',
@@ -68,9 +86,9 @@ $vv-checkbox: (
 		switch: (
 			element: (
 				input: (
+					--input-control-size: var(--spacing-24),
 					border: 0,
-					min-width: var(--spacing-44),
-					height: var(--spacing-24),
+					[min-width]: var(--spacing-44),
 					border-radius: var(--spacing-12),
 					background-color: var(--color-word-5),
 					position: relative,
