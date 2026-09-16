@@ -9,7 +9,7 @@ wrapperClass: max-w-full
                 vv-alert--danger 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
-        <IconifyIcon icon="akar-icons:block" />
+        <IconifyIcon class="vv-alert__icon" icon="akar-icons:block" />
         <strong class="vv-alert__title">Danger!</strong>
         <button class="vv-alert__close" type="button" aria-label="Close"></button>
       </div>
@@ -21,7 +21,7 @@ wrapperClass: max-w-full
                 vv-alert--success 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
-        <IconifyIcon icon="akar-icons:circle-check" />
+        <IconifyIcon class="vv-alert__icon" icon="akar-icons:circle-check" />
         <strong class="vv-alert__title">Success!</strong>
         <button class="vv-alert__close" type="button" aria-label="Close"></button>
       </div>
@@ -33,7 +33,7 @@ wrapperClass: max-w-full
                 vv-alert--warning 
                 vv-alert--dismissable" role="alert">
       <div class="vv-alert__header">
-        <IconifyIcon icon="akar-icons:triangle-alert" />
+        <IconifyIcon class="vv-alert__icon" icon="akar-icons:triangle-alert" />
         <strong class="vv-alert__title">Warning!</strong>
         <button class="vv-alert__close" type="button" aria-label="Close"></button>
       </div>

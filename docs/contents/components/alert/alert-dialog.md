@@ -8,7 +8,7 @@ wrapperClass: flex flex-1 items-center flex-col gap-md
      aria-labelledby="alert-title"
      aria-describedby="alert-content">
   <div class="vv-alert__header">
-    <IconifyIcon icon="akar-icons:triangle-alert" />
+    <IconifyIcon class="vv-alert__icon" icon="akar-icons:triangle-alert" />
     <strong id="alert-title" 
             class="vv-alert__title">
       Attention!
@@ -41,7 +41,7 @@ wrapperClass: flex flex-1 items-center flex-col gap-md
      aria-labelledby="notification-title"
      aria-describedby="notification-content">
   <div class="vv-alert__header">
-    <IconifyIcon icon="akar-icons:triangle-alert" />
+    <IconifyIcon class="vv-alert__icon" icon="akar-icons:triangle-alert" />
     <strong id="notification-title" class="vv-alert__title">
       Attention!
     </strong>
