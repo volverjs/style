@@ -13,7 +13,7 @@ This adds the skill to your Claude Code configuration.
 ## What this skill covers
 
 - **Where the vocabulary differs from Tailwind**: bare `flex`/`grid`/`none`, spacing without responsive variants (dynamic `sm`/`md`/`lg` tokens instead), semantic `z-*`, `rounded-xxl`, the real text-size scale, the semantic `word`/`surface` palette.
-- **BEM components**: canonical markup for all 37 `vv-*` components, their elements, modifiers and states, alias children that need no class, and how states map to attributes.
+- **BEM components**: canonical markup for all 40 `vv-*` components, their elements, modifiers and states, alias children that need no class, and how states map to attributes.
 - **Utility classes**: every class with its exact value set and whether it accepts breakpoint prefixes.
 - **Design tokens**: CSS custom properties, CSS-only overrides, component `--vv-*` properties, the dark theme and its `theme theme--dark` activation.
 - **SCSS**: import paths, `@use '@volverjs/style/scss/context' with (…)`, component map extension, custom components, mixins and cascade layers.

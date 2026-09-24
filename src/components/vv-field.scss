@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-field);
+$component-map: $vv-field;
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// disabled and readonly, from the attribute of the control
+@include spread-map-into-control-states(
+	$map: $component-map,
+	$block: $component-name,
+	$control: '.#{$component-name}__control',
+	$states: ('disabled', 'readonly'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
+}

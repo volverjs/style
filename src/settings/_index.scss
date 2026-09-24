@@ -42,10 +42,16 @@
 @forward 'components/vv-input-file';
 @forward 'components/vv-input-range';
 @forward 'components/vv-input-text';
+
+// After vv-input-text, which it loads: forwarded first, it would load that
+// map unconfigured and a `with` on it would fail
+@forward 'components/vv-field';
 @forward 'components/vv-item';
 @forward 'components/vv-item-group';
 @forward 'components/vv-nav';
+@forward 'components/vv-pagination';
 @forward 'components/vv-progress';
+@forward 'components/vv-prose';
 @forward 'components/vv-select';
 @forward 'components/vv-separator';
 @forward 'components/vv-skeleton';

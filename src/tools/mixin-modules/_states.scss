@@ -17,7 +17,8 @@ $valid-states: (
 	disabled, checked, checked-within, focus-visible-within, multiple, selected,
 	pressed-within, readonly, empty, placeholder-shown, dirty, valid, invalid,
 	indeterminate, first-child, last-child, open, close, determinate, pressed,
-	current, popover, popover-open
+	current, current-page, popover, popover-open, sort-ascending,
+	sort-descending, sort-none
 );
 
 // Selector suffixes appended to the block, and to its alias when there is one,
@@ -29,6 +30,9 @@ $state-suffixes: (
 	checked: ':checked',
 	checked-within: ':has(input:checked)',
 	close: ':not([open])',
+	// The page a link points to, the way a pagination, a breadcrumb or a
+	// navigation marks it. `current` stays a class, as it always was.
+	current-page: '[aria-current="page"]',
 	dirty: ':not(:has(*:placeholder-shown))',
 	disabled: ('[disabled]', '[aria-disabled="true"]'),
 	focus-visible: ':not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):focus-visible',
@@ -51,6 +55,11 @@ $state-suffixes: (
 	pressed-within: ':has(> [aria-pressed="true"])',
 	readonly: '[readonly]',
 	selected: '[aria-selected="true"]',
+	// A sortable column header, read from `aria-sort` on the `th`: `none`
+	// is sortable and not sorted yet
+	sort-ascending: '[aria-sort="ascending"]',
+	sort-descending: '[aria-sort="descending"]',
+	sort-none: '[aria-sort="none"]',
 );
 
 // The suffixes of a state, as a list: its entry in `$state-suffixes`, the

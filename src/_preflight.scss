@@ -19,8 +19,9 @@
 		// `label.vv-radio--segment` as a plain radio. Both arguments of the
 		// `:not()` weigh a class, so the specificity does not move. A bare
 		// child a component styles through an `_alias` has no class to tell
-		// it apart and is still dressed.
-		:not(.preflight-revert *, [class*='#{$components-prefix}-']) {
+		// it apart and is still dressed, except inside `vv-prose`, whose whole
+		// content is bare tags it draws itself.
+		:not(.preflight-revert *, .#{map.get($components-names, vv-prose)} *, [class*='#{$components-prefix}-']) {
 			// typography
 			&:where(h1, h2, h3, h4, h5, h6) {
 				@extend %vv-text !optional;

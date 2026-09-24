@@ -128,7 +128,9 @@ Valid `state` keys: `active` `focus` `hover` `focus-within` `focus-visible` `tar
 `visited` `disabled` `readonly` `checked` `checked-within` `focus-visible-within`
 `indeterminate` `determinate` `open` `close` `popover` `popover-open` `pressed`
 `pressed-within` `selected` `multiple` `dirty` `valid` `invalid` `empty` `placeholder-shown`
-`first-child` `last-child` `current`. Other keys are silently dropped.
+`first-child` `last-child` `current` `current-page` (`[aria-current="page"]`)
+`sort-ascending` `sort-descending` `sort-none` (`aria-sort` on a `th`). Other keys are
+silently dropped.
 
 The `-within` states match a child of the block: `checked-within` is
 `:has(input:checked)`, `focus-visible-within` is `:has(input:focus-visible)` (a keyboard

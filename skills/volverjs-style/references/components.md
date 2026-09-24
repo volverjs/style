@@ -256,6 +256,32 @@ Identical maps. The block is a `<fieldset>`; vertical is the default (there is n
 |---|---|
 | legend† `> legend`, wrapper, hint† `> small` | `horizontal` `segmented` `cards` `valid` `invalid` |
 
+## vv-field
+
+The shell of a field around a control the library does not draw (a code editor, a
+contenteditable, a button that opens a picker, a switch). Label, box, hint, `valid`,
+`invalid`, `loading` and the disabled and readonly states are those of `vv-input-text`.
+
+```html
+<div class="vv-field">
+  <label id="prompt-label">System prompt</label>
+  <div class="vv-field__wrapper">
+    <span class="vv-field__before"><svg>…</svg></span>
+    <div class="vv-field__control" contenteditable="true" role="textbox" aria-labelledby="prompt-label"></div>
+    <span class="vv-field__after">tokens</span>
+    <div class="vv-field__toolbar"><button type="button" class="vv-button vv-button--action-quiet">…</button></div>
+  </div>
+  <small class="vv-field__hint">Markdown is allowed.</small>
+</div>
+```
+
+| elements | modifiers | states |
+|---|---|---|
+| label† `> label`, wrapper, control, before, after, toolbar (a row under the control), hint† `> small` | `valid` `invalid` `loading` | disabled and readonly through `:has(.vv-field__control[disabled])` / `[readonly]`, or on the block |
+
+A switch framed like a field is `<label class="vv-checkbox vv-checkbox--switch vv-field__control">`
+inside the wrapper.
+
 ## vv-input-range
 
 CSS cannot read the value of a range input, so the filled part of the track comes from
@@ -473,7 +499,28 @@ Plain semantic table, no cell classes needed.
 </table>
 ```
 
-Modifiers: `inline-spacing` `bordered`.
+Modifiers: `inline-spacing` `bordered`. Body rows take `selected` (`aria-selected="true"`) and
+`current` (class on the `tr`: the row looked at in a master list, a bar along the start). A
+sortable column carries `aria-sort="none|ascending|descending"` on the `th` and a
+`<button type="button" class="vv-table__sort">` inside it; the chevron indicator is drawn
+after the button.
+
+## vv-pagination
+
+```html
+<nav class="vv-pagination" aria-label="Pages">
+  <span class="vv-pagination__summary">21-40 of 240</span>
+  <ul class="vv-pagination__list">
+    <li><a class="vv-pagination__page" href="?p=1">1</a></li>
+    <li><a class="vv-pagination__page" href="?p=2" aria-current="page">2</a></li>
+    <li><span class="vv-pagination__ellipsis" aria-hidden="true">…</span></li>
+  </ul>
+</nav>
+```
+
+Elements: list† `> :is(ol, ul)` (give the list its class inside `.preflight`, where a bare list is dressed), page, ellipsis, summary. The current page is read from
+`aria-current="page"` (state `current-page`); a page that cannot be reached is `disabled` or
+`aria-disabled="true"`.
 
 ## vv-badge, vv-avatar, vv-avatar-group
 
@@ -603,3 +650,23 @@ sets `--item-divider`, `--item-hover`, `--item-chosen` and `--item-current`; row
 with a fallback, so a row works outside a group too. An empty list shows a
 `vv-empty vv-empty--compact`; a row still loading is a `vv-item--plain` holding
 `vv-skeleton__item` bars.
+
+## vv-prose
+
+Rich text that arrives as plain tags (rendered markdown, editor output). No class on the
+children: headings, paragraphs, lists, links, `blockquote`, inline `code`, `pre`, `kbd`,
+`table`, `hr`, `img`, `details`, and the inline tags whose meaning the reset removes (`em`,
+`del`, `u`, `sub`, `sup`, `small`, `mark`, `abbr`).
+
+```html
+<div class="vv-prose">
+  <h2>Getting started</h2>
+  <p>Connect a <a href="#">knowledge base</a>.</p>
+  <ul><li>Pick a folder</li></ul>
+</div>
+<div class="vv-prose vv-prose--compact text-14">…</div>
+```
+
+Sizes are in `em` (headings follow the text around them); the rhythm is a margin on every
+child after the first, so the block has no outer margin. `compact` sets headings at text size
+and halves the gaps. Inside `.preflight` the content of a prose block is left to it.

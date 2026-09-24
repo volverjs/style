@@ -24,8 +24,14 @@
 @use 'vv-item-group';
 @use 'vv-input-file';
 @use 'vv-input-range';
+
+// After vv-checkbox and vv-radio: a switch used as its control takes the
+// control's margin over its own
+@use 'vv-field';
 @use 'vv-nav';
+@use 'vv-pagination';
 @use 'vv-progress';
+@use 'vv-prose';
 @use 'vv-select';
 @use 'vv-separator';
 @use 'vv-skeleton';
