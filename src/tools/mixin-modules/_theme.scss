@@ -1,9 +1,11 @@
 @use 'sass:map';
 @use 'sass:list';
 @use 'sass:meta';
+@use 'sass:selector';
 @use 'props' as *;
 @use 'attrs' as *;
 @use 'helpers' as *;
+@use 'states' as *;
 
 // ============================================
 // Theme component utilities
@@ -109,6 +111,7 @@
 				$map: map.get($theme-map, 'modifier'),
 				$prefix: $component-name,
 				$block: $selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -120,6 +123,7 @@
 				$map: map.get($theme-map, 'element'),
 				$prefix: $component-name,
 				$block: $selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -132,6 +136,7 @@
 				$prefix: $component-name,
 				$block: $selector,
 				$parent-selector: $selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -144,6 +149,7 @@
 					$map: $light-reset-map,
 					$prefix: $component-name,
 					$block: $selector,
+					$base-map: $base-map,
 					$bps: $bps,
 					$zero-specificity: $zero-specificity
 				);
@@ -153,7 +159,7 @@
 }
 
 // Helper to generate all theme rules (block, modifiers, elements, states)
-@mixin _theme-generate-all($map, $prefix, $block, $bps, $zero-specificity: true) {
+@mixin _theme-generate-all($map, $prefix, $block, $bps, $base-map: (), $zero-specificity: true) {
 	// Block styles
 	@include wrap-with-where($selector: $block, $enabled: $zero-specificity) {
 		@include spread-map-into-attrs(
@@ -170,6 +176,7 @@
 			$map: map.get($map, 'modifier'),
 			$prefix: $prefix,
 			$block: $block,
+			$base-map: $base-map,
 			$bps: $bps,
 			$zero-specificity: $zero-specificity
 		);
@@ -181,6 +188,7 @@
 			$map: map.get($map, 'element'),
 			$prefix: $prefix,
 			$block: $block,
+			$base-map: $base-map,
 			$bps: $bps,
 			$zero-specificity: $zero-specificity
 		);
@@ -193,6 +201,7 @@
 			$prefix: $prefix,
 			$block: $block,
 			$parent-selector: $block,
+			$base-map: $base-map,
 			$bps: $bps,
 			$zero-specificity: $zero-specificity
 		);
@@ -203,8 +212,39 @@
 // Private helper mixins for theme spreading
 // ============================================
 
+// Every selector of a list with a suffix appended, one entry at a time.
+// Appended to the list as a whole, the suffix would reach its last entry
+// alone and leave the others bare (see AGENTS.md).
+// @param {String|List} $selectors - Selector list
+// @param {String} $suffix - Compound suffix (a class, an attribute, a pseudo-class)
+// @return {List} Comma separated list of selector strings
+@function -theme-suffix($selectors, $suffix) {
+	$result: ();
+
+	@each $item in selector.parse($selectors) {
+		$result: list.append($result, '#{$item}#{$suffix}', $separator: comma);
+	}
+
+	@return $result;
+}
+
+// Every selector of a list with a descendant nested under it, one entry at a
+// time, the way the light walk nests an element or an alias under a modifier
+// @param {String|List} $parents - Selector list
+// @param {String} $child - Descendant, possibly starting with a combinator
+// @return {List} Comma separated list of selector strings
+@function -theme-nest($parents, $child) {
+	$result: ();
+
+	@each $item in selector.parse($parents) {
+		$result: list.append($result, '#{selector.nest($item, $child)}', $separator: comma);
+	}
+
+	@return $result;
+}
+
 // Spread modifiers for theme (no @extend)
-@mixin _theme-spread-modifiers($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
+@mixin _theme-spread-modifiers($map, $prefix, $block, $parent-selector: null, $base-map: (), $bps: (xxs: 0), $zero-specificity: true) {
 	@each $mod-name, $mod-value in $map {
 		$mod-selector: '#{$block}#{$block}--#{$mod-name}';
 
@@ -229,6 +269,7 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -241,6 +282,7 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -253,6 +295,7 @@
 				$prefix: $prefix,
 				$block: $block,
 				$parent-selector: $mod-selector,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -261,17 +304,36 @@
 }
 
 // Spread elements for theme (no @extend)
-@mixin _theme-spread-elements($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
+// The `_alias` of an element lives in the base map, not in the theme map, so
+// `$base-map` is threaded down to find it: without it a dark override reached
+// `.block__element` alone and missed the plain markup the alias is there for.
+// Under a parent (a modifier, a state) the element and its alias are nested
+// under every selector of the parent, like the light walk does.
+@mixin _theme-spread-elements($map, $prefix, $block, $parent-selector: null, $base-map: (), $bps: (xxs: 0), $zero-specificity: true) {
 	@each $el-name, $el-value in $map {
 		$el-selector: '#{$block}__#{$el-name}';
-		$full-selector: $el-selector;
+		$alias: map.get($el-value, '_alias') or map.get($base-map, 'element', $el-name, '_alias');
+		$selectors: $el-selector;
+		$alias-selectors: null;
 
 		@if $parent-selector {
-			$full-selector: '#{$parent-selector} #{$el-selector}';
+			$selectors: -theme-nest($parent-selector, $el-selector);
+
+			@if $alias {
+				$alias-selectors: -theme-nest($parent-selector, $alias);
+			}
+		} @else if $alias {
+			$alias-selectors: '#{$block} #{$alias}';
+		}
+
+		$rule-selectors: $selectors;
+
+		@if $alias-selectors {
+			$rule-selectors: list.join($selectors, $alias-selectors, $separator: comma);
 		}
 
 		// Element base styles
-		@include wrap-with-where($selector: $full-selector, $enabled: $zero-specificity) {
+		@include wrap-with-where($selector: $rule-selectors, $enabled: $zero-specificity) {
 			@include spread-map-into-attrs(
 				$map: $el-value,
 				$prefix: $prefix,
@@ -280,13 +342,17 @@
 			);
 		}
 
-		// States inside element
+		// States inside element: on the element itself, wherever it sits.
+		// They used to take the parent as their base, which put the state of
+		// an element under a modifier on the modifier block instead.
 		@if map.has-key($el-value, 'state') {
 			@include _theme-spread-states(
 				$map: map.get($el-value, 'state'),
 				$prefix: $prefix,
 				$block: $el-selector,
-				$parent-selector: $parent-selector,
+				$parent-selector: $selectors,
+				$alias-selector: $alias-selectors,
+				$base-map: $base-map,
 				$bps: $bps,
 				$zero-specificity: $zero-specificity
 			);
@@ -295,16 +361,13 @@
 }
 
 // Spread states for theme (no @extend)
-@mixin _theme-spread-states($map, $prefix, $block, $parent-selector: null, $bps: (xxs: 0), $zero-specificity: true) {
-	$state-list: (
-		active, focus, hover, focus-within, target, visited, focus-visible,
-		disabled, checked, checked-within, multiple, selected, readonly,
-		empty, placeholder-shown, dirty, valid, invalid, indeterminate,
-		first-child, last-child, open, close, determinate, pressed, current
-	);
-
+// `$parent-selector` is the selector the state compounds onto (the block, a
+// modifier, an element, possibly a list of them) and `$alias-selector` the
+// alias of an element, which takes the `.state` class and the suffixes like
+// the light walk gives it, but not the `--state` modifier.
+@mixin _theme-spread-states($map, $prefix, $block, $parent-selector: null, $alias-selector: null, $base-map: (), $bps: (xxs: 0), $zero-specificity: true) {
 	@each $state-name, $state-value in $map {
-		@if list.index($state-list, $state-name) {
+		@if list.index($valid-states, $state-name) {
 			$base: $block;
 
 			@if $parent-selector {
@@ -313,10 +376,15 @@
 
 			// BEM modifier style: .block--state
 			// Class style: .block.state
-			$state-selectors: (
-				'#{$base}#{$block}--#{$state-name}',
-				'#{$base}.#{$state-name}'
+			$state-selectors: list.join(
+				-theme-suffix($base, '#{$block}--#{$state-name}'),
+				-theme-suffix($base, '.#{$state-name}'),
+				$separator: comma
 			);
+
+			@if $alias-selector {
+				$state-selectors: list.join($state-selectors, -theme-suffix($alias-selector, '.#{$state-name}'), $separator: comma);
+			}
 
 			@include wrap-with-where($selector: $state-selectors, $enabled: $zero-specificity) {
 				@include spread-map-into-attrs(
@@ -327,81 +395,22 @@
 				);
 			}
 
-			// Pseudo-class style based on state type
-			@if $state-name == 'disabled' or $state-name == 'readonly' or $state-name == 'multiple' {
-				@include wrap-with-where($selector: '#{$base}[#{$state-name}]', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
+			// The selectors the state reads from the DOM, from the table the
+			// light walk uses too. One rule for all of them, so a state with a
+			// single suffix comes out exactly as it did when this walk had its own
+			// chain of branches. "current" has none and stops at the classes above.
+			$suffix-selectors: ();
+
+			@each $suffix in state-suffixes($state-name) {
+				$suffix-selectors: list.join($suffix-selectors, -theme-suffix($base, $suffix), $separator: comma);
+
+				@if $alias-selector {
+					$suffix-selectors: list.join($suffix-selectors, -theme-suffix($alias-selector, $suffix), $separator: comma);
 				}
-			} @else if $state-name == 'focus-visible' {
-				@include wrap-with-where($selector: '#{$base}:not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):#{$state-name}', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'selected' {
-				@include wrap-with-where($selector: '#{$base}[aria-selected="true"]', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'pressed' {
-				@include wrap-with-where($selector: '#{$base}[aria-pressed="true"]', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'checked-within' {
-				@include wrap-with-where($selector: '#{$base}:has(input:checked)', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'open' {
-				@include wrap-with-where($selector: '#{$base}[open]', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'close' {
-				@include wrap-with-where($selector: '#{$base}:not([open])', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name == 'dirty' {
-				@include wrap-with-where($selector: '#{$base}:not(:has(*:placeholder-shown))', $enabled: $zero-specificity) {
-					@include spread-map-into-attrs(
-						$map: $state-value,
-						$prefix: $prefix,
-						$use-custom-props: false,
-						$ignore: (modifier, element, state, breakpoint)
-					);
-				}
-			} @else if $state-name != 'current' {
-				@include wrap-with-where($selector: '#{$base}:not([disabled]):#{$state-name}', $enabled: $zero-specificity) {
+			}
+
+			@if list.length($suffix-selectors) > 0 {
+				@include wrap-with-where($selector: $suffix-selectors, $enabled: $zero-specificity) {
 					@include spread-map-into-attrs(
 						$map: $state-value,
 						$prefix: $prefix,
@@ -411,13 +420,16 @@
 				}
 			}
 
-			// Elements inside state
+			// Elements inside state, under every selector the state matches:
+			// the classes and what it reads from the DOM. They used to hang
+			// under `.block--state` alone.
 			@if map.has-key($state-value, 'element') {
 				@include _theme-spread-elements(
 					$map: map.get($state-value, 'element'),
 					$prefix: $prefix,
 					$block: $block,
-					$parent-selector: '#{$base}#{$block}--#{$state-name}',
+					$parent-selector: list.join($state-selectors, $suffix-selectors, $separator: comma),
+					$base-map: $base-map,
 					$bps: $bps,
 					$zero-specificity: $zero-specificity
 				);

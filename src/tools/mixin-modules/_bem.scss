@@ -8,43 +8,15 @@
 @use 'helpers' as *;
 @use 'props' as *;
 @use 'attrs' as *;
+@use 'states' as *;
 
 // ============================================
 // BEM Mixins
 // Generate BEM-structured CSS from maps
 // ============================================
 
-// List of valid CSS states
-$-valid-states: (
-	active, focus, hover, focus-within, target, visited, focus-visible,
-	disabled, checked, checked-within, multiple, selected, readonly,
-	empty, placeholder-shown, dirty, valid, invalid, indeterminate,
-	first-child, last-child, open, close, determinate, pressed, current,
-	popover, popover-open
-);
-
-// Selector suffixes appended to the block, and to its alias when there is one,
-// for the states that are not plain pseudo-classes. A state can need more than
-// one suffix: "disabled" also matches the aria attribute. States missing here
-// fall back to ":not([disabled]):<state>", while "current" adds no suffix at
-// all and keeps only the BEM selectors built by the caller.
-$-state-suffixes: (
-	checked: ':checked',
-	checked-within: ':has(input:checked)',
-	close: ':not([open])',
-	dirty: ':not(:has(*:placeholder-shown))',
-	disabled: ('[disabled]', '[aria-disabled="true"]'),
-	focus-visible: ':not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):focus-visible',
-	multiple: '[multiple]',
-	open: '[open]',
-	// Element promoted to the top layer through the Popover API: "popover"
-	// matches it whether it is open or not, "popover-open" only when it is
-	popover: '[popover]',
-	popover-open: ':popover-open',
-	pressed: '[aria-pressed="true"]',
-	readonly: '[readonly]',
-	selected: '[aria-selected="true"]',
-);
+// The valid states and their selector suffixes live in `_states.scss`, shared
+// with the theme walk.
 
 // ============================================
 // Main BEM mixin
@@ -448,7 +420,7 @@ $-state-suffixes: (
 
 	@if meta.type-of(map.get($map, $key)) == 'map' {
 		@each $state, $value in map.get($map, $key) {
-			@if list.index($-valid-states, $state) {
+			@if list.index($valid-states, $state) {
 				$selectors: ();
 				$block-items: selector.parse($block);
 				$alias-items: ();
@@ -546,13 +518,7 @@ $-state-suffixes: (
 // Helper to add state-specific selectors
 // Returns the updated selectors list
 @function -add-state-selectors($state, $block-item, $modifier, $alias, $selectors) {
-	@if $state == 'current' {
-		@return $selectors;
-	}
-
-	$suffixes: map.get($-state-suffixes, $state) or ':not([disabled]):#{$state}';
-
-	@each $suffix in $suffixes {
+	@each $suffix in state-suffixes($state) {
 		$selectors: list.join($selectors, '#{$modifier}#{$block-item}#{$suffix}');
 
 		@if $alias {

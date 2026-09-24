@@ -125,10 +125,16 @@ hover selector (`.vv-button--success.vv-button:not([disabled]):hover`). Use it a
 extended the same way.
 
 Valid `state` keys: `active` `focus` `hover` `focus-within` `focus-visible` `target`
-`visited` `disabled` `readonly` `checked` `checked-within` `indeterminate` `determinate`
-`open` `close` `popover` `popover-open` `pressed` `selected` `multiple` `dirty` `valid`
-`invalid` `empty` `placeholder-shown` `first-child` `last-child` `current`. Other keys are
-silently dropped.
+`visited` `disabled` `readonly` `checked` `checked-within` `focus-visible-within`
+`indeterminate` `determinate` `open` `close` `popover` `popover-open` `pressed`
+`pressed-within` `selected` `multiple` `dirty` `valid` `invalid` `empty` `placeholder-shown`
+`first-child` `last-child` `current`. Other keys are silently dropped.
+
+The `-within` states match a child of the block: `checked-within` is
+`:has(input:checked)`, `focus-visible-within` is `:has(input:focus-visible)` (a keyboard
+ring on a tile whose native input is hidden) and `pressed-within` is
+`:has(> [aria-pressed="true"])` (a row chosen through the button inside it). The light
+rules and the dark theme read the same table, `src/tools/mixin-modules/_states.scss`.
 
 ## Creating a component
 
