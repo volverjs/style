@@ -1,0 +1,104 @@
+// Modifiers shared by `vv-radio` and `vv-checkbox`, the two ways of drawing an
+// option as something other than a control beside a label. Loaded by both
+// component maps and not forwarded by `settings/_index.scss`: to change one,
+// deep-merge `modifier.segment` or `modifier.card` of `$vv-radio` or
+// `$vv-checkbox`, which hold their own copy.
+
+// One option of a segmented control (`--segmented` on the group). The native
+// input stays in the tree for the keyboard and assistive technology but is
+// not painted: the tile is the control. Chosen, the tile is raised out of the
+// recessed track; the keyboard focus draws the outline every control of the
+// library draws, on the tile rather than on the hidden input. The label
+// centres the icon and the text, because `@volverjs/ui-vue` wraps the slot in
+// a `__label` span that the block stretches with `flex: 1`.
+$choice-segment: (
+	position: relative,
+	display: flex,
+	flex: 1,
+	flex-wrap: nowrap,
+	align-items: center,
+	justify-content: center,
+	min-width: 0,
+	min-height: calc(var(--input-min-height) - var(--spacing-8)),
+	margin: 0,
+	padding: 0 var(--spacing-12),
+	border-radius: var(--rounded-md),
+	color: var(--color-word-2),
+	white-space: nowrap,
+	transition: (
+		background-color var(--duration-150) var(--ease-out),
+		color var(--duration-150) var(--ease-out),
+		box-shadow var(--duration-150) var(--ease-out),
+	),
+	element: (
+		label: (
+			display: flex,
+			align-items: center,
+			justify-content: center,
+			gap: var(--spacing-8),
+		),
+		input: (
+			position: absolute,
+			width: var(--spacing-px),
+			min-width: 0,
+			height: var(--spacing-px),
+			margin: 0,
+			border: 0,
+			opacity: 0,
+			pointer-events: none,
+		),
+	),
+	state: (
+		hover: (
+			color: var(--color-word),
+		),
+		checked-within: (
+			color: var(--color-word),
+			font-weight: var(--font-semibold),
+			background-color: var(--color-surface),
+			box-shadow: var(--shadow-sm),
+		),
+		focus-visible-within: (
+			outline: var(--spacing-px) solid var(--color-brand),
+			outline-offset: var(--spacing-2),
+		),
+	),
+);
+
+// An option drawn as a bordered tile, the control at the start and a title
+// over a description beside it: a plan, a channel, a way of doing a thing
+// that needs a line of explanation. The frame takes the hairline of the other
+// frames of the library, and the chosen tile is marked by a step of surface
+// and a border in the text colour, not by a colour of its own. The tiles of a
+// row (`--cards` on the group) share the width and wrap under 8rem.
+$choice-card: (
+	display: flex,
+	flex: 1,
+	flex-wrap: nowrap,
+	align-items: flex-start,
+	gap: var(--spacing-16),
+	min-width: var(--spacing-128),
+	margin: 0,
+	padding: var(--spacing-16),
+	border: var(--border) solid var(--color-surface-4),
+	border-radius: var(--rounded-lg),
+	transition: (
+		background-color var(--duration-150) var(--ease-out),
+		border-color var(--duration-150) var(--ease-out),
+	),
+	element: (
+		input: (
+			flex-shrink: 0,
+			margin: 0,
+		),
+	),
+	state: (
+		hover: (
+			border-color: var(--color-surface-5),
+		),
+		checked-within: (
+			border-color: var(--color-word),
+			background-color: var(--color-surface-1),
+		),
+	),
+);

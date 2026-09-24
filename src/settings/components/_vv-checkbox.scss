@@ -1,3 +1,5 @@
+@use 'choice' as *;
+
 $vv-checkbox: (
 	display: inline-flex,
 	flex-wrap: wrap,
@@ -82,6 +84,8 @@ $vv-checkbox: (
 		),
 	),
 	modifier: (
+		segment: $choice-segment,
+		card: $choice-card,
 		readonly: (
 			opacity: var(--opacity-100),
 			cursor: default,

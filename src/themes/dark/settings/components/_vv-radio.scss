@@ -1,0 +1,7 @@
+@use 'choice' as *;
+
+$dark-vv-radio: (
+	modifier: (
+		segment: $dark-choice-segment,
+	),
+);

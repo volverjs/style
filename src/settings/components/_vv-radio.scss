@@ -1,3 +1,5 @@
+@use 'choice' as *;
+
 $vv-radio: (
 	display: inline-flex,
 	flex-wrap: wrap,
@@ -21,6 +23,8 @@ $vv-radio: (
 		),
 	),
 	modifier: (
+		segment: $choice-segment,
+		card: $choice-card,
 		readonly: (
 			opacity: var(--opacity-100),
 			cursor: default,

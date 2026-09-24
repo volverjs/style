@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../context' as *;
+
+$component-name: map.get($components-names, vv-radio);
+
+@mixin theme-dark-vv-radio {
+	@include spread-theme-component(
+		$base-map: $vv-radio,
+		$theme-map: $dark-vv-radio,
+		$component-name: $component-name,
+		$bps: $breakpoints,
+		$use-custom-props: $use-custom-props-for-components,
+		$zero-specificity: $zero-specificity-for-components
+	);
+}
+
+@include layer(themes, $use-css-layers, $layer-prefix) {
+	:where(:host, :root, .theme):not(.theme--light) {
+		@media (prefers-color-scheme: dark) {
+			@include theme-dark-vv-radio;
+		}
+	}
+
+	:where(.theme.theme--dark) {
+		@include theme-dark-vv-radio;
+	}
+}

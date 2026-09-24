@@ -46,6 +46,37 @@ $vv-checkbox-group: (
 				),
 			),
 		),
+		// A segmented control: one recessed track the height of a field,
+		// the options side by side inside it, the chosen one raised (the
+		// `segment` modifier of the radio or the checkbox). For a choice
+		// between a few short named states. `vv-radio-group` shares this map,
+		// so a radio group takes the same modifiers. The options carry no
+		// margin here, so the wrapper takes the one they would have left under
+		// the last row, which the negative top margin of the hint expects.
+		segmented: (
+			element: (
+				wrapper: (
+					margin-bottom: var(--input-gap),
+					flex-direction: row,
+					flex-wrap: nowrap,
+					gap: var(--spacing-2),
+					padding: var(--spacing-4),
+					border-radius: var(--rounded-lg),
+					background-color: var(--color-surface-2),
+				),
+			),
+		),
+		// A row of choice cards (the `card` modifier of the radio or the
+		// checkbox), which wraps when a card would fall under its floor
+		cards: (
+			element: (
+				wrapper: (
+					margin-bottom: var(--input-gap),
+					flex-direction: row,
+					gap: var(--spacing-8),
+				),
+			),
+		),
 		valid: (
 			element: (
 				hint: (

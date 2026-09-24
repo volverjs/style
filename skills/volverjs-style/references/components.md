@@ -212,10 +212,29 @@ The block is the `<label>` wrapping the control.
 
 | component | elements | modifiers | states |
 |---|---|---|---|
-| vv-checkbox | input† `> input[type=checkbox]`, hint† `> small` | `readonly` `switch` `valid` `invalid` | disabled; input: checked, indeterminate, focus-visible |
-| vv-radio | input† `> input[type=radio]`, hint† | `readonly` `valid` `invalid` | disabled; input: checked, focus-visible |
+| vv-checkbox | input† `> input[type=checkbox]`, label† `> span:not([class])`, hint† `> small` | `readonly` `switch` `segment` `card` `valid` `invalid` | disabled; input: checked, indeterminate, focus-visible; segment and card: checked-within |
+| vv-radio | input† `> input[type=radio]`, label† `> span:not([class])`, hint† | `readonly` `segment` `card` `valid` `invalid` | disabled; input: checked, focus-visible; segment and card: checked-within |
 
-The switch modifier is `switch`, not `toggle`.
+The switch modifier is `switch`, not `toggle`. `segment` is one option of a segmented
+control (the group takes `--segmented`): the native input is not painted, the tile is the
+control, and the keyboard focus draws an outline on the tile through `focus-visible-within`.
+`card` draws the option as a bordered tile with the control at the start (the group takes
+`--cards`). Both work on a checkbox too, for a choice where more than one option can be on.
+
+```html
+<fieldset class="vv-radio-group vv-radio-group--segmented">
+  <legend>View</legend>
+  <div class="vv-radio-group__wrapper">
+    <label class="vv-radio vv-radio--segment"><input type="radio" name="v" checked /><span>Day</span></label>
+    <label class="vv-radio vv-radio--segment"><input type="radio" name="v" /><span>Week</span></label>
+  </div>
+</fieldset>
+
+<label class="vv-radio vv-radio--card">
+  <input type="radio" name="plan" value="team" />
+  <span><strong class="block">Team</strong> Unlimited agents.</span>
+</label>
+```
 
 ## vv-checkbox-group and vv-radio-group
 
@@ -235,7 +254,7 @@ Identical maps. The block is a `<fieldset>`; vertical is the default (there is n
 
 | elements | modifiers |
 |---|---|
-| legend† `> legend`, wrapper, hint† `> small` | `horizontal` `valid` `invalid` |
+| legend† `> legend`, wrapper, hint† `> small` | `horizontal` `segmented` `cards` `valid` `invalid` |
 
 ## vv-input-range
 

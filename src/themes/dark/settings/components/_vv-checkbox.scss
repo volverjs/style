@@ -1,0 +1,7 @@
+@use 'choice' as *;
+
+$dark-vv-checkbox: (
+	modifier: (
+		segment: $dark-choice-segment,
+	),
+);
