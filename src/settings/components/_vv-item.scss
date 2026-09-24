@@ -153,7 +153,8 @@ $vv-item: (
 		),
 		current: (
 			[background-color]: var(--item-current, var(--color-surface-2)),
-			box-shadow: inset var(--spacing-3) 0 0 var(--color-word-2),
+			// On the inline start: `--direction` is -1 in a right to left page
+			[box-shadow]: inset calc(var(--spacing-3) * var(--direction, 1)) 0 0 var(--color-word-2),
 			element: (
 				title: (
 					font-weight: var(--font-medium),
