@@ -514,3 +514,73 @@ Modifiers: `inline-spacing` `bordered`.
 | vv-skeleton | item | | |
 | vv-breadcrumb | list† `> ol`, item† `li:has(a)`, item-active† `li:not(:has(a))`, link† `li > a` | `multiline` | link: hover, focus-within, active |
 | vv-text | | `headline` `copy` `link` `quote` `size-1`..`size-6` | link: focus-visible, hover, active, disabled |
+
+## vv-empty, vv-separator, vv-spinner
+
+```html
+<div class="vv-empty">
+  <div class="vv-empty__media"><svg width="1em" height="1em">…</svg></div>
+  <h3 class="vv-empty__title">No messages yet</h3>
+  <p class="vv-empty__description">When someone writes to you, it shows up here.</p>
+  <div class="vv-empty__actions"><button type="button" class="vv-button">New message</button></div>
+</div>
+
+<hr class="vv-separator" />
+<div class="vv-separator"><span>or</span></div>
+<div class="vv-separator vv-separator--vertical" role="separator" aria-orientation="vertical"></div>
+
+<span class="vv-spinner" role="status" aria-label="Loading"></span>
+<button type="button" class="vv-button" disabled><span class="vv-spinner" aria-hidden="true"></span> Saving</button>
+```
+
+| component | elements | modifiers | tokens |
+|---|---|---|---|
+| vv-empty | media, title, description, actions | `compact` (inside a list, a table or a card) `bordered` (dashed frame, drop zone) | |
+| vv-separator | label† `> span` | `vertical` | the line takes the block's `border-color`: set it on the block, or `--vv-separator-border-color` when components use custom properties |
+| vv-spinner | | | `--spinner-duration`, `--spinner-thickness`, read on the block |
+
+The icon in `vv-empty__media` is sized by the font size, so give it `1em`. The spinner is
+`1em` in `currentcolor`: size and colour it with text utilities (`text-24 text-brand`). Under
+`prefers-reduced-motion` it keeps turning, slower, instead of stopping.
+
+## vv-item, vv-item-group
+
+A row of a list, and the list. The row is not the button: its `__entry` is (a `<button>` or
+an `<a>`), because the row can hold other controls beside it.
+
+```html
+<div class="vv-item-group vv-item-group--framed">
+  <div class="vv-item-group__header"><nav class="vv-breadcrumb">…</nav></div>
+  <ul class="vv-item-group__list">
+    <li class="vv-item">
+      <button type="button" class="vv-item__entry" aria-pressed="true">
+        <span class="vv-item__media"><svg>…</svg></span>
+        <span class="vv-item__title">Contracts</span>
+        <svg class="vv-item__check">…</svg>
+      </button>
+      <button type="button" class="vv-item__open" aria-label="Open"><svg>…</svg></button>
+    </li>
+    <li class="vv-item vv-item--roomy vv-item--current">
+      <a href="#" class="vv-item__entry" aria-current="true">
+        <span class="vv-item__content">
+          <span class="vv-item__title">Invoice reminder</span>
+          <span class="vv-item__description">Sent to 42 customers.</span>
+        </span>
+      </a>
+      <div class="vv-item__actions"><button type="button" class="vv-button vv-button--action-quiet vv-button--icon-only" aria-label="More">…</button></div>
+    </li>
+  </ul>
+</div>
+```
+
+| component | elements | modifiers | states |
+|---|---|---|---|
+| vv-item | entry, media, content, title, description, note, check, chevron, actions, open | `roomy` `top` `plain` | hover; pressed-within (entry `[aria-pressed="true"]`: the chosen row of a picker); current (class only: the row looked at in a master list); entry: focus-visible, disabled |
+| vv-item-group | header, list | `framed` `fill` `raised` | |
+
+Selection is surface, weight and a check, never a colour. A title over a description is
+semibold on every row, and there the surface and the bar carry the state alone. The group
+sets `--item-divider`, `--item-hover`, `--item-chosen` and `--item-current`; rows read them
+with a fallback, so a row works outside a group too. An empty list shows a
+`vv-empty vv-empty--compact`; a row still loading is a `vv-item--plain` holding
+`vv-skeleton__item` bars.

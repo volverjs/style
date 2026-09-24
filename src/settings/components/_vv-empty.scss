@@ -1,0 +1,71 @@
+// "There is nothing here yet": what a list, a table or a page shows in place
+// of its content, with an optional way out (create, import, clear the filters).
+// The message is quiet on purpose: `word-3` for the block, `word-1` for the
+// title alone, no colour of state.
+$vv-empty: (
+	display: flex,
+	flex-direction: column,
+	align-items: center,
+	justify-content: center,
+	gap: var(--spacing-sm),
+	padding: var(--spacing-xl) var(--spacing-lg),
+	color: var(--color-word-3),
+	text-align: center,
+	element: (
+		// An icon or an illustration. The font size sets the icon, which
+		// measures `1em` the way Iconify emits it
+		media: (
+			display: flex,
+			align-items: center,
+			justify-content: center,
+			margin-block-end: var(--spacing-xs),
+			color: var(--color-word-4),
+			font-size: var(--text-32),
+			line-height: var(--leading-none),
+		),
+		title: (
+			margin: var(--spacing-0),
+			color: var(--color-word-1),
+			font-size: var(--text-16),
+			font-weight: var(--font-semibold),
+			line-height: var(--leading-snug),
+		),
+		description: (
+			max-inline-size: 60ch,
+			margin: var(--spacing-0),
+			font-size: var(--text-14),
+			line-height: var(--leading-normal),
+			text-wrap: pretty,
+		),
+		actions: (
+			display: flex,
+			flex-wrap: wrap,
+			justify-content: center,
+			gap: var(--spacing-sm),
+			margin-block-start: var(--spacing-xs),
+		),
+	),
+	modifier: (
+		// Inside a list, a table or a card, where the frame is already there
+		// and a page sized empty state would push the rest away
+		compact: (
+			gap: var(--spacing-xs),
+			padding: var(--spacing-lg) var(--spacing-12),
+			element: (
+				media: (
+					margin-block-end: var(--spacing-0),
+					font-size: var(--text-24),
+				),
+				title: (
+					font-size: var(--text-14),
+				),
+			),
+		),
+		// A dashed frame, for an area that is waiting to be filled: a drop
+		// zone, a board with no card yet
+		bordered: (
+			border: var(--border) dashed var(--color-surface-4),
+			border-radius: var(--rounded-lg),
+		),
+	),
+) !default;

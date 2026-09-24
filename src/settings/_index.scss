@@ -32,6 +32,7 @@
 @forward 'components/vv-dropdown-action';
 @forward 'components/vv-dropdown-option';
 @forward 'components/vv-dropdown-optgroup';
+@forward 'components/vv-empty';
 @forward 'components/vv-checkbox';
 @forward 'components/vv-checkbox-group';
 @forward 'components/vv-radio';
@@ -41,10 +42,14 @@
 @forward 'components/vv-input-file';
 @forward 'components/vv-input-range';
 @forward 'components/vv-input-text';
+@forward 'components/vv-item';
+@forward 'components/vv-item-group';
 @forward 'components/vv-nav';
 @forward 'components/vv-progress';
 @forward 'components/vv-select';
+@forward 'components/vv-separator';
 @forward 'components/vv-skeleton';
+@forward 'components/vv-spinner';
 @forward 'components/vv-tab';
 @forward 'components/vv-table';
 @forward 'components/vv-text';

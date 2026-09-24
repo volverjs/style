@@ -1,0 +1,27 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-spinner);
+$component-map: $vv-spinner;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// A spinner that stands still says nothing, so reduced motion slows the ring
+// down rather than stopping it. The map cannot express a media feature, and
+// this rule comes after the block's own, which it overrides at the same
+// specificity.
+@media (prefers-reduced-motion: reduce) {
+	@include wrap-with-where($selector: $component-selector, $enabled: $zero-specificity-for-components) {
+		--spinner-duration: 1.5s;
+	}
+}
+
+}

@@ -1,0 +1,200 @@
+// A row of a list: something to choose, to open, or to act on. The row holds
+// an `entry`, the clickable part (a `<button>` or an `<a>`), and whatever sits
+// beside it with a hit area of its own: `actions` for controls that act on the
+// row, `open` for a divided area that opens a level while the entry chooses.
+// A button cannot contain buttons, which is why the row is not the button.
+
+// Selection is a step of surface, a step of weight on the title and a check,
+// never a colour: the brand is left to the primary action around the list.
+// Two different things are marked two different ways. `pressed-within` is the
+// row being chosen in a picker (the entry carries `aria-pressed`); `current`
+// is the row being looked at in a master list, marked by a bar along the
+// inline start instead of a check, which there would read as a verdict.
+
+// The four surfaces come from custom properties a `vv-item-group` sets, with a
+// fallback at the point of use, so a row works outside a group too and a group
+// drawn on a ground that is already `surface-1` only reassigns them (`raised`).
+// Every declaration that reads one is plain, in brackets: a `var()` inside a
+// generated custom property is substituted at the root, where the group's
+// values do not reach. `inherit` is plain for a related reason: written into a
+// custom property, a CSS-wide keyword applies to the property itself.
+$vv-item: (
+	display: flex,
+	align-items: stretch,
+	// A floor, so a row holding a short name and one holding a wrapped title
+	// read as the same kind of thing. `flex-shrink: 0` keeps a list that is a
+	// bounded flex column from squeezing its rows under their content.
+	min-height: var(--spacing-40),
+	flex-shrink: 0,
+	color: var(--color-word-2),
+	[border-bottom]: var(--border) solid var(--item-divider, var(--color-surface-2)),
+	transition: background-color var(--duration-150) var(--ease-out),
+	element: (
+		entry: (
+			display: flex,
+			flex: 1,
+			align-items: center,
+			gap: var(--spacing-sm),
+			min-width: 0,
+			margin: 0,
+			padding: var(--spacing-8) var(--spacing-12),
+			border: 0,
+			background: none,
+			[color]: inherit,
+			[font]: inherit,
+			text-align: start,
+			text-decoration: none,
+			cursor: pointer,
+			state: (
+				// Inset, so the scrolling list around the row does not clip it
+				focus-visible: (
+					outline: var(--spacing-2) solid var(--color-brand),
+					outline-offset: calc(var(--spacing-2) * -1),
+				),
+				disabled: (
+					opacity: var(--opacity-30),
+					cursor: not-allowed,
+				),
+			),
+		),
+		media: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			justify-content: center,
+			color: var(--color-word-3),
+		),
+		content: (
+			display: flex,
+			flex: 1,
+			flex-direction: column,
+			min-width: 0,
+		),
+		title: (
+			flex: 1,
+			min-width: 0,
+			overflow: hidden,
+			color: var(--color-word-1),
+			text-overflow: ellipsis,
+			white-space: nowrap,
+		),
+		description: (
+			display: -webkit-box,
+			overflow: hidden,
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+			line-height: var(--leading-normal),
+			-webkit-box-orient: vertical,
+			-webkit-line-clamp: 2,
+		),
+		// A quiet note at the end of the row: a status, "current"
+		note: (
+			flex-shrink: 0,
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+		),
+		// The mark of the chosen row, in the row's own colour
+		check: (
+			flex-shrink: 0,
+		),
+		// The row opens a level
+		chevron: (
+			flex-shrink: 0,
+			color: var(--color-word-4),
+		),
+		// Controls that act on the row, inline with it and without a divider:
+		// a divided column is for opening a level (`open`), not for acting
+		actions: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-2),
+			padding-inline-end: var(--spacing-8),
+		),
+		open: (
+			display: flex,
+			align-items: center,
+			margin: 0,
+			padding: 0 var(--spacing-12),
+			border: 0,
+			[border-inline-start]: var(--border) solid var(--item-divider, var(--color-surface-2)),
+			background: none,
+			color: var(--color-word-3),
+			[font]: inherit,
+			cursor: pointer,
+			transition: color var(--duration-150) var(--ease-out),
+			state: (
+				hover: (
+					color: var(--color-word-1),
+				),
+				focus-visible: (
+					outline: var(--spacing-2) solid var(--color-brand),
+					outline-offset: calc(var(--spacing-2) * -1),
+				),
+			),
+		),
+	),
+	state: (
+		last-child: (
+			border-bottom-width: 0,
+		),
+		hover: (
+			[background-color]: var(--item-hover, var(--color-surface-1)),
+		),
+		// Declared after `hover`, so the chosen and the current row keep their
+		// surface under the pointer
+		pressed-within: (
+			[background-color]: var(--item-chosen, var(--color-surface-1)),
+			element: (
+				title: (
+					font-weight: var(--font-medium),
+				),
+			),
+		),
+		current: (
+			[background-color]: var(--item-current, var(--color-surface-2)),
+			box-shadow: inset var(--spacing-3) 0 0 var(--color-word-2),
+			element: (
+				title: (
+					font-weight: var(--font-medium),
+				),
+			),
+		),
+	),
+	modifier: (
+		// More inside than an icon and a line of text: an avatar, a title
+		// over a description, a row of badges. The floor goes on the entry,
+		// which holds the content, and the row stretches to it.
+		roomy: (
+			element: (
+				entry: (
+					min-height: var(--spacing-56),
+					padding: var(--spacing-12) var(--spacing-md),
+				),
+			),
+		),
+		// Content several lines tall: the media and the control belong next
+		// to the first line, not halfway down the row
+		top: (
+			element: (
+				entry: (
+					align-items: flex-start,
+				),
+			),
+		),
+		// Nothing to click and nothing to choose: the row holds its own
+		// controls, or it is a skeleton standing in for a row still loading
+		plain: (
+			state: (
+				hover: (
+					[background-color]: transparent,
+				),
+			),
+			element: (
+				entry: (
+					cursor: default,
+				),
+			),
+		),
+	),
+) !default;
