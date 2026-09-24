@@ -76,6 +76,7 @@ white black transparent shadow backdrop
 | `inset-` `inset-x-` `inset-y-` `top-` `right-` `bottom-` `left-` | spacing scale + dynamic + `1/2` `1/3` `2/3` `1/4` `2/4` `3/4` `full` `auto` | no |
 | `z-` | `1` `sticky` `fixed` `dropdown` `modal-backdrop` `modal` `confirm-backdrop` `confirm` `popover` `tooltip` `toast` `notification-alert` `auto` | no |
 | `overflow-` `overflow-x-` `overflow-y-` | `visible` `hidden` `scroll` `auto` | no |
+| `scrollbar-` | `thin` (thin, `word-5` thumb on a transparent track) `none` (hidden, still scrolls) | no |
 | `container` | | width 100%, max-width follows the current breakpoint; no size suffixes |
 | `aspect-` | `auto` `square` `photo` (3/2) `tv` (4/3) `wide` (16/9) `ultrawide` (21/9) | yes |
 | `object-` (fit) | `fill` `contain` `cover` `none` `scale-down` | no |

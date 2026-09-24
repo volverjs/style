@@ -73,6 +73,33 @@ wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center
                     value="slide-inline-end" />
                 slide-inline-end
             </label>
+            <label class="vv-radio" for="slide-inline-start">
+                <input
+                    v-model="transition"
+                    id="slide-inline-start"
+                    type="radio"
+                    name="transition"
+                    value="slide-inline-start" />
+                slide-inline-start
+            </label>
+            <label class="vv-radio" for="slide-block-start">
+                <input
+                    v-model="transition"
+                    id="slide-block-start"
+                    type="radio"
+                    name="transition"
+                    value="slide-block-start" />
+                slide-block-start
+            </label>
+            <label class="vv-radio" for="slide-block-end">
+                <input
+                    v-model="transition"
+                    id="slide-block-end"
+                    type="radio"
+                    name="transition"
+                    value="slide-block-end" />
+                slide-block-end
+            </label>
         </div>
     </fieldset>
     <fieldset class="vv-radio-group">
@@ -115,6 +142,33 @@ wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center
                     value="drawer" />
                 drawer
             </label>
+            <label class="vv-radio" for="drawer-start">
+                <input
+                    v-model="size"
+                    id="drawer-start"
+                    type="radio"
+                    name="size"
+                    value="drawer-start" />
+                drawer-start
+            </label>
+            <label class="vv-radio" for="drawer-top">
+                <input
+                    v-model="size"
+                    id="drawer-top"
+                    type="radio"
+                    name="size"
+                    value="drawer-top" />
+                drawer-top
+            </label>
+            <label class="vv-radio" for="drawer-bottom">
+                <input
+                    v-model="size"
+                    id="drawer-bottom"
+                    type="radio"
+                    name="size"
+                    value="drawer-bottom" />
+                drawer-bottom
+            </label>
         </div>
     </fieldset>
     <button type="button" class="vv-button mr-auto" @click.stop="toggleOpen">
@@ -125,7 +179,7 @@ wrapperClass: grid grid-cols-2 flex-1 sm:grid-cols-3 gap-md items-center
             <article class="vv-dialog__wrapper">
                 <header class="vv-dialog__header">
                     Dialog title 
-                    <button class="vv-dialog__close" type="buttom" aria-label="Close" @click.stop="toggleOpen"></button>
+                    <button class="vv-dialog__close" type="button" aria-label="Close" @click.stop="toggleOpen"></button>
                 </header>
                 <div class="vv-dialog__content">
                     <p>

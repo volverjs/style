@@ -392,7 +392,7 @@ The `<dialog>` block is the backdrop; the panel is the mandatory `<article>` chi
 
 | elements | modifiers | states |
 |---|---|---|
-| wrapper† `> article`, header† `> article > header`, close, content, footer† `> article > footer` | `small` `fullscreen` `drawer`; transitions `fade-block` `fade-inline` `scale` `slide-inline-end` (pair `drawer` with `slide-inline-end`) | open `[open]`, close `:not([open])` |
+| wrapper† `> article`, header† `> article > header`, close, content, footer† `> article > footer` | `small` `fullscreen` `drawer` (inline end) `drawer-start` `drawer-top` `drawer-bottom` (the bottom sheet of a phone); transitions `fade-block` `fade-inline` `scale` `slide-inline-end` `slide-inline-start` `slide-block-start` `slide-block-end` (pair each drawer with the slide from its side) | open `[open]`, close `:not([open])` |
 
 ## vv-dropdown family
 
