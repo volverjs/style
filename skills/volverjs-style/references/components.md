@@ -670,3 +670,39 @@ children: headings, paragraphs, lists, links, `blockquote`, inline `code`, `pre`
 Sizes are in `em` (headings follow the text around them); the rhythm is a margin on every
 child after the first, so the block has no outer margin. `compact` sets headings at text size
 and halves the gaps. Inside `.preflight` the content of a prose block is left to it.
+
+## Conversation: vv-message, vv-bubble, vv-bubble-group, vv-message-scroller, vv-attachment, vv-attachment-group, vv-marker, vv-questionnaire
+
+```html
+<div class="vv-message-scroller" role="log" aria-live="polite">
+  <div class="vv-message">
+    <span class="vv-avatar vv-avatar--rounded vv-message__avatar">AI</span>
+    <div class="vv-message__content">
+      <div class="vv-message__header"><strong>Assistant</strong><span class="vv-message__meta">10:42</span></div>
+      <div class="vv-bubble-group">
+        <div class="vv-bubble">Hi!</div>
+        <div class="vv-bubble vv-bubble--reacted">How can I help? <span class="vv-bubble__reactions" role="img" aria-label="2 likes">👍 2</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="vv-message vv-message--end">
+    <div class="vv-message__content"><div class="vv-bubble vv-bubble--end">An invoice, please.</div></div>
+  </div>
+  <div class="vv-marker"><span class="vv-marker__content">Maria joined</span></div>
+  <button type="button" class="vv-message-scroller__jump" aria-label="Latest message">…</button>
+</div>
+```
+
+| component | elements | modifiers |
+|---|---|---|
+| vv-message | avatar, content, header, footer, meta (hover/focus only, always without hover) | `end` (the one reading) `wide` (content takes the row) |
+| vv-bubble | reactions | `end` `plain` (no surface) `reacted` (room for reactions); colours from `--bubble-background`, `--bubble-color`, `--bubble-border-color` and the `--bubble-end-*` trio, read with a fallback, so one value on the conversation paints a side |
+| vv-bubble-group | joined† `> :not(:first-child)` (load after `vv-bubble`) | `end` |
+| vv-message-scroller | jump (sticky, hide with `hidden`) | `fade` |
+| vv-attachment | media, picture† `img`, content, title, description, actions, remove | `image` `invalid` `loading` |
+| vv-attachment-group | | |
+| vv-marker | icon, content | `bordered` |
+| vv-questionnaire | header, progress (`--questionnaire-progress` on the block), item, title, description, error, actions | |
+
+A date between two days of messages is a `vv-separator` with a label; the choices of a
+questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.

@@ -1,0 +1,32 @@
+// A note inside a conversation that nobody says: an operator joined, the
+// conversation was handed over, a tool ran. Quiet and centred, an optional
+// `icon` beside the `content`. `bordered` frames it in a pill; a date between
+// two days of messages is a `vv-separator` with a label.
+$vv-marker: (
+	display: flex,
+	align-items: center,
+	justify-content: center,
+	gap: var(--spacing-6),
+	color: var(--color-word-3),
+	font-size: var(--text-12),
+	line-height: var(--leading-snug),
+	text-align: center,
+	element: (
+		icon: (
+			flex-shrink: 0,
+		),
+		content: (
+			min-width: 0,
+		),
+	),
+	modifier: (
+		bordered: (
+			width: fit-content,
+			margin-inline: auto,
+			padding: var(--spacing-2) var(--spacing-10),
+			border: var(--border) solid var(--color-surface-3),
+			border-radius: var(--rounded-full),
+			background-color: var(--color-surface),
+		),
+	),
+) !default;

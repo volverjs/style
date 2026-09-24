@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-message);
+$component-map: $vv-message;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// A device that cannot hover never reveals what shows on hover: the metadata
+// of a message is always there. The map cannot express a media feature.
+@media (hover: none) {
+	@include wrap-with-where($selector: '#{$component-selector}__meta', $enabled: $zero-specificity-for-components) {
+		opacity: var(--opacity-100);
+	}
+}
+
+}

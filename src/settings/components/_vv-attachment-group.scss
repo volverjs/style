@@ -1,0 +1,10 @@
+// A row of attachments that wraps, the tray above a composer or the files of
+// a message. The top padding leaves room for the `remove` buttons, which hang
+// over the top edge of each tile.
+$vv-attachment-group: (
+	display: flex,
+	flex-wrap: wrap,
+	gap: var(--spacing-12),
+	padding-block-start: var(--spacing-12),
+	padding-inline-end: var(--spacing-12),
+) !default;

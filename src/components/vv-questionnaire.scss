@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-questionnaire);
+$component-map: $vv-questionnaire;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+}

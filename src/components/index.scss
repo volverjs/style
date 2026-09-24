@@ -41,3 +41,13 @@
 @use 'vv-text';
 @use 'vv-textarea';
 @use 'vv-tooltip';
+@use 'vv-attachment';
+@use 'vv-attachment-group';
+@use 'vv-bubble';
+
+// After vv-bubble: the joined corners of a group win over the bubble's own
+@use 'vv-bubble-group';
+@use 'vv-marker';
+@use 'vv-message';
+@use 'vv-message-scroller';
+@use 'vv-questionnaire';

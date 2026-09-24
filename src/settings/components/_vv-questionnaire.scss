@@ -1,0 +1,74 @@
+// Questions asked one step at a time, in a conversation or a panel: a
+// `header` with the title of the set, a `progress` bar, the `item` being
+// asked (a `title`, a `description`, the choices, an `error`) and the
+// `actions` that move between steps. The choices are fields of the library:
+// `vv-radio--card` or `vv-checkbox--card` for a single or a multiple choice,
+// a text field for a free answer.
+// The share of the steps done is `--questionnaire-progress`, set on the block
+// (`style="--questionnaire-progress: 40%"`) and read by a plain declaration.
+$vv-questionnaire: (
+	display: flex,
+	flex-direction: column,
+	overflow: hidden,
+	border: var(--border) solid var(--color-surface-3),
+	border-radius: var(--rounded-xl),
+	background-color: var(--color-surface),
+	element: (
+		// A heading, in the markup
+		header: (
+			display: flex,
+			align-items: center,
+			gap: var(--spacing-8),
+			margin: 0,
+			padding: var(--spacing-10) var(--spacing-sm),
+			font-size: var(--text-16),
+			color: var(--color-word-1),
+			font-weight: var(--font-semibold),
+		),
+		progress: (
+			position: relative,
+			block-size: var(--spacing-4),
+			overflow: hidden,
+			background-color: var(--color-surface-3),
+			pseudo: (
+				after: (
+					position: absolute,
+					inset-block: 0,
+					inset-inline-start: 0,
+					background-color: var(--color-word-4),
+					transition: inline-size var(--duration-300) var(--ease-out),
+					[inline-size]: var(--questionnaire-progress, 0%),
+				),
+			),
+		),
+		item: (
+			display: flex,
+			flex-direction: column,
+			gap: var(--spacing-12),
+			padding: var(--spacing-16) var(--spacing-sm),
+		),
+		title: (
+			margin: 0,
+			color: var(--color-word-1),
+			font-weight: var(--font-semibold),
+		),
+		description: (
+			margin: 0,
+			color: var(--color-word-3),
+			font-size: var(--text-14),
+		),
+		error: (
+			color: var(--color-danger),
+			font-size: var(--text-12),
+		),
+		actions: (
+			display: flex,
+			flex-wrap: wrap,
+			align-items: center,
+			justify-content: flex-end,
+			gap: var(--spacing-8),
+			padding: var(--spacing-10) var(--spacing-sm),
+			border-top: var(--border) solid var(--color-surface-3),
+		),
+	),
+) !default;
