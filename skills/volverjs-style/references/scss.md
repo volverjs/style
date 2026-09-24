@@ -138,6 +138,23 @@ ring on a tile whose native input is hidden) and `pressed-within` is
 `:has(> [aria-pressed="true"])` (a row chosen through the button inside it). The light
 rules and the dark theme read the same table, `src/tools/mixin-modules/_states.scss`.
 
+## Presets
+
+`@volverjs/style/scss/presets/outlined-fields` turns every field (`vv-input-text`,
+`vv-textarea`, `vv-select`, `vv-input-file`, `vv-field`) from the filled box into an outlined
+one: plain surface, 1px border, radius, a ring on focus, the floating label as a notch.
+Load it after the context and before the library, or it changes nothing:
+
+```scss
+@use '@volverjs/style/scss/context' with (...);
+@use '@volverjs/style/scss/presets/outlined-fields';
+@use '@volverjs/style/scss';
+```
+
+It adds `--input-border-color(-hover)`, `--input-border-radius`, `--input-focus-color`,
+`--input-focus-ring`, `--input-invalid-ring` and `--input-disabled-*`, and changes the look
+only, not the density.
+
 ## Creating a component
 
 ```scss

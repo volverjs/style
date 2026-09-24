@@ -213,6 +213,7 @@
     "./scss/functions": "./src/tools/_functions.scss",
     "./scss/mixins": "./src/tools/_mixins.scss",
     "./scss/preflight": "./src/_preflight.scss",
+    "./scss/presets/outlined-fields": "./src/presets/_outlined-fields.scss",
     "./scss/props": "./src/props/index.scss",
     "./scss/props/background": "./src/props/background.scss",
     "./scss/props/borders": "./src/props/borders.scss",
