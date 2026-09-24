@@ -38,6 +38,9 @@ $input: (
 		display: block,
 		font-size: var(--text-12),
 		gap: var(--spacing-8),
+		// Read by the hint of every field as `--input-hint-max-width`, which
+		// was never declared: the declaration was invalid and did nothing
+		max-width: 100%,
 		overflow: hidden,
 		text-overflow: ellipsis,
 		white-space: nowrap,
