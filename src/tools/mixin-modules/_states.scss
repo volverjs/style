@@ -17,7 +17,7 @@ $valid-states: (
 	disabled, checked, checked-within, focus-visible-within, multiple, selected,
 	pressed-within, readonly, empty, placeholder-shown, dirty, valid, invalid,
 	indeterminate, first-child, last-child, open, close, determinate, pressed,
-	current, current-page, popover, popover-open, sort-ascending,
+	current, current-date, current-page, popover, popover-open, sort-ascending,
 	sort-descending, sort-none
 );
 
@@ -33,6 +33,8 @@ $state-suffixes: (
 	// The page a link points to, the way a pagination, a breadcrumb or a
 	// navigation marks it. `current` stays a class, as it always was.
 	current-page: '[aria-current="page"]',
+	// Today in a calendar
+	current-date: '[aria-current="date"]',
 	dirty: ':not(:has(*:placeholder-shown))',
 	disabled: ('[disabled]', '[aria-disabled="true"]'),
 	focus-visible: ':not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):focus-visible',

@@ -1,0 +1,53 @@
+// A floating panel for a short piece of content or a small form, on the
+// Popover API: the element carries `popover`, the browser moves it to the top
+// layer and shows it while it is open. The reset of the library unsets the
+// fixed position the browser gives a popover, so the block puts it back, with
+// the z-index of a popover for a panel shown without the top layer. Placing
+// it next to its trigger is left to the script that opens it or to anchor
+// positioning, which set its inset: without one the panel opens at the top
+// left corner of the viewport, and `center` centres it instead.
+// A panel opened on hover (a hover card) is the same block: the delay is
+// behaviour and belongs to the script. `vv-dropdown` stays the menu and the
+// list of options.
+$vv-popover: (
+	position: fixed,
+	z-index: var(--z-popover),
+	inset: auto,
+	max-inline-size: min(20rem, calc(100vw - var(--spacing-32))),
+	max-block-size: calc(100dvh - var(--spacing-32)),
+	margin: 0,
+	padding: var(--spacing-sm),
+	overflow: auto,
+	border: var(--border) solid var(--color-surface-3),
+	border-radius: var(--rounded-lg),
+	background-color: var(--color-surface),
+	box-shadow: var(--shadow-lg),
+	color: var(--color-word-2),
+	font-size: var(--text-14),
+	line-height: var(--leading-normal),
+	element: (
+		title: (
+			margin: 0 0 var(--spacing-4),
+			color: var(--color-word-1),
+			font-size: var(--text-14),
+			font-weight: var(--font-semibold),
+		),
+		footer: (
+			display: flex,
+			flex-wrap: wrap,
+			justify-content: flex-end,
+			gap: var(--spacing-8),
+			margin-block-start: var(--spacing-sm),
+		),
+	),
+	modifier: (
+		// Centred in the viewport, as the browser shows a popover nobody
+		// places: for a panel opened by `popovertarget` alone
+		center: (
+			inset: 0,
+			inline-size: fit-content,
+			block-size: fit-content,
+			margin: auto,
+		),
+	),
+) !default;

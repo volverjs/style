@@ -1,0 +1,9 @@
+---
+title: Sidebar
+description: Sidebar is the side column of an application, with a header, a navigation that scrolls and a footer.
+isNew: true
+---
+
+A `__header` (the product, a switcher), a `__content` that scrolls, usually a [Navigation](/style/components/navigation) with `vv-nav--sidebar`, and a `__footer` (the account). Its width is `--sidebar-width`, 16rem by default; `vv-sidebar--collapsed` narrows it to `--sidebar-collapsed-width`, a 64px rail, and hides every `__label` from sight, so only the icons remain and each still carries the name of its link for assistive technology. Both widths can be set on the layout around the sidebar.
+
+<code-editor resource-folder="sidebar" resource-name="default"></code-editor>

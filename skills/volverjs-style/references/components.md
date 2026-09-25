@@ -706,3 +706,48 @@ and halves the gaps. Inside `.preflight` the content of a prose block is left to
 
 A date between two days of messages is a `vv-separator` with a label; the choices of a
 questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.
+
+## vv-kbd, vv-popover, vv-command, vv-input-otp, vv-sidebar, vv-calendar
+
+```html
+<span class="vv-kbd-group"><kbd class="vv-kbd">Ctrl</kbd>+<kbd class="vv-kbd">K</kbd></span>
+
+<button type="button" popovertarget="share">Share</button>
+<div id="share" class="vv-popover" popover><p class="vv-popover__title">Share</p>…<div class="vv-popover__footer">…</div></div>
+
+<div class="vv-command">
+  <div class="vv-command__search"><input class="vv-command__input" role="combobox" aria-expanded="true" /></div>
+  <ul class="vv-command__list" role="listbox">
+    <li class="vv-command__heading" role="presentation">Documents</li>
+    <li class="vv-command__option" role="option" aria-selected="true">New <span class="vv-command__shortcut"><kbd class="vv-kbd">N</kbd></span></li>
+  </ul>
+</div>
+
+<div class="vv-input-otp" role="group" aria-label="Code">
+  <div class="vv-input-otp__group"><input class="vv-input-otp__slot" maxlength="1" /></div>
+  <span class="vv-input-otp__separator" aria-hidden="true">–</span>
+</div>
+
+<aside class="vv-sidebar vv-sidebar--collapsed">
+  <div class="vv-sidebar__header">… <span class="vv-sidebar__label">Product</span></div>
+  <nav class="vv-sidebar__content">…</nav>
+  <div class="vv-sidebar__footer">…</div>
+</aside>
+
+<div class="vv-calendar">
+  <div class="vv-calendar__header"><button class="vv-calendar__nav">‹</button><span class="vv-calendar__title">September 2026</span><button class="vv-calendar__nav">›</button></div>
+  <table class="vv-calendar__grid" role="grid">
+    <thead><tr><th>Mo</th>…</tr></thead>
+    <tbody><tr><td aria-selected="true"><button class="vv-calendar__day" aria-pressed="true">10</button></td>…</tr></tbody>
+  </table>
+</div>
+```
+
+| component | elements | modifiers / states |
+|---|---|---|
+| vv-kbd, vv-kbd-group | | sized in `em` |
+| vv-popover | title, footer | `center`; on `[popover]`, placed by a script or anchor positioning, top left without one |
+| vv-command | search (focus-within), input, list, heading, option, shortcut, empty | option: `aria-selected="true"`, disabled; groups are `role="group"` labelled by a heading |
+| vv-input-otp | group, slot, separator | `invalid` |
+| vv-sidebar | header, content, footer, label | `collapsed` (hides `label` from sight, not from AT); `--sidebar-width`, `--sidebar-collapsed-width` |
+| vv-calendar | header, title, nav, grid† `table`, weekday† `th`, cell† `td`, day | day: `aria-pressed` (chosen, range ends), `aria-current="date"` (today), disabled, a focus ring that also holds for `tabindex="-1"` (roving); cell: `aria-selected` (range) |

@@ -112,6 +112,11 @@ outputs: that is what tells you which rules moved.
   a token on the block and still follow the line box of the summary, which is the element that
   consumes it. So a declaration whose value carries only relative units needs no `[brackets]`,
   while one that reads a token another element declares still does.
+- **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
+  `.block__element--modifier`: its declarations are flattened into the rule of the element
+  itself, so they apply to every instance and win over the declarations before them. Express a
+  variant of an element as a state read from the DOM, as a modifier of the block that reaches
+  the element, or as a second element.
 - **`.preflight` dresses bare tags at (0,1,0)**, above the zero specificity of every component
   rule. An element carrying a class of a component (`[class*='vv-']`) is excluded from all of
   its rules, so `button.vv-badge__button` or `label.vv-radio--segment` are left to their

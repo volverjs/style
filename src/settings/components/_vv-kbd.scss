@@ -1,0 +1,20 @@
+// A key of the keyboard, to name a shortcut: a cap drawn in the mono face,
+// sized in `em` so it follows the text around it. A combination of keys is a
+// `vv-kbd-group`, with whatever joins them written in the markup.
+$vv-kbd: (
+	display: inline-flex,
+	align-items: center,
+	justify-content: center,
+	min-inline-size: 1.5em,
+	padding: 0.1em 0.4em,
+	border: var(--border) solid var(--color-surface-4),
+	border-bottom-width: var(--spacing-2),
+	border-radius: var(--rounded),
+	background-color: var(--color-surface-1),
+	color: var(--color-word-2),
+	font-family: var(--font-mono),
+	font-size: 0.8125em,
+	font-weight: var(--font-medium),
+	line-height: var(--leading-snug),
+	white-space: nowrap,
+) !default;

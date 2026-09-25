@@ -128,7 +128,8 @@ Valid `state` keys: `active` `focus` `hover` `focus-within` `focus-visible` `tar
 `visited` `disabled` `readonly` `checked` `checked-within` `focus-visible-within`
 `indeterminate` `determinate` `open` `close` `popover` `popover-open` `pressed`
 `pressed-within` `selected` `multiple` `dirty` `valid` `invalid` `empty` `placeholder-shown`
-`first-child` `last-child` `current` `current-page` (`[aria-current="page"]`)
+`first-child` `last-child` `current` `current-page` (`[aria-current="page"]`) `current-date`
+(`[aria-current="date"]`)
 `sort-ascending` `sort-descending` `sort-none` (`aria-sort` on a `th`). Other keys are
 silently dropped.
 

@@ -1,0 +1,9 @@
+// The keys of a combination side by side, with what joins them (a `+`, a
+// `then`) written in the markup between them
+$vv-kbd-group: (
+	display: inline-flex,
+	align-items: center,
+	gap: 0.25em,
+	color: var(--color-word-4),
+	white-space: nowrap,
+) !default;
