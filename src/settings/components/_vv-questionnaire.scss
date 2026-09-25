@@ -6,6 +6,10 @@
 // a text field for a free answer.
 // The share of the steps done is `--questionnaire-progress`, set on the block
 // (`style="--questionnaire-progress: 40%"`) and read by a plain declaration.
+// The title and the description space themselves with a margin, not the item
+// with a gap: a choice keeps them inside its fieldset, as the `legend` and a
+// paragraph, where a gap of the item would not reach. The description sits
+// close under the title (see `src/components/vv-questionnaire.scss`).
 $vv-questionnaire: (
 	display: flex,
 	flex-direction: column,
@@ -44,16 +48,15 @@ $vv-questionnaire: (
 		item: (
 			display: flex,
 			flex-direction: column,
-			gap: var(--spacing-12),
 			padding: var(--spacing-16) var(--spacing-sm),
 		),
 		title: (
-			margin: 0,
+			margin: 0 0 var(--spacing-12),
 			color: var(--color-word-1),
 			font-weight: var(--font-semibold),
 		),
 		description: (
-			margin: 0,
+			margin: 0 0 var(--spacing-12),
 			color: var(--color-word-3),
 			font-size: var(--text-14),
 		),

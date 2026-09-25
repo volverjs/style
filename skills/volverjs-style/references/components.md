@@ -462,7 +462,7 @@ the `__list` class). Items are `vv-dropdown-action` (buttons) or `vv-dropdown-op
 
 ## vv-tab
 
-Panels toggle on `:target` or the `current` class.
+Panels toggle on `:target` or the `target` class.
 
 | elements | states |
 |---|---|
@@ -702,7 +702,7 @@ and halves the gaps. Inside `.preflight` the content of a prose block is left to
 | vv-attachment | media, picture† `img`, content, title, description, actions, remove | `image` `invalid` `loading` |
 | vv-attachment-group | | |
 | vv-marker | icon, content | `bordered` |
-| vv-questionnaire | header, progress (`--questionnaire-progress` on the block), item, title, description, error, actions | |
+| vv-questionnaire | header, progress (`--questionnaire-progress` on the block), item, title (the `legend` of a choice), description, error, actions | |
 
 A date between two days of messages is a `vv-separator` with a label; the choices of a
 questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.
@@ -749,5 +749,5 @@ questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.
 | vv-popover | title, footer | `center`; on `[popover]`, placed by a script or anchor positioning, top left without one |
 | vv-command | search (focus-within), input, list, heading, option, shortcut, empty | option: `aria-selected="true"`, disabled; groups are `role="group"` labelled by a heading |
 | vv-input-otp | group, slot, separator | `invalid` |
-| vv-sidebar | header, content, footer, label | `collapsed` (hides `label` from sight, not from AT); `--sidebar-width`, `--sidebar-collapsed-width` |
+| vv-sidebar | header, content, footer, label | `collapsed` (hides `label` from sight, not from AT, and centres the icons of header, content and footer on the rail: wrap every text of the nav in `label`); `--sidebar-width`, `--sidebar-collapsed-width` |
 | vv-calendar | header, title, nav, grid† `table`, weekday† `th`, cell† `td`, day | day: `aria-pressed` (chosen, range ends), `aria-current="date"` (today), disabled, a focus ring that also holds for `tabindex="-1"` (roving); cell: `aria-selected` (range) |
