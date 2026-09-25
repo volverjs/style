@@ -21,13 +21,13 @@ Each breakpoint is defined by a CSS Custom Property. The default breakpoints are
 </table-utility>
 
 ### Responsive Utilities
-Many utilities classes can be used with a breakpoint suffix.
+Many utility classes can be used with a breakpoint prefix.
 
 ```html
 <div class="none lg:flex"></div>
 ```
 
-The breakpoint suffix has a greater specificity than the default utility class. This means that the breakpoint suffix will override the default utility class.
+Responsive classes have the same zero specificity as the others: they are emitted after the base classes, so at their breakpoint and above they override them.
 
 ### Current Breakpoint
 The current breakpoint can be accessed using the `--breakpoint-key` and `--breakpoint-value` CSS Custom Properties.
@@ -43,31 +43,33 @@ const breakpointValue = computedStyle.getPropertyValue('--breakpoint-value')
 Volver Style includes a set of SCSS mixins that can be used to create responsive utilities. 
 
 ```scss
-@use '@volverjs/style/scss/context'
+@use '@volverjs/style/scss/context' as *;
 
-// shorthand for media-breakpoint-up('md', $breakpoints)
+// from md up: (min-width: 992px)
 @include bp-up('md') {
   // ...
 }
 
-// shorthand for media-breakpoint-down('md', $breakpoints)
+// up to the end of md: (max-width: 1023.98px)
 @include bp-down('md') {
   // ...
 }
 
-// shorthand for media-breakpoint-between('md', 'lg', $breakpoints)
+// from md to the end of lg: (min-width: 992px) and (max-width: 1279.98px)
 @include bp-between('md', 'lg') {
   // ...
 }
 
-// shorthand for media-breakpoint-only('md', $breakpoints)
+// md only: (min-width: 992px) and (max-width: 1023.98px)
 @include bp-only('md') {
   // ...
 }
 ```
 
+Each is a shorthand for the `media-breakpoint-*` mixin of the same name with `$breakpoints` as the last argument.
+
 ### Customization
-You can create your own breakpoints overriding the `$breakpoints` SCSS variable.
+You can create your own breakpoints overriding the `$breakpoints` SCSS variable. The map must be in ascending order and start with a key set to `0`, or the compilation stops with an error.
 
 ```scss 
 @use '@volverjs/style/scss/context' with (

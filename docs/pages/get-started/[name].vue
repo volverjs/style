@@ -1,5 +1,7 @@
 <script setup>
 	import CodeEditor from '../../components/CodeEditor.vue'
+	import CardExample from '../../components/CardExample.vue'
+	import PresetOutlinedFields from '../../components/PresetOutlinedFields.vue'
 	import { permalinkToPath } from '@docs/utils/permalink'
 
 	const route = useRoute()
@@ -20,6 +22,8 @@
 		permalinks.value = toc.map(({ content }) => permalinkToPath(content))
 		MainContent = VueComponentWith({
 			CodeEditor,
+			CardExample,
+			PresetOutlinedFields,
 		})
 	} catch (error) {
 		router.replace({ name: 'index' })
@@ -45,8 +49,8 @@
 			<div class="p-16">
 				<header class="my-lg">
 					<span
-						class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
-						{{ route.params.name }}
+						class="vv-text vv-text--size-5 font-semibold text-brand">
+						Get Started
 					</span>
 					<div class="flex items-center mb-sm">
 						<h1

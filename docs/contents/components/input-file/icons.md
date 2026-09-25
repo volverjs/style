@@ -11,7 +11,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="filefield-icon-before" 
                type="file" 
                name="filefield-icon-before" 
-               placeholder="Placeholder text" />
+               />
     </div>
 </div>
 
@@ -22,7 +22,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="filefield-icon-after" 
                type="file" 
                name="filefield-icon-after" 
-               placeholder="Placeholder text" />
+               />
         <IconifyIcon icon="akar-icons:heart" />
     </div>
 </div>
@@ -38,8 +38,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <IconifyIcon icon="akar-icons:heart" />
         <input id="filefield-valid-icon" 
                type="file" 
-               name="filefield-invalid-icon" 
-               placeholder="Placeholder text" 
+               name="filefield-valid-icon" 
                aria-describedby="filefield-valid-icon-hint" 
                aria-invalid="false">
         <IconifyIcon icon="akar-icons:check" />
@@ -61,7 +60,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="filefield-invalid-icon" 
                type="file" 
                name="filefield-invalid-icon" 
-               placeholder="Placeholder text" 
                aria-describedby="filefield-invalid-icon-hint" 
                aria-invalid="true" />
         <IconifyIcon icon="akar-icons:circle-alert" />

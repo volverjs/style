@@ -35,7 +35,7 @@ wrapperClass: md:w-9/12 mx-auto preflight
                 id="field-switch-1"
                 type="checkbox"
                 role="switch"
-                value="1"
+                value="a"
                 name="switch"
                 checked="checked" />
         Choice A
@@ -78,7 +78,7 @@ wrapperClass: md:w-9/12 mx-auto preflight
     <fieldset>
         <legend>Radio</legend>
         <label for="field-radio-1">
-            <input id="field-radio-1" name="checkradiobox" value="a" type="radio" checked="checked" />
+            <input id="field-radio-1" name="radio" value="a" type="radio" checked="checked" />
             Choice A
         </label>
         <label for="field-radio-2">

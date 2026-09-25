@@ -1,14 +1,16 @@
 ---
 title: Translate
-description: Utilities for translating elements with transform.
+description: Utilities for translating elements with the translate property.
 ---
 <table-utility prefix="translate" property="translate" class="mb-lg">
+  <template #class="{ key }">.translate-{{ key.replace('\\', '') }}</template>
   <template #value="{ value }">
     translate: {{ value }} {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate" property="translate" class="mb-lg">
+  <template #class="{ key }">.-translate-{{ key.replace('\\', '') }}</template>
   <template #value="{ value }">
     translate: -{{ value }} -{{ value }};
   </template>
@@ -18,12 +20,14 @@ description: Utilities for translating elements with transform.
 Translate an element by a given factor on the X axis.
 
 <table-utility prefix="translate-x" property="translate" class="mb-lg">
+  <template #class="{ key }">.translate-x-{{ key.replace('\\', '') }}</template>
   <template #value="{ value }">
       translate: {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate-x" property="translate" class="mb-lg">
+  <template #class="{ key }">.-translate-x-{{ key.replace('\\', '') }}</template>
   <template #value="{ value }">
       translate: -{{ value }};
   </template>
@@ -33,12 +37,14 @@ Translate an element by a given factor on the X axis.
 Translate an element by a given factor on the Y axis.
 
 <table-utility prefix="translate-y" property="translate">
+  <template #class="{ key }">.translate-y-{{ key.replace('\\', '') }}</template>
     <template #value="{ value }">
       translate: 0 {{ value }};
   </template>
 </table-utility>
 
 <table-utility prefix="-translate-y" property="translate">
+  <template #class="{ key }">.-translate-y-{{ key.replace('\\', '') }}</template>
     <template #value="{ value }">
       translate: 0 -{{ value }};
   </template>

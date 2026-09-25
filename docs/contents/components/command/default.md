@@ -6,7 +6,7 @@ wrapperClass: flex-1
 <div class="vv-command">
     <div class="vv-command__search">
         <IconifyIcon icon="akar-icons:search" />
-        <input class="vv-command__input" type="text" role="combobox" aria-expanded="true" aria-controls="command-list" aria-activedescendant="command-new" aria-autocomplete="list" placeholder="Type a command" />
+        <input class="vv-command__input" type="text" role="combobox" aria-label="Search commands" aria-expanded="true" aria-controls="command-list" aria-activedescendant="command-new" aria-autocomplete="list" placeholder="Type a command" />
     </div>
     <ul id="command-list" class="vv-command__list" role="listbox" aria-label="Commands">
         <li role="presentation">

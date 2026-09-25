@@ -33,7 +33,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     <div class="vv-textarea__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
         <textarea id="textarea-valid-icon" 
-                  name="textarea-invalid-icon" 
+                  name="textarea-valid-icon" 
                   placeholder="Placeholder text" 
                   aria-describedby="textarea-valid-icon-hint" 
                   aria-invalid="false"></textarea>

@@ -20,7 +20,8 @@ description: Utilities for controlling word breaks in an element.
           .break-normal
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          word-break: normal;
+          <div>overflow-wrap: normal;</div>
+          <div>word-break: normal;</div>
         </td>
       </tr>
       <tr>
@@ -28,7 +29,7 @@ description: Utilities for controlling word breaks in an element.
           .break-words
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          word-break: word-break;
+          overflow-wrap: break-word;
         </td>
       </tr>
       <tr>
@@ -36,7 +37,7 @@ description: Utilities for controlling word breaks in an element.
           .break-all
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          word-break: all;
+          word-break: break-all;
         </td>
       </tr>
     </tbody>

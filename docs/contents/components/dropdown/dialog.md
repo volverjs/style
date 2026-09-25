@@ -1,5 +1,5 @@
 ---
-title: Example
+title: Dialog
 wrapperClass: flex flex-1 flex-wrap gap-md items-center 
 ---
 
@@ -48,14 +48,14 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             role="option" 
             aria-selected="false" 
             aria-disabled="true" 
-            tabindex="0">
+            tabindex="-1">
             <span class="vv-dropdown-option__label">Option disabled</span>
           </li>
           <li class="vv-dropdown-option focus-visible" 
             role="option" 
             aria-selected="false"
             aria-disabled="false" 
-            tabindex="0">
+            tabindex="-1">
             <span class="vv-dropdown-option__label">Option focused</span>
             <span class="vv-dropdown-option__hint">Press enter to select</span>
           </li>
@@ -63,14 +63,14 @@ wrapperClass: flex flex-1 flex-wrap gap-md items-center
             role="option" 
             aria-selected="true" 
             aria-disabled="false" 
-            tabindex="0">
+            tabindex="-1">
             <span class="vv-dropdown-option__label">Option selected</span>
           </li>
           <li class="vv-dropdown-option vv-dropdown-option--unselectable focus-visible" 
             role="option" 
             aria-selected="true" 
             aria-disabled="false" 
-            tabindex="0">
+            tabindex="-1">
             <span class="vv-dropdown-option__label">Option selected focused</span>
             <span class="vv-dropdown-option__hint">Press enter to remove</span>
           </li>

@@ -2,10 +2,11 @@
 title: Font Size
 description: Utilities for controlling the font size of an element.
 customProperties: true
+breakpoints: true
 ---
 
 ### Static Font Sizes
-Static font sizes are defined in the `--text` CSS Custom Property. The key rapresents the font size in `px` and the value is the font size in `rem`.
+Static font sizes are defined in the `--text` CSS Custom Property. The key represents the font size in `px` and the value is the font size in `rem`.
 
 <table-utility prefix="text" property="font-size" custom-property="text" class="mb-lg"></table-utility>
 

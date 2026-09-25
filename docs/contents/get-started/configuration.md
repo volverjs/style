@@ -10,7 +10,7 @@ By design Volver Style has zero specificity. This means that you can easily over
 
 In some circumstances you may want to increase the specificity of components or utilities. For example, if you want to use Volver Style in a CMS or a framework that already has its own style or if you want to use Volver Style in a legacy project.
 
-An other reason could be to avoid the change of components style with utilities.
+Another reason could be to keep utilities from changing the style of components.
 
 You can configure the specificity of components and utilities by setting the `$zero-specificity-for-components` and the `$zero-specificity-for-utilities` variables.
 
@@ -18,7 +18,7 @@ You can configure the specificity of components and utilities by setting the `$z
 @use '@volverjs/style/scss/context' with (
   // disable zero specificity for components
   $zero-specificity-for-components: false,
-  // enable zero specificity for utilities
+  // keep zero specificity for utilities (the default)
   $zero-specificity-for-utilities: true
 );
 @use '@volverjs/style/scss';
@@ -36,8 +36,19 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 @use '@volverjs/style/scss';
 ```
 
+### Color Shades
+The shades of every color (`--color-brand-lighten-1`, `--color-surface-2`, ...) are computed in the browser from a single base token with CSS Relative Color Syntax, so overriding `--color-brand` recolors all of them. It needs Chrome 119, Safari 16.4 or Firefox 128. For older browsers set `$use-color-mix` to `false`: the shades are then computed from three channel tokens, `--color-brand-hue`, `--color-brand-saturation` and `--color-brand-lightness`, which are the ones to override.
+
+```scss
+@use '@volverjs/style/scss/context' with (
+  // legacy HSL channels instead of relative color syntax
+  $use-color-mix: false
+);
+@use '@volverjs/style/scss';
+```
+
 ### Components Names
-By default all components are defined with [BEM](https://getbem.com/) methodology and the they have a `vv-` prefix. If you want to change the prefix you can set the `$components-prefix` variable.
+By default all components are defined with [BEM](https://getbem.com/) methodology and they have a `vv-` prefix. If you want to change the prefix you can set the `$components-prefix` variable.
 
 ```scss
 @use '@volverjs/style/scss/context' with (
@@ -48,6 +59,7 @@ By default all components are defined with [BEM](https://getbem.com/) methodolog
 
 // now all components have a `my-` prefix
 // example: my-button, my-button--primary, my-button__icon
+// and so do their custom properties: --my-button-background
 ```
 
 If you want a completely different name for a component you can set the `$components-names` variable.
@@ -70,6 +82,7 @@ context.$components-names: map.deep-merge(
 
 // now vv-button class is btn
 // example: btn, btn--primary, btn__icon
+// and its custom properties: --btn-background
 ```
 
 ### CSS Layers
@@ -88,12 +101,12 @@ By default Volver Style doesn't use CSS layers. If you want to enable them you c
 
 When enabled, Volver Style will wrap all styles in layers with this order (from lowest to highest priority):
 
-1. `reset` - CSS reset styles
-2. `preflight` - Volver preflight/normalization styles  
-3. `props` - CSS custom properties
-4. `components` - Component styles
-5. `themes` - Theme overrides (dark mode, etc.)
-6. `utilities` - Utility classes (highest priority)
+1. `reset`: CSS reset styles
+2. `preflight`: reserved, since the [Preflight](/style/get-started/preflight) rules are emitted inside `components` and `utilities`
+3. `props`: CSS custom properties
+4. `components`: component styles
+5. `themes`: theme overrides (dark mode, etc.)
+6. `utilities`: utility classes (highest priority)
 
 The layers are prefixed with `volver.` by default, so the full layer names are: `volver.reset`, `volver.preflight`, `volver.props`, etc.
 

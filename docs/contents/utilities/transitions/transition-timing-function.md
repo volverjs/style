@@ -4,5 +4,5 @@ description: Utilities for controlling the easing of CSS transitions.
 customProperties: true
 ---
 <div>
-    <table-utility prefix="ease" property="transition-timing-function" custom-property="ease" class="mb-lg"></table-utility>
+    <table-utility prefix="ease" property="transition-timing-function" custom-property="ease" class="mb-lg" literal></table-utility>
 </div>

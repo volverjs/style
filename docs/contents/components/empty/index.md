@@ -4,7 +4,7 @@ description: Empty is what a list, a table or a page shows in place of its conte
 isNew: true
 ---
 
-The block centres a `media`, a `title`, a `description` and the `actions`, each optional. The message stays quiet on purpose: no colour of state, only the title in the strongest text colour. The icon inside `vv-empty__media` takes its size from the font size, so an icon of `1em` fits as it is.
+The block centers a `media`, a `title`, a `description` and the `actions`, each optional. The message stays quiet on purpose: no color of state, only the title in the strongest text color. The icon inside `vv-empty__media` takes its size from the font size, so an icon of `1em` fits as it is.
 
 <code-editor resource-folder="empty" resource-name="default" class="mb-lg"></code-editor>
 

@@ -41,24 +41,6 @@ Border radius utilities are available for individual corners, as well as for all
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          .rounded-r-{size-key}
-        </td>
-        <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-top-right-radius: {size-value};</div>
-          <div>border-bottom-right-radius: {size-value};</div>
-        </td>
-      </tr>
-      <tr>
-        <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          .rounded-l-{size-key}
-        </td>
-        <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-top-left-radius: {size-value};</div>
-          <div>border-bottom-left-radius: {size-value};</div>
-        </td>
-      </tr>
-      <tr>
-        <td translate="no" class="font-mono text-accent whitespace-nowrap">
           .rounded-tl-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
@@ -83,10 +65,10 @@ Border radius utilities are available for individual corners, as well as for all
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          .rounded-bl-{size-key}
+          .rounded-br-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          border-bottom-left-radius: {size-value};
+          border-bottom-right-radius: {size-value};
         </td>
       </tr>
     </tbody>

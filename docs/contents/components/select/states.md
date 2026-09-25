@@ -4,9 +4,9 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 ---
 
 <div class="vv-select">
-    <label for="select">Select</label>
+    <label for="select-standard">Select</label>
     <div class="vv-select__wrapper">
-        <select id="select"
+        <select id="select-standard"
                 name="select" 
                 aria-describedby="select-standard-hint">
             <option value="" disabled="disabled" selected="selected">
@@ -79,8 +79,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-select
-            vv-select--disabled">
+<div class="vv-select">
     <label for="select-disabled">Disabled Select</label>
     <div class="vv-select__wrapper">
         <select id="select-disabled"
@@ -118,6 +117,9 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
             <option value="3">Option 3</option>
         </select>
     </div>
+    <small id="select-readonly-hint" class="vv-select__hint">
+        This value cannot be changed.
+    </small>
 </div>
 
 <div class="vv-select 

@@ -13,7 +13,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea" 
                type="file" 
                name="droparea" 
-               placeholder="Placeholder text" 
                aria-describedby="droparea-hint" />
     </div>
     <small id="droparea-hint" class="vv-input-file__hint">
@@ -32,7 +31,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea-disabled" 
                type="file" 
                name="droparea-disabled" 
-               placeholder="Placeholder text" 
                aria-describedby="droparea-disabled-hint" 
                disabled="disabled" />
     </div>
@@ -52,7 +50,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea-dragging" 
                type="file" 
                name="droparea-dragging" 
-               placeholder="Placeholder text" 
                aria-describedby="droparea-dragging-hint" />
     </div>
     <small id="droparea-dragging-hint" class="vv-input-file__hint">
@@ -71,7 +68,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea-success" 
                type="file" 
                name="droparea-success"
-               placeholder="Placeholder text" 
                aria-describedby="droparea-success-hint" 
                aria-invalid="false" />
     </div>
@@ -91,7 +87,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea-invalid" 
                type="file" 
                name="droparea-invalid" 
-               placeholder="Placeholder text" 
                aria-describedby="droparea-invalid-hint" 
                aria-invalid="true" />
     </div>
@@ -111,7 +106,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="droparea-loading" 
                type="file" 
                name="droparea-loading" 
-               placeholder="Placeholder text" 
                aria-describedby="droparea-loading-hint" />
     </div>
     <small id="droparea-loading-hint" class="vv-input-file__hint">

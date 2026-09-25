@@ -9,6 +9,7 @@ Label, box, hint, the `valid`, `invalid` and `loading` modifiers and the disable
 <code-editor resource-folder="field" resource-name="default" class="mb-lg"></code-editor>
 
 ### Before and after
+An icon, a unit or a button inline with the control goes in `__before` or `__after`, inside the box.
 
 <code-editor resource-folder="field" resource-name="addons" class="mb-lg"></code-editor>
 

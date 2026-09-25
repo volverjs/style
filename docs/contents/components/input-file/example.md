@@ -73,7 +73,6 @@ wrapperClass: items-start w-full md:w-1/2 mx-auto
                   @change="onChange"
                   type="file" 
                   name="file-example" 
-                  placeholder="Placeholder text" 
                   aria-describedby="file-example-hint"
                   multiple />
         </div>
@@ -88,7 +87,7 @@ wrapperClass: items-start w-full md:w-1/2 mx-auto
             </small>
             <button type="button" 
             @click.stop="removeFile(index)"
-            class="vv-input-file__item-remove" title="Remove" />
+            class="vv-input-file__item-remove" aria-label="Remove file"></button>
           </li>
         </ul>
         <small id="file-example-hint" class="vv-input-file__hint">

@@ -5,19 +5,16 @@ title: Badge
 <div class="flex gap-24 items-end flex-wrap justify-center">
     <span class="vv-avatar" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sup class="vv-badge
                     vv-badge--warning
                     vv-badge--sm
-                    vv-badge--rounded">
-        </sup>
+                    vv-badge--rounded"></sup>
     </span>
     <span class="vv-avatar" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sup class="vv-badge
                     vv-badge--danger
@@ -29,8 +26,7 @@ title: Badge
     <span class="vv-avatar 
                  vv-avatar--lg" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sup class="vv-badge
                     vv-badge--danger
@@ -42,8 +38,7 @@ title: Badge
                  vv-avatar--lg
                  vv-avatar--rounded" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
           MR
         <sup class="vv-badge
                     vv-badge--danger
@@ -53,19 +48,16 @@ title: Badge
     </span>
     <span class="vv-avatar" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sub class="vv-badge
                     vv-badge--warning
                     vv-badge--sm
-                    vv-badge--rounded">
-        </sub>
+                    vv-badge--rounded"></sub>
     </span>
     <span class="vv-avatar" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sub class="vv-badge
                     vv-badge--danger
@@ -77,8 +69,7 @@ title: Badge
     <span class="vv-avatar 
                  vv-avatar--lg" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
         <sub class="vv-badge
                     vv-badge--danger
@@ -90,8 +81,7 @@ title: Badge
                  vv-avatar--lg
                  vv-avatar--rounded" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
           MR
         <sub class="vv-badge
                     vv-badge--danger

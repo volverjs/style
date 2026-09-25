@@ -31,7 +31,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-end
                type="datetime-local" 
                name="textfield-datetime" 
                placeholder="Floating label" 
-               aria-describedby="textfield-date-hint" />
+               aria-describedby="textfield-datetime-hint" />
         <IconifyIcon icon="akar-icons:calendar" />
     </div>
     <small id="textfield-datetime-hint" class="vv-input-text__hint">

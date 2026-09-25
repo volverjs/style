@@ -7,20 +7,17 @@ title: Square
                vv-avatar--square
                vv-avatar--surface"
         src="https://api.dicebear.com/7.x/pixel-art/svg" 
-        alt="avatar" 
-        tabindex="0" />
+        alt="avatar"  />
     <span class="vv-avatar
                  vv-avatar--square
                  vv-avatar--surface">
         <img src="https://api.dicebear.com/7.x/identicon/svg" 
-             alt="avatar" 
-             tabindex="0">
+             alt="avatar" >
     </span>
     <span class="vv-avatar 
                  vv-avatar--square" 
            role="img" 
-           aria-label="Mario Rossi" 
-           tabindex="0">
+           aria-label="Mario Rossi" >
         MR
     </span>
 </div>

@@ -26,6 +26,22 @@ text-overflow: ellipsis;
 white-space: nowrap;</pre>
         </td>
       </tr>
+      <tr>
+        <td translate="no" class="font-mono text-accent whitespace-nowrap">
+          .text-ellipsis
+        </td>
+        <td translate="no" class="font-mono text-info whitespace-nowrap">
+          text-overflow: ellipsis;
+        </td>
+      </tr>
+      <tr>
+        <td translate="no" class="font-mono text-accent whitespace-nowrap">
+          .text-clip
+        </td>
+        <td translate="no" class="font-mono text-info whitespace-nowrap">
+          text-overflow: clip;
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

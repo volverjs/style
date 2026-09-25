@@ -18,6 +18,25 @@ const utilities = import.meta.glob('../contents/utilities/*/*.md', {
 	import: 'attributes',
 })
 
+// The components of a section of the menu: a page names its section in
+// `section`, and a page that names none belongs to Components
+function getComponentsSection(section) {
+	return Object.keys(components)
+		.filter((key) => (components[key].section ?? 'Components') === section)
+		.map((key) => {
+			const name = key.split('/').slice(-2, -1).pop()
+			return {
+				name: components[key].title,
+				isNew: components[key].isNew ?? false,
+				isDraft: components[key].isDraft ?? false,
+				to: {
+					name: 'components-name',
+					params: { name },
+				},
+			}
+		})
+}
+
 function getUtilitiesGroup(group) {
 	return Object.keys(utilities).reduce((acc, key) => {
 		const folder = key.split('/').slice(-2, -1).pop()
@@ -76,18 +95,11 @@ export const mainMenu = [
 	},
 	{
 		name: 'Components',
-		children: Object.keys(components).map((key) => {
-			const name = key.split('/').slice(-2, -1).pop()
-			return {
-				name: components[key].title,
-				isNew: components[key].isNew ?? false,
-				isDraft: components[key].isDraft ?? false,
-				to: {
-					name: 'components-name',
-					params: { name },
-				},
-			}
-		}),
+		children: getComponentsSection('Components'),
+	},
+	{
+		name: 'AI',
+		children: getComponentsSection('AI'),
 	},
 	{
 		name: 'Layout',
@@ -136,5 +148,9 @@ export const mainMenu = [
 	{
 		name: 'Transforms',
 		children: getUtilitiesGroup('transforms'),
+	},
+	{
+		name: 'Interactivity',
+		children: getUtilitiesGroup('interactivity'),
 	},
 ]

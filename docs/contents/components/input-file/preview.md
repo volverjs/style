@@ -15,9 +15,7 @@ wrapperClass: flex-1 grid grid-cols-2 md:grid-cols-5 gap-md items-start
     <div class="vv-input-file__wrapper">
         <input id="circle" 
                type="file" 
-               name="droparea" 
-               placeholder="Placeholder text" 
-               aria-describedby="droparea-hint" />
+               name="circle" />
     </div>
 </div>
 
@@ -33,8 +31,6 @@ wrapperClass: flex-1 grid grid-cols-2 md:grid-cols-5 gap-md items-start
     <div class="vv-input-file__wrapper">
         <input id="square" 
                type="file" 
-               name="droparea" 
-               placeholder="Placeholder text" 
-               aria-describedby="droparea-hint" />
+               name="square" />
     </div>
 </div>

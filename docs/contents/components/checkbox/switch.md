@@ -54,7 +54,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
        </label>
        <label class="vv-checkbox 
                      vv-checkbox--switch"
-              for="switch-option-checked">
+              for="switch-option-focus">
        <input id="switch-option-focus" 
               type="checkbox" 
               role="switch" 

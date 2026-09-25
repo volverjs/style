@@ -20,14 +20,14 @@ wrapperClass: w-full md:w-9/12
 <div class="vv-textarea 
             vv-textarea--floating
             vv-textarea--dirty">
-    <label for="textarea-floating">Floating label with value (dirty)</label>
+    <label for="textarea-floating-dirty">Floating label with value (dirty)</label>
     <div class="vv-textarea__wrapper">
-        <textarea id="textarea-floating" 
-                  name="textarea-floating" 
+        <textarea id="textarea-floating-dirty" 
+                  name="textarea-floating-dirty" 
                   placeholder="Floating label" 
-                  aria-describedby="textarea-floating-hint">Lorem ipsum dolor sit amet</textarea>
+                  aria-describedby="textarea-floating-dirty-hint">Lorem ipsum dolor sit amet</textarea>
     </div>
-    <small id="textarea-floating-hint" class="vv-textarea__hint">
+    <small id="textarea-floating-dirty-hint" class="vv-textarea__hint">
         Please fill the input above.
     </small>
 </div>

@@ -1,8 +1,7 @@
 ---
 title: Avatar
-description: Avatars are images that users can set as their profile picture.
+description: Avatar is the picture, the initials or the icon that stands for a person or an entity.
 uiVue: true
-isNew: false
 ---
 
 ### Wrappers
@@ -21,7 +20,7 @@ Add `vv-avatar--square` to display a square avatar.
 <code-editor resource-folder="avatar" resource-name="square" class="mb-lg"></code-editor>
 
 ### Colors
-Add `vv-avatar--{color}` to display a colored avatar.
+Add `vv-avatar--{color}` to display a colored avatar: `accent`, `success`, `danger`, `warning`, `info` or `gray`. `vv-avatar--surface` takes the surface of the page and `vv-avatar--transparent` has no background at all. An avatar that is only a picture needs no role; one made of initials takes `role="img"` and an `aria-label` with the name.
 
 <code-editor resource-folder="avatar" resource-name="colors" class="mb-lg"></code-editor>
 
@@ -41,11 +40,11 @@ Add `vv-avatar--md` or `vv-avatar--lg` modifiers to display an avatar in differe
 <code-editor resource-folder="avatar" resource-name="sizing"></code-editor>
 
 ### Badge
-You can use the `vv-badge` component to display a badge on top of an avatar.
+You can use the `vv-badge` component to display a badge on an avatar: a `<sup>` sits at the top end and a `<sub>` at the bottom end. An empty badge is drawn as a dot, so write it with nothing inside, not even a space.
 
 <code-editor resource-folder="avatar" resource-name="badge" class="mb-lg"></code-editor>
 
 ### Group
-You can use the `vv-avatar-group` component to display a group of avatars.
+You can use the `vv-avatar-group` component to display a group of overlapping avatars. `vv-avatar-group--tight` overlaps them more and `vv-avatar-group--relaxed` less.
 
 <code-editor resource-folder="avatar" resource-name="group" class="mb-lg"></code-editor>

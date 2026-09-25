@@ -4,5 +4,5 @@ description: Utilities for controlling the duration of CSS transitions.
 customProperties: true
 ---
 <div>
-    <table-utility prefix="duration" property="transition-duration-delay" custom-property="duration"  attribute="transition-duration" class="mb-lg"></table-utility>
+    <table-utility prefix="duration" property="transition-duration-delay" custom-property="duration"  attribute="transition-duration" class="mb-lg" literal></table-utility>
 </div>

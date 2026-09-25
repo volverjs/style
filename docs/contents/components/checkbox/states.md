@@ -48,7 +48,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
         Indeterminate
     </label>
     <label class="vv-checkbox" 
-           for="checkbox-option-checked">
+           for="checkbox-option-focus">
         <input id="checkbox-option-focus" 
                type="checkbox"
                name="checkbox-option-focus" 
