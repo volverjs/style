@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.29] - 2026-09-25
+## [Unreleased]
 
 ### Added
 
@@ -37,6 +37,22 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 * The current voice of `vv-nav--sidebar` is inverted, `surface` text on a `word-1` background, where it had a `surface-1` background. That background was lighter than the `surface-2` of a hovered voice, so a voice under the pointer looked more chosen than the current one, and on a `surface-1` column, which is what `vv-sidebar` draws, the current voice did not show at all. The inverted voice reads on any surface, and in the dark theme as well, where the two tokens swap. The state is declared after `hover` and `active`, so a current voice under the pointer stays inverted. Only the sidebar modifier moves: in `dist/` its `current` rule gains a `color` and changes its `background-color`, and nothing else changes.
+
+## [0.1.29] - 2026-09-30
+
+### Changed
+
+* The SCSS entry no longer emits the `@custom-media` rules of `props/media`. `props/index.scss` pulled the module in, so `@volverjs/style/scss`, `scss/base` and `scss/props` wrote 38 definitions (`--motion-ok`, `--os-dark`, `--touch`, the ranges of the breakpoints...) into the stylesheet of every consumer that compiles the SCSS, although nothing in the library queries them. `@custom-media` is a draft that has to be resolved at build time. The library's own `dist/` never carried the rules, because `postcss-preset-env` at stage 0 resolves the definitions and drops them, but a consumer that compiles the SCSS does not run that step: the rules shipped as dead weight, and a minifier that does not know the draft reported every one of them. On Vite 8, whose default CSS minifier is Lightning CSS, a build printed `Unknown at rule: @custom-media` 38 times, each with its code frame, some 270 lines for `src/volver.scss` alone, which buried the warnings that mattered.
+
+  The definitions are now opt-in. `@volverjs/style/scss/props/media` was already exported and still emits them, so a project that resolves custom media, with `postcss-custom-media` or with Lightning CSS and `drafts.customMedia`, imports it after the context in each stylesheet that writes a query, since both resolvers read the definitions of the file they transform. The definitions were never documented, and nothing changes for a consumer of the compiled CSS or for one without a resolver. The one stylesheet to touch is one that compiles the entry, resolves custom media and writes a query in the same file: it adds `@use '@volverjs/style/scss/props/media';` after the context, otherwise `postcss-custom-media` leaves the query unresolved, so it matches nothing, and Lightning CSS stops the build with `Custom media query --motion-ok is not defined`.
+
+  `dist/` is identical byte for byte before and after, and so are `design-tokens.json` and the `exports` map: `props.css` never contained the rules, and `props/media.css` was empty and stays empty. Compiled with Sass, `src/volver.scss` now carries no `@custom-media` rule instead of 38, the only lines that leave it, together with the `/* stylelint-disable */` comment of the module, and Lightning CSS minifies it without a warning. The configuration page of the documentation and the SCSS reference of the skill describe the opt-in.
+
+### Fixed
+
+* The breakpoint ranges of `props/media` did not cover the widths their names promise, nor the ones of the mixins they sit next to. Each rule was written from the value of the next breakpoint: `--md-n-above` was `width >= 1024px`, the value of `lg`, so every `n-above` query started one breakpoint late and left the 992px to 1023px of `md` out. `-only` and `n-below` included their upper bound, so at exactly 1024px both `--md-only` and `--lg-only` matched, and the last breakpoint had no range at all: `--xxxl-only` was undefined, which Lightning CSS turns into a failed build. The loop now writes `--{name}-n-above` from the value of the breakpoint itself, stops `-only` and `n-below` short of the next one with `width <`, and closes on the last breakpoint with `--xxxl-only (width >= 1536px)` and an `n-below` that matches every width. Compared at the same 19 widths, the 24 ranges now match `bp-only`, `bp-up` and `bp-down` at all 456 points, where the 21 old ones disagreed at 31 of 399. The module emits 41 definitions instead of 38, and a consumer that queried `--{name}-n-above` gets one breakpoint more than before.
+
+  The module also stopped writing `/* stylelint-disable */` into the stylesheet of whoever imports it. The directive was a loud comment that switched off every rule for the rest of the file; it is now a silent `// stylelint-disable custom-media-pattern`, the one rule the interpolated names need, closed after the loop.
 
 ## [0.1.28] - 2026-09-16
 
