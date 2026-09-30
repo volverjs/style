@@ -1,5 +1,10 @@
 @use '../context' as *;
 
+// Opt-in, left out of `props/index.scss`: `@custom-media` is a draft that has
+// to be resolved at build time (postcss-custom-media, or lightningcss with
+// `drafts.customMedia`), and each resolver reads the definitions of the file
+// it is transforming, so import this module where the queries are used.
+
 // motion
 @custom-media --motion-ok (prefers-reduced-motion: no-preference);
 @custom-media --motion-not-ok (prefers-reduced-motion: reduce);
@@ -16,7 +21,7 @@
 @custom-media --os-dark (prefers-color-scheme: dark);
 @custom-media --os-light (prefers-color-scheme: light);
 
-// constrast
+// contrast
 @custom-media --high-contrast (prefers-contrast: more);
 @custom-media --low-contrast (prefers-contrast: less);
 
@@ -33,17 +38,27 @@
 @custom-media --pointer (hover) and (pointer: coarse);
 @custom-media --mouse (hover) and (pointer: fine);
 
-// breakpoints
-/* stylelint-disable */
+// breakpoints: the same widths as the `bp-only`, `bp-up` and `bp-down`
+// mixins. A range stops short of the next breakpoint instead of sharing its
+// first pixel, and the last breakpoint has no upper bound.
+// stylelint-disable custom-media-pattern
 $old-breakpoint: null;
 $old-breakpoint-value: null;
+
 @each $breakpoint, $breakpoint-value in $breakpoints {
 	@if $old-breakpoint {
-		@custom-media --#{$old-breakpoint}-only (#{$old-breakpoint-value} <= width <= #{$breakpoint-value});
-		@custom-media --#{$old-breakpoint}-n-above (width >= #{$breakpoint-value});
-		@custom-media --#{$old-breakpoint}-n-below (width <= #{$breakpoint-value});
+		@custom-media --#{$old-breakpoint}-only (#{$old-breakpoint-value} <= width < #{$breakpoint-value});
+		@custom-media --#{$old-breakpoint}-n-below (width < #{$breakpoint-value});
 	}
+
+	@custom-media --#{$breakpoint}-n-above (width >= #{$breakpoint-value});
 
 	$old-breakpoint: $breakpoint;
 	$old-breakpoint-value: $breakpoint-value;
 }
+
+@if $old-breakpoint {
+	@custom-media --#{$old-breakpoint}-only (width >= #{$old-breakpoint-value});
+	@custom-media --#{$old-breakpoint}-n-below (width >= 0);
+}
+// stylelint-enable custom-media-pattern
