@@ -73,6 +73,13 @@ _Gray colors_ are used for neutral actions. They are defined in the `--color-gra
 
 <color-palette name="gray"></color-palette>
 
+### Alpha Colors
+_Alpha colors_ are translucent layers of black, from `--color-alpha` (fully transparent) to `--color-alpha-5`. They darken whatever surface they sit on, so they suit hover layers and hairlines that have to work on any background (`bg-alpha-1`, `border-alpha-1`).
+
+<color-palette name="alpha"></color-palette>
+
+The palette also holds `--color-black`, `--color-white`, `--color-transparent`, `--color-shadow`, the tint of the shadows, and `--color-backdrop`, the veil behind a dialog.
+
 ### Class Names
 You can also use the color class names to style your site, `bg-*` for background, `text-*` for text color and `border-*` for border color.
 
@@ -96,7 +103,7 @@ body {
 
 Color shades are generated using CSS Relative Color Syntax with two algorithms:
 
-- **Proportional scaling** for brand/accent colors: `calc(l * 1.1)` multiplies lightness
+- **Proportional scaling** for brand, accent, success, danger, info, warning and gray: `calc(l * 1.1)` multiplies lightness
 - **Fixed steps** for surface/word colors: `calc(l + 12)` adds to lightness
 
 You can create custom shades:
@@ -104,7 +111,7 @@ You can create custom shades:
 ```css
 @import '@volverjs/style';
 
-:root {
+:root, :host, .theme {
   /* Surface uses fixed steps (addition/subtraction) */
   --color-surface-6: hsl(from var(--color-surface) h s calc(l - 12));
   
@@ -113,21 +120,21 @@ You can create custom shades:
 }
 ```
 
-Override the base color to update all shades automatically:
+The library declares the colors on `:root`, `:host` and every `.theme` element, the dark theme included, so set yours on the same selectors, or a themed section would fall back to the default. The dark theme runs its steps the other way, so a custom shade may need a dark counterpart. Override the base color to update all shades automatically:
 
 ```css
 @import '@volverjs/style';
 
-:root {
+:root, :host, .theme {
   --color-brand: #45cb85;
 }
 ```
 
 ### SCSS Variables
-You can also use the color variables in your SCSS files.
+You can also use the color variables in your SCSS files. They are values fixed at compile time and do not follow the dark theme: prefer `var(--color-*)` wherever the value has to change with the theme.
 
 ```scss
-@use '@volverjs/style/scss/context'
+@use '@volverjs/style/scss/context' as *;
 
 body {
   background-color: $color-surface;
@@ -136,7 +143,7 @@ body {
 
 ```
 
-Override the color variables to create the palette automatically.
+Override the color variables to create the palette automatically: `$color-brand`, `$color-accent`, `$color-success`, `$color-danger`, `$color-info`, `$color-warning`, `$color-gray`, `$color-word`, `$color-surface`, `$color-shadow`, `$color-backdrop` and `$color-alpha`.
 
 ```scss
 @use '@volverjs/style/scss/context' with (
@@ -153,7 +160,7 @@ Or you can create your own color palette.
 @use '@volverjs/style/scss/context';
 
 context.$colors: map.deep-merge(
-  contex.$colors,
+  context.$colors,
   (
     brand: (
       brand: #45cb85,

@@ -1,0 +1,78 @@
+// Moving between the pages of a list or a table: a `<nav>` holding a list of
+// page links or buttons, previous and next, an ellipsis where pages are
+// skipped, and optionally a line that says where the reader is ("21-40 of
+// 240"). The page being shown is read from `aria-current="page"`, the way a
+// pagination marks it for assistive technology, so the markup states it once.
+// A page that cannot be reached (previous on the first page) is a `disabled`
+// button, or a link with `aria-disabled="true"` and no `href`: the
+// `pointer-events: none` below stops the pointer only, the missing `href`
+// takes the link out of the tab order.
+$vv-pagination: (
+	display: flex,
+	flex-wrap: wrap,
+	align-items: center,
+	gap: var(--spacing-sm),
+	font-size: var(--text-14),
+	element: (
+		list: (
+			_alias: '> :is(ol, ul)',
+			display: flex,
+			flex-wrap: wrap,
+			align-items: center,
+			gap: var(--spacing-4),
+			margin: 0,
+			padding: 0,
+			list-style: none,
+		),
+		page: (
+			display: inline-flex,
+			align-items: center,
+			justify-content: center,
+			gap: 0.25em,
+			min-width: 2.25em,
+			height: 2.25em,
+			padding-inline: 0.5em,
+			border-radius: var(--rounded),
+			color: var(--color-word-2),
+			font-variant-numeric: tabular-nums,
+			text-decoration: none,
+			cursor: pointer,
+			transition: (
+				background-color var(--duration-150) var(--ease-out),
+				color var(--duration-150) var(--ease-out),
+			),
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+				current-page: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word),
+					font-weight: var(--font-semibold),
+				),
+				disabled: (
+					opacity: var(--opacity-30),
+					cursor: not-allowed,
+					pointer-events: none,
+				),
+			),
+		),
+		ellipsis: (
+			display: inline-flex,
+			align-items: center,
+			justify-content: center,
+			min-width: 2.25em,
+			color: var(--color-word-4),
+		),
+		summary: (
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+			font-variant-numeric: tabular-nums,
+		),
+	),
+) !default;

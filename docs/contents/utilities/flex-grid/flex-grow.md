@@ -6,7 +6,7 @@ Flex grow utilities are used to control how flex items grow. They can be used to
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 		<table class="vv-table vv-table--inline-spacing">
-			<thead class="sticky z-sticky top-0">
+			<thead class="sticky z-sticky top-0 bg-surface-1">
 				<tr>
 					<th>
 						Class
@@ -19,7 +19,7 @@ Flex grow utilities are used to control how flex items grow. They can be used to
 			<tbody class="align-baseline">
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						grow
+						.grow
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
 						flex-grow: 1;
@@ -27,7 +27,7 @@ Flex grow utilities are used to control how flex items grow. They can be used to
 				</tr>
 				<tr>
 					<td translate="no" class="font-mono text-accent whitespace-nowrap">
-						grow-0
+						.grow-0
 					</td>
 					<td translate="no" class="font-mono text-info whitespace-nowrap">
 						flex-grow: 0;

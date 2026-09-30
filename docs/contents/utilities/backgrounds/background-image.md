@@ -40,6 +40,6 @@ Utilities for controlling the gradient.
     </card-example>
 </div>
 
-#### Acknoledgements
+#### Acknowledgements
 
 `--gradient-{1-30}` variables are based on [open-props](https://github.com/argyleink/open-props).

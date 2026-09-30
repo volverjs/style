@@ -5,7 +5,7 @@ uiVue: true
 ---
 
 ### States
-The `textarea` state controls the style of the component. 
+`disabled` and `readonly` on the `<textarea>` style the whole field, no modifier needed. With `vv-textarea--floating` the label rises on focus and when the textarea has a value, if it also has a placeholder; `vv-textarea--dirty` raises it in any case.
 
 Use `vv-textarea--invalid` to show an invalid state and `vv-textarea--valid` to show a valid state. Use `vv-textarea--loading` to show a loading state.
 
@@ -24,9 +24,9 @@ Use `vv-textarea--floating` modifier to show the label inside the textarea.
 ### Icons
 Use `vv-textarea--icon-before` modifier to show an icon before the textarea and `vv-textarea--icon-after` to show an icon after the textarea.
 
-<code-editor resource-folder="textarea" resource-name="icons"></code-editor>
+<code-editor resource-folder="textarea" resource-name="icons" class="mb-lg"></code-editor>
 
 ### Resizable
 Use `vv-textarea--resizable` modifier to make the textarea resizable.
 
-<code-editor resource-folder="textarea" resource-name="resizable" class="mb-lg"></code-editor>
+<code-editor resource-folder="textarea" resource-name="resizable"></code-editor>

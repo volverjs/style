@@ -60,8 +60,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-input-text
-            vv-input-text--disabled">
+<div class="vv-input-text">
     <label for="textfield-disabled">Disabled Text Field</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-disabled" 
@@ -76,8 +75,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 
-<div class="vv-input-text
-            vv-input-text--readonly">
+<div class="vv-input-text">
     <label for="textfield-readonly">Readonly Text Field</label>
     <div class="vv-input-text__wrapper">
         <input id="textfield-readonly" 
@@ -86,9 +84,11 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
                placeholder="Placeholder text" 
                aria-describedby="textfield-readonly-hint" 
                readonly="readonly" 
-               value="Lorem ipsum dolor sit amet" 
-               tabindex="-1" />
+               value="Lorem ipsum dolor sit amet" />
     </div>
+    <small id="textfield-readonly-hint" class="vv-input-text__hint">
+        This value cannot be changed.
+    </small>
 </div>
 
 <div class="vv-input-text 

@@ -79,8 +79,12 @@ $vv-nav: (
 						hover: (
 							background-color: var(--color-surface-2),
 						),
+						// Inverted, so it reads on any surface a sidebar sits
+						// on and stays apart from a hovered voice; it comes
+						// after hover and active, which it wins over
 						current: (
-							background-color: var(--color-surface-1),
+							color: var(--color-surface),
+							background-color: var(--color-word-1),
 						),
 					),
 				),

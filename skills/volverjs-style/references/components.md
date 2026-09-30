@@ -212,10 +212,29 @@ The block is the `<label>` wrapping the control.
 
 | component | elements | modifiers | states |
 |---|---|---|---|
-| vv-checkbox | input† `> input[type=checkbox]`, hint† `> small` | `readonly` `switch` `valid` `invalid` | disabled; input: checked, indeterminate, focus-visible |
-| vv-radio | input† `> input[type=radio]`, hint† | `readonly` `valid` `invalid` | disabled; input: checked, focus-visible |
+| vv-checkbox | input† `> input[type=checkbox]`, label† `> span:not([class])`, hint† `> small` | `readonly` `switch` `segment` `card` `valid` `invalid` | disabled; input: checked, indeterminate, focus-visible; segment and card: checked-within |
+| vv-radio | input† `> input[type=radio]`, label† `> span:not([class])`, hint† | `readonly` `segment` `card` `valid` `invalid` | disabled; input: checked, focus-visible; segment and card: checked-within |
 
-The switch modifier is `switch`, not `toggle`.
+The switch modifier is `switch`, not `toggle`. `segment` is one option of a segmented
+control (the group takes `--segmented`): the native input is not painted, the tile is the
+control, and the keyboard focus draws an outline on the tile through `focus-visible-within`.
+`card` draws the option as a bordered tile with the control at the start (the group takes
+`--cards`). Both work on a checkbox too, for a choice where more than one option can be on.
+
+```html
+<fieldset class="vv-radio-group vv-radio-group--segmented">
+  <legend>View</legend>
+  <div class="vv-radio-group__wrapper">
+    <label class="vv-radio vv-radio--segment"><input type="radio" name="v" checked /><span>Day</span></label>
+    <label class="vv-radio vv-radio--segment"><input type="radio" name="v" /><span>Week</span></label>
+  </div>
+</fieldset>
+
+<label class="vv-radio vv-radio--card">
+  <input type="radio" name="plan" value="team" />
+  <span><strong class="block">Team</strong> Unlimited agents.</span>
+</label>
+```
 
 ## vv-checkbox-group and vv-radio-group
 
@@ -235,7 +254,33 @@ Identical maps. The block is a `<fieldset>`; vertical is the default (there is n
 
 | elements | modifiers |
 |---|---|
-| legend† `> legend`, wrapper, hint† `> small` | `horizontal` `valid` `invalid` |
+| legend† `> legend`, wrapper, hint† `> small` | `horizontal` `segmented` `cards` `valid` `invalid` |
+
+## vv-field
+
+The shell of a field around a control the library does not draw (a code editor, a
+contenteditable, a button that opens a picker, a switch). Label, box, hint, `valid`,
+`invalid`, `loading` and the disabled and readonly states are those of `vv-input-text`.
+
+```html
+<div class="vv-field">
+  <label id="prompt-label">System prompt</label>
+  <div class="vv-field__wrapper">
+    <span class="vv-field__before"><svg>…</svg></span>
+    <div class="vv-field__control" contenteditable="true" role="textbox" aria-labelledby="prompt-label"></div>
+    <span class="vv-field__after">tokens</span>
+    <div class="vv-field__toolbar"><button type="button" class="vv-button vv-button--action-quiet">…</button></div>
+  </div>
+  <small class="vv-field__hint">Markdown is allowed.</small>
+</div>
+```
+
+| elements | modifiers | states |
+|---|---|---|
+| label† `> label`, wrapper, control, before, after, toolbar (a row under the control), hint† `> small` | `valid` `invalid` `loading` | disabled and readonly through `:has(.vv-field__control[disabled])` / `[readonly]`, or on the block |
+
+A switch framed like a field is `<label class="vv-checkbox vv-checkbox--switch vv-field__control">`
+inside the wrapper.
 
 ## vv-input-range
 
@@ -373,7 +418,7 @@ The `<dialog>` block is the backdrop; the panel is the mandatory `<article>` chi
 
 | elements | modifiers | states |
 |---|---|---|
-| wrapper† `> article`, header† `> article > header`, close, content, footer† `> article > footer` | `small` `fullscreen` `drawer`; transitions `fade-block` `fade-inline` `scale` `slide-inline-end` (pair `drawer` with `slide-inline-end`) | open `[open]`, close `:not([open])` |
+| wrapper† `> article`, header† `> article > header`, close, content, footer† `> article > footer` | `small` `fullscreen` `drawer` (inline end) `drawer-start` `drawer-top` `drawer-bottom` (the bottom sheet of a phone); transitions `fade-block` `fade-inline` `scale` `slide-inline-end` `slide-inline-start` `slide-block-start` `slide-block-end` (pair each drawer with the slide from its side) | open `[open]`, close `:not([open])` |
 
 ## vv-dropdown family
 
@@ -417,7 +462,7 @@ the `__list` class). Items are `vv-dropdown-action` (buttons) or `vv-dropdown-op
 
 ## vv-tab
 
-Panels toggle on `:target` or the `current` class.
+Panels toggle on `:target` or the `target` class.
 
 | elements | states |
 |---|---|
@@ -454,7 +499,28 @@ Plain semantic table, no cell classes needed.
 </table>
 ```
 
-Modifiers: `inline-spacing` `bordered`.
+Modifiers: `inline-spacing` `bordered`. Body rows take `selected` (`aria-selected="true"`) and
+`current` (class on the `tr`: the row looked at in a master list, a bar along the start). A
+sortable column carries `aria-sort="none|ascending|descending"` on the `th` and a
+`<button type="button" class="vv-table__sort">` inside it; the chevron indicator is drawn
+after the button.
+
+## vv-pagination
+
+```html
+<nav class="vv-pagination" aria-label="Pages">
+  <span class="vv-pagination__summary">21-40 of 240</span>
+  <ul class="vv-pagination__list">
+    <li><a class="vv-pagination__page" href="?p=1">1</a></li>
+    <li><a class="vv-pagination__page" href="?p=2" aria-current="page">2</a></li>
+    <li><span class="vv-pagination__ellipsis" aria-hidden="true">…</span></li>
+  </ul>
+</nav>
+```
+
+Elements: list† `> :is(ol, ul)` (give the list its class inside `.preflight`, where a bare list is dressed), page, ellipsis, summary. The current page is read from
+`aria-current="page"` (state `current-page`); a page that cannot be reached is `disabled` or
+`aria-disabled="true"`.
 
 ## vv-badge, vv-avatar, vv-avatar-group
 
@@ -514,3 +580,174 @@ Modifiers: `inline-spacing` `bordered`.
 | vv-skeleton | item | | |
 | vv-breadcrumb | list† `> ol`, item† `li:has(a)`, item-active† `li:not(:has(a))`, link† `li > a` | `multiline` | link: hover, focus-within, active |
 | vv-text | | `headline` `copy` `link` `quote` `size-1`..`size-6` | link: focus-visible, hover, active, disabled |
+
+## vv-empty, vv-separator, vv-spinner
+
+```html
+<div class="vv-empty">
+  <div class="vv-empty__media"><svg width="1em" height="1em">…</svg></div>
+  <h3 class="vv-empty__title">No messages yet</h3>
+  <p class="vv-empty__description">When someone writes to you, it shows up here.</p>
+  <div class="vv-empty__actions"><button type="button" class="vv-button">New message</button></div>
+</div>
+
+<hr class="vv-separator" />
+<div class="vv-separator"><span>or</span></div>
+<div class="vv-separator vv-separator--vertical" role="separator" aria-orientation="vertical"></div>
+
+<span class="vv-spinner" role="status" aria-label="Loading"></span>
+<button type="button" class="vv-button" disabled><span class="vv-spinner" aria-hidden="true"></span> Saving</button>
+```
+
+| component | elements | modifiers | tokens |
+|---|---|---|---|
+| vv-empty | media, title, description, actions | `compact` (inside a list, a table or a card) `bordered` (dashed frame, drop zone) | |
+| vv-separator | label† `> span` | `vertical` | the line takes the block's `border-color`: set it on the block, or `--vv-separator-border-color` when components use custom properties |
+| vv-spinner | | | `--spinner-duration`, `--spinner-thickness`, read on the block |
+
+The icon in `vv-empty__media` is sized by the font size, so give it `1em`. The spinner is
+`1em` in `currentcolor`: size and colour it with text utilities (`text-24 text-brand`). Under
+`prefers-reduced-motion` it keeps turning, slower, instead of stopping.
+
+## vv-item, vv-item-group
+
+A row of a list, and the list. The row is not the button: its `__entry` is (a `<button>` or
+an `<a>`), because the row can hold other controls beside it.
+
+```html
+<div class="vv-item-group vv-item-group--framed">
+  <div class="vv-item-group__header"><nav class="vv-breadcrumb">…</nav></div>
+  <ul class="vv-item-group__list">
+    <li class="vv-item">
+      <button type="button" class="vv-item__entry" aria-pressed="true">
+        <span class="vv-item__media"><svg>…</svg></span>
+        <span class="vv-item__title">Contracts</span>
+        <svg class="vv-item__check">…</svg>
+      </button>
+      <button type="button" class="vv-item__open" aria-label="Open"><svg>…</svg></button>
+    </li>
+    <li class="vv-item vv-item--roomy vv-item--current">
+      <a href="#" class="vv-item__entry" aria-current="true">
+        <span class="vv-item__content">
+          <span class="vv-item__title">Invoice reminder</span>
+          <span class="vv-item__description">Sent to 42 customers.</span>
+        </span>
+      </a>
+      <div class="vv-item__actions"><button type="button" class="vv-button vv-button--action-quiet vv-button--icon-only" aria-label="More">…</button></div>
+    </li>
+  </ul>
+</div>
+```
+
+| component | elements | modifiers | states |
+|---|---|---|---|
+| vv-item | entry, media, content, title, description, note, check, chevron, actions, open | `roomy` `top` `plain` | hover; pressed-within (entry `[aria-pressed="true"]`: the chosen row of a picker); current (class only: the row looked at in a master list); entry: focus-visible, disabled |
+| vv-item-group | header, list | `framed` `fill` `raised` | |
+
+Selection is surface, weight and a check, never a colour. A title over a description is
+semibold on every row, and there the surface and the bar carry the state alone. The group
+sets `--item-divider`, `--item-hover`, `--item-chosen` and `--item-current`; rows read them
+with a fallback, so a row works outside a group too. An empty list shows a
+`vv-empty vv-empty--compact`; a row still loading is a `vv-item--plain` holding
+`vv-skeleton__item` bars.
+
+## vv-prose
+
+Rich text that arrives as plain tags (rendered markdown, editor output). No class on the
+children: headings, paragraphs, lists, links, `blockquote`, inline `code`, `pre`, `kbd`,
+`table`, `hr`, `img`, `details`, and the inline tags whose meaning the reset removes (`em`,
+`del`, `u`, `sub`, `sup`, `small`, `mark`, `abbr`).
+
+```html
+<div class="vv-prose">
+  <h2>Getting started</h2>
+  <p>Connect a <a href="#">knowledge base</a>.</p>
+  <ul><li>Pick a folder</li></ul>
+</div>
+<div class="vv-prose vv-prose--compact text-14">…</div>
+```
+
+Sizes are in `em` (headings follow the text around them); the rhythm is a margin on every
+child after the first, so the block has no outer margin. `compact` sets headings at text size
+and halves the gaps. Inside `.preflight` the content of a prose block is left to it.
+
+## Conversation: vv-message, vv-bubble, vv-bubble-group, vv-message-scroller, vv-attachment, vv-attachment-group, vv-marker, vv-questionnaire
+
+```html
+<div class="vv-message-scroller" role="log" aria-live="polite">
+  <div class="vv-message">
+    <span class="vv-avatar vv-avatar--rounded vv-message__avatar">AI</span>
+    <div class="vv-message__content">
+      <div class="vv-message__header"><strong>Assistant</strong><span class="vv-message__meta">10:42</span></div>
+      <div class="vv-bubble-group">
+        <div class="vv-bubble">Hi!</div>
+        <div class="vv-bubble vv-bubble--reacted">How can I help? <span class="vv-bubble__reactions" role="img" aria-label="2 likes">👍 2</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="vv-message vv-message--end">
+    <div class="vv-message__content"><div class="vv-bubble vv-bubble--end">An invoice, please.</div></div>
+  </div>
+  <div class="vv-marker"><span class="vv-marker__content">Maria joined</span></div>
+  <button type="button" class="vv-message-scroller__jump" aria-label="Latest message">…</button>
+</div>
+```
+
+| component | elements | modifiers |
+|---|---|---|
+| vv-message | avatar, content, header, footer, meta (hover/focus only, always without hover) | `end` (the one reading) `wide` (content takes the row) |
+| vv-bubble | reactions | `end` `plain` (no surface) `reacted` (room for reactions); colours from `--bubble-background`, `--bubble-color`, `--bubble-border-color` and the `--bubble-end-*` trio, read with a fallback, so one value on the conversation paints a side |
+| vv-bubble-group | joined† `> :not(:first-child)` (load after `vv-bubble`) | `end` |
+| vv-message-scroller | jump (sticky, hide with `hidden`) | `fade` |
+| vv-attachment | media, picture† `img`, content, title, description, actions, remove | `image` `invalid` `loading` |
+| vv-attachment-group | | |
+| vv-marker | icon, content | `bordered` |
+| vv-questionnaire | header, progress (`--questionnaire-progress` on the block), item, title (the `legend` of a choice), description, error, actions | |
+
+A date between two days of messages is a `vv-separator` with a label; the choices of a
+questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.
+
+## vv-kbd, vv-popover, vv-command, vv-input-otp, vv-sidebar, vv-calendar
+
+```html
+<span class="vv-kbd-group"><kbd class="vv-kbd">Ctrl</kbd>+<kbd class="vv-kbd">K</kbd></span>
+
+<button type="button" popovertarget="share">Share</button>
+<div id="share" class="vv-popover" popover><p class="vv-popover__title">Share</p>…<div class="vv-popover__footer">…</div></div>
+
+<div class="vv-command">
+  <div class="vv-command__search"><input class="vv-command__input" role="combobox" aria-expanded="true" /></div>
+  <ul class="vv-command__list" role="listbox">
+    <li class="vv-command__heading" role="presentation">Documents</li>
+    <li class="vv-command__option" role="option" aria-selected="true">New <span class="vv-command__shortcut"><kbd class="vv-kbd">N</kbd></span></li>
+  </ul>
+</div>
+
+<div class="vv-input-otp" role="group" aria-label="Code">
+  <div class="vv-input-otp__group"><input class="vv-input-otp__slot" maxlength="1" /></div>
+  <span class="vv-input-otp__separator" aria-hidden="true">–</span>
+</div>
+
+<aside class="vv-sidebar vv-sidebar--collapsed">
+  <div class="vv-sidebar__header">… <span class="vv-sidebar__label">Product</span></div>
+  <nav class="vv-sidebar__content">…</nav>
+  <div class="vv-sidebar__footer">…</div>
+</aside>
+
+<div class="vv-calendar">
+  <div class="vv-calendar__header"><button class="vv-calendar__nav">‹</button><span class="vv-calendar__title">September 2026</span><button class="vv-calendar__nav">›</button></div>
+  <table class="vv-calendar__grid" role="grid">
+    <thead><tr><th>Mo</th>…</tr></thead>
+    <tbody><tr><td aria-selected="true"><button class="vv-calendar__day" aria-pressed="true">10</button></td>…</tr></tbody>
+  </table>
+</div>
+```
+
+| component | elements | modifiers / states |
+|---|---|---|
+| vv-kbd, vv-kbd-group | | sized in `em` |
+| vv-popover | title, footer | `center`; on `[popover]`, placed by a script or anchor positioning, top left without one |
+| vv-command | search (focus-within), input, list, heading, option, shortcut, empty | option: `aria-selected="true"`, disabled; groups are `role="group"` labelled by a heading |
+| vv-input-otp | group, slot, separator | `invalid` |
+| vv-sidebar | header, content, footer, label | `collapsed` (hides `label` from sight, not from AT, and centres the icons of header, content and footer on the rail: wrap every text of the nav in `label`); `--sidebar-width`, `--sidebar-collapsed-width` |
+| vv-calendar | header, title, nav, grid† `table`, weekday† `th`, cell† `td`, day | day: `aria-pressed` (chosen, range ends), `aria-current="date"` (today), disabled, a focus ring that also holds for `tabindex="-1"` (roving); cell: `aria-selected` (range) |

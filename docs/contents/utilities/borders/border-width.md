@@ -2,6 +2,7 @@
 title: Border Width
 description: Utilities for controlling the width of an element's borders.
 customProperties: true
+breakpoints: true
 ---
 <table-utility prefix="border" property="border-width" custom-property="border" class="mb-lg"></table-utility>
 
@@ -16,50 +17,50 @@ Border width utilities are available for individual sides, as well as for all si
           Class
         </th>
         <th>
-          Properties
+          Value
         </th>
       </tr>
     </thead>
     <tbody class="align-baseline">
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-x
+          .border-x
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-left-width: 1px</div>
-          <div>border-right-width: 1px</div>
+          <div>border-left-width: 1px;</div>
+          <div>border-right-width: 1px;</div>
         </td>
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-x-{size-key}
+          .border-x-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-left-width: {size-value}</div>
-          <div>border-right-width: {size-value}</div>
+          <div>border-left-width: {size-value};</div>
+          <div>border-right-width: {size-value};</div>
         </td>
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-y
+          .border-y
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-top-width: 1px</div>
-          <div>border-bottom-width: 1px</div>
+          <div>border-top-width: 1px;</div>
+          <div>border-bottom-width: 1px;</div>
         </td>
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-y-{size-key}
+          .border-y-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
-          <div>border-top-width: {size-value}</div>
-          <div>border-bottom-width: {size-value}</div>
+          <div>border-top-width: {size-value};</div>
+          <div>border-bottom-width: {size-value};</div>
         </td>
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-t
+          .border-t
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-top-width: 1px
@@ -67,7 +68,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-r
+          .border-r
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-right-width: 1px
@@ -75,7 +76,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-b
+          .border-b
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-bottom-width: 1px
@@ -83,7 +84,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-l
+          .border-l
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-left-width: 1px
@@ -91,7 +92,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-t-{size-key}
+          .border-t-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-top-width: {size-value}
@@ -99,7 +100,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-r-{size-key}
+          .border-r-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-right-width: {size-value}
@@ -107,7 +108,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-b-{size-key}
+          .border-b-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-bottom-width: {size-value}
@@ -115,7 +116,7 @@ Border width utilities are available for individual sides, as well as for all si
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          border-l-{size-key}
+          .border-l-{size-key}
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           border-left-width: {size-value}

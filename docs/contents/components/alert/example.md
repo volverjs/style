@@ -76,7 +76,7 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
 </script>
 
 <template>
-    <fieldset class="vv-radio-group vv-radio-group--vertical">
+    <fieldset class="vv-radio-group">
         <legend>Position Inline</legend>
         <div class="vv-radio-group__wrapper">
             <label class="vv-radio" for="position-start">
@@ -111,7 +111,7 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
             </label>
         </div>
     </fieldset>
-    <fieldset class="vv-radio-group vv-radio-group--vertical">
+    <fieldset class="vv-radio-group">
         <legend>Position Block</legend>
         <div class="vv-radio-group__wrapper">
             <label class="vv-radio" for="position-top">
@@ -145,41 +145,48 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
             </label>
         </div>
     </fieldset>
-    <fieldset class="vv-checkbox-group vv-checkbox-group--vertical">
-      <label class="vv-checkbox vv-checkbox--toggle" for="auto-close">
+    <fieldset class="vv-checkbox-group">
+      <legend>Options</legend>
+      <div class="vv-checkbox-group__wrapper">
+      <label class="vv-checkbox vv-checkbox--switch" for="auto-close">
           <input 
               v-model="autoCloseEnabled"
               id="auto-close" 
               type="checkbox" 
+              role="switch"
               name="auto-close" />
           Auto close
       </label>
-      <label class="vv-checkbox vv-checkbox--toggle" for="stack">
+      <label class="vv-checkbox vv-checkbox--switch" for="stack">
           <input 
               v-model="stackEnabled"
               id="stack" 
               type="checkbox" 
+              role="switch"
               name="stack" />
           Stack
       </label>
-      <label class="vv-checkbox vv-checkbox--toggle" for="reverse">
+      <label class="vv-checkbox vv-checkbox--switch" for="reverse">
           <input 
               v-model="reverseEnabled"
               id="reverse" 
               type="checkbox" 
+              role="switch"
               name="reverse" />
           Reverse
       </label>
-      <label class="vv-checkbox vv-checkbox--toggle" for="notification">
+      <label class="vv-checkbox vv-checkbox--switch" for="notification">
           <input 
               v-model="notificationEnabled"
               id="notification" 
               type="checkbox" 
+              role="switch"
               name="notification" />
           Notification
       </label>
+      </div>
     </fieldset>
-    <button class="vv-button" @click="setItem">Add Alert</button>
+    <button type="button" class="vv-button" @click="setItem">Add Alert</button>
     <div class="vv-alert-group vv-alert-group--fixed" 
         :class="[
           `vv-alert-group--${positionBlock}-${positionInline}`, 
@@ -206,7 +213,7 @@ wrapperClass: grid grid-cols-2 sm:grid-cols-4 flex-1 gap-md items-center
                   <IconifyIcon class="vv-alert__icon" :icon="`akar-icons:${item[1].icon}`" />
                   <strong class="vv-alert__title">Message!</strong> 
                   <button type="button" class="vv-alert__close" aria-label="Close" @click="deleteItem(item[0])">
-                    <div class="vv-alert__close-mask"></div>
+                    <span class="vv-alert__close-mask"></span>
                   </button>
               </div>
               <div class="vv-alert__content">

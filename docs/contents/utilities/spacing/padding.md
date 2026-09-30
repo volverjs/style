@@ -3,7 +3,6 @@ title: Padding
 description: Utilities for controlling an element's padding.
 spacing: true
 ---
-<table-helper property="spacers" title="Spacing & Spacing-dynamic" class="mb-lg"></table-helper>
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">
 		<thead class="sticky z-sticky top-0 bg-surface-1">
@@ -17,6 +16,14 @@ spacing: true
 			</tr>
 		</thead>
 		<tbody class="align-baseline">
+			<tr>
+				<td translate="no" class="font-mono text-accent whitespace-nowrap">
+					.p-{spacing-key}
+				</td>
+				<td translate="no" class="font-mono text-info whitespace-nowrap">
+					padding: {spacing-value};
+				</td>
+			</tr>
 			<tr>
 				<td translate="no" class="font-mono text-accent whitespace-nowrap">
 					.pt-{spacing-key}

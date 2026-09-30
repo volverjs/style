@@ -5,9 +5,9 @@ wrapperClass: w-full md:w-9/12
 
 <div class="vv-select
             vv-select--floating">
-    <label for="select">Floating label</label>
+    <label for="select-floating">Floating label</label>
     <div class="vv-select__wrapper">
-        <select id="select"
+        <select id="select-floating"
                 name="select" 
                 aria-describedby="select-floating-hint">
             <option value="" disabled="disabled" selected="selected">
@@ -26,9 +26,9 @@ wrapperClass: w-full md:w-9/12
 <div class="vv-select
             vv-select--floating
             vv-select--dirty">
-    <label for="select">Floating label with value (dirty)</label>
+    <label for="select-floating-dirty">Floating label with value (dirty)</label>
     <div class="vv-select__wrapper">
-        <select id="select"
+        <select id="select-floating-dirty"
                 name="select" 
                 aria-describedby="select-floating-dirty-hint">
             <option value="" disabled="disabled">

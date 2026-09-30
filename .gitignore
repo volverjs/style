@@ -19,6 +19,9 @@ yarn-error.log*
 .agents
 .claude
 
+# Specs, kept local
+/docs/specs
+
 # Editor directories and files
 .idea
 .stylelintcache

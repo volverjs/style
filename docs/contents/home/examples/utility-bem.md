@@ -15,13 +15,12 @@
     <div class="text-left">
       <h3 class="leading-relaxed tracking-tight flex justify-between">
         Lorem ipsum dolor 
-        <div class="vv-badge 
+        <span class="vv-badge 
                     vv-badge--success 
                     vv-badge--outline
-                    vv-badge--sm"
-             role="status">
+                    vv-badge--sm">
           NEW
-        </div>
+        </span>
       </h3>
       <p class="text-smaller text-word-4">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. 

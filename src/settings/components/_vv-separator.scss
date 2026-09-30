@@ -1,0 +1,79 @@
+// A hairline between two groups of content, with an optional label on it
+// ("or", a date). The two halves of the line are the `::before` and `::after`
+// of the block, either side of the label, so a long label wraps and the
+// separator takes its own height instead of overlapping what is around it.
+// The generator gives both pseudo elements their empty `content`.
+
+// Each half keeps at least 16px and never shrinks, so a label too long for
+// the row wraps instead of squeezing the line out of sight.
+
+// The space around the label is its own padding, not a `gap` on the block:
+// without a label the halves have to meet, and `:empty` cannot tell, since
+// a single space or line break inside the block is enough to defeat it.
+
+// The line takes the colour of the block's `border-color`, which the block
+// never draws itself (it has no border of its own): override that one colour
+// and both halves follow. `inherit` goes through a plain declaration, in
+// brackets: written into a custom property, a CSS-wide keyword applies to the
+// custom property itself, at the root, and the halves would fall back to
+// `currentcolor`.
+$vv-separator: (
+	display: flex,
+	align-items: center,
+	margin: var(--spacing-0),
+	border: var(--border-0),
+	border-color: var(--color-surface-3),
+	color: var(--color-word-3),
+	font-size: var(--text-12),
+	line-height: var(--leading-snug),
+	text-transform: uppercase,
+	pseudo: (
+		before: (
+			flex: 1 0 var(--spacing-16),
+			border-block-start: var(--border) solid,
+			[border-color]: inherit,
+		),
+		after: (
+			flex: 1 0 var(--spacing-16),
+			border-block-start: var(--border) solid,
+			[border-color]: inherit,
+		),
+	),
+	element: (
+		label: (
+			_alias: '> span',
+			min-width: 0,
+			padding-inline: var(--spacing-8),
+			text-align: center,
+		),
+	),
+	modifier: (
+		// Between two items of a row: the halves stand up and the block
+		// stretches to the height of the row. They drop the 16px floor, which
+		// would make a row of text taller than its text.
+		vertical: (
+			flex-direction: column,
+			align-self: stretch,
+			pseudo: (
+				before: (
+					flex: 1,
+					border-block-start: var(--border-0),
+					border-inline-start: var(--border) solid,
+					[border-color]: inherit,
+				),
+				after: (
+					flex: 1,
+					border-block-start: var(--border-0),
+					border-inline-start: var(--border) solid,
+					[border-color]: inherit,
+				),
+			),
+			element: (
+				label: (
+					padding-block: var(--spacing-8),
+					padding-inline: var(--spacing-0),
+				),
+			),
+		),
+	),
+) !default;

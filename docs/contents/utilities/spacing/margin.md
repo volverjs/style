@@ -3,7 +3,6 @@ title: Margin
 description: Utilities for controlling an element's margin.
 spacing: true
 ---
-<table-helper property="spacers" title="Spacing & Spacing-dynamic" class="mb-lg"></table-helper>
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">
 		<thead class="sticky z-sticky top-0 bg-surface-1">

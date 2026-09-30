@@ -1,0 +1,102 @@
+// A month to pick a date or a range from: a `header` with the `title` of the
+// month between two `nav` buttons, and a `grid`, a table whose `weekday`
+// headers sit over the `day` buttons of the month. The keyboard moves across
+// the grid with a roving tabindex: one day is `tabindex="0"`, the others
+// `tabindex="-1"`, which the shared `focus-visible` state leaves out, so the
+// ring of a day is a rule on the entry (`src/components/vv-calendar.scss`). What a day is comes from
+// its markup: the chosen day, or each end of a range, is `aria-pressed="true"`
+// on its button, today is `aria-current="date"`, a day that cannot be chosen
+// is `disabled`, and the days between the two ends of a range are cells with
+// `aria-selected="true"`. Days of the months around are left out, or written
+// as disabled buttons. A date picker is this block in a `vv-popover` next to
+// a field.
+$vv-calendar: (
+	display: inline-flex,
+	flex-direction: column,
+	gap: var(--spacing-8),
+	color: var(--color-word-2),
+	font-size: var(--text-14),
+	element: (
+		header: (
+			display: flex,
+			align-items: center,
+			justify-content: space-between,
+			gap: var(--spacing-8),
+		),
+		title: (
+			color: var(--color-word-1),
+			font-weight: var(--font-semibold),
+		),
+		nav: (
+			display: inline-grid,
+			place-items: center,
+			inline-size: 2em,
+			block-size: 2em,
+			border-radius: var(--rounded),
+			color: var(--color-word-3),
+			cursor: pointer,
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+		grid: (
+			_alias: 'table',
+			border-collapse: collapse,
+		),
+		weekday: (
+			_alias: 'th',
+			padding-block-end: var(--spacing-4),
+			color: var(--color-word-4),
+			font-size: var(--text-12),
+			font-weight: var(--font-normal),
+			text-align: center,
+		),
+		cell: (
+			_alias: 'td',
+			padding: var(--spacing-1) 0,
+			text-align: center,
+			state: (
+				// The band between the two ends of a range
+				selected: (
+					background-color: var(--color-surface-2),
+				),
+			),
+		),
+		day: (
+			display: inline-grid,
+			place-items: center,
+			inline-size: 2.25em,
+			block-size: 2.25em,
+			border-radius: var(--rounded-full),
+			font-variant-numeric: tabular-nums,
+			cursor: pointer,
+			state: (
+				// One step deeper than the band of a range, so it shows there
+				hover: (
+					background-color: var(--color-surface-3),
+				),
+				current-date: (
+					font-weight: var(--font-semibold),
+					box-shadow: inset 0 0 0 var(--spacing-px) var(--color-word-4),
+				),
+				// After the hover and today: the chosen day keeps its fill
+				pressed: (
+					background-color: var(--color-word),
+					color: var(--color-surface),
+					font-weight: var(--font-semibold),
+				),
+				disabled: (
+					opacity: var(--opacity-30),
+					cursor: not-allowed,
+				),
+			),
+		),
+	),
+) !default;

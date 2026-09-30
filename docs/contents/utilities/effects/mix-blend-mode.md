@@ -1,5 +1,5 @@
 ---
 title: Mix Blend Mode
-description: Utilities for controlling how flex and grid items are positioned along a container's main axis.
+description: Utilities for controlling how an element's content blends with the content behind it.
 ---
 <table-utility prefix="mix-blend" property="mix-blend-mode"></table-utility>

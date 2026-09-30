@@ -7,6 +7,7 @@
 	const title = ref('')
 	const description = ref('')
 	const uiVue = ref(false)
+	const section = ref('Components')
 	const permalinks = ref([])
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/components/${route.params.name}/index.md`
 
@@ -18,6 +19,7 @@
 		title.value = attributes.title
 		description.value = attributes.description
 		uiVue.value = attributes.uiVue
+		section.value = attributes.section ?? 'Components'
 		permalinks.value = toc.map(({ content }) => permalinkToPath(content))
 		MainContent = VueComponentWith({
 			CodeEditor,
@@ -46,7 +48,7 @@
 				<header class="my-lg">
 					<span
 						class="vv-text vv-text--size-5 font-semibold text-brand">
-						Components
+						{{ section }}
 					</span>
 					<div class="flex items-center mb-sm">
 						<h1

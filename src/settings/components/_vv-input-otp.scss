@@ -1,0 +1,55 @@
+// A one-time code typed one character per slot: `slot` inputs side by side,
+// optionally split into groups by a `separator`. Each slot is a text input of
+// one character; moving the focus between them is behaviour and belongs to
+// the script. The slots take the surface and the text of the fields of the
+// library, a border so each reads as a box, and the focus of the library.
+$vv-input-otp: (
+	display: inline-flex,
+	align-items: center,
+	gap: var(--spacing-8),
+	element: (
+		group: (
+			display: inline-flex,
+			gap: var(--spacing-6),
+		),
+		slot: (
+			inline-size: 2.5em,
+			block-size: 3em,
+			border: var(--border) solid var(--color-surface-4),
+			border-radius: var(--rounded-md),
+			background-color: var(--input-background-color),
+			color: var(--input-color),
+			font-size: var(--text-20),
+			font-variant-numeric: tabular-nums,
+			text-align: center,
+			caret-color: var(--color-brand),
+			transition: border-color var(--duration-150) var(--ease-out),
+			state: (
+				hover: (
+					border-color: var(--color-surface-5),
+				),
+				focus-visible: (
+					border-color: var(--color-brand),
+					outline: var(--spacing-px) solid var(--color-brand),
+					outline-offset: 0,
+				),
+				disabled: (
+					opacity: var(--opacity-50),
+					cursor: not-allowed,
+				),
+			),
+		),
+		separator: (
+			color: var(--color-word-4),
+		),
+	),
+	modifier: (
+		invalid: (
+			element: (
+				slot: (
+					border-color: var(--input-invalid-color),
+				),
+			),
+		),
+	),
+) !default;

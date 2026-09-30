@@ -1,0 +1,91 @@
+// The width of the collapsed sidebar, read by the block and by its sections
+$-rail-width: var(--sidebar-collapsed-width, var(--spacing-64));
+
+// A section of the rail is one column as wide as the rail, anchored at its
+// start, with what is left in it centred: the icons of the header, of the
+// navigation and of the footer line up on the middle of the rail, whatever
+// padding each of them carries. The column keeps that width while the rail is
+// still narrowing, so the icons stay where they land instead of riding the
+// middle of a column that shrinks. `minmax(0, ...)` gives up the pixel of the
+// border at rest, where the section is that much narrower than the rail.
+$-rail-section: (
+	display: grid,
+	align-content: start,
+	justify-items: center,
+	padding-inline: 0,
+	[grid-template-columns]: minmax(0, $-rail-width),
+);
+
+// The side column of an application: a `header` (the product, a switcher), a
+// `content` that scrolls (a `vv-nav--sidebar`), a `footer` (the account).
+// Its width is `--sidebar-width`, 16rem when nothing sets it; `collapsed`
+// narrows it to `--sidebar-collapsed-width`, a 64px rail, and hides every
+// `label` from sight, so the icons of the navigation remain and still carry
+// their names. Both are read with a
+// fallback and never declared on the block, so a value set on the layout
+// around it reaches it.
+$vv-sidebar: (
+	display: flex,
+	flex-direction: column,
+	// Its width is the one set, even beside a main column that overflows
+	flex-shrink: 0,
+	block-size: 100%,
+	min-block-size: 0,
+	border-inline-end: var(--border) solid var(--color-surface-3),
+	background-color: var(--color-surface-1),
+	color: var(--color-word-2),
+	transition: inline-size var(--duration-300) var(--ease-out),
+	[inline-size]: var(--sidebar-width, 16rem),
+	element: (
+		header: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-8),
+			min-width: 0,
+			padding: var(--spacing-sm),
+		),
+		content: (
+			flex: 1,
+			min-height: 0,
+			padding: var(--spacing-xs) var(--spacing-sm),
+			overflow-y: auto,
+			scrollbar-width: thin,
+		),
+		footer: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-8),
+			min-width: 0,
+			padding: var(--spacing-sm),
+			border-top: var(--border) solid var(--color-surface-3),
+		),
+		label: (
+			min-width: 0,
+			overflow: hidden,
+			text-overflow: ellipsis,
+			white-space: nowrap,
+		),
+	),
+	modifier: (
+		// The labels leave the rail but stay in the accessibility tree, so an
+		// icon keeps the name of its link
+		collapsed: (
+			[inline-size]: $-rail-width,
+			element: (
+				header: $-rail-section,
+				content: $-rail-section,
+				footer: $-rail-section,
+				label: (
+					position: absolute,
+					inline-size: var(--spacing-1),
+					block-size: var(--spacing-1),
+					overflow: hidden,
+					clip-path: inset(50%),
+					white-space: nowrap,
+				),
+			),
+		),
+	),
+) !default;

@@ -112,12 +112,18 @@ outputs: that is what tells you which rules moved.
   a token on the block and still follow the line box of the summary, which is the element that
   consumes it. So a declaration whose value carries only relative units needs no `[brackets]`,
   while one that reads a token another element declares still does.
-- **`.preflight` dresses every bare `<button>` as `%vv-button`**, so a component that owns a
-  bare button is restyled inside a `.preflight` container. `.vv-badge__button` of an action
-  badge comes out with the brand background, a 2px border and 7px by 16px of padding, which
-  takes the badge from 46.7px to 77.1px wide. This predates the icon work of 0.1.28 and is not
-  fixed there. The escape hatch today is `.preflight-revert`; the fix is to exclude the buttons
-  a component owns from the bare button selector in `src/_preflight.scss`.
+- **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
+  `.block__element--modifier`: its declarations are flattened into the rule of the element
+  itself, so they apply to every instance and win over the declarations before them. Express a
+  variant of an element as a state read from the DOM, as a modifier of the block that reaches
+  the element, or as a second element.
+- **`.preflight` dresses bare tags at (0,1,0)**, above the zero specificity of every component
+  rule. An element carrying a class of a component (`[class*='vv-']`) is excluded from all of
+  its rules, so `button.vv-badge__button` or `label.vv-radio--segment` are left to their
+  component. A child that a component reaches only through an `_alias` has no class and is
+  still dressed: a bare `<button>` inside an action badge comes out as a primary button, 77.1px
+  wide instead of 46.7px. Give such a child its element class, or wrap the block in
+  `.preflight-revert`. A new component that owns bare children should document that.
 
 ## Conventions
 

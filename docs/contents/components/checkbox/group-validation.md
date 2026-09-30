@@ -8,7 +8,7 @@ wrapperClass: flex flex-1 flex-col md:flex-row
                      vv-checkbox-group--valid">
         <legend>Group Valid</legend>
         <div class="vv-checkbox-group__wrapper">
-            <label class="vv-checkbox" for="checkbox-group-option-vertical-invalid-1">
+            <label class="vv-checkbox" for="checkbox-group-option-vertical-valid-1">
                 <input id="checkbox-group-option-vertical-valid-1" 
                        type="checkbox"
                        name="checkbox-group-vertical-valid" 

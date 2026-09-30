@@ -32,6 +32,7 @@
 @forward 'components/vv-dropdown-action';
 @forward 'components/vv-dropdown-option';
 @forward 'components/vv-dropdown-optgroup';
+@forward 'components/vv-empty';
 @forward 'components/vv-checkbox';
 @forward 'components/vv-checkbox-group';
 @forward 'components/vv-radio';
@@ -41,12 +42,37 @@
 @forward 'components/vv-input-file';
 @forward 'components/vv-input-range';
 @forward 'components/vv-input-text';
+
+// After vv-input-text, which it loads: forwarded first, it would load that
+// map unconfigured and a `with` on it would fail
+@forward 'components/vv-field';
+@forward 'components/vv-item';
+@forward 'components/vv-item-group';
 @forward 'components/vv-nav';
+@forward 'components/vv-pagination';
 @forward 'components/vv-progress';
+@forward 'components/vv-prose';
 @forward 'components/vv-select';
+@forward 'components/vv-separator';
 @forward 'components/vv-skeleton';
+@forward 'components/vv-spinner';
 @forward 'components/vv-tab';
 @forward 'components/vv-table';
 @forward 'components/vv-text';
 @forward 'components/vv-textarea';
 @forward 'components/vv-tooltip';
+@forward 'components/vv-attachment';
+@forward 'components/vv-attachment-group';
+@forward 'components/vv-bubble';
+@forward 'components/vv-bubble-group';
+@forward 'components/vv-marker';
+@forward 'components/vv-message';
+@forward 'components/vv-message-scroller';
+@forward 'components/vv-questionnaire';
+@forward 'components/vv-calendar';
+@forward 'components/vv-command';
+@forward 'components/vv-input-otp';
+@forward 'components/vv-kbd';
+@forward 'components/vv-kbd-group';
+@forward 'components/vv-popover';
+@forward 'components/vv-sidebar';

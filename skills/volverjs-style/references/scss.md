@@ -125,10 +125,36 @@ hover selector (`.vv-button--success.vv-button:not([disabled]):hover`). Use it a
 extended the same way.
 
 Valid `state` keys: `active` `focus` `hover` `focus-within` `focus-visible` `target`
-`visited` `disabled` `readonly` `checked` `checked-within` `indeterminate` `determinate`
-`open` `close` `popover` `popover-open` `pressed` `selected` `multiple` `dirty` `valid`
-`invalid` `empty` `placeholder-shown` `first-child` `last-child` `current`. Other keys are
+`visited` `disabled` `readonly` `checked` `checked-within` `focus-visible-within`
+`indeterminate` `determinate` `open` `close` `popover` `popover-open` `pressed`
+`pressed-within` `selected` `multiple` `dirty` `valid` `invalid` `empty` `placeholder-shown`
+`first-child` `last-child` `current` `current-page` (`[aria-current="page"]`) `current-date`
+(`[aria-current="date"]`)
+`sort-ascending` `sort-descending` `sort-none` (`aria-sort` on a `th`). Other keys are
 silently dropped.
+
+The `-within` states match a child of the block: `checked-within` is
+`:has(input:checked)`, `focus-visible-within` is `:has(input:focus-visible)` (a keyboard
+ring on a tile whose native input is hidden) and `pressed-within` is
+`:has(> [aria-pressed="true"])` (a row chosen through the button inside it). The light
+rules and the dark theme read the same table, `src/tools/mixin-modules/_states.scss`.
+
+## Presets
+
+`@volverjs/style/scss/presets/outlined-fields` turns every field (`vv-input-text`,
+`vv-textarea`, `vv-select`, `vv-input-file`, `vv-field`) from the filled box into an outlined
+one: plain surface, 1px border, radius, a ring on focus, the floating label as a notch.
+Load it after the context and before the library, or it changes nothing:
+
+```scss
+@use '@volverjs/style/scss/context' with (...);
+@use '@volverjs/style/scss/presets/outlined-fields';
+@use '@volverjs/style/scss';
+```
+
+It adds `--input-border-color(-hover)`, `--input-border-radius`, `--input-focus-color`,
+`--input-focus-ring`, `--input-invalid-ring` and `--input-disabled-*`, and changes the look
+only, not the density.
 
 ## Creating a component
 

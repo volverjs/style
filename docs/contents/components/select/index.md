@@ -5,7 +5,7 @@ uiVue: true
 ---
 
 ### States
-The `select` state controls the style of the component. Select by default cannot be readonly. Use `vv-select--readonly` modifier to make the select readonly. 
+A select shows its value in the placeholder color until an option is chosen: add `vv-select--dirty` then, so the value takes the text color. `disabled` on the `<select>` is enough for the disabled look. A select has no `readonly` attribute: disable it, take it out of the tab order with `tabindex="-1"` and add `vv-select--readonly`, which keeps it at full strength. A disabled select submits nothing, so add a hidden input when the value has to reach the server.
 
 Use `vv-select--invalid` to show an invalid state and `vv-select--valid` to show a valid state. Use `vv-select--loading` to show a loading state.
 
@@ -31,6 +31,6 @@ Use `vv-select--multiple` modifier to make the select multiple.
       <div class="vv-alert__title">Warning</div>
     </div>
     <div class="vv-alert__content">
-        Multiple select currently does not working properly on Safari.
+        Multiple select does not work properly in Safari yet.
     </div>
 </div>

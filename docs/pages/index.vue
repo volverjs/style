@@ -7,7 +7,7 @@
 	import { VueComponentWith } from '../contents/home/index.md'
 
 	useHead({
-		title: 'Volver CSS Library',
+		title: 'Volver Style',
 		meta: [
 			{
 				name: 'description',

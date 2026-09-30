@@ -68,20 +68,20 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
     <button type="button" 
             class="vv-button 
                    vv-button--action" 
-            title="First">
+            title="First" aria-label="First">
         <IconifyIcon icon="akar-icons:pencil" />
     </button>
     <button type="button" 
             class="vv-button 
                    vv-button--action" 
             title="Second" 
-            aria-pressed="true">
+            aria-pressed="true" aria-label="Second">
          <IconifyIcon icon="akar-icons:cut" />
     </button>
     <button type="button" 
             class="vv-button
                    vv-button--action" 
-            title="Third">
+            title="Third" aria-label="Third">
         <IconifyIcon icon="akar-icons:copy" />
     </button>
 </div>
@@ -91,20 +91,20 @@ wrapperClass: flex flex-col gap-8 items-center justify-center
     <button type="button" 
             class="vv-button 
                    vv-button--action-quiet" 
-            title="First">
+            title="First" aria-label="First">
         <IconifyIcon icon="akar-icons:pencil" />
     </button>
     <button type="button" 
             class="vv-button 
                    vv-button--action-quiet" 
             title="Second" 
-            aria-pressed="true">
+            aria-pressed="true" aria-label="Second">
          <IconifyIcon icon="akar-icons:cut" />
     </button>
     <button type="button" 
             class="vv-button 
                    vv-button--action-quiet" 
-            title="Third">
+            title="Third" aria-label="Third">
         <IconifyIcon icon="akar-icons:copy" />
     </button>
 </div>

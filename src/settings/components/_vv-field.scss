@@ -1,0 +1,111 @@
+@use 'sass:map';
+@use 'vv-input-text' as *;
+
+// The shell of a field around a control the library does not draw: a code
+// editor, a contenteditable prompt, a button that opens a picker, a switch
+// that has to sit in a form with the rhythm of the other fields. Label, box,
+// hint, states and the `valid`, `invalid` and `loading` modifiers are the
+// ones of `vv-input-text`, read from its map, so the two stay one field; what
+// is new is what goes inside the box:
+// - `control`: the control itself, which takes the padding of a field and
+//   lets the box draw hover, focus and disabled;
+// - `before` and `after`: an icon, a unit or a button inline with the
+//   control, on either side of it;
+// - `toolbar`: a row of buttons under the control, inside the box, the way a
+//   message composer puts its actions under the text.
+// The copy is taken when this map is loaded: a later override of
+// `$vv-input-text` does not reach it, `$vv-field` is overridden on its own.
+
+$-text: $vv-input-text;
+$vv-field: (
+	display: var(--input-display),
+	flex: var(--input-flex),
+	flex-direction: var(--input-flex-direction),
+	margin-bottom: var(--input-gap),
+	font-size: var(--input-font-size),
+	line-height: var(--input-line-height),
+	min-width: var(--input-min-width),
+	element: (
+		label: map.get($-text, 'element', 'label'),
+		// The box wraps, so a toolbar takes a row of its own under the control
+		wrapper: map.merge(
+			map.get($-text, 'element', 'wrapper'),
+			(
+				flex-wrap: wrap,
+			)
+		),
+		// No `display` of its own: a flex item is blockified anyway, and a
+		// switch used as the control keeps the `inline-flex` of its block
+		control: (
+			flex: 1,
+			min-width: 0,
+			min-height: var(--input-min-height),
+			margin: 0,
+			border: 0,
+			outline: none,
+			background: none,
+			color: var(--input-color),
+			line-height: var(--leading-normal),
+			// Plain declarations: the spacing tokens are overridden on the
+			// block by the modifiers of a field, see `vv-input-text`
+			[padding-block]: var(--input-spacing-top) var(--input-spacing-bottom),
+			[padding-inline]: var(--input-spacing-left) var(--input-spacing-right),
+			[font]: inherit,
+			pseudo: (
+				placeholder: (
+					color: var(--input-placeholder-color),
+				),
+			),
+			state: (
+				disabled: (
+					cursor: not-allowed,
+				),
+			),
+		),
+		// Named after `input-before` and `input-after` of `vv-input-text`: the
+		// padding goes on the outer side only, since the control already
+		// spaces the inner one
+		before: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-4),
+			color: var(--input-placeholder-color),
+			[padding-inline-start]: var(--input-spacing-left),
+		),
+		after: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-4),
+			color: var(--input-placeholder-color),
+			[padding-inline-end]: var(--input-spacing-right),
+		),
+		toolbar: (
+			display: flex,
+			flex-basis: 100%,
+			flex-wrap: wrap,
+			align-items: center,
+			gap: var(--spacing-4),
+			[padding-inline]: var(--input-spacing-left) var(--input-spacing-right),
+			[padding-bottom]: var(--input-spacing-bottom),
+		),
+		hint: map.get($-text, 'element', 'hint'),
+	),
+	modifier: (
+		valid: (
+			element: (
+				wrapper: map.get($-text, 'modifier', 'valid', 'element', 'wrapper'),
+				hint: map.get($-text, 'modifier', 'valid', 'element', 'hint'),
+			),
+		),
+		invalid: (
+			element: (
+				wrapper: map.get($-text, 'modifier', 'invalid', 'element', 'wrapper'),
+				hint: map.get($-text, 'modifier', 'invalid', 'element', 'hint'),
+			),
+		),
+		loading: map.get($-text, 'modifier', 'loading'),
+	),
+	state: map.get($-text, 'state'),
+) !default;

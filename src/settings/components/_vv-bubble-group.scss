@@ -1,0 +1,31 @@
+// Consecutive bubbles of one speaker, stacked close and joined on the side of
+// the speaker: every bubble after the first tightens its top corner there, so
+// the first keeps a round top and the side of the speaker runs as one
+// straight edge down to the tail of the last. `end` groups the bubbles of the
+// one reading, whose bubbles take `vv-bubble--end` too. Load `vv-bubble`
+// before this block when importing the two on their own: the joined corners
+// have to come after the bubble's own radius.
+$vv-bubble-group: (
+	display: flex,
+	flex-direction: column,
+	align-items: flex-start,
+	gap: var(--spacing-2),
+	max-width: 100%,
+	element: (
+		joined: (
+			_alias: '> :not(:first-child)',
+			border-start-start-radius: var(--rounded-sm),
+		),
+	),
+	modifier: (
+		end: (
+			align-items: flex-end,
+			element: (
+				joined: (
+					border-start-start-radius: var(--rounded-xl),
+					border-start-end-radius: var(--rounded-sm),
+				),
+			),
+		),
+	),
+) !default;

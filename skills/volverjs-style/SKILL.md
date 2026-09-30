@@ -29,7 +29,7 @@ not in this library. Work from the reference files, not from memory.
    - [utilities.md](references/utilities.md): every utility class with its exact value
      set and whether it has responsive variants.
    - [components.md](references/components.md): canonical markup, elements, modifiers and
-     states for all 32 components, plus how states are expressed.
+     states for all 55 components, plus how states are expressed.
    - [tokens.md](references/tokens.md): custom properties, CSS-only overrides, dark theme.
    - [scss.md](references/scss.md): import paths, context configuration, extending and
      creating components, mixins, cascade layers.
@@ -106,7 +106,11 @@ Available: `vv-button` `vv-button-group` `vv-input-text` `vv-textarea` `vv-selec
 `vv-input-range` `vv-card` `vv-dialog` `vv-alert` `vv-alert-group` `vv-dropdown`
 `vv-dropdown-action` `vv-dropdown-option` `vv-dropdown-optgroup` `vv-nav` `vv-tab`
 `vv-accordion` `vv-accordion-group` `vv-table` `vv-badge` `vv-avatar` `vv-avatar-group`
-`vv-tooltip` `vv-progress` `vv-skeleton` `vv-breadcrumb` `vv-text`.
+`vv-tooltip` `vv-progress` `vv-skeleton` `vv-spinner` `vv-breadcrumb` `vv-text`
+`vv-empty` `vv-separator` `vv-item` `vv-item-group` `vv-field` `vv-prose` `vv-pagination`
+`vv-message` `vv-bubble` `vv-bubble-group` `vv-message-scroller` `vv-attachment`
+`vv-attachment-group` `vv-marker` `vv-questionnaire` `vv-kbd` `vv-kbd-group`
+`vv-popover` `vv-command` `vv-input-otp` `vv-sidebar` `vv-calendar`.
 
 Three facts shape the markup; components.md has the full structure of each component.
 

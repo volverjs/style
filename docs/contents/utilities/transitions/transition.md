@@ -1,12 +1,13 @@
 ---
 title: Transition
-description: Utilities for apply a CSS transition.
+description: Utilities for applying a CSS transition.
 ---
 <div>
-    <table-utility prefix="transition" property="transition-property" :exclude="['none']">
-        <template #value="{ key }">
-            <pre class="whitespace-pre">
-transition-property: var(--transition-property-{{ key }});
+    <table-utility prefix="transition" property="transition-property">
+        <template #value="{ key, value }">
+            <pre v-if="key === 'none'" class="whitespace-pre">transition-property: none;</pre>
+            <pre v-else class="whitespace-pre">
+transition-property: {{ value }};
 transition-duration: var(--duration-300);
 transition-timing-function: var(--ease-in-out);</pre>
         </template>

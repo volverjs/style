@@ -1,6 +1,6 @@
 ---
 title: Scale
-description: Utilities for scaling elements with transform.
+description: Utilities for scaling elements with the scale property.
 ---
 Scale an element by a given factor.
 

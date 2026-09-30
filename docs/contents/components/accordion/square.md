@@ -8,12 +8,10 @@ wrapperClass: w-full md:w-9/12 mx-auto
     id="accordion-item-square-1"
     class="vv-accordion vv-accordion--bordered vv-accordion--square">
     <summary
-      class="vv-accordion__summary"
-      aria-controls="accordion-item-square-1"
-      aria-expanded="false">
+      class="vv-accordion__summary">
       Lorem Ipsum
     </summary>
-    <div class="vv-accordion__content" aria-hidden="true">
+    <div class="vv-accordion__content">
       <p class="font-light text-word-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean turpis
         diam, tempor non sem ut, suscipit gravida mi.
@@ -24,12 +22,10 @@ wrapperClass: w-full md:w-9/12 mx-auto
     id="accordion-item-square-2"
     class="vv-accordion vv-accordion--bordered vv-accordion--square">
     <summary
-      class="vv-accordion__summary"
-      aria-controls="accordion-item-square-2"
-      aria-expanded="false">
+      class="vv-accordion__summary">
       Lorem Ipsum
     </summary>
-    <div class="vv-accordion__content" aria-hidden="true">
+    <div class="vv-accordion__content">
       <p class="font-light text-word-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean turpis
         diam, tempor non sem ut, suscipit gravida mi.
@@ -41,12 +37,10 @@ wrapperClass: w-full md:w-9/12 mx-auto
     class="vv-accordion vv-accordion--bordered vv-accordion--square"
     open>
     <summary
-      class="vv-accordion__summary"
-      aria-controls="accordion-item-square-3"
-      aria-expanded="true">
+      class="vv-accordion__summary">
       Lorem Ipsum
     </summary>
-    <div class="vv-accordion__content" aria-hidden="false">
+    <div class="vv-accordion__content">
       <p class="font-light text-word-3">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean turpis
         diam, tempor non sem ut, suscipit gravida mi.

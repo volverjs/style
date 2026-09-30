@@ -4,7 +4,7 @@ description: Utilities for controlling the opacity of an element.
 customProperties: true
 ---
 
-<table-utility prefix="opacity" property="opacity" custom-property="opacity" class="mb-lg"></table-utility>
+<table-utility prefix="opacity" property="opacity" custom-property="opacity" class="mb-lg" literal></table-utility>
 <card-example>
     <div class="absolute inset-0 bg-grid mix-blend-plus-lighter"></div>
     <div class="grid grid-cols-4 gap-sm relative text-xs font-semibold">

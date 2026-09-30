@@ -7,7 +7,7 @@ wrapperClass: flex flex-wrap gap-8 items-center justify-center
    Action
 </button>
 
-<button type="button" class="vv-button vv-button--action-quiet vv-button--hover">
+<button type="button" class="vv-button vv-button--action-quiet hover">
     Hover
 </button>
 
