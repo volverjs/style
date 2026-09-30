@@ -5,16 +5,17 @@ on:
     pull_request:
         branches: [main, develop]
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# Sets permissions of the GITHUB_TOKEN for the depfu automerge; a pull request
+# deploys nothing, so it needs no Pages permissions
 permissions:
     contents: write
-    pages: write
-    id-token: write
     pull-requests: write
 
-# Allow one concurrent deployment
+# One queue per pull request: a new push cancels the older run of the same pull
+# request only. A group shared with the publish would let any pull request
+# cancel a release halfway, and every pull request cancel the others.
 concurrency:
-    group: 'pages'
+    group: check-pr-${{ github.event.pull_request.number }}
     cancel-in-progress: true
 
 jobs:
