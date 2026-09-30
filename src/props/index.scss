@@ -6,8 +6,11 @@
 @use 'filters';
 @use 'input';
 @use 'layout';
-@use 'media';
 @use 'sizing';
 @use 'spacing';
 @use 'transitions';
 @use 'typography';
+
+// `media` is left out on purpose: `@custom-media` needs a build step to be
+// resolved, and without one a minifier warns about every rule. A consumer
+// whose pipeline resolves them imports `scss/props/media` on its own.

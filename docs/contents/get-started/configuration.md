@@ -131,6 +131,41 @@ You can customize the layer order and prefix:
 
 CSS `@layer` is supported in all modern browsers (Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+). For older browsers, you may need to disable this feature or use a polyfill.
 
+### Custom Media
+
+Volver Style has a set of [custom media queries](https://drafts.csswg.org/mediaqueries-5/#custom-mq) that name a user preference, a kind of pointer or a breakpoint range: `--motion-ok`, `--os-dark`, `--high-contrast`, `--touch`, `--mouse`, `--md-only` and more. `@custom-media` is still a draft, so the queries work only in a pipeline that replaces them with their definition at build time.
+
+For this reason `@volverjs/style/scss` does not emit them. Import `scss/props/media` in the stylesheet that uses them, after the context and after its `with (...)` if you configure one, so that the breakpoint ranges follow your `$breakpoints`. The configuration has to reach that compilation: the `<style>` block of a component is compiled on its own, and without a `with (...)` of its own it gets the default breakpoints.
+
+```scss
+@use '@volverjs/style/scss/context';
+@use '@volverjs/style/scss/props/media';
+
+@media (--motion-ok) {
+  .card {
+    transition: transform 0.2s;
+  }
+}
+```
+
+Then let your pipeline resolve them, with [postcss-custom-media](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media) (also part of `postcss-preset-env`) or with Lightning CSS:
+
+```js
+// vite.config.js
+export default defineConfig({
+  css: {
+    transformer: 'lightningcss',
+    lightningcss: {
+      drafts: { customMedia: true },
+    },
+  },
+})
+```
+
+Both read the definitions of the file they are transforming, so every stylesheet that uses a query imports the module, the `<style>` block of a component included. The PostCSS configuration of this repository resolves them for its own `dist/` only and is not published, so the resolver has to be configured in your project. Lightning CSS resolves them when `drafts.customMedia` is on and it has `targets`: Vite sets the targets for its `lightningcss` transformer and for its minifier, so `drafts.customMedia` on the default transformer resolves them in the production build but not in development. Without a resolver a query matches nothing, in development and in production, and the minifier warns about every `@custom-media` rule.
+
+The breakpoint ranges cover the same widths as the `bp-only`, `bp-up` and `bp-down` [mixins](/style/settings/breakpoints): with the default breakpoints `--md-only` is `992px <= width < 1024px`, `--md-n-above` is `width >= 992px` and `--md-n-below` is `width < 1024px`. The mixins emit plain media queries and need no build step.
+
 ### Writing Direction
 
 CSS has logical properties for the box: `inset-inline`, `padding-inline` and
