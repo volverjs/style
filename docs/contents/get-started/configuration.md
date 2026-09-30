@@ -162,7 +162,7 @@ export default defineConfig({
 })
 ```
 
-Both read the definitions of the file they are transforming, so every stylesheet that uses a query imports the module, the `<style>` block of a component included. Lightning CSS resolves them only when it has `targets`. Vite sets them for the `lightningcss` transformer and for its minifier, so without `transformer: 'lightningcss'` the queries are resolved in the production build but not in development. Without a resolver a query matches nothing, and the minifier warns about every `@custom-media` rule.
+Both read the definitions of the file they are transforming, so every stylesheet that uses a query imports the module, the `<style>` block of a component included. The PostCSS configuration of this repository resolves them for its own `dist/` only and is not published, so the resolver has to be configured in your project. Lightning CSS resolves them when `drafts.customMedia` is on and it has `targets`: Vite sets the targets for its `lightningcss` transformer and for its minifier, so `drafts.customMedia` on the default transformer resolves them in the production build but not in development. Without a resolver a query matches nothing, in development and in production, and the minifier warns about every `@custom-media` rule.
 
 The breakpoint ranges cover the same widths as the `bp-only`, `bp-up` and `bp-down` [mixins](/style/settings/breakpoints): with the default breakpoints `--md-only` is `992px <= width < 1024px`, `--md-n-above` is `width >= 992px` and `--md-n-below` is `width < 1024px`. The mixins emit plain media queries and need no build step.
 
