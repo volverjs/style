@@ -26,6 +26,7 @@ SCSS (`src/`, prefix every path with `scss/`):
 | `@volverjs/style/scss/context` | config + settings maps + tools; the module to `@use … with (…)` |
 | `@volverjs/style/scss/reset` `…/scss/preflight` `…/scss/base` `…/scss/props` `…/scss/components` `…/scss/utilities` | one layer each |
 | `@volverjs/style/scss/components/vv-button`, `…/scss/props/colors`, `…/scss/utilities/spacing` | single modules |
+| `@volverjs/style/scss/props/media` | `@custom-media` definitions, opt-in: not part of `scss`, `scss/base` or `scss/props` (see "Custom media") |
 | `@volverjs/style/scss/tools` `…/scss/mixins` `…/scss/functions` `…/scss/settings` | tools only, no output |
 | `@volverjs/style/scss/themes/dark` (+ `/context` `/props` `/components` `/settings`) | dark theme |
 
@@ -200,6 +201,28 @@ example).
   @include ctx.bp-up(md) { display: block; }
 }
 ```
+
+## Custom media
+
+`scss/props/media` defines `@custom-media` queries for preferences and pointers
+(`--motion-ok`, `--motion-not-ok`, `--os-dark`, `--os-light`, `--high-contrast`,
+`--touch`, `--stylus`, `--pointer`, `--mouse`, `--portrait`, `--landscape` …) and three
+ranges per breakpoint (`--md-only`, `--md-n-above`, `--md-n-below`). `@custom-media` is
+a draft that has to be resolved at build time, so the module is opt-in and `scss` does
+not emit it. Use it only where the project resolves the queries (postcss-custom-media,
+or Vite with `css.transformer: 'lightningcss'` and
+`css.lightningcss.drafts.customMedia: true`), and `@use` it, after the context, in every
+stylesheet that writes a query: both resolvers read the definitions of the file they
+transform. Without the import, postcss-custom-media leaves the query as it is and it
+matches nothing, while Lightning CSS stops the build with `Custom media query
+--motion-ok is not defined`. A Vue `<style>` block is a compilation of its own, so its
+ranges follow the default `$breakpoints` unless it configures the context too. The CSS
+export `@volverjs/style/props/media` is empty.
+
+The breakpoint ranges cover the same widths as `bp-only`, `bp-up` and `bp-down`:
+`--md-only` is `992px <= width < 1024px`, `--md-n-above` is `width >= 992px`,
+`--md-n-below` is `width < 1024px`, and the last breakpoint has no upper bound. Without
+a resolver in the project, use the `bp-*` mixins, which emit plain media queries.
 
 ## Cascade layers
 
