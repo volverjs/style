@@ -18,6 +18,10 @@
 	const toggleDarkMode = useToggle(isPreviewInDarkMode)
 
 	const items = computed(() => {
+		// the color swatches are backgrounds
+		if (props.property === 'colors') {
+			return utilityColors(icssExports.colors, 'bg')
+		}
 		return icssExports[props.property] ?? []
 	})
 </script>

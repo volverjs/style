@@ -11,6 +11,10 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 | Group | Custom properties |
 |---|---|
 | Palette | `--color-{brand,accent,success,danger,info,warning,gray}` each with `-lighten-1..5` and `-darken-1..5` |
+| Text on a fill | `--color-{brand,accent,success,danger,info,warning}-contrast`: pure white or pure black, whichever has the higher WCAG contrast on the base color (no `--color-gray-contrast`) |
+| Text in a color | `--color-{brand,accent,success,danger,info,warning}-readable` and `--color-{name}-{lighten,darken}-{1..5}-readable`: the shade as text on the surface, pushed just far enough to keep 4.6:1 against `--color-surface` (darker in the light theme, lighter in the dark one), the shade itself when it already reads; driven by `--color-readable-luminance` and `--color-readable-target`, which the dark theme redeclares |
+| Covers | `--color-{brand,...}-cover` and `--color-{name}-darken-{1..5}-cover`: the fill where its contrast text turns dark, transparent otherwise; laid by `vv-button` over its emboss; no utilities |
+| Tint | `--color-tint`: the color gray, word, surface, shadow and backdrop take their hue from; the light brand unless set; not redeclared by the dark theme; no utilities |
 | Text | `--color-word`, `--color-word-1..5` (progressively fainter) |
 | Surfaces | `--color-surface`, `--color-surface-1..5` (progressively deeper), `--color-surface-{brand,accent,success,danger,info,warning}` (tinted) |
 | Overlays | `--color-alpha`, `--color-alpha-1..5`, `--color-shadow`, `--color-backdrop`, `--color-transparent`, `--color-white`, `--color-black`, `--color-scheme` |
@@ -26,7 +30,7 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 | Effects | `--shadow`, `--shadow-{sm,md,lg,xl,2xl,inner,none}`, `--opacity-{0..100 step 5}`, `--blur*`, `--brightness-*`, `--contrast-*`, `--saturate-*` |
 | Motion | `--duration-{75..1000}`, `--ease-{linear,in,out,in-out}`, `--transition-{none,all,colors,opacity,shadow,transform}`, `--transition-property-*`, `--animation-{none,indeterminate,progress-indeterminate,spin,ping,pulse,bounce,shine,clippath}` |
 | Backgrounds | `--bg-*` (patterns and glyphs such as `--bg-close`, `--bg-chevron`), `--gradient-*` |
-| Form fields | `--input-*`: `--input-background-color`, `--input-color`, `--input-min-height`, `--input-gap`, `--input-font-size`, `--input-placeholder-color`, `--input-label-color`, `--input-label-font-size`, `--input-hint-color`, `--input-valid-color`, `--input-invalid-color`, `--input-range-*` … |
+| Form fields | `--input-*`: `--input-background-color`, `--input-color`, `--input-min-height`, `--input-gap`, `--input-font-size`, `--input-placeholder-color`, `--input-label-color`, `--input-label-font-size`, `--input-hint-color`, `--input-valid-color`, `--input-invalid-color` (bars and borders; the hint text reads `--input-valid-text-color`, `--input-invalid-text-color`, their readable form), `--input-range-*` … |
 | Components | `--vv-{block}-{attribute}`, `--vv-{block}-element-{element}-{attribute}`, `--vv-{block}-modifier-{modifier}-{attribute}`, `--vv-{block}-state-{state}-{attribute}` |
 
 Motion tokens (`--duration-*`, `--transition-*`) are `0s`/`none` unless the user has
@@ -51,12 +55,17 @@ compiled output: `--vv-button-background`, `--vv-button-border-color`,
 
 Brand colors derive their ten shades from the base with relative color syntax
 (`hsl(from var(--color-brand) h s calc(l * 1.1))`), so one override recolors everything.
-There are no `--color-brand-hue/saturation/lightness` channels in the default build
-(they exist only when the library is compiled with `$use-color-mix: false`).
+The same goes for `--color-{name}-contrast`, which flips to black when the color turns
+light, and for the neutrals, which follow `--color-tint`: rebranding at runtime means
+setting both, with the light brand as the tint in both themes. There are no
+`--color-brand-hue/saturation/lightness` channels in the default build (they exist only
+when the library is compiled with `$use-color-mix: false`, where the contrast tokens are
+chosen at compile time and `--color-tint` does not exist).
 
 ```css
 :root {
   --color-brand: #45cb85;
+  --color-tint: #45cb85; /* gray, word, surface, shadow, backdrop follow its hue */
   --color-accent: #e040fb;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --rounded: 0.5rem;
@@ -81,11 +90,17 @@ There are no `--color-brand-hue/saturation/lightness` channels in the default bu
   --input-background-color: var(--color-surface);
 }
 
-/* scoped to a region */
+/* scoped to a region: <section class="theme marketing-hero"> */
 .marketing-hero {
   --color-brand: #ff5722;
 }
 ```
+
+A derived token is computed where it is declared, on `:root` and on every `.theme`
+element, so a scoped override only reaches the shades, the contrast tokens and the
+`--vv-*` component properties when the element carrying it also has the `theme` class.
+Without it the region keeps the root's shades and contrast text: a light brand set on a
+plain `<div>` gets the white text computed for the root's brand.
 
 ## Dark theme
 

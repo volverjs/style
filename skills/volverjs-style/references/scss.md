@@ -56,6 +56,8 @@ compile error, because the comma separates configuration entries.
 | Variable | Default | Effect |
 |---|---|---|
 | `$color-brand` `$color-accent` `$color-success` `$color-danger` `$color-info` `$color-warning` `$color-gray` `$color-word` `$color-surface` | brand `#166abd`, accent `#9c27b0` … | palette bases; shades derive |
+| `$color-tint` | `$color-brand` | hue of gray, word, surface, shadow and backdrop while they keep their defaults; emitted as `--color-tint` |
+| `$color-readable-ratio` | `4.6` | contrast the `-readable` shades keep against `--color-surface` in each theme |
 | `$font-family-sans` `$font-family-serif` `$font-family-mono` | system stacks | one quoted string each |
 | `$font-size` `$font-size-dynamic` `$font-weight` `$spacing` `$spacing-dynamic` `$breakpoints` `$colors` | maps | override the scales themselves |
 | `$vv-button` `$vv-card` … one per component | maps | see "Extending a component" |
