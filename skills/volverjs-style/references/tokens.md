@@ -11,9 +11,9 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 | Group | Custom properties |
 |---|---|
 | Palette | `--color-{brand,accent,success,danger,info,warning,gray}` each with `-lighten-1..5` and `-darken-1..5` |
-| Text on a fill | `--color-{brand,accent,success,danger,info,warning}-contrast`: pure white or pure black, whichever has the higher WCAG contrast on the base color (no `--color-gray-contrast`) |
+| Text on a fill | `--color-{brand,accent,success,danger,info,warning}-contrast` and `--color-{name}-darken-{1..5}-contrast`: pure white or pure black, whichever has the higher WCAG contrast on that shade, so take the one of the shade you fill with (no `--color-gray-contrast`) |
 | Text in a color | `--color-{brand,accent,success,danger,info,warning}-readable` and `--color-{name}-{lighten,darken}-{1..5}-readable`: the shade as text on the surface, pushed just far enough to keep 4.6:1 against `--color-surface` (darker in the light theme, lighter in the dark one), the shade itself when it already reads; driven by `--color-readable-luminance` and `--color-readable-target`, which the dark theme redeclares |
-| Covers | `--color-{brand,...}-cover` and `--color-{name}-darken-{1..5}-cover`: the fill where its contrast text turns dark, transparent otherwise; laid by `vv-button` over its emboss; no utilities |
+| Covers | `--color-{brand,...}-cover` and `--color-{name}-darken-{1..5}-cover`: the shade where its contrast text turns dark, transparent otherwise; laid by `vv-button` over its emboss; no utilities |
 | Tint | `--color-tint`: the color gray, word, surface, shadow and backdrop take their hue from; the light brand unless set; not redeclared by the dark theme; no utilities |
 | Text | `--color-word`, `--color-word-1..5` (progressively fainter) |
 | Surfaces | `--color-surface`, `--color-surface-1..5` (progressively deeper), `--color-surface-{brand,accent,success,danger,info,warning}` (tinted) |

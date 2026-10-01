@@ -49,8 +49,8 @@ variants, so `md:p-16` does nothing: the dynamic tokens are how spacing adapts.
 
 ```text
 brand accent success danger info warning gray      each also -lighten-1..5 and -darken-1..5
-brand-contrast accent-contrast success-contrast     white or black, the text that reads on that fill
-danger-contrast info-contrast warning-contrast      (no gray-contrast)
+brand-contrast accent-contrast success-contrast     white or black, the text that reads on that fill,
+danger-contrast info-contrast warning-contrast      also -darken-1..5-contrast, text- only (no gray-contrast)
 brand-readable brand-darken-1-readable ...          the shade as text on the surface, text- only
 word word-1..word-5                                 text colors, from strongest to faintest
 surface surface-1..surface-5                        backgrounds, from page to deepest inset
@@ -199,8 +199,9 @@ There is no `text-40`, `text-44`, `text-56`, `text-64` or `text-80`; the scale j
 
 Text on a filled color takes the `-contrast` of that color, not `text-white`:
 `<span class="bg-brand text-brand-contrast">` stays readable when the brand turns light.
-It is computed against the base color only; on a dark shade such as `bg-warning-darken-5`
-use `text-white`. There is no `text-tint`: `--color-tint` has no utilities.
+On a darker shade take the contrast of that shade: `bg-warning-darken-5
+text-warning-darken-5-contrast`. The contrast colors are `text-` classes only. There is
+no `text-tint`: `--color-tint` has no utilities.
 
 Text written in a color on the page takes the `-readable` of that shade, not the shade:
 `text-brand-readable`, `text-danger-darken-1-readable`. It is the shade itself while it

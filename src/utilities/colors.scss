@@ -4,10 +4,11 @@
 @use '../context' as *;
 
 // The colors map for one group of utilities. A cover only exists to hide the
-// emboss of vv-button and gets no class. A readable shade is a text color: it
-// is left out of the fills ($text: false) and kept without a value for the
-// `text-` classes ($text: true), which then read the token with no fallback,
-// since the expression they would repeat reads the tokens of the props anyway.
+// emboss of vv-button and gets no class. A contrast text and a readable shade
+// are text colors: they are left out of the fills ($text: false) and kept
+// without a value for the `text-` classes ($text: true), which then read the
+// token with no fallback, since the expression they would repeat reads the
+// tokens of the props anyway.
 @function -utility-colors($colors, $text) {
 	$result: ();
 
@@ -18,7 +19,7 @@
 			@each $shade, $color in $value {
 				$shade-name: '#{$shade}';
 
-				@if string.index($shade-name, 'readable') {
+				@if string.index($shade-name, 'readable') or string.index($shade-name, 'contrast') {
 					@if $text {
 						$shades: map.set($shades, $shade, null);
 					}

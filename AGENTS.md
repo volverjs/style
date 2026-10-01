@@ -127,8 +127,8 @@ outputs: that is what tells you which rules moved.
   of an 8-bit step. The contrast and readable tokens in `_functions.scss` route around both.
   The HSL channel branch, `$use-color-mix: false`, is the one for browsers without relative
   color syntax: it emits none outside `@supports (color: color(from red xyz-d65 x y z))`, a
-  token that needs it gets a plain fallback there (the shade, `transparent`), and
-  `check:colors` fails on any that slips through.
+  readable shade gets the shade itself as its plain fallback there, the contrast texts and
+  the covers are chosen at compile time, and `check:colors` fails on any that slips through.
 - **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
   `.block__element--modifier`: its declarations are flattened into the rule of the element
   itself, so they apply to every instance and win over the declarations before them. Express a

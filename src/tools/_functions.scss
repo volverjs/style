@@ -156,8 +156,8 @@
 // @param {String} $name - Color name for CSS variables
 // @param {Number} $steps - Number of lighten/darken steps (default: 5)
 // @param {Number} $scale - Lightness increment per step (default: 10%)
-// @param {Boolean} $text - Add the tokens for text on and in the color:
-//   `contrast` (relative-contrast-value()), the `readable` shades
+// @param {Boolean} $text - Add the tokens for text on and in the color: the
+//   `contrast` texts (relative-contrast-value()), the `readable` shades
 //   (relative-readable-value()) and the covers (relative-cover-value())
 //   (default: false)
 // @return {Map} Complete shades map with base + lighten + darken variants
@@ -186,7 +186,6 @@
 	}
 
 	@if $text {
-		$result: map.set($result, contrast, relative-contrast-value($name));
 		$result: -with-text-tokens($result, $name, $relative: true, $scale: $scale);
 	}
 
@@ -341,7 +340,7 @@
 //   result is exactly white or black. Writing the channels in xyz-d65 would
 //   not be: Chrome turns the white point into 0.99987 1.00005 1.00007, and
 //   text drawn with it differs from white at the antialiased edges.
-// @param {String} $name - Color name for CSS variables
+// @param {String} $name - Shade name for CSS variables (`brand`, `brand-darken-1`)
 // @return {String} CSS relative color syntax expression
 @function relative-contrast-value($name) {
 	@return string.unquote(
@@ -358,21 +357,15 @@
 	@return 'clamp(0, (#{$threshold} - y) * 1000000, 1)';
 }
 
-// The fill under the contrast text of $name: the shade itself where that text
-// turns dark, transparent where it stays white. vv-button lays it over its
+// The fill under the contrast text of a shade: the shade itself where that
+// text turns dark, transparent where it stays white, with the step of
+// relative-contrast-value() on the same shade. vv-button lays it over its
 // dark emboss, which suits light text only, so the emboss disappears under
-// dark text. The opacity follows the base color, the one the text is chosen
-// against, and the color follows the shade the state paints: `darken-1-cover`
-// rescales the lightness of the base cover with the factor of `darken-1`.
-// @param {String} $name - Color name for CSS variables
-// @param {Number} $multiplier - The lightness factor of the shade (default: 1)
+// dark text.
+// @param {String} $name - Shade name for CSS variables (`brand-darken-1`)
 // @return {String} CSS relative color syntax expression
-@function relative-cover-value($name, $multiplier: 1) {
-	@if $multiplier == 1 {
-		@return string.unquote('color(from var(--color-#{$name}) xyz-d65 x y z / calc(1 - #{-contrast-step()}))');
-	}
-
-	@return string.unquote('hsl(from var(--color-#{$name}-cover) h s calc(l * #{$multiplier}) / alpha)');
+@function relative-cover-value($name) {
+	@return string.unquote('color(from var(--color-#{$name}) xyz-d65 x y z / calc(1 - #{-contrast-step()}))');
 }
 
 // ============================================
@@ -441,17 +434,21 @@
 
 // Add the tokens for text in and on a color to its shades map: `readable`
 // next to the base and to every lighten and darken key (`darken-1-readable`),
-// and `cover` next to the base and to every darken key (`darken-1-cover`).
-// With $relative they are computed in CSS; without, for the HSL channel
-// branch, a readable shade is the shade and a cover is transparent, which is
-// what a browser without relative color syntax can draw, and the props add
-// the computed ones under @supports (see relative-text-tokens()).
+// and `contrast` and `cover` next to the base and to every darken key
+// (`darken-1-contrast`, `darken-1-cover`), the shades a filled component
+// paints. With $relative they are computed in CSS. Without, for the HSL
+// channel branch, a readable shade is the shade, which is what a browser
+// without relative color syntax can draw, and the props add the computed one
+// under @supports (see relative-text-tokens()); the contrast text is chosen
+// at compile time by contrast-color(), on the shade of $color, and the cover
+// follows that choice.
 // @param {Map} $map - A shades map
 // @param {String} $name - Color name for CSS variables
 // @param {Boolean} $relative - Compute the tokens in CSS
 // @param {Number} $scale - Lightness factor per step of the shades (default: 10%)
+// @param {Color} $color - The base color, required without $relative (default: null)
 // @return {Map} The map with the text tokens
-@function -with-text-tokens($map, $name, $relative, $scale: 10%) {
+@function -with-text-tokens($map, $name, $relative, $scale: 10%, $color: null) {
 	$result: $map;
 
 	@each $key, $value in $map {
@@ -459,26 +456,31 @@
 		$base: $key == $name;
 		$lighten: string.index($key, 'lighten-') == 1;
 		$darken: string.index($key, 'darken-') == 1;
+		$token: string.index($key, 'readable') or string.index($key, 'contrast') or string.index($key, 'cover');
 
-		@if not string.index($key, 'readable') and not string.index($key, 'cover') {
-			@if $base or $lighten or $darken {
-				$shade: if(sass($base): $name; else: '#{$name}-#{$key}');
-				$readable-key: if(sass($base): readable; else: string.unquote('#{$key}-readable'));
-				$readable: if(sass($relative): relative-readable-value($shade); else: string.unquote('var(--color-#{$shade})'));
-				$result: map.set($result, $readable-key, $readable);
-			}
+		@if not $token and ($base or $lighten or $darken) {
+			$shade: if(sass($base): $name; else: '#{$name}-#{$key}');
+			$suffix: if(sass($base): ''; else: '#{$key}-');
+			$readable: if(sass($relative): relative-readable-value($shade); else: string.unquote('var(--color-#{$shade})'));
+			$result: map.set($result, string.unquote('#{$suffix}readable'), $readable);
 
 			@if $base or $darken {
-				$multiplier: 1;
+				@if $relative {
+					$result: map.set($result, string.unquote('#{$suffix}contrast'), relative-contrast-value($shade));
+					$result: map.set($result, string.unquote('#{$suffix}cover'), relative-cover-value($shade));
+				} @else {
+					$multiplier: 1;
 
-				@if $darken {
-					$step: string.slice($key, string.length('darken-') + 1);
-					$multiplier: 1 - math.div($scale, 100%) * -to-number($step);
+					@if $darken {
+						$multiplier: 1 - math.div($scale, 100%) * -to-number(string.slice($key, string.length('darken-') + 1));
+					}
+
+					$lightness: color.channel($color, 'lightness', $space: hsl) * $multiplier;
+					$contrast: contrast-color(color.change($color, $lightness: $lightness, $space: hsl));
+					$cover: if(sass($contrast == #fff): transparent; else: string.unquote('var(--color-#{$shade})'));
+					$result: map.set($result, string.unquote('#{$suffix}contrast'), $contrast);
+					$result: map.set($result, string.unquote('#{$suffix}cover'), $cover);
 				}
-
-				$cover-key: if(sass($base): cover; else: string.unquote('#{$key}-cover'));
-				$cover: if(sass($relative): relative-cover-value($name, $multiplier); else: transparent);
-				$result: map.set($result, $cover-key, $cover);
 			}
 		}
 	}
@@ -498,11 +500,12 @@
 	@return $result;
 }
 
-// The readable and cover tokens of a colors map computed in CSS, for the HSL
-// channel branch to declare under @supports: the shade map entries there hold
-// the plain fallbacks of -with-text-tokens()
+// The readable shades of a colors map computed in CSS, for the HSL channel
+// branch to declare under @supports: the shade map entries there hold the
+// plain fallbacks of -with-text-tokens(). The contrast text and the covers
+// stay those chosen at compile time, which the two have to agree on.
 // @param {Map} $colors - A colors map
-// @return {Map} The readable and cover keys alone, computed in CSS
+// @return {Map} The readable keys alone, computed in CSS
 @function relative-text-tokens($colors) {
 	$result: ();
 
@@ -512,7 +515,7 @@
 			$tokens: ();
 
 			@each $key, $value in $computed {
-				@if string.index('#{$key}', 'readable') or string.index('#{$key}', 'cover') {
+				@if string.index('#{$key}', 'readable') {
 					$tokens: map.set($tokens, $key, $value);
 				}
 			}
@@ -558,10 +561,11 @@
 // ============================================
 // Legacy Color Functions (HSL channel-based)
 // ============================================
-// @param {Boolean} $text - Add the tokens for text on and in the color:
-//   `contrast`, chosen at compile time by contrast-color(), and the
-//   `readable` shades and the covers in the plain form a browser without
-//   relative color syntax can draw (see -with-text-tokens()) (default: false)
+// @param {Boolean} $text - Add the tokens for text on and in the color: the
+//   `contrast` texts and the covers, chosen at compile time by
+//   contrast-color(), and the `readable` shades in the plain form a browser
+//   without relative color syntax can draw (see -with-text-tokens())
+//   (default: false)
 @function color-shades-map(
 	$color,
 	$name,
@@ -597,8 +601,7 @@
 	);
 
 	@if $text {
-		$result: map.set($result, contrast, contrast-color($color));
-		$result: -with-text-tokens($result, $name, $relative: false, $scale: $scale);
+		$result: -with-text-tokens($result, $name, $relative: false, $scale: $scale, $color: $color);
 	}
 
 	@return $result;

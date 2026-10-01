@@ -81,7 +81,7 @@ _Alpha colors_ are translucent layers of black, from `--color-alpha` (fully tran
 The palette also holds `--color-black`, `--color-white`, `--color-transparent`, `--color-shadow`, the tint of the shadows, and `--color-backdrop`, the veil behind a dialog.
 
 ### Contrast Colors
-_Contrast colors_ are the text that goes on a filled color. Each of brand, accent, success, danger, info and warning has one, `--color-brand-contrast` and so on: pure white or pure black, whichever gives the text the higher WCAG contrast ratio on the base color. It is computed in CSS, so it follows the color when it changes at runtime. Buttons, badges, avatars, notification headers and the switch use it, and the `text-*-contrast` classes expose it.
+_Contrast colors_ are the text that goes on a filled color. Each of brand, accent, success, danger, info and warning has one, `--color-brand-contrast` and so on: pure white or pure black, whichever gives the text the higher WCAG contrast ratio on the base color, so never less than 4.58:1. It is computed in CSS, so it follows the color when it changes at runtime. Buttons, badges, avatars, notification headers and the switch use it, and the `text-*-contrast` classes expose it.
 
 <card-example title="Contrast Colors">
   <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
@@ -89,9 +89,9 @@ _Contrast colors_ are the text that goes on a filled color. Each of brand, accen
   </div>
 </card-example>
 
-The token reads the base color only. On a darker shade, such as the `warning-darken-5` that fills a warning badge, white is the right text whatever the color, and the components keep `--color-white` there. Gray has no contrast token: the components fill with its dark shades, which always take white.
+Every darker shade has its own, `--color-brand-darken-1-contrast` to `--color-brand-darken-5-contrast`, chosen on that shade. A component takes the one of the shade it paints: the hovered button takes `darken-1`, the active and pressed one `darken-2`, the warning badge `warning-darken-5`. A color near the threshold can therefore take black at rest and white on its darker states, as `#9365ff` does, black at 5.55:1 and white at 5.20:1 on hover. Gray has no contrast token: the components fill with its dark shades, which always take white.
 
-Next to it, the base and every darker shade have a _cover_, `--color-brand-cover`, `--color-brand-darken-1-cover` and so on: the fill itself where the contrast text of the base color turns dark, transparent where it stays white. The button lays it over its dark emboss, which suits light text only, so the emboss disappears under dark text; each state lays the cover of the shade it paints. Covers have no utility classes.
+Next to it, the base and every darker shade have a _cover_, `--color-brand-cover`, `--color-brand-darken-1-cover` and so on: the shade itself where its contrast text turns dark, transparent where it stays white. The button lays it over its dark emboss, which suits light text only, so the emboss disappears under dark text; each state lays the cover of the shade it paints. Covers have no utility classes.
 
 ### Readable Colors
 _Readable colors_ are the shades of a color written as text on the surface. Every shade of brand, accent, success, danger, info and warning has one, `--color-brand-readable`, `--color-brand-darken-1-readable` and so on: the shade itself when it already reads, and otherwise the shade pushed just far enough from the surface for a contrast ratio of 4.6:1, darker in the light theme and lighter in the dark one. Links, outlined and ghost badges, tabs, breadcrumbs, the headers of alerts, the hints of the fields and the other components that write in a color use them, and the `text-*-readable` classes expose them.

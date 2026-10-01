@@ -102,16 +102,15 @@ $vv-badge: (
 			background-color: var(--color-success),
 			color: var(--color-success-contrast),
 		),
-		// Filled with the darkest shade, which takes white text for any
-		// warning or info color but white itself: the contrast token of the
-		// base color would pick black here.
+		// Filled with the darkest shade, so the text is the contrast of that
+		// shade and not of the base color
 		warning: (
 			background-color: var(--color-warning-darken-5),
-			color: var(--color-white),
+			color: var(--color-warning-darken-5-contrast),
 		),
 		info: (
 			background-color: var(--color-info-darken-5),
-			color: var(--color-white),
+			color: var(--color-info-darken-5-contrast),
 		),
 		accent: (
 			background-color: var(--color-accent),

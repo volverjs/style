@@ -93,7 +93,7 @@ $dark-vv-alert: (
 					border-color: var(--color-warning-darken-5),
 					element: (
 						header: (
-							color: var(--color-white),
+							color: var(--color-warning-darken-5-contrast),
 							background-color: var(--color-warning-darken-5),
 						),
 					),
@@ -102,7 +102,7 @@ $dark-vv-alert: (
 					border-color: var(--color-info-darken-2),
 					element: (
 						header: (
-							color: var(--color-white),
+							color: var(--color-info-darken-5-contrast),
 							background-color: var(--color-info-darken-5),
 						),
 					),

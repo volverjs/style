@@ -227,13 +227,16 @@ $vv-alert: (
 						),
 					),
 				),
-				// Warning and info fill with the darkest shade and keep the
-				// white of the notification header
+				// Warning and info fill with the darkest shade, and take its contrast
 				warning: (
 					border-color: var(--color-warning-darken-5),
 					element: (
 						header: (
 							background-color: var(--color-warning-darken-5),
+							color: var(--color-warning-darken-5-contrast),
+						),
+						icon: (
+							color: var(--color-warning-darken-5-contrast),
 						),
 					),
 				),
@@ -242,6 +245,10 @@ $vv-alert: (
 					element: (
 						header: (
 							background-color: var(--color-info-darken-5),
+							color: var(--color-info-darken-5-contrast),
+						),
+						icon: (
+							color: var(--color-info-darken-5-contrast),
 						),
 					),
 				),

@@ -1,6 +1,7 @@
 // Checks the color tokens that CSS relative color syntax computes at runtime:
-// - the white or black text of --color-<name>-contrast, against a reference
-//   set of colors and the WCAG 2 contrast ratio;
+// - the white or black text of --color-<name>-contrast and of the darker
+//   shades, against a reference set of colors and the WCAG 2 contrast ratio,
+//   and the text of the states of vv-button that follows them;
 // - the neutrals written relative to --color-tint, against the literals they
 //   replaced, for the default brand and for #140e33, in both themes;
 // - the readable shades, which keep the reference set at 4.5:1 or more on
@@ -37,10 +38,11 @@ const toHex = (channels) =>
 		.join('')}`
 const toLinear = (value) =>
 	value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
-const luminance = (hex) => {
-	const [r, g, b] = hexToRgb(hex).map(toLinear)
+const luminanceOf = (channels) => {
+	const [r, g, b] = channels.map(toLinear)
 	return 0.2126 * r + 0.7152 * g + 0.0722 * b
 }
+const luminance = (hex) => luminanceOf(hexToRgb(hex))
 const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
 const hue = ([r, g, b]) => {
 	const max = Math.max(r, g, b)
@@ -63,6 +65,18 @@ const hsl = (h, s, l) => {
 		return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))
 	}
 	return [channel(0), channel(8), channel(4)]
+}
+const toHsl = (channels) => {
+	const max = Math.max(...channels)
+	const min = Math.min(...channels)
+	const l = (max + min) / 2
+	const s = max === min ? 0 : (max - min) / (1 - Math.abs(2 * l - 1))
+	return [hue(channels), s, l]
+}
+// a shade of the palette, hsl(from <color> h s calc(l * <multiplier>))
+const shade = (hex, multiplier) => {
+	const [h, s, l] = toHsl(hexToRgb(hex))
+	return hsl(h, s, Math.min(1, l * multiplier))
 }
 // #endregion
 
@@ -122,9 +136,17 @@ check(
 	`--color-brand-contrast is ${emitted['--color-brand-contrast']}`,
 )
 check(
+	emitted['--color-brand-darken-1-contrast'] ===
+		`color(from color(from var(--color-brand-darken-1) xyz-d65 x y z / clamp(0, (${cssThreshold} - y) * 1000000, 1)) srgb alpha alpha alpha / 1)`,
+	`--color-brand-darken-1-contrast is ${emitted['--color-brand-darken-1-contrast']}`,
+)
+check(
 	Math.abs(threshold - (Math.sqrt(1.05 * 0.05) - 0.05)) < 1e-9,
 	`threshold ${threshold}`,
 )
+// the text the CSS threshold puts on a luminance, and its ratio
+const pickText = (y) => (y < cssThreshold ? 'white' : 'black')
+const textRatio = (y) => ratio(y, pickText(y) === 'white' ? 1 : 0)
 
 const table = reference.map((hex, index) => {
 	const [, sassLuminance, pick] = probe.match(
@@ -150,11 +172,27 @@ const table = reference.map((hex, index) => {
 		css === best,
 		`${hex}: the CSS threshold picks ${css}, WCAG prefers ${best}`,
 	)
+	// every darker shade picks its own text, at 4.5:1 or more
+	for (let step = 1; step <= 5; step++) {
+		const y = luminanceOf(shade(hex, 1 - step / 10))
+		const shadeBest = ratio(y, 1) >= ratio(y, 0) ? 'white' : 'black'
+		check(
+			pickText(y) === shadeBest && textRatio(y) >= 4.5,
+			`${hex}: darken-${step} takes ${pickText(y)} at ${textRatio(y).toFixed(2)}, WCAG prefers ${shadeBest}`,
+		)
+	}
+	// vv-button paints darken-1 on hover, darken-2 when active or pressed
+	const state = (multiplier) => {
+		const y = luminanceOf(shade(hex, multiplier))
+		return `${pickText(y)} ${textRatio(y).toFixed(2)}`
+	}
 	return {
 		color: hex,
 		text: best,
 		ratio: (best === 'white' ? onWhite : onBlack).toFixed(2),
 		other: (best === 'white' ? onBlack : onWhite).toFixed(2),
+		hover: state(0.9),
+		active: state(0.8),
 	}
 })
 // #endregion
@@ -368,51 +406,86 @@ check(
 check(
 	legacy['--color-brand-darken-1-readable'] ===
 		'var(--color-brand-darken-1)' &&
-		legacy['--color-brand-cover'] === 'transparent' &&
 		legacySupported.includes(
 			`--color-brand-darken-1-readable: ${emitted['--color-brand-darken-1-readable']}`,
-		) &&
-		legacySupported.includes(
-			`--color-brand-darken-2-cover: ${emitted['--color-brand-darken-2-cover']}`,
 		),
-	'without $use-color-mix the readable shades and covers lack their fallback or their computed form',
+	'without $use-color-mix the readable shades lack their fallback or their computed form',
+)
+check(
+	!/-(contrast|cover):/.test(legacySupported),
+	'without $use-color-mix a contrast text or a cover is computed in CSS, apart from the text chosen at compile time',
 )
 check(
 	!('--color-tint' in legacy),
 	'without $use-color-mix --color-tint is emitted',
 )
+// without $use-color-mix the contrast text of each shade is chosen at compile
+// time, and the cover agrees with it: the shade under dark text, transparent
+// under white
 for (const [name, hex] of Object.entries({
-	brand: '#fff',
-	accent: '#fff',
-	success: '#fff',
-	danger: '#fff',
-	info: '#000',
-	warning: '#000',
+	brand: '#166abd',
+	accent: '#9c27b0',
+	success: '#178230',
+	danger: '#af2323',
+	info: '#31ccec',
+	warning: '#e7b735',
 })) {
-	check(
-		legacy[`--color-${name}-contrast`] === hex,
-		`legacy ${name} contrast is ${legacy[`--color-${name}-contrast`]}`,
-	)
+	for (let step = 0; step <= 5; step++) {
+		const key = step ? `${name}-darken-${step}` : name
+		const white =
+			pickText(luminanceOf(shade(hex, 1 - step / 10))) === 'white'
+		const contrast = legacy[`--color-${key}-contrast`]
+		const cover = legacy[`--color-${key}-cover`]
+		check(
+			contrast === (white ? '#fff' : '#000') &&
+				cover === (white ? 'transparent' : `var(--color-${key})`),
+			`legacy ${key} contrast is ${contrast}, cover ${cover}`,
+		)
+	}
 }
 check(!('--color-gray-contrast' in emitted), '--color-gray-contrast is emitted')
 
-// the covers share the threshold of the contrast tokens, and the button lays
-// the one of the shade each state paints
+// the covers share the step of the contrast tokens on the same shade, and
+// the button takes the text and lays the cover of the shade each state paints
+const cover = (name) =>
+	`color(from var(--color-${name}) xyz-d65 x y z / calc(1 - clamp(0, (${cssThreshold} - y) * 1000000, 1)))`
 check(
-	emitted['--color-brand-cover'] ===
-		`color(from var(--color-brand) xyz-d65 x y z / calc(1 - clamp(0, (${cssThreshold} - y) * 1000000, 1)))` &&
-		emitted['--color-brand-darken-1-cover'] ===
-			'hsl(from var(--color-brand-cover) h s calc(l * 0.9) / alpha)',
-	`--color-brand-cover is ${emitted['--color-brand-cover']}`,
+	emitted['--color-brand-cover'] === cover('brand') &&
+		emitted['--color-brand-darken-1-cover'] === cover('brand-darken-1'),
+	`--color-brand-cover is ${emitted['--color-brand-cover']}, darken-1 ${emitted['--color-brand-darken-1-cover']}`,
 )
 const button = compile(
 	`@use 'src/context' with ($use-custom-props-for-components: false); @use 'src/components/vv-button';`,
 )
+// the rules that paint a shade: each must also take its text and its cover
+for (const shadeName of [
+	'brand-darken-1',
+	'brand-darken-2',
+	'danger-darken-1',
+	'danger-darken-2',
+]) {
+	const rules = button
+		.split('}')
+		.filter((rule) =>
+			rule.includes(`background: var(--color-${shadeName})`),
+		)
+	check(
+		rules.length > 0 &&
+			rules.every(
+				(rule) =>
+					rule.includes(
+						`color: var(--color-${shadeName}-contrast)`,
+					) &&
+					rule.includes(
+						`text-shadow: 0 1px 0 var(--color-${shadeName}-cover)`,
+					),
+			),
+		`vv-button paints ${shadeName} without its contrast text and its cover`,
+	)
+}
 check(
-	/:hover[^{]*\{[^}]*text-shadow: 0 1px 0 var\(--color-brand-darken-1-cover\)/.test(
-		button,
-	) && !button.includes(' - y)'),
-	'vv-button does not lay the cover of its hover shade, or computes one itself',
+	!button.includes(' - y)'),
+	'vv-button computes a contrast or a cover itself',
 )
 
 // a field paints its bar in its color and writes its hint in the readable one
@@ -436,9 +509,12 @@ check(
 )
 check(
 	/\.text-brand-darken-1-readable\b/.test(utilities) &&
-		!/\.(bg|border|decoration)-[a-z0-9-]*readable\b/.test(utilities) &&
+		/\.text-brand-darken-1-contrast\b/.test(utilities) &&
+		!/\.(bg|border|decoration)-[a-z0-9-]*(readable|contrast)\b/.test(
+			utilities,
+		) &&
 		!/-cover\b/.test(utilities),
-	'the readable shades are not text utilities alone, or a cover has a utility',
+	'the readable shades or the contrast texts are not text utilities alone, or a cover has a utility',
 )
 const preflight = compile(`@use 'src/context'; @use 'src/preflight';`)
 check(
@@ -460,5 +536,5 @@ if (failures.length) {
 	process.exit(1)
 }
 console.log(
-	`Color checks passed: contrast threshold ${cssThreshold}, neutrals, readable shades, Safari 17 steps, explicit values, legacy branch, utilities.`,
+	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable shades, Safari 17 steps, explicit values, legacy branch, utilities.`,
 )
