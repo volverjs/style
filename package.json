@@ -62,7 +62,7 @@
     "@nabla/vite-plugin-eslint": "^3.0.1",
     "@types/node": "^26.4.1",
     "@vitejs/plugin-vue": "^6.0.8",
-    "@vueuse/core": "^14.4.0",
+    "@vueuse/core": "^15.0.0",
     "@vueuse/head": "^2.0.0",
     "eslint": "^10.10.0",
     "eslint-config-prettier": "^10.1.8",
