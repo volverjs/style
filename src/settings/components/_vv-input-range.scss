@@ -155,7 +155,7 @@ $vv-input-range: (
 			--input-range-accent-color: var(--input-valid-color),
 			element: (
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				value: (
 					border-color: var(--input-valid-color),
@@ -166,7 +166,7 @@ $vv-input-range: (
 			--input-range-accent-color: var(--input-invalid-color),
 			element: (
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				value: (
 					border-color: var(--input-invalid-color),

@@ -1,22 +1,22 @@
 $dark-vv-badge: (
 	modifier: (
 		outline: (
-			color: var(--color-brand-lighten-3),
+			color: var(--color-brand-lighten-3-readable),
 			modifier: (
 				danger: (
-					color: var(--color-danger-lighten-3),
+					color: var(--color-danger-lighten-3-readable),
 				),
 				success: (
-					color: var(--color-success-lighten-3),
+					color: var(--color-success-lighten-3-readable),
 				),
 				warning: (
-					color: var(--color-warning),
+					color: var(--color-warning-readable),
 				),
 				info: (
-					color: var(--color-info),
+					color: var(--color-info-readable),
 				),
 				accent: (
-					color: var(--color-accent-lighten-3),
+					color: var(--color-accent-lighten-3-readable),
 				),
 				gray: (
 					color: var(--color-gray-lighten-3),
@@ -24,22 +24,22 @@ $dark-vv-badge: (
 			),
 		),
 		ghost: (
-			color: var(--color-brand-lighten-3),
+			color: var(--color-brand-lighten-3-readable),
 			modifier: (
 				danger: (
-					color: var(--color-danger-lighten-3),
+					color: var(--color-danger-lighten-3-readable),
 				),
 				success: (
-					color: var(--color-success-lighten-3),
+					color: var(--color-success-lighten-3-readable),
 				),
 				warning: (
-					color: var(--color-warning),
+					color: var(--color-warning-readable),
 				),
 				info: (
-					color: var(--color-info),
+					color: var(--color-info-readable),
 				),
 				accent: (
-					color: var(--color-accent-lighten-3),
+					color: var(--color-accent-lighten-3-readable),
 				),
 				gray: (
 					color: var(--color-gray-lighten-3),

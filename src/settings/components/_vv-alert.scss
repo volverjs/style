@@ -78,10 +78,10 @@ $vv-alert: (
 			background-color: var(--color-surface-success),
 			element: (
 				icon: (
-					color: var(--color-success-darken-1),
+					color: var(--color-success-darken-1-readable),
 				),
 				header: (
-					color: var(--color-success-darken-1),
+					color: var(--color-success-darken-1-readable),
 				),
 			),
 		),
@@ -90,10 +90,10 @@ $vv-alert: (
 			background-color: var(--color-surface-danger),
 			element: (
 				icon: (
-					color: var(--color-danger),
+					color: var(--color-danger-readable),
 				),
 				header: (
-					color: var(--color-danger),
+					color: var(--color-danger-readable),
 				),
 			),
 		),
@@ -102,10 +102,10 @@ $vv-alert: (
 			background-color: var(--color-surface-warning),
 			element: (
 				icon: (
-					color: var(--color-warning-darken-5),
+					color: var(--color-warning-darken-5-readable),
 				),
 				header: (
-					color: var(--color-warning-darken-5),
+					color: var(--color-warning-darken-5-readable),
 				),
 			),
 		),
@@ -114,10 +114,10 @@ $vv-alert: (
 			background-color: var(--color-surface-info),
 			element: (
 				icon: (
-					color: var(--color-info-darken-5),
+					color: var(--color-info-darken-5-readable),
 				),
 				header: (
-					color: var(--color-info-darken-5),
+					color: var(--color-info-darken-5-readable),
 				),
 			),
 		),
@@ -126,10 +126,10 @@ $vv-alert: (
 			background-color: var(--color-surface-accent),
 			element: (
 				icon: (
-					color: var(--color-accent),
+					color: var(--color-accent-readable),
 				),
 				header: (
-					color: var(--color-accent),
+					color: var(--color-accent-readable),
 				),
 			),
 		),
@@ -138,10 +138,10 @@ $vv-alert: (
 			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand-darken-3),
+					color: var(--color-brand-darken-3-readable),
 				),
 				header: (
-					color: var(--color-brand-darken-3),
+					color: var(--color-brand-darken-3-readable),
 				),
 			),
 		),
@@ -208,6 +208,10 @@ $vv-alert: (
 					element: (
 						header: (
 							background-color: var(--color-success),
+							color: var(--color-success-contrast),
+						),
+						icon: (
+							color: var(--color-success-contrast),
 						),
 					),
 				),
@@ -216,9 +220,15 @@ $vv-alert: (
 					element: (
 						header: (
 							background-color: var(--color-danger),
+							color: var(--color-danger-contrast),
+						),
+						icon: (
+							color: var(--color-danger-contrast),
 						),
 					),
 				),
+				// Warning and info fill with the darkest shade and keep the
+				// white of the notification header
 				warning: (
 					border-color: var(--color-warning-darken-5),
 					element: (
@@ -240,6 +250,10 @@ $vv-alert: (
 					element: (
 						header: (
 							background-color: var(--color-accent),
+							color: var(--color-accent-contrast),
+						),
+						icon: (
+							color: var(--color-accent-contrast),
 						),
 					),
 				),
@@ -248,6 +262,10 @@ $vv-alert: (
 					element: (
 						header: (
 							background-color: var(--color-brand),
+							color: var(--color-brand-contrast),
+						),
+						icon: (
+							color: var(--color-brand-contrast),
 						),
 					),
 				),

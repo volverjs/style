@@ -15,42 +15,42 @@ $dark-vv-alert: (
 		success: (
 			element: (
 				header: (
-					color: var(--color-success-lighten-3),
+					color: var(--color-success-lighten-3-readable),
 				),
 			),
 		),
 		warning: (
 			element: (
 				header: (
-					color: var(--color-warning),
+					color: var(--color-warning-readable),
 				),
 			),
 		),
 		danger: (
 			element: (
 				header: (
-					color: var(--color-danger-lighten-5),
+					color: var(--color-danger-lighten-5-readable),
 				),
 			),
 		),
 		accent: (
 			element: (
 				header: (
-					color: var(--color-accent-lighten-4),
+					color: var(--color-accent-lighten-4-readable),
 				),
 			),
 		),
 		brand: (
 			element: (
 				header: (
-					color: var(--color-brand-lighten-3),
+					color: var(--color-brand-lighten-3-readable),
 				),
 			),
 		),
 		info: (
 			element: (
 				header: (
-					color: var(--color-info),
+					color: var(--color-info-readable),
 				),
 			),
 		),
@@ -61,7 +61,7 @@ $dark-vv-alert: (
 					border-color: var(--color-danger-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-danger-contrast)
 						),
 					),
 				),
@@ -69,7 +69,7 @@ $dark-vv-alert: (
 					border-color: var(--color-brand-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-brand-contrast)
 						),
 					),
 				),
@@ -77,7 +77,7 @@ $dark-vv-alert: (
 					border-color: var(--color-success-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-success-contrast)
 						),
 					),
 				),
@@ -85,7 +85,7 @@ $dark-vv-alert: (
 					border-color: var(--color-accent-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-accent-contrast)
 						),
 					),
 				),

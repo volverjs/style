@@ -15,7 +15,7 @@ $vv-text: (
 			margin-block: var(--spacing-16),
 		),
 		link: (
-			color: var(--color-brand),
+			color: var(--color-brand-readable),
 			state: (
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-brand),
@@ -26,7 +26,7 @@ $vv-text: (
 					text-underline-offset: var(--spacing-4),
 				),
 				active: (
-					color: var(--color-brand-darken-3),
+					color: var(--color-brand-darken-3-readable),
 				),
 				disabled: (
 					opacity: var(--opacity-50),
