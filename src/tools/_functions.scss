@@ -156,12 +156,17 @@
 // @param {String} $name - Color name for CSS variables
 // @param {Number} $steps - Number of lighten/darken steps (default: 5)
 // @param {Number} $scale - Lightness increment per step (default: 10%)
+// @param {Boolean} $text - Add the tokens for text on and in the color:
+//   `contrast` (relative-contrast-value()), the `readable` shades
+//   (relative-readable-value()) and the covers (relative-cover-value())
+//   (default: false)
 // @return {Map} Complete shades map with base + lighten + darken variants
 @function color-mix-shades-map(
 	$color,
 	$name,
 	$steps: 5,
-	$scale: 10%
+	$scale: 10%,
+	$text: false
 ) {
 	// Start with base color
 	$result: color-base-map($color, $name);
@@ -178,6 +183,11 @@
 		$key: 'darken-#{$i}';
 		$change: $scale * $i * -1;
 		$result: map.merge($result, (#{$key}: relative-color-value($name, $change)));
+	}
+
+	@if $text {
+		$result: map.set($result, contrast, relative-contrast-value($name));
+		$result: -with-text-tokens($result, $name, $relative: true, $scale: $scale);
 	}
 
 	@return $result;
@@ -260,16 +270,306 @@
 	@return $result;
 }
 
+// A neutral that takes its hue from the tint. While $color is still the
+// default derived from $tint, hsl(color-hue($tint) $saturation $lightness),
+// it is written relative to var(--color-tint), so a runtime override of the
+// tint moves it too. A color set explicitly is returned as it is.
+// @param {Color} $color - The neutral, as configured
+// @param {Color} $tint - The color the default takes its hue from
+// @param {Number} $saturation - Saturation of the default
+// @param {Number} $lightness - Lightness of the default
+// @param {Number} $alpha - Alpha of the default (default: 1)
+// @return {Color|String} $color, or its relative color syntax expression
+@function tinted-neutral-value($color, $tint, $saturation, $lightness, $alpha: 1) {
+	@if $color != hsl(color-hue($tint), $saturation, $lightness, $alpha) {
+		@return $color;
+	}
+
+	@if $alpha == 1 {
+		@return string.unquote('hsl(from var(--color-tint) h #{$saturation} #{$lightness})');
+	}
+
+	@return string.unquote('hsl(from var(--color-tint) h #{$saturation} #{$lightness} / #{$alpha})');
+}
+
+// ============================================
+// Contrast Functions
+// ============================================
+
+// WCAG 2 relative luminance: the Y of the color in CIE XYZ (D65), which is
+// the weighted sum of the linear sRGB channels that WCAG defines.
+// @param {Color} $color - Any color
+// @return {Number} Luminance, 0 for black and 1 for white
+@function color-luminance($color) {
+	@return color.channel($color, 'y', $space: xyz-d65);
+}
+
+// The luminance at which $light and $dark give the same WCAG contrast ratio:
+// below it $light reads better, above it $dark does. For white and black it
+// is sqrt(1.05 * 0.05) - 0.05, about 0.1791.
+// @param {Color} $light - The light text color (default: white)
+// @param {Color} $dark - The dark text color (default: black)
+// @return {Number} Threshold luminance
+@function contrast-threshold($light: #fff, $dark: #000) {
+	@return math.sqrt((color-luminance($light) + 0.05) * (color-luminance($dark) + 0.05)) - 0.05;
+}
+
+// Pick at compile time the text color that reads better on $color
+// @param {Color} $color - The filled background
+// @param {Color} $light - The light text color (default: white)
+// @param {Color} $dark - The dark text color (default: black)
+// @return {Color} $light or $dark, whichever has the higher contrast ratio
+@function contrast-color($color, $light: #fff, $dark: #000) {
+	@if color-luminance($color) < contrast-threshold($light, $dark) {
+		@return $light;
+	}
+
+	@return $dark;
+}
+
+// The choice of contrast-color() between white and black made in CSS, so it
+// follows a runtime override of --color-#{$name}. Two nested relative colors:
+// - the inner one reads the luminance as the `y` channel of xyz-d65, and a
+//   clamp turns it into a step, 1 below the threshold and 0 above it, that it
+//   stores as its alpha. The xyz-d65 channels are numbers in every engine,
+//   while Safari 17 reads those of srgb as percentages and drops the whole
+//   value as soon as one meets a number.
+// - the outer one copies that alpha into the three sRGB channels. The
+//   keyword has the type of those channels in each engine, a percentage in
+//   Safari 17 and a number elsewhere, so it can stand alone in them (not in
+//   a sum with a number), and no color space conversion touches it, so the
+//   result is exactly white or black. Writing the channels in xyz-d65 would
+//   not be: Chrome turns the white point into 0.99987 1.00005 1.00007, and
+//   text drawn with it differs from white at the antialiased edges.
+// @param {String} $name - Color name for CSS variables
+// @return {String} CSS relative color syntax expression
+@function relative-contrast-value($name) {
+	@return string.unquote(
+		'color(from color(from var(--color-#{$name}) xyz-d65 x y z / #{-contrast-step()}) srgb alpha alpha alpha / 1)'
+	);
+}
+
+// The step of the contrast token, read from the `y` of an xyz-d65 origin: 1
+// where white text reads better, 0 where black does. The threshold has four
+// decimals, 0.1791, the most stylelint allows in the source.
+@function -contrast-step() {
+	$threshold: math.div(math.round(contrast-threshold() * 10000), 10000);
+
+	@return 'clamp(0, (#{$threshold} - y) * 1000000, 1)';
+}
+
+// The fill under the contrast text of $name: the shade itself where that text
+// turns dark, transparent where it stays white. vv-button lays it over its
+// dark emboss, which suits light text only, so the emboss disappears under
+// dark text. The opacity follows the base color, the one the text is chosen
+// against, and the color follows the shade the state paints: `darken-1-cover`
+// rescales the lightness of the base cover with the factor of `darken-1`.
+// @param {String} $name - Color name for CSS variables
+// @param {Number} $multiplier - The lightness factor of the shade (default: 1)
+// @return {String} CSS relative color syntax expression
+@function relative-cover-value($name, $multiplier: 1) {
+	@if $multiplier == 1 {
+		@return string.unquote('color(from var(--color-#{$name}) xyz-d65 x y z / calc(1 - #{-contrast-step()}))');
+	}
+
+	@return string.unquote('hsl(from var(--color-#{$name}-cover) h s calc(l * #{$multiplier}) / alpha)');
+}
+
+// ============================================
+// Readable Functions
+// ============================================
+
+// The luminance that text on $surface has to stay beyond for a contrast
+// ratio of $ratio: at most this much on a light surface, at least this much
+// on a dark one. Rounded to four decimals, toward the safe side.
+// @param {Color} $surface - The surface the text sits on
+// @param {Number} $ratio - The contrast ratio to keep
+// @return {Number} Bound luminance
+@function readable-luminance($surface, $ratio) {
+	$y: color-luminance($surface);
+
+	@if $y >= contrast-threshold() {
+		@return math.div(math.floor((math.div($y + 0.05, $ratio) - 0.05) * 10000), 10000);
+	}
+
+	@return math.div(math.ceil(($ratio * ($y + 0.05) - 0.05) * 10000), 10000);
+}
+
+// Where text on $surface is pushed when it reads too close to it: 0 toward
+// black on a light surface, 1 toward white on a dark one
+// @param {Color} $surface - The surface the text sits on
+// @return {Number} 0 or 1
+@function readable-target($surface) {
+	@if color-luminance($surface) >= contrast-threshold() {
+		@return 0;
+	}
+
+	@return 1;
+}
+
+// A shade written as text, pushed just far enough from the surface to keep
+// the contrast ratio of --color-readable-luminance, and left alone when it
+// already does. The mix runs in xyz-d65: its channels are numbers in every
+// engine (Safari 17 reads those of srgb and the `alpha` keyword otherwise),
+// and mixing there is mixing linear light, so scaling toward black lands on
+// the bound luminance exactly and mixing toward white stays in gamut. The
+// weight is 0 for a shade that already reads, and the color is then written
+// back unchanged, through a round trip in xyz-d65 that lands within a
+// fraction of an 8-bit step: a channel that sits on the edge of a step can
+// move by one. Mixing toward white also pulls the chroma down, so a very dark
+// color raised in the dark theme comes out greyish.
+// The theme sets the bound and the direction, --color-readable-target, so
+// the same token darkens on a light surface and lightens on a dark one.
+// @param {String} $origin - Any CSS color, `var(--input-valid-color)`
+// @return {String} CSS relative color syntax expression
+@function readable-color-value($origin) {
+	$weight: 'clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)';
+	$x: math.div(math.round(color.channel(#fff, 'x', $space: xyz-d65) * 10000), 10000);
+	$z: math.div(math.round(color.channel(#fff, 'z', $space: xyz-d65) * 10000), 10000);
+
+	@return string.unquote(
+		'color(from #{$origin} xyz-d65 calc(x + (#{$x} * var(--color-readable-target) - x) * #{$weight}) calc(y + (var(--color-readable-target) - y) * #{$weight}) calc(z + (#{$z} * var(--color-readable-target) - z) * #{$weight}))'
+	);
+}
+
+// readable-color-value() of a shade of the palette
+// @param {String} $name - Shade name for CSS variables (`brand-darken-1`)
+// @return {String} CSS relative color syntax expression
+@function relative-readable-value($name) {
+	@return readable-color-value('var(--color-#{$name})');
+}
+
+// Add the tokens for text in and on a color to its shades map: `readable`
+// next to the base and to every lighten and darken key (`darken-1-readable`),
+// and `cover` next to the base and to every darken key (`darken-1-cover`).
+// With $relative they are computed in CSS; without, for the HSL channel
+// branch, a readable shade is the shade and a cover is transparent, which is
+// what a browser without relative color syntax can draw, and the props add
+// the computed ones under @supports (see relative-text-tokens()).
+// @param {Map} $map - A shades map
+// @param {String} $name - Color name for CSS variables
+// @param {Boolean} $relative - Compute the tokens in CSS
+// @param {Number} $scale - Lightness factor per step of the shades (default: 10%)
+// @return {Map} The map with the text tokens
+@function -with-text-tokens($map, $name, $relative, $scale: 10%) {
+	$result: $map;
+
+	@each $key, $value in $map {
+		$key: '#{$key}';
+		$base: $key == $name;
+		$lighten: string.index($key, 'lighten-') == 1;
+		$darken: string.index($key, 'darken-') == 1;
+
+		@if not string.index($key, 'readable') and not string.index($key, 'cover') {
+			@if $base or $lighten or $darken {
+				$shade: if(sass($base): $name; else: '#{$name}-#{$key}');
+				$readable-key: if(sass($base): readable; else: string.unquote('#{$key}-readable'));
+				$readable: if(sass($relative): relative-readable-value($shade); else: string.unquote('var(--color-#{$shade})'));
+				$result: map.set($result, $readable-key, $readable);
+			}
+
+			@if $base or $darken {
+				$multiplier: 1;
+
+				@if $darken {
+					$step: string.slice($key, string.length('darken-') + 1);
+					$multiplier: 1 - math.div($scale, 100%) * -to-number($step);
+				}
+
+				$cover-key: if(sass($base): cover; else: string.unquote('#{$key}-cover'));
+				$cover: if(sass($relative): relative-cover-value($name, $multiplier); else: transparent);
+				$result: map.set($result, $cover-key, $cover);
+			}
+		}
+	}
+
+	@return $result;
+}
+
+// '3' to 3
+@function -to-number($string) {
+	$digits: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+	$result: 0;
+
+	@for $index from 1 through string.length($string) {
+		$result: $result * 10 + map.get($digits, string.slice($string, $index, $index));
+	}
+
+	@return $result;
+}
+
+// The readable and cover tokens of a colors map computed in CSS, for the HSL
+// channel branch to declare under @supports: the shade map entries there hold
+// the plain fallbacks of -with-text-tokens()
+// @param {Map} $colors - A colors map
+// @return {Map} The readable and cover keys alone, computed in CSS
+@function relative-text-tokens($colors) {
+	$result: ();
+
+	@each $name, $shades in $colors {
+		@if meta.type-of($shades) == 'map' and map.has-key($shades, readable) {
+			$computed: -with-text-tokens($shades, '#{$name}', $relative: true);
+			$tokens: ();
+
+			@each $key, $value in $computed {
+				@if string.index('#{$key}', 'readable') or string.index('#{$key}', 'cover') {
+					$tokens: map.set($tokens, $key, $value);
+				}
+			}
+
+			$result: map.set($result, $name, $tokens);
+		}
+	}
+
+	@return $result;
+}
+
+// The fixed lightness steps of word and surface, calc(l + 12), rewritten in
+// percent, calc(l + 12%). Safari 17 reads `l` as a percentage and drops the
+// first form, Chrome and Firefox read it as a number and drop the second, so
+// the props emit both, the second under @supports. Entries that are not a
+// fixed step are left out.
+// @param {Map} $map - A colors map
+// @return {Map} The fixed steps alone, in percent
+@function fixed-steps-in-percent($map) {
+	$result: ();
+
+	@each $key, $value in $map {
+		@if meta.type-of($value) == 'map' {
+			$steps: fixed-steps-in-percent($value);
+
+			@if list.length($steps) > 0 {
+				$result: map.set($result, $key, $steps);
+			}
+		} @else if meta.type-of($value) == 'string' and
+			(string.index($value, ' h s calc(l + ') or string.index($value, ' h s calc(l - '))
+		{
+			$result: map.set(
+				$result,
+				$key,
+				string.unquote(string.slice($value, 1, -3) + '%))')
+			);
+		}
+	}
+
+	@return $result;
+}
+
 // ============================================
 // Legacy Color Functions (HSL channel-based)
 // ============================================
+// @param {Boolean} $text - Add the tokens for text on and in the color:
+//   `contrast`, chosen at compile time by contrast-color(), and the
+//   `readable` shades and the covers in the plain form a browser without
+//   relative color syntax can draw (see -with-text-tokens()) (default: false)
 @function color-shades-map(
 	$color,
 	$name,
 	$steps: 5,
 	$scale: 10%,
 	$fixed: false,
-	$noVarExport: false
+	$noVarExport: false,
+	$text: false
 ) {
 	$result: map.merge(
 		map.set(
@@ -295,6 +595,11 @@
 			$noVarExport
 		)
 	);
+
+	@if $text {
+		$result: map.set($result, contrast, contrast-color($color));
+		$result: -with-text-tokens($result, $name, $relative: false, $scale: $scale);
+	}
 
 	@return $result;
 }

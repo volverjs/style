@@ -3,5 +3,23 @@
 @include layer(props, $use-css-layers, $layer-prefix) {
 	:where(:host, :root, .theme) {
 		@include spread-map-into-props($colors, $prefix: color);
+
+		--color-readable-luminance: #{$color-readable-luminance};
+		--color-readable-target: #{$color-readable-target};
+
+		// Safari 17 reads `l` as a percentage: the fixed steps of word and
+		// surface, calc(l + 12), resolve there only written in percent
+		@supports not (color: hsl(from red h s calc(l + 1))) {
+			@include spread-map-into-props(fixed-steps-in-percent($colors), $prefix: color);
+		}
+
+		// The HSL channel branch serves browsers without relative color
+		// syntax: its readable shades are the shades and its covers are
+		// transparent, and a browser that has the syntax gets them computed
+		@if not $use-color-mix {
+			@supports (color: color(from red xyz-d65 x y z)) {
+				@include spread-map-into-props(relative-text-tokens($colors), $prefix: color);
+			}
+		}
 	}
 }

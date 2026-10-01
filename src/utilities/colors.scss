@@ -1,9 +1,51 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:string';
 @use '../context' as *;
+
+// The colors map for one group of utilities. A cover only exists to hide the
+// emboss of vv-button and gets no class. A readable shade is a text color: it
+// is left out of the fills ($text: false) and kept without a value for the
+// `text-` classes ($text: true), which then read the token with no fallback,
+// since the expression they would repeat reads the tokens of the props anyway.
+@function -utility-colors($colors, $text) {
+	$result: ();
+
+	@each $key, $value in $colors {
+		@if meta.type-of($value) == 'map' {
+			$shades: ();
+
+			@each $shade, $color in $value {
+				$shade-name: '#{$shade}';
+
+				@if string.index($shade-name, 'readable') {
+					@if $text {
+						$shades: map.set($shades, $shade, null);
+					}
+				} @else if not string.index($shade-name, 'cover') {
+					$shades: map.set($shades, $shade, $color);
+				}
+			}
+
+			$result: map.set($result, $key, $shades);
+		} @else {
+			$result: map.set($result, $key, $value);
+		}
+	}
+
+	@return $result;
+}
+
+// --color-tint is only the source the neutrals take their hue from, so it
+// gets no utilities
+$-colors: map.remove($colors, tint);
+$-texts: -utility-colors($-colors, $text: true);
+$-fills: -utility-colors($-colors, $text: false);
 
 @include layer(utilities, $use-css-layers, $layer-prefix) {
 // background-color
 @include spread-map-into-utilities(
-	$map: $colors,
+	$map: $-fills,
 	$class: bg,
 	$attribute: background-color,
 	$prop: color,
@@ -12,7 +54,7 @@
 
 // color
 @include spread-map-into-utilities(
-	$map: $colors,
+	$map: $-texts,
 	$class: text,
 	$attribute: color,
 	$prop: color,
@@ -21,7 +63,7 @@
 
 // text-decoration-color
 @include spread-map-into-utilities(
-	$map: $colors,
+	$map: $-fills,
 	$class: decoration,
 	$attribute: text-decoration-color,
 	$prop: color,
@@ -30,7 +72,7 @@
 
 // border-color
 @include spread-map-into-utilities(
-	$map: $colors,
+	$map: $-fills,
 	$class: border,
 	$attribute: border-color,
 	$prop: color,

@@ -7,8 +7,15 @@
 @use '../../../config' as config;
 
 $dark-color-scheme: dark !default;
-$dark-color-word: hsl(color-hue($color-brand) 15% 85%) !default;
-$dark-color-surface: hsl(color-hue($color-brand) 10% 5%) !default;
+
+// Hue from the light tint, as in the light theme: --color-tint is not
+// redeclared here, so a dark brand does not move the neutrals.
+$dark-color-word: hsl(color-hue($color-tint) 15% 85%) !default;
+$dark-color-surface: hsl(color-hue($color-tint) 10% 5%) !default;
+
+// The bound and the direction of the readable shades on the dark surface
+$dark-color-readable-luminance: readable-luminance($dark-color-surface, $color-readable-ratio) !default;
+$dark-color-readable-target: readable-target($dark-color-surface) !default;
 
 // Surface palette for dark theme
 $dark-color-surface-palette: if(
@@ -37,9 +44,19 @@ $dark-colors: if(
 	sass(config.$use-color-mix):
 		(
 			scheme: $dark-color-scheme,
-			word: color-mix-darken-map($dark-color-word, 'word', $steps: 5, $scale: 12%),
+			word: color-mix-darken-map(
+				tinted-neutral-value($dark-color-word, $color-tint, 15%, 85%),
+				'word',
+				$steps: 5,
+				$scale: 12%
+			),
 			surface: map.merge(
-				color-mix-lighten-map($dark-color-surface, 'surface', $steps: 5, $scale: 5%),
+				color-mix-lighten-map(
+					tinted-neutral-value($dark-color-surface, $color-tint, 10%, 5%),
+					'surface',
+					$steps: 5,
+					$scale: 5%
+				),
 				$dark-color-surface-palette
 			),
 		);

@@ -1,3 +1,6 @@
+@use '../config' as config;
+@use '../tools/functions' as *;
+
 $input: (
 	background-color-focus: var(--color-surface-2),
 	background-color-hover: var(--color-surface-3),
@@ -48,11 +51,24 @@ $input: (
 	placeholder: (
 		color: var(--color-word-4),
 	),
+	// The color of a valid or invalid field paints its bar and its border;
+	// its hint and its label take text-color, the same color pushed to read
+	// on the surface (readable-color-value()), so an override of
+	// --input-valid-color moves both. Without relative color syntax the text
+	// is the color itself, and the props add the readable one under @supports.
 	valid: (
 		color: var(--color-success),
+		text-color: if(
+			sass(config.$use-color-mix): readable-color-value('var(--input-valid-color)');
+			else: var(--input-valid-color)
+		),
 	),
 	invalid: (
 		color: var(--color-danger),
+		text-color: if(
+			sass(config.$use-color-mix): readable-color-value('var(--input-invalid-color)');
+			else: var(--input-invalid-color)
+		),
 	),
 	floating: (
 		padding-top: calc(var(--input-spacing-top) + 0.55em),
