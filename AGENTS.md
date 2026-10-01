@@ -33,10 +33,11 @@ npm run stylelint      # stylelint over src/**/*.scss
 npm run lint           # eslint over the repository
 npm run build          # compiles dist/ and regenerates design-tokens.json
 npm run stylelint:dist # stylelint over the compiled dist/**/*.css
+npm run check:colors   # contrast tokens and tint derived neutrals, see scripts/checkColors.js
 ```
 
-There are no unit tests. Correctness is established by compiling and reading the emitted CSS,
-so the two checks below carry the weight tests would carry elsewhere.
+Apart from `check:colors`, there are no unit tests. Correctness is established by compiling and
+reading the emitted CSS, so the two checks below carry the weight tests would carry elsewhere.
 
 ### The compiled output is the test
 
@@ -112,6 +113,22 @@ outputs: that is what tells you which rules moved.
   a token on the block and still follow the line box of the summary, which is the element that
   consumes it. So a declaration whose value carries only relative units needs no `[brackets]`,
   while one that reads a token another element declares still does.
+- **The channel keywords of relative color syntax do not have the same type everywhere.**
+  Safari 17 reads `r g b` of `rgb()` and `color(srgb)`, `s l` of `hsl()` and the `alpha`
+  keyword as percentages, Chrome and Firefox as numbers, so `calc(l + 12)` is valid in the
+  latter and drops the whole value in Safari 17, and `calc(l + 12%)` the other way round. A
+  product with a plain number (`calc(l * 1.1)`, `calc(x * alpha)`) is valid in both, a sum is
+  not; the channels of `xyz-d65` and `oklch` are numbers everywhere. Measured in Chrome 154,
+  Firefox 155 and Safari 17.6. The fixed steps of word and surface are emitted twice for this,
+  the percent form under `@supports not (color: hsl(from red h s calc(l + 1)))`. A result
+  written outside sRGB is also not exact in Chrome: `oklch(1 0 0)` and the D65 white point in
+  `xyz-d65` resolve to `0.99987 1.00005 1.00007`, and text drawn with that differs from white
+  at its edges, while a round trip of an sRGB color through `xyz-d65` lands within a fraction
+  of an 8-bit step. The contrast and readable tokens in `_functions.scss` route around both.
+  The HSL channel branch, `$use-color-mix: false`, is the one for browsers without relative
+  color syntax: it emits none outside `@supports (color: color(from red xyz-d65 x y z))`, a
+  token that needs it gets a plain fallback there (the shade, `transparent`), and
+  `check:colors` fails on any that slips through.
 - **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
   `.block__element--modifier`: its declarations are flattened into the rule of the element
   itself, so they apply to every instance and win over the declarations before them. Express a

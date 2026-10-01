@@ -40,6 +40,7 @@
     "dev": "vite --port 3000 --open",
     "build": "node ./scripts/build.js && node ./scripts/generateDesignTokens.js",
     "design-tokens": "node ./scripts/generateDesignTokens.js",
+    "check:colors": "node ./scripts/checkColors.js",
     "styleguide": "vite-ssg build",
     "preview": "vite preview",
     "lint": "eslint .",

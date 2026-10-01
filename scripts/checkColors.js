@@ -1,0 +1,464 @@
+// Checks the color tokens that CSS relative color syntax computes at runtime:
+// - the white or black text of --color-<name>-contrast, against a reference
+//   set of colors and the WCAG 2 contrast ratio;
+// - the neutrals written relative to --color-tint, against the literals they
+//   replaced, for the default brand and for #140e33, in both themes;
+// - the readable shades, which keep the reference set at 4.5:1 or more on
+//   the surface of each theme and leave a color that already reads alone;
+// - the covers of vv-button, the split fill and text colors of the fields,
+//   and the HSL channel branch, which emits no relative color syntax outside
+//   @supports;
+// - the cases that must not move: neutrals set explicitly, the compile time
+//   branch without $use-color-mix, the color utilities.
+// No browser runs here. The relative expressions are resolved with the
+// formulas of CSS Color 4, the ones the engines apply; what Chrome, Firefox
+// and Safari 17 actually compute was measured when the tokens were written.
+import process from 'process'
+import { initCompiler } from 'sass-embedded'
+import { pathToFileURL } from 'url'
+
+const failures = []
+const check = (ok, message) => {
+	if (!ok) {
+		failures.push(message)
+	}
+}
+
+// #region color math (WCAG 2 and CSS Color 4)
+const hexToRgb = (hex) =>
+	[1, 3, 5].map((index) => parseInt(hex.slice(index, index + 2), 16) / 255)
+const toHex = (channels) =>
+	`#${channels
+		.map((value) =>
+			Math.round(value * 255)
+				.toString(16)
+				.padStart(2, '0'),
+		)
+		.join('')}`
+const toLinear = (value) =>
+	value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+const luminance = (hex) => {
+	const [r, g, b] = hexToRgb(hex).map(toLinear)
+	return 0.2126 * r + 0.7152 * g + 0.0722 * b
+}
+const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
+const hue = ([r, g, b]) => {
+	const max = Math.max(r, g, b)
+	const delta = max - Math.min(r, g, b)
+	if (!delta) {
+		return 0
+	}
+	const h =
+		max === r
+			? ((g - b) / delta) % 6
+			: max === g
+				? (b - r) / delta + 2
+				: (r - g) / delta + 4
+	return (h * 60 + 360) % 360
+}
+const hsl = (h, s, l) => {
+	const a = s * Math.min(l, 1 - l)
+	const channel = (n) => {
+		const k = (n + h / 30) % 12
+		return l - a * Math.max(-1, Math.min(k - 3, 9 - k, 1))
+	}
+	return [channel(0), channel(8), channel(4)]
+}
+// #endregion
+
+// one compiler for every compilation: a fresh one per call exhausts the
+// synchronous channel of sass-embedded after a dozen of them
+const compiler = initCompiler()
+const compile = (source) =>
+	compiler.compileString(source, {
+		loadPaths: ['.'],
+		url: pathToFileURL('./check-colors.scss'),
+		logger: {
+			warn: (message) =>
+				failures.push(`Sass warning: ${message.split('\n')[0]}`),
+		},
+	}).css
+
+// custom properties declared in the first rule that sets them
+const props = (css) => {
+	const result = {}
+	for (const [, name, value] of css.matchAll(
+		/(--color-[a-z0-9-]+):\s*([^;}]+)/g,
+	)) {
+		result[name] ??= value.trim()
+	}
+	return result
+}
+
+// #region 1. contrast threshold
+const reference = [
+	'#140e33',
+	'#166abd',
+	'#0a3d62',
+	'#f5c400',
+	'#86c8fb',
+	'#9365ff',
+	'#38ada9',
+	'#e7b735',
+	'#af2323',
+	'#178230',
+	'#31ccec',
+	'#565676',
+	'#ffffff',
+	'#000000',
+	'#9c27b0',
+]
+const probe = compile(`
+@use 'src/tools/functions' as f;
+.threshold { value: f.contrast-threshold(); }
+${reference.map((hex, index) => `.c${index} { luminance: f.color-luminance(${hex}); pick: f.contrast-color(${hex}); }`).join('\n')}
+`)
+const threshold = Number(probe.match(/\.threshold \{\s*value: ([\d.]+)/)[1])
+const cssThreshold = Math.round(threshold * 10000) / 10000
+const emitted = props(compile(`@use 'src/context'; @use 'src/props';`))
+check(
+	emitted['--color-brand-contrast'] ===
+		`color(from color(from var(--color-brand) xyz-d65 x y z / clamp(0, (${cssThreshold} - y) * 1000000, 1)) srgb alpha alpha alpha / 1)`,
+	`--color-brand-contrast is ${emitted['--color-brand-contrast']}`,
+)
+check(
+	Math.abs(threshold - (Math.sqrt(1.05 * 0.05) - 0.05)) < 1e-9,
+	`threshold ${threshold}`,
+)
+
+const table = reference.map((hex, index) => {
+	const [, sassLuminance, pick] = probe.match(
+		new RegExp(
+			`\\.c${index} \\{\\s*luminance: ([\\d.e-]+);\\s*pick: (#[0-9a-f]+|white|black)`,
+		),
+	)
+	const y = luminance(hex)
+	const onWhite = ratio(y, 1)
+	const onBlack = ratio(y, 0)
+	const best = onWhite >= onBlack ? 'white' : 'black'
+	const css = y < cssThreshold ? 'white' : 'black'
+	const sass = ['#fff', 'white'].includes(pick) ? 'white' : 'black'
+	check(
+		Math.abs(Number(sassLuminance) - y) < 1e-4,
+		`${hex}: Sass luminance ${sassLuminance}, WCAG ${y}`,
+	)
+	check(
+		sass === best,
+		`${hex}: contrast-color() picks ${sass}, WCAG prefers ${best}`,
+	)
+	check(
+		css === best,
+		`${hex}: the CSS threshold picks ${css}, WCAG prefers ${best}`,
+	)
+	return {
+		color: hex,
+		text: best,
+		ratio: (best === 'white' ? onWhite : onBlack).toFixed(2),
+		other: (best === 'white' ? onBlack : onWhite).toFixed(2),
+	}
+})
+// #endregion
+
+// #region 2. neutrals relative to the tint
+const neutrals = {
+	'#166abd': {
+		gray: '#6c8093',
+		word: '#161a1d',
+		surface: '#ffffff',
+		shadow: '#19334d',
+		backdrop: '#19334d33',
+		'dark word': '#d3d9de',
+		'dark surface': '#0b0d0e',
+	},
+	'#140e33': {
+		gray: '#736c93',
+		word: '#17161d',
+		surface: '#ffffff',
+		shadow: '#22194d',
+		backdrop: '#22194d33',
+		'dark word': '#d5d3de',
+		'dark surface': '#0c0b0e',
+	},
+}
+// [r, g, b, alpha] of the expression, or null when it is not relative to the tint
+const resolveTinted = (value, tint) => {
+	const match = value.match(
+		/^hsl\(from var\(--color-tint\) h ([\d.]+)% ([\d.]+)%(?: \/ ([\d.]+)%)?\)$/,
+	)
+	if (!match) {
+		return null
+	}
+	const [s, l, alpha] = [match[1], match[2], match[3] ?? 100].map(Number)
+	return [...hsl(hue(hexToRgb(tint)), s / 100, l / 100), alpha / 100]
+}
+// Within half a step of the 8-bit value: shadow and backdrop land exactly on
+// 25.5 in one channel, which Sass rounded down and a browser may round up.
+const matches = (channels, hex) =>
+	[1, 3, 5, 7].every((index) => {
+		const expected =
+			index < hex.length ? parseInt(hex.slice(index, index + 2), 16) : 255
+		return (
+			Math.abs(channels[(index - 1) / 2] * 255 - expected) <= 0.5 + 1e-9
+		)
+	})
+for (const [brand, expected] of Object.entries(neutrals)) {
+	const light = props(
+		compile(
+			`@use 'src/context' with ($color-brand: ${brand}); @use 'src/props';`,
+		),
+	)
+	const dark = props(
+		compile(
+			`@use 'src/context' with ($color-brand: ${brand}); @use 'src/themes/dark/props';`,
+		),
+	)
+	check(
+		light['--color-tint'] === brand,
+		`${brand}: --color-tint is ${light['--color-tint']}`,
+	)
+	check(
+		!('--color-tint' in dark),
+		`${brand}: the dark theme redeclares --color-tint`,
+	)
+	for (const [name, hex] of Object.entries(expected)) {
+		const [theme, token] = name.startsWith('dark ')
+			? [dark, name.slice(5)]
+			: [light, name]
+		const value = theme[`--color-${token}`]
+		const resolved = resolveTinted(value, brand)
+		check(
+			resolved && matches(resolved, hex),
+			`${brand}: ${name} is ${value}, resolves to ${resolved && toHex(resolved.slice(0, 3))}, expected ${hex}`,
+		)
+	}
+}
+// #endregion
+
+// #region 3. readable shades
+// linear sRGB to XYZ (D65) and back, the matrices of CSS Color 4
+const toXyz = ([r, g, b]) => [
+	0.41239079926595934 * r + 0.357584339383878 * g + 0.1804807884018343 * b,
+	0.21263900587151027 * r + 0.715168678767756 * g + 0.07219231536073371 * b,
+	0.01933081871559182 * r + 0.11919477979462598 * g + 0.9505321522496607 * b,
+]
+const fromXyz = ([x, y, z]) => [
+	3.2409699419045226 * x - 1.537383177570094 * y - 0.4986107602930034 * z,
+	-0.9692436362808796 * x + 1.8759675015077202 * y + 0.04155505740717559 * z,
+	0.05563007969699366 * x - 0.20397695888897652 * y + 1.0569715142428786 * z,
+]
+const toGamma = (value) =>
+	value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055
+// the readable expression evaluated: a mix toward the target in xyz-d65
+const readable = (hex, bound, target) => {
+	const [x, y, z] = toXyz(hexToRgb(hex).map(toLinear))
+	const weight = Math.min(
+		1,
+		Math.max(0, (y - bound) / (y - target + 0.00001)),
+	)
+	return toHex(
+		fromXyz([
+			x + (0.9505 * target - x) * weight,
+			y + (target - y) * weight,
+			z + (1.0891 * target - z) * weight,
+		]).map((value) => Math.min(1, Math.max(0, toGamma(value)))),
+	)
+}
+const weight =
+	'clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)'
+check(
+	emitted['--color-brand-darken-1-readable'] ===
+		`color(from var(--color-brand-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * ${weight}) calc(y + (var(--color-readable-target) - y) * ${weight}) calc(z + (1.0891 * var(--color-readable-target) - z) * ${weight}))`,
+	`--color-brand-darken-1-readable is ${emitted['--color-brand-darken-1-readable']}`,
+)
+const darkProps = compile(`@use 'src/context'; @use 'src/themes/dark/props';`)
+const darkEmitted = props(darkProps)
+const themes = {
+	light: {
+		bound: Number(emitted['--color-readable-luminance']),
+		target: Number(emitted['--color-readable-target']),
+		surface: luminance('#ffffff'),
+	},
+	dark: {
+		bound: Number(darkEmitted['--color-readable-luminance']),
+		target: Number(darkEmitted['--color-readable-target']),
+		surface: luminance(neutrals['#166abd']['dark surface']),
+	},
+}
+check(
+	themes.light.bound === 0.1782 && themes.light.target === 0,
+	`light readable bound ${themes.light.bound}, target ${themes.light.target}`,
+)
+check(
+	// the bound comes from the exact surface, the ratio from its 8-bit hex
+	themes.dark.target === 1 &&
+		ratio(themes.dark.bound, themes.dark.surface) >= 4.59,
+	`dark readable bound ${themes.dark.bound}, target ${themes.dark.target}`,
+)
+const readableTable = reference.map((hex) => {
+	const row = { color: hex }
+	for (const [name, theme] of Object.entries(themes)) {
+		const before = ratio(luminance(hex), theme.surface)
+		const text = readable(hex, theme.bound, theme.target)
+		const after = ratio(luminance(text), theme.surface)
+		check(
+			after >= 4.5,
+			`${hex} in the ${name} theme reads at ${after.toFixed(2)}`,
+		)
+		check(
+			before < 4.6 || text === hex,
+			`${hex} in the ${name} theme already reads but moves to ${text}`,
+		)
+		row[name] =
+			`${text} ${after.toFixed(2)}${text === hex ? '' : ` (was ${before.toFixed(2)})`}`
+	}
+	return row
+})
+
+// the fixed steps of word and surface, again in percent for Safari 17
+const fallback = '@supports not (color: hsl(from red h s calc(l + 1)))'
+check(
+	compile(`@use 'src/context'; @use 'src/props';`)
+		.split(fallback)[1]
+		?.includes(
+			'--color-word-1: hsl(from var(--color-word) h s calc(l + 12%))',
+		),
+	'the light fixed steps have no percent fallback',
+)
+check(
+	darkProps
+		.split(fallback)[1]
+		?.includes(
+			'--color-word-1: hsl(from var(--color-word) h s calc(l - 12%))',
+		),
+	'the dark fixed steps have no percent fallback',
+)
+// #endregion
+
+// #region 4. what must not move
+const explicit = props(
+	compile(`@use 'src/context' with ($color-gray: #808080, $color-word: #111, $color-surface: #fafafa,
+		$color-shadow: #222, $color-backdrop: rgb(0 0 0 / 30%)); @use 'src/props';`),
+)
+for (const [name, value] of Object.entries({
+	gray: '#808080',
+	word: '#111',
+	surface: '#fafafa',
+	shadow: '#222',
+	backdrop: 'rgba(0, 0, 0, 0.3)',
+})) {
+	check(
+		explicit[`--color-${name}`] === value,
+		`explicit ${name} is ${explicit[`--color-${name}`]}`,
+	)
+}
+
+const legacyProps = compile(
+	`@use 'src/context' with ($use-color-mix: false); @use 'src/props';`,
+)
+const legacy = props(legacyProps)
+// the HSL channel branch serves browsers without relative color syntax: none
+// outside the @supports block that adds the computed text tokens
+const [legacyPlain, legacySupported = ''] = legacyProps.split(
+	'@supports (color: color(from red xyz-d65 x y z))',
+)
+check(
+	!legacyPlain.includes('from var('),
+	'without $use-color-mix relative color syntax is emitted outside @supports',
+)
+check(
+	legacy['--color-brand-darken-1-readable'] ===
+		'var(--color-brand-darken-1)' &&
+		legacy['--color-brand-cover'] === 'transparent' &&
+		legacySupported.includes(
+			`--color-brand-darken-1-readable: ${emitted['--color-brand-darken-1-readable']}`,
+		) &&
+		legacySupported.includes(
+			`--color-brand-darken-2-cover: ${emitted['--color-brand-darken-2-cover']}`,
+		),
+	'without $use-color-mix the readable shades and covers lack their fallback or their computed form',
+)
+check(
+	!('--color-tint' in legacy),
+	'without $use-color-mix --color-tint is emitted',
+)
+for (const [name, hex] of Object.entries({
+	brand: '#fff',
+	accent: '#fff',
+	success: '#fff',
+	danger: '#fff',
+	info: '#000',
+	warning: '#000',
+})) {
+	check(
+		legacy[`--color-${name}-contrast`] === hex,
+		`legacy ${name} contrast is ${legacy[`--color-${name}-contrast`]}`,
+	)
+}
+check(!('--color-gray-contrast' in emitted), '--color-gray-contrast is emitted')
+
+// the covers share the threshold of the contrast tokens, and the button lays
+// the one of the shade each state paints
+check(
+	emitted['--color-brand-cover'] ===
+		`color(from var(--color-brand) xyz-d65 x y z / calc(1 - clamp(0, (${cssThreshold} - y) * 1000000, 1)))` &&
+		emitted['--color-brand-darken-1-cover'] ===
+			'hsl(from var(--color-brand-cover) h s calc(l * 0.9) / alpha)',
+	`--color-brand-cover is ${emitted['--color-brand-cover']}`,
+)
+const button = compile(
+	`@use 'src/context' with ($use-custom-props-for-components: false); @use 'src/components/vv-button';`,
+)
+check(
+	/:hover[^{]*\{[^}]*text-shadow: 0 1px 0 var\(--color-brand-darken-1-cover\)/.test(
+		button,
+	) && !button.includes(' - y)'),
+	'vv-button does not lay the cover of its hover shade, or computes one itself',
+)
+
+// a field paints its bar in its color and writes its hint in the readable one
+const input = compile(`@use 'src/context'; @use 'src/props';`)
+check(
+	input.includes('--input-valid-color: var(--color-success);') &&
+		input.includes(
+			'--input-valid-text-color: color(from var(--input-valid-color) xyz-d65',
+		),
+	'the valid color of a field is not split into a fill and a text color',
+)
+
+const utilities = compile(`@use 'src/context'; @use 'src/utilities/colors';`)
+check(
+	/\.text-brand-contrast\b/.test(utilities),
+	'.text-brand-contrast is missing',
+)
+check(
+	!/\.(bg|text|border|decoration)-tint\b/.test(utilities),
+	'--color-tint has utilities',
+)
+check(
+	/\.text-brand-darken-1-readable\b/.test(utilities) &&
+		!/\.(bg|border|decoration)-[a-z0-9-]*readable\b/.test(utilities) &&
+		!/-cover\b/.test(utilities),
+	'the readable shades are not text utilities alone, or a cover has a utility',
+)
+const preflight = compile(`@use 'src/context'; @use 'src/preflight';`)
+check(
+	/mark\)[^{]*\.text-warning-contrast\)\s*\{\s*color: var\(--color-warning-contrast/.test(
+		preflight,
+	),
+	'mark in .preflight does not take --color-warning-contrast',
+)
+// #endregion
+
+compiler.dispose()
+
+console.table(table)
+console.table(readableTable)
+if (failures.length) {
+	console.error(
+		`\n${failures.length} check(s) failed:\n- ${failures.join('\n- ')}`,
+	)
+	process.exit(1)
+}
+console.log(
+	`Color checks passed: contrast threshold ${cssThreshold}, neutrals, readable shades, Safari 17 steps, explicit values, legacy branch, utilities.`,
+)
