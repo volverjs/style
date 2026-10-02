@@ -1,8 +1,7 @@
 <script setup>
-	const colors = computed(() => {
-		let exports = icssExports['colors'] ?? []
-		return Object.keys(exports)
-	})
+	const colors = computed(() =>
+		Object.keys(utilityColors(icssExports.colors, 'bg')),
+	)
 </script>
 
 <template>

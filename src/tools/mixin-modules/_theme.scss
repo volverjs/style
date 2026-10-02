@@ -105,19 +105,9 @@
 			);
 		}
 
-		// Process modifiers recursively
-		@if map.has-key($theme-map, 'modifier') {
-			@include _theme-spread-modifiers(
-				$map: map.get($theme-map, 'modifier'),
-				$prefix: $component-name,
-				$block: $selector,
-				$base-map: $base-map,
-				$bps: $bps,
-				$zero-specificity: $zero-specificity
-			);
-		}
-
-		// Process elements
+		// Elements, states, then modifiers: the order of the light walk, so
+		// that at equal specificity a modifier wins over a state of the block
+		// in the dark theme as it does in the light one
 		@if map.has-key($theme-map, 'element') {
 			@include _theme-spread-elements(
 				$map: map.get($theme-map, 'element'),
@@ -142,6 +132,18 @@
 			);
 		}
 
+		// Process modifiers recursively
+		@if map.has-key($theme-map, 'modifier') {
+			@include _theme-spread-modifiers(
+				$map: map.get($theme-map, 'modifier'),
+				$prefix: $component-name,
+				$block: $selector,
+				$base-map: $base-map,
+				$bps: $bps,
+				$zero-specificity: $zero-specificity
+			);
+		}
+
 		// Generate light reset rules if enabled
 		@if $light-reset-map and $generate-light-reset {
 			#{$light-reset-selector} {
@@ -158,7 +160,7 @@
 	}
 }
 
-// Helper to generate all theme rules (block, modifiers, elements, states)
+// Helper to generate all theme rules (block, elements, states, modifiers)
 @mixin _theme-generate-all($map, $prefix, $block, $bps, $base-map: (), $zero-specificity: true) {
 	// Block styles
 	@include wrap-with-where($selector: $block, $enabled: $zero-specificity) {
@@ -170,19 +172,7 @@
 		);
 	}
 
-	// Process modifiers
-	@if map.has-key($map, 'modifier') {
-		@include _theme-spread-modifiers(
-			$map: map.get($map, 'modifier'),
-			$prefix: $prefix,
-			$block: $block,
-			$base-map: $base-map,
-			$bps: $bps,
-			$zero-specificity: $zero-specificity
-		);
-	}
-
-	// Process elements
+	// Elements, states, then modifiers, as above
 	@if map.has-key($map, 'element') {
 		@include _theme-spread-elements(
 			$map: map.get($map, 'element'),
@@ -201,6 +191,18 @@
 			$prefix: $prefix,
 			$block: $block,
 			$parent-selector: $block,
+			$base-map: $base-map,
+			$bps: $bps,
+			$zero-specificity: $zero-specificity
+		);
+	}
+
+	// Process modifiers
+	@if map.has-key($map, 'modifier') {
+		@include _theme-spread-modifiers(
+			$map: map.get($map, 'modifier'),
+			$prefix: $prefix,
+			$block: $block,
 			$base-map: $base-map,
 			$bps: $bps,
 			$zero-specificity: $zero-specificity

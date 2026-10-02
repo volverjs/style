@@ -1,7 +1,7 @@
 $vv-avatar: (
 	background-color: var(--color-brand),
 	border-radius: var(--rounded),
-	color: var(--color-white),
+	color: var(--color-brand-contrast),
 	display: inline-flex,
 	position: relative,
 	justify-content: center,
@@ -82,8 +82,10 @@ $vv-avatar: (
 			width: var(--spacing-40),
 			height: var(--spacing-40),
 		),
+		// Keeps the white it had before the block followed the brand
 		transparent: (
 			background-color: var(--color-transparent),
+			color: var(--color-white),
 		),
 		surface: (
 			background-color: var(--color-surface-2),
@@ -93,29 +95,37 @@ $vv-avatar: (
 		danger: (
 			background-color: var(--color-danger),
 			border-color: var(--color-danger-lighten-3),
+			color: var(--color-danger-contrast),
 		),
 		success: (
 			background-color: var(--color-success),
 			border-color: var(--color-success-lighten-3),
+			color: var(--color-success-contrast),
 		),
+		// Filled with the darkest shade, so the text is the contrast of that
+		// shade and not of the base color
 		warning: (
 			background-color: var(--color-warning-darken-5),
 			border-color: var(--color-warning-darken-2),
+			color: var(--color-warning-darken-5-contrast),
 		),
 		info: (
 			background-color: var(--color-info-darken-5),
 			border-color: var(--color-info-darken-2),
+			color: var(--color-info-darken-5-contrast),
 		),
 		accent: (
 			background-color: var(--color-accent),
 			border-color: var(--color-accent-darken-3),
+			color: var(--color-accent-contrast),
 		),
 		gray: (
 			background-color: var(--color-gray-darken-1),
 			border-color: var(--color-gray-lighten-2),
+			color: var(--color-white),
 		),
 		ring: (
-			color: var(--color-brand-darken-3),
+			color: var(--color-surface-brand-readable),
 			background-color: var(--color-surface-brand),
 			border-color: currentcolor,
 			border-width: var(--border),
@@ -127,23 +137,23 @@ $vv-avatar: (
 				),
 				danger: (
 					background-color: var(--color-surface-danger),
-					color: var(--color-danger),
+					color: var(--color-surface-danger-readable),
 				),
 				success: (
 					background-color: var(--color-surface-success),
-					color: var(--color-success-darken-3),
+					color: var(--color-surface-success-readable),
 				),
 				warning: (
 					background-color: var(--color-surface-warning),
-					color: var(--color-warning-darken-5),
+					color: var(--color-surface-warning-readable),
 				),
 				info: (
 					background-color: var(--color-surface-info),
-					color: var(--color-info-darken-5),
+					color: var(--color-surface-info-readable),
 				),
 				accent: (
 					background-color: var(--color-surface-accent),
-					color: var(--color-accent),
+					color: var(--color-surface-accent-readable),
 				),
 				gray: (
 					background-color: var(--color-surface-4),

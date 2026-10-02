@@ -606,7 +606,8 @@ Elements: list† `> :is(ol, ul)` (give the list its class inside `.preflight`, 
 | vv-spinner | | | `--spinner-duration`, `--spinner-thickness`, read on the block |
 
 The icon in `vv-empty__media` is sized by the font size, so give it `1em`. The spinner is
-`1em` in `currentcolor`: size and colour it with text utilities (`text-24 text-brand`). Under
+`1em` in `currentcolor`: size and colour it with text utilities (`text-24 text-brand-graphic`,
+the graphic role, which keeps 3:1 with any brand). Under
 `prefers-reduced-motion` it keeps turning, slower, instead of stopping.
 
 ## vv-item, vv-item-group

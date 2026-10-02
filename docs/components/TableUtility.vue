@@ -55,6 +55,9 @@
 	})
 
 	const items = computed(() => {
+		if (props.property === 'colors') {
+			return utilityColors(icssExports.colors, props.prefix)
+		}
 		return icssExports[props.property] ?? []
 	})
 

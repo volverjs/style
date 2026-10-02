@@ -7,49 +7,114 @@
 @use '../../../config' as config;
 
 $dark-color-scheme: dark !default;
-$dark-color-word: hsl(color-hue($color-brand) 15% 85%) !default;
-$dark-color-surface: hsl(color-hue($color-brand) 10% 5%) !default;
+
+// Hue from the light tint, as in the light theme: --color-tint is not
+// redeclared here, so a dark brand does not move the neutrals.
+$dark-color-word: hsl(color-hue($color-tint) 15% 85%) !default;
+$dark-color-surface: hsl(color-hue($color-tint) 10% 5%) !default;
+
+// Lightness of the tinted surfaces in the dark theme
+$dark-color-surface-tint-lightness: 10% !default;
+
+// Lightness between two neutral surfaces in the dark theme
+$dark-color-surface-scale: 5% !default;
+
+// `readable-strong` in the dark theme: `readable` with its luminance scaled
+// by this, toward white. The text roles are redeclared here, so they follow
+// the theme in every component and a light rule needs no dark override for
+// its text color.
+$dark-color-readable-strong-factor: 1.5 !default;
+
+// The luminance the roles are moved to, on the neutral surfaces down to
+// $color-readable-depth and on the hardest tinted surface of any hue, as in
+// the light theme
+$dark-color-readable-luminance: readable-luminance(
+	readable-surface($dark-color-surface, $color-readable-depth * $dark-color-surface-scale),
+	$color-readable-ratio
+) !default;
+$dark-color-surface-readable-luminance: readable-luminance(
+	readable-worst-tint($dark-color-surface-tint-lightness),
+	$color-readable-ratio
+) !default;
+$dark-color-graphic-luminance: readable-luminance(
+	readable-surface($dark-color-surface, $color-readable-depth * $dark-color-surface-scale),
+	$color-graphic-ratio
+) !default;
 
 // Surface palette for dark theme
 $dark-color-surface-palette: if(
 	sass(config.$use-color-mix):
 		(
-			brand: string.unquote('hsl(from var(--color-brand) h s 10%)'),
-			accent: string.unquote('hsl(from var(--color-accent) h s 10%)'),
-			success: string.unquote('hsl(from var(--color-success) h s 10%)'),
-			danger: string.unquote('hsl(from var(--color-danger) h s 10%)'),
-			info: string.unquote('hsl(from var(--color-info) h s 10%)'),
-			warning: string.unquote('hsl(from var(--color-warning) h s 10%)'),
+			brand: string.unquote('hsl(from var(--color-brand) h s #{$dark-color-surface-tint-lightness})'),
+			accent: string.unquote('hsl(from var(--color-accent) h s #{$dark-color-surface-tint-lightness})'),
+			success: string.unquote('hsl(from var(--color-success) h s #{$dark-color-surface-tint-lightness})'),
+			danger: string.unquote('hsl(from var(--color-danger) h s #{$dark-color-surface-tint-lightness})'),
+			info: string.unquote('hsl(from var(--color-info) h s #{$dark-color-surface-tint-lightness})'),
+			warning: string.unquote('hsl(from var(--color-warning) h s #{$dark-color-surface-tint-lightness})'),
 		);
 	else:
 		(
-			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 10%),
-			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 10%),
-			success: hsl(var(--color-success-hue) var(--color-success-saturation) 10%),
-			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 10%),
-			info: hsl(var(--color-info-hue) var(--color-info-saturation) 10%),
-			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 10%),
+			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) $dark-color-surface-tint-lightness),
+			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) $dark-color-surface-tint-lightness),
+			success: hsl(var(--color-success-hue) var(--color-success-saturation) $dark-color-surface-tint-lightness),
+			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) $dark-color-surface-tint-lightness),
+			info: hsl(var(--color-info-hue) var(--color-info-saturation) $dark-color-surface-tint-lightness),
+			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) $dark-color-surface-tint-lightness),
 		)
 ) !default;
 
 // color map
-$dark-colors: if(
-	sass(config.$use-color-mix):
+$dark-colors: map.deep-merge(
+	if(
+		sass(config.$use-color-mix):
+			(
+				scheme: $dark-color-scheme,
+				word: color-mix-darken-map(
+					tinted-neutral-value($dark-color-word, $color-tint, 15%, 85%),
+					'word',
+					$steps: 5,
+					$scale: 12%
+				),
+				surface: map.merge(
+					color-mix-lighten-map(
+						tinted-neutral-value($dark-color-surface, $color-tint, 10%, 5%),
+						'surface',
+						$steps: 5,
+						$scale: $dark-color-surface-scale
+					),
+					$dark-color-surface-palette
+				),
+			);
+		else:
+			(
+				scheme: $dark-color-scheme,
+				word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
+				surface: map.merge(
+					color-lighten-map(
+						$dark-color-surface,
+						'surface',
+						$scale: $dark-color-surface-scale,
+						$fixed: true,
+						$inverted: false
+					),
+					$dark-color-surface-palette
+				),
+			)
+	),
+	readable-roles(
 		(
-			scheme: $dark-color-scheme,
-			word: color-mix-darken-map($dark-color-word, 'word', $steps: 5, $scale: 12%),
-			surface: map.merge(
-				color-mix-lighten-map($dark-color-surface, 'surface', $steps: 5, $scale: 5%),
-				$dark-color-surface-palette
-			),
-		);
-	else:
-		(
-			scheme: $dark-color-scheme,
-			word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
-			surface: map.merge(
-				color-lighten-map($dark-color-surface, 'surface', $scale: 5%, $fixed: true, $inverted: false),
-				$dark-color-surface-palette
-			),
-		)
+			brand: $color-brand,
+			accent: $color-accent,
+			success: $color-success,
+			danger: $color-danger,
+			info: $color-info,
+			warning: $color-warning,
+		),
+		$dark-color-readable-luminance,
+		$dark-color-surface-readable-luminance,
+		$dark-color-graphic-luminance,
+		$dark-color-readable-strong-factor,
+		$lighten: color-luminance($dark-color-surface) < contrast-threshold(),
+		$relative: config.$use-color-mix
+	)
 ) !default;

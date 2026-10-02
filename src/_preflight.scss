@@ -154,8 +154,11 @@
 				@extend %text-smaller !optional;
 			}
 
+			// A filled color: the text takes its contrast token, not the
+			// word color, which is light in the dark theme
 			&:where(mark) {
 				@extend %bg-warning !optional;
+				@extend %text-warning-contrast !optional;
 			}
 
 			&:where(pre) {

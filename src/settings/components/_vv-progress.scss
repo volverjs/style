@@ -9,18 +9,18 @@ $vv-progress: (
 	border: var(--border-0),
 	border-radius: var(--rounded-full),
 	overflow: hidden,
-	color: var(--color-brand),
+	color: var(--color-brand-graphic),
 	background-color: var(--color-surface-2),
 	pseudo: (
 		-webkit-progress-bar: (
 				background-color: transparent,
 			),
 		-moz-progress-bar: (
-				background-color: var(--color-brand),
+				background-color: var(--color-brand-graphic),
 				transition: var(--transition-all),
 			),
 		-webkit-progress-value: (
-				background-color: var(--color-brand),
+				background-color: var(--color-brand-graphic),
 				transition: var(--transition-all),
 			),
 	),
@@ -29,7 +29,7 @@ $vv-progress: (
 			background: var(--color-surface-2)
 				linear-gradient(
 					to right,
-					var(--color-brand) 30%,
+					var(--color-brand-graphic) 30%,
 					var(--color-surface-2) 30%
 				)
 				top left/150% 150% no-repeat,

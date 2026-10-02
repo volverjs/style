@@ -8,13 +8,21 @@ $vv-button: (
 	border-radius: var(--rounded),
 	border-style: solid,
 	border-color: var(--color-brand),
-	color: var(--color-white),
+	color: var(--color-brand-contrast),
 	font-family: var(--font-sans),
 	font-weight: var(--font-semibold),
 	gap: 1ch,
 	padding-block: var(--spacing-7),
 	padding-inline: var(--spacing-16),
-	text-shadow: 0 1px 0 var(--color-gray-darken-5),
+	// The dark emboss suits light text only. The shadow above it is the cover
+	// of the fill, the fill itself where --color-brand-contrast turns dark and
+	// transparent otherwise, so it hides the emboss beneath dark text. Each
+	// state takes the contrast text and the cover of the shade it paints, so a
+	// color near the threshold turns its text white on the darker shades.
+	text-shadow: (
+		0 1px 0 var(--color-brand-cover),
+		0 1px 0 var(--color-gray-darken-5),
+	),
 	transition: var(--transition-all),
 	will-change: all,
 	min-width: 0,
@@ -27,15 +35,30 @@ $vv-button: (
 		hover: (
 			background: var(--color-brand-darken-1),
 			border-color: var(--color-brand-darken-1),
+			color: var(--color-brand-darken-1-contrast),
 			text-decoration: none,
+			text-shadow: (
+				0 1px 0 var(--color-brand-darken-1-cover),
+				0 1px 0 var(--color-gray-darken-5),
+			),
 		),
 		active: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
+			color: var(--color-brand-darken-2-contrast),
+			text-shadow: (
+				0 1px 0 var(--color-brand-darken-2-cover),
+				0 1px 0 var(--color-gray-darken-5),
+			),
 		),
 		pressed: (
 			background: var(--color-brand-darken-2),
 			border-color: var(--color-brand-darken-2),
+			color: var(--color-brand-darken-2-contrast),
+			text-shadow: (
+				0 1px 0 var(--color-brand-darken-2-cover),
+				0 1px 0 var(--color-gray-darken-5),
+			),
 		),
 		disabled: (
 			opacity: var(--opacity-50),
@@ -77,6 +100,7 @@ $vv-button: (
 			background: var(--color-gray-darken-3),
 			border-color: var(--color-gray-darken-3),
 			color: var(--color-white),
+			text-shadow: 0 1px 0 var(--color-gray-darken-5),
 			state: (
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-gray-darken-3),
@@ -119,7 +143,11 @@ $vv-button: (
 		danger: (
 			background: var(--color-danger),
 			border-color: var(--color-danger),
-			color: var(--color-white),
+			color: var(--color-danger-contrast),
+			text-shadow: (
+				0 1px 0 var(--color-danger-cover),
+				0 1px 0 var(--color-gray-darken-5),
+			),
 			state: (
 				focus-visible: (
 					outline: var(--spacing-px) solid var(--color-danger),
@@ -127,14 +155,29 @@ $vv-button: (
 				hover: (
 					background: var(--color-danger-darken-1),
 					border-color: var(--color-danger-darken-1),
+					color: var(--color-danger-darken-1-contrast),
+					text-shadow: (
+						0 1px 0 var(--color-danger-darken-1-cover),
+						0 1px 0 var(--color-gray-darken-5),
+					),
 				),
 				active: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
+					color: var(--color-danger-darken-2-contrast),
+					text-shadow: (
+						0 1px 0 var(--color-danger-darken-2-cover),
+						0 1px 0 var(--color-gray-darken-5),
+					),
 				),
 				pressed: (
 					background: var(--color-danger-darken-2),
 					border-color: var(--color-danger-darken-2),
+					color: var(--color-danger-darken-2-contrast),
+					text-shadow: (
+						0 1px 0 var(--color-danger-darken-2-cover),
+						0 1px 0 var(--color-gray-darken-5),
+					),
 				),
 			),
 		),
@@ -166,7 +209,7 @@ $vv-button: (
 			background: transparent,
 			border-width: var(--border-0),
 			padding: 0,
-			color: var(--color-brand-darken-1),
+			color: var(--color-brand-readable),
 			font-weight: inherit,
 			text-shadow: none,
 			state: (
@@ -180,7 +223,7 @@ $vv-button: (
 					text-underline-offset: var(--spacing-4),
 				),
 				active: (
-					color: var(--color-brand-darken-3),
+					color: var(--color-brand-readable-strong),
 				),
 			),
 			element: (

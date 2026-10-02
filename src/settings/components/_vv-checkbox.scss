@@ -139,6 +139,7 @@ $vv-checkbox: (
 								after: (
 									[translate]:
 										calc(100% * var(--direction, 1)),
+									background: var(--color-brand-contrast),
 								),
 							),
 						),
@@ -149,14 +150,14 @@ $vv-checkbox: (
 		valid: (
 			element: (
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 			),
 		),
 		invalid: (
 			element: (
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 			),
 		),

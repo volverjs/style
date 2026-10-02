@@ -3,6 +3,7 @@
 	import ColorPalette from '../../components/ColorPalette.vue'
 	import TableUtility from '../../components/TableUtility.vue'
 	import CardExample from '../../components/CardExample.vue'
+	import ReadableCheck from '../../components/ReadableCheck.vue'
 	import { permalinkToPath } from '@docs/utils/permalink'
 
 	const route = useRoute()
@@ -26,6 +27,7 @@
 			ColorPalette,
 			TableUtility,
 			CardExample,
+			ReadableCheck,
 		})
 	} catch (error) {
 		router.replace({ name: 'index' })
