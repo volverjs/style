@@ -251,6 +251,10 @@
         "brand-readable-strong": {
           "value": "color(from var(--color-brand-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
           "type": "color"
+        },
+        "brand-graphic": {
+          "value": "color(from var(--color-brand) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
+          "type": "color"
         }
       },
       "accent": {
@@ -352,6 +356,10 @@
         },
         "accent-readable-strong": {
           "value": "color(from var(--color-accent-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
+          "type": "color"
+        },
+        "accent-graphic": {
+          "value": "color(from var(--color-accent) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -455,6 +463,10 @@
         "success-readable-strong": {
           "value": "color(from var(--color-success-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
           "type": "color"
+        },
+        "success-graphic": {
+          "value": "color(from var(--color-success) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
+          "type": "color"
         }
       },
       "danger": {
@@ -556,6 +568,10 @@
         },
         "danger-readable-strong": {
           "value": "color(from var(--color-danger-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
+          "type": "color"
+        },
+        "danger-graphic": {
+          "value": "color(from var(--color-danger) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -659,6 +675,10 @@
         "info-readable-strong": {
           "value": "color(from var(--color-info-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
           "type": "color"
+        },
+        "info-graphic": {
+          "value": "color(from var(--color-info) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
+          "type": "color"
         }
       },
       "warning": {
@@ -760,6 +780,10 @@
         },
         "warning-readable-strong": {
           "value": "color(from var(--color-warning-readable) xyz-d65 calc(x * 0.5) calc(y * 0.5) calc(z * 0.5))",
+          "type": "color"
+        },
+        "warning-graphic": {
+          "value": "color(from var(--color-warning) xyz-d65 calc(x * min(1, 0.2577 / max(y, 0.0001))) min(y, 0.2577) calc(z * min(1, 0.2577 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -1821,6 +1845,10 @@
         "brand-readable-strong": {
           "value": "color(from color(from var(--color-brand-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
           "type": "color"
+        },
+        "brand-graphic": {
+          "value": "color(from color(from color(from var(--color-brand) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
+          "type": "color"
         }
       },
       "accent": {
@@ -1830,6 +1858,10 @@
         },
         "accent-readable-strong": {
           "value": "color(from color(from var(--color-accent-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
+          "type": "color"
+        },
+        "accent-graphic": {
+          "value": "color(from color(from color(from var(--color-accent) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
           "type": "color"
         }
       },
@@ -1841,6 +1873,10 @@
         "success-readable-strong": {
           "value": "color(from color(from var(--color-success-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
           "type": "color"
+        },
+        "success-graphic": {
+          "value": "color(from color(from color(from var(--color-success) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
+          "type": "color"
         }
       },
       "danger": {
@@ -1850,6 +1886,10 @@
         },
         "danger-readable-strong": {
           "value": "color(from color(from var(--color-danger-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
+          "type": "color"
+        },
+        "danger-graphic": {
+          "value": "color(from color(from color(from var(--color-danger) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
           "type": "color"
         }
       },
@@ -1861,6 +1901,10 @@
         "info-readable-strong": {
           "value": "color(from color(from var(--color-info-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
           "type": "color"
+        },
+        "info-graphic": {
+          "value": "color(from color(from color(from var(--color-info) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
+          "type": "color"
         }
       },
       "warning": {
@@ -1870,6 +1914,10 @@
         },
         "warning-readable-strong": {
           "value": "color(from color(from var(--color-warning-readable) xyz-d65 calc(x * 1.5) calc(y * 1.5) calc(z * 1.5)) srgb min(r, alpha) min(g, alpha) min(b, alpha))",
+          "type": "color"
+        },
+        "warning-graphic": {
+          "value": "color(from color(from color(from var(--color-warning) xyz-d65 calc(x * max(1, 0.1755 / max(y, 0.0001))) calc(y * max(1, 0.1755 / max(y, 0.0001))) calc(z * max(1, 0.1755 / max(y, 0.0001)))) srgb min(r, alpha) min(g, alpha) min(b, alpha)) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8245 / max(1 - y, 0.0001))) max(y, 0.1755) calc(1.0891 - (1.0891 - z) * min(1, 0.8245 / max(1 - y, 0.0001))))",
           "type": "color"
         }
       }

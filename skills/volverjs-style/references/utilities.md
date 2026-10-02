@@ -53,6 +53,7 @@ brand-contrast accent-contrast success-contrast     white or black, the text tha
 danger-contrast info-contrast warning-contrast      also -darken-1..5-contrast, text- only (no gray-contrast)
 brand-readable brand-readable-strong               the color as text on the surface, text- only
 surface-brand-readable surface-success-readable ...  the color as text on its tinted surface, text- only
+brand-graphic accent-graphic ...                    the color as a bar, ring or state border, 3:1
 word word-1..word-5                                 text colors, from strongest to faintest
 surface surface-1..surface-5                        backgrounds, from page to deepest inset
 surface-brand surface-accent surface-success surface-danger surface-info surface-warning

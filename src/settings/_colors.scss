@@ -38,6 +38,11 @@ $color-alpha: hsl(0deg 0% 0% / 0%) !default;
 // channels.
 $color-readable-ratio: 4.6 !default;
 
+// A palette color that has to be seen but not read, a bar, a focus ring or a
+// state border, keeps this one. WCAG asks for 3 to graphics and to the parts
+// of a control that show its state.
+$color-graphic-ratio: 3.1 !default;
+
 // Lightness of the tinted surfaces, --color-surface-brand and the others
 $color-surface-tint-lightness: 90% !default;
 
@@ -70,6 +75,10 @@ $color-readable-luminance: readable-luminance(
 $color-surface-readable-luminance: readable-luminance(
 	readable-worst-tint($color-surface-tint-lightness),
 	$color-readable-ratio
+) !default;
+$color-graphic-luminance: readable-luminance(
+	readable-surface($color-surface, -$color-readable-depth * $color-surface-scale),
+	$color-graphic-ratio
 ) !default;
 
 // ============================================
@@ -186,6 +195,7 @@ $colors: map.deep-merge(
 		),
 		$color-readable-luminance,
 		$color-surface-readable-luminance,
+		$color-graphic-luminance,
 		$color-readable-strong-factor,
 		$lighten: color-luminance($color-surface) < contrast-threshold(),
 		$relative: config.$use-color-mix

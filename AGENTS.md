@@ -150,7 +150,9 @@ outputs: that is what tells you which rules moved.
   color, while a shade written as text reads only by chance. A state that changes the
   background changes the role with it: the hovered `vv-dropdown-action` sits on
   `--color-surface-brand` and takes `--color-surface-brand-readable`. Text on a surface deeper
-  than `--color-surface-2` needs `$color-readable-depth` raised, not a darker shade.
+  than `--color-surface-2` needs `$color-readable-depth` raised, not a darker shade. A color
+  that has to be seen but not read, the bar of `vv-progress`, a focus ring, a border that
+  shows a state, takes `--color-brand-graphic`, which keeps 3:1 on the same surfaces.
   `check:colors` fails on a `var(--color-*)` that nothing declares.
 - **The first line offset is spelled out, not factored out.** Five declarations centre an icon
   on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`

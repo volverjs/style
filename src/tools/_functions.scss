@@ -490,23 +490,26 @@
 	@return string.unquote('color(from #{$color} srgb min(r, alpha) min(g, alpha) min(b, alpha))');
 }
 
-// The text roles of the palette colors, as a map to deep-merge into a colors
-// map: `readable` and `readable-strong` next to the shades of each color, the
-// text on the surface and the one a step further from it, and
-// `<name>-readable` in `surface`, the text on the tinted surface of the
-// color. Each role starts from the color itself and is moved to $bound, or to
-// $surface-bound on the tinted surface, and `readable-strong` is `readable`
-// with its luminance scaled by $strong. Without $relative, for the HSL channel
-// branch, which has no relative color syntax, a role is the first shade of
-// the color that reads, chosen at compile time (-readable-shade()).
+// The text and graphic roles of the palette colors, as a map to deep-merge
+// into a colors map: `readable` and `readable-strong` next to the shades of
+// each color, the text on the neutral surfaces and the one a step further
+// from them, `graphic`, the color of a bar, a focus ring or a state border on
+// the same surfaces, and `<name>-readable` in `surface`, the text on the
+// tinted surface of the color. Each role starts from the color itself and is
+// moved to $bound, to $graphic-bound for `graphic`, or to $surface-bound on
+// the tinted surface, and `readable-strong` is `readable` with its luminance
+// scaled by $strong. Without $relative, for the HSL channel branch, which has
+// no relative color syntax, a role is the first shade of the color that
+// reaches its bound, chosen at compile time (-readable-shade()).
 // @param {Map} $colors - Color name to its compile time value
-// @param {Number} $bound - Bound on the surface, from readable-luminance()
-// @param {Number} $surface-bound - Bound on the tinted surfaces
+// @param {Number} $bound - Bound of the text on the neutral surfaces, from readable-luminance()
+// @param {Number} $surface-bound - Bound of the text on the tinted surfaces
+// @param {Number} $graphic-bound - Bound of a graphic on the neutral surfaces
 // @param {Number} $strong - Luminance factor of `readable-strong`
 // @param {Boolean} $lighten - The surface is dark (default: false)
 // @param {Boolean} $relative - Compute the roles in CSS (default: true)
-// @return {Map} (brand: (readable, readable-strong), ..., surface: (brand-readable, ...))
-@function readable-roles($colors, $bound, $surface-bound, $strong, $lighten: false, $relative: true) {
+// @return {Map} (brand: (readable, readable-strong, graphic), ..., surface: (brand-readable, ...))
+@function readable-roles($colors, $bound, $surface-bound, $graphic-bound, $strong, $lighten: false, $relative: true) {
 	$result: ();
 	$surface: ();
 
@@ -520,6 +523,7 @@
 				(
 					readable: readable-color-value($origin, $bound, $lighten),
 					readable-strong: readable-strong-value('var(--color-#{$name}-readable)', $strong),
+					graphic: readable-color-value($origin, $graphic-bound, $lighten),
 				)
 			);
 			$surface: map.set(
@@ -540,6 +544,7 @@
 						-readable-shade($color, $target, $lighten, $from: $step + 1),
 						$lighten
 					),
+					graphic: -legacy-shade-var($name, -readable-shade($color, $graphic-bound, $lighten), $lighten),
 				)
 			);
 			$surface: map.set(

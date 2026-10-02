@@ -4,11 +4,11 @@
 @use '../context' as *;
 
 // The colors map for one group of utilities. A cover only exists to hide the
-// emboss of vv-button and gets no class. A contrast text and a readable shade
+// emboss of vv-button and gets no class. A contrast text and a readable role
 // are text colors: they are left out of the fills ($text: false) and kept
 // without a value for the `text-` classes ($text: true), which then read the
 // token with no fallback, since the expression they would repeat reads the
-// tokens of the props anyway.
+// tokens of the props anyway. A graphic role is kept the same way in both.
 @function -utility-colors($colors, $text) {
 	$result: ();
 
@@ -23,6 +23,8 @@
 					@if $text {
 						$shades: map.set($shades, $shade, null);
 					}
+				} @else if string.index($shade-name, 'graphic') {
+					$shades: map.set($shades, $shade, null);
 				} @else if not string.index($shade-name, 'cover') {
 					$shades: map.set($shades, $shade, $color);
 				}

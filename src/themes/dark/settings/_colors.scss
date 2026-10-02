@@ -36,6 +36,10 @@ $dark-color-surface-readable-luminance: readable-luminance(
 	readable-worst-tint($dark-color-surface-tint-lightness),
 	$color-readable-ratio
 ) !default;
+$dark-color-graphic-luminance: readable-luminance(
+	readable-surface($dark-color-surface, $color-readable-depth * $dark-color-surface-scale),
+	$color-graphic-ratio
+) !default;
 
 // Surface palette for dark theme
 $dark-color-surface-palette: if(
@@ -108,6 +112,7 @@ $dark-colors: map.deep-merge(
 		),
 		$dark-color-readable-luminance,
 		$dark-color-surface-readable-luminance,
+		$dark-color-graphic-luminance,
 		$dark-color-readable-strong-factor,
 		$lighten: color-luminance($dark-color-surface) < contrast-threshold(),
 		$relative: config.$use-color-mix

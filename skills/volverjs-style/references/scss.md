@@ -58,6 +58,7 @@ compile error, because the comma separates configuration entries.
 | `$color-brand` `$color-accent` `$color-success` `$color-danger` `$color-info` `$color-warning` `$color-gray` `$color-word` `$color-surface` | brand `#166abd`, accent `#9c27b0` … | palette bases; shades derive |
 | `$color-tint` | `$color-brand` | hue of gray, word, surface, shadow and backdrop while they keep their defaults; emitted as `--color-tint` |
 | `$color-readable-ratio` | `4.6` | contrast the `-readable` roles keep with what they sit on, in each theme |
+| `$color-graphic-ratio` | `3.1` | contrast the `-graphic` roles keep on the same surfaces |
 | `$color-readable-depth` | `2` | the deepest neutral surface the roles read on, `--color-surface-2` |
 | `$color-readable-strong-factor` `$dark-color-readable-strong-factor` | `0.5`, `1.5` | luminance step from `-readable` to `-readable-strong`, per theme |
 | `$font-family-sans` `$font-family-serif` `$font-family-mono` | system stacks | one quoted string each |

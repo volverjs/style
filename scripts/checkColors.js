@@ -8,7 +8,8 @@
 //   the neutral surfaces down to surface-2 of each theme, of any hue, leave a
 //   color that already reads alone and keep its hue, put readable-strong a
 //   step further, and keep every shade at 4.5:1 or more on the tinted
-//   surface of any hue;
+//   surface of any hue; the graphic roles, which keep 3:1 on the same
+//   neutral surfaces and paint the bar of vv-progress;
 // - the covers of vv-button, the split fill and text colors of the fields,
 //   and the HSL channel branch, which emits no relative color syntax outside
 //   @supports;
@@ -366,6 +367,7 @@ const themes = {
 		tint: 0.9,
 		bound: boundOf(emitted['--color-brand-readable']),
 		surfaceBound: boundOf(emitted['--color-surface-brand-readable']),
+		graphicBound: boundOf(emitted['--color-brand-graphic']),
 		strong: factorOf(emitted['--color-brand-readable-strong']),
 		emitted,
 	},
@@ -375,6 +377,7 @@ const themes = {
 		tint: 0.1,
 		bound: boundOf(darkEmitted['--color-brand-readable']),
 		surfaceBound: boundOf(darkEmitted['--color-surface-brand-readable']),
+		graphicBound: boundOf(darkEmitted['--color-brand-graphic']),
 		strong: factorOf(darkEmitted['--color-brand-readable-strong']),
 		emitted: darkEmitted,
 	},
@@ -390,6 +393,12 @@ for (const [name, theme] of Object.entries(themes)) {
 					'var(--color-brand)',
 					theme.surfaceBound,
 					theme.lighten,
+				) &&
+			theme.emitted['--color-brand-graphic'] ===
+				formula(
+					'var(--color-brand)',
+					theme.graphicBound,
+					theme.lighten,
 				),
 		`the ${name} readable roles of brand are ${theme.emitted['--color-brand-readable']}, ${theme.emitted['--color-brand-readable-strong']}, ${theme.emitted['--color-surface-brand-readable']}`,
 	)
@@ -397,15 +406,18 @@ for (const [name, theme] of Object.entries(themes)) {
 		theme.lighten ? theme.strong > 1 : theme.strong < 1,
 		`the ${name} readable-strong factor ${theme.strong} does not move away from the surface`,
 	)
-	// the bound of the deepest neutral surface, and the one of the hardest
-	// tint of any hue, both of the hardest hue
+	// the bounds of the text and of a graphic on the deepest neutral surface,
+	// and the one of the text on the hardest tint of any hue, all of the
+	// hardest hue
 	const worst = worstTint(theme.tint, !theme.lighten)
 	check(
 		ratio(theme.bound, theme.surface) >= 4.59 &&
 			ratio(theme.bound, theme.surface) < 4.61 &&
 			ratio(theme.surfaceBound, worst) >= 4.59 &&
-			ratio(theme.surfaceBound, worst) < 4.61,
-		`${name} readable bounds ${theme.bound} and ${theme.surfaceBound}, hardest surface ${theme.surface.toFixed(4)}, hardest tint ${worst.toFixed(4)}`,
+			ratio(theme.surfaceBound, worst) < 4.61 &&
+			ratio(theme.graphicBound, theme.surface) >= 3.09 &&
+			ratio(theme.graphicBound, theme.surface) < 3.11,
+		`${name} readable bounds ${theme.bound}, ${theme.surfaceBound} and ${theme.graphicBound}, hardest surface ${theme.surface.toFixed(4)}, hardest tint ${worst.toFixed(4)}`,
 	)
 }
 check(
@@ -418,9 +430,10 @@ check(
 )
 // on the deepest neutral surface, every reference color ends at 4.5:1 or
 // more, one that already reads is left alone, and the dark theme keeps its
-// hue; readable-strong reads at least as well and is a step away; on its own
-// tinted surface, so does every shade of every reference color, and every hue
-// at full saturation
+// hue; readable-strong reads at least as well and is a step away; the graphic
+// role ends at 3:1 or more, and is left alone when it is already seen; on its
+// own tinted surface, every shade of every reference color reads, and so does
+// every hue at full saturation
 const readableTable = reference.map((hex) => {
 	const row = { color: hex }
 	for (const [name, theme] of Object.entries(themes)) {
@@ -451,6 +464,12 @@ const readableTable = reference.map((hex) => {
 						luminance(text) * theme.strong + 1e-3),
 			`readable-strong of ${hex} in the ${name} theme is ${toHex(strong)} at ${strongRatio.toFixed(2)}, readable ${after.toFixed(2)}`,
 		)
+		const graphic = readable(hex, theme.graphicBound, theme.lighten)
+		const graphicRatio = ratio(luminance(graphic), theme.surface)
+		check(
+			graphicRatio >= 3 && (before < 3.1 || graphic === hex),
+			`the graphic role of ${hex} in the ${name} theme is ${graphic} at ${graphicRatio.toFixed(2)}, the color at ${before.toFixed(2)}`,
+		)
 		const tint = luminanceOf(hsl(h, s, theme.tint))
 		let lowest = Infinity
 		for (const multiplier of [0.5, 0.7, 0.9, 1, 1.3, 1.5]) {
@@ -470,6 +489,7 @@ const readableTable = reference.map((hex) => {
 		row[name] =
 			`${text} ${after.toFixed(2)}${text === hex ? '' : ` (was ${before.toFixed(2)})`}`
 		row[`${name} strong`] = `${toHex(strong)} ${strongRatio.toFixed(2)}`
+		row[`${name} graphic`] = `${graphic} ${graphicRatio.toFixed(2)}`
 		row[`${name} tint`] = lowest.toFixed(2)
 	}
 	return row
@@ -568,7 +588,7 @@ for (const [theme, emittedLegacy] of [
 	['light', legacy],
 	['dark', props(legacyDarkProps)],
 ]) {
-	const { bound, surfaceBound, strong, lighten } = themes[theme]
+	const { bound, surfaceBound, graphicBound, strong, lighten } = themes[theme]
 	for (const [name, hex] of Object.entries(palette)) {
 		const step = legacyStep(hex, bound, lighten)
 		const target =
@@ -584,6 +604,11 @@ for (const [theme, emittedLegacy] of [
 			[`--color-surface-${name}-readable`]: legacyVar(
 				name,
 				legacyStep(hex, surfaceBound, lighten),
+				lighten,
+			),
+			[`--color-${name}-graphic`]: legacyVar(
+				name,
+				legacyStep(hex, graphicBound, lighten),
 				lighten,
 			),
 		})) {
@@ -690,6 +715,26 @@ check(
 		!/-cover\b/.test(utilities),
 	'the readable roles or the contrast texts are not text utilities alone, or a cover has a utility',
 )
+// the graphic roles have every utility, reading the token without repeating
+// its expression as a fallback
+check(
+	['bg', 'text', 'border', 'decoration'].every((prefix) =>
+		new RegExp(
+			`\\.${prefix}-brand-graphic\\)\\s*\\{\\s*[a-z-]+: var\\(--color-brand-graphic\\);`,
+		).test(utilities),
+	),
+	'a graphic role lacks a utility, or its utility repeats the expression',
+)
+// vv-progress paints its bar in the graphic role, which keeps 3:1 with the
+// track, and never in the plain brand
+const progress = compile(
+	`@use 'src/context' with ($use-custom-props-for-components: false); @use 'src/components/vv-progress';`,
+)
+check(
+	progress.includes('var(--color-brand-graphic)') &&
+		!progress.includes('var(--color-brand)'),
+	'vv-progress paints its bar in a color that is not its graphic role',
+)
 const preflight = compile(`@use 'src/context'; @use 'src/preflight';`)
 check(
 	/mark\)[^{]*\.text-warning-contrast\)\s*\{\s*color: var\(--color-warning-contrast/.test(
@@ -728,5 +773,5 @@ if (failures.length) {
 	process.exit(1)
 }
 console.log(
-	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens.`,
+	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable and graphic roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens.`,
 )

@@ -1,8 +1,8 @@
 <script setup>
 	// Sets a palette color at runtime on a light and a dark region, as a
 	// tenant brand would be, and measures in this browser the contrast of
-	// every text the library derives from it, on the backgrounds it is meant
-	// for. WCAG 2 asks for 4.5:1.
+	// every text and graphic the library derives from it, on the backgrounds
+	// it is meant for. WCAG 2 asks for 4.5:1 to text and 3:1 to graphics.
 	const names = ['brand', 'accent', 'success', 'danger', 'info', 'warning']
 	const presets = [
 		'#166abd',
@@ -21,6 +21,7 @@
 		{ text: `${name.value}-readable`, background: 'surface-1' },
 		{ text: `${name.value}-readable`, background: 'surface-2' },
 		{ text: `${name.value}-readable-strong`, background: 'surface-2' },
+		{ text: `${name.value}-graphic`, background: 'surface-2', min: 3 },
 		{
 			text: `surface-${name.value}-readable`,
 			background: `surface-${name.value}`,
@@ -71,9 +72,12 @@
 			const style = getComputedStyle(el)
 			const text = luminance(style.color)
 			const background = luminance(style.backgroundColor)
-			next[el.dataset.pair] =
-				(Math.max(text, background) + 0.05) /
-				(Math.min(text, background) + 0.05)
+			next[el.dataset.pair] = {
+				ratio:
+					(Math.max(text, background) + 0.05) /
+					(Math.min(text, background) + 0.05),
+				min: Number(el.dataset.min),
+			}
 		}
 		results.value = next
 	}
@@ -83,15 +87,16 @@
 	const measured = computed(() => Object.keys(results.value).length)
 	const below = computed(
 		() =>
-			Object.values(results.value).filter((ratio) => ratio < 4.5).length,
+			Object.values(results.value).filter(({ ratio, min }) => ratio < min)
+				.length,
 	)
 	const summary = computed(() => {
 		if (!measured.value) {
 			return 'Measuring…'
 		}
 		return below.value
-			? `${below.value} of ${measured.value} texts read below 4.5:1 in this browser.`
-			: `All ${measured.value} texts read at 4.5:1 or more in this browser.`
+			? `${below.value} of ${measured.value} colors fall below their ratio in this browser.`
+			: `All ${measured.value} colors keep their ratio in this browser, 4.5:1 for text and 3:1 for the graphic.`
 	})
 </script>
 
@@ -152,6 +157,7 @@
 						v-for="(pair, index) in pairs"
 						:key="`${pair.text} ${pair.background}`"
 						:data-pair="`${theme} ${index}`"
+						:data-min="pair.min ?? 4.5"
 						:style="{
 							color: `var(--color-${pair.text})`,
 							backgroundColor: `var(--color-${pair.background})`,
@@ -161,9 +167,14 @@
 						<span
 							v-if="results[`${theme} ${index}`]"
 							class="whitespace-nowrap">
-							{{ results[`${theme} ${index}`].toFixed(2) }}:1
 							{{
-								results[`${theme} ${index}`] >= 4.5 ? '✓' : '✗'
+								results[`${theme} ${index}`].ratio.toFixed(2)
+							}}:1
+							{{
+								results[`${theme} ${index}`].ratio >=
+								(pair.min ?? 4.5)
+									? '✓'
+									: '✗'
 							}}
 						</span>
 					</div>
