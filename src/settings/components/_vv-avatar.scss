@@ -125,7 +125,7 @@ $vv-avatar: (
 			color: var(--color-white),
 		),
 		ring: (
-			color: var(--color-brand-darken-3-readable),
+			color: var(--color-surface-brand-readable),
 			background-color: var(--color-surface-brand),
 			border-color: currentcolor,
 			border-width: var(--border),
@@ -137,23 +137,23 @@ $vv-avatar: (
 				),
 				danger: (
 					background-color: var(--color-surface-danger),
-					color: var(--color-danger-readable),
+					color: var(--color-surface-danger-readable),
 				),
 				success: (
 					background-color: var(--color-surface-success),
-					color: var(--color-success-darken-3-readable),
+					color: var(--color-surface-success-readable),
 				),
 				warning: (
 					background-color: var(--color-surface-warning),
-					color: var(--color-warning-darken-5-readable),
+					color: var(--color-surface-warning-readable),
 				),
 				info: (
 					background-color: var(--color-surface-info),
-					color: var(--color-info-darken-5-readable),
+					color: var(--color-surface-info-readable),
 				),
 				accent: (
 					background-color: var(--color-surface-accent),
-					color: var(--color-accent-readable),
+					color: var(--color-surface-accent-readable),
 				),
 				gray: (
 					background-color: var(--color-surface-4),

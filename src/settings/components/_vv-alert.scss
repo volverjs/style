@@ -78,10 +78,10 @@ $vv-alert: (
 			background-color: var(--color-surface-success),
 			element: (
 				icon: (
-					color: var(--color-success-darken-1-readable),
+					color: var(--color-surface-success-readable),
 				),
 				header: (
-					color: var(--color-success-darken-1-readable),
+					color: var(--color-surface-success-readable),
 				),
 			),
 		),
@@ -90,10 +90,10 @@ $vv-alert: (
 			background-color: var(--color-surface-danger),
 			element: (
 				icon: (
-					color: var(--color-danger-readable),
+					color: var(--color-surface-danger-readable),
 				),
 				header: (
-					color: var(--color-danger-readable),
+					color: var(--color-surface-danger-readable),
 				),
 			),
 		),
@@ -102,10 +102,10 @@ $vv-alert: (
 			background-color: var(--color-surface-warning),
 			element: (
 				icon: (
-					color: var(--color-warning-darken-5-readable),
+					color: var(--color-surface-warning-readable),
 				),
 				header: (
-					color: var(--color-warning-darken-5-readable),
+					color: var(--color-surface-warning-readable),
 				),
 			),
 		),
@@ -114,10 +114,10 @@ $vv-alert: (
 			background-color: var(--color-surface-info),
 			element: (
 				icon: (
-					color: var(--color-info-darken-5-readable),
+					color: var(--color-surface-info-readable),
 				),
 				header: (
-					color: var(--color-info-darken-5-readable),
+					color: var(--color-surface-info-readable),
 				),
 			),
 		),
@@ -126,10 +126,10 @@ $vv-alert: (
 			background-color: var(--color-surface-accent),
 			element: (
 				icon: (
-					color: var(--color-accent-readable),
+					color: var(--color-surface-accent-readable),
 				),
 				header: (
-					color: var(--color-accent-readable),
+					color: var(--color-surface-accent-readable),
 				),
 			),
 		),
@@ -138,10 +138,10 @@ $vv-alert: (
 			background-color: var(--color-surface-brand),
 			element: (
 				icon: (
-					color: var(--color-brand-darken-3-readable),
+					color: var(--color-surface-brand-readable),
 				),
 				header: (
-					color: var(--color-brand-darken-3-readable),
+					color: var(--color-surface-brand-readable),
 				),
 			),
 		),

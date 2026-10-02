@@ -4,13 +4,15 @@
 //   and the text of the states of vv-button that follows them;
 // - the neutrals written relative to --color-tint, against the literals they
 //   replaced, for the default brand and for #140e33, in both themes;
-// - the readable shades, which keep the reference set at 4.5:1 or more on
-//   the surface of each theme and leave a color that already reads alone;
+// - the readable roles, which keep the reference set at 4.5:1 or more on
+//   the surface of each theme, leave a color that already reads alone, and
+//   keep every shade at 4.5:1 or more on the tinted surface of any hue;
 // - the covers of vv-button, the split fill and text colors of the fields,
 //   and the HSL channel branch, which emits no relative color syntax outside
 //   @supports;
 // - the cases that must not move: neutrals set explicitly, the compile time
-//   branch without $use-color-mix, the color utilities.
+//   branch without $use-color-mix, the color utilities;
+// - that every color token the compiled library reads is declared.
 // No browser runs here. The relative expressions are resolved with the
 // formulas of CSS Color 4, the ones the engines apply; what Chrome, Firefox
 // and Safari 17 actually compute was measured when the tokens were written.
@@ -272,7 +274,7 @@ for (const [brand, expected] of Object.entries(neutrals)) {
 }
 // #endregion
 
-// #region 3. readable shades
+// #region 3. readable roles
 // linear sRGB to XYZ (D65) and back, the matrices of CSS Color 4
 const toXyz = ([r, g, b]) => [
 	0.41239079926595934 * r + 0.357584339383878 * g + 0.1804807884018343 * b,
@@ -286,57 +288,115 @@ const fromXyz = ([x, y, z]) => [
 ]
 const toGamma = (value) =>
 	value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055
-// the readable expression evaluated: a mix toward the target in xyz-d65
-const readable = (hex, bound, target) => {
-	const [x, y, z] = toXyz(hexToRgb(hex).map(toLinear))
-	const weight = Math.min(
-		1,
-		Math.max(0, (y - bound) / (y - target + 0.00001)),
-	)
-	return toHex(
-		fromXyz([
-			x + (0.9505 * target - x) * weight,
-			y + (target - y) * weight,
-			z + (1.0891 * target - z) * weight,
-		]).map((value) => Math.min(1, Math.max(0, toGamma(value)))),
-	)
+// the readable expression evaluated on [r, g, b]: toward black, the channels
+// scaled by bound / y; toward white, their distance from the white point by
+// (1 - bound) / (1 - y)
+const readableOf = (channels, bound, lighten) => {
+	const [x, y, z] = toXyz(channels.map(toLinear))
+	const xyz = lighten
+		? ((g) => [
+				0.9505 - (0.9505 - x) * g,
+				Math.max(y, bound),
+				1.0891 - (1.0891 - z) * g,
+			])(Math.min(1, (1 - bound) / Math.max(1 - y, 0.0001)))
+		: ((g) => [x * g, Math.min(y, bound), z * g])(
+				Math.min(1, bound / Math.max(y, 0.0001)),
+			)
+	return fromXyz(xyz).map((value) => Math.min(1, Math.max(0, toGamma(value))))
 }
-const weight =
-	'clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)'
-check(
-	emitted['--color-brand-darken-1-readable'] ===
-		`color(from var(--color-brand-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * ${weight}) calc(y + (var(--color-readable-target) - y) * ${weight}) calc(z + (1.0891 * var(--color-readable-target) - z) * ${weight}))`,
-	`--color-brand-darken-1-readable is ${emitted['--color-brand-darken-1-readable']}`,
-)
+const readable = (hex, bound, lighten) =>
+	toHex(readableOf(hexToRgb(hex), bound, lighten))
+const formula = (origin, bound, lighten) =>
+	lighten
+		? `color(from ${origin} xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))) max(y, ${bound}) calc(1.0891 - (1.0891 - z) * min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))))`
+		: `color(from ${origin} xyz-d65 calc(x * min(1, ${bound} / max(y, 0.0001))) min(y, ${bound}) calc(z * min(1, ${bound} / max(y, 0.0001))))`
+// the luminance the y channel is clamped to, `) min(y, 0.1782)`, not the
+// guard of the division, `/ max(y, 0.0001)`
+const boundOf = (value) =>
+	Number(value?.match(/\) (?:min|max)\(y, ([\d.]+)\)/)?.[1])
 const darkProps = compile(`@use 'src/context'; @use 'src/themes/dark/props';`)
 const darkEmitted = props(darkProps)
+// the hardest tint of each theme, among every hue at full saturation
+const worstTint = (lightness, light) => {
+	let worst = null
+	for (let h = 0; h < 360; h++) {
+		const y = luminanceOf(hsl(h, 1, lightness))
+		if (worst === null || (light ? y < worst : y > worst)) {
+			worst = y
+		}
+	}
+	return worst
+}
 const themes = {
 	light: {
-		bound: Number(emitted['--color-readable-luminance']),
-		target: Number(emitted['--color-readable-target']),
+		lighten: false,
 		surface: luminance('#ffffff'),
+		tint: 0.9,
+		bound: boundOf(emitted['--color-brand-readable']),
+		surfaceBound: boundOf(emitted['--color-surface-brand-readable']),
+		emitted,
+		roles: { brand: ['brand', 'brand-darken-3', 'brand-darken-3'] },
 	},
 	dark: {
-		bound: Number(darkEmitted['--color-readable-luminance']),
-		target: Number(darkEmitted['--color-readable-target']),
+		lighten: true,
 		surface: luminance(neutrals['#166abd']['dark surface']),
+		tint: 0.1,
+		bound: boundOf(darkEmitted['--color-brand-readable']),
+		surfaceBound: boundOf(darkEmitted['--color-surface-brand-readable']),
+		emitted: darkEmitted,
+		roles: {
+			brand: ['brand-lighten-3', 'brand-lighten-5', 'brand-lighten-3'],
+		},
 	},
 }
+for (const [name, theme] of Object.entries(themes)) {
+	const [readableShade, strongShade, surfaceShade] = theme.roles.brand
+	check(
+		theme.emitted['--color-brand-readable'] ===
+			formula(
+				`var(--color-${readableShade})`,
+				theme.bound,
+				theme.lighten,
+			) &&
+			theme.emitted['--color-brand-readable-strong'] ===
+				formula(
+					`var(--color-${strongShade})`,
+					theme.bound,
+					theme.lighten,
+				) &&
+			theme.emitted['--color-surface-brand-readable'] ===
+				formula(
+					`var(--color-${surfaceShade})`,
+					theme.surfaceBound,
+					theme.lighten,
+				),
+		`the ${name} readable roles of brand are ${theme.emitted['--color-brand-readable']}, ${theme.emitted['--color-surface-brand-readable']}`,
+	)
+	// the bound of the surface, and the one of the hardest tint of any hue
+	const worst = worstTint(theme.tint, !theme.lighten)
+	check(
+		ratio(theme.bound, theme.surface) >= 4.59 &&
+			ratio(theme.surfaceBound, worst) >= 4.59 &&
+			ratio(theme.surfaceBound, worst) < 4.61,
+		`${name} readable bounds ${theme.bound} and ${theme.surfaceBound}, hardest tint ${worst.toFixed(4)}`,
+	)
+}
 check(
-	themes.light.bound === 0.1782 && themes.light.target === 0,
-	`light readable bound ${themes.light.bound}, target ${themes.light.target}`,
+	!('--color-readable-luminance' in emitted) &&
+		!('--color-readable-target' in darkEmitted) &&
+		!Object.keys(emitted).some((key) =>
+			/-(lighten|darken)-\d-readable$/.test(key),
+		),
+	'a readable shade or a readable bound token is still emitted',
 )
-check(
-	// the bound comes from the exact surface, the ratio from its 8-bit hex
-	themes.dark.target === 1 &&
-		ratio(themes.dark.bound, themes.dark.surface) >= 4.59,
-	`dark readable bound ${themes.dark.bound}, target ${themes.dark.target}`,
-)
+// on the surface, every reference color ends at 4.5:1 or more and one that
+// already reads is left alone; on its own tinted surface, so is every shade
+// of every reference color, and every hue at full saturation
 const readableTable = reference.map((hex) => {
 	const row = { color: hex }
 	for (const [name, theme] of Object.entries(themes)) {
 		const before = ratio(luminance(hex), theme.surface)
-		const text = readable(hex, theme.bound, theme.target)
+		const text = readable(hex, theme.bound, theme.lighten)
 		const after = ratio(luminance(text), theme.surface)
 		check(
 			after >= 4.5,
@@ -346,11 +406,41 @@ const readableTable = reference.map((hex) => {
 			before < 4.6 || text === hex,
 			`${hex} in the ${name} theme already reads but moves to ${text}`,
 		)
+		const [h, s] = toHsl(hexToRgb(hex))
+		const tint = luminanceOf(hsl(h, s, theme.tint))
+		let lowest = Infinity
+		for (const multiplier of [0.5, 0.7, 0.9, 1, 1.3, 1.5]) {
+			const y = luminanceOf(
+				readableOf(
+					shade(hex, multiplier),
+					theme.surfaceBound,
+					theme.lighten,
+				),
+			)
+			lowest = Math.min(lowest, ratio(y, tint))
+		}
+		check(
+			lowest >= 4.5,
+			`a shade of ${hex} reads at ${lowest.toFixed(2)} on its tinted surface in the ${name} theme`,
+		)
 		row[name] =
 			`${text} ${after.toFixed(2)}${text === hex ? '' : ` (was ${before.toFixed(2)})`}`
+		row[`${name} tint`] = lowest.toFixed(2)
 	}
 	return row
 })
+for (const [name, theme] of Object.entries(themes)) {
+	for (let h = 0; h < 360; h += 5) {
+		const tint = luminanceOf(hsl(h, 1, theme.tint))
+		const y = luminanceOf(
+			readableOf(hsl(h, 1, 0.5), theme.surfaceBound, theme.lighten),
+		)
+		check(
+			ratio(y, tint) >= 4.5,
+			`hue ${h} reads at ${ratio(y, tint).toFixed(2)} on its tinted surface in the ${name} theme`,
+		)
+	}
+}
 
 // the fixed steps of word and surface, again in percent for Safari 17
 const fallback = '@supports not (color: hsl(from red h s calc(l + 1)))'
@@ -394,26 +484,18 @@ const legacyProps = compile(
 	`@use 'src/context' with ($use-color-mix: false); @use 'src/props';`,
 )
 const legacy = props(legacyProps)
-// the HSL channel branch serves browsers without relative color syntax: none
-// outside the @supports block that adds the computed text tokens
-const [legacyPlain, legacySupported = ''] = legacyProps.split(
-	'@supports (color: color(from red xyz-d65 x y z))',
+// the HSL channel branch serves browsers without relative color syntax: it
+// emits none, and a readable role there is its shade
+check(
+	!legacyProps.includes('from var(') &&
+		!legacyProps.includes('@supports (color:'),
+	'without $use-color-mix relative color syntax is emitted',
 )
 check(
-	!legacyPlain.includes('from var('),
-	'without $use-color-mix relative color syntax is emitted outside @supports',
-)
-check(
-	legacy['--color-brand-darken-1-readable'] ===
-		'var(--color-brand-darken-1)' &&
-		legacySupported.includes(
-			`--color-brand-darken-1-readable: ${emitted['--color-brand-darken-1-readable']}`,
-		),
-	'without $use-color-mix the readable shades lack their fallback or their computed form',
-)
-check(
-	!/-(contrast|cover):/.test(legacySupported),
-	'without $use-color-mix a contrast text or a cover is computed in CSS, apart from the text chosen at compile time',
+	legacy['--color-brand-readable'] === 'var(--color-brand)' &&
+		legacy['--color-surface-brand-readable'] ===
+			'var(--color-brand-darken-3)',
+	`without $use-color-mix the readable roles are ${legacy['--color-brand-readable']}, ${legacy['--color-surface-brand-readable']}`,
 )
 check(
 	!('--color-tint' in legacy),
@@ -488,12 +570,12 @@ check(
 	'vv-button computes a contrast or a cover itself',
 )
 
-// a field paints its bar in its color and writes its hint in the readable one
+// a field paints its bar in its color and writes its hint in the readable role
 const input = compile(`@use 'src/context'; @use 'src/props';`)
 check(
 	input.includes('--input-valid-color: var(--color-success);') &&
 		input.includes(
-			'--input-valid-text-color: color(from var(--input-valid-color) xyz-d65',
+			'--input-valid-text-color: var(--color-success-readable);',
 		),
 	'the valid color of a field is not split into a fill and a text color',
 )
@@ -508,13 +590,15 @@ check(
 	'--color-tint has utilities',
 )
 check(
-	/\.text-brand-darken-1-readable\b/.test(utilities) &&
+	/\.text-brand-readable\b/.test(utilities) &&
+		/\.text-brand-readable-strong\b/.test(utilities) &&
+		/\.text-surface-brand-readable\b/.test(utilities) &&
 		/\.text-brand-darken-1-contrast\b/.test(utilities) &&
 		!/\.(bg|border|decoration)-[a-z0-9-]*(readable|contrast)\b/.test(
 			utilities,
 		) &&
 		!/-cover\b/.test(utilities),
-	'the readable shades or the contrast texts are not text utilities alone, or a cover has a utility',
+	'the readable roles or the contrast texts are not text utilities alone, or a cover has a utility',
 )
 const preflight = compile(`@use 'src/context'; @use 'src/preflight';`)
 check(
@@ -523,6 +607,24 @@ check(
 	),
 	'mark in .preflight does not take --color-warning-contrast',
 )
+// #endregion
+
+// every color token the library reads is declared, in the light props or in
+// the dark theme: a component that names a shade or a role that no longer
+// exists would otherwise fall back to the inherited color without a word
+const bundle =
+	compile(`@use 'src/volver';`) + compile(`@use 'src/themes/dark/volver';`)
+const declared = new Set(
+	[...bundle.matchAll(/(--color-[a-z0-9-]+)\s*:/g)].map(([, name]) => name),
+)
+const missing = [
+	...new Set(
+		[...bundle.matchAll(/var\((--color-[a-z0-9-]+)/g)].map(
+			([, name]) => name,
+		),
+	),
+].filter((name) => !declared.has(name))
+check(!missing.length, `undeclared color tokens: ${missing.join(', ')}`)
 // #endregion
 
 compiler.dispose()
@@ -536,5 +638,5 @@ if (failures.length) {
 	process.exit(1)
 }
 console.log(
-	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable shades, Safari 17 steps, explicit values, legacy branch, utilities.`,
+	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens.`,
 )

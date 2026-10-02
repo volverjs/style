@@ -51,7 +51,8 @@ variants, so `md:p-16` does nothing: the dynamic tokens are how spacing adapts.
 brand accent success danger info warning gray      each also -lighten-1..5 and -darken-1..5
 brand-contrast accent-contrast success-contrast     white or black, the text that reads on that fill,
 danger-contrast info-contrast warning-contrast      also -darken-1..5-contrast, text- only (no gray-contrast)
-brand-readable brand-darken-1-readable ...          the shade as text on the surface, text- only
+brand-readable brand-readable-strong               the color as text on the surface, text- only
+surface-brand-readable surface-success-readable ...  the color as text on its tinted surface, text- only
 word word-1..word-5                                 text colors, from strongest to faintest
 surface surface-1..surface-5                        backgrounds, from page to deepest inset
 surface-brand surface-accent surface-success surface-danger surface-info surface-warning
@@ -203,11 +204,12 @@ On a darker shade take the contrast of that shade: `bg-warning-darken-5
 text-warning-darken-5-contrast`. The contrast colors are `text-` classes only. There is
 no `text-tint`: `--color-tint` has no utilities.
 
-Text written in a color on the page takes the `-readable` of that shade, not the shade:
-`text-brand-readable`, `text-danger-darken-1-readable`. It is the shade itself while it
-reads, and moves only when the color would not reach 4.6:1 on `--color-surface`, darker in
-the light theme and lighter in the dark one. The readable shades exist as `text-` classes
-only: there is no `bg-brand-readable`.
+Text written in a color takes a readable role, not a shade: `text-brand-readable` on the
+page, `text-brand-readable-strong` for a stronger one, and on a tinted surface the role of
+that surface, `<div class="bg-surface-success text-surface-success-readable">`. A role is
+a shade while it reads and moves only when it would not reach 4.6:1, darker in the light
+theme and lighter in the dark one. They are `text-` classes only: there is no
+`bg-brand-readable`, and no `text-brand-darken-1-readable`.
 
 ## Borders
 

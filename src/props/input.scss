@@ -3,15 +3,5 @@
 @include layer(props, $use-css-layers, $layer-prefix) {
 	:where(:host, :root, .theme) {
 		@include spread-map-into-props($map: $input, $prefix: input);
-
-		// The HSL channel branch serves browsers without relative color
-		// syntax, which take the text of a valid or invalid field in its
-		// color; a browser that has the syntax gets the readable one
-		@if not $use-color-mix {
-			@supports (color: color(from red xyz-d65 x y z)) {
-				--input-valid-text-color: #{readable-color-value('var(--input-valid-color)')};
-				--input-invalid-text-color: #{readable-color-value('var(--input-invalid-color)')};
-			}
-		}
 	}
 }

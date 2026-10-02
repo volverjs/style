@@ -33,16 +33,38 @@ $color-shadow: hsl(color-hue($color-tint) 50% 20%) !default;
 $color-backdrop: hsla(color-hue($color-tint) 50% 20% / 20%) !default;
 $color-alpha: hsl(0deg 0% 0% / 0%) !default;
 
-// Text written in a palette color stays readable on the surface: each shade
-// has a `readable` key, --color-brand-darken-1-readable and so on, the shade
-// pushed just far enough from the surface to keep this contrast ratio. WCAG
-// asks for 4.5; 4.6 leaves room for the rounding to 8-bit channels.
+// Text written in a palette color keeps this contrast ratio with what it
+// sits on. WCAG asks for 4.5; 4.6 leaves room for the rounding to 8-bit
+// channels.
 $color-readable-ratio: 4.6 !default;
 
-// Emitted as --color-readable-luminance and --color-readable-target, which
-// the dark theme redeclares from its own surface
+// Lightness of the tinted surfaces, --color-surface-brand and the others
+$color-surface-tint-lightness: 90% !default;
+
+// The text roles of each palette color, and the shade each one starts from:
+// `readable`, --color-brand-readable, the text on the surface (links,
+// outlined badges, tabs, hints); `readable-strong`, a step further from it (a
+// hovered or pressed link); `surface`, --color-surface-brand-readable, the
+// text on the tinted surface of the color (alerts, ring avatars, dropdown
+// options). A role is its shade while that reads, and the shade pushed just
+// far enough otherwise (readable-roles()). The dark theme has its own map.
+$color-readable-shades: (
+	brand: (readable: base, readable-strong: darken-3, surface: darken-3),
+	accent: (readable: base, readable-strong: darken-3, surface: base),
+	success: (readable: base, readable-strong: darken-3, surface: darken-1),
+	danger: (readable: base, readable-strong: darken-3, surface: base),
+	info: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
+	warning: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
+) !default;
+
+// The luminance the roles are pushed to, on the surface and on the tinted
+// surfaces. The second is computed on the hardest tint of any hue
+// (readable-worst-tint()), since the color behind it can change at runtime.
 $color-readable-luminance: readable-luminance($color-surface, $color-readable-ratio) !default;
-$color-readable-target: readable-target($color-surface) !default;
+$color-surface-readable-luminance: readable-luminance(
+	readable-worst-tint($color-surface-tint-lightness),
+	$color-readable-ratio
+) !default;
 
 // ============================================
 // Surface Palette (semantic surface colors)
@@ -50,21 +72,21 @@ $color-readable-target: readable-target($color-surface) !default;
 $color-surface-palette: if(
 	sass(config.$use-color-mix):
 		(
-			brand: string.unquote('hsl(from var(--color-brand) h s 90%)'),
-			accent: string.unquote('hsl(from var(--color-accent) h s 90%)'),
-			success: string.unquote('hsl(from var(--color-success) h s 90%)'),
-			danger: string.unquote('hsl(from var(--color-danger) h s 90%)'),
-			info: string.unquote('hsl(from var(--color-info) h s 90%)'),
-			warning: string.unquote('hsl(from var(--color-warning) h s 90%)'),
+			brand: string.unquote('hsl(from var(--color-brand) h s #{$color-surface-tint-lightness})'),
+			accent: string.unquote('hsl(from var(--color-accent) h s #{$color-surface-tint-lightness})'),
+			success: string.unquote('hsl(from var(--color-success) h s #{$color-surface-tint-lightness})'),
+			danger: string.unquote('hsl(from var(--color-danger) h s #{$color-surface-tint-lightness})'),
+			info: string.unquote('hsl(from var(--color-info) h s #{$color-surface-tint-lightness})'),
+			warning: string.unquote('hsl(from var(--color-warning) h s #{$color-surface-tint-lightness})'),
 		);
 	else:
 		(
-			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) 90%),
-			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) 90%),
-			success: hsl(var(--color-success-hue) var(--color-success-saturation) 90%),
-			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) 90%),
-			info: hsl(var(--color-info-hue) var(--color-info-saturation) 90%),
-			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) 90%),
+			brand: hsl(var(--color-brand-hue) var(--color-brand-saturation) $color-surface-tint-lightness),
+			accent: hsl(var(--color-accent-hue) var(--color-accent-saturation) $color-surface-tint-lightness),
+			success: hsl(var(--color-success-hue) var(--color-success-saturation) $color-surface-tint-lightness),
+			danger: hsl(var(--color-danger-hue) var(--color-danger-saturation) $color-surface-tint-lightness),
+			info: hsl(var(--color-info-hue) var(--color-info-saturation) $color-surface-tint-lightness),
+			warning: hsl(var(--color-warning-hue) var(--color-warning-saturation) $color-surface-tint-lightness),
 		)
 ) !default;
 
@@ -73,77 +95,85 @@ $color-surface-palette: if(
 // Override this map or use map.merge() to customize
 // ============================================
 
-// Each palette color gets the tokens for text on and in it ($text):
-// `contrast`, --color-<name>-contrast, pure white or pure black, whichever
-// gives the text on the fill the higher WCAG contrast ratio; a `readable`
-// variant of every shade, the shade written as text on the surface; and a
-// `cover` for the base and every darker shade, the fill under that contrast
-// text, which vv-button lays over its emboss. With $use-color-mix all of them
-// are computed in CSS and follow a runtime override of the color; otherwise
-// the contrast is chosen at compile time, and the props add the readable
-// shades and the covers under @supports.
+// Each palette color gets the tokens for text on it ($text): `contrast`,
+// --color-<name>-contrast, pure white or pure black, whichever gives the text
+// on the fill the higher WCAG contrast ratio, and a `cover`, the fill under
+// that text, which vv-button lays over its emboss, both for the base and every
+// darker shade. The text roles of $color-readable-shades are merged in last.
+// With $use-color-mix all of them are computed in CSS and follow a runtime
+// override of the color; otherwise the contrast is chosen at compile time and
+// a role is its shade.
 
 // The saturation and lightness passed to tinted-neutral-value() repeat the
 // defaults above: a neutral that no longer matches its default was set
 // explicitly, and keeps its literal value.
-$colors: if(
-	sass(config.$use-color-mix):
-		(
-			scheme: $color-scheme,
-			transparent: $color-transparent,
-			tint: $color-tint,
-			shadow: color-base-map(tinted-neutral-value($color-shadow, $color-tint, 50%, 20%), 'shadow'),
-			backdrop: color-base-map(tinted-neutral-value($color-backdrop, $color-tint, 50%, 20%, 20%), 'backdrop'),
-			black: color-base-map($color-black, 'black'),
-			white: color-base-map($color-white, 'white'),
-			word: color-mix-lighten-map(
-				tinted-neutral-value($color-word, $color-tint, 15%, 10%),
-				'word',
-				$steps: 5,
-				$scale: 12%
-			),
-			surface: map.merge(
-				color-mix-darken-map(
-					tinted-neutral-value($color-surface, $color-tint, 10%, 100%),
-					'surface',
+$colors: map.deep-merge(
+	if(
+		sass(config.$use-color-mix):
+			(
+				scheme: $color-scheme,
+				transparent: $color-transparent,
+				tint: $color-tint,
+				shadow: color-base-map(tinted-neutral-value($color-shadow, $color-tint, 50%, 20%), 'shadow'),
+				backdrop: color-base-map(tinted-neutral-value($color-backdrop, $color-tint, 50%, 20%, 20%), 'backdrop'),
+				black: color-base-map($color-black, 'black'),
+				white: color-base-map($color-white, 'white'),
+				word: color-mix-lighten-map(
+					tinted-neutral-value($color-word, $color-tint, 15%, 10%),
+					'word',
 					$steps: 5,
-					$scale: 2%
+					$scale: 12%
 				),
-				$color-surface-palette
-			),
-			alpha: color-mix-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
-			brand: color-mix-shades-map($color-brand, 'brand', $text: true),
-			accent: color-mix-shades-map($color-accent, 'accent', $text: true),
-			success: color-mix-shades-map($color-success, 'success', $text: true),
-			danger: color-mix-shades-map($color-danger, 'danger', $text: true),
-			info: color-mix-shades-map($color-info, 'info', $text: true),
-			warning: color-mix-shades-map($color-warning, 'warning', $text: true),
-			gray: color-mix-shades-map(
-				tinted-neutral-value($color-gray, $color-tint, 15%, 50%),
-				'gray',
-				$scale: 15%
-			),
-		);
-	else:
-		(
-			scheme: $color-scheme,
-			transparent: $color-transparent,
-			shadow: hsla-map($color-shadow, 'shadow'),
-			backdrop: hsla-map($color-backdrop, 'backdrop'),
-			black: hsla-map($color-black, 'black'),
-			white: hsla-map($color-white, 'white'),
-			word: color-lighten-map($color-word, 'word', $scale: 12%, $fixed: true, $inverted: false),
-			surface: map.merge(
-				color-darken-map($color-surface, 'surface', $scale: 2%, $fixed: true),
-				$color-surface-palette
-			),
-			alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
-			brand: color-shades-map($color-brand, 'brand', $text: true),
-			accent: color-shades-map($color-accent, 'accent', $text: true),
-			success: color-shades-map($color-success, 'success', $text: true),
-			danger: color-shades-map($color-danger, 'danger', $text: true),
-			info: color-shades-map($color-info, 'info', $text: true),
-			warning: color-shades-map($color-warning, 'warning', $text: true),
-			gray: color-shades-map($color-gray, 'gray', $scale: 15%),
-		)
+				surface: map.merge(
+					color-mix-darken-map(
+						tinted-neutral-value($color-surface, $color-tint, 10%, 100%),
+						'surface',
+						$steps: 5,
+						$scale: 2%
+					),
+					$color-surface-palette
+				),
+				alpha: color-mix-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
+				brand: color-mix-shades-map($color-brand, 'brand', $text: true),
+				accent: color-mix-shades-map($color-accent, 'accent', $text: true),
+				success: color-mix-shades-map($color-success, 'success', $text: true),
+				danger: color-mix-shades-map($color-danger, 'danger', $text: true),
+				info: color-mix-shades-map($color-info, 'info', $text: true),
+				warning: color-mix-shades-map($color-warning, 'warning', $text: true),
+				gray: color-mix-shades-map(
+					tinted-neutral-value($color-gray, $color-tint, 15%, 50%),
+					'gray',
+					$scale: 15%
+				),
+			);
+		else:
+			(
+				scheme: $color-scheme,
+				transparent: $color-transparent,
+				shadow: hsla-map($color-shadow, 'shadow'),
+				backdrop: hsla-map($color-backdrop, 'backdrop'),
+				black: hsla-map($color-black, 'black'),
+				white: hsla-map($color-white, 'white'),
+				word: color-lighten-map($color-word, 'word', $scale: 12%, $fixed: true, $inverted: false),
+				surface: map.merge(
+					color-darken-map($color-surface, 'surface', $scale: 2%, $fixed: true),
+					$color-surface-palette
+				),
+				alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
+				brand: color-shades-map($color-brand, 'brand', $text: true),
+				accent: color-shades-map($color-accent, 'accent', $text: true),
+				success: color-shades-map($color-success, 'success', $text: true),
+				danger: color-shades-map($color-danger, 'danger', $text: true),
+				info: color-shades-map($color-info, 'info', $text: true),
+				warning: color-shades-map($color-warning, 'warning', $text: true),
+				gray: color-shades-map($color-gray, 'gray', $scale: 15%),
+			)
+	),
+	readable-roles(
+		$color-readable-shades,
+		$color-readable-luminance,
+		$color-surface-readable-luminance,
+		$lighten: color-luminance($color-surface) < contrast-threshold(),
+		$relative: config.$use-color-mix
+	)
 ) !default;

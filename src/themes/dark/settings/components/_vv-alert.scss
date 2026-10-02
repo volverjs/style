@@ -12,48 +12,6 @@ $dark-vv-alert: (
 				),
 			),
 		),
-		success: (
-			element: (
-				header: (
-					color: var(--color-success-lighten-3-readable),
-				),
-			),
-		),
-		warning: (
-			element: (
-				header: (
-					color: var(--color-warning-readable),
-				),
-			),
-		),
-		danger: (
-			element: (
-				header: (
-					color: var(--color-danger-lighten-5-readable),
-				),
-			),
-		),
-		accent: (
-			element: (
-				header: (
-					color: var(--color-accent-lighten-4-readable),
-				),
-			),
-		),
-		brand: (
-			element: (
-				header: (
-					color: var(--color-brand-lighten-3-readable),
-				),
-			),
-		),
-		info: (
-			element: (
-				header: (
-					color: var(--color-info-readable),
-				),
-			),
-		),
 		notification: (
 			border-color: var(--color-gray-lighten-3),
 			modifier: (

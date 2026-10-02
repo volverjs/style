@@ -99,6 +99,30 @@
         "surface-warning": {
           "value": "hsl(from var(--color-warning) h s 90%)",
           "type": "color"
+        },
+        "surface-brand-readable": {
+          "value": "color(from var(--color-brand-darken-3) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-accent-readable": {
+          "value": "color(from var(--color-accent) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-success-readable": {
+          "value": "color(from var(--color-success-darken-1) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-danger-readable": {
+          "value": "color(from var(--color-danger) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-info-readable": {
+          "value": "color(from var(--color-info-darken-5) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-warning-readable": {
+          "value": "color(from var(--color-warning-darken-5) xyz-d65 calc(x * min(1, 0.0983 / max(y, 0.0001))) min(y, 0.0983) calc(z * min(1, 0.0983 / max(y, 0.0001))))",
+          "type": "color"
         }
       },
       "alpha": {
@@ -172,40 +196,12 @@
           "value": "hsl(from var(--color-brand) h s calc(l * 0.5))",
           "type": "color"
         },
-        "brand-readable": {
-          "value": "color(from var(--color-brand) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "brand-contrast": {
           "value": "color(from color(from var(--color-brand) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "brand-cover": {
           "value": "color(from var(--color-brand) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "brand-lighten-1-readable": {
-          "value": "color(from var(--color-brand-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "brand-lighten-2-readable": {
-          "value": "color(from var(--color-brand-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "brand-lighten-3-readable": {
-          "value": "color(from var(--color-brand-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "brand-lighten-4-readable": {
-          "value": "color(from var(--color-brand-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "brand-lighten-5-readable": {
-          "value": "color(from var(--color-brand-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "brand-darken-1-readable": {
-          "value": "color(from var(--color-brand-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "brand-darken-1-contrast": {
@@ -216,20 +212,12 @@
           "value": "color(from var(--color-brand-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "brand-darken-2-readable": {
-          "value": "color(from var(--color-brand-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "brand-darken-2-contrast": {
           "value": "color(from color(from var(--color-brand-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "brand-darken-2-cover": {
           "value": "color(from var(--color-brand-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "brand-darken-3-readable": {
-          "value": "color(from var(--color-brand-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "brand-darken-3-contrast": {
@@ -240,10 +228,6 @@
           "value": "color(from var(--color-brand-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "brand-darken-4-readable": {
-          "value": "color(from var(--color-brand-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "brand-darken-4-contrast": {
           "value": "color(from color(from var(--color-brand-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -252,16 +236,20 @@
           "value": "color(from var(--color-brand-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "brand-darken-5-readable": {
-          "value": "color(from var(--color-brand-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "brand-darken-5-contrast": {
           "value": "color(from color(from var(--color-brand-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "brand-darken-5-cover": {
           "value": "color(from var(--color-brand-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "brand-readable": {
+          "value": "color(from var(--color-brand) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "brand-readable-strong": {
+          "value": "color(from var(--color-brand-darken-3) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -310,40 +298,12 @@
           "value": "hsl(from var(--color-accent) h s calc(l * 0.5))",
           "type": "color"
         },
-        "accent-readable": {
-          "value": "color(from var(--color-accent) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "accent-contrast": {
           "value": "color(from color(from var(--color-accent) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "accent-cover": {
           "value": "color(from var(--color-accent) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "accent-lighten-1-readable": {
-          "value": "color(from var(--color-accent-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "accent-lighten-2-readable": {
-          "value": "color(from var(--color-accent-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "accent-lighten-3-readable": {
-          "value": "color(from var(--color-accent-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "accent-lighten-4-readable": {
-          "value": "color(from var(--color-accent-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "accent-lighten-5-readable": {
-          "value": "color(from var(--color-accent-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "accent-darken-1-readable": {
-          "value": "color(from var(--color-accent-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "accent-darken-1-contrast": {
@@ -354,20 +314,12 @@
           "value": "color(from var(--color-accent-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "accent-darken-2-readable": {
-          "value": "color(from var(--color-accent-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "accent-darken-2-contrast": {
           "value": "color(from color(from var(--color-accent-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "accent-darken-2-cover": {
           "value": "color(from var(--color-accent-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "accent-darken-3-readable": {
-          "value": "color(from var(--color-accent-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "accent-darken-3-contrast": {
@@ -378,10 +330,6 @@
           "value": "color(from var(--color-accent-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "accent-darken-4-readable": {
-          "value": "color(from var(--color-accent-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "accent-darken-4-contrast": {
           "value": "color(from color(from var(--color-accent-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -390,16 +338,20 @@
           "value": "color(from var(--color-accent-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "accent-darken-5-readable": {
-          "value": "color(from var(--color-accent-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "accent-darken-5-contrast": {
           "value": "color(from color(from var(--color-accent-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "accent-darken-5-cover": {
           "value": "color(from var(--color-accent-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "accent-readable": {
+          "value": "color(from var(--color-accent) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "accent-readable-strong": {
+          "value": "color(from var(--color-accent-darken-3) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -448,40 +400,12 @@
           "value": "hsl(from var(--color-success) h s calc(l * 0.5))",
           "type": "color"
         },
-        "success-readable": {
-          "value": "color(from var(--color-success) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "success-contrast": {
           "value": "color(from color(from var(--color-success) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "success-cover": {
           "value": "color(from var(--color-success) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "success-lighten-1-readable": {
-          "value": "color(from var(--color-success-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "success-lighten-2-readable": {
-          "value": "color(from var(--color-success-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "success-lighten-3-readable": {
-          "value": "color(from var(--color-success-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "success-lighten-4-readable": {
-          "value": "color(from var(--color-success-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "success-lighten-5-readable": {
-          "value": "color(from var(--color-success-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "success-darken-1-readable": {
-          "value": "color(from var(--color-success-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "success-darken-1-contrast": {
@@ -492,20 +416,12 @@
           "value": "color(from var(--color-success-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "success-darken-2-readable": {
-          "value": "color(from var(--color-success-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "success-darken-2-contrast": {
           "value": "color(from color(from var(--color-success-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "success-darken-2-cover": {
           "value": "color(from var(--color-success-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "success-darken-3-readable": {
-          "value": "color(from var(--color-success-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "success-darken-3-contrast": {
@@ -516,10 +432,6 @@
           "value": "color(from var(--color-success-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "success-darken-4-readable": {
-          "value": "color(from var(--color-success-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "success-darken-4-contrast": {
           "value": "color(from color(from var(--color-success-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -528,16 +440,20 @@
           "value": "color(from var(--color-success-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "success-darken-5-readable": {
-          "value": "color(from var(--color-success-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "success-darken-5-contrast": {
           "value": "color(from color(from var(--color-success-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "success-darken-5-cover": {
           "value": "color(from var(--color-success-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "success-readable": {
+          "value": "color(from var(--color-success) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "success-readable-strong": {
+          "value": "color(from var(--color-success-darken-3) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -586,40 +502,12 @@
           "value": "hsl(from var(--color-danger) h s calc(l * 0.5))",
           "type": "color"
         },
-        "danger-readable": {
-          "value": "color(from var(--color-danger) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "danger-contrast": {
           "value": "color(from color(from var(--color-danger) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "danger-cover": {
           "value": "color(from var(--color-danger) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "danger-lighten-1-readable": {
-          "value": "color(from var(--color-danger-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "danger-lighten-2-readable": {
-          "value": "color(from var(--color-danger-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "danger-lighten-3-readable": {
-          "value": "color(from var(--color-danger-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "danger-lighten-4-readable": {
-          "value": "color(from var(--color-danger-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "danger-lighten-5-readable": {
-          "value": "color(from var(--color-danger-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "danger-darken-1-readable": {
-          "value": "color(from var(--color-danger-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "danger-darken-1-contrast": {
@@ -630,20 +518,12 @@
           "value": "color(from var(--color-danger-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "danger-darken-2-readable": {
-          "value": "color(from var(--color-danger-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "danger-darken-2-contrast": {
           "value": "color(from color(from var(--color-danger-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "danger-darken-2-cover": {
           "value": "color(from var(--color-danger-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "danger-darken-3-readable": {
-          "value": "color(from var(--color-danger-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "danger-darken-3-contrast": {
@@ -654,10 +534,6 @@
           "value": "color(from var(--color-danger-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "danger-darken-4-readable": {
-          "value": "color(from var(--color-danger-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "danger-darken-4-contrast": {
           "value": "color(from color(from var(--color-danger-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -666,16 +542,20 @@
           "value": "color(from var(--color-danger-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "danger-darken-5-readable": {
-          "value": "color(from var(--color-danger-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "danger-darken-5-contrast": {
           "value": "color(from color(from var(--color-danger-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "danger-darken-5-cover": {
           "value": "color(from var(--color-danger-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "danger-readable": {
+          "value": "color(from var(--color-danger) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "danger-readable-strong": {
+          "value": "color(from var(--color-danger-darken-3) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -724,40 +604,12 @@
           "value": "hsl(from var(--color-info) h s calc(l * 0.5))",
           "type": "color"
         },
-        "info-readable": {
-          "value": "color(from var(--color-info) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "info-contrast": {
           "value": "color(from color(from var(--color-info) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "info-cover": {
           "value": "color(from var(--color-info) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "info-lighten-1-readable": {
-          "value": "color(from var(--color-info-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "info-lighten-2-readable": {
-          "value": "color(from var(--color-info-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "info-lighten-3-readable": {
-          "value": "color(from var(--color-info-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "info-lighten-4-readable": {
-          "value": "color(from var(--color-info-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "info-lighten-5-readable": {
-          "value": "color(from var(--color-info-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "info-darken-1-readable": {
-          "value": "color(from var(--color-info-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "info-darken-1-contrast": {
@@ -768,20 +620,12 @@
           "value": "color(from var(--color-info-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "info-darken-2-readable": {
-          "value": "color(from var(--color-info-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "info-darken-2-contrast": {
           "value": "color(from color(from var(--color-info-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "info-darken-2-cover": {
           "value": "color(from var(--color-info-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "info-darken-3-readable": {
-          "value": "color(from var(--color-info-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "info-darken-3-contrast": {
@@ -792,10 +636,6 @@
           "value": "color(from var(--color-info-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "info-darken-4-readable": {
-          "value": "color(from var(--color-info-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "info-darken-4-contrast": {
           "value": "color(from color(from var(--color-info-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -804,16 +644,20 @@
           "value": "color(from var(--color-info-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "info-darken-5-readable": {
-          "value": "color(from var(--color-info-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "info-darken-5-contrast": {
           "value": "color(from color(from var(--color-info-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "info-darken-5-cover": {
           "value": "color(from var(--color-info-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "info-readable": {
+          "value": "color(from var(--color-info-darken-5) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "info-readable-strong": {
+          "value": "color(from var(--color-info-darken-5) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -862,40 +706,12 @@
           "value": "hsl(from var(--color-warning) h s calc(l * 0.5))",
           "type": "color"
         },
-        "warning-readable": {
-          "value": "color(from var(--color-warning) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "warning-contrast": {
           "value": "color(from color(from var(--color-warning) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "warning-cover": {
           "value": "color(from var(--color-warning) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "warning-lighten-1-readable": {
-          "value": "color(from var(--color-warning-lighten-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "warning-lighten-2-readable": {
-          "value": "color(from var(--color-warning-lighten-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "warning-lighten-3-readable": {
-          "value": "color(from var(--color-warning-lighten-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "warning-lighten-4-readable": {
-          "value": "color(from var(--color-warning-lighten-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "warning-lighten-5-readable": {
-          "value": "color(from var(--color-warning-lighten-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
-        "warning-darken-1-readable": {
-          "value": "color(from var(--color-warning-darken-1) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "warning-darken-1-contrast": {
@@ -906,20 +722,12 @@
           "value": "color(from var(--color-warning-darken-1) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "warning-darken-2-readable": {
-          "value": "color(from var(--color-warning-darken-2) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "warning-darken-2-contrast": {
           "value": "color(from color(from var(--color-warning-darken-2) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "warning-darken-2-cover": {
           "value": "color(from var(--color-warning-darken-2) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
-          "type": "color"
-        },
-        "warning-darken-3-readable": {
-          "value": "color(from var(--color-warning-darken-3) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
           "type": "color"
         },
         "warning-darken-3-contrast": {
@@ -930,10 +738,6 @@
           "value": "color(from var(--color-warning-darken-3) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "warning-darken-4-readable": {
-          "value": "color(from var(--color-warning-darken-4) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "warning-darken-4-contrast": {
           "value": "color(from color(from var(--color-warning-darken-4) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
@@ -942,16 +746,20 @@
           "value": "color(from var(--color-warning-darken-4) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
           "type": "color"
         },
-        "warning-darken-5-readable": {
-          "value": "color(from var(--color-warning-darken-5) xyz-d65 calc(x + (0.9505 * var(--color-readable-target) - x) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(y + (var(--color-readable-target) - y) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)) calc(z + (1.0891 * var(--color-readable-target) - z) * clamp(0, (y - var(--color-readable-luminance)) / (y - var(--color-readable-target) + 0.00001), 1)))",
-          "type": "color"
-        },
         "warning-darken-5-contrast": {
           "value": "color(from color(from var(--color-warning-darken-5) xyz-d65 x y z / clamp(0, (0.1791 - y) * 1000000, 1)) srgb alpha alpha alpha / 1)",
           "type": "color"
         },
         "warning-darken-5-cover": {
           "value": "color(from var(--color-warning-darken-5) xyz-d65 x y z / calc(1 - clamp(0, (0.1791 - y) * 1000000, 1)))",
+          "type": "color"
+        },
+        "warning-readable": {
+          "value": "color(from var(--color-warning-darken-5) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
+          "type": "color"
+        },
+        "warning-readable-strong": {
+          "value": "color(from var(--color-warning-darken-5) xyz-d65 calc(x * min(1, 0.1782 / max(y, 0.0001))) min(y, 0.1782) calc(z * min(1, 0.1782 / max(y, 0.0001))))",
           "type": "color"
         }
       },
@@ -1978,6 +1786,90 @@
         },
         "surface-warning": {
           "value": "hsl(from var(--color-warning) h s 10%)",
+          "type": "color"
+        },
+        "surface-brand-readable": {
+          "value": "color(from var(--color-brand-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-accent-readable": {
+          "value": "color(from var(--color-accent-lighten-4) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-success-readable": {
+          "value": "color(from var(--color-success-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-danger-readable": {
+          "value": "color(from var(--color-danger-lighten-5) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-info-readable": {
+          "value": "color(from var(--color-info) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "surface-warning-readable": {
+          "value": "color(from var(--color-warning) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.6787 / max(1 - y, 0.0001))) max(y, 0.3213) calc(1.0891 - (1.0891 - z) * min(1, 0.6787 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "brand": {
+        "brand-readable": {
+          "value": "color(from var(--color-brand-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "brand-readable-strong": {
+          "value": "color(from var(--color-brand-lighten-5) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "accent": {
+        "accent-readable": {
+          "value": "color(from var(--color-accent-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "accent-readable-strong": {
+          "value": "color(from var(--color-accent-lighten-5) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "success": {
+        "success-readable": {
+          "value": "color(from var(--color-success-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "success-readable-strong": {
+          "value": "color(from var(--color-success-lighten-5) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "danger": {
+        "danger-readable": {
+          "value": "color(from var(--color-danger-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "danger-readable-strong": {
+          "value": "color(from var(--color-danger-lighten-5) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "info": {
+        "info-readable": {
+          "value": "color(from var(--color-info) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "info-readable-strong": {
+          "value": "color(from var(--color-info-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        }
+      },
+      "warning": {
+        "warning-readable": {
+          "value": "color(from var(--color-warning) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
+          "type": "color"
+        },
+        "warning-readable-strong": {
+          "value": "color(from var(--color-warning-lighten-3) xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, 0.8021 / max(1 - y, 0.0001))) max(y, 0.1979) calc(1.0891 - (1.0891 - z) * min(1, 0.8021 / max(1 - y, 0.0001))))",
           "type": "color"
         }
       }

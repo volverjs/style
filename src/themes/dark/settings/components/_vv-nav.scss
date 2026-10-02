@@ -1,15 +1,2 @@
-$dark-vv-nav: (
-	modifier: (
-		tabs: (
-			element: (
-				item-label: (
-					state: (
-						current: (
-							color: var(--color-brand-lighten-3-readable),
-						),
-					),
-				),
-			),
-		),
-	),
-);
+// Its text colors are the readable roles, which the dark theme redeclares
+$dark-vv-nav: ();

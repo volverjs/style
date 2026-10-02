@@ -209,7 +209,7 @@ $vv-button: (
 			background: transparent,
 			border-width: var(--border-0),
 			padding: 0,
-			color: var(--color-brand-darken-1-readable),
+			color: var(--color-brand-readable),
 			font-weight: inherit,
 			text-shadow: none,
 			state: (
@@ -223,7 +223,7 @@ $vv-button: (
 					text-underline-offset: var(--spacing-4),
 				),
 				active: (
-					color: var(--color-brand-darken-3-readable),
+					color: var(--color-brand-readable-strong),
 				),
 			),
 			element: (

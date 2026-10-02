@@ -126,9 +126,8 @@ outputs: that is what tells you which rules moved.
   at its edges, while a round trip of an sRGB color through `xyz-d65` lands within a fraction
   of an 8-bit step. The contrast and readable tokens in `_functions.scss` route around both.
   The HSL channel branch, `$use-color-mix: false`, is the one for browsers without relative
-  color syntax: it emits none outside `@supports (color: color(from red xyz-d65 x y z))`, a
-  readable shade gets the shade itself as its plain fallback there, the contrast texts and
-  the covers are chosen at compile time, and `check:colors` fails on any that slips through.
+  color syntax: it emits none, a readable role there is its shade, the contrast texts and the
+  covers are chosen at compile time, and `check:colors` fails on any that slips through.
 - **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
   `.block__element--modifier`: its declarations are flattened into the rule of the element
   itself, so they apply to every instance and win over the declarations before them. Express a
@@ -144,6 +143,13 @@ outputs: that is what tells you which rules moved.
 
 ## Conventions
 
+- **Text written in a color takes a readable role, never a shade.** `--color-brand-readable`
+  on the surface, `--color-brand-readable-strong` a step further from it, and
+  `--color-surface-brand-readable` on the tinted surface of the color. The dark theme
+  redeclares the roles, so a light rule needs no dark override for its text color, while a
+  shade written as text reads only by chance. A new role or a new starting shade goes in
+  `$color-readable-shades` and `$dark-color-readable-shades`; `check:colors` fails on a
+  `var(--color-*)` that nothing declares.
 - **The first line offset is spelled out, not factored out.** Five declarations centre an icon
   on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`
   and the `self-first-line` utility, each as `calc((1lh - <the size>) / 2)`. The component maps

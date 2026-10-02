@@ -1,46 +1,15 @@
+// The colored variants take the readable roles, which follow the theme
 $dark-vv-badge: (
 	modifier: (
 		outline: (
-			color: var(--color-brand-lighten-3-readable),
 			modifier: (
-				danger: (
-					color: var(--color-danger-lighten-3-readable),
-				),
-				success: (
-					color: var(--color-success-lighten-3-readable),
-				),
-				warning: (
-					color: var(--color-warning-readable),
-				),
-				info: (
-					color: var(--color-info-readable),
-				),
-				accent: (
-					color: var(--color-accent-lighten-3-readable),
-				),
 				gray: (
 					color: var(--color-gray-lighten-3),
 				),
 			),
 		),
 		ghost: (
-			color: var(--color-brand-lighten-3-readable),
 			modifier: (
-				danger: (
-					color: var(--color-danger-lighten-3-readable),
-				),
-				success: (
-					color: var(--color-success-lighten-3-readable),
-				),
-				warning: (
-					color: var(--color-warning-readable),
-				),
-				info: (
-					color: var(--color-info-readable),
-				),
-				accent: (
-					color: var(--color-accent-lighten-3-readable),
-				),
 				gray: (
 					color: var(--color-gray-lighten-3),
 				),

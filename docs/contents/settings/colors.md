@@ -94,17 +94,41 @@ Every darker shade has its own, `--color-brand-darken-1-contrast` to `--color-br
 Next to it, the base and every darker shade have a _cover_, `--color-brand-cover`, `--color-brand-darken-1-cover` and so on: the shade itself where its contrast text turns dark, transparent where it stays white. The button lays it over its dark emboss, which suits light text only, so the emboss disappears under dark text; each state lays the cover of the shade it paints. Covers have no utility classes.
 
 ### Readable Colors
-_Readable colors_ are the shades of a color written as text on the surface. Every shade of brand, accent, success, danger, info and warning has one, `--color-brand-readable`, `--color-brand-darken-1-readable` and so on: the shade itself when it already reads, and otherwise the shade pushed just far enough from the surface for a contrast ratio of 4.6:1, darker in the light theme and lighter in the dark one. Links, outlined and ghost badges, tabs, breadcrumbs, the headers of alerts, the hints of the fields and the other components that write in a color use them, and the `text-*-readable` classes expose them.
+_Readable colors_ are a color written as text. Each of brand, accent, success, danger, info and warning has three, one per background the text can sit on:
+
+- `--color-brand-readable`, on the surface: links, outlined and ghost badges, tabs, the hints of the fields;
+- `--color-brand-readable-strong`, a step further from the surface: a pressed link, the current crumb;
+- `--color-surface-brand-readable`, on the tinted surface of the color, `--color-surface-brand`: the headers and icons of alerts, ring avatars, selected dropdown options.
+
+Each one starts from a shade of the color, `darken-5` for warning and info and closer to the base for the others, and is that shade while it reads, or the shade pushed just far enough for a contrast ratio of 4.6:1 otherwise: darker in the light theme, lighter in the dark one, which starts from lighter shades and redeclares the three, so a component writes the same token in both themes. The `text-*-readable` classes expose them.
 
 <card-example title="Readable Colors">
   <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
     <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" :class="`text-${name}-readable`" class="py-22">{{name}}-readable</div>
   </div>
+  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
+    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" :class="`bg-surface-${name} text-surface-${name}-readable`" class="py-22">surface-{{name}}-readable</div>
+  </div>
 </card-example>
 
-The ratio is kept against the plain surface of the theme, `--color-surface`, as it is compiled. On a deeper or tinted surface, such as the `surface-brand` of an alert, the text reads lower: still darker than the shade it replaces, but not always at 4.5:1. Change the target with `$color-readable-ratio`. The bound it gives each theme is `--color-readable-luminance`, with `--color-readable-target` saying which way the shades are pushed, `0` toward black and `1` toward white: they are numbers fixed at compile time, so a `--color-surface` overridden at runtime does not move them, and a region that turns its surface dark has to set both, as the dark theme does.
+On the surface the ratio is kept against `--color-surface` as it is compiled. On a tinted surface it is kept against the hardest tint of any hue at the lightness of the tinted surfaces, 90% in the light theme and 10% in the dark one: the tinted surface follows the color, which can change at runtime, so the bound holds whatever color is set, at the price of a text a little further from the surface than the compiled color alone would need. Change the ratio with `$color-readable-ratio` and the shade each role starts from with `$color-readable-shades`, and `$dark-color-readable-shades` in the dark theme:
 
-The hints and the labels of the fields take `--input-valid-text-color` and `--input-invalid-text-color`, the readable form of `--input-valid-color` and `--input-invalid-color`, which keep painting the bars and the borders. Overriding the color moves both.
+```scss
+@use '@volverjs/style/scss/context' with (
+	$color-readable-shades: (
+		brand: (readable: darken-1, readable-strong: darken-3, surface: darken-3),
+		accent: (readable: base, readable-strong: darken-3, surface: base),
+		success: (readable: base, readable-strong: darken-3, surface: darken-1),
+		danger: (readable: base, readable-strong: darken-3, surface: base),
+		info: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
+		warning: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
+	)
+);
+```
+
+In the dark theme the roles start from lighter shades, `lighten-3` for the brand: a brand that is already light gets a pale text there, the price of a shade that reads on a dark surface whatever the brand. The bounds are fixed at compile time, so a `--color-surface` overridden at runtime does not move them; a region that turns dark takes the `theme theme--dark` classes.
+
+The hints and the labels of the fields take `--input-valid-text-color` and `--input-invalid-text-color`, which are `--color-success-readable` and `--color-danger-readable`, while `--input-valid-color` and `--input-invalid-color` keep painting the bars and the borders. Overriding one of the colors needs its text token as well.
 
 ### Tint
 _Gray_, _word_, _surface_, _shadow_ and _backdrop_ take their hue from `--color-tint`, which holds the light brand and is not redeclared by the dark theme. Set it next to the brand to move the neutrals at runtime too:
