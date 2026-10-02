@@ -110,11 +110,15 @@ ctx.$vv-button: map.deep-merge(
       success: (
         background: var(--color-success),
         border-color: var(--color-success),
-        color: var(--color-white),
+        // the text and the cover of each shade, as the brand button has them
+        color: var(--color-success-contrast),
+        text-shadow: (0 1px 0 var(--color-success-cover), 0 1px 0 var(--color-gray-darken-5)),
         state: (
           hover: (
             background: var(--color-success-darken-1),
             border-color: var(--color-success-darken-1),
+            color: var(--color-success-darken-1-contrast),
+            text-shadow: (0 1px 0 var(--color-success-darken-1-cover), 0 1px 0 var(--color-gray-darken-5)),
           ),
         ),
       ),

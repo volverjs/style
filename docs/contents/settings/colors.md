@@ -84,8 +84,12 @@ The palette also holds `--color-black`, `--color-white`, `--color-transparent`, 
 _Contrast colors_ are the text that goes on a filled color. Each of brand, accent, success, danger, info and warning has one, `--color-brand-contrast` and so on: pure white or pure black, whichever gives the text the higher WCAG contrast ratio on the base color, so never less than 4.58:1. It is computed in CSS, so it follows the color when it changes at runtime. Buttons, badges, avatars, notification headers and the switch use it, and the `text-*-contrast` classes expose it.
 
 <card-example title="Contrast Colors">
-  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" :class="`bg-${name} text-${name}-contrast`" class="py-22">{{name}}-contrast</div>
+  <div class="grid sm:grid-cols-2 gap-sm font-mono text-14">
+    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" class="flex flex-col rounded overflow-hidden">
+      <div :class="`bg-${name} text-${name}-contrast`" class="px-sm py-sm">{{name}}-contrast</div>
+      <div :class="`bg-${name}-darken-1 text-${name}-darken-1-contrast`" class="px-sm py-sm">{{name}}-darken-1-contrast</div>
+      <div :class="`bg-${name}-darken-2 text-${name}-darken-2-contrast`" class="px-sm py-sm">{{name}}-darken-2-contrast</div>
+    </div>
   </div>
 </card-example>
 
@@ -103,11 +107,12 @@ _Readable colors_ are a color written as text. Each of brand, accent, success, d
 Each one is the color itself while it reads at 4.6:1, and the color moved just far enough otherwise. It is computed in CSS, so it follows the color when it changes at runtime. In the light theme the color is darkened. In the dark theme it is brightened with its chromaticity kept as far as the screen can show it, and only what is left is mixed with white: a dark brand comes out vivid rather than greyish, and a light brand is left as it is. `--color-brand-readable-strong` is `--color-brand-readable` with its luminance halved in the light theme, and raised by half in the dark one. The dark theme redeclares the three, so a component writes the same token in both themes. The `text-*-readable` classes expose them.
 
 <card-example title="Readable Colors">
-  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" :class="`text-${name}-readable`" class="py-22">{{name}}-readable</div>
-  </div>
-  <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
-    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" :class="`bg-surface-${name} text-surface-${name}-readable`" class="py-22">surface-{{name}}-readable</div>
+  <div class="grid sm:grid-cols-2 gap-sm font-mono text-14">
+    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" class="flex flex-col rounded border border-surface-3 overflow-hidden">
+      <div :class="`text-${name}-readable`" class="px-sm py-sm">{{name}}-readable</div>
+      <div :class="`text-${name}-readable-strong`" class="px-sm py-sm">{{name}}-readable-strong</div>
+      <div :class="`bg-surface-${name} text-surface-${name}-readable`" class="px-sm py-sm">surface-{{name}}-readable</div>
+    </div>
   </div>
 </card-example>
 
@@ -133,10 +138,10 @@ The hints and the labels of the fields take `--input-valid-text-color` and `--in
 _Graphic colors_ are a color that has to be seen but not read: the bar of `vv-progress`, a focus ring, a border that shows a state. Each of brand, accent, success, danger, info and warning has one, `--color-brand-graphic`, built like the readable ones on the same neutral surfaces, for the 3:1 that WCAG asks of graphics and of the parts of a control that show its state, 3.1:1 with the margin for the rounding. It stays closer to the color than a readable role: on a white surface `#f5c400` keeps `#aa8700` where its text takes `#876b00`, and the color itself while it is already seen, as the default brand is in the light theme. Change the ratio with `$color-graphic-ratio`. The `bg-`, `text-`, `border-` and `decoration-` classes expose it.
 
 <card-example title="Graphic Colors">
-  <div class="grid grid-cols-2 xl:grid-cols-3 gap-md text-center font-mono whitespace-nowrap text-14">
-    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" class="flex flex-col gap-xs py-12">
-      <div class="h-8 rounded-full overflow-hidden bg-surface-2"><div :class="`bg-${name}-graphic`" class="h-8 w-3/5"></div></div>
+  <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-sm font-mono text-14">
+    <div v-for="name in ['brand', 'accent', 'success', 'danger', 'info', 'warning']" class="flex flex-col gap-xs px-sm py-sm rounded border border-surface-3">
       {{name}}-graphic
+      <div class="h-8 rounded-full overflow-hidden bg-surface-2"><div :class="`bg-${name}-graphic`" class="h-8 w-3/5"></div></div>
     </div>
   </div>
 </card-example>

@@ -78,11 +78,20 @@ chosen at compile time and `--color-tint` does not exist).
   --vv-button-font-weight: var(--font-medium);
 }
 
-/* a new variant without touching SCSS */
+/* a new variant without touching SCSS. A class beats the zero specificity of
+   the state rules, so the hover is written out, and each shade takes its own
+   contrast text and cover, or a light color gets white text */
 .vv-button--success {
   --vv-button-background: var(--color-success);
   --vv-button-border-color: var(--color-success);
-  --vv-button-state-hover-background: var(--color-success-darken-1);
+  --vv-button-color: var(--color-success-contrast);
+  --vv-button-text-shadow: 0 1px 0 var(--color-success-cover), 0 1px 0 var(--color-gray-darken-5);
+}
+.vv-button--success:not([disabled]):hover {
+  --vv-button-background: var(--color-success-darken-1);
+  --vv-button-border-color: var(--color-success-darken-1);
+  --vv-button-color: var(--color-success-darken-1-contrast);
+  --vv-button-text-shadow: 0 1px 0 var(--color-success-darken-1-cover), 0 1px 0 var(--color-gray-darken-5);
 }
 
 /* all form fields at once */
