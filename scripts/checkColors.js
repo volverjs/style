@@ -5,8 +5,10 @@
 // - the neutrals written relative to --color-tint, against the literals they
 //   replaced, for the default brand and for #140e33, in both themes;
 // - the readable roles, which keep the reference set at 4.5:1 or more on
-//   the surface of each theme, leave a color that already reads alone, and
-//   keep every shade at 4.5:1 or more on the tinted surface of any hue;
+//   the neutral surfaces down to surface-2 of each theme, of any hue, leave a
+//   color that already reads alone and keep its hue, put readable-strong a
+//   step further, and keep every shade at 4.5:1 or more on the tinted
+//   surface of any hue;
 // - the covers of vv-button, the split fill and text colors of the fields,
 //   and the HSL channel branch, which emits no relative color syntax outside
 //   @supports;
@@ -288,97 +290,122 @@ const fromXyz = ([x, y, z]) => [
 ]
 const toGamma = (value) =>
 	value <= 0.0031308 ? 12.92 * value : 1.055 * value ** (1 / 2.4) - 0.055
-// the readable expression evaluated on [r, g, b]: toward black, the channels
-// scaled by bound / y; toward white, their distance from the white point by
-// (1 - bound) / (1 - y)
+// xyz-d65 to [r, g, b], clipped to 1 in srgb like `min(r, alpha)`
+const clipped = (xyz) => fromXyz(xyz).map((value) => Math.min(1, value))
+const W = [0.9505, 1, 1.0891]
+// the readable expression evaluated on [r, g, b]. Toward black, the channels
+// scaled by bound / y. Toward white, scaled up by the same ratio, clipped to
+// the gamut, and their distance from the white point moved by
+// (1 - bound) / (1 - y) for what the clip took
 const readableOf = (channels, bound, lighten) => {
 	const [x, y, z] = toXyz(channels.map(toLinear))
-	const xyz = lighten
-		? ((g) => [
-				0.9505 - (0.9505 - x) * g,
-				Math.max(y, bound),
-				1.0891 - (1.0891 - z) * g,
-			])(Math.min(1, (1 - bound) / Math.max(1 - y, 0.0001)))
-		: ((g) => [x * g, Math.min(y, bound), z * g])(
-				Math.min(1, bound / Math.max(y, 0.0001)),
-			)
-	return fromXyz(xyz).map((value) => Math.min(1, Math.max(0, toGamma(value))))
+	if (!lighten) {
+		const g = Math.min(1, bound / Math.max(y, 0.0001))
+		return fromXyz([x * g, Math.min(y, bound), z * g]).map((value) =>
+			Math.min(1, Math.max(0, toGamma(value))),
+		)
+	}
+	const s = Math.max(1, bound / Math.max(y, 0.0001))
+	const [cx, cy, cz] = toXyz(clipped([x * s, y * s, z * s]))
+	const g = Math.min(1, (1 - bound) / Math.max(1 - cy, 0.0001))
+	return fromXyz([
+		W[0] - (W[0] - cx) * g,
+		Math.max(cy, bound),
+		W[2] - (W[2] - cz) * g,
+	]).map((value) => Math.min(1, Math.max(0, toGamma(value))))
+}
+// readable-strong evaluated on the readable role: its xyz scaled by factor,
+// clipped to the gamut when the factor raises it
+const strongOf = (channels, factor) => {
+	const xyz = toXyz(channels.map(toLinear)).map((value) => value * factor)
+	return (factor > 1 ? clipped(xyz) : fromXyz(xyz)).map((value) =>
+		Math.min(1, Math.max(0, toGamma(value))),
+	)
 }
 const readable = (hex, bound, lighten) =>
 	toHex(readableOf(hexToRgb(hex), bound, lighten))
-const formula = (origin, bound, lighten) =>
-	lighten
-		? `color(from ${origin} xyz-d65 calc(0.9505 - (0.9505 - x) * min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))) max(y, ${bound}) calc(1.0891 - (1.0891 - z) * min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))))`
-		: `color(from ${origin} xyz-d65 calc(x * min(1, ${bound} / max(y, 0.0001))) min(y, ${bound}) calc(z * min(1, ${bound} / max(y, 0.0001))))`
-// the luminance the y channel is clamped to, `) min(y, 0.1782)`, not the
+const clip = (color) =>
+	`color(from ${color} srgb min(r, alpha) min(g, alpha) min(b, alpha))`
+const formula = (origin, bound, lighten) => {
+	if (!lighten) {
+		return `color(from ${origin} xyz-d65 calc(x * min(1, ${bound} / max(y, 0.0001))) min(y, ${bound}) calc(z * min(1, ${bound} / max(y, 0.0001))))`
+	}
+	const up = `max(1, ${bound} / max(y, 0.0001))`
+	const toWhite = `min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))`
+	return `color(from ${clip(`color(from ${origin} xyz-d65 calc(x * ${up}) calc(y * ${up}) calc(z * ${up}))`)} xyz-d65 calc(0.9505 - (0.9505 - x) * ${toWhite}) max(y, ${bound}) calc(1.0891 - (1.0891 - z) * ${toWhite}))`
+}
+const strongFormula = (name, factor) => {
+	const value = `color(from var(--color-${name}-readable) xyz-d65 calc(x * ${factor}) calc(y * ${factor}) calc(z * ${factor}))`
+	return factor > 1 ? clip(value) : value
+}
+// the luminance the y channel is clamped to, `) min(y, 0.1574)`, not the
 // guard of the division, `/ max(y, 0.0001)`
 const boundOf = (value) =>
 	Number(value?.match(/\) (?:min|max)\(y, ([\d.]+)\)/)?.[1])
+const factorOf = (value) => Number(value?.match(/calc\(x \* ([\d.]+)\)/)?.[1])
 const darkProps = compile(`@use 'src/context'; @use 'src/themes/dark/props';`)
 const darkEmitted = props(darkProps)
-// the hardest tint of each theme, among every hue at full saturation
-const worstTint = (lightness, light) => {
+// the hardest surface of each theme, among every hue at a saturation and a
+// lightness: the darkest of them when they are light, the lightest otherwise
+const worstTint = (lightness, light, saturation = 1) => {
 	let worst = null
 	for (let h = 0; h < 360; h++) {
-		const y = luminanceOf(hsl(h, 1, lightness))
+		const y = luminanceOf(hsl(h, saturation, lightness))
 		if (worst === null || (light ? y < worst : y > worst)) {
 			worst = y
 		}
 	}
 	return worst
 }
+// the roles read on the neutral surfaces down to surface-2, 96% in the light
+// theme and 15% in the dark one, of any hue --color-tint gives them
 const themes = {
 	light: {
 		lighten: false,
-		surface: luminance('#ffffff'),
+		surface: worstTint(0.96, true, 0.1),
 		tint: 0.9,
 		bound: boundOf(emitted['--color-brand-readable']),
 		surfaceBound: boundOf(emitted['--color-surface-brand-readable']),
+		strong: factorOf(emitted['--color-brand-readable-strong']),
 		emitted,
-		roles: { brand: ['brand', 'brand-darken-3', 'brand-darken-3'] },
 	},
 	dark: {
 		lighten: true,
-		surface: luminance(neutrals['#166abd']['dark surface']),
+		surface: worstTint(0.15, false, 0.1),
 		tint: 0.1,
 		bound: boundOf(darkEmitted['--color-brand-readable']),
 		surfaceBound: boundOf(darkEmitted['--color-surface-brand-readable']),
+		strong: factorOf(darkEmitted['--color-brand-readable-strong']),
 		emitted: darkEmitted,
-		roles: {
-			brand: ['brand-lighten-3', 'brand-lighten-5', 'brand-lighten-3'],
-		},
 	},
 }
 for (const [name, theme] of Object.entries(themes)) {
-	const [readableShade, strongShade, surfaceShade] = theme.roles.brand
 	check(
 		theme.emitted['--color-brand-readable'] ===
-			formula(
-				`var(--color-${readableShade})`,
-				theme.bound,
-				theme.lighten,
-			) &&
+			formula('var(--color-brand)', theme.bound, theme.lighten) &&
 			theme.emitted['--color-brand-readable-strong'] ===
-				formula(
-					`var(--color-${strongShade})`,
-					theme.bound,
-					theme.lighten,
-				) &&
+				strongFormula('brand', theme.strong) &&
 			theme.emitted['--color-surface-brand-readable'] ===
 				formula(
-					`var(--color-${surfaceShade})`,
+					'var(--color-brand)',
 					theme.surfaceBound,
 					theme.lighten,
 				),
-		`the ${name} readable roles of brand are ${theme.emitted['--color-brand-readable']}, ${theme.emitted['--color-surface-brand-readable']}`,
+		`the ${name} readable roles of brand are ${theme.emitted['--color-brand-readable']}, ${theme.emitted['--color-brand-readable-strong']}, ${theme.emitted['--color-surface-brand-readable']}`,
 	)
-	// the bound of the surface, and the one of the hardest tint of any hue
+	check(
+		theme.lighten ? theme.strong > 1 : theme.strong < 1,
+		`the ${name} readable-strong factor ${theme.strong} does not move away from the surface`,
+	)
+	// the bound of the deepest neutral surface, and the one of the hardest
+	// tint of any hue, both of the hardest hue
 	const worst = worstTint(theme.tint, !theme.lighten)
 	check(
 		ratio(theme.bound, theme.surface) >= 4.59 &&
+			ratio(theme.bound, theme.surface) < 4.61 &&
 			ratio(theme.surfaceBound, worst) >= 4.59 &&
 			ratio(theme.surfaceBound, worst) < 4.61,
-		`${name} readable bounds ${theme.bound} and ${theme.surfaceBound}, hardest tint ${worst.toFixed(4)}`,
+		`${name} readable bounds ${theme.bound} and ${theme.surfaceBound}, hardest surface ${theme.surface.toFixed(4)}, hardest tint ${worst.toFixed(4)}`,
 	)
 }
 check(
@@ -389,9 +416,11 @@ check(
 		),
 	'a readable shade or a readable bound token is still emitted',
 )
-// on the surface, every reference color ends at 4.5:1 or more and one that
-// already reads is left alone; on its own tinted surface, so is every shade
-// of every reference color, and every hue at full saturation
+// on the deepest neutral surface, every reference color ends at 4.5:1 or
+// more, one that already reads is left alone, and the dark theme keeps its
+// hue; readable-strong reads at least as well and is a step away; on its own
+// tinted surface, so does every shade of every reference color, and every hue
+// at full saturation
 const readableTable = reference.map((hex) => {
 	const row = { color: hex }
 	for (const [name, theme] of Object.entries(themes)) {
@@ -407,6 +436,21 @@ const readableTable = reference.map((hex) => {
 			`${hex} in the ${name} theme already reads but moves to ${text}`,
 		)
 		const [h, s] = toHsl(hexToRgb(hex))
+		const [textHue, textSaturation] = toHsl(hexToRgb(text))
+		const drift = Math.abs(((textHue - h + 540) % 360) - 180)
+		check(
+			s < 0.2 || textSaturation < 0.05 || drift <= 6,
+			`${hex} in the ${name} theme turns its hue by ${drift.toFixed(1)} degrees, to ${text}`,
+		)
+		const strong = strongOf(hexToRgb(text), theme.strong)
+		const strongRatio = ratio(luminanceOf(strong), theme.surface)
+		check(
+			strongRatio >= after &&
+				(theme.lighten ||
+					luminanceOf(strong) <=
+						luminance(text) * theme.strong + 1e-3),
+			`readable-strong of ${hex} in the ${name} theme is ${toHex(strong)} at ${strongRatio.toFixed(2)}, readable ${after.toFixed(2)}`,
+		)
 		const tint = luminanceOf(hsl(h, s, theme.tint))
 		let lowest = Infinity
 		for (const multiplier of [0.5, 0.7, 0.9, 1, 1.3, 1.5]) {
@@ -425,6 +469,7 @@ const readableTable = reference.map((hex) => {
 		)
 		row[name] =
 			`${text} ${after.toFixed(2)}${text === hex ? '' : ` (was ${before.toFixed(2)})`}`
+		row[`${name} strong`] = `${toHex(strong)} ${strongRatio.toFixed(2)}`
 		row[`${name} tint`] = lowest.toFixed(2)
 	}
 	return row
@@ -484,19 +529,71 @@ const legacyProps = compile(
 	`@use 'src/context' with ($use-color-mix: false); @use 'src/props';`,
 )
 const legacy = props(legacyProps)
+const legacyDarkProps = compile(
+	`@use 'src/context' with ($use-color-mix: false); @use 'src/themes/dark/props';`,
+)
+const palette = {
+	brand: '#166abd',
+	accent: '#9c27b0',
+	success: '#178230',
+	danger: '#af2323',
+	info: '#31ccec',
+	warning: '#e7b735',
+}
 // the HSL channel branch serves browsers without relative color syntax: it
-// emits none, and a readable role there is its shade
+// emits none, and a readable role there is the first shade of the color that
+// reads, away from the surface, chosen at compile time
 check(
-	!legacyProps.includes('from var(') &&
-		!legacyProps.includes('@supports (color:'),
+	![legacyProps, legacyDarkProps].some(
+		(css) => css.includes('from var(') || css.includes('@supports (color:'),
+	),
 	'without $use-color-mix relative color syntax is emitted',
 )
-check(
-	legacy['--color-brand-readable'] === 'var(--color-brand)' &&
-		legacy['--color-surface-brand-readable'] ===
-			'var(--color-brand-darken-3)',
-	`without $use-color-mix the readable roles are ${legacy['--color-brand-readable']}, ${legacy['--color-surface-brand-readable']}`,
-)
+const legacyStep = (hex, bound, lighten, from = 0) => {
+	for (let step = Math.min(from, 5); step <= 5; step++) {
+		const y = luminanceOf(
+			shade(hex, lighten ? 1 + step / 10 : 1 - step / 10),
+		)
+		if (lighten ? y >= bound : y <= bound) {
+			return step
+		}
+	}
+	return 5
+}
+const legacyVar = (name, step, lighten) =>
+	step
+		? `var(--color-${name}-${lighten ? 'lighten' : 'darken'}-${step})`
+		: `var(--color-${name})`
+for (const [theme, emittedLegacy] of [
+	['light', legacy],
+	['dark', props(legacyDarkProps)],
+]) {
+	const { bound, surfaceBound, strong, lighten } = themes[theme]
+	for (const [name, hex] of Object.entries(palette)) {
+		const step = legacyStep(hex, bound, lighten)
+		const target =
+			luminanceOf(shade(hex, lighten ? 1 + step / 10 : 1 - step / 10)) *
+			strong
+		for (const [token, value] of Object.entries({
+			[`--color-${name}-readable`]: legacyVar(name, step, lighten),
+			[`--color-${name}-readable-strong`]: legacyVar(
+				name,
+				legacyStep(hex, target, lighten, step + 1),
+				lighten,
+			),
+			[`--color-surface-${name}-readable`]: legacyVar(
+				name,
+				legacyStep(hex, surfaceBound, lighten),
+				lighten,
+			),
+		})) {
+			check(
+				emittedLegacy[token] === value,
+				`without $use-color-mix ${theme} ${token} is ${emittedLegacy[token]}, expected ${value}`,
+			)
+		}
+	}
+}
 check(
 	!('--color-tint' in legacy),
 	'without $use-color-mix --color-tint is emitted',
@@ -504,14 +601,7 @@ check(
 // without $use-color-mix the contrast text of each shade is chosen at compile
 // time, and the cover agrees with it: the shade under dark text, transparent
 // under white
-for (const [name, hex] of Object.entries({
-	brand: '#166abd',
-	accent: '#9c27b0',
-	success: '#178230',
-	danger: '#af2323',
-	info: '#31ccec',
-	warning: '#e7b735',
-})) {
+for (const [name, hex] of Object.entries(palette)) {
 	for (let step = 0; step <= 5; step++) {
 		const key = step ? `${name}-darken-${step}` : name
 		const white =

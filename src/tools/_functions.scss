@@ -387,20 +387,22 @@
 	@return math.div(math.ceil(($ratio * ($y + 0.05) - 0.05) * 10000), 10000);
 }
 
-// The tint, among every hue at full saturation and $lightness, that text has
-// the hardest time reading on: the darkest of them when they are light, the
+// The tint, among every hue at $saturation and $lightness, that text has the
+// hardest time reading on: the darkest of them when they are light, the
 // lightest when they are dark. The tinted surfaces are
 // hsl(from <color> h s <lightness>), and full saturation is where their
 // luminance strays furthest from that of a grey, so a bound computed on this
-// tint holds for whatever color is set at runtime.
-// @param {Number} $lightness - Lightness of the tinted surfaces
+// tint holds for whatever color is set at runtime. The neutral surfaces take
+// their hue from --color-tint, which can change at runtime too.
+// @param {Number} $lightness - Lightness of the surfaces
+// @param {Number} $saturation - Saturation of the surfaces (default: 100%)
 // @return {Color} The tint
-@function readable-worst-tint($lightness) {
+@function readable-worst-tint($lightness, $saturation: 100%) {
 	$light: $lightness >= 50%;
 	$worst: null;
 
 	@for $hue from 0 to 360 {
-		$tint: hsl($hue, 100%, $lightness);
+		$tint: hsl($hue, $saturation, $lightness);
 
 		@if not $worst or ($light and color-luminance($tint) < color-luminance($worst)) or
 			(not $light and color-luminance($tint) > color-luminance($worst))
@@ -412,20 +414,36 @@
 	@return $worst;
 }
 
-// A color written as text, pushed toward black, or toward white with
-// $lighten, just far enough to reach the luminance $bound, and left alone
-// when it already does. The push runs in xyz-d65: its channels are numbers
-// in every engine (Safari 17 reads those of srgb and the `alpha` keyword as
-// percentages), and scaling there is scaling linear light, so the color keeps
-// its chromaticity and lands on the bound exactly. Toward black the channels
-// are scaled by bound / y, toward white their distance from the white point
-// by (1 - bound) / (1 - y). A color that already reads goes through a round
-// trip in xyz-d65 that lands within a fraction of an 8-bit step, and mixing
-// toward white pulls the chroma down, so a very dark color raised on a dark
-// background comes out greyish.
-// @param {String} $origin - Any CSS color, `var(--color-brand-darken-3)`
+// The surface readable-luminance() keeps text on: the hardest hue of
+// $surface, $offset lightness away from it, where the deepest neutral surface
+// that carries text in a color sits.
+// @param {Color} $surface - The base surface of the theme
+// @param {Number} $offset - Lightness from it to the deepest surface
+// @return {Color} The surface to compute the bound on
+@function readable-surface($surface, $offset) {
+	@return readable-worst-tint(
+		color.channel($surface, 'lightness', $space: hsl) + $offset,
+		color.channel($surface, 'saturation', $space: hsl)
+	);
+}
+
+// A color written as text, moved just far enough to reach the luminance
+// $bound, and left alone when it already does. The math runs in xyz-d65,
+// whose channels are numbers in every engine (Safari 17 reads those of srgb
+// and the `alpha` keyword as percentages), and where scaling is scaling
+// linear light: the color keeps its chromaticity and lands on the bound.
+// - Toward black, on a light surface, the channels are scaled by bound / y.
+// - Toward white, on a dark surface, they are scaled up by the same ratio,
+//   which keeps the color as vivid as it was, then clipped to the sRGB gamut
+//   (-gamut-clip()), and what the clip took is made up by moving their
+//   distance from the white point by (1 - bound) / (1 - y). Mixing toward
+//   white alone would pull the chroma down, and a dark color raised on a dark
+//   surface would come out greyish.
+// A color that already reads goes through a round trip in xyz-d65 that lands
+// within a fraction of an 8-bit step.
+// @param {String} $origin - Any CSS color, `var(--color-brand)`
 // @param {Number} $bound - The luminance to reach, from readable-luminance()
-// @param {Boolean} $lighten - Push toward white, for a dark background (default: false)
+// @param {Boolean} $lighten - Move toward white, for a dark surface (default: false)
 // @return {String} CSS relative color syntax expression
 @function readable-color-value($origin, $bound, $lighten: false) {
 	@if not $lighten {
@@ -434,55 +452,137 @@
 		@return string.unquote('color(from #{$origin} xyz-d65 calc(x * #{$scale}) min(y, #{$bound}) calc(z * #{$scale}))');
 	}
 
+	$scale: 'max(1, #{$bound} / max(y, 0.0001))';
+	$lifted: -gamut-clip(
+		'color(from #{$origin} xyz-d65 calc(x * #{$scale}) calc(y * #{$scale}) calc(z * #{$scale}))'
+	);
 	$x: math.div(math.round(color.channel(#fff, 'x', $space: xyz-d65) * 10000), 10000);
 	$z: math.div(math.round(color.channel(#fff, 'z', $space: xyz-d65) * 10000), 10000);
 	$scale: 'min(1, #{1 - $bound} / max(1 - y, 0.0001))';
 
 	@return string.unquote(
-		'color(from #{$origin} xyz-d65 calc(#{$x} - (#{$x} - x) * #{$scale}) max(y, #{$bound}) calc(#{$z} - (#{$z} - z) * #{$scale}))'
+		'color(from #{$lifted} xyz-d65 calc(#{$x} - (#{$x} - x) * #{$scale}) max(y, #{$bound}) calc(#{$z} - (#{$z} - z) * #{$scale}))'
 	);
+}
+
+// The readable role a step further from the surface: its luminance scaled by
+// $factor, below 1 on a light surface and above it on a dark one, where the
+// result is clipped to the sRGB gamut. Each channel ends at least as far from
+// the surface as the role, so it reads at least as well.
+// @param {String} $readable - The readable role, `var(--color-brand-readable)`
+// @param {Number} $factor - The luminance factor of the step
+// @return {String} CSS relative color syntax expression
+@function readable-strong-value($readable, $factor) {
+	$value: 'color(from #{$readable} xyz-d65 calc(x * #{$factor}) calc(y * #{$factor}) calc(z * #{$factor}))';
+
+	@if $factor > 1 {
+		@return -gamut-clip($value);
+	}
+
+	@return string.unquote($value);
+}
+
+// A color scaled up in xyz-d65 can leave the sRGB gamut, where a browser
+// would map it on its own terms. Each channel is clipped to 1 in srgb, where
+// `alpha` is the unit in the type every engine reads the channels in, 1 or
+// 100%, as long as the color is opaque.
+@function -gamut-clip($color) {
+	@return string.unquote('color(from #{$color} srgb min(r, alpha) min(g, alpha) min(b, alpha))');
 }
 
 // The text roles of the palette colors, as a map to deep-merge into a colors
 // map: `readable` and `readable-strong` next to the shades of each color, the
 // text on the surface and the one a step further from it, and
 // `<name>-readable` in `surface`, the text on the tinted surface of the
-// color. Each role starts from the shade $shades names for it (`base`,
-// `darken-3`) and is pushed to $bound, or to $surface-bound on the tinted
-// surface. Without $relative, for the HSL channel branch, a role is the shade
-// itself.
-// @param {Map} $shades - Color name to (readable, readable-strong, surface) shade names
+// color. Each role starts from the color itself and is moved to $bound, or to
+// $surface-bound on the tinted surface, and `readable-strong` is `readable`
+// with its luminance scaled by $strong. Without $relative, for the HSL channel
+// branch, which has no relative color syntax, a role is the first shade of
+// the color that reads, chosen at compile time (-readable-shade()).
+// @param {Map} $colors - Color name to its compile time value
 // @param {Number} $bound - Bound on the surface, from readable-luminance()
 // @param {Number} $surface-bound - Bound on the tinted surfaces
-// @param {Boolean} $lighten - The background is dark (default: false)
+// @param {Number} $strong - Luminance factor of `readable-strong`
+// @param {Boolean} $lighten - The surface is dark (default: false)
 // @param {Boolean} $relative - Compute the roles in CSS (default: true)
 // @return {Map} (brand: (readable, readable-strong), ..., surface: (brand-readable, ...))
-@function readable-roles($shades, $bound, $surface-bound, $lighten: false, $relative: true) {
+@function readable-roles($colors, $bound, $surface-bound, $strong, $lighten: false, $relative: true) {
 	$result: ();
 	$surface: ();
 
-	@each $name, $roles in $shades {
-		$tokens: ();
+	@each $name, $color in $colors {
+		$origin: 'var(--color-#{$name})';
 
-		@each $role, $shade in $roles {
-			$origin: if(sass($shade == base): 'var(--color-#{$name})'; else: 'var(--color-#{$name}-#{$shade})');
-			$value: string.unquote($origin);
-
-			@if $relative {
-				$value: readable-color-value($origin, if(sass($role == surface): $surface-bound; else: $bound), $lighten);
-			}
-
-			@if $role == surface {
-				$surface: map.set($surface, string.unquote('#{$name}-readable'), $value);
-			} @else {
-				$tokens: map.set($tokens, $role, $value);
-			}
+		@if $relative {
+			$result: map.set(
+				$result,
+				$name,
+				(
+					readable: readable-color-value($origin, $bound, $lighten),
+					readable-strong: readable-strong-value('var(--color-#{$name}-readable)', $strong),
+				)
+			);
+			$surface: map.set(
+				$surface,
+				string.unquote('#{$name}-readable'),
+				readable-color-value($origin, $surface-bound, $lighten)
+			);
+		} @else {
+			$step: -readable-shade($color, $bound, $lighten);
+			$target: color-luminance(-legacy-shade($color, $step, $lighten)) * $strong;
+			$result: map.set(
+				$result,
+				$name,
+				(
+					readable: -legacy-shade-var($name, $step, $lighten),
+					readable-strong: -legacy-shade-var(
+						$name,
+						-readable-shade($color, $target, $lighten, $from: $step + 1),
+						$lighten
+					),
+				)
+			);
+			$surface: map.set(
+				$surface,
+				string.unquote('#{$name}-readable'),
+				-legacy-shade-var($name, -readable-shade($color, $surface-bound, $lighten), $lighten)
+			);
 		}
-
-		$result: map.set($result, $name, $tokens);
 	}
 
 	@return map.set($result, surface, $surface);
+}
+
+// The first step, from $from to 5, of the shades of $color away from the
+// surface (darker with a light surface, lighter with a dark one) whose
+// luminance reaches $bound, or 5 when none does
+@function -readable-shade($color, $bound, $lighten, $from: 0) {
+	@for $step from math.min($from, 5) through 5 {
+		$y: color-luminance(-legacy-shade($color, $step, $lighten));
+
+		@if if(sass($lighten): $y >= $bound; else: $y <= $bound) {
+			@return $step;
+		}
+	}
+
+	@return 5;
+}
+
+// A shade of the HSL channel branch at compile time: the lightness scaled by
+// 1 - 10% per step (darken), or 1 + 10% per step (lighten)
+@function -legacy-shade($color, $step, $lighten) {
+	$multiplier: if(sass($lighten): 1 + 0.1 * $step; else: 1 - 0.1 * $step);
+	$lightness: math.min(100%, color.channel($color, 'lightness', $space: hsl) * $multiplier);
+
+	@return color.change($color, $lightness: $lightness, $space: hsl);
+}
+
+@function -legacy-shade-var($name, $step, $lighten) {
+	@if $step == 0 {
+		@return string.unquote('var(--color-#{$name})');
+	}
+
+	@return string.unquote('var(--color-#{$name}-#{if(sass($lighten): lighten; else: darken)}-#{$step})');
 }
 
 // Add the tokens for text on a color to its shades map: `contrast` and

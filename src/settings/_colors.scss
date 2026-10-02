@@ -41,26 +41,32 @@ $color-readable-ratio: 4.6 !default;
 // Lightness of the tinted surfaces, --color-surface-brand and the others
 $color-surface-tint-lightness: 90% !default;
 
-// The text roles of each palette color, and the shade each one starts from:
-// `readable`, --color-brand-readable, the text on the surface (links,
-// outlined badges, tabs, hints); `readable-strong`, a step further from it (a
-// hovered or pressed link); `surface`, --color-surface-brand-readable, the
-// text on the tinted surface of the color (alerts, ring avatars, dropdown
-// options). A role is its shade while that reads, and the shade pushed just
-// far enough otherwise (readable-roles()). The dark theme has its own map.
-$color-readable-shades: (
-	brand: (readable: base, readable-strong: darken-3, surface: darken-3),
-	accent: (readable: base, readable-strong: darken-3, surface: base),
-	success: (readable: base, readable-strong: darken-3, surface: darken-1),
-	danger: (readable: base, readable-strong: darken-3, surface: base),
-	info: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
-	warning: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
-) !default;
+// Lightness between two neutral surfaces, --color-surface to --color-surface-5
+$color-surface-scale: 2% !default;
 
-// The luminance the roles are pushed to, on the surface and on the tinted
-// surfaces. The second is computed on the hardest tint of any hue
-// (readable-worst-tint()), since the color behind it can change at runtime.
-$color-readable-luminance: readable-luminance($color-surface, $color-readable-ratio) !default;
+// The text roles of each palette color, readable-roles(): `readable`,
+// --color-brand-readable, the text on the neutral surfaces (links, outlined
+// badges, tabs, hints); `readable-strong`, a step further from them (a
+// pressed link, the current crumb); and --color-surface-brand-readable, the text on the
+// tinted surface of the color (alerts, ring avatars, dropdown options). Each
+// one is the color itself while it reads, and the color moved just far
+// enough otherwise, so a brand set at runtime keeps its hue and stays as
+// vivid as it can.
+// The roles read on the neutral surfaces down to this one: 2 is
+// --color-surface-2, a hovered row or a pressed action.
+$color-readable-depth: 2 !default;
+
+// `readable-strong` is `readable` with its luminance scaled by this
+$color-readable-strong-factor: 0.5 !default;
+
+// The luminance the roles are moved to, on the neutral surfaces and on the
+// tinted ones. Both are computed on the hardest hue (readable-surface() and
+// readable-worst-tint()): the neutrals take theirs from --color-tint, the
+// tinted surfaces from their color, and either can change at runtime.
+$color-readable-luminance: readable-luminance(
+	readable-surface($color-surface, -$color-readable-depth * $color-surface-scale),
+	$color-readable-ratio
+) !default;
 $color-surface-readable-luminance: readable-luminance(
 	readable-worst-tint($color-surface-tint-lightness),
 	$color-readable-ratio
@@ -99,10 +105,10 @@ $color-surface-palette: if(
 // --color-<name>-contrast, pure white or pure black, whichever gives the text
 // on the fill the higher WCAG contrast ratio, and a `cover`, the fill under
 // that text, which vv-button lays over its emboss, both for the base and every
-// darker shade. The text roles of $color-readable-shades are merged in last.
+// darker shade. The text roles of readable-roles() are merged in last.
 // With $use-color-mix all of them are computed in CSS and follow a runtime
-// override of the color; otherwise the contrast is chosen at compile time and
-// a role is its shade.
+// override of the color; otherwise the contrast and the shade each role
+// takes are chosen at compile time.
 
 // The saturation and lightness passed to tinted-neutral-value() repeat the
 // defaults above: a neutral that no longer matches its default was set
@@ -129,7 +135,7 @@ $colors: map.deep-merge(
 						tinted-neutral-value($color-surface, $color-tint, 10%, 100%),
 						'surface',
 						$steps: 5,
-						$scale: 2%
+						$scale: $color-surface-scale
 					),
 					$color-surface-palette
 				),
@@ -156,7 +162,7 @@ $colors: map.deep-merge(
 				white: hsla-map($color-white, 'white'),
 				word: color-lighten-map($color-word, 'word', $scale: 12%, $fixed: true, $inverted: false),
 				surface: map.merge(
-					color-darken-map($color-surface, 'surface', $scale: 2%, $fixed: true),
+					color-darken-map($color-surface, 'surface', $scale: $color-surface-scale, $fixed: true),
 					$color-surface-palette
 				),
 				alpha: color-alpha-map($color-alpha, 'alpha', $steps: 5, $scale: 0.05),
@@ -170,9 +176,17 @@ $colors: map.deep-merge(
 			)
 	),
 	readable-roles(
-		$color-readable-shades,
+		(
+			brand: $color-brand,
+			accent: $color-accent,
+			success: $color-success,
+			danger: $color-danger,
+			info: $color-info,
+			warning: $color-warning,
+		),
 		$color-readable-luminance,
 		$color-surface-readable-luminance,
+		$color-readable-strong-factor,
 		$lighten: color-luminance($color-surface) < contrast-threshold(),
 		$relative: config.$use-color-mix
 	)

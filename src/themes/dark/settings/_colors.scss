@@ -16,22 +16,22 @@ $dark-color-surface: hsl(color-hue($color-tint) 10% 5%) !default;
 // Lightness of the tinted surfaces in the dark theme
 $dark-color-surface-tint-lightness: 10% !default;
 
-// The shades the text roles start from in the dark theme (see
-// $color-readable-shades): lighter ones, pushed toward white when they need
-// it. Redeclared here, the roles follow the theme in every component, so a
-// light rule needs no dark override for its text color.
-$dark-color-readable-shades: (
-	brand: (readable: lighten-3, readable-strong: lighten-5, surface: lighten-3),
-	accent: (readable: lighten-3, readable-strong: lighten-5, surface: lighten-4),
-	success: (readable: lighten-3, readable-strong: lighten-5, surface: lighten-3),
-	danger: (readable: lighten-3, readable-strong: lighten-5, surface: lighten-5),
-	info: (readable: base, readable-strong: lighten-3, surface: base),
-	warning: (readable: base, readable-strong: lighten-3, surface: base),
-) !default;
+// Lightness between two neutral surfaces in the dark theme
+$dark-color-surface-scale: 5% !default;
 
-// The luminance the roles are pushed to, on the surface and on the hardest
-// tinted surface of any hue, as in the light theme
-$dark-color-readable-luminance: readable-luminance($dark-color-surface, $color-readable-ratio) !default;
+// `readable-strong` in the dark theme: `readable` with its luminance scaled
+// by this, toward white. The text roles are redeclared here, so they follow
+// the theme in every component and a light rule needs no dark override for
+// its text color.
+$dark-color-readable-strong-factor: 1.5 !default;
+
+// The luminance the roles are moved to, on the neutral surfaces down to
+// $color-readable-depth and on the hardest tinted surface of any hue, as in
+// the light theme
+$dark-color-readable-luminance: readable-luminance(
+	readable-surface($dark-color-surface, $color-readable-depth * $dark-color-surface-scale),
+	$color-readable-ratio
+) !default;
 $dark-color-surface-readable-luminance: readable-luminance(
 	readable-worst-tint($dark-color-surface-tint-lightness),
 	$color-readable-ratio
@@ -76,7 +76,7 @@ $dark-colors: map.deep-merge(
 						tinted-neutral-value($dark-color-surface, $color-tint, 10%, 5%),
 						'surface',
 						$steps: 5,
-						$scale: 5%
+						$scale: $dark-color-surface-scale
 					),
 					$dark-color-surface-palette
 				),
@@ -86,15 +86,29 @@ $dark-colors: map.deep-merge(
 				scheme: $dark-color-scheme,
 				word: color-darken-map($dark-color-word, 'word', $scale: 12%, $fixed: true),
 				surface: map.merge(
-					color-lighten-map($dark-color-surface, 'surface', $scale: 5%, $fixed: true, $inverted: false),
+					color-lighten-map(
+						$dark-color-surface,
+						'surface',
+						$scale: $dark-color-surface-scale,
+						$fixed: true,
+						$inverted: false
+					),
 					$dark-color-surface-palette
 				),
 			)
 	),
 	readable-roles(
-		$dark-color-readable-shades,
+		(
+			brand: $color-brand,
+			accent: $color-accent,
+			success: $color-success,
+			danger: $color-danger,
+			info: $color-info,
+			warning: $color-warning,
+		),
 		$dark-color-readable-luminance,
 		$dark-color-surface-readable-luminance,
+		$dark-color-readable-strong-factor,
 		$lighten: color-luminance($dark-color-surface) < contrast-threshold(),
 		$relative: config.$use-color-mix
 	)

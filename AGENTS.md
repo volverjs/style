@@ -144,12 +144,14 @@ outputs: that is what tells you which rules moved.
 ## Conventions
 
 - **Text written in a color takes a readable role, never a shade.** `--color-brand-readable`
-  on the surface, `--color-brand-readable-strong` a step further from it, and
-  `--color-surface-brand-readable` on the tinted surface of the color. The dark theme
-  redeclares the roles, so a light rule needs no dark override for its text color, while a
-  shade written as text reads only by chance. A new role or a new starting shade goes in
-  `$color-readable-shades` and `$dark-color-readable-shades`; `check:colors` fails on a
-  `var(--color-*)` that nothing declares.
+  on the neutral surfaces down to `--color-surface-2`, `--color-brand-readable-strong` a step
+  further from them, and `--color-surface-brand-readable` on the tinted surface of the color.
+  The dark theme redeclares the roles, so a light rule needs no dark override for its text
+  color, while a shade written as text reads only by chance. A state that changes the
+  background changes the role with it: the hovered `vv-dropdown-action` sits on
+  `--color-surface-brand` and takes `--color-surface-brand-readable`. Text on a surface deeper
+  than `--color-surface-2` needs `$color-readable-depth` raised, not a darker shade.
+  `check:colors` fails on a `var(--color-*)` that nothing declares.
 - **The first line offset is spelled out, not factored out.** Five declarations centre an icon
   on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`
   and the `self-first-line` utility, each as `calc((1lh - <the size>) / 2)`. The component maps

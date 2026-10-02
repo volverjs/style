@@ -207,8 +207,8 @@ no `text-tint`: `--color-tint` has no utilities.
 Text written in a color takes a readable role, not a shade: `text-brand-readable` on the
 page, `text-brand-readable-strong` for a stronger one, and on a tinted surface the role of
 that surface, `<div class="bg-surface-success text-surface-success-readable">`. A role is
-a shade while it reads and moves only when it would not reach 4.6:1, darker in the light
-theme and lighter in the dark one. They are `text-` classes only: there is no
+the color itself while it reads and moves only when it would not reach 4.6:1, darker in the
+light theme and brighter in the dark one. They are `text-` classes only: there is no
 `bg-brand-readable`, and no `text-brand-darken-1-readable`.
 
 ## Borders

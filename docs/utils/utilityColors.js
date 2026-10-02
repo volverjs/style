@@ -1,7 +1,7 @@
 /**
  * The colors that have a utility class with the given prefix, as
  * src/utilities/colors.scss emits them: `--color-tint` and the covers have
- * none, and a contrast text or a readable shade is a `text-` class alone.
+ * none, and a contrast text or a readable role is a `text-` class alone.
  */
 export const utilityColors = (colors, prefix) =>
 	Object.fromEntries(
@@ -10,6 +10,6 @@ export const utilityColors = (colors, prefix) =>
 				key !== 'tint' &&
 				!key.endsWith('-cover') &&
 				(prefix === 'text' ||
-					!(key.endsWith('-readable') || key.endsWith('-contrast'))),
+					!/-(readable|readable-strong|contrast)$/.test(key)),
 		),
 	)

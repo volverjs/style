@@ -96,11 +96,11 @@ Next to it, the base and every darker shade have a _cover_, `--color-brand-cover
 ### Readable Colors
 _Readable colors_ are a color written as text. Each of brand, accent, success, danger, info and warning has three, one per background the text can sit on:
 
-- `--color-brand-readable`, on the surface: links, outlined and ghost badges, tabs, the hints of the fields;
+- `--color-brand-readable`, on the neutral surfaces, `--color-surface` to `--color-surface-2`: links, outlined and ghost badges, tabs, the hints of the fields;
 - `--color-brand-readable-strong`, a step further from the surface: a pressed link, the current crumb;
 - `--color-surface-brand-readable`, on the tinted surface of the color, `--color-surface-brand`: the headers and icons of alerts, ring avatars, selected dropdown options.
 
-Each one starts from a shade of the color, `darken-5` for warning and info and closer to the base for the others, and is that shade while it reads, or the shade pushed just far enough for a contrast ratio of 4.6:1 otherwise: darker in the light theme, lighter in the dark one, which starts from lighter shades and redeclares the three, so a component writes the same token in both themes. The `text-*-readable` classes expose them.
+Each one is the color itself while it reads at 4.6:1, and the color moved just far enough otherwise. It is computed in CSS, so it follows the color when it changes at runtime. In the light theme the color is darkened. In the dark theme it is brightened with its chromaticity kept as far as the screen can show it, and only what is left is mixed with white: a dark brand comes out vivid rather than greyish, and a light brand is left as it is. `--color-brand-readable-strong` is `--color-brand-readable` with its luminance halved in the light theme, and raised by half in the dark one. The dark theme redeclares the three, so a component writes the same token in both themes. The `text-*-readable` classes expose them.
 
 <card-example title="Readable Colors">
   <div class="grid grid-cols-3 xl:grid-cols-6 text-center font-mono whitespace-nowrap text-14">
@@ -111,22 +111,25 @@ Each one starts from a shade of the color, `darken-5` for warning and info and c
   </div>
 </card-example>
 
-On the surface the ratio is kept against `--color-surface` as it is compiled. On a tinted surface it is kept against the hardest tint of any hue at the lightness of the tinted surfaces, 90% in the light theme and 10% in the dark one: the tinted surface follows the color, which can change at runtime, so the bound holds whatever color is set, at the price of a text a little further from the surface than the compiled color alone would need. Change the ratio with `$color-readable-ratio` and the shade each role starts from with `$color-readable-shades`, and `$dark-color-readable-shades` in the dark theme:
+The ratio is kept on the neutral surfaces down to `--color-surface-2`, a hovered row or a pressed action, and on the tinted surfaces, in both cases against the hardest hue. The neutrals take their hue from `--color-tint` and a tinted surface from its color, and both can change at runtime, so the bound holds whatever color is set, at the price of a text a little further from the surface than the compiled colors alone would need. The bounds themselves are fixed at compile time: a `--color-surface` overridden at runtime does not move them, and a region that turns dark takes the `theme theme--dark` classes.
 
 ```scss
 @use '@volverjs/style/scss/context' with (
-	$color-readable-shades: (
-		brand: (readable: darken-1, readable-strong: darken-3, surface: darken-3),
-		accent: (readable: base, readable-strong: darken-3, surface: base),
-		success: (readable: base, readable-strong: darken-3, surface: darken-1),
-		danger: (readable: base, readable-strong: darken-3, surface: base),
-		info: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
-		warning: (readable: darken-5, readable-strong: darken-5, surface: darken-5),
-	)
+	// the contrast ratio the roles keep
+	$color-readable-ratio: 4.6,
+	// the deepest neutral surface they read on, --color-surface-2
+	$color-readable-depth: 2,
+	// the luminance step of readable-strong, $dark-color-readable-strong-factor
+	// (1.5) in the dark theme
+	$color-readable-strong-factor: 0.5
 );
 ```
 
-In the dark theme the roles start from lighter shades, `lighten-3` for the brand: a brand that is already light gets a pale text there, the price of a shade that reads on a dark surface whatever the brand. The bounds are fixed at compile time, so a `--color-surface` overridden at runtime does not move them; a region that turns dark takes the `theme theme--dark` classes.
+Without `$use-color-mix`, which emits no relative color syntax, a role is the first shade of the color that reads on the compiled surface, chosen at compile time.
+
+The check below sets a color at runtime on a light and a dark region, the way a tenant brand is set, and measures each text on its background in the browser you are reading this in.
+
+<readable-check></readable-check>
 
 The hints and the labels of the fields take `--input-valid-text-color` and `--input-invalid-text-color`, which are `--color-success-readable` and `--color-danger-readable`, while `--input-valid-color` and `--input-invalid-color` keep painting the bars and the borders. Overriding one of the colors needs its text token as well.
 

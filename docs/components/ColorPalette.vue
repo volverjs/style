@@ -9,12 +9,12 @@
 	const selected = ref()
 	const shades = computed(() =>
 		Object.keys(icssExports['colors']).reduce((acc, key) => {
-			// the contrast and readable tokens are text colors, not shades
+			// the contrast, cover and readable tokens are text colors and the
+			// fill under them, not shades
 			if (
 				typeof key === 'string' &&
 				key.startsWith(props.name) &&
-				!key.endsWith('-contrast') &&
-				!key.endsWith('-readable')
+				!/-(contrast|cover|readable|readable-strong)$/.test(key)
 			) {
 				acc[key] = icssExports.colors[key]
 			}
