@@ -19,9 +19,9 @@
 // No browser runs here. The relative expressions are resolved with the
 // formulas of CSS Color 4, the ones the engines apply; what Chrome, Firefox
 // and Safari 17 actually compute was measured when the tokens were written.
-import process from 'process'
+import process from 'node:process'
 import { initCompiler } from 'sass-embedded'
-import { pathToFileURL } from 'url'
+import { pathToFileURL } from 'node:url'
 
 const failures = []
 const check = (ok, message) => {
@@ -32,7 +32,9 @@ const check = (ok, message) => {
 
 // #region color math (WCAG 2 and CSS Color 4)
 const hexToRgb = (hex) =>
-	[1, 3, 5].map((index) => parseInt(hex.slice(index, index + 2), 16) / 255)
+	[1, 3, 5].map(
+		(index) => Number.parseInt(hex.slice(index, index + 2), 16) / 255,
+	)
 const toHex = (channels) =>
 	`#${channels
 		.map((value) =>
@@ -55,12 +57,12 @@ const hue = ([r, g, b]) => {
 	if (!delta) {
 		return 0
 	}
-	const h =
-		max === r
-			? ((g - b) / delta) % 6
-			: max === g
-				? (b - r) / delta + 2
-				: (r - g) / delta + 4
+	let h = (r - g) / delta + 4
+	if (max === r) {
+		h = ((g - b) / delta) % 6
+	} else if (max === g) {
+		h = (b - r) / delta + 2
+	}
 	return (h * 60 + 360) % 360
 }
 const hsl = (h, s, l) => {
@@ -156,7 +158,7 @@ const textRatio = (y) => ratio(y, pickText(y) === 'white' ? 1 : 0)
 const table = reference.map((hex, index) => {
 	const [, sassLuminance, pick] = probe.match(
 		new RegExp(
-			`\\.c${index} \\{\\s*luminance: ([\\d.e-]+);\\s*pick: (#[0-9a-f]+|white|black)`,
+			String.raw`\.c${index} \{\s*luminance: ([\d.e-]+);\s*pick: (#[0-9a-f]+|white|black)`,
 		),
 	)
 	const y = luminance(hex)
@@ -239,7 +241,9 @@ const resolveTinted = (value, tint) => {
 const matches = (channels, hex) =>
 	[1, 3, 5, 7].every((index) => {
 		const expected =
-			index < hex.length ? parseInt(hex.slice(index, index + 2), 16) : 255
+			index < hex.length
+				? Number.parseInt(hex.slice(index, index + 2), 16)
+				: 255
 		return (
 			Math.abs(channels[(index - 1) / 2] * 255 - expected) <= 0.5 + 1e-9
 		)
@@ -333,7 +337,10 @@ const formula = (origin, bound, lighten) => {
 	}
 	const up = `max(1, ${bound} / max(y, 0.0001))`
 	const toWhite = `min(1, ${Math.round((1 - bound) * 1e4) / 1e4} / max(1 - y, 0.0001))`
-	return `color(from ${clip(`color(from ${origin} xyz-d65 calc(x * ${up}) calc(y * ${up}) calc(z * ${up}))`)} xyz-d65 calc(0.9505 - (0.9505 - x) * ${toWhite}) max(y, ${bound}) calc(1.0891 - (1.0891 - z) * ${toWhite}))`
+	const lifted = clip(
+		`color(from ${origin} xyz-d65 calc(x * ${up}) calc(y * ${up}) calc(z * ${up}))`,
+	)
+	return `color(from ${lifted} xyz-d65 calc(0.9505 - (0.9505 - x) * ${toWhite}) max(y, ${bound}) calc(1.0891 - (1.0891 - z) * ${toWhite}))`
 }
 const strongFormula = (name, factor) => {
 	const value = `color(from var(--color-${name}-readable) xyz-d65 calc(x * ${factor}) calc(y * ${factor}) calc(z * ${factor}))`
@@ -486,8 +493,8 @@ const readableTable = reference.map((hex) => {
 			lowest >= 4.5,
 			`a shade of ${hex} reads at ${lowest.toFixed(2)} on its tinted surface in the ${name} theme`,
 		)
-		row[name] =
-			`${text} ${after.toFixed(2)}${text === hex ? '' : ` (was ${before.toFixed(2)})`}`
+		const was = text === hex ? '' : ` (was ${before.toFixed(2)})`
+		row[name] = `${text} ${after.toFixed(2)}${was}`
 		row[`${name} strong`] = `${toHex(strong)} ${strongRatio.toFixed(2)}`
 		row[`${name} graphic`] = `${graphic} ${graphicRatio.toFixed(2)}`
 		row[`${name} tint`] = lowest.toFixed(2)
@@ -539,10 +546,8 @@ for (const [name, value] of Object.entries({
 	shadow: '#222',
 	backdrop: 'rgba(0, 0, 0, 0.3)',
 })) {
-	check(
-		explicit[`--color-${name}`] === value,
-		`explicit ${name} is ${explicit[`--color-${name}`]}`,
-	)
+	const emittedValue = explicit[`--color-${name}`]
+	check(emittedValue === value, `explicit ${name} is ${emittedValue}`)
 }
 
 const legacyProps = compile(
@@ -580,14 +585,16 @@ const legacyStep = (hex, bound, lighten, from = 0) => {
 	}
 	return 5
 }
-const legacyVar = (name, step, lighten) =>
-	step
-		? `var(--color-${name}-${lighten ? 'lighten' : 'darken'}-${step})`
+const legacyVar = (name, step, lighten) => {
+	const direction = lighten ? 'lighten' : 'darken'
+	return step
+		? `var(--color-${name}-${direction}-${step})`
 		: `var(--color-${name})`
-for (const [theme, emittedLegacy] of [
-	['light', legacy],
-	['dark', props(legacyDarkProps)],
-]) {
+}
+for (const [theme, emittedLegacy] of Object.entries({
+	light: legacy,
+	dark: props(legacyDarkProps),
+})) {
 	const { bound, surfaceBound, graphicBound, strong, lighten } = themes[theme]
 	for (const [name, hex] of Object.entries(palette)) {
 		const step = legacyStep(hex, bound, lighten)
@@ -720,7 +727,7 @@ check(
 check(
 	['bg', 'text', 'border', 'decoration'].every((prefix) =>
 		new RegExp(
-			`\\.${prefix}-brand-graphic\\)\\s*\\{\\s*[a-z-]+: var\\(--color-brand-graphic\\);`,
+			String.raw`\.${prefix}-brand-graphic\)\s*\{\s*[a-z-]+: var\(--color-brand-graphic\);`,
 		).test(utilities),
 	),
 	'a graphic role lacks a utility, or its utility repeats the expression',

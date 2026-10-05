@@ -116,7 +116,7 @@ Each one is the color itself while it reads at 4.6:1, and the color moved just f
   </div>
 </card-example>
 
-The ratio is kept on the neutral surfaces down to `--color-surface-2`, a hovered row or a pressed action, and on the tinted surfaces, in both cases against the hardest hue. The neutrals take their hue from `--color-tint` and a tinted surface from its color, and both can change at runtime, so the bound holds whatever color is set, at the price of a text a little further from the surface than the compiled colors alone would need. The bounds themselves are fixed at compile time: a `--color-surface` overridden at runtime does not move them, and a region that turns dark takes the `theme theme--dark` classes.
+The ratio is kept on the neutral surfaces down to `--color-surface-2`, a hovered row or a pressed action, and on the tinted surfaces, in both cases against the hardest hue. The neutrals take their hue from `--color-tint` and a tinted surface from its color, and both can change at runtime, so the bound holds whatever color is set, at the price of a text a little further from the surface than the compiled colors alone would need. The bounds themselves are fixed at compile time: a `--color-surface` overridden at runtime does not move them, and a region that turns dark takes the `theme theme--dark` classes. The roles assume an opaque color: with a translucent one, `#9365ff80`, the page shows through the text and the tinted surfaces, and no ratio holds any more, as the check below shows.
 
 ```scss
 @use '@volverjs/style/scss/context' with (

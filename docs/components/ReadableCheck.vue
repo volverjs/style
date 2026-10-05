@@ -46,6 +46,7 @@
 	const root = ref()
 	const results = ref({})
 	let context
+	// [r, g, b, alpha] of a CSS color, alpha from 0 to 1
 	const channels = (color) => {
 		context ??= document
 			.createElement('canvas')
@@ -54,10 +55,34 @@
 		context.fillStyle = '#000'
 		context.fillStyle = color
 		context.fillRect(0, 0, 1, 1)
-		return [...context.getImageData(0, 0, 1, 1).data].slice(0, 3)
+		const [r, g, b, alpha] = context.getImageData(0, 0, 1, 1).data
+		return [r, g, b, alpha / 255]
 	}
-	const luminance = (color) => {
-		const [r, g, b] = channels(color).map((value) => {
+	const over = (top, below) => [
+		...[0, 1, 2].map((i) => top[i] * top[3] + below[i] * (1 - top[3])),
+		1,
+	]
+	// a translucent color, a value with an alpha set here, is measured as it
+	// is painted: the background of the element over those of its ancestors,
+	// down to the first opaque one, and the text over that
+	const backdrop = (el) => {
+		const layers = []
+		for (let node = el; node; node = node.parentElement) {
+			const layer = channels(getComputedStyle(node).backgroundColor)
+			if (layer[3] > 0) {
+				layers.push(layer)
+			}
+			if (layer[3] === 1) {
+				break
+			}
+		}
+		return layers.reduceRight(
+			(below, layer) => over(layer, below),
+			[255, 255, 255, 1],
+		)
+	}
+	const luminance = (rgb) => {
+		const [r, g, b] = rgb.slice(0, 3).map((value) => {
 			const c = value / 255
 			return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4
 		})
@@ -69,9 +94,11 @@
 		}
 		const next = {}
 		for (const el of root.value.querySelectorAll('[data-pair]')) {
-			const style = getComputedStyle(el)
-			const text = luminance(style.color)
-			const background = luminance(style.backgroundColor)
+			const painted = backdrop(el)
+			const text = luminance(
+				over(channels(getComputedStyle(el).color), painted),
+			)
+			const background = luminance(painted)
 			next[el.dataset.pair] = {
 				ratio:
 					(Math.max(text, background) + 0.05) /
