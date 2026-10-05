@@ -298,6 +298,7 @@
     "useWindowFocus": true,
     "useWindowScroll": true,
     "useWindowSize": true,
+    "utilityColors": true,
     "watch": true,
     "watchArray": true,
     "watchAtMost": true,

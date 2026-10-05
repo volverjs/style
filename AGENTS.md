@@ -33,10 +33,11 @@ npm run stylelint      # stylelint over src/**/*.scss
 npm run lint           # eslint over the repository
 npm run build          # compiles dist/ and regenerates design-tokens.json
 npm run stylelint:dist # stylelint over the compiled dist/**/*.css
+npm run check:colors   # contrast tokens and tint derived neutrals, see scripts/checkColors.js
 ```
 
-There are no unit tests. Correctness is established by compiling and reading the emitted CSS,
-so the two checks below carry the weight tests would carry elsewhere.
+Apart from `check:colors`, there are no unit tests. Correctness is established by compiling and
+reading the emitted CSS, so the two checks below carry the weight tests would carry elsewhere.
 
 ### The compiled output is the test
 
@@ -112,6 +113,21 @@ outputs: that is what tells you which rules moved.
   a token on the block and still follow the line box of the summary, which is the element that
   consumes it. So a declaration whose value carries only relative units needs no `[brackets]`,
   while one that reads a token another element declares still does.
+- **The channel keywords of relative color syntax do not have the same type everywhere.**
+  Safari 17 reads `r g b` of `rgb()` and `color(srgb)`, `s l` of `hsl()` and the `alpha`
+  keyword as percentages, Chrome and Firefox as numbers, so `calc(l + 12)` is valid in the
+  latter and drops the whole value in Safari 17, and `calc(l + 12%)` the other way round. A
+  product with a plain number (`calc(l * 1.1)`, `calc(x * alpha)`) is valid in both, a sum is
+  not; the channels of `xyz-d65` and `oklch` are numbers everywhere. Measured in Chrome 154,
+  Firefox 155 and Safari 17.6. The fixed steps of word and surface are emitted twice for this,
+  the percent form under `@supports not (color: hsl(from red h s calc(l + 1)))`. A result
+  written outside sRGB is also not exact in Chrome: `oklch(1 0 0)` and the D65 white point in
+  `xyz-d65` resolve to `0.99987 1.00005 1.00007`, and text drawn with that differs from white
+  at its edges, while a round trip of an sRGB color through `xyz-d65` lands within a fraction
+  of an 8-bit step. The contrast and readable tokens in `_functions.scss` route around both.
+  The HSL channel branch, `$use-color-mix: false`, is the one for browsers without relative
+  color syntax: it emits none, a readable role there is its shade, the contrast texts and the
+  covers are chosen at compile time, and `check:colors` fails on any that slips through.
 - **An element has no modifiers.** A `modifier` key inside an `element` map is not emitted as
   `.block__element--modifier`: its declarations are flattened into the rule of the element
   itself, so they apply to every instance and win over the declarations before them. Express a
@@ -127,6 +143,17 @@ outputs: that is what tells you which rules moved.
 
 ## Conventions
 
+- **Text written in a color takes a readable role, never a shade.** `--color-brand-readable`
+  on the neutral surfaces down to `--color-surface-2`, `--color-brand-readable-strong` a step
+  further from them, and `--color-surface-brand-readable` on the tinted surface of the color.
+  The dark theme redeclares the roles, so a light rule needs no dark override for its text
+  color, while a shade written as text reads only by chance. A state that changes the
+  background changes the role with it: the hovered `vv-dropdown-action` sits on
+  `--color-surface-brand` and takes `--color-surface-brand-readable`. Text on a surface deeper
+  than `--color-surface-2` needs `$color-readable-depth` raised, not a darker shade. A color
+  that has to be seen but not read, the bar of `vv-progress`, a focus ring, a border that
+  shows a state, takes `--color-brand-graphic`, which keeps 3:1 on the same surfaces.
+  `check:colors` fails on a `var(--color-*)` that nothing declares.
 - **The first line offset is spelled out, not factored out.** Five declarations centre an icon
   on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`
   and the `self-first-line` utility, each as `calc((1lh - <the size>) / 2)`. The component maps

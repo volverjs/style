@@ -44,7 +44,13 @@ You can also overwrite utilities *CSS Custom Property* defined globally.
 }
 ```
 
-The shades of a color (`--color-brand-lighten-1`, `--color-brand-darken-2`, ...) are computed from it with relative color syntax, so they follow. With `$use-color-mix: false` in the [configuration](/style/get-started/configuration) the shades are computed from `--color-brand-hue`, `--color-brand-saturation` and `--color-brand-lightness` instead, which are the tokens to set then.
+The shades of a color (`--color-brand-lighten-1`, `--color-brand-darken-2`, ...) are computed from it with relative color syntax, so they follow. So do the text that goes on the color, `--color-brand-contrast`, and the shades written as text, `--color-brand-readable` and the like, while gray, word, surface, shadow and backdrop follow `--color-tint`, to set next to the brand. With `$use-color-mix: false` in the [configuration](/style/get-started/configuration) the shades are computed from `--color-brand-hue`, `--color-brand-saturation` and `--color-brand-lightness` instead, which are the tokens to set then.
+
+A computed token takes its value where it is declared, on `:root`, `:host` and every `.theme` element, which is why the overrides go on the same selectors. Set on any other element, a color reaches what reads it directly, but the shades, the contrast and readable tokens and the `--vv-*` component properties keep the values computed for the root: a light brand set on a plain `<div>` would keep the white text computed for the brand of the page. To recolor a region, give it the `theme` class as well.
+
+```html
+<section class="theme" style="--color-brand: #f5c400">…</section>
+```
 
 ### SCSS Variables
 You can override _SCSS Variables_ defined globally importing `scss/context` with `@use`. 

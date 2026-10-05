@@ -252,13 +252,13 @@ $vv-input-text: (
 					),
 				),
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				limit: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				icon-after: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 			),
 		),
@@ -273,13 +273,13 @@ $vv-input-text: (
 					),
 				),
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				limit: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				icon-after: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 			),
 		),

@@ -33,14 +33,14 @@ $vv-radio: (
 		valid: (
 			element: (
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 			),
 		),
 		invalid: (
 			element: (
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 			),
 		),

@@ -139,10 +139,10 @@ $vv-nav: (
 					white-space: nowrap,
 					state: (
 						hover: (
-							color: var(--color-brand),
+							color: var(--color-brand-readable),
 						),
 						current: (
-							color: var(--color-brand),
+							color: var(--color-brand-readable),
 							border-color: currentcolor,
 							background-color: color-mix(in srgb, var(--color-brand), transparent 95%),
 						),
