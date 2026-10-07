@@ -44,9 +44,20 @@
 			type: Array,
 			default: () => [],
 		},
+		/**
+		 * The classes declare the value itself rather than reading the custom
+		 * property: show the value even when the custom property column is on.
+		 */
+		literal: {
+			type: Boolean,
+			default: false,
+		},
 	})
 
 	const items = computed(() => {
+		if (props.property === 'colors') {
+			return utilityColors(icssExports.colors, props.prefix)
+		}
 		return icssExports[props.property] ?? []
 	})
 
@@ -110,7 +121,7 @@
 							<slot name="value" v-bind="{ value, key }">
 								{{
 									`${attribute || property}: ${
-										customProperty !== undefined
+										customProperty !== undefined && !literal
 											? `var(${getCustomProperty(key)})`
 											: value
 									};`

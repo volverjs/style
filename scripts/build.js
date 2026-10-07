@@ -16,6 +16,7 @@ packageJson.exports = {
 	'./scss/preflight': './src/_preflight.scss',
 	'./scss/themes/dark/context': './src/themes/dark/_context.scss',
 	'./scss/themes/dark/settings': './src/themes/dark/settings/_index.scss',
+	'./scss/presets/outlined-fields': './src/presets/_outlined-fields.scss',
 }
 
 // get scss files

@@ -38,6 +38,9 @@ $input: (
 		display: block,
 		font-size: var(--text-12),
 		gap: var(--spacing-8),
+		// Read by the hint of every field as `--input-hint-max-width`, which
+		// was never declared: the declaration was invalid and did nothing
+		max-width: 100%,
 		overflow: hidden,
 		text-overflow: ellipsis,
 		white-space: nowrap,
@@ -45,11 +48,17 @@ $input: (
 	placeholder: (
 		color: var(--color-word-4),
 	),
+	// The color of a valid or invalid field paints its bar and its border, in
+	// the graphic role of its palette color; its hint and its label take
+	// text-color, the readable role of the same color. Both follow the theme,
+	// and an override of the color needs one of the text as well.
 	valid: (
-		color: var(--color-success),
+		color: var(--color-success-graphic),
+		text-color: var(--color-success-readable),
 	),
 	invalid: (
-		color: var(--color-danger),
+		color: var(--color-danger-graphic),
+		text-color: var(--color-danger-readable),
 	),
 	floating: (
 		padding-top: calc(var(--input-spacing-top) + 0.55em),

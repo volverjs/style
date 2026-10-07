@@ -2,14 +2,14 @@
     <div class="flex flex-col mx-auto px-16 py-xl relative">
         <div class="flex flex-col flex-1 justify-center items-center text-center mb-48">
             <Logo alt="Volver" class="w-208 md:w-256 h-auto" width="256" height="256"></Logo>
-            <h1 class="vv-text vv-text--headline text-34 md:text-48 tracking-tighter md:text-60 font-black my-md">
+            <h1 class="vv-text vv-text--headline text-34 md:text-48 tracking-tighter lg:text-60 font-black my-md">
                 The Easy Way to Style
             </h1>
             <h2 class="vv-text text-balance text-18 md:text-24 text-word-3 mt-0 mb-lg">
-                An highly customizable CSS library with components and
+                A highly customizable CSS library with components and
                 utilities.
             </h2>
-            <copy-code class="mb-xl" code="npm i -s @volverjs/style"></copy-code>
+            <copy-code class="mb-xl" code="npm i @volverjs/style"></copy-code>
             <div class="vv-button-group">
                 <router-link :to="{
 								name: 'get-started-name',
@@ -25,7 +25,7 @@
                 </a>
             </div>
         </div>
-        <div class="grid grid-col-1 md:grid-cols-3 gap-xl w-10/12 md:w-8/12 xxl:w-6/12 mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-xl w-10/12 md:w-8/12 xxl:w-6/12 mx-auto">
             <div>
                 <span class="vv-text vv-text--headline vv-text--size-3">
                     👌 Zero Specificity
@@ -82,17 +82,17 @@
             <div class="sm:w-10/12 md:w-8/12 xxl:w-6/12 text-center mx-auto">
 
 ```css
+@import '@volverjs/style';
+
+/* (0,1,0) beats the (0,0,0) of the library, wherever it is loaded */
 .vv-button {
   background: green;
-  font-weight: light;
+  font-weight: 300;
 }
 
 .font-sans {
   font-family: "Open Sans", sans-serif;
 }
-
-/*  the library not override your style */
-@import '@volverjs/style';
 ```
   <router-link :to="{
                   name: 'get-started-name',
@@ -119,15 +119,13 @@
 /* theme */
 :root, :host, .theme {
   --font-sans: "Open Sans", sans-serif;
-  --color-brand-hue: 150deg;
-  --color-brand-saturation: 64%;
-  --color-brand-lightness: 40%;
+  --color-brand: hsl(150deg 64% 40%);
 }
 
 /* component specific */
 .vv-button--new-variant {
   --vv-button-background: green;
-  --vv-button-font-weight: light;
+  --vv-button-font-weight: 300;
 }
 ```
   <router-link :to="{
@@ -146,9 +144,9 @@
             😱 Utility-first + BEM
         </h1>
         <h2 class="vv-text vv-text--copy text-balance vv-text--size-3 text-word-3 text-center mb-xl">
-            You can style utility-first (with
+            You can style utility-first (with a
             <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer"
-                class="vv-button vv-button--link">tailwindcss</a>
+                class="vv-button vv-button--link">Tailwind CSS</a>-like
             syntax) and use components written with
             <a href="https://getbem.com" target="_blank" rel="noopener noreferrer"
                 class="vv-button vv-button--link">BEM</a>.

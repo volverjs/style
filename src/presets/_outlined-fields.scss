@@ -1,0 +1,346 @@
+@use 'sass:map';
+@use '../context' as ctx;
+
+// Outlined fields: every field of the library as a box on the plain surface,
+// a 1px border, a radius, and a ring on focus, instead of the default filled
+// box with a line underneath and a brand bar sliding in on focus. Opt in by
+// loading this module after the context and before the library emits
+// anything:
+
+//   @use '@volverjs/style/scss/context' with (...);
+//   @use '@volverjs/style/scss/presets/outlined-fields';
+//   @use '@volverjs/style/scss';
+
+// It reassigns `$input` and the maps of `vv-input-text`, `vv-textarea`,
+// `vv-select`, `vv-input-file` and `vv-field`, so it has to run before the
+// props and the components are emitted: loaded later it changes nothing. It
+// changes the look only, not the density: heights, paddings and font sizes
+// stay those of the library. The new tokens are `--input-border-color`,
+// `--input-border-color-hover`, `--input-border-radius`,
+// `--input-focus-color`, `--input-focus-ring`, `--input-invalid-ring` and
+// `--input-disabled-*`; the dark theme follows through the colours they read.
+
+ctx.$input: map.deep-merge(
+	ctx.$input,
+	(
+		// The filled pattern darkened the surface on hover and focus; the
+		// outlined one keeps it still and moves the border instead
+		background-color: var(--color-surface),
+		background-color-hover: var(--color-surface),
+		background-color-focus: var(--color-surface),
+		border-color: var(--color-surface-4),
+		border-color-hover: var(--color-surface-5),
+		border-radius: var(--rounded-lg),
+		// The ring is the only focus indication and has to hold on its own
+		focus-color: var(--color-brand-graphic),
+		focus-ring: 0 0 0 var(--spacing-3)
+			color-mix(in srgb, var(--input-focus-color) 16%, transparent),
+		invalid-ring: 0 0 0 var(--spacing-3)
+			color-mix(in srgb, var(--input-invalid-color) 14%, transparent),
+		disabled-background-color: var(--color-surface-1),
+		disabled-border-color: var(--color-surface-3),
+		disabled-color: var(--color-word-3),
+		transition: (
+			border-color var(--duration-150) var(--ease-out),
+			box-shadow var(--duration-150) var(--ease-out),
+		),
+		// The text keeps the padding of the field (the filled pattern pushed
+		// it down to make room inside the box) and the label rises to sit on
+		// the top border, half above it and half below
+		floating: (
+			padding-top: var(--input-spacing-top),
+			padding-bottom: var(--input-spacing-bottom),
+			label: (
+				translate: 0 -50%,
+			),
+		),
+	)
+);
+
+// The box around the control: the two pseudo elements of the filled pattern
+// are hidden and every state moves to the border and the ring
+$-wrapper: (
+	border: var(--spacing-px) solid var(--input-border-color),
+	border-radius: var(--input-border-radius),
+	transition: var(--input-transition),
+	pseudo: (
+		before: (
+			display: none,
+		),
+		after: (
+			display: none,
+		),
+	),
+	state: (
+		hover: (
+			border-color: var(--input-border-color-hover),
+		),
+		focus-within: (
+			border-color: var(--input-focus-color),
+			box-shadow: var(--input-focus-ring),
+		),
+	),
+);
+$-wrapper-invalid: (
+	border-color: var(--input-invalid-color),
+	state: (
+		hover: (
+			border-color: var(--input-invalid-color),
+		),
+		focus-within: (
+			border-color: var(--input-invalid-color),
+			box-shadow: var(--input-invalid-ring),
+		),
+	),
+);
+
+// Success has no ring of its own: the border says it
+$-wrapper-valid: (
+	border-color: var(--input-valid-color),
+	state: (
+		hover: (
+			border-color: var(--input-valid-color),
+		),
+		focus-within: (
+			border-color: var(--input-valid-color),
+		),
+	),
+);
+
+// The indeterminate bar of `loading` is the `::after` of the filled pattern,
+// shown again and pulled in by the radius so it runs along the straight part
+// of the bottom edge
+$-wrapper-loading: (
+	pseudo: (
+		after: (
+			display: block,
+			inset: auto var(--input-border-radius) 0,
+		),
+	),
+);
+
+// A quiet box that does not react. The label stays readable at full
+// opacity: the box says it is disabled by itself. The dimmed text goes on the
+// control of each field (`$-disabled-control` below), not through a token on
+// the box: the control reads its colour from a property resolved at the root.
+$-disabled: (
+	opacity: var(--opacity-100),
+	// The floating label paints the field surface behind itself
+	--input-background-color: var(--input-disabled-background-color),
+	element: (
+		wrapper: (
+			background-color: var(--input-disabled-background-color),
+			border-color: var(--input-disabled-border-color),
+			state: (
+				hover: (
+					border-color: var(--input-disabled-border-color),
+				),
+				focus-within: (
+					border-color: var(--input-disabled-border-color),
+					box-shadow: none,
+				),
+			),
+		),
+	),
+);
+
+// The dimmed text of a disabled field, on its control element
+@function -disabled-control($element) {
+	@return (
+		state: (
+			disabled: (
+				element: (
+					#{$element}: (
+						color: var(--input-disabled-color),
+					),
+				),
+			),
+		),
+	);
+}
+
+// Read only: looks like rest, ignores hover and focus
+$-readonly: (
+	element: (
+		wrapper: (
+			state: (
+				hover: (
+					border-color: var(--input-border-color),
+				),
+				focus-within: (
+					border-color: var(--input-border-color),
+					box-shadow: none,
+				),
+			),
+		),
+	),
+);
+
+// The floated label shrinks to its own line, sits on the top border with the
+// field surface behind it and a little air on each side: the border is
+// interrupted by the label, the notch of an outlined field
+$-floating-label: (
+	top: 0,
+	min-height: 0,
+	line-height: var(--leading-normal),
+	padding-inline: var(--spacing-4),
+	margin-left: calc(-1 * var(--spacing-4)),
+	// Plain: the disabled state sets `--input-background-color` on the
+	// block, which a generated property, resolved at the root, would miss
+	[background-color]: var(--input-background-color),
+);
+$-floating: (
+	state: (
+		focus-within: (
+			element: (
+				label: $-floating-label,
+			),
+		),
+		dirty: (
+			element: (
+				label: $-floating-label,
+			),
+		),
+	),
+);
+
+// The select spells "dirty" as a modifier rather than a state
+$-floating-select: (
+	state: (
+		focus-within: (
+			element: (
+				label: $-floating-label,
+			),
+		),
+	),
+	modifier: (
+		dirty: (
+			element: (
+				label: $-floating-label,
+			),
+		),
+	),
+);
+
+// What every field takes
+$-field: (
+	element: (
+		wrapper: $-wrapper,
+	),
+	modifier: (
+		valid: (
+			element: (
+				wrapper: $-wrapper-valid,
+			),
+		),
+		invalid: (
+			element: (
+				wrapper: $-wrapper-invalid,
+			),
+		),
+		loading: (
+			element: (
+				wrapper: $-wrapper-loading,
+			),
+		),
+	),
+	state: (
+		disabled: $-disabled,
+	),
+);
+
+// A text input and a textarea: the field, the floating label, read only
+$-text-like: map.deep-merge(
+	map.deep-merge($-field, -disabled-control('input')),
+	(
+		modifier: (
+			floating: $-floating,
+		),
+		state: (
+			readonly: $-readonly,
+		),
+	)
+);
+
+ctx.$vv-input-text: map.deep-merge(ctx.$vv-input-text, $-text-like);
+ctx.$vv-textarea: map.deep-merge(ctx.$vv-textarea, $-text-like);
+
+ctx.$vv-field: map.deep-merge(
+	ctx.$vv-field,
+	map.deep-merge(
+		map.deep-merge($-field, -disabled-control('control')),
+		(
+			state: (
+				readonly: $-readonly,
+			),
+		)
+	)
+);
+
+// The dashed border of the drop area is its `::after` at `inset: 0`, so the
+// radius goes on both
+ctx.$vv-input-file: map.deep-merge(
+	ctx.$vv-input-file,
+	map.deep-merge(
+		$-field,
+		(
+			element: (
+				drop-area: (
+					border-radius: var(--input-border-radius),
+					pseudo: (
+						after: (
+							// Plain: `inherit` written into a custom
+							// property would apply to the property itself
+							[border-radius]: inherit,
+						),
+					),
+				),
+			),
+		)
+	)
+);
+
+// The focus of a combobox sits on its dropdown, so the open state carries
+// the ring as well, and read only freezes the control with the disabled
+// attribute: the box is told it is at rest, not disabled
+ctx.$vv-select: map.deep-merge(
+	ctx.$vv-select,
+	map.deep-merge(
+		map.deep-merge($-field, -disabled-control('input')),
+		(
+			element: (
+				wrapper: (
+					state: (
+						open: (
+							border-color: var(--input-focus-color),
+							box-shadow: var(--input-focus-ring),
+						),
+					),
+				),
+			),
+			modifier: (
+				floating: $-floating-select,
+				readonly: (
+					element: (
+						input: (
+							color: var(--color-word-1),
+						),
+						wrapper: (
+							background-color: var(--input-background-color),
+							border-color: var(--input-border-color),
+							state: (
+								hover: (
+									border-color: var(--input-border-color),
+								),
+								focus-within: (
+									border-color: var(--input-border-color),
+									box-shadow: none,
+								),
+							),
+						),
+					),
+				),
+			),
+		)
+	)
+);

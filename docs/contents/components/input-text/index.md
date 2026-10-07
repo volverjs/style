@@ -1,11 +1,11 @@
 ---
 title: Input Text
-description: Text Fields allow users to input custom text entries with a keyboard. Various options can be shown with the field to communicate the input requirements.
+description: Input Text is a single-line text field, with a label, a hint and the states of a form.
 uiVue: true
 ---
 
 ### States
-The `input` state controls the style of the component. 
+`disabled` and `readonly` on the `<input>` style the whole field through `:has()`, no modifier needed.
 
 Use `vv-input-text--invalid` to show an invalid state and `vv-input-text--valid` to show a valid state. Use `vv-input-text--loading` to show a loading state.
 
@@ -17,7 +17,7 @@ Add a `vv-input-text__limit` element to show the limit of characters.
 <code-editor resource-folder="input-text" resource-name="limit" class="mb-lg"></code-editor>
 
 ### Floating label
-Use `vv-input-text--floating` modifier to show the label inside the input.
+Use `vv-input-text--floating` modifier to show the label inside the input. The label rises on focus and when the input has a value, which the field reads from `:placeholder-shown`, so the input needs a placeholder. Date, time and color inputs show no placeholder: add `vv-input-text--dirty` to raise the label for good.
 
 <code-editor resource-folder="input-text" resource-name="floating-label" class="mb-lg"></code-editor>
 
@@ -27,7 +27,7 @@ Use `vv-input-text--icon-before` modifier to show an icon before the input and `
 <code-editor resource-folder="input-text" resource-name="icons" class="mb-lg"></code-editor>
 
 ### Number
-You can customize the `input[type="number"]` with increment and decrement buttons.
+You can customize the `input[type="number"]` with a `vv-input-text__unit` and a `vv-input-text__actions-group` of increment and decrement buttons, each a `vv-input-text__action` with `__action-chevron` (and `__action-chevron-up` for the one that steps up) and an `aria-label`.
 
 <code-editor resource-folder="input-text" resource-name="number" class="mb-lg"></code-editor>
 

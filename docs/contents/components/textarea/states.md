@@ -51,8 +51,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         input above.</small>
 </div>
 
-<div class="vv-textarea
-            vv-textarea--disabled">
+<div class="vv-textarea">
     <label for="textarea-disabled">Disabled Textarea</label>
     <div class="vv-textarea__wrapper">
         <textarea id="textarea-disabled" 
@@ -66,7 +65,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
 </div>
 
 <div class="vv-textarea
-            vv-textarea--readonly
             vv-textarea--dirty">
     <label for="textarea-readonly">Readonly Textarea</label>
     <div class="vv-textarea__wrapper">
@@ -74,10 +72,10 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
                   name="textarea-readonly" 
                   placeholder="Placeholder text" 
                   aria-describedby="textarea-readonly-hint" 
-                  readonly="readonly" 
-                  value="Lorem ipsum dolor sit amet" 
-                  tabindex="-1">Lorem ipsum dolor sit amet</textarea>
+                  readonly="readonly">Lorem ipsum dolor sit amet</textarea>
     </div>
+    <small id="textarea-readonly-hint" class="vv-textarea__hint">This value
+        cannot be changed.</small>
 </div>
 
 <div class="vv-textarea 

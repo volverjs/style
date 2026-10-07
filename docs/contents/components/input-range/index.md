@@ -1,6 +1,6 @@
 ---
 title: Input Range
-description: Range fields let users pick a numeric value between known bounds, with the value they picked shown next to the slider.
+description: Input Range is a slider that picks a number between known bounds, with the value shown next to it.
 uiVue: true
 ---
 
@@ -15,8 +15,6 @@ Add a `vv-input-range__value` element next to the slider to show the current
 value, and a `vv-input-range__unit` inside it for the unit of measure.
 
 ### States
-The `input` state controls the style of the component.
-
 Use `vv-input-range--invalid` to show an invalid state and
 `vv-input-range--valid` to show a valid state. The disabled state needs no
 class: `:has(input[disabled])` picks it up from the attribute, which is why the

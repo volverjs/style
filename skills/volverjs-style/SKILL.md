@@ -29,7 +29,7 @@ not in this library. Work from the reference files, not from memory.
    - [utilities.md](references/utilities.md): every utility class with its exact value
      set and whether it has responsive variants.
    - [components.md](references/components.md): canonical markup, elements, modifiers and
-     states for all 32 components, plus how states are expressed.
+     states for all 55 components, plus how states are expressed.
    - [tokens.md](references/tokens.md): custom properties, CSS-only overrides, dark theme.
    - [scss.md](references/scss.md): import paths, context configuration, extending and
      creating components, mixins, cascade layers.
@@ -65,7 +65,7 @@ These are the mistakes that recur. Each row is verified against the compiled CSS
 | `rounded-2xl`, `rounded-3xl` | `rounded-xxl`, `rounded-xxxl` (shadows do use `shadow-2xl`) |
 | `text-xl`, `text-4xl`, `text-40` | Dynamic `text-xs`…`text-xl` (responsive by design) or static `text-12 14 16 18 20 22 24 26 28 30 32 34 36 48 60 72 96 128`. No 40, 44, 56, 64, 80 |
 | `font-italic`, `text-uppercase`, `tracking-loose` | Bare `italic` `non-italic` `uppercase` `lowercase` `capitalize`; `tracking-tighter/tight/normal/wide/wider/widest` |
-| `text-blue-500`, `bg-gray-100` | Semantic palette: `text-brand` `text-word` `text-word-2` `bg-surface-1` `border-surface-3` `bg-surface-brand` `text-danger-darken-1` |
+| `text-blue-500`, `bg-gray-100` | Semantic palette: `text-word` `text-word-2` `bg-surface-1` `border-surface-3` `bg-surface-brand`, and for text in a color a role, `text-brand-readable` `text-danger-readable`, never a shade |
 | `space-y-4`, `divide-y` | Not available: use `flex flex-col gap-md` |
 | `w-1/2` | Exists, written literally: `w-1/2`, `col-span-6` |
 | `border-none` to remove a border | `border-0` (`border-none` is `border-style: none`) |
@@ -74,7 +74,18 @@ These are the mistakes that recur. Each row is verified against the compiled CSS
 Color semantics: `word` is text (`word-1`…`word-5` progressively fainter), `surface` is
 background (`surface-1`…`surface-5` progressively deeper), `surface-{brand,success,…}`
 are tinted backgrounds for badges and callouts, `alpha-*` are translucent overlays.
-Every palette color has `-lighten-1..5` and `-darken-1..5`.
+Every palette color has `-lighten-1..5` and `-darken-1..5`, which are fills, plus roles
+that stay legible whatever color is set at runtime, in both themes:
+
+| What you are painting | Token, for brand (same for accent, success, danger, info, warning) |
+|---|---|
+| Text on the page, down to `surface-2` | `text-brand-readable`; a step further, a pressed link: `text-brand-readable-strong` |
+| Text on a tinted surface | `bg-surface-brand text-surface-brand-readable` |
+| Text on a fill | `bg-brand text-brand-contrast`, `bg-brand-darken-1 text-brand-darken-1-contrast` |
+| A bar, a focus ring, a border that shows a state | `bg-brand-graphic`, `border-brand-graphic` (3:1, not text) |
+
+A shade written as text (`text-brand`, `text-danger-darken-1`) reads only by chance: with a
+light tenant brand, or in the dark theme, it can fall to 1.5:1.
 
 ## Layout recipes (verified)
 
@@ -106,7 +117,11 @@ Available: `vv-button` `vv-button-group` `vv-input-text` `vv-textarea` `vv-selec
 `vv-input-range` `vv-card` `vv-dialog` `vv-alert` `vv-alert-group` `vv-dropdown`
 `vv-dropdown-action` `vv-dropdown-option` `vv-dropdown-optgroup` `vv-nav` `vv-tab`
 `vv-accordion` `vv-accordion-group` `vv-table` `vv-badge` `vv-avatar` `vv-avatar-group`
-`vv-tooltip` `vv-progress` `vv-skeleton` `vv-breadcrumb` `vv-text`.
+`vv-tooltip` `vv-progress` `vv-skeleton` `vv-spinner` `vv-breadcrumb` `vv-text`
+`vv-empty` `vv-separator` `vv-item` `vv-item-group` `vv-field` `vv-prose` `vv-pagination`
+`vv-message` `vv-bubble` `vv-bubble-group` `vv-message-scroller` `vv-attachment`
+`vv-attachment-group` `vv-marker` `vv-questionnaire` `vv-kbd` `vv-kbd-group`
+`vv-popover` `vv-command` `vv-input-otp` `vv-sidebar` `vv-calendar`.
 
 Three facts shape the markup; components.md has the full structure of each component.
 
@@ -189,9 +204,14 @@ with the block: `--vv-button-background`, `--vv-button-state-hover-background`,
 `--vv-button-modifier-primary-background`. Fields share `--input-*`.
 
 ```css
-:root { --color-brand: #45cb85; --rounded: 0.5rem; --input-min-height: var(--spacing-44); }
-.vv-button--success { --vv-button-background: var(--color-success); --vv-button-border-color: var(--color-success); }
+:root, :host, .theme { --color-brand: #45cb85; --color-tint: #45cb85; --rounded: 0.5rem; }
 ```
+
+`--color-tint` gives the brand hue to gray, word and surface too; leave it out to keep the
+neutrals. The readable, contrast and graphic roles follow the new brand by themselves. A
+new button variant goes through the SCSS map (see scss.md) or, in plain CSS, names the
+hover state itself, since a class beats the zero specificity of the library's state
+rules: the recipe is in tokens.md.
 
 Dark theme is a separate stylesheet (`@import '@volverjs/style/themes/dark'` or
 `@use '@volverjs/style/scss/themes/dark'`) loaded after the base. With it loaded the page
@@ -234,3 +254,5 @@ docs use `useDark({ attribute: 'class', valueDark: 'theme theme--dark', valueLig
   readonly is the modifier. Hints are linked with `aria-describedby`, labels have `for`.
 - Dialogs have the `__wrapper` article; range inputs have `--input-range-progress`.
 - Colors are tokens, not hex, so the dark theme keeps working.
+- Text in a color is a `-readable` role, text on a fill its `-contrast`, a bar or a ring
+  its `-graphic`: never a shade, which stops reading with a light brand or in the dark.

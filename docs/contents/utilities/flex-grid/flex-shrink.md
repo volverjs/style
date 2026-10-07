@@ -6,7 +6,7 @@ Flex shrink utilities are used to control how flex items shrink. They can be use
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
   <table class="vv-table vv-table--inline-spacing">
-    <thead class="sticky z-sticky top-0">
+    <thead class="sticky z-sticky top-0 bg-surface-1">
       <tr>
         <th>
           Class
@@ -19,7 +19,7 @@ Flex shrink utilities are used to control how flex items shrink. They can be use
     <tbody class="align-baseline">
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          shrink
+          .shrink
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           flex-shrink: 1;
@@ -27,7 +27,7 @@ Flex shrink utilities are used to control how flex items shrink. They can be use
       </tr>
       <tr>
         <td translate="no" class="font-mono text-accent whitespace-nowrap">
-          shrink-0
+          .shrink-0
         </td>
         <td translate="no" class="font-mono text-info whitespace-nowrap">
           flex-shrink: 0;

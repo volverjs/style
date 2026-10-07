@@ -1,0 +1,68 @@
+// A list of `vv-item` rows, with an optional header on top (the trail of a
+// picker that walks a tree: a breadcrumb, or one button per level). It sets
+// the four surfaces its rows read, so a modifier of the group restyles every
+// row without touching them: the hairline between two rows, the hover, the
+// chosen row and the current one.
+$vv-item-group: (
+	--item-divider: var(--color-surface-2),
+	--item-hover: var(--color-surface-1),
+	--item-chosen: var(--color-surface-1),
+	--item-current: var(--color-surface-2),
+	display: flex,
+	flex-direction: column,
+	min-height: 0,
+	font-size: var(--text-14),
+	element: (
+		header: (
+			display: flex,
+			align-items: center,
+			gap: var(--spacing-4),
+			min-width: 0,
+			padding: var(--spacing-8) var(--spacing-12),
+			border-bottom: var(--border) solid var(--color-surface-4),
+		),
+		// Bounded, so the footer of a dialog stays in view: the rows scroll
+		// inside
+		list: (
+			display: flex,
+			flex-direction: column,
+			max-height: 20rem,
+			margin: 0,
+			padding: 0,
+			overflow-y: auto,
+			list-style: none,
+		),
+	),
+	modifier: (
+		// The hairline and the radius of the other frames of the library.
+		// Leave it off when the list already sits in a frame: a card, a panel.
+		framed: (
+			overflow: hidden,
+			border: var(--border) solid var(--color-surface-4),
+			border-radius: var(--rounded-lg),
+		),
+		// The list is the whole panel: it takes the height it is given and
+		// scrolls there. Rows the width of a page need a hairline one step
+		// deeper, or the line between two of them disappears into the ground.
+		fill: (
+			--item-divider: var(--color-surface-3),
+			flex: 1,
+			element: (
+				list: (
+					flex: 1,
+					min-height: 0,
+					max-height: none,
+				),
+			),
+		),
+		// Drawn on a ground that is already `surface-1`: hover and chosen step
+		// up, and the current row goes the other way, to the plain surface,
+		// so it is the one light row on a grey panel
+		raised: (
+			--item-divider: var(--color-surface-3),
+			--item-hover: var(--color-surface-2),
+			--item-chosen: var(--color-surface-2),
+			--item-current: var(--color-surface),
+		),
+	),
+) !default;

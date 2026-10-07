@@ -2,7 +2,7 @@
 index: 1
 label: Customization
 title: Make your own Style
-description: 'Volver Style is made to be hightly configurable and customizable. You can use both CSS custom properties or SCSS variables maps.'
+description: 'Volver Style is made to be highly configurable and customizable, with CSS custom properties or SCSS maps.'
 stackblitzExample: https://stackblitz.com/edit/volverjs-customization?file=src%2Fstyle.scss
 ---
 
@@ -12,17 +12,17 @@ The style of each class can be overwritten easily without `!important` or comple
 
 
 ```css
+@import '@volverjs/style';
+
+/* (0,1,0) beats the (0,0,0) of the library, wherever it is loaded */
 .vv-button {
   background: green;
-  font-weight: light;
+  font-weight: 300;
 }
 
 .font-sans {
   font-family: "Open Sans", sans-serif;
 }
-
-// the library not override your style
-@import '@volverjs/style';
 ```
 
 ### CSS Custom Properties
@@ -31,7 +31,7 @@ By default every component attribute is defined by a *CSS Custom Property* so it
 ```css
 .vv-button--new-variant {
   --vv-button-background: green;
-  --vv-button-font-weight: light;
+  --vv-button-font-weight: 300;
 }
 ```
 
@@ -40,10 +40,16 @@ You can also overwrite utilities *CSS Custom Property* defined globally.
 ```css
 :root, :host, .theme {
   --font-sans: "Open Sans", sans-serif;
-  --color-brand-hue: 150deg;
-  --color-brand-saturation: 64%;
-  --color-brand-lightness: 40%;
+  --color-brand: hsl(150deg 64% 40%);
 }
+```
+
+The shades of a color (`--color-brand-lighten-1`, `--color-brand-darken-2`, ...) are computed from it with relative color syntax, so they follow. So do the text that goes on the color, `--color-brand-contrast`, and the shades written as text, `--color-brand-readable` and the like, while gray, word, surface, shadow and backdrop follow `--color-tint`, to set next to the brand. With `$use-color-mix: false` in the [configuration](/style/get-started/configuration) the shades are computed from `--color-brand-hue`, `--color-brand-saturation` and `--color-brand-lightness` instead, which are the tokens to set then.
+
+A computed token takes its value where it is declared, on `:root`, `:host` and every `.theme` element, which is why the overrides go on the same selectors. Set on any other element, a color reaches what reads it directly, but the shades, the contrast and readable tokens and the `--vv-*` component properties keep the values computed for the root: a light brand set on a plain `<div>` would keep the white text computed for the brand of the page. To recolor a region, give it the `theme` class as well.
+
+```html
+<section class="theme" style="--color-brand: #f5c400">…</section>
 ```
 
 ### SCSS Variables
@@ -54,7 +60,7 @@ You can override _SCSS Variables_ defined globally importing `scss/context` with
   // custom color brand 
   $color-brand: #45cb85,
   //custom font sans
-  $font-family-sans: 'Open Sans', sans-serif,
+  $font-family-sans: '"Open Sans", sans-serif',
 );
 @use '@volverjs/style/scss';
 
@@ -74,7 +80,7 @@ All components are defined with [BEM](https://getbem.com/) methodology. The styl
 
 ```scss
 $vv-button: (
-  background: blue
+  background: blue,
   element: (
     icon: (
       font-size: 1.2rem
@@ -99,11 +105,13 @@ $vv-button: (
 }
 ```
 
+The output above and below is simplified: the generator wraps every selector in `:where()` and, with the default `$use-custom-props-for-components: true`, routes each value through a `--vv-button-*` custom property.
+
 All the properties in the map root define the *block* class. 
 `element` sub-map contains the elements specifications and `modifier` the component variants.
 
 #### Alias
-Each `element` can have an `_alias`, a selector with the same properites. 
+Each `element` can have an `_alias`, a selector with the same properties. 
 
 ```scss
 $vv-button: (
@@ -125,13 +133,13 @@ $vv-button: (
 
 #### State
 
-States (`:hover`, `:active`, `:disabled`, ecc.) can be defined with `state` keyword.
+States (`:hover`, `:active`, `:disabled`, etc.) can be defined with `state` keyword.
 
 ```scss
 $vv-button: (
   state: (
     hover: (
-      text-decoration: undeline
+      text-decoration: underline
     )
   )
 );
@@ -139,8 +147,8 @@ $vv-button: (
 /* will generate */
 .vv-button--hover, 
 .vv-button.hover, 
-.vv-button:hover { 
-  text-decoration: undeline;
+.vv-button:not([disabled]):hover { 
+  text-decoration: underline;
 }
 ```
 
@@ -183,7 +191,7 @@ $vv-button: (
 /* will generate */
 .vv-button--danger.vv-button--hover, 
 .vv-button--danger.hover, 
-.vv-button--danger:hover { 
+.vv-button--danger:not([disabled]):hover { 
   background: red;
 }
 ```
@@ -207,7 +215,7 @@ $vv-button: (
   content: '';
   width: 1rem;
   height: 1rem;
-  backgound: red;
+  background: red;
 } 
 ```
 
@@ -249,7 +257,7 @@ Default maps can be easily overridden without useless code generation.
 
 // override vv-button map
 context.$vv-button: map.deep-merge(
-  contex.$vv-button,
+  context.$vv-button,
   (
     // change button background
     background: blue,
@@ -270,7 +278,7 @@ Also the utilities classes can be modified with the same approach.
 
 // override aspect-ratio map
 context.$aspect-ratio: map.deep-merge(
-  contex.$aspect-ratio,
+  context.$aspect-ratio,
   (
     // add cinemascope aspect ratio
     cinemascope: '2.35/1',

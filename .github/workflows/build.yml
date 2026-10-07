@@ -36,6 +36,9 @@ jobs:
             - name: Validate compiled CSS
               run: pnpm stylelint:dist
 
+            - name: Check color tokens
+              run: pnpm check:colors
+
             # `pnpm version` refuses to run on an unclean working tree, and the
             # tree is expected to be unclean at this point: the build regenerates
             # design-tokens.json, which is a tracked file. `npm pkg set` only

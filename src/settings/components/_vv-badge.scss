@@ -4,7 +4,7 @@ $vv-badge: (
 	border-width: 0,
 	background-color: var(--color-brand),
 	border-color: var(--color-brand),
-	color: var(--color-white),
+	color: var(--color-brand-contrast),
 	border-style: solid,
 	border-radius: 0.5em,
 	min-height: 2em,
@@ -34,7 +34,7 @@ $vv-badge: (
 		),
 		focus-within: (
 			outline-offset: var(--spacing-4),
-			outline: var(--spacing-px) solid currentcolor,
+			outline: var(--spacing-px) solid var(--color-brand-graphic),
 		),
 	),
 	element: (
@@ -96,42 +96,75 @@ $vv-badge: (
 		),
 		danger: (
 			background-color: var(--color-danger),
+			color: var(--color-danger-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-danger-graphic),
+				),
+			),
 		),
 		success: (
 			background-color: var(--color-success),
+			color: var(--color-success-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-success-graphic),
+				),
+			),
 		),
+		// Filled with the darkest shade, so the text is the contrast of that
+		// shade and not of the base color
 		warning: (
 			background-color: var(--color-warning-darken-5),
+			color: var(--color-warning-darken-5-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-warning-graphic),
+				),
+			),
 		),
 		info: (
 			background-color: var(--color-info-darken-5),
+			color: var(--color-info-darken-5-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-info-graphic),
+				),
+			),
 		),
 		accent: (
 			background-color: var(--color-accent),
+			color: var(--color-accent-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-accent-graphic),
+				),
+			),
 		),
 		gray: (
 			background-color: var(--color-gray-darken-1),
+			color: var(--color-white),
 		),
 		outline: (
 			border-width: var(--border),
-			color: var(--color-brand),
+			color: var(--color-brand-readable),
 			border-color: currentcolor,
 			background-color: transparent,
 			modifier: (
 				danger: (
-					color: var(--color-danger),
+					color: var(--color-danger-readable),
 				),
 				success: (
-					color: var(--color-success),
+					color: var(--color-success-readable),
 				),
 				warning: (
-					color: var(--color-warning-darken-5),
+					color: var(--color-warning-readable),
 				),
 				info: (
-					color: var(--color-info-darken-5),
+					color: var(--color-info-readable),
 				),
 				accent: (
-					color: var(--color-accent),
+					color: var(--color-accent-readable),
 				),
 				gray: (
 					color: var(--color-gray-darken-1),
@@ -140,22 +173,22 @@ $vv-badge: (
 		),
 		ghost: (
 			background-color: transparent,
-			color: var(--color-brand),
+			color: var(--color-brand-readable),
 			modifier: (
 				danger: (
-					color: var(--color-danger),
+					color: var(--color-danger-readable),
 				),
 				success: (
-					color: var(--color-success),
+					color: var(--color-success-readable),
 				),
 				warning: (
-					color: var(--color-warning-darken-5),
+					color: var(--color-warning-readable),
 				),
 				info: (
-					color: var(--color-info-darken-5),
+					color: var(--color-info-readable),
 				),
 				accent: (
-					color: var(--color-accent),
+					color: var(--color-accent-readable),
 				),
 				gray: (
 					color: var(--color-gray-darken-1),

@@ -3,27 +3,27 @@ title: Rounded
 wrapperClass: flex flex-wrap gap-4 items-center justify-center
 ---
 
-<div role="status" class="vv-badge vv-badge--rounded">
+<div class="vv-badge vv-badge--rounded">
     99+
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--gray">
+<div class="vv-badge vv-badge--rounded vv-badge--gray">
     42
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--danger">
+<div class="vv-badge vv-badge--rounded vv-badge--danger">
     8
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--success">
+<div class="vv-badge vv-badge--rounded vv-badge--success">
     <IconifyIcon icon="akar-icons:check" />
     NEW
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--warning">
+<div class="vv-badge vv-badge--rounded vv-badge--warning">
     <IconifyIcon icon="akar-icons:pencil" />
     DRAFT
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--info">
+<div class="vv-badge vv-badge--rounded vv-badge--info">
     <IconifyIcon icon="akar-icons:info" />
     INFO
 </div>
-<div role="status" class="vv-badge vv-badge--rounded vv-badge--accent">
+<div class="vv-badge vv-badge--rounded vv-badge--accent">
     <IconifyIcon icon="akar-icons:octocat-fill" />
 </div>

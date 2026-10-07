@@ -2,6 +2,12 @@
 
 @mixin theme-dark-colors {
 	@include spread-map-into-props($dark-colors, 'color');
+
+	// Safari 17 reads `l` as a percentage: the fixed steps of word and
+	// surface, calc(l - 12), resolve there only written in percent
+	@supports not (color: hsl(from red h s calc(l + 1))) {
+		@include spread-map-into-props(fixed-steps-in-percent($dark-colors), 'color');
+	}
 }
 
 @include layer(themes, $use-css-layers, $layer-prefix) {

@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-questionnaire);
+$component-map: $vv-questionnaire;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// A title followed by its description sits close over it, and the space
+// before the choices is the description's. The map cannot say "a title with a
+// description after it", and the title is the `legend` of a choice, so it has
+// to be told from the sibling it has, not from a wrapper.
+@include wrap-with-where(
+	$selector: '#{$component-selector}__title:has(+ #{$component-selector}__description)',
+	$enabled: $zero-specificity-for-components
+) {
+	margin-block-end: var(--spacing-4);
+}
+
+}

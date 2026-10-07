@@ -1,0 +1,135 @@
+// A file or an image attached to a message or waiting in a composer: a tile
+// with its `media` (the icon of the kind of file, a thumbnail), a `content`
+// column with a `title` and a `description` (the kind, the size), `actions`
+// such as open or download, and an optional `remove` button pinned to the
+// top corner on the inline end, over the edge of the tile.
+// `image` shows a picture whole, with the caption under it; `invalid` is an
+// upload that failed; `loading` dims the media while a `vv-spinner` inside it
+// turns. A row of them is a `vv-attachment-group`.
+$vv-attachment: (
+	position: relative,
+	display: flex,
+	align-items: center,
+	gap: var(--spacing-8),
+	max-width: 17.5rem,
+	padding: var(--spacing-8),
+	border: var(--border) solid var(--color-surface-3),
+	border-radius: var(--rounded-lg),
+	background-color: var(--color-surface-1),
+	color: var(--color-word-2),
+	font-size: var(--text-12),
+	line-height: var(--leading-snug),
+	element: (
+		media: (
+			display: grid,
+			flex-shrink: 0,
+			place-items: center,
+			inline-size: var(--spacing-36),
+			block-size: var(--spacing-36),
+			overflow: hidden,
+			border-radius: var(--rounded-md),
+			background-color: var(--color-surface-2),
+			color: var(--color-word-3),
+			font-size: var(--text-16),
+		),
+		// A thumbnail fills the media
+		picture: (
+			_alias: 'img',
+			inline-size: 100%,
+			block-size: 100%,
+			object-fit: cover,
+		),
+		content: (
+			display: flex,
+			flex: 1,
+			flex-direction: column,
+			min-width: 0,
+		),
+		title: (
+			overflow: hidden,
+			color: var(--color-word-1),
+			font-weight: var(--font-medium),
+			text-overflow: ellipsis,
+			white-space: nowrap,
+		),
+		description: (
+			overflow: hidden,
+			color: var(--color-word-4),
+			font-variant-numeric: tabular-nums,
+			text-overflow: ellipsis,
+			white-space: nowrap,
+		),
+		actions: (
+			display: flex,
+			flex-shrink: 0,
+			align-items: center,
+			gap: var(--spacing-2),
+		),
+		// Half outside the tile on both axes, mirrored in a right to left
+		// page through `--direction`, read by a plain declaration
+		remove: (
+			position: absolute,
+			inset-block-start: 0,
+			inset-inline-end: 0,
+			display: grid,
+			place-items: center,
+			inline-size: var(--spacing-24),
+			block-size: var(--spacing-24),
+			border: var(--border) solid var(--color-surface-4),
+			border-radius: var(--rounded-full),
+			background-color: var(--color-surface),
+			box-shadow: var(--shadow-sm),
+			color: var(--color-word-2),
+			font-size: var(--text-12),
+			cursor: pointer,
+			[translate]: calc(50% * var(--direction, 1)) -50%,
+			state: (
+				hover: (
+					background-color: var(--color-surface-2),
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand-graphic),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+	),
+	modifier: (
+		image: (
+			flex-direction: column,
+			align-items: stretch,
+			gap: 0,
+			padding: 0,
+			element: (
+				media: (
+					inline-size: 100%,
+					block-size: auto,
+					// A number, not `7 / 5`, which Sass would read as a division
+					aspect-ratio: calc(7 / 5),
+					border-radius: var(--rounded-lg) var(--rounded-lg) 0 0,
+				),
+				content: (
+					padding: var(--spacing-8),
+				),
+			),
+		),
+		invalid: (
+			border-color: var(--color-danger),
+			element: (
+				description: (
+					color: var(--color-danger-readable),
+				),
+			),
+		),
+		loading: (
+			element: (
+				media: (
+					color: var(--color-word-2),
+				),
+				picture: (
+					opacity: var(--opacity-50),
+				),
+			),
+		),
+	),
+) !default;

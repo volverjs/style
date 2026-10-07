@@ -1,6 +1,6 @@
 ---
 title: Line Height
-description: Utilities for controlling the leading (line height) of an element. ​
+description: Utilities for controlling the leading (line height) of an element.
 customProperties: true
 ---
 <table-utility prefix="leading" property="line-height" custom-property="leading" class="mb-lg"></table-utility>

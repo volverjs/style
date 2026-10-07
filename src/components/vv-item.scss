@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-item);
+$component-map: $vv-item;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// A title over a description carries the weight of a heading on every row,
+// or a list of titles over grey descriptions reads as one run of grey. The
+// step of weight a chosen or a current row takes would be lost next to it,
+// so on those rows the surface and the bar carry the state alone. The map
+// cannot say "a title that has a description beside it", and this rule comes
+// after the state rules it has to win over at the same specificity.
+@include wrap-with-where(
+	$selector: '#{$component-selector}__content:has(> #{$component-selector}__description) > #{$component-selector}__title',
+	$enabled: $zero-specificity-for-components
+) {
+	font-weight: var(--font-semibold);
+}
+
+// A row whose entry is disabled answers no pointer: the row itself never
+// carries the attribute, so its hover state would still light it up
+@include wrap-with-where(
+	$selector: '#{$component-selector}:has(> #{$component-selector}__entry:is(:disabled, [aria-disabled="true"]))',
+	$enabled: $zero-specificity-for-components
+) {
+	background-color: transparent;
+}
+
+}

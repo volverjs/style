@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-calendar);
+$component-map: $vv-calendar;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// The keyboard ring of a day. The shared `focus-visible` state leaves out
+// `tabindex="-1"`, and a grid moved across with a roving tabindex gives it to
+// every day but one, so the ring is written here, on the pseudo-class alone.
+@include wrap-with-where($selector: '#{$component-selector}__day:focus-visible', $enabled: $zero-specificity-for-components) {
+	outline: var(--spacing-px) solid var(--color-brand-graphic);
+	outline-offset: var(--spacing-2);
+}
+
+}

@@ -12,6 +12,11 @@
 	const customProperties = ref(false)
 	const spacing = ref(false)
 	const githubUrl = `https://github.com/volverjs/style/edit/develop/docs/contents/utilities/${route.params.group}/${route.params.name}.md`
+	// The name the menu gives the group, `Flexbox & Grid` for `flex-grid`
+	const section =
+		mainMenu.find(({ children }) =>
+			children.some(({ to }) => to.params?.group === route.params.group),
+		)?.name ?? route.params.group
 	let MainContent
 	try {
 		const { attributes, toc, VueComponentWith } = await import(
@@ -48,8 +53,8 @@
 			<div class="p-16">
 				<header class="my-lg">
 					<span
-						class="vv-text vv-text--size-5 font-semibold text-brand capitalize">
-						{{ route.params.group }}
+						class="vv-text vv-text--size-5 font-semibold text-brand">
+						{{ section }}
 					</span>
 					<div class="flex items-center mb-sm">
 						<div v-if="title" class="md:flex items-end mr-auto">

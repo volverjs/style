@@ -40,7 +40,7 @@ $vv-input-file: (
 					position: absolute,
 					height: var(--spacing-2),
 					inset: auto 0 0 0,
-					background: var(--color-brand),
+					background: var(--color-brand-graphic),
 					scale: 0 1,
 					transform-origin: left,
 					will-change: transform,
@@ -287,7 +287,7 @@ $vv-input-file: (
 					background-color: var(--color-surface-5),
 				),
 				focus-visible: (
-					outline: var(--spacing-px) solid var(--color-gray-lighten-4),
+					outline: var(--spacing-px) solid var(--color-gray),
 				),
 				disabled: (
 					cursor: not-allowed,
@@ -336,13 +336,13 @@ $vv-input-file: (
 					),
 				),
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				limit: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				icon-after: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 				drop-area: (
 					pseudo: (
@@ -364,13 +364,13 @@ $vv-input-file: (
 					),
 				),
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				limit: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				icon-after: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 				drop-area: (
 					pseudo: (

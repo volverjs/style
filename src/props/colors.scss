@@ -3,5 +3,11 @@
 @include layer(props, $use-css-layers, $layer-prefix) {
 	:where(:host, :root, .theme) {
 		@include spread-map-into-props($colors, $prefix: color);
+
+		// Safari 17 reads `l` as a percentage: the fixed steps of word and
+		// surface, calc(l + 12), resolve there only written in percent
+		@supports not (color: hsl(from red h s calc(l + 1))) {
+			@include spread-map-into-props(fixed-steps-in-percent($colors), $prefix: color);
+		}
 	}
 }

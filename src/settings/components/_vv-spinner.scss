@@ -1,0 +1,26 @@
+// A ring that turns while something is loading. It measures `1em` and draws
+// in `currentcolor`, so it takes the size and the colour of the text it sits
+// in: inside a button, next to a label, or alone with a text utility on it.
+
+// The animation tokens are `none` under `prefers-reduced-motion`, and a
+// spinner that stands still says nothing, so the block runs `spin` itself
+// and slows it down there instead (see `src/components/vv-spinner.scss`).
+// `--spinner-duration` and `--spinner-thickness` are read by plain
+// declarations, in brackets: a `var()` inside a generated custom property is
+// substituted where that property is declared, at the root, and would never
+// see a value set on the block.
+$vv-spinner: (
+	--spinner-duration: 0.75s,
+	--spinner-thickness: 0.125em,
+	display: inline-block,
+	flex-shrink: 0,
+	inline-size: 1em,
+	block-size: 1em,
+	border-style: solid,
+	border-color: color-mix(in srgb, currentcolor 20%, transparent),
+	border-block-start-color: currentcolor,
+	border-radius: var(--rounded-full),
+	vertical-align: middle,
+	[border-width]: var(--spinner-thickness),
+	[animation]: spin var(--spinner-duration) linear infinite,
+) !default;

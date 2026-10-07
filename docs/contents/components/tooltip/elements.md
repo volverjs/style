@@ -14,15 +14,16 @@ wrapperClass: flex-1
 	<button class="vv-button 
 				   vv-button--action 
 				   focus-visible" 
-			title="Accent rounded">
+			type="button"
+			aria-label="Edit">
 		<IconifyIcon icon="akar-icons:pencil" />
 		<span class="vv-tooltip" role="tooltip" inert>
-			I'm a tooltip
+			Edit
 		</span>
 	</button>
-	<span>Hover me
+	<a href="#">Hover or focus me
 		<span class="vv-tooltip" role="tooltip" inert>
 			I'm a tooltip
 		</span>
-	</span>
+	</a>
 </div>

@@ -16,49 +16,41 @@ wrapperClass: flex-1 w-100
 <template>
     <div class="vv-tab">
         <nav class="vv-nav vv-nav--tabs vv-nav--full">
-            <ul class="vv-nav__menu" role="menu">
-                <li class="vv-nav__item" role="presentation">
+            <ul class="vv-nav__menu">
+                <li class="vv-nav__item">
                     <a
                         class="vv-nav__item-label"
-                        role="menuitem"
-                        tabindex="0"
                         href="#tab-panel-1"
                         :class="{'current': activeTab === 1}"
                         @click="activeTab = 1">
-                        Sidebar item 1
+                        Overview
                     </a>
                 </li>
-                <li class="vv-nav__item" role="presentation">
+                <li class="vv-nav__item">
                     <a
                         class="vv-nav__item-label"
-                        role="menuitem"
-                        tabindex="0"
                         href="#tab-panel-2"
                         :class="{'current': activeTab === 2}"
                         @click="activeTab = 2">
-                        Sidebar item 2
+                        Details
                     </a>
                 </li>
-                <li class="vv-nav__item" role="presentation">
+                <li class="vv-nav__item">
                     <a
                         class="vv-nav__item-label"
-                        role="menuitem"
-                        tabindex="0"
                         href="#tab-panel-3"
                         :class="{'current': activeTab === 3}"
                         @click="activeTab = 3">
-                        Sidebar item 3
+                        Activity
                     </a>
                 </li>
-                <li class="vv-nav__item" role="presentation">
+                <li class="vv-nav__item">
                     <a
                         class="vv-nav__item-label"
-                        role="menuitem"
-                        tabindex="0"
                         href="#tab-panel-4"
                         :class="{'current': activeTab === 4}"
                         @click="activeTab = 4">
-                        Sidebar item 4
+                        Settings
                     </a>
                 </li>
             </ul>

@@ -1,0 +1,99 @@
+// A command palette: a search field over a list of commands grouped under
+// headings, inline in a page or inside a `vv-dialog`. The field is the
+// `combobox` and the list the `listbox`, each group a `role="group"` labelled
+// by its `heading`; the option the keyboard is on carries
+// `aria-selected="true"`, which the block reads. A shortcut at the end of an
+// option is a `vv-kbd`.
+$vv-command: (
+	display: flex,
+	flex-direction: column,
+	min-width: 0,
+	overflow: hidden,
+	border: var(--border) solid var(--color-surface-3),
+	border-radius: var(--rounded-lg),
+	background-color: var(--color-surface),
+	color: var(--color-word-2),
+	font-size: var(--text-14),
+	element: (
+		search: (
+			display: flex,
+			align-items: center,
+			gap: var(--spacing-8),
+			padding-inline: var(--spacing-12),
+			border-bottom: var(--border) solid var(--color-surface-3),
+			color: var(--color-word-3),
+			transition: border-color var(--duration-150) var(--ease-out),
+			// The field has no ring of its own: the divider under it takes
+			// the focus colour, like the search of a dropdown
+			state: (
+				focus-within: (
+					border-bottom-color: var(--color-brand-graphic),
+				),
+			),
+		),
+		input: (
+			flex: 1,
+			min-width: 0,
+			min-height: var(--spacing-44),
+			color: var(--color-word-1),
+			[font]: inherit,
+			pseudo: (
+				placeholder: (
+					color: var(--input-placeholder-color),
+				),
+			),
+		),
+		list: (
+			max-height: 20rem,
+			margin: 0,
+			padding: var(--spacing-4),
+			overflow-y: auto,
+			list-style: none,
+			scrollbar-width: thin,
+		),
+		heading: (
+			padding: var(--spacing-8) var(--spacing-8) var(--spacing-4),
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+			font-weight: var(--font-semibold),
+		),
+		option: (
+			display: flex,
+			align-items: center,
+			gap: var(--spacing-8),
+			padding: var(--spacing-8),
+			border-radius: var(--rounded-md),
+			cursor: pointer,
+			state: (
+				hover: (
+					background-color: var(--color-surface-1),
+				),
+				// Declared after the hover: the option the keyboard is on
+				// keeps its surface under the pointer
+				selected: (
+					background-color: var(--color-surface-2),
+					color: var(--color-word),
+				),
+				// A `li` can only be `aria-disabled`, which the hover suffix does
+				// not exclude: the option answers no pointer instead
+				disabled: (
+					opacity: var(--opacity-30),
+					cursor: not-allowed,
+					pointer-events: none,
+				),
+			),
+		),
+		shortcut: (
+			display: inline-flex,
+			align-items: center,
+			gap: 0.25em,
+			margin-inline-start: auto,
+			color: var(--color-word-4),
+		),
+		empty: (
+			padding: var(--spacing-lg) var(--spacing-12),
+			color: var(--color-word-3),
+			text-align: center,
+		),
+	),
+) !default;

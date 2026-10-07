@@ -1,3 +1,5 @@
+@use 'choice' as *;
+
 $vv-radio: (
 	display: inline-flex,
 	flex-wrap: wrap,
@@ -21,6 +23,8 @@ $vv-radio: (
 		),
 	),
 	modifier: (
+		segment: $choice-segment,
+		card: $choice-card,
 		readonly: (
 			opacity: var(--opacity-100),
 			cursor: default,
@@ -29,14 +33,14 @@ $vv-radio: (
 		valid: (
 			element: (
 				hint: (
-					color: var(--input-valid-color),
+					color: var(--input-valid-text-color),
 				),
 			),
 		),
 		invalid: (
 			element: (
 				hint: (
-					color: var(--input-invalid-color),
+					color: var(--input-invalid-text-color),
 				),
 			),
 		),
@@ -92,7 +96,7 @@ $vv-radio: (
 					),
 				),
 				focus-visible: (
-					outline: var(--spacing-px) solid var(--color-brand),
+					outline: var(--spacing-px) solid var(--color-brand-graphic),
 					outline-offset: var(--spacing-2),
 				),
 			),

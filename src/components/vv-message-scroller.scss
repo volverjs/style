@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '../context' as *;
+
+@include layer(components, $use-css-layers, $layer-prefix) {
+$component-name: map.get($components-names, vv-message-scroller);
+$component-map: $vv-message-scroller;
+$component-selector: '.#{ $component-name}';
+
+@include spread-map-into-bem(
+	$map: $component-map,
+	$block: $component-name,
+	$use-custom-props: $use-custom-props-for-components,
+	$zero-specificity: $zero-specificity-for-components,
+	$bps: $breakpoints
+);
+
+// The reset hides `[hidden]` at zero specificity, before the components, so
+// the `display` of the button would win over it: the script hides the button
+// with the attribute while the reader is at the bottom
+@include wrap-with-where($selector: '#{$component-selector}__jump[hidden]', $enabled: $zero-specificity-for-components) {
+	display: none;
+}
+
+}

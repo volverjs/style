@@ -50,7 +50,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
     </small>
 </div>
 <div class="vv-select vv-select--invalid vv-select--icon-before vv-select--icon-after">
-    <label for="select-icon-invalid">Valid Select with left and right icon</label>
+    <label for="select-icon-invalid">Invalid Select with left and right icon</label>
     <div class="vv-select__wrapper">
         <IconifyIcon icon="akar-icons:heart" />
         <select name="select" id="select-icon-invalid" aria-describedby="select-icon-invalid-hint">

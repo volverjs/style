@@ -115,6 +115,31 @@
 	}
 }
 
+// scrollbar: the native scrollbar through the standard properties, which
+// is all a scrolling panel needs; no component draws a custom one
+%scrollbar-thin {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-word-5) transparent;
+}
+
+@include wrap-with-where(
+	$selector: '.scrollbar-thin',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %scrollbar-thin;
+}
+
+%scrollbar-none {
+	scrollbar-width: none;
+}
+
+@include wrap-with-where(
+	$selector: '.scrollbar-none',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %scrollbar-none;
+}
+
 // position
 @include spread-map-into-utilities(
 	$map: $position,

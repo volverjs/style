@@ -9,22 +9,19 @@ title: Group
                 vv-avatar--surface
                 vv-avatar--md"
           src="https://api.dicebear.com/7.x/pixel-art/svg" 
-          alt="avatar" 
-          tabindex="0" />
+          alt="avatar"  />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
           <img src="https://api.dicebear.com/7.x/identicon/svg" 
-              alt="avatar" 
-              tabindex="0">
+              alt="avatar" >
       </span>
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           MR
       </span>
       <span class="vv-avatar 
@@ -33,8 +30,7 @@ title: Group
                   vv-avatar--surface
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           +3
       </span>
   </span>
@@ -44,22 +40,19 @@ title: Group
                 vv-avatar--surface
                 vv-avatar--md"
           src="https://api.dicebear.com/7.x/pixel-art/svg" 
-          alt="avatar" 
-          tabindex="0" />
+          alt="avatar"  />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
           <img src="https://api.dicebear.com/7.x/identicon/svg" 
-              alt="avatar" 
-              tabindex="0">
+              alt="avatar" >
       </span>
       <span class="vv-avatar 
                   vv-avatar--rounded 
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           MR
       </span>
       <span class="vv-avatar 
@@ -68,8 +61,7 @@ title: Group
                   vv-avatar--surface
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           +3
       </span>
   </span>
@@ -79,22 +71,19 @@ title: Group
                 vv-avatar--surface
                 vv-avatar--md"
           src="https://api.dicebear.com/7.x/pixel-art/svg" 
-          alt="avatar" 
-          tabindex="0" />
+          alt="avatar"  />
       <span class="vv-avatar 
                   vv-avatar--rounded
                   vv-avatar--surface
                   vv-avatar--md">
           <img src="https://api.dicebear.com/7.x/identicon/svg" 
-              alt="avatar" 
-              tabindex="0">
+              alt="avatar" >
       </span>
       <span class="vv-avatar 
                   vv-avatar--rounded 
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           MR
       </span>
       <span class="vv-avatar 
@@ -103,8 +92,7 @@ title: Group
                   vv-avatar--surface
                   vv-avatar--md" 
             role="img" 
-            aria-label="Mario Rossi" 
-            tabindex="0">
+            aria-label="Mario Rossi" >
           +3
       </span>
   </span>

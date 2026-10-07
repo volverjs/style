@@ -1,0 +1,15 @@
+// Dark values of the modifiers shared by `vv-radio` and `vv-checkbox`, like
+// `src/settings/components/_choice.scss` on the light side. Loaded by both
+// dark maps and not forwarded.
+
+// The chosen tile of a segmented control is raised on the plain surface in
+// the light theme. In the dark one the plain surface is the darkest colour
+// there is and would read as a hole in the `surface-2` track, so the tile
+// takes a lighter step instead.
+$dark-choice-segment: (
+	state: (
+		checked-within: (
+			background-color: var(--color-surface-4),
+		),
+	),
+);

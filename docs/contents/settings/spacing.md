@@ -2,11 +2,11 @@
 index: 4
 label: Spacing
 title: Spacing
-description: Volver uses a spacing scale to control the padding, margin and position of elements.
+description: Volver Style uses a spacing scale to control the padding, margin and position of elements.
 ---
 
 ### Static Spacing
-Static spacing is defined by a CSS Custom Property. The key rapresents the size in `px` and the value is the font size in `rem`.
+Static spacing is defined by a CSS Custom Property. The key represents the size in `px` and the value is the length in `rem`.
 
 <table-utility property="spacing" custom-property="spacing" hide-class class="mb-lg">
   <template #custom-property="{ key }">
@@ -18,7 +18,7 @@ Static spacing is defined by a CSS Custom Property. The key rapresents the size 
 </table-utility>
 
 ### Dynamic Spacing
-Dynamic spacing change based on the breakpoint.
+Dynamic spacing changes with the breakpoint: each step points to a step of the static scale.
 
 <table-utility prefix="spacing" property="spacing-dynamic" custom-property="spacing" hide-class class="mb-lg">
   <template #custom-property="{ key }">
@@ -26,21 +26,18 @@ Dynamic spacing change based on the breakpoint.
   </template>
   <template #value="{ value, key }">
     <div v-for="(item, breakpoint) in value" :key="breakpoint" class="whitespace-pre leading-relaxed">
-      <pre v-if="breakpoint !== 'xxs'">
-@media (--breakpoint-{{ breakpoint }}) {
-  --spacing-{{ key }}: var(--spacing-{{ item }});
-}</pre>
+      <template v-if="breakpoint !== 'xxs'">from {{ breakpoint }}: --spacing-{{ key }}: var(--spacing-{{ item }});</template>
       <template v-else>--spacing-{{ key }}: var(--spacing-{{ item }});</template>
     </div>
   </template>
 </table-utility>
 
 ### Customization
-You can customize the spacing by changing the values of the `--spacing` CSS Custom Property.
+You can customize the spacing by changing the values of the `--spacing-*` CSS Custom Properties.
 
 ```css
-:root {
-  --spacing-7: 0.4375rem;
+:root, :host, .theme {
+  --spacing-16: 1.125rem;
 }
 ```
 Or overriding the `$spacing` SCSS variable.
@@ -49,11 +46,11 @@ Or overriding the `$spacing` SCSS variable.
 @use 'sass:map';
 @use '@volverjs/style/scss/context';
 
-// override font-size map
+// add a step to the spacing map: --spacing-60, p-60, m-60, ...
 context.$spacing: map.deep-merge(
   context.$spacing,
   (
-    7: 0.4375rem
+    60: 3.75rem
   )
 );
 
@@ -66,13 +63,13 @@ Or the `$spacing-dynamic` SCSS variable for dynamic spacing.
 @use 'sass:map';
 @use '@volverjs/style/scss/context';
 
-// override font-size-dynamic map
+// add a step to the dynamic spacing map
 context.$spacing-dynamic: map.deep-merge(
   context.$spacing-dynamic,
   (
-    // --text-xxl
+    // --spacing-xxl
     xxl: (
-      // initial font size
+      // initial spacing: var(--spacing-28)
       xxs: 28,
       // from sm breakpoint
       sm: 38,

@@ -27,11 +27,44 @@ $vv-table: (
 				last-child: (
 					border-width: 0,
 				),
+				// A row picked in a table that selects (`aria-selected`)
+				selected: (
+					background-color: var(--color-surface-1),
+				),
+				// The row being looked at, the table as a master list: a
+				// surface that stands apart and a bar along the inline start,
+				// as `vv-item--current` draws it. Plain markup puts `current`
+				// on the `tr`.
+				current: (
+					background-color: var(--color-surface-2),
+					// On the inline start: `--direction` is -1 in a right to left page
+					[box-shadow]: inset calc(var(--spacing-3) * var(--direction, 1)) 0 0 var(--color-word-2),
+				),
 			),
 		),
 		tfoot-tr: (
 			_alias: 'tfoot > tr',
 			border-width: 1px 0 0 0,
+		),
+		// A sortable column carries `aria-sort` on the `th` and a
+		// `vv-table__sort` button inside it. The indicator is the chevron of
+		// the library, drawn as a mask in the colour of the text after the
+		// button, faint while the column is not sorted. Declared before `th`,
+		// whose sorted states follow it.
+		sortable: (
+			_alias: 'th[aria-sort]',
+			pseudo: (
+				after: (
+					display: inline-block,
+					width: 0.75em,
+					height: 0.75em,
+					margin-inline-start: 0.25em,
+					vertical-align: middle,
+					background-color: currentcolor,
+					mask: var(--bg-chevron) center / contain no-repeat,
+					opacity: var(--opacity-40),
+				),
+			),
 		),
 		th: (
 			_alias: 'th',
@@ -40,6 +73,36 @@ $vv-table: (
 			color: var(--color-word-2),
 			vertical-align: middle,
 			[padding]: var(--table-cell-padding),
+			// Sorted: the indicator of `sortable` above, full strength,
+			// pointing down for descending and up for ascending
+			state: (
+				sort-descending: (
+					pseudo: (
+						after: (
+							opacity: var(--opacity-100),
+						),
+					),
+				),
+				sort-ascending: (
+					pseudo: (
+						after: (
+							opacity: var(--opacity-100),
+							rotate: 180deg,
+						),
+					),
+				),
+			),
+		),
+		sort: (
+			display: inline-flex,
+			align-items: center,
+			cursor: pointer,
+			state: (
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand-graphic),
+					outline-offset: var(--spacing-2),
+				),
+			),
 		),
 		td: (
 			_alias: 'td',

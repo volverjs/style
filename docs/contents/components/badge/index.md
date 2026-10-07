@@ -5,7 +5,7 @@ uiVue: true
 ---
 
 ### Colors
-Use `vv-badge--${color}` to change the color of the badge.
+Use `vv-badge--{color}` to change the color of the badge: `accent`, `success`, `danger`, `warning`, `info`, `gray`, `white` or `black`. A badge with no content, not even a space, is drawn as a dot. A badge is static text: add `role="status"` only to one whose content changes while the page is open, such as a counter updated live.
 
 <code-editor resource-folder="badge" resource-name="colors" class="mb-lg"></code-editor>
 
@@ -30,6 +30,6 @@ Use `vv-badge--sm` to change the size of the badge.
 <code-editor resource-folder="badge" resource-name="small"></code-editor>
 
 ### Action
-Add a button to the badge to make it interactive.
+Add `vv-badge--action` and a `vv-badge__button` inside the badge, a `<button type="button">` with an `aria-label`, to make it removable or interactive, as a filter chip.
 
 <code-editor resource-folder="badge" resource-name="action"></code-editor>

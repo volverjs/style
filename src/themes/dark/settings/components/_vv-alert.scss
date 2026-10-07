@@ -12,48 +12,6 @@ $dark-vv-alert: (
 				),
 			),
 		),
-		success: (
-			element: (
-				header: (
-					color: var(--color-success-lighten-3),
-				),
-			),
-		),
-		warning: (
-			element: (
-				header: (
-					color: var(--color-warning),
-				),
-			),
-		),
-		danger: (
-			element: (
-				header: (
-					color: var(--color-danger-lighten-5),
-				),
-			),
-		),
-		accent: (
-			element: (
-				header: (
-					color: var(--color-accent-lighten-4),
-				),
-			),
-		),
-		brand: (
-			element: (
-				header: (
-					color: var(--color-brand-lighten-3),
-				),
-			),
-		),
-		info: (
-			element: (
-				header: (
-					color: var(--color-info),
-				),
-			),
-		),
 		notification: (
 			border-color: var(--color-gray-lighten-3),
 			modifier: (
@@ -61,7 +19,7 @@ $dark-vv-alert: (
 					border-color: var(--color-danger-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-danger-contrast)
 						),
 					),
 				),
@@ -69,7 +27,7 @@ $dark-vv-alert: (
 					border-color: var(--color-brand-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-brand-contrast)
 						),
 					),
 				),
@@ -77,7 +35,7 @@ $dark-vv-alert: (
 					border-color: var(--color-success-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-success-contrast)
 						),
 					),
 				),
@@ -85,7 +43,7 @@ $dark-vv-alert: (
 					border-color: var(--color-accent-lighten-3),
 					element: (
 						header: (
-							color: var(--color-white)
+							color: var(--color-accent-contrast)
 						),
 					),
 				),
@@ -93,7 +51,7 @@ $dark-vv-alert: (
 					border-color: var(--color-warning-darken-5),
 					element: (
 						header: (
-							color: var(--color-white),
+							color: var(--color-warning-darken-5-contrast),
 							background-color: var(--color-warning-darken-5),
 						),
 					),
@@ -102,7 +60,7 @@ $dark-vv-alert: (
 					border-color: var(--color-info-darken-2),
 					element: (
 						header: (
-							color: var(--color-white),
+							color: var(--color-info-darken-5-contrast),
 							background-color: var(--color-info-darken-5),
 						),
 					),

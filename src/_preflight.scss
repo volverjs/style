@@ -12,7 +12,16 @@
 @include layer(preflight, $use-css-layers, $layer-prefix) {
 @if $preflight {
 	:where(.preflight) {
-		:not(.preflight-revert *) {
+		// An element that carries a class of a component is drawn by that
+		// component and left alone here: the rules below sit at (0,1,0) and
+		// would win over the component's zero specificity rules, dressing a
+		// `button.vv-badge__button` as a primary button or a
+		// `label.vv-radio--segment` as a plain radio. Both arguments of the
+		// `:not()` weigh a class, so the specificity does not move. A bare
+		// child a component styles through an `_alias` has no class to tell
+		// it apart and is still dressed, except inside `vv-prose`, whose whole
+		// content is bare tags it draws itself.
+		:not(.preflight-revert *, .#{map.get($components-names, vv-prose)} *, [class*='#{$components-prefix}-']) {
 			// typography
 			&:where(h1, h2, h3, h4, h5, h6) {
 				@extend %vv-text !optional;
@@ -145,8 +154,11 @@
 				@extend %text-smaller !optional;
 			}
 
+			// A filled color: the text takes its contrast token, not the
+			// word color, which is light in the dark theme
 			&:where(mark) {
 				@extend %bg-warning !optional;
+				@extend %text-warning-contrast !optional;
 			}
 
 			&:where(pre) {
@@ -170,7 +182,7 @@
 			}
 
 			// anchor
-			&:where(a:not(.#{map.get($components-names, vv-button)})) {
+			&:where(a) {
 				@extend %vv-text !optional;
 				@extend %vv-text--link !optional;
 

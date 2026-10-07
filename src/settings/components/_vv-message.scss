@@ -1,0 +1,95 @@
+// A row of a conversation: who says it, what is said, and what can be done
+// with it. The row lays out an optional `avatar`, anchored to the last line,
+// beside a `content` column that holds a `header` (the sender, a time), one or
+// more `vv-bubble`, attachments or cards, and a `footer` (status, actions).
+// The rows of the one reading are `end`: mirrored to the inline end.
+// `meta` is metadata that shows on hover or focus only, and always on a
+// device that cannot hover (see `src/components/vv-message.scss`).
+$vv-message: (
+	display: flex,
+	align-items: flex-end,
+	gap: var(--spacing-sm),
+	max-width: 100%,
+	element: (
+		avatar: (
+			flex-shrink: 0,
+		),
+		content: (
+			display: flex,
+			flex-direction: column,
+			align-items: flex-start,
+			gap: var(--spacing-4),
+			min-width: 0,
+			max-width: min(100%, 48rem),
+		),
+		header: (
+			display: flex,
+			flex-wrap: wrap,
+			align-items: baseline,
+			gap: var(--spacing-8),
+			padding-inline: var(--spacing-4),
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+		),
+		footer: (
+			display: flex,
+			flex-wrap: wrap,
+			align-items: center,
+			gap: var(--spacing-8),
+			color: var(--color-word-3),
+			font-size: var(--text-12),
+		),
+		meta: (
+			display: inline-flex,
+			align-items: center,
+			gap: var(--spacing-4),
+			font-variant-numeric: tabular-nums,
+			opacity: var(--opacity-0),
+			transition: opacity var(--duration-150) var(--ease-out),
+		),
+	),
+	state: (
+		hover: (
+			element: (
+				meta: (
+					opacity: var(--opacity-100),
+				),
+			),
+		),
+		focus-within: (
+			element: (
+				meta: (
+					opacity: var(--opacity-100),
+				),
+			),
+		),
+	),
+	modifier: (
+		end: (
+			flex-direction: row-reverse,
+			element: (
+				content: (
+					align-items: flex-end,
+				),
+				// Aligned to the end, not reversed: a reversed row would run the
+				// keyboard through its buttons against the order they are seen in
+				header: (
+					justify-content: flex-end,
+				),
+				footer: (
+					justify-content: flex-end,
+				),
+			),
+		),
+		// The content takes the whole row: an answer rendered as rich text,
+		// a card, a table
+		wide: (
+			element: (
+				content: (
+					flex: 1,
+					max-width: 100%,
+				),
+			),
+		),
+	),
+) !default;

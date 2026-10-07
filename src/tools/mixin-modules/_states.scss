@@ -1,0 +1,77 @@
+@use 'sass:map';
+
+// ============================================
+// States shared by the BEM walk and the theme walk
+// ============================================
+
+// Loaded by `_bem.scss` and `_theme.scss` and deliberately not forwarded by
+// `_index.scss`: both walks read the same table, so a state added here reaches
+// the light rules and the dark overrides at once, and neither can drift from
+// the other again. The theme walk used to keep its own copy, which gave
+// `disabled` no `[aria-disabled="true"]`, put `:not([disabled])` in front of
+// `:checked` and dropped `popover` and `popover-open` altogether.
+
+// List of valid CSS states
+$valid-states: (
+	active, focus, hover, focus-within, target, visited, focus-visible,
+	disabled, checked, checked-within, focus-visible-within, multiple, selected,
+	pressed-within, readonly, empty, placeholder-shown, dirty, valid, invalid,
+	indeterminate, first-child, last-child, open, close, determinate, pressed,
+	current, current-date, current-page, popover, popover-open, sort-ascending,
+	sort-descending, sort-none
+);
+
+// Selector suffixes appended to the block, and to its alias when there is one,
+// for the states that are not plain pseudo-classes. A state can need more than
+// one suffix: "disabled" also matches the aria attribute. States missing here
+// fall back to ":not([disabled]):<state>", while "current" adds no suffix at
+// all and keeps only the BEM selectors built by the caller.
+$state-suffixes: (
+	checked: ':checked',
+	checked-within: ':has(input:checked)',
+	close: ':not([open])',
+	// The page a link points to, the way a pagination, a breadcrumb or a
+	// navigation marks it. `current` stays a class, as it always was.
+	current-page: '[aria-current="page"]',
+	// Today in a calendar
+	current-date: '[aria-current="date"]',
+	dirty: ':not(:has(*:placeholder-shown))',
+	disabled: ('[disabled]', '[aria-disabled="true"]'),
+	focus-visible: ':not(:active):not([disabled]):not([tabindex="-1"]):not([aria-disabled="true"]):focus-visible',
+	// A keyboard focus on the input of the block, for a control whose native
+	// input is not painted (a segment, a card): `focus-within` would also ring
+	// it on a mouse click. Like "checked-within" it looks for the input only,
+	// so a button elsewhere in the block does not ring it.
+	focus-visible-within: ':has(input:focus-visible)',
+	multiple: '[multiple]',
+	open: '[open]',
+	// Element promoted to the top layer through the Popover API: "popover"
+	// matches it whether it is open or not, "popover-open" only when it is
+	popover: '[popover]',
+	popover-open: ':popover-open',
+	pressed: '[aria-pressed="true"]',
+	// A block whose toggle is a child button: `aria-pressed` is valid on a
+	// button only, so a row chosen through its entry carries it one level down.
+	// The child combinator keeps a pressed button nested deeper (in the actions
+	// of a row) from marking the whole block.
+	pressed-within: ':has(> [aria-pressed="true"])',
+	readonly: '[readonly]',
+	selected: '[aria-selected="true"]',
+	// A sortable column header, read from `aria-sort` on the `th`: `none`
+	// is sortable and not sorted yet
+	sort-ascending: '[aria-sort="ascending"]',
+	sort-descending: '[aria-sort="descending"]',
+	sort-none: '[aria-sort="none"]',
+);
+
+// The suffixes of a state, as a list: its entry in `$state-suffixes`, the
+// pseudo-class fallback, or nothing for "current"
+// @param {String} $state - State name
+// @return {List} Suffixes, comma separated
+@function state-suffixes($state) {
+	@if $state == 'current' {
+		@return ();
+	}
+
+	@return map.get($state-suffixes, $state) or ':not([disabled]):#{$state}';
+}

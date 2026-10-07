@@ -3,7 +3,7 @@ title: Box Shadow
 description: Utilities for controlling the box shadow of an element.
 customProperties: true
 ---
-<table-utility prefix="shadow" property="box-shadow" custom-property="shadow" class="mb-lg"></table-utility>
+<table-utility prefix="shadow" property="box-shadow" custom-property="shadow" class="mb-lg" literal></table-utility>
 <card-example>
     <div class="grid grid-cols-4 gap-sm relative bg-white text-black font-semibold n-24 p-24">
         <div class="break-inside-avoid mb-sm flex justify-center items-center rounded-md bg-white shadow-sm">

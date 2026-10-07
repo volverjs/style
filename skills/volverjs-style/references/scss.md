@@ -56,11 +56,16 @@ compile error, because the comma separates configuration entries.
 | Variable | Default | Effect |
 |---|---|---|
 | `$color-brand` `$color-accent` `$color-success` `$color-danger` `$color-info` `$color-warning` `$color-gray` `$color-word` `$color-surface` | brand `#166abd`, accent `#9c27b0` … | palette bases; shades derive |
+| `$color-tint` | `$color-brand` | hue of gray, word, surface, shadow and backdrop while they keep their defaults; emitted as `--color-tint` |
+| `$color-readable-ratio` | `4.6` | contrast the `-readable` roles keep with what they sit on, in each theme |
+| `$color-graphic-ratio` | `3.1` | contrast the `-graphic` roles keep on the same surfaces |
+| `$color-readable-depth` | `2` | the deepest neutral surface the roles read on, `--color-surface-2` |
+| `$color-readable-strong-factor` `$dark-color-readable-strong-factor` | `0.5`, `1.5` | luminance step from `-readable` to `-readable-strong`, per theme |
 | `$font-family-sans` `$font-family-serif` `$font-family-mono` | system stacks | one quoted string each |
 | `$font-size` `$font-size-dynamic` `$font-weight` `$spacing` `$spacing-dynamic` `$breakpoints` `$colors` | maps | override the scales themselves |
 | `$vv-button` `$vv-card` … one per component | maps | see "Extending a component" |
 | `$components-prefix` | `vv` | class prefix for every component |
-| `$components-names` | map | rename or drop components |
+| `$components-names` | map | rename a component, classes and `--vv-*` properties alike, except in `.preflight`, which extends and leaves out the default `vv-` names: a renamed component loses what preflight gives its bare tags, and one renamed outside the prefix is dressed by it. It cannot drop a component, `scss` emits them all, so cherry-pick the modules to leave some out |
 | `$preflight` | `true` | emit the opinionated base styles |
 | `$use-custom-props-for-components` | `true` | expose `--vv-{block}-*` properties (turn off for a smaller CSS) |
 | `$use-color-mix` | `true` | relative color syntax for shades; `false` falls back to HSL channel variables |
@@ -105,11 +110,15 @@ ctx.$vv-button: map.deep-merge(
       success: (
         background: var(--color-success),
         border-color: var(--color-success),
-        color: var(--color-white),
+        // the text and the cover of each shade, as the brand button has them
+        color: var(--color-success-contrast),
+        text-shadow: (0 1px 0 var(--color-success-cover), 0 1px 0 var(--color-gray-darken-5)),
         state: (
           hover: (
             background: var(--color-success-darken-1),
             border-color: var(--color-success-darken-1),
+            color: var(--color-success-darken-1-contrast),
+            text-shadow: (0 1px 0 var(--color-success-darken-1-cover), 0 1px 0 var(--color-gray-darken-5)),
           ),
         ),
       ),
@@ -126,10 +135,36 @@ hover selector (`.vv-button--success.vv-button:not([disabled]):hover`). Use it a
 extended the same way.
 
 Valid `state` keys: `active` `focus` `hover` `focus-within` `focus-visible` `target`
-`visited` `disabled` `readonly` `checked` `checked-within` `indeterminate` `determinate`
-`open` `close` `popover` `popover-open` `pressed` `selected` `multiple` `dirty` `valid`
-`invalid` `empty` `placeholder-shown` `first-child` `last-child` `current`. Other keys are
+`visited` `disabled` `readonly` `checked` `checked-within` `focus-visible-within`
+`indeterminate` `determinate` `open` `close` `popover` `popover-open` `pressed`
+`pressed-within` `selected` `multiple` `dirty` `valid` `invalid` `empty` `placeholder-shown`
+`first-child` `last-child` `current` `current-page` (`[aria-current="page"]`) `current-date`
+(`[aria-current="date"]`)
+`sort-ascending` `sort-descending` `sort-none` (`aria-sort` on a `th`). Other keys are
 silently dropped.
+
+The `-within` states match a child of the block: `checked-within` is
+`:has(input:checked)`, `focus-visible-within` is `:has(input:focus-visible)` (a keyboard
+ring on a tile whose native input is hidden) and `pressed-within` is
+`:has(> [aria-pressed="true"])` (a row chosen through the button inside it). The light
+rules and the dark theme read the same table, `src/tools/mixin-modules/_states.scss`.
+
+## Presets
+
+`@volverjs/style/scss/presets/outlined-fields` turns every field (`vv-input-text`,
+`vv-textarea`, `vv-select`, `vv-input-file`, `vv-field`) from the filled box into an outlined
+one: plain surface, 1px border, radius, a ring on focus, the floating label as a notch.
+Load it after the context and before the library, or it changes nothing:
+
+```scss
+@use '@volverjs/style/scss/context' with (...);
+@use '@volverjs/style/scss/presets/outlined-fields';
+@use '@volverjs/style/scss';
+```
+
+It adds `--input-border-color(-hover)`, `--input-border-radius`, `--input-focus-color`,
+`--input-focus-ring`, `--input-invalid-ring` and `--input-disabled-*`, and changes the look
+only, not the density.
 
 ## Creating a component
 

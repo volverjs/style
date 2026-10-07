@@ -12,10 +12,12 @@ permissions:
     id-token: write
     pull-requests: read
 
-# Allow one concurrent deployment
+# Allow one concurrent deployment, and never cancel one that is running: a
+# publish stopped halfway leaves a release that is on npm but not on GitHub
+# Packages or Pages, or on none of them. A second release waits its turn.
 concurrency:
     group: 'pages'
-    cancel-in-progress: true
+    cancel-in-progress: false
 
 jobs:
     # Sonarcloud analysis

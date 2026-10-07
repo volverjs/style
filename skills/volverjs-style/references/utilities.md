@@ -49,6 +49,11 @@ variants, so `md:p-16` does nothing: the dynamic tokens are how spacing adapts.
 
 ```text
 brand accent success danger info warning gray      each also -lighten-1..5 and -darken-1..5
+brand-contrast accent-contrast success-contrast     white or black, the text that reads on that fill,
+danger-contrast info-contrast warning-contrast      also -darken-1..5-contrast, text- only (no gray-contrast)
+brand-readable brand-readable-strong               the color as text on the surface, text- only
+surface-brand-readable surface-success-readable ...  the color as text on its tinted surface, text- only
+brand-graphic accent-graphic ...                    the color as a bar, ring or state border, 3:1
 word word-1..word-5                                 text colors, from strongest to faintest
 surface surface-1..surface-5                        backgrounds, from page to deepest inset
 surface-brand surface-accent surface-success surface-danger surface-info surface-warning
@@ -76,6 +81,7 @@ white black transparent shadow backdrop
 | `inset-` `inset-x-` `inset-y-` `top-` `right-` `bottom-` `left-` | spacing scale + dynamic + `1/2` `1/3` `2/3` `1/4` `2/4` `3/4` `full` `auto` | no |
 | `z-` | `1` `sticky` `fixed` `dropdown` `modal-backdrop` `modal` `confirm-backdrop` `confirm` `popover` `tooltip` `toast` `notification-alert` `auto` | no |
 | `overflow-` `overflow-x-` `overflow-y-` | `visible` `hidden` `scroll` `auto` | no |
+| `scrollbar-` | `thin` (thin, `word-5` thumb on a transparent track) `none` (hidden, still scrolls) | no |
 | `container` | | width 100%, max-width follows the current breakpoint; no size suffixes |
 | `aspect-` | `auto` `square` `photo` (3/2) `tv` (4/3) `wide` (16/9) `ultrawide` (21/9) | yes |
 | `object-` (fit) | `fill` `contain` `cover` `none` `scale-down` | no |
@@ -192,6 +198,19 @@ There is no `text-40`, `text-44`, `text-56`, `text-64` or `text-80`; the scale j
 | `bg-` (patterns) | `grid` `chessboard` `check` `chevron` `close` `minus` `none` |
 
 `bg-` is overloaded: `bg-center`, `bg-cover`, `bg-fixed`, `bg-none` are not colors.
+
+Text on a filled color takes the `-contrast` of that color, not `text-white`:
+`<span class="bg-brand text-brand-contrast">` stays readable when the brand turns light.
+On a darker shade take the contrast of that shade: `bg-warning-darken-5
+text-warning-darken-5-contrast`. The contrast colors are `text-` classes only. There is
+no `text-tint`: `--color-tint` has no utilities.
+
+Text written in a color takes a readable role, not a shade: `text-brand-readable` on the
+page, `text-brand-readable-strong` for a stronger one, and on a tinted surface the role of
+that surface, `<div class="bg-surface-success text-surface-success-readable">`. A role is
+the color itself while it reads and moves only when it would not reach 4.6:1, darker in the
+light theme and brighter in the dark one. They are `text-` classes only: there is no
+`bg-brand-readable`, and no `text-brand-darken-1-readable`.
 
 ## Borders
 

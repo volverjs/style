@@ -1,6 +1,7 @@
 ---
 title: Z-Index
 description: Utilities for controlling the stack order of an element.
+customProperties: true
 ---
 <div>
     <table-utility prefix="z" property="z-index" custom-property="z" class="mb-lg"></table-utility>

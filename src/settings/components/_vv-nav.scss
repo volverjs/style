@@ -79,8 +79,12 @@ $vv-nav: (
 						hover: (
 							background-color: var(--color-surface-2),
 						),
+						// Inverted, so it reads on any surface a sidebar sits
+						// on and stays apart from a hovered voice; it comes
+						// after hover and active, which it wins over
 						current: (
-							background-color: var(--color-surface-1),
+							color: var(--color-surface),
+							background-color: var(--color-word-1),
 						),
 					),
 				),
@@ -135,10 +139,10 @@ $vv-nav: (
 					white-space: nowrap,
 					state: (
 						hover: (
-							color: var(--color-brand),
+							color: var(--color-brand-readable),
 						),
 						current: (
-							color: var(--color-brand),
+							color: var(--color-brand-readable),
 							border-color: currentcolor,
 							background-color: color-mix(in srgb, var(--color-brand), transparent 95%),
 						),

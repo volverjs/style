@@ -12,7 +12,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="file-list" 
                type="file" 
                name="file-list" 
-               placeholder="Placeholder text" 
                aria-describedby="file-list-hint" />
     </div>
     <ul class="vv-input-file__list">
@@ -22,7 +21,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
           file1.txt
         </div>
         <small class="vv-input-file__item-info">300 KB</small>
-        <button type="button" class="vv-input-file__item-remove" title="Remove" />
+        <button type="button" class="vv-input-file__item-remove" aria-label="Remove file"></button>
       </li>
       <li class="vv-input-file__item">
         <IconifyIcon class="vv-input-file__item-icon" icon="akar-icons:file" />
@@ -30,7 +29,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
           long-long-long-long-long-long-file-name.txt
         </div>
         <small class="vv-input-file__item-info">300 KB</small>
-        <button type="button" class="vv-input-file__item-remove" title="Remove" />
+        <button type="button" class="vv-input-file__item-remove" aria-label="Remove file"></button>
       </li>
     </ul>
     <small id="file-list-hint" class="vv-input-file__hint">
@@ -48,7 +47,6 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
         <input id="file-list-hidden" 
                type="file" 
                name="file-list-hidden" 
-               placeholder="Placeholder text" 
                aria-describedby="file-list-hidden-hint" />
     </div>
     <ul class="vv-input-file__list">
@@ -58,7 +56,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
           file1.txt
         </div>
         <small class="vv-input-file__item-info">300 KB</small>
-        <button type="button" class="vv-input-file__item-remove" title="Remove" />
+        <button type="button" class="vv-input-file__item-remove" aria-label="Remove file"></button>
       </li>
       <li class="vv-input-file__item">
         <IconifyIcon class="vv-input-file__item-icon" icon="akar-icons:file" />
@@ -66,7 +64,7 @@ wrapperClass: flex-1 grid md:grid-cols-2 gap-md items-start
           long-long-long-long-long-long-file-name.txt
         </div>
         <small class="vv-input-file__item-info">300 KB</small>
-        <button type="button" class="vv-input-file__item-remove" title="Remove" />
+        <button type="button" class="vv-input-file__item-remove" aria-label="Remove file"></button>
       </li>
     </ul>
     <small id="file-list-hidden-hint" class="vv-input-file__hint">

@@ -1,3 +1,40 @@
+@use 'sass:map';
+
+// The sections of every drawer. Flat header and footer: on a panel that
+// spans a side of the viewport the filled bands read as heavy. The footer
+// keeps its divider because the content above it scrolls.
+$-drawer-sections: (
+	header: (
+		font-weight: var(--font-bold),
+		background: var(--color-transparent),
+		border-bottom: 0,
+	),
+	// Without the divider the header padding already spaces the title from
+	// the first field, so drop the duplicate.
+	content: (
+		padding-top: 0,
+	),
+	footer: (
+		background: var(--color-transparent),
+	),
+);
+
+// A panel along an inline side: full height, full width below sm
+$-drawer-inline-elements: map.merge(
+	(
+		wrapper: (
+			width: 100%,
+			max-height: 100dvh,
+			border-radius: var(--rounded-none),
+			breakpoint: (
+				up-sm: (
+					width: min(75dvw, 32rem),
+				),
+			),
+		),
+	),
+	$-drawer-sections
+);
 $vv-dialog: (
 	display: flex,
 	user-select: text,
@@ -163,6 +200,60 @@ $vv-dialog: (
 				),
 			),
 		),
+		slide-inline-start: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			inert: (
+				opacity: var(--opacity-0),
+				element: (
+					wrapper: (
+						[translate]: calc(-100% * var(--direction, 1)),
+					),
+				),
+			),
+		),
+		slide-block-start: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			inert: (
+				opacity: var(--opacity-0),
+				element: (
+					wrapper: (
+						translate: 0 -100%,
+					),
+				),
+			),
+		),
+		slide-block-end: (
+			active: (
+				transition: var(--transition-opacity),
+				element: (
+					wrapper: (
+						transition: var(--transition-transform),
+					),
+				),
+			),
+			inert: (
+				opacity: var(--opacity-0),
+				element: (
+					wrapper: (
+						translate: 0 100%,
+					),
+				),
+			),
+		),
 	),
 	modifier: (
 		small: (
@@ -190,33 +281,45 @@ $vv-dialog: (
 			padding: 0,
 			align-items: stretch,
 			justify-content: flex-end,
-			element: (
-				wrapper: (
-					width: 100%,
-					max-height: 100dvh,
-					border-radius: var(--rounded-none),
-					breakpoint: (
-						up-sm: (
-							width: min(75dvw, 32rem),
-						),
+			element: $-drawer-inline-elements,
+		),
+		// The same panel on the inline start, with slide-inline-start
+		drawer-start: (
+			padding: 0,
+			align-items: stretch,
+			justify-content: flex-start,
+			element: $-drawer-inline-elements,
+		),
+		// A sheet across the top, with slide-block-start: full width, as tall
+		// as its content up to the 90% of the viewport every dialog stops at
+		drawer-top: (
+			padding: 0,
+			align-items: flex-start,
+			justify-content: stretch,
+			element: map.merge(
+				$-drawer-sections,
+				(
+					wrapper: (
+						width: 100%,
+						border-radius: 0 0 var(--rounded-lg) var(--rounded-lg),
 					),
-				),
-				// Flat header and footer: on a full height panel the filled
-				// bands read as heavy. The footer keeps its divider because
-				// the content above it scrolls.
-				header: (
-					font-weight: var(--font-bold),
-					background: var(--color-transparent),
-					border-bottom: 0,
-				),
-				// Without the divider the header padding already spaces the
-				// title from the first field, so drop the duplicate.
-				content: (
-					padding-top: 0,
-				),
-				footer: (
-					background: var(--color-transparent),
-				),
+				)
+			),
+		),
+		// The bottom sheet of a phone, with slide-block-end: full width, as
+		// tall as its content up to 90% of the viewport, rounded on top
+		drawer-bottom: (
+			padding: 0,
+			align-items: flex-end,
+			justify-content: stretch,
+			element: map.merge(
+				$-drawer-sections,
+				(
+					wrapper: (
+						width: 100%,
+						border-radius: var(--rounded-lg) var(--rounded-lg) 0 0,
+					),
+				)
 			),
 		),
 	),

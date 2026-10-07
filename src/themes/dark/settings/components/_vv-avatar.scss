@@ -1,25 +1,10 @@
 $dark-vv-avatar: (
 	modifier: (
+		// The colored rings take the readable roles, which follow the theme
 		ring: (
-			color: var(--color-brand-lighten-3),
 			modifier: (
-				danger: (
-					color: var(--color-danger-lighten-5),
-				),
-				success: (
-					color: var(--color-success-lighten-3),
-				),
-				warning: (
-					color: var(--color-warning),
-				),
 				gray: (
 					color: var(--color-gray-lighten-3),
-				),
-				info: (
-					color: var(--color-info),
-				),
-				accent: (
-					color: var(--color-accent-lighten-5),
 				),
 				surface: (
 					color: var(--color-word-2),

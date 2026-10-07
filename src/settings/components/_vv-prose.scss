@@ -1,0 +1,274 @@
+// A container for rich text that arrives as plain tags: rendered markdown,
+// the output of an editor or a CMS. Every element is an alias on a bare tag
+// inside the block, and a group of tags is one selector through `:is()`,
+// since an `_alias` has to be a single selector. The BEM classes the
+// generator emits next to the aliases are there if a tag needs one.
+
+// The reset of the library unsets every property of every tag but its
+// `display`, so the meaning of the inline tags (italic, struck, underlined,
+// raised) is given back here, not only their look.
+
+// Sizes are in `em`, not in the static steps of `vv-text`: rich text is set
+// at 14px in a chat bubble and at 16px on a page, and the headings follow the
+// text around them. The rhythm is a margin on every child after the first,
+// so the block has no margin of its own at either end.
+$vv-prose: (
+	line-height: var(--leading-normal),
+	overflow-wrap: break-word,
+	element: (
+		// Declared first: the rules below add space back where it belongs
+		child: (
+			_alias: '> *',
+			margin-block: 0,
+		),
+		flow: (
+			_alias: '> * + *',
+			margin-block-start: 0.75em,
+		),
+		// Markdown wraps content in these too: two paragraphs in a quote, a
+		// loose list item, a disclosure
+		nested-flow: (
+			_alias: ':is(blockquote, details, td, th) > * + *',
+			margin-block-start: 0.75em,
+		),
+		item-nested-flow: (
+			_alias: 'li > * + *',
+			margin-block-start: 0.25em,
+		),
+		heading: (
+			_alias: ':is(h1, h2, h3, h4, h5, h6)',
+			color: var(--color-word),
+			font-weight: var(--font-semibold),
+			line-height: var(--leading-tight),
+			text-wrap: balance,
+		),
+		// A heading opens a section: more room above it than between two
+		// paragraphs
+		heading-flow: (
+			_alias: '> * + :is(h1, h2, h3, h4, h5, h6)',
+			margin-block-start: 1.5em,
+		),
+		h1: (
+			_alias: 'h1',
+			font-size: 1.5em,
+		),
+		h2: (
+			_alias: 'h2',
+			font-size: 1.25em,
+		),
+		h3: (
+			_alias: 'h3',
+			font-size: 1.125em,
+		),
+		h4: (
+			_alias: ':is(h4, h5, h6)',
+			font-size: 1em,
+		),
+		link: (
+			_alias: 'a',
+			color: var(--color-brand-readable),
+			text-decoration: underline,
+			text-underline-offset: 0.2em,
+			state: (
+				hover: (
+					text-decoration-thickness: 2px,
+				),
+				focus-visible: (
+					outline: var(--spacing-px) solid var(--color-brand-graphic),
+					outline-offset: var(--spacing-2),
+				),
+			),
+		),
+		strong: (
+			_alias: ':is(b, strong)',
+			font-weight: var(--font-semibold),
+		),
+		emphasis: (
+			_alias: ':is(em, i, cite, dfn, var)',
+			font-style: italic,
+		),
+		strike: (
+			_alias: ':is(del, s)',
+			text-decoration: line-through,
+		),
+		underline: (
+			_alias: ':is(ins, u)',
+			text-decoration: underline,
+		),
+		abbr: (
+			_alias: 'abbr[title]',
+			text-decoration: underline dotted,
+			cursor: help,
+		),
+		small: (
+			_alias: 'small',
+			font-size: 0.875em,
+		),
+		mark: (
+			_alias: 'mark',
+			padding-inline: 0.1em,
+			background-color: var(--color-surface-warning),
+		),
+		script: (
+			_alias: ':is(sub, sup)',
+			position: relative,
+			font-size: 0.75em,
+			line-height: 0,
+		),
+		sub: (
+			_alias: 'sub',
+			bottom: -0.25em,
+		),
+		sup: (
+			_alias: 'sup',
+			top: -0.5em,
+		),
+		kbd: (
+			_alias: 'kbd',
+			padding: 0.1em 0.35em,
+			border: var(--border) solid var(--color-surface-4),
+			border-bottom-width: var(--spacing-2),
+			border-radius: var(--rounded),
+			font-family: var(--font-mono),
+			font-size: 0.875em,
+		),
+		list: (
+			_alias: ':is(ul, ol)',
+			padding-inline-start: 1.5em,
+		),
+		ul: (
+			_alias: 'ul',
+			list-style-type: disc,
+		),
+		ol: (
+			_alias: 'ol',
+			list-style-type: decimal,
+		),
+		item-flow: (
+			_alias: 'li + li',
+			margin-block-start: 0.25em,
+		),
+		nested-list: (
+			_alias: 'li > :is(ul, ol)',
+			margin-block-start: 0.25em,
+		),
+		// The checkbox of a task list item, which the reset leaves with no
+		// appearance and no size
+		task: (
+			_alias: "li > input[type='checkbox']",
+			appearance: auto,
+			margin-inline-end: 0.5em,
+			vertical-align: middle,
+		),
+		dt: (
+			_alias: 'dt',
+			font-weight: var(--font-semibold),
+		),
+		dd: (
+			_alias: 'dd',
+			margin-inline-start: 1.5em,
+		),
+		blockquote: (
+			_alias: 'blockquote',
+			margin-inline: 0,
+			padding-inline-start: 1em,
+			border-inline-start: var(--spacing-4) solid var(--color-surface-3),
+			color: var(--color-word-3),
+		),
+		code: (
+			_alias: ':not(pre) > code',
+			padding: 0.1em 0.3em,
+			border-radius: var(--rounded),
+			background-color: var(--color-surface-1),
+			font-family: var(--font-mono),
+			font-size: 0.875em,
+		),
+		pre: (
+			_alias: 'pre',
+			overflow: auto,
+			padding: 0.75em 1em,
+			border: var(--border) solid var(--color-surface-3),
+			border-radius: var(--rounded-md),
+			background-color: var(--color-surface-1),
+			font-family: var(--font-mono),
+			font-size: 0.875em,
+			line-height: var(--leading-snug),
+			white-space: pre,
+		),
+		table: (
+			_alias: 'table',
+			width: 100%,
+			border-collapse: collapse,
+			font-size: 0.875em,
+		),
+		cell: (
+			_alias: ':is(th, td)',
+			padding: 0.375em 0.625em,
+			border: var(--border) solid var(--color-surface-3),
+			text-align: start,
+			vertical-align: top,
+		),
+		th: (
+			_alias: 'th',
+			background-color: var(--color-surface-1),
+			font-weight: var(--font-semibold),
+		),
+		hr: (
+			_alias: 'hr',
+			margin-block: 1.5em,
+			border: 0,
+			border-block-start: var(--border) solid var(--color-surface-3),
+		),
+		img: (
+			_alias: 'img',
+			max-width: 100%,
+			height: auto,
+			border-radius: var(--rounded-md),
+		),
+		details: (
+			_alias: 'details',
+			padding: 0.5em 0.75em,
+			border: var(--border) solid var(--color-surface-3),
+			border-radius: var(--rounded-md),
+			background-color: var(--color-surface-1),
+		),
+		summary: (
+			_alias: 'summary',
+			font-weight: var(--font-semibold),
+			cursor: pointer,
+		),
+		summary-open: (
+			_alias: 'details[open] > summary',
+			margin-block-end: 0.5em,
+		),
+	),
+	modifier: (
+		// Rich text at the density of a field or a list: headings at the size
+		// of the text, the gaps halved
+		compact: (
+			element: (
+				flow: (
+					margin-block-start: 0.375em,
+				),
+				heading-flow: (
+					margin-block-start: 0.75em,
+				),
+				h1: (
+					font-size: 1em,
+				),
+				h2: (
+					font-size: 1em,
+				),
+				h3: (
+					font-size: 1em,
+				),
+				item-flow: (
+					margin-block-start: 0,
+				),
+				hr: (
+					margin-block: 0.75em,
+				),
+			),
+		),
+	),
+) !default;

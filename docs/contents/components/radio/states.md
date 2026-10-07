@@ -18,7 +18,7 @@ wrapperClass: md:w-9/12 mx-auto flex justify-center flex-wrap
            checked="checked" />
     Checked
 </label>
-<label class="vv-radio" for="radio-option-checked">
+<label class="vv-radio" for="radio-option-focus">
     <input id="radio-option-focus" 
            type="radio" 
            name="radio-option-focus" 

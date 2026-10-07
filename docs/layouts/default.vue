@@ -48,6 +48,7 @@
 				type="button"
 				class="vv-button vv-button--action-quiet mr-sm md:none"
 				title="Toggle menu"
+				:aria-expanded="isAsideOpen"
 				@click.stop="toggleAside()">
 				<IconifyIcon icon="akar-icons:three-line-horizontal" />
 			</button>
@@ -115,20 +116,16 @@
 									<ul
 										v-if="section.children"
 										class="vv-nav__menu"
-										role="menu"
 										:aria-labelledby="`section-${sectionIndex}`">
 										<li
 											v-for="(
 												child, childIndex
 											) in section.children"
 											:key="childIndex"
-											role="presentation"
 											class="vv-nav__item">
 											<RouterLink
 												class="vv-nav__item-label"
-												:to="child.to"
-												tabindex="0"
-												role="menuitem">
+												:to="child.to">
 												{{ child.name }}
 												<div
 													v-if="

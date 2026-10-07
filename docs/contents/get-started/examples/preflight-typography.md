@@ -42,7 +42,7 @@ wrapperClass: md:w-9/12 mx-auto preflight
     <p>Superscript<sup>®</sup>.</p>
     <p>Subscript for things like H<sub>2</sub>O.</p>
     <p>
-        <small>This small text is small for for fine print, etc.</small>
+        <small>This small text is small for fine print, etc.</small>
     </p>
     <p>
         Abbreviation:
@@ -66,4 +66,21 @@ wrapperClass: md:w-9/12 mx-auto preflight
         The time element:
         <time datetime='2013-04-06T12:32+00:00'>2 weeks ago</time>
     </p>
+    <ul>
+        <li>An unordered list</li>
+        <li>With a second item</li>
+    </ul>
+    <ol type="i">
+        <li>An ordered list numbered by its <code>type</code></li>
+        <li>With a second item</li>
+    </ol>
+    <blockquote>A blockquote sets a quotation apart from the text around it.</blockquote>
+    <p>Inline <code>code</code> sits in the line of text.</p>
+    <pre>A pre block
+    keeps its spaces and line breaks.</pre>
+    <dl>
+        <dt>Term</dt>
+        <dd>The description of the term.</dd>
+    </dl>
+    <progress value="40" max="100" aria-label="Progress">40%</progress>
 </div>
