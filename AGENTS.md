@@ -153,7 +153,13 @@ outputs: that is what tells you which rules moved.
   than `--color-surface-2` needs `$color-readable-depth` raised, not a darker shade. A color
   that has to be seen but not read, the bar of `vv-progress`, a focus ring, a border that
   shows a state, takes `--color-brand-graphic`, which keeps 3:1 on the same surfaces.
-  `check:colors` fails on a `var(--color-*)` that nothing declares.
+  `check:colors` fails on a `var(--color-*)` that nothing declares, and on an outline drawn
+  in a palette color outside its graphic role.
+- **The color tokens an application reads at runtime are a contract.** The contrast, cover,
+  readable and graphic tokens, their `text-` utilities, the selector and the layer they are
+  declared on and the order of the layers are read by name from applications that set
+  their brand at runtime, and region 6 of `check:colors` fails on a rename. Changing one is a
+  breaking change: say so in the changelog and update the check in the same commit.
 - **The first line offset is spelled out, not factored out.** Five declarations centre an icon
   on the first line of a label that wraps, in `$vv-alert`, `$vv-nav`, `$vv-checkbox`, `$vv-radio`
   and the `self-first-line` utility, each as `calc((1lh - <the size>) / 2)`. The component maps

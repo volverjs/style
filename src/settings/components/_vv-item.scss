@@ -48,7 +48,7 @@ $vv-item: (
 			state: (
 				// Inset, so the scrolling list around the row does not clip it
 				focus-visible: (
-					outline: var(--spacing-2) solid var(--color-brand),
+					outline: var(--spacing-2) solid var(--color-brand-graphic),
 					outline-offset: calc(var(--spacing-2) * -1),
 				),
 				disabled: (
@@ -128,7 +128,7 @@ $vv-item: (
 					color: var(--color-word-1),
 				),
 				focus-visible: (
-					outline: var(--spacing-2) solid var(--color-brand),
+					outline: var(--spacing-2) solid var(--color-brand-graphic),
 					outline-offset: calc(var(--spacing-2) * -1),
 				),
 			),

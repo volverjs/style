@@ -15,7 +15,11 @@
 //   @supports;
 // - the cases that must not move: neutrals set explicitly, the compile time
 //   branch without $use-color-mix, the color utilities;
-// - that every color token the compiled library reads is declared.
+// - that every color token the compiled library reads is declared;
+// - in the build an application compiles, with layers and without custom
+//   properties for the components: that no outline is drawn in a palette
+//   color outside its graphic role, and that the tokens and the text
+//   utilities it reads keep their names, their selector and their layer.
 // No browser runs here. The relative expressions are resolved with the
 // formulas of CSS Color 4, the ones the engines apply; what Chrome, Firefox
 // and Safari 17 actually compute was measured when the tokens were written.
@@ -751,6 +755,7 @@ check(
 )
 // #endregion
 
+// #region 5. declared tokens
 // every color token the library reads is declared, in the light props or in
 // the dark theme: a component that names a shade or a role that no longer
 // exists would otherwise fall back to the inherited color without a word
@@ -769,6 +774,122 @@ const missing = [
 check(!missing.length, `undeclared color tokens: ${missing.join(', ')}`)
 // #endregion
 
+// #region 6. the build a consumer compiles
+// Layers on and no custom properties for the components, which is how an
+// application that sets its brand at runtime compiles the library. It reads
+// the names below from its own CSS and declares the order of the layers
+// before any stylesheet, so a rename would break it with every check above
+// still passing. That the dark theme does not redeclare --color-tint is
+// checked with the neutrals.
+const consumer = `@use 'src/context' with ($use-css-layers: true, $use-custom-props-for-components: false);`
+const layered = compile(`${consumer} @use 'src/volver';`)
+const layeredDark = compile(`${consumer} @use 'src/themes/dark/volver';`)
+
+// a palette color drawn around a control keeps 3:1 with what it sits on only
+// in its graphic role
+const rings = [
+	...new Set(
+		[
+			...(layered + layeredDark).matchAll(
+				/(?<![\w-])outline(?:-color)?\s*:\s*([^;}]+)/g,
+			),
+		].flatMap(([, value]) =>
+			[
+				...value.matchAll(
+					/var\((--color-(?:brand|accent|success|danger|info|warning)[a-z0-9-]*)\)/g,
+				),
+			]
+				.map(([, name]) => name)
+				.filter((name) => !name.endsWith('-graphic')),
+		),
+	),
+]
+check(
+	!rings.length,
+	`an outline is drawn in a palette color outside its graphic role: ${rings.join(', ')}`,
+)
+
+const roleNames = ['brand', 'accent', 'success', 'danger', 'info', 'warning']
+const themedNames = roleNames.flatMap((name) => [
+	`--color-${name}-readable`,
+	`--color-${name}-readable-strong`,
+	`--color-surface-${name}-readable`,
+	`--color-${name}-graphic`,
+])
+const lightNames = [
+	'--color-tint',
+	...themedNames,
+	...roleNames.flatMap((name) =>
+		[
+			'',
+			'-darken-1',
+			'-darken-2',
+			'-darken-3',
+			'-darken-4',
+			'-darken-5',
+		].flatMap((shadeName) => [
+			`--color-${name}${shadeName}-contrast`,
+			`--color-${name}${shadeName}-cover`,
+		]),
+	),
+]
+// the selector and the layer of every rule that declares a token
+const placesOf = (css, name) =>
+	[...css.matchAll(new RegExp(String.raw`(?<![\w-])${name}\s*:`, 'g'))].map(
+		({ index }) => {
+			const open = css.lastIndexOf('{', index)
+			const start = Math.max(
+				css.lastIndexOf('{', open - 1),
+				css.lastIndexOf('}', open),
+				css.lastIndexOf(';', open),
+			)
+			return `${css.slice(css.lastIndexOf('@layer ', index)).match(/^@layer ([\w.-]+) \{/)?.[1]} ${css.slice(start + 1, open).trim()}`
+		},
+	)
+const misplaced = (css, names, expected) =>
+	names.filter((name) => {
+		const places = new Set(placesOf(css, name))
+		return (
+			places.size !== expected.length ||
+			!expected.every((place) => places.has(place))
+		)
+	})
+const lightMisplaced = misplaced(layered, lightNames, [
+	'volver.props :where(:host, :root, .theme)',
+])
+check(
+	!lightMisplaced.length,
+	`not declared on :where(:host, :root, .theme) in @layer volver.props alone: ${lightMisplaced.join(', ')}`,
+)
+const darkMisplaced = misplaced(layeredDark, themedNames, [
+	'volver.themes :where(:host, :root, .theme):not(.theme--light)',
+	'volver.themes :where(.theme.theme--dark)',
+])
+check(
+	!darkMisplaced.length,
+	`not redeclared by the dark theme in @layer volver.themes, under prefers-color-scheme and .theme--dark: ${darkMisplaced.join(', ')}`,
+)
+check(
+	layered.match(/@layer [^{;]+[{;]/)?.[0] ===
+		'@layer volver.reset, volver.preflight, volver.props, volver.components, volver.themes, volver.utilities;',
+	'the first statement is not the order of the six volver layers',
+)
+const textUtilities = roleNames.flatMap((name) => [
+	`text-${name}-contrast`,
+	`text-${name}-readable`,
+	`text-${name}-readable-strong`,
+	`text-surface-${name}-readable`,
+	`text-${name}-graphic`,
+])
+const absentUtilities = textUtilities.filter(
+	(name) => !new RegExp(String.raw`\.${name}(?![\w-])`).test(utilities),
+)
+check(
+	!absentUtilities.length,
+	`text utilities are gone: ${absentUtilities.join(', ')}`,
+)
+// #endregion
+
 compiler.dispose()
 
 console.table(table)
@@ -780,5 +901,5 @@ if (failures.length) {
 	process.exit(1)
 }
 console.log(
-	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable and graphic roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens.`,
+	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable and graphic roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens, focus rings, consumer contract.`,
 )
