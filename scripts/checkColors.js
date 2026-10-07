@@ -778,23 +778,28 @@ check(!missing.length, `undeclared color tokens: ${missing.join(', ')}`)
 // checked with the neutrals.
 const consumer = `@use 'src/context' with ($use-css-layers: true, $use-custom-props-for-components: false);`
 
+// the index of the quote that closes the string opened at `index`
+const stringEnd = (css, index) => {
+	let end = index + 1
+	while (css[end] !== css[index]) {
+		end += css[end] === '\\' ? 2 : 1
+	}
+	return end
+}
 // the stylesheet with its comments blanked out, strings left alone
 const withoutComments = (css) => {
 	const parts = []
 	let start = 0
-	for (let index = 0; index < css.length; index++) {
-		const char = css[index]
-		if (char === '"' || char === "'") {
-			for (index++; css[index] !== char; index++) {
-				if (css[index] === '\\') {
-					index++
-				}
-			}
-		} else if (char === '/' && css[index + 1] === '*') {
+	let index = 0
+	while (index < css.length) {
+		if (css[index] === '"' || css[index] === "'") {
+			index = stringEnd(css, index)
+		} else if (css.startsWith('/*', index)) {
 			parts.push(css.slice(start, index), ' ')
 			index = css.indexOf('*/', index + 2) + 1
 			start = index + 1
 		}
+		index++
 	}
 	return parts.join('') + css.slice(start)
 }
@@ -809,37 +814,39 @@ const rulesOf = (source) => {
 	let start = 0
 	let depth = 0
 	const text = (end) => css.slice(start, end).trim().replaceAll(/\s+/g, ' ')
-	for (let index = 0; index < css.length; index++) {
+	const declare = (end) => {
+		if (text(end) && stack.length) {
+			stack.at(-1).body.push(text(end))
+		}
+	}
+	const close = () => {
+		const rule = stack.pop()
+		const context = stack.map(({ prelude }) => prelude)
+		rules.push({
+			path: [...context, rule.prelude].join(' > '),
+			context,
+			selector: rule.prelude,
+			body: rule.body,
+		})
+	}
+	let index = 0
+	while (index < css.length) {
 		const char = css[index]
 		if (char === '"' || char === "'") {
-			for (index++; css[index] !== char; index++) {
-				if (css[index] === '\\') {
-					index++
-				}
-			}
-		} else if (char === '(') {
-			depth++
-		} else if (char === ')') {
-			depth--
+			index = stringEnd(css, index)
+		} else if (char === '(' || char === ')') {
+			depth += char === '(' ? 1 : -1
 		} else if (char === '{') {
 			stack.push({ prelude: text(index), body: [] })
 			start = index + 1
-		} else if ((char === ';' && !depth) || char === '}') {
-			if (text(index) && stack.length) {
-				stack.at(-1).body.push(text(index))
-			}
+		} else if (char === '}' || (char === ';' && !depth)) {
+			declare(index)
 			if (char === '}') {
-				const rule = stack.pop()
-				const context = stack.map(({ prelude }) => prelude)
-				rules.push({
-					path: [...context, rule.prelude].join(' > '),
-					context,
-					selector: rule.prelude,
-					body: rule.body,
-				})
+				close()
 			}
 			start = index + 1
 		}
+		index++
 	}
 	return rules
 }
@@ -848,9 +855,18 @@ const layered = rulesOf(layeredCss)
 const layeredDark = rulesOf(
 	compile(`${consumer} @use 'src/themes/dark/volver';`),
 )
+const fieldModules = [
+	'vv-input-text',
+	'vv-textarea',
+	'vv-select',
+	'vv-input-file',
+	'vv-field',
+]
+	.map((name) => `@use 'src/components/${name}';`)
+	.join(' ')
 const outlinedFields = rulesOf(
 	compile(
-		`${consumer} @use 'src/presets/outlined-fields'; @use 'src/props'; ${['vv-input-text', 'vv-textarea', 'vv-select', 'vv-input-file', 'vv-field'].map((name) => `@use 'src/components/${name}';`).join(' ')}`,
+		`${consumer} @use 'src/presets/outlined-fields'; @use 'src/props'; ${fieldModules}`,
 	),
 )
 
@@ -906,40 +922,41 @@ const builds = [
 	[outlinedFields, themesOf(tokensOf(outlinedFields, propsRoot))],
 	[layeredDark, themesOf(lightTokens).slice(1)],
 ]
+// why a palette color read by a focus indicator does not keep 3:1, if it
+// does not: a ring, the caret and the bar of a field take the graphic role,
+// the other declarations of a focus rule may also write a text role
+const faultOf = (name, { ring, strict, selector }) => {
+	if (!name.startsWith('--color-gray')) {
+		const roles = strict
+			? /-graphic$/
+			: /-(?:graphic|readable|readable-strong|contrast)$/
+		return roles.test(name) ? null : 'not the graphic role'
+	}
+	const lightGray =
+		ring && name.includes('-lighten-') && !selector.includes('static-light')
+	return lightGray ? 'a light gray' : null
+}
 const focusFaults = new Set()
-function checkFocus(selector, body, theme, tokens) {
+const checkFocus = (selector, body, theme, tokens) => {
 	const onFocus = /focus/.test(selector)
 	const fieldBar = /__wrapper\)::after/.test(selector)
 	for (const [property, value] of body.map(declarationOf)) {
 		const ring = /^(?:outline|outline-color|caret-color)$/.test(property)
-		if (!ring && !onFocus && !fieldBar) {
-			continue
-		}
-		const resolved = follow(value, tokens)
-		const fault = (reason) =>
-			focusFaults.add(
-				`${property}: ${value} (${reason}, ${theme} theme) in ${selector.slice(0, 90)}`,
+		if (ring || onFocus || fieldBar) {
+			const resolved = follow(value, tokens)
+			const reasons = [...resolved.matchAll(paletteVar)].map(([, name]) =>
+				faultOf(name, { ring, strict: ring || fieldBar, selector }),
 			)
-		if (property.startsWith('outline') && /currentcolor/i.test(resolved)) {
-			fault('currentcolor')
-		}
-		for (const [, name] of resolved.matchAll(paletteVar)) {
-			if (name.startsWith('--color-gray')) {
-				if (
-					ring &&
-					name.includes('-lighten-') &&
-					!selector.includes('static-light')
-				) {
-					fault('a light gray')
-				}
-			} else if (
-				!(
-					ring || fieldBar
-						? /-graphic$/
-						: /-(?:graphic|readable|readable-strong|contrast)$/
-				).test(name)
+			if (
+				property.startsWith('outline') &&
+				/currentcolor/i.test(resolved)
 			) {
-				fault('not the graphic role')
+				reasons.push('currentcolor')
+			}
+			for (const reason of reasons.filter(Boolean)) {
+				focusFaults.add(
+					`${property}: ${value} (${reason}, ${theme} theme) in ${selector.slice(0, 90)}`,
+				)
 			}
 		}
 	}
