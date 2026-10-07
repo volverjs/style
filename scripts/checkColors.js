@@ -17,9 +17,10 @@
 //   branch without $use-color-mix, the color utilities;
 // - that every color token the compiled library reads is declared;
 // - in the build an application compiles, with layers and without custom
-//   properties for the components: that no outline is drawn in a palette
-//   color outside its graphic role, and that the tokens and the text
-//   utilities it reads keep their names, their selector and their layer.
+//   properties for the components, and in the outlined preset: that what
+//   shows the focus is in the graphic role of a palette color, never in
+//   `currentcolor` or a light gray, and that the tokens and the text
+//   utilities it reads keep their names, their rules and their layers.
 // No browser runs here. The relative expressions are resolved with the
 // formulas of CSS Color 4, the ones the engines apply; what Chrome, Firefox
 // and Safari 17 actually compute was measured when the tokens were written.
@@ -696,10 +697,11 @@ check(
 	'vv-button computes a contrast or a cover itself',
 )
 
-// a field paints its bar in its color and writes its hint in the readable role
+// a field paints its bar in the graphic role of its color and writes its hint
+// in the readable role
 const input = compile(`@use 'src/context'; @use 'src/props';`)
 check(
-	input.includes('--input-valid-color: var(--color-success);') &&
+	input.includes('--input-valid-color: var(--color-success-graphic);') &&
 		input.includes(
 			'--input-valid-text-color: var(--color-success-readable);',
 		),
@@ -708,23 +710,16 @@ check(
 
 const utilities = compile(`@use 'src/context'; @use 'src/utilities/colors';`)
 check(
-	/\.text-brand-contrast\b/.test(utilities),
-	'.text-brand-contrast is missing',
-)
-check(
 	!/\.(bg|text|border|decoration)-tint\b/.test(utilities),
 	'--color-tint has utilities',
 )
+// the readable roles and the contrast texts are text utilities alone (that
+// each one exists is checked in the consumer build), and a cover has none
 check(
-	/\.text-brand-readable\b/.test(utilities) &&
-		/\.text-brand-readable-strong\b/.test(utilities) &&
-		/\.text-surface-brand-readable\b/.test(utilities) &&
-		/\.text-brand-darken-1-contrast\b/.test(utilities) &&
-		!/\.(bg|border|decoration)-[a-z0-9-]*(readable|contrast)\b/.test(
-			utilities,
-		) &&
-		!/-cover\b/.test(utilities),
-	'the readable roles or the contrast texts are not text utilities alone, or a cover has a utility',
+	!/\.(bg|border|decoration)-[a-z0-9-]*(readable|contrast)\b/.test(
+		utilities,
+	) && !/-cover\b/.test(utilities),
+	'a readable role or a contrast text has a utility other than text-, or a cover has a utility',
 )
 // the graphic roles have every utility, reading the token without repeating
 // its expression as a fallback
@@ -782,34 +777,186 @@ check(!missing.length, `undeclared color tokens: ${missing.join(', ')}`)
 // still passing. That the dark theme does not redeclare --color-tint is
 // checked with the neutrals.
 const consumer = `@use 'src/context' with ($use-css-layers: true, $use-custom-props-for-components: false);`
-const layered = compile(`${consumer} @use 'src/volver';`)
-const layeredDark = compile(`${consumer} @use 'src/themes/dark/volver';`)
 
-// a palette color drawn around a control keeps 3:1 with what it sits on only
-// in its graphic role
-const rings = [
-	...new Set(
-		[
-			...(layered + layeredDark).matchAll(
-				/(?<![\w-])outline(?:-color)?\s*:\s*([^;}]+)/g,
-			),
-		].flatMap(([, value]) =>
-			[
-				...value.matchAll(
-					/var\((--color-(?:brand|accent|success|danger|info|warning)[a-z0-9-]*)\)/g,
-				),
-			]
-				.map(([, name]) => name)
-				.filter((name) => !name.endsWith('-graphic')),
-		),
+// the stylesheet with its comments blanked out, strings left alone
+const withoutComments = (css) => {
+	const parts = []
+	let start = 0
+	for (let index = 0; index < css.length; index++) {
+		const char = css[index]
+		if (char === '"' || char === "'") {
+			for (index++; css[index] !== char; index++) {
+				if (css[index] === '\\') {
+					index++
+				}
+			}
+		} else if (char === '/' && css[index + 1] === '*') {
+			parts.push(css.slice(start, index), ' ')
+			index = css.indexOf('*/', index + 2) + 1
+			start = index + 1
+		}
+	}
+	return parts.join('') + css.slice(start)
+}
+// every rule with its selector, the at-rules and the selectors around it
+// (context), the two joined by ' > ' (path), and its declarations; a brace or
+// a semicolon inside a string or between parentheses, as in a data URI, does
+// not end anything
+const rulesOf = (source) => {
+	const css = withoutComments(source)
+	const rules = []
+	const stack = []
+	let start = 0
+	let depth = 0
+	const text = (end) => css.slice(start, end).trim().replaceAll(/\s+/g, ' ')
+	for (let index = 0; index < css.length; index++) {
+		const char = css[index]
+		if (char === '"' || char === "'") {
+			for (index++; css[index] !== char; index++) {
+				if (css[index] === '\\') {
+					index++
+				}
+			}
+		} else if (char === '(') {
+			depth++
+		} else if (char === ')') {
+			depth--
+		} else if (char === '{') {
+			stack.push({ prelude: text(index), body: [] })
+			start = index + 1
+		} else if ((char === ';' && !depth) || char === '}') {
+			if (text(index) && stack.length) {
+				stack.at(-1).body.push(text(index))
+			}
+			if (char === '}') {
+				const rule = stack.pop()
+				const context = stack.map(({ prelude }) => prelude)
+				rules.push({
+					path: [...context, rule.prelude].join(' > '),
+					context,
+					selector: rule.prelude,
+					body: rule.body,
+				})
+			}
+			start = index + 1
+		}
+	}
+	return rules
+}
+const layeredCss = compile(`${consumer} @use 'src/volver';`)
+const layered = rulesOf(layeredCss)
+const layeredDark = rulesOf(
+	compile(`${consumer} @use 'src/themes/dark/volver';`),
+)
+const outlinedFields = rulesOf(
+	compile(
+		`${consumer} @use 'src/presets/outlined-fields'; @use 'src/props'; ${['vv-input-text', 'vv-textarea', 'vv-select', 'vv-input-file', 'vv-field'].map((name) => `@use 'src/components/${name}';`).join(' ')}`,
 	),
-]
-check(
-	!rings.length,
-	`an outline is drawn in a palette color outside its graphic role: ${rings.join(', ')}`,
 )
 
-const roleNames = ['brand', 'accent', 'success', 'danger', 'info', 'warning']
+// What shows where the focus is, a ring, the caret, the bar under a field or
+// a border that changes on focus, and the bar and the border of a valid or
+// invalid field keep 3:1 with what they sit on only in the graphic role of a
+// palette color. A ring in `currentcolor` takes the contrast text of a
+// filled control, white on a white page, and a light gray one is not seen on
+// the light surfaces, so neither is allowed outside the static button meant
+// for dark media; a ring in `--color-gray` or darker, or in another neutral,
+// does not follow the brand and is left to review. A declaration that reads
+// another custom property is followed to the props, and in the dark theme to
+// what it redeclares: the outlined fields reach the brand through
+// --input-focus-color, and a field its state colors through
+// --input-invalid-color.
+const roleNames = Object.keys(palette)
+const paletteVar = new RegExp(
+	String.raw`var\((--color-(?:${[...roleNames, 'gray'].join('|')})[a-z0-9-]*)\s*[,)]`,
+	'g',
+)
+const declarationOf = (text) => {
+	const colon = text.indexOf(':')
+	return [text.slice(0, colon).trim(), text.slice(colon + 1).trim()]
+}
+// the custom properties a rule declares, to follow a value that reads one:
+// those of the props of a build, and in the dark theme those it redeclares
+const tokensOf = (rules, path) =>
+	new Map(
+		rules
+			.filter((rule) => rule.path === path)
+			.flatMap(({ body }) => body.map(declarationOf)),
+	)
+const propsRoot = '@layer volver.props > :where(:host, :root, .theme)'
+const darkTokens = tokensOf(
+	layeredDark,
+	'@layer volver.themes > :where(.theme.theme--dark)',
+)
+const follow = (value, tokens, depth = 0) =>
+	value.replaceAll(/var\((--(?!color-)[a-z0-9-]+)\)/g, (match, name) =>
+		tokens.has(name) && depth < 8
+			? follow(tokens.get(name), tokens, depth + 1)
+			: match,
+	)
+// each build with the tokens its rules are read with, in the light theme
+// and in the dark one; the rules of the dark theme apply only in the latter
+const themesOf = (tokens) => [
+	['light', tokens],
+	['dark', new Map([...tokens, ...darkTokens])],
+]
+const lightTokens = tokensOf(layered, propsRoot)
+const builds = [
+	[layered, themesOf(lightTokens)],
+	[outlinedFields, themesOf(tokensOf(outlinedFields, propsRoot))],
+	[layeredDark, themesOf(lightTokens).slice(1)],
+]
+const focusFaults = new Set()
+function checkFocus(selector, body, theme, tokens) {
+	const onFocus = /focus/.test(selector)
+	const fieldBar = /__wrapper\)::after/.test(selector)
+	for (const [property, value] of body.map(declarationOf)) {
+		const ring = /^(?:outline|outline-color|caret-color)$/.test(property)
+		if (!ring && !onFocus && !fieldBar) {
+			continue
+		}
+		const resolved = follow(value, tokens)
+		const fault = (reason) =>
+			focusFaults.add(
+				`${property}: ${value} (${reason}, ${theme} theme) in ${selector.slice(0, 90)}`,
+			)
+		if (property.startsWith('outline') && /currentcolor/i.test(resolved)) {
+			fault('currentcolor')
+		}
+		for (const [, name] of resolved.matchAll(paletteVar)) {
+			if (name.startsWith('--color-gray')) {
+				if (
+					ring &&
+					name.includes('-lighten-') &&
+					!selector.includes('static-light')
+				) {
+					fault('a light gray')
+				}
+			} else if (
+				!(
+					ring || fieldBar
+						? /-graphic$/
+						: /-(?:graphic|readable|readable-strong|contrast)$/
+				).test(name)
+			) {
+				fault('not the graphic role')
+			}
+		}
+	}
+}
+for (const [rules, themes] of builds) {
+	for (const { selector, body } of rules) {
+		for (const [theme, tokens] of themes) {
+			checkFocus(selector, body, theme, tokens)
+		}
+	}
+}
+check(
+	!focusFaults.size,
+	`a focus indicator does not keep 3:1:\n  ${[...focusFaults].join('\n  ')}`,
+)
+
+const shadeNames = ['', ...[1, 2, 3, 4, 5].map((step) => `-darken-${step}`)]
 const themedNames = roleNames.flatMap((name) => [
 	`--color-${name}-readable`,
 	`--color-${name}-readable-strong`,
@@ -820,73 +967,91 @@ const lightNames = [
 	'--color-tint',
 	...themedNames,
 	...roleNames.flatMap((name) =>
-		[
-			'',
-			'-darken-1',
-			'-darken-2',
-			'-darken-3',
-			'-darken-4',
-			'-darken-5',
-		].flatMap((shadeName) => [
+		shadeNames.flatMap((shadeName) => [
 			`--color-${name}${shadeName}-contrast`,
 			`--color-${name}${shadeName}-cover`,
 		]),
 	),
 ]
-// the selector and the layer of every rule that declares a token
-const placesOf = (css, name) =>
-	[...css.matchAll(new RegExp(String.raw`(?<![\w-])${name}\s*:`, 'g'))].map(
-		({ index }) => {
-			const open = css.lastIndexOf('{', index)
-			const start = Math.max(
-				css.lastIndexOf('{', open - 1),
-				css.lastIndexOf('}', open),
-				css.lastIndexOf(';', open),
-			)
-			return `${css.slice(css.lastIndexOf('@layer ', index)).match(/^@layer ([\w.-]+) \{/)?.[1]} ${css.slice(start + 1, open).trim()}`
-		},
-	)
-const misplaced = (css, names, expected) =>
+// a token is declared in these rules, with these at-rules around them, and
+// nowhere else
+const misplaced = (rules, names, expected) =>
 	names.filter((name) => {
-		const places = new Set(placesOf(css, name))
+		const places = new Set(
+			rules
+				.filter(({ body }) =>
+					body.some((text) => text.startsWith(`${name}:`)),
+				)
+				.map(({ path }) => path),
+		)
 		return (
 			places.size !== expected.length ||
 			!expected.every((place) => places.has(place))
 		)
 	})
 const lightMisplaced = misplaced(layered, lightNames, [
-	'volver.props :where(:host, :root, .theme)',
+	'@layer volver.props > :where(:host, :root, .theme)',
 ])
 check(
 	!lightMisplaced.length,
 	`not declared on :where(:host, :root, .theme) in @layer volver.props alone: ${lightMisplaced.join(', ')}`,
 )
 const darkMisplaced = misplaced(layeredDark, themedNames, [
-	'volver.themes :where(:host, :root, .theme):not(.theme--light)',
-	'volver.themes :where(.theme.theme--dark)',
+	'@layer volver.themes > @media (prefers-color-scheme: dark) > :where(:host, :root, .theme):not(.theme--light)',
+	'@layer volver.themes > :where(.theme.theme--dark)',
 ])
 check(
 	!darkMisplaced.length,
-	`not redeclared by the dark theme in @layer volver.themes, under prefers-color-scheme and .theme--dark: ${darkMisplaced.join(', ')}`,
+	`not redeclared by the dark theme in @layer volver.themes, under prefers-color-scheme and .theme--dark alone: ${darkMisplaced.join(', ')}`,
 )
 check(
-	layered.match(/@layer [^{;]+[{;]/)?.[0] ===
-		'@layer volver.reset, volver.preflight, volver.props, volver.components, volver.themes, volver.utilities;',
+	withoutComments(layeredCss)
+		.trimStart()
+		.startsWith(
+			'@layer volver.reset, volver.preflight, volver.props, volver.components, volver.themes, volver.utilities;',
+		),
 	'the first statement is not the order of the six volver layers',
 )
+// each text utility sits in @layer volver.utilities and reads its own token;
+// a utility that preflight extends shares its rule with the tags, so the
+// selector is looked for in the list
+const selectorsOf = (selector) => {
+	const selectors = []
+	let depth = 0
+	let start = 0
+	for (let index = 0; index < selector.length; index++) {
+		if (selector[index] === '(') {
+			depth++
+		} else if (selector[index] === ')') {
+			depth--
+		} else if (selector[index] === ',' && !depth) {
+			selectors.push(selector.slice(start, index).trim())
+			start = index + 1
+		}
+	}
+	return [...selectors, selector.slice(start).trim()]
+}
 const textUtilities = roleNames.flatMap((name) => [
-	`text-${name}-contrast`,
+	...shadeNames.map((shadeName) => `text-${name}${shadeName}-contrast`),
 	`text-${name}-readable`,
 	`text-${name}-readable-strong`,
 	`text-surface-${name}-readable`,
 	`text-${name}-graphic`,
 ])
 const absentUtilities = textUtilities.filter(
-	(name) => !new RegExp(String.raw`\.${name}(?![\w-])`).test(utilities),
+	(name) =>
+		!layered.some(
+			({ context, selector, body }) =>
+				context.join(' > ') === '@layer volver.utilities' &&
+				selectorsOf(selector).includes(`:where(.${name})`) &&
+				body.includes(
+					`color: var(--color-${name.slice('text-'.length)})`,
+				),
+		),
 )
 check(
 	!absentUtilities.length,
-	`text utilities are gone: ${absentUtilities.join(', ')}`,
+	`text utilities are gone, moved or read another token: ${absentUtilities.join(', ')}`,
 )
 // #endregion
 
@@ -901,5 +1066,5 @@ if (failures.length) {
 	process.exit(1)
 }
 console.log(
-	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable and graphic roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens, focus rings, consumer contract.`,
+	`Color checks passed: contrast threshold ${cssThreshold}, contrast of the shades and button states, neutrals, readable and graphic roles, Safari 17 steps, explicit values, legacy branch, utilities, declared tokens, focus indicators, consumer contract.`,
 )

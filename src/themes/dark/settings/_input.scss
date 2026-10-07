@@ -1,8 +1,4 @@
-$dark-input: (
-	invalid: (
-		color: var(--color-danger-lighten-2),
-	),
-	valid: (
-		color: var(--color-success-lighten-2),
-	),
-) !default;
+// The bars and the borders of a valid or invalid field read the graphic roles
+// of success and danger, which the dark theme redeclares, so the fields
+// follow it with nothing here
+$dark-input: () !default;

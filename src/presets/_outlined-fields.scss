@@ -32,7 +32,7 @@ ctx.$input: map.deep-merge(
 		border-color-hover: var(--color-surface-5),
 		border-radius: var(--rounded-lg),
 		// The ring is the only focus indication and has to hold on its own
-		focus-color: var(--color-brand),
+		focus-color: var(--color-brand-graphic),
 		focus-ring: 0 0 0 var(--spacing-3)
 			color-mix(in srgb, var(--input-focus-color) 16%, transparent),
 		invalid-ring: 0 0 0 var(--spacing-3)

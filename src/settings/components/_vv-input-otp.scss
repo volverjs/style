@@ -22,14 +22,14 @@ $vv-input-otp: (
 			font-size: var(--text-20),
 			font-variant-numeric: tabular-nums,
 			text-align: center,
-			caret-color: var(--color-brand),
+			caret-color: var(--color-brand-graphic),
 			transition: border-color var(--duration-150) var(--ease-out),
 			state: (
 				hover: (
 					border-color: var(--color-surface-5),
 				),
 				focus-visible: (
-					border-color: var(--color-brand),
+					border-color: var(--color-brand-graphic),
 					outline: var(--spacing-px) solid var(--color-brand-graphic),
 					outline-offset: 0,
 				),
