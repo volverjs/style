@@ -34,7 +34,7 @@ $vv-badge: (
 		),
 		focus-within: (
 			outline-offset: var(--spacing-4),
-			outline: var(--spacing-px) solid currentcolor,
+			outline: var(--spacing-px) solid var(--color-brand-graphic),
 		),
 	),
 	element: (
@@ -97,24 +97,49 @@ $vv-badge: (
 		danger: (
 			background-color: var(--color-danger),
 			color: var(--color-danger-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-danger-graphic),
+				),
+			),
 		),
 		success: (
 			background-color: var(--color-success),
 			color: var(--color-success-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-success-graphic),
+				),
+			),
 		),
 		// Filled with the darkest shade, so the text is the contrast of that
 		// shade and not of the base color
 		warning: (
 			background-color: var(--color-warning-darken-5),
 			color: var(--color-warning-darken-5-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-warning-graphic),
+				),
+			),
 		),
 		info: (
 			background-color: var(--color-info-darken-5),
 			color: var(--color-info-darken-5-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-info-graphic),
+				),
+			),
 		),
 		accent: (
 			background-color: var(--color-accent),
 			color: var(--color-accent-contrast),
+			state: (
+				focus-within: (
+					outline-color: var(--color-accent-graphic),
+				),
+			),
 		),
 		gray: (
 			background-color: var(--color-gray-darken-1),

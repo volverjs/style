@@ -18,7 +18,7 @@ $component-selector: '.#{ $component-name}';
 // `tabindex="-1"`, and a grid moved across with a roving tabindex gives it to
 // every day but one, so the ring is written here, on the pseudo-class alone.
 @include wrap-with-where($selector: '#{$component-selector}__day:focus-visible', $enabled: $zero-specificity-for-components) {
-	outline: var(--spacing-px) solid var(--color-brand);
+	outline: var(--spacing-px) solid var(--color-brand-graphic);
 	outline-offset: var(--spacing-2);
 }
 

@@ -65,7 +65,7 @@ compile error, because the comma separates configuration entries.
 | `$font-size` `$font-size-dynamic` `$font-weight` `$spacing` `$spacing-dynamic` `$breakpoints` `$colors` | maps | override the scales themselves |
 | `$vv-button` `$vv-card` … one per component | maps | see "Extending a component" |
 | `$components-prefix` | `vv` | class prefix for every component |
-| `$components-names` | map | rename or drop components |
+| `$components-names` | map | rename a component, classes and `--vv-*` properties alike, except in `.preflight`, which extends and leaves out the default `vv-` names: a renamed component loses what preflight gives its bare tags, and one renamed outside the prefix is dressed by it. It cannot drop a component, `scss` emits them all, so cherry-pick the modules to leave some out |
 | `$preflight` | `true` | emit the opinionated base styles |
 | `$use-custom-props-for-components` | `true` | expose `--vv-{block}-*` properties (turn off for a smaller CSS) |
 | `$use-color-mix` | `true` | relative color syntax for shades; `false` falls back to HSL channel variables |
