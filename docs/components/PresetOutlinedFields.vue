@@ -23,21 +23,25 @@
 	@use '@/layers';
 
 	// The keys of `$after` whose value is not the one in `$before`, nested
-	// maps compared key by key
+	// maps compared key by key. Written without `@else`: stylelint, which
+	// SonarCloud runs on the styles of a component, validates `@else` as the
+	// at-rule of CSS Conditional 5, whose syntax refers to an undefined
+	// `<boolean-condition>`, and the whole file fails to parse.
 	@function -changed($before, $after) {
 		$result: ();
 
 		@each $key, $value in $after {
 			$old: map.get($before, $key);
+			$change: $value;
+			$changed: $value != $old;
 
 			@if meta.type-of($value) == 'map' and meta.type-of($old) == 'map' {
-				$nested: -changed($old, $value);
+				$change: -changed($old, $value);
+				$changed: list.length($change) > 0;
+			}
 
-				@if list.length($nested) > 0 {
-					$result: map.set($result, $key, $nested);
-				}
-			} @else if $value != $old {
-				$result: map.set($result, $key, $value);
+			@if $changed {
+				$result: map.set($result, $key, $change);
 			}
 		}
 
@@ -51,8 +55,8 @@
 	.docs-preset-outlined-fields {
 		// The `--input-*` tokens the preset changes, declared on this element
 		// instead of the root. The ones it leaves alone, such as the colours
-		// the dark theme sets for `valid` and `invalid`, keep coming from the
-		// root, as they do in a build with the preset.
+		// of `valid` and `invalid`, keep coming from the root, as they do in a
+		// build with the preset.
 		@include ctx.layer(props, ctx.$use-css-layers, ctx.$layer-prefix) {
 			@include ctx.spread-map-into-props(
 				$map: -changed($-default-input, ctx.$input),
