@@ -14,10 +14,14 @@
 			min-h: min-height
 		)
 {
+	// A dynamic size is a map of its value at each breakpoint, which
+	// --spacing-{size} already resolves: one class reads that token, as
+	// the spacing, gap and inset utilities do, instead of a class per entry
 	@include spread-map-into-utilities(
 		$map: map.merge($spacing, $spacing-dynamic),
 		$class: $class,
 		$attribute: $attribute,
+		$deep: false,
 		$bps: $breakpoints,
 		$prop: spacing,
 		$zero-specificity: $zero-specificity-for-utilities

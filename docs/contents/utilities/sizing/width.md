@@ -8,7 +8,7 @@ spacing: true
 <table-utility prefix="w" property="width" custom-property="w"></table-utility>
 
 ### Spacing scale
-Width can also be set using the static spacing scale, for example `w-96`.
+Width can also be set using the spacing scale: a static step, for example `w-96`, or a dynamic one from `w-xs` to `w-xl`, which grows with the viewport.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">

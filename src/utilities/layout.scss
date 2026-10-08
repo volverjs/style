@@ -14,9 +14,19 @@
 );
 
 // container
+// The first breakpoint starts at 0, a value that caps nothing: up to the
+// next one the container takes the whole width instead of collapsing
 %container {
 	width: 100%;
 	max-width: var(--breakpoint-value, 100%);
+
+	@each $breakpoint, $breakpoint-value in $breakpoints {
+		@if $breakpoint-value == 0 {
+			@include media-breakpoint-down($breakpoint, $breakpoints) {
+				max-width: 100%;
+			}
+		}
+	}
 }
 
 @include wrap-with-where(

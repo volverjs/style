@@ -7,10 +7,13 @@
 	$map: $transition-property,
 	$class: transition-property,
 	$attribute: transition-property,
+	$prop: transition-property,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
 // transition duration and transition delay
+// Both read the duration tokens, which are 0s under prefers-reduced-motion,
+// so a class that sets a duration or a delay follows the preference
 @each $class,
 	$attribute in (duration: transition-duration, delay: transition-delay)
 {
@@ -18,6 +21,7 @@
 		$map: $transition-duration-delay,
 		$class: $class,
 		$attribute: $attribute,
+		$prop: duration,
 		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
@@ -27,6 +31,7 @@
 	$map: $transition-timing-function,
 	$class: ease,
 	$attribute: transition-timing-function,
+	$prop: ease,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 

@@ -9,7 +9,7 @@ spacing: true
 </div>
 
 ### Spacing scale
-Max width can also be set using the static spacing scale, for example `max-w-384`.
+Max width can also be set using the spacing scale: a static step, for example `max-w-384`, or a dynamic one from `max-w-xs` to `max-w-xl`, which grows with the viewport.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">

@@ -1,11 +1,15 @@
 @use '../context' as *;
 
 @include layer(utilities, $use-css-layers, $layer-prefix) {
+// The shadows and the opacities read their tokens, with the value as the
+// fallback, so a token set on the page reaches the classes too
+
 // box shadow
 @include spread-map-into-utilities(
 	$map: $box-shadow,
 	$class: shadow,
 	$attribute: box-shadow,
+	$prop: shadow,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -14,6 +18,7 @@
 	$map: $opacity,
 	$class: opacity,
 	$attribute: opacity,
+	$prop: opacity,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 

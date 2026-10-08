@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+
+* `.container` was 0px wide on a viewport narrower than 360px, with its content spilling out of it. Its `max-width` reads `--breakpoint-value`, which the props set at each breakpoint to the width it starts at, and the first breakpoint, `xxs`, starts at 0. The token keeps that value, which is true of the breakpoint and is what a script reading it gets. Instead, the container rule now takes the whole width up to the next breakpoint, through a media query for every breakpoint that starts at 0. In `dist/` the `.container` rule gains `@media (width<=359.98px)` with `max-width: 100%`, and nothing else moves.
+* The sizing classes walked into the dynamic spacing map, which holds the value of each size at each breakpoint, and emitted a class per entry: `.w-xs-xxs`, `.h-md-sm`, `.max-w-xl-lg` and so on, for `w-`, `h-`, `max-w-`, `max-h-`, `min-w-` and `min-h-`. Each read a token nothing declares, with a unitless fallback (`var(--spacing-xs-xxs, 6)`), which is invalid, so the class reset the property instead of setting it. Only `sm` and `lg` came out with a bare name, because they are also the names of two breakpoints: `.w-sm` and `.w-lg` read the right token, still with the unitless fallback. The recursion also ran the loop over the breakpoints again for every breakpoint, so about half of the rules were duplicates. The classes now read the dynamic tokens the way the spacing, gap and inset utilities do, with one class per size, from `w-xs` to `w-xl` for each of the six prefixes and their responsive variants, and the token resolves the size for the viewport. `max-w-md` is therefore 12 to 16px, not the container width that Tailwind gives the name: the skill says so. In `dist/`, 624 class names that did nothing go away and 144 come in. `utilities/sizing.css` drops from 529 kB to 173 kB, and `volver.css` from 1425 kB to 1071 kB, 120.3 kB to 113.2 kB gzipped.
+* The `duration-` and `delay-` classes wrote their value, `.duration-300` as `transition-duration: .3s`, while the duration tokens are `0s` unless the user allows motion, so a transition set by a class kept moving for a user who had asked for less motion. The classes now read the tokens, with the value as a fallback: `var(--duration-300, .3s)`. A delay reads the same duration tokens and drops to 0s with the preference, as the transitions of the components do. The shadow, opacity, blur, brightness, contrast, saturate, backdrop blur, `transition-property-` and `ease-` classes read their tokens the same way, so a token set on the page, `--shadow-md` or `--opacity-50`, reaches the classes as it already reached the components.
+
+  A shadow token is written with `var(--color-shadow)`, which resolves where the token is declared, on the root and on every `.theme`. A `--color-shadow` set on another element no longer recolours the shadow classes inside it, which is how the shadows of the components already behaved.
+
+  Reading the token also renames the default backdrop blur, because the generator gives the bare class name to the key that matches the token. `.backdrop-blur-blur` is now `.backdrop-blur`, like `.blur`, and the old name is kept on the same rule.
+
+  In `dist/` the declarations of these classes change and no other rule moves. Every token they read is declared in `props.css`.
+* The alias that styles a plain `div` as the list of `vv-dropdown` matched `[role="list-box"]`, which is not an ARIA role, so a `<div role="listbox">` without the `vv-dropdown__list` class was left unstyled. It reads `[role="listbox"]` now. `VvDropdown` of `@volverjs/ui-vue` puts the class on its list and renders as before. In `dist/` the 12 rules of the list change their selector and none of their declarations.
+* `scheme`, the `color-scheme` of the theme, is in the map of the colors, and came out as `.bg-scheme`, `.text-scheme`, `.border-scheme` and `.decoration-scheme`, which wrote `light` as a color. The color utilities leave it out, as they leave out `tint`, and `--color-scheme` stays declared. In `dist/` the four rules go away.
+
+`design-tokens.json` and the `exports` map do not change.
+
 ## [0.1.30] - 2026-10-07
 
 ### Added
