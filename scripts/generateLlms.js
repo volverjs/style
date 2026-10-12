@@ -1,6 +1,6 @@
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import {
 	componentSections,
 	utilityGroups,
@@ -49,9 +49,10 @@ function readAttributes(file) {
 	const attributes = {}
 	const [, block = ''] = frontMatter.exec(fs.readFileSync(file, 'utf8')) ?? []
 	for (const line of block.split('\n')) {
-		const [, key, value] = /^(\w+):\s*(.*)$/.exec(line) ?? []
+		const [, key, value] = /^(\w+):(.*)$/.exec(line) ?? []
 		if (key) {
 			attributes[key] = value
+				.trim()
 				.replace(/^'(.*)'$/, (_, text) => text.replaceAll("''", "'"))
 				.replace(/^"(.*)"$/, '$1')
 		}
@@ -94,7 +95,8 @@ function listPages(folder, label) {
 }
 
 function link(hostname, { label, route, description }) {
-	return `- [${label}](${hostname}/${route})${description ? `: ${description}` : ''}`
+	const item = `- [${label}](${hostname}/${route})`
+	return description ? `${item}: ${description}` : item
 }
 
 function linkSection(hostname, title, pages) {

@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import CSSExports from 'vite-plugin-css-export'
@@ -14,7 +14,7 @@ import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import generateSitemap from 'vite-ssg-sitemap'
 import packageJson from './package.json' with { type: 'json' }
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { generateLlms } from './scripts/generateLlms.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))

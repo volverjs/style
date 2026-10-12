@@ -1,5 +1,5 @@
 import { extractICSS } from 'icss-utils'
-import fs from 'fs'
+import fs from 'node:fs'
 import postcss from 'postcss'
 import { compile } from 'sass-embedded'
 import calc from 'reduce-css-calc'
