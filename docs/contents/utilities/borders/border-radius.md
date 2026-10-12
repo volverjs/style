@@ -74,3 +74,29 @@ Border radius utilities are available for individual corners, as well as for all
     </tbody>
   </table>
 </div>
+
+### Rescale the corners
+`--rounded` is the base of the scale: the other steps are declared as a multiple of it, so one declaration rescales every corner of the utilities and of the components. `none` and `full` keep their value.
+
+```css
+:root, :host, .theme {
+  --rounded: 0.375rem; /* sm 0.1875rem, lg 0.75rem, xxl 1.5rem */
+}
+```
+
+The steps are computed where they are declared, on the root and on every `.theme` element, so a section gets its own scale with the `theme` class:
+
+```html
+<section class="theme" style="--rounded: 0">
+  <!-- square corners -->
+</section>
+```
+
+In SCSS the ratios come from `$border-radius` at compile time. A step that is not a size, like a pill, goes in `$border-radius-fixed` to keep its own value:
+
+```scss
+@use '@volverjs/style/scss/context' with (
+  $border-radius: (none: 0px, sm: 2px, rounded: 4px, lg: 8px, pill: 9999px, full: 9999px),
+  $border-radius-fixed: (none, pill, full)
+);
+```

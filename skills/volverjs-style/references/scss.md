@@ -64,6 +64,7 @@ compile error, because the comma separates configuration entries.
 | `$font-family-sans` `$font-family-serif` `$font-family-mono` | system stacks | one quoted string each |
 | `$font-size` `$font-size-dynamic` `$font-weight` `$spacing` `$spacing-dynamic` `$breakpoints` `$colors` | maps | override the scales themselves |
 | `$container-breakpoints` | `xs` 20rem … `xxxl` 48rem | steps of the `@` container variants, all above 0; `()` emits none |
+| `$border-radius-fixed` | `(none, full)` | radius steps that keep their value instead of following `--rounded` |
 | `$vv-button` `$vv-card` … one per component | maps | see "Extending a component" |
 | `$components-prefix` | `vv` | class prefix for every component |
 | `$components-names` | map | rename a component, classes and `--vv-*` properties alike, except in `.preflight`, which extends and leaves out the default `vv-` names: a renamed component loses what preflight gives its bare tags, and one renamed outside the prefix is dressed by it. It cannot drop a component, `scss` emits them all, so cherry-pick the modules to leave some out |

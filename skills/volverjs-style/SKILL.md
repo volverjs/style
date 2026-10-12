@@ -208,7 +208,8 @@ with the block: `--vv-button-background`, `--vv-button-state-hover-background`,
 :root, :host, .theme { --color-brand: #45cb85; --color-tint: #45cb85; --rounded: 0.5rem; }
 ```
 
-`--color-tint` gives the brand hue to gray, word and surface too; leave it out to keep the
+`--rounded` is the base of the radius scale: `--rounded-sm` … `--rounded-xxxl` are multiples
+of it, so it rescales every corner (`none` and `full` stay). `--color-tint` gives the brand hue to gray, word and surface too; leave it out to keep the
 neutrals. The readable, contrast and graphic roles follow the new brand by themselves. A
 new button variant goes through the SCSS map (see scss.md) or, in plain CSS, names the
 hover state itself, since a class beats the zero specificity of the library's state
