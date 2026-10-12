@@ -9,7 +9,7 @@ spacing: true
 </div>
 
 ### Spacing scale
-Min height can also be set using the static spacing scale, for example `min-h-96`.
+Min height can also be set using the spacing scale: a static step, for example `min-h-96`, or a dynamic one from `min-h-xs` to `min-h-xl`, which grows with the viewport.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">

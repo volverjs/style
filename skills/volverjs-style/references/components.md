@@ -423,7 +423,7 @@ The `<dialog>` block is the backdrop; the panel is the mandatory `<article>` chi
 ## vv-dropdown family
 
 `vv-dropdown` is a popover container (`[popover]`) positioned by script in
-`@volverjs/ui-vue`. Its list is a `div[role=menu]` or `div[role=list-box]` (a `<ul>` needs
+`@volverjs/ui-vue`. Its list is a `div[role=menu]` or `div[role=listbox]` (a `<ul>` needs
 the `__list` class). Items are `vv-dropdown-action` (buttons) or `vv-dropdown-option`
 (selectable, `aria-selected`), grouped by `vv-dropdown-optgroup`.
 

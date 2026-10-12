@@ -9,7 +9,7 @@ spacing: true
 <table-utility prefix="h" property="height" custom-property="h"></table-utility>
 
 ### Spacing scale
-Height can also be set using the static spacing scale, for example `h-96`.
+Height can also be set using the spacing scale: a static step, for example `h-96`, or a dynamic one from `h-xs` to `h-xl`, which grows with the viewport.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">

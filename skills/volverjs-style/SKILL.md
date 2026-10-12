@@ -59,7 +59,7 @@ These are the mistakes that recur. Each row is verified against the compiled CSS
 | `md:p-16`, `lg:gap-8` | Spacing and gap have **no responsive variants**. Use the dynamic tokens `xs sm md lg xl` (`p-md`, `gap-lg`), which grow with the viewport by themselves |
 | `xxs:` prefix, `2xl:` | Prefixes are `xs: sm: md: lg: xl: xxl: xxxl:` (360, 576, 992, 1024, 1280, 1440, 1536px) and only display, position, visibility, flex/grid, sizing, text size/align, border width/style, aspect and columns accept them |
 | `hover:bg-…`, `dark:text-…`, `focus:` | No state or theme variants at all. Use component states, tokens, or your own CSS |
-| `max-w-md`, `max-w-2xl` | `max-w-screen-md` … `max-w-screen-xxxl`, `max-w-prose`, or `container` |
+| `max-w-md`, `max-w-2xl` | `max-w-screen-md` … `max-w-screen-xxxl`, `max-w-prose`, or `container`. `max-w-md` exists, but it is the dynamic spacing step (12 to 16px) |
 | `z-10` … `z-50` | Semantic: `z-sticky` `z-fixed` `z-dropdown` `z-modal-backdrop` `z-modal` `z-popover` `z-tooltip` `z-toast` (plus `z-1`, `z-auto`) |
 | `aspect-video` | `aspect-wide` (16/9); also `square` `photo` `tv` `ultrawide` |
 | `rounded-2xl`, `rounded-3xl` | `rounded-xxl`, `rounded-xxxl` (shadows do use `shadow-2xl`) |

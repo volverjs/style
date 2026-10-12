@@ -23,7 +23,7 @@ $vv-dropdown: (
 	),
 	element: (
 		list: (
-			_alias: 'div:is([role="menu"],[role="list-box"])',
+			_alias: 'div:is([role="menu"],[role="listbox"])',
 			[border-radius]: var(--dropdown-border-radius),
 			background-color: var(--color-surface-1),
 			overflow: auto,
