@@ -2,12 +2,6 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
-
-### Fixed
-
-* The color swatch of the readable check, on the colors page of the documentation, sat 16px below the fields next to it and was 8px shorter than them. It was aligned to the end of the row, which includes the `--input-gap` margin each field keeps under its wrapper, and it was 44px tall where a field is `--input-min-height`, 52px. The swatch now takes that margin and that height from the same tokens, so it lines up with the wrapper of the fields and stays lined up when a theme changes them.
-
 ## [0.1.31] - 2026-10-12
 
 ### Added
@@ -38,6 +32,7 @@ All notable changes to this project will be documented in this file.
 * A nested map in `spread-map-into-utilities` was walked with every breakpoint under the prefix of the current one: at the first, of 0, it emitted the prefixed classes with no media query, and it emitted every rule of the nested map once per breakpoint. The recursion now takes the current breakpoint alone. No map of the library reaches the branch since the sizing classes stopped walking the dynamic spacing map, above, so `dist/` does not move; before that the sizing classes gave 630 classes such as `.xs:w-sm` that applied at every width and 4,410 identical copies of the others, and an application that spreads a nested map of its own with breakpoints still did.
 * A `transition` declared by a state or a modifier of a block that has Vue transitions shares its name with the `transition` map of the block, which the generator took for a declaration: it reassigned a `--vv-*-transition` that no rule reads, and the transition never applied. A map in the block is no longer taken for a declaration. No component reached the branch before the fade in of `vv-dialog`.
 * The sitemap of the documentation listed every page without the `/style` of the site, `https://volverjs.github.io/components/accordion` instead of `https://volverjs.github.io/style/components/accordion`: the routes are absolute, so they replaced the path of the hostname. The sitemap is now generated with `basePath: 'style'`, and `robots.txt` still points to `/style/sitemap.xml`.
+* The color swatch of the readable check, on the colors page of the documentation, sat 16px below the fields next to it and was 8px shorter than them. It was aligned to the end of the row, which includes the `--input-gap` margin each field keeps under its wrapper, and it was 44px tall where a field is `--input-min-height`, 52px. The swatch now takes that margin and that height from the same tokens, so it lines up with the wrapper of the fields and stays lined up when a theme changes them.
 
 `design-tokens.json` and the `exports` map do not change.
 
