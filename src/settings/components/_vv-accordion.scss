@@ -8,8 +8,33 @@ $vv-accordion: (
 	--accordion-padding-bottom: var(--spacing-14),
 	--accordion-padding-left: var(--spacing-14),
 	overflow: hidden,
+	// The box the browser wraps around everything but the summary: its height
+	// runs from 0 to `auto`, which `interpolate-size` lets a transition reach,
+	// and `content-visibility` flips at the end of the closing rather than at
+	// its start. The `overflow` of the block clips what the box does not hold
+	// yet. A browser without `::details-content` drops the rule and opens the
+	// accordion at once, one without `interpolate-size` (Safari, Firefox) as
+	// well. The duration tokens are 0s under reduced motion. The height is a
+	// plain declaration: through a `--vv-accordion-*` property, the `auto` of
+	// an open accordion would be inherited by an accordion nested in it,
+	// which would then open and close with no transition.
+	pseudo: (
+		details-content: (
+			[block-size]: 0,
+			interpolate-size: allow-keywords,
+			transition: (
+				block-size var(--duration-300) var(--ease-in-out),
+				content-visibility var(--duration-300) allow-discrete,
+			),
+		),
+	),
 	state: (
 		open: (
+			pseudo: (
+				details-content: (
+					[block-size]: auto,
+				),
+			),
 			element: (
 				summary: (
 					background-color: var(--color-surface-2),

@@ -39,9 +39,10 @@
 	@return $result;
 }
 
-// --color-tint is only the source the neutrals take their hue from, so it
-// gets no utilities
-$-colors: map.remove($colors, tint);
+// --color-tint is only the source the neutrals take their hue from, and
+// --color-scheme is a value of `color-scheme`, not a color: neither gets
+// utilities
+$-colors: map.remove($colors, tint, scheme);
 $-texts: -utility-colors($-colors, $text: true);
 $-fills: -utility-colors($-colors, $text: false);
 

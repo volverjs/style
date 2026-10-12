@@ -75,6 +75,11 @@
 		#{'breakpoints__' + $key}: $value;
 	}
 
+	// container breakpoints
+	@each $key, $value in $container-breakpoints {
+		#{'container-breakpoints__' + $key}: $value;
+	}
+
 	// columns
 	@each $index in $columns {
 		#{'columns__' + $index}: $index;

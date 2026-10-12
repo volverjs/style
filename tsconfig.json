@@ -16,18 +16,13 @@
         "alwaysStrict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        // `"noImplicitThis": true` is part of `strict`
-        // Added again here in case some users decide to disable `strict`.
-        // This enables stricter inference for data properties on `this`.
         "noImplicitThis": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "declaration": true,
         "outDir": "dist",
-        // Recommended
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        // `"verbatimModuleSyntax": true` replaces isolatedModules, preserveValueImports and importsNotUsedAsValues
         "verbatimModuleSyntax": true,
         "skipLibCheck": true
     },

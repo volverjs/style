@@ -9,6 +9,7 @@
 	$class: flex,
 	$attribute: flex-direction,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -18,6 +19,7 @@
 	$class: flex,
 	$attribute: flex-wrap,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -110,6 +112,7 @@
 		$class: $class,
 		$attribute: $attribute,
 		$bps: $breakpoints,
+		$cqs: $container-breakpoints,
 		$zero-specificity: $zero-specificity-for-utilities
 	);
 }
@@ -121,6 +124,7 @@
 		$class: $class,
 		$attribute: $attribute,
 		$bps: $breakpoints,
+		$cqs: $container-breakpoints,
 		$zero-specificity: $zero-specificity-for-utilities
 	);
 }

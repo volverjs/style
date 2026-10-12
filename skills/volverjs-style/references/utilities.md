@@ -19,6 +19,16 @@ before using it.
 |---|---|---|---|---|---|---|---|
 | min-width | 360px | 576px | 992px | 1024px | 1280px | 1440px | 1536px |
 
+- Container variant: `@{step}:{class}` (`@md:flex-row`), the width of the nearest ancestor
+  with the `@container` class (`container-type: inline-size`); with none it never applies.
+  Only for display, `flex-` direction and wrap, `justify-` `content-` `justify-items-`
+  `items-`, `grid-cols-`, `col-` (span, auto, full) and `text-` align. Emitted after the
+  responsive classes of the same utility, so it wins when both apply.
+
+| Container step | @xs | @sm | @md | @lg | @xl | @xxl | @xxxl |
+|---|---|---|---|---|---|---|---|
+| min-width | 20rem | 24rem | 28rem | 32rem | 36rem | 42rem | 48rem |
+
 ## Scales shared by several groups
 
 **Static spacing scale** (used by margin, padding, gap, inset, sizing):
@@ -82,7 +92,8 @@ white black transparent shadow backdrop
 | `z-` | `1` `sticky` `fixed` `dropdown` `modal-backdrop` `modal` `confirm-backdrop` `confirm` `popover` `tooltip` `toast` `notification-alert` `auto` | no |
 | `overflow-` `overflow-x-` `overflow-y-` | `visible` `hidden` `scroll` `auto` | no |
 | `scrollbar-` | `thin` (thin, `word-5` thumb on a transparent track) `none` (hidden, still scrolls) | no |
-| `container` | | width 100%, max-width follows the current breakpoint; no size suffixes |
+| `container` | | width 100%, max-width follows the current breakpoint, the whole width below `xs` (360px); no size suffixes |
+| `@container` | | `container-type: inline-size`, the box the `@` variants measure; it stops taking its width from its content, so not on an `inline-flex` or a flex item with no basis; no prefixes |
 | `aspect-` | `auto` `square` `photo` (3/2) `tv` (4/3) `wide` (16/9) `ultrawide` (21/9) | yes |
 | `object-` (fit) | `fill` `contain` `cover` `none` `scale-down` | no |
 | `object-` (position) | `top` `bottom` `left` `right` `center` `left-top` `left-bottom` `right-top` `right-bottom` | no |
@@ -139,8 +150,9 @@ All grid utilities are responsive.
 | `min-w-` | spacing scale, `0` `full` `min` `max` `fit` |
 | `min-h-` | spacing scale, `0` `full` `screen` `min` `max` `fit` |
 
-`screen` uses `100dvw`/`100dvh`. The Tailwind container idiom `max-w-md` does not
-exist here (the dynamic spacing names are not valid sizing values): use
+`screen` uses `100dvw`/`100dvh`. The spacing scale includes the dynamic steps
+(`w-md`, `h-lg`), which grow with the viewport like the spacing does. So the Tailwind
+container idiom `max-w-md` is 12 to 16px here, not a container width: use
 `max-w-screen-md` or `container`. Fractions are written literally in the markup
 (`class="w-1/2"`).
 
@@ -234,7 +246,7 @@ The radius scale is `xxl`/`xxxl`, not `2xl`/`3xl`.
 | `opacity-` | `0` `5` `10` … `95` `100` (every multiple of 5) |
 | `mix-blend-` `bg-blend-` | CSS blend mode names (`multiply` `screen` `overlay` …) |
 | `blur` `blur-` | `none` `sm` (4px) `md` (12px) `lg` (16px) `xl` (24px) `xxl` (40px) `xxxl` (64px); bare `blur` = 8px |
-| `backdrop-blur-` | `none` `sm` `blur` (8px) `md` `lg` `xl` `xxl` `xxxl`; no bare `backdrop-blur` |
+| `backdrop-blur` `backdrop-blur-` | `none` `sm` `md` `lg` `xl` `xxl` `xxxl`; bare `backdrop-blur` = 8px (`backdrop-blur-blur` is kept as an alias) |
 | `brightness-` | `0` `50` `75` `90` `95` `100` `105` `110` `125` `150` `200` `250` `500` `1000` |
 | `contrast-` | `0` `50` `75` `100` `125` `150` `200` `300` |
 | `saturate-` | `0` `50` `100` `150` `200` |
@@ -245,7 +257,9 @@ The radius scale is `xxl`/`xxxl`, not `2xl`/`3xl`.
 
 Transition and duration tokens are `0s` unless the user has
 `prefers-reduced-motion: no-preference`, so motion switches itself off for users
-who asked for it. There are no `animate-*` utilities; animation keyframes exist only
+who asked for it, and the `duration-` and `delay-` classes read them. The shadow,
+opacity, filter, `transition-property-` and `ease-` classes read their tokens too, with
+the value as a fallback, so a token set on the page reaches them. There are no `animate-*` utilities; animation keyframes exist only
 as `--animation-*` custom properties.
 
 ## Transforms (not responsive)

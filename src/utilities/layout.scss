@@ -14,9 +14,19 @@
 );
 
 // container
+// The first breakpoint starts at 0, a value that caps nothing: up to the
+// next one the container takes the whole width instead of collapsing
 %container {
 	width: 100%;
 	max-width: var(--breakpoint-value, 100%);
+
+	@each $breakpoint, $breakpoint-value in $breakpoints {
+		@if $breakpoint-value == 0 {
+			@include media-breakpoint-down($breakpoint, $breakpoints) {
+				max-width: 100%;
+			}
+		}
+	}
 }
 
 @include wrap-with-where(
@@ -24,6 +34,18 @@
 	$enabled: $zero-specificity-for-utilities
 ) {
 	@extend %container;
+}
+
+// container query: the element whose width the `@` prefixed utilities of its
+// descendants read. Its inline size is contained, so it no longer grows with
+// its content: it suits a block that fills its parent (a card, a column, a
+// panel), not one that takes the width of what it holds (an inline-flex, an
+// item of a flex row with no basis), which collapses to nothing.
+@include wrap-with-where(
+	$selector: '.\\@container',
+	$enabled: $zero-specificity-for-utilities
+) {
+	container-type: inline-size;
 }
 
 // columns
@@ -69,6 +91,7 @@
 	$map: $display-with-breakpoints,
 	$attribute: display,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 

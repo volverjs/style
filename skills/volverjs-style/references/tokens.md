@@ -1,8 +1,9 @@
 # Design tokens, CSS-only customization, dark theme
 
 All tokens are CSS custom properties declared on `:where(:host, :root, .theme)`, which
-has zero specificity: a plain `:root { … }` in your stylesheet overrides any of them
-without `!important`. The machine-readable copy is
+has zero specificity: a plain `:root, :host, .theme { … }` in your stylesheet overrides
+any of them without `!important`. `:root` alone does not reach inside an element with the
+`theme` class, which declares every token again. The machine-readable copy is
 `node_modules/@volverjs/style/design-tokens.json` (keys `volver` and `volver-dark`,
 entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 
@@ -24,7 +25,7 @@ entries shaped `{ value, type }`; read it by path, it has no `exports` entry).
 | Font weight | `--font-{thin,extralight,light,normal,medium,semibold,bold,extrabold,black}` |
 | Font size | `--text-{6..128 static steps}`, `--text-smaller`, `--text-larger`, dynamic `--text-{xs,sm,md,lg,xl}` |
 | Line height, tracking | `--leading-{none,tight,snug,normal,relaxed,loose}`, `--tracking-{tighter,tight,normal,wide,wider,widest}` |
-| Borders | `--border` (1px), `--border-{0,2,4,8}`, `--rounded`, `--rounded-{none,sm,md,lg,xl,xxl,xxxl,full}` |
+| Borders | `--border` (1px), `--border-{0,2,4,8}`, `--rounded`, `--rounded-{none,sm,md,lg,xl,xxl,xxxl,full}`; `sm` … `xxxl` are `calc(var(--rounded) * n)`, so `--rounded` rescales them, declared on the root or on a `.theme` |
 | Breakpoints | `--breakpoint-{xs,sm,md,lg,xl,xxl,xxxl}` (no xxs); `--breakpoint-key` and `--breakpoint-value` are re-declared inside each media query and always hold the current breakpoint |
 | Layout | `--z-{1,sticky,fixed,dropdown,modal-backdrop,modal,confirm-backdrop,confirm,popover,tooltip,toast,notification-alert,auto}`, `--aspect-*`, `--w-*`, `--h-*` |
 | Direction | `--direction`: `1` where the inline axis runs left to right, `-1` where it runs the other way |
@@ -64,16 +65,16 @@ when the library is compiled with `$use-color-mix: false`, where the contrast to
 chosen at compile time and `--color-tint` does not exist).
 
 ```css
-:root {
+:root, :host, .theme {
   --color-brand: #45cb85;
   --color-tint: #45cb85; /* gray, word, surface, shadow, backdrop follow its hue */
   --color-accent: #e040fb;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --rounded: 0.5rem;
+  --rounded: 0.5rem; /* the whole radius scale but none and full */
 }
 
 /* one component, everywhere */
-:root {
+:root, :host, .theme {
   --vv-button-border-radius: var(--rounded-full);
   --vv-button-font-weight: var(--font-medium);
 }
@@ -95,7 +96,7 @@ chosen at compile time and `--color-tint` does not exist).
 }
 
 /* all form fields at once */
-:root {
+:root, :host, .theme {
   --input-min-height: var(--spacing-44);
   --input-background-color: var(--color-surface);
 }

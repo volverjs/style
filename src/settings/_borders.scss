@@ -11,6 +11,12 @@ $border-radius: (
 	full: 9999px,
 ) !default;
 
+// The other steps of the scale are declared as a multiple of `--rounded`,
+// with the ratio they have in `$border-radius`, so redeclaring that one token
+// rescales every corner of the library. The steps listed here keep the value
+// of the map: no radius at all and a pill are not sizes.
+$border-radius-fixed: (none, full) !default;
+
 // border-width
 $border-width: (
 	0: 0px,

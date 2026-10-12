@@ -6,6 +6,37 @@ $component-name: map.get($components-names, vv-popover);
 $component-map: $vv-popover;
 $component-selector: '.#{ $component-name}';
 
+// A panel on the Popover API fades in and out. `display` and `overlay` keep it
+// on the page and in the top layer until the fade has ended. A browser without
+// `@starting-style` shows it at once, and one that does not hold `display`
+// through the transition (Safari 17) hides it at once, as before; so does
+// reduced motion, where the duration tokens are 0s. The rules are written here
+// rather than as a state of the map, which would also give them to the
+// `--popover` and `.popover` classes: hidden with `display: none`, those would
+// stay on the page for the length of the transition. They come before the
+// block, so a state or a modifier of the map overrides them at the same zero
+// specificity (`transition: none` for a panel that must not fade).
+@include wrap-with-where(
+	$selector: '#{$component-selector}[popover]',
+	$enabled: $zero-specificity-for-components
+) {
+	transition:
+		opacity var(--duration-150) var(--ease-out),
+		display var(--duration-150) allow-discrete,
+		overlay var(--duration-150) allow-discrete;
+}
+
+// The closed panel, which the fade out runs to. Not on `[popover]` alone: a
+// browser without the Popover API (Safari 16) shows the element as it is, and
+// would keep it invisible and still in the way of the pointer, while it drops
+// this selector for its unknown pseudo-class.
+@include wrap-with-where(
+	$selector: '#{$component-selector}[popover]:not(:popover-open)',
+	$enabled: $zero-specificity-for-components
+) {
+	opacity: var(--opacity-0);
+}
+
 @include spread-map-into-bem(
 	$map: $component-map,
 	$block: $component-name,
@@ -13,5 +44,17 @@ $component-selector: '.#{ $component-name}';
 	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
+
+// The frame before the panel opens, which the fade in starts from. After the
+// block, so it also starts from 0 a panel whose modifier sets an opacity. A
+// component map has no key for `@starting-style`.
+@starting-style {
+	@include wrap-with-where(
+		$selector: '#{$component-selector}:popover-open',
+		$enabled: $zero-specificity-for-components
+	) {
+		opacity: var(--opacity-0);
+	}
+}
 
 }

@@ -4,6 +4,7 @@
 @include layer(components, $use-css-layers, $layer-prefix) {
 $component-name: map.get($components-names, vv-dialog);
 $component-map: $vv-dialog;
+$component-selector: '.#{ $component-name}';
 
 @include spread-map-into-bem(
 	$map: $component-map,
@@ -12,5 +13,17 @@ $component-map: $vv-dialog;
 	$zero-specificity: $zero-specificity-for-components,
 	$bps: $breakpoints
 );
+
+// The frame before the dialog opens, which the fade in of the `open` state
+// starts from. A component map has no key for `@starting-style`, and the
+// rule has to follow the block it overrides.
+@starting-style {
+	@include wrap-with-where(
+		$selector: '#{$component-selector}[open]',
+		$enabled: $zero-specificity-for-components
+	) {
+		opacity: var(--opacity-0);
+	}
+}
 
 }

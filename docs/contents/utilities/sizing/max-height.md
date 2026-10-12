@@ -9,7 +9,7 @@ spacing: true
 </div>
 
 ### Spacing scale
-Max height can also be set using the static spacing scale, for example `max-h-288`.
+Max height can also be set using the spacing scale: a static step, for example `max-h-288`, or a dynamic one from `max-h-xs` to `max-h-xl`, which grows with the viewport.
 
 <div class="max-h-288 overflow-y-auto mb-lg preflight-revert">
 	<table class="vv-table vv-table--inline-spacing">

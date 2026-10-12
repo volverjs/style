@@ -1,11 +1,15 @@
 @use '../context' as *;
 
 @include layer(utilities, $use-css-layers, $layer-prefix) {
+// The filters read their tokens, with the value as the fallback, so a
+// token set on the page reaches the classes too
+
 // blur
 @include spread-map-into-utilities(
 	$map: $blur,
 	$class: blur,
 	$attribute: filter,
+	$prop: blur,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -14,6 +18,7 @@
 	$map: $brightness,
 	$class: brightness,
 	$attribute: filter,
+	$prop: brightness,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -22,6 +27,7 @@
 	$map: $contrast,
 	$class: contrast,
 	$attribute: filter,
+	$prop: contrast,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -30,6 +36,7 @@
 	$map: $saturation,
 	$class: saturate,
 	$attribute: filter,
+	$prop: saturate,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -38,7 +45,17 @@
 	$map: $blur,
 	$class: backdrop-blur,
 	$attribute: backdrop-filter,
+	$prop: blur,
 	$zero-specificity: $zero-specificity-for-utilities
 );
+
+// The default blur was `.backdrop-blur-blur` before the classes read the
+// tokens, which names it `.backdrop-blur` like `.blur`: the old name stays
+@include wrap-with-where(
+	$selector: '.backdrop-blur-blur',
+	$enabled: $zero-specificity-for-utilities
+) {
+	@extend %backdrop-blur !optional;
+}
 
 }

@@ -56,8 +56,15 @@ $vv-dialog: (
 		close: (
 			display: none,
 		),
+		// A dialog opened with `showModal()` fades in from the
+		// `@starting-style` of the component entry. It closes at once: a fade
+		// out needs `allow-discrete` on the closed dialog, which would keep a
+		// dialog that `@volverjs/ui-vue` hides with an inline `display: none`
+		// on the page, invisible and in the way of the pointer, for the
+		// length of the transition. The Vue transitions below run as before.
 		open: (
 			overflow: hidden,
+			transition: var(--transition-opacity),
 		),
 	),
 	element: (
