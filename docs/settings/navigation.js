@@ -1,3 +1,5 @@
+import { componentSections, utilityGroups } from './menuSections.js'
+
 const getStarted = import.meta.glob('../contents/get-started/*.md', {
 	eager: true,
 	import: 'attributes',
@@ -93,64 +95,12 @@ export const mainMenu = [
 			})
 			.sort((a, b) => a.index - b.index),
 	},
-	{
-		name: 'Components',
-		children: getComponentsSection('Components'),
-	},
-	{
-		name: 'AI',
-		children: getComponentsSection('AI'),
-	},
-	{
-		name: 'Layout',
-		children: getUtilitiesGroup('layout'),
-	},
-	{
-		name: 'Flexbox & Grid',
-		children: getUtilitiesGroup('flex-grid'),
-	},
-	{
-		name: 'Spacing',
-		children: getUtilitiesGroup('spacing'),
-	},
-	{
-		name: 'Sizing',
-		children: getUtilitiesGroup('sizing'),
-	},
-	{
-		name: 'Typography',
-		children: getUtilitiesGroup('typography'),
-	},
-	{
-		name: 'Backgrounds',
-		children: getUtilitiesGroup('backgrounds'),
-	},
-	{
-		name: 'Borders',
-		children: getUtilitiesGroup('borders'),
-	},
-	{
-		name: 'Effects',
-		children: getUtilitiesGroup('effects'),
-	},
-	{
-		name: 'Filters',
-		children: getUtilitiesGroup('filters'),
-	},
-	{
-		name: 'Tables',
-		children: getUtilitiesGroup('tables'),
-	},
-	{
-		name: 'Transitions & Animation',
-		children: getUtilitiesGroup('transitions'),
-	},
-	{
-		name: 'Transforms',
-		children: getUtilitiesGroup('transforms'),
-	},
-	{
-		name: 'Interactivity',
-		children: getUtilitiesGroup('interactivity'),
-	},
+	...componentSections.map((name) => ({
+		name,
+		children: getComponentsSection(name),
+	})),
+	...utilityGroups.map(({ name, group }) => ({
+		name,
+		children: getUtilitiesGroup(group),
+	})),
 ]

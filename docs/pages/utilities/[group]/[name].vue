@@ -8,6 +8,7 @@
 	const title = ref('')
 	const description = ref('')
 	const breakpoints = ref(false)
+	const containerQueries = ref(false)
 	const colors = ref(false)
 	const customProperties = ref(false)
 	const spacing = ref(false)
@@ -25,6 +26,7 @@
 		title.value = attributes.title
 		description.value = attributes.description
 		breakpoints.value = attributes.breakpoints
+		containerQueries.value = attributes.containerQueries
 		colors.value = attributes.colors
 		customProperties.value = attributes.customProperties
 		spacing.value = attributes.spacing
@@ -68,6 +70,11 @@
 									breakpoints
 								</span>
 								<span
+									v-if="containerQueries"
+									class="vv-badge vv-badge--sm">
+									container queries
+								</span>
+								<span
 									v-if="customProperties"
 									class="vv-badge vv-badge--info vv-badge--sm">
 									custom properties
@@ -102,18 +109,38 @@
 					</h2>
 				</header>
 				<div
-					v-if="breakpoints"
+					v-if="breakpoints || containerQueries"
 					class="vv-alert vv-alert--callout vv-alert--brand mb-lg"
 					role="alert">
 					<div class="vv-alert__header">
-						<div class="vv-alert__title">Breakpoints</div>
+						<div class="vv-alert__title">
+							{{
+								breakpoints
+									? 'Breakpoints'
+									: 'Container queries'
+							}}
+						</div>
 					</div>
 					<div class="vv-alert__content">
-						<p class="mb-12">
-							This set of utilities can be used with breakpoint
-							prefix.
-						</p>
-						<code class="font-mono"> .{breakpoint}:{utility} </code>
+						<template v-if="breakpoints">
+							<p class="mb-12">
+								This set of utilities can be used with
+								breakpoint prefix.
+							</p>
+							<code class="font-mono">
+								.{breakpoint}:{utility}
+							</code>
+						</template>
+						<template v-if="containerQueries">
+							<p class="mb-12" :class="{ 'mt-sm': breakpoints }">
+								With a container prefix, these utilities read
+								the width of the nearest <code>@container</code>
+								instead of the viewport.
+							</p>
+							<code class="font-mono">
+								.@{container-breakpoint}:{utility}
+							</code>
+						</template>
 						<div class="mt-sm">
 							<RouterLink
 								:to="{
@@ -121,7 +148,9 @@
 									params: {
 										name: 'breakpoints',
 									},
-									hash: '#responsive-utilities',
+									hash: breakpoints
+										? '#responsive-utilities'
+										: '#container-queries',
 								}"
 								class="vv-button vv-button--action">
 								<IconifyIcon icon="akar-icons:info" />

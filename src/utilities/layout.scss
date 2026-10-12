@@ -36,6 +36,18 @@
 	@extend %container;
 }
 
+// container query: the element whose width the `@` prefixed utilities of its
+// descendants read. Its inline size is contained, so it no longer grows with
+// its content: it suits a block that fills its parent (a card, a column, a
+// panel), not one that takes the width of what it holds (an inline-flex, an
+// item of a flex row with no basis), which collapses to nothing.
+@include wrap-with-where(
+	$selector: '.\\@container',
+	$enabled: $zero-specificity-for-utilities
+) {
+	container-type: inline-size;
+}
+
 // columns
 @include spread-map-into-utilities(
 	$map: $columns,
@@ -79,6 +91,7 @@
 	$map: $display-with-breakpoints,
 	$attribute: display,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 

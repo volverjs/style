@@ -192,5 +192,7 @@ context.$vv-button: map.deep-merge(
 ## Documentation
 To learn more about `@volverjs/style`, check [its documentation](https://volverjs.github.io/style).
 
+For coding agents, the documentation publishes [`llms.txt`](https://volverjs.github.io/style/llms.txt), an index of its pages, and [`llms-full.txt`](https://volverjs.github.io/style/llms-full.txt), the whole reference of the [agent skill](skills/volverjs-style) in one file. The skill installs with `npx skills add volverjs/style`.
+
 ## License
 [MIT](http://opensource.org/licenses/MIT)

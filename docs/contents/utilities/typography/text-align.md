@@ -2,6 +2,7 @@
 title: Text Align
 description: Utilities for controlling the alignment of text.
 breakpoints: true
+containerQueries: true
 ---
 <table-utility prefix="text" property="text-align" class="mb-lg"></table-utility>
 <card-example>

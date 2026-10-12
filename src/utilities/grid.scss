@@ -8,6 +8,7 @@
 	$class: grid-cols,
 	$attribute: grid-template-columns,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 
@@ -17,6 +18,7 @@
 	$class: col,
 	$attribute: grid-column,
 	$bps: $breakpoints,
+	$cqs: $container-breakpoints,
 	$zero-specificity: $zero-specificity-for-utilities
 );
 

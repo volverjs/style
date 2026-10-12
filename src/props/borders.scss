@@ -1,8 +1,47 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
 @use '../context' as *;
+
+// The radius scale as custom properties: each step but `rounded` and the fixed
+// ones becomes `calc(var(--rounded) * <ratio>)`, the ratio taken from the map
+// at compile time, so the default values do not move. A step written in a unit
+// other than the one of `rounded`, or in none, keeps its own value: across
+// units the ratio would carry a `px` per `in`, and a unitless `0` would divide
+// into a number with a unit. A base of 0 has no ratio either: `$base > 0` rather than `!= 0`, which is
+// true for `0rem`. `var()` is substituted where the step is declared, which
+// is the root and every `.theme`: a new `--rounded` rescales the steps on
+// those elements only.
+@function -radius-scale($map, $fixed) {
+	$base: map.get($map, rounded);
+	$scale: ();
+
+	@each $key, $value in $map {
+		@if $key != rounded and
+			not list.index($fixed, $key) and
+			meta.type-of($base) == 'number' and
+			meta.type-of($value) == 'number' and
+			math.unit($base) == math.unit($value) and
+			$base > 0
+		{
+			$ratio: math.div($value, $base);
+			$value: string.unquote('calc(var(--rounded) * #{$ratio})');
+		}
+
+		$scale: map.set($scale, $key, $value);
+	}
+
+	@return $scale;
+}
 
 @include layer(props, $use-css-layers, $layer-prefix) {
 	:where(:host, :root, .theme) {
-		@include spread-map-into-props($border-radius, $prefix: rounded);
+		@include spread-map-into-props(
+			-radius-scale($border-radius, $border-radius-fixed),
+			$prefix: rounded
+		);
 		@include spread-map-into-props($border-width, $prefix: border);
 	}
 }

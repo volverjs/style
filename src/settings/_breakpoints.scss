@@ -13,3 +13,21 @@ $breakpoints: (
 
 @include assert-ascending($breakpoints, '$breakpoints');
 @include assert-starts-at-zero($breakpoints, '$breakpoints');
+
+// The widths of a container for the `@` prefixed utilities (`@md:flex-row`),
+// which query the nearest ancestor marked with the `@container` class rather
+// than the viewport. The steps are the ones of Tailwind CSS, a component
+// being narrower than the page: every step above 0, since a step of 0 would
+// emit the base classes a second time after the responsive ones. An empty map
+// emits no container variant at all.
+$container-breakpoints: (
+	xs: 20rem,
+	sm: 24rem,
+	md: 28rem,
+	lg: 32rem,
+	xl: 36rem,
+	xxl: 42rem,
+	xxxl: 48rem,
+) !default;
+
+@include assert-ascending($container-breakpoints, '$container-breakpoints');

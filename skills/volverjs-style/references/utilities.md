@@ -19,6 +19,16 @@ before using it.
 |---|---|---|---|---|---|---|---|
 | min-width | 360px | 576px | 992px | 1024px | 1280px | 1440px | 1536px |
 
+- Container variant: `@{step}:{class}` (`@md:flex-row`), the width of the nearest ancestor
+  with the `@container` class (`container-type: inline-size`); with none it never applies.
+  Only for display, `flex-` direction and wrap, `justify-` `content-` `justify-items-`
+  `items-`, `grid-cols-`, `col-` (span, auto, full) and `text-` align. Emitted after the
+  responsive classes of the same utility, so it wins when both apply.
+
+| Container step | @xs | @sm | @md | @lg | @xl | @xxl | @xxxl |
+|---|---|---|---|---|---|---|---|
+| min-width | 20rem | 24rem | 28rem | 32rem | 36rem | 42rem | 48rem |
+
 ## Scales shared by several groups
 
 **Static spacing scale** (used by margin, padding, gap, inset, sizing):
@@ -83,6 +93,7 @@ white black transparent shadow backdrop
 | `overflow-` `overflow-x-` `overflow-y-` | `visible` `hidden` `scroll` `auto` | no |
 | `scrollbar-` | `thin` (thin, `word-5` thumb on a transparent track) `none` (hidden, still scrolls) | no |
 | `container` | | width 100%, max-width follows the current breakpoint, the whole width below `xs` (360px); no size suffixes |
+| `@container` | | `container-type: inline-size`, the box the `@` variants measure; it stops taking its width from its content, so not on an `inline-flex` or a flex item with no basis; no prefixes |
 | `aspect-` | `auto` `square` `photo` (3/2) `tv` (4/3) `wide` (16/9) `ultrawide` (21/9) | yes |
 | `object-` (fit) | `fill` `contain` `cover` `none` `scale-down` | no |
 | `object-` (position) | `top` `bottom` `left` `right` `center` `left-top` `left-bottom` `right-top` `right-bottom` | no |

@@ -2,6 +2,7 @@
 title: Justify Items
 description: Utilities for controlling how grid items are aligned along their inline axis.
 breakpoints: true
+containerQueries: true
 ---
 The `justify-items` property sets the default `justify-self` of every grid item, placing it on the inline axis of its grid area. Flex containers ignore it.
 
