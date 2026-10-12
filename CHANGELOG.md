@@ -18,6 +18,8 @@ All notable changes to this project will be documented in this file.
 * The alias that styles a plain `div` as the list of `vv-dropdown` matched `[role="list-box"]`, which is not an ARIA role, so a `<div role="listbox">` without the `vv-dropdown__list` class was left unstyled. It reads `[role="listbox"]` now. `VvDropdown` of `@volverjs/ui-vue` puts the class on its list and renders as before. In `dist/` the 12 rules of the list change their selector and none of their declarations.
 * `scheme`, the `color-scheme` of the theme, is in the map of the colors, and came out as `.bg-scheme`, `.text-scheme`, `.border-scheme` and `.decoration-scheme`, which wrote `light` as a color. The color utilities leave it out, as they leave out `tint`, and `--color-scheme` stays declared. In `dist/` the four rules go away.
 
+* A nested map in `spread-map-into-utilities` was walked with every breakpoint under the prefix of the current one: at the first, of 0, it emitted the prefixed classes with no media query, and it emitted every rule of the nested map once per breakpoint. The recursion now takes the current breakpoint alone. No map of the library reaches the branch since the sizing classes stopped walking the dynamic spacing map, above, so `dist/` does not move; before that the sizing classes gave 630 classes such as `.xs:w-sm` that applied at every width and 4,410 identical copies of the others, and an application that spreads a nested map of its own with breakpoints still did.
+
 `design-tokens.json` and the `exports` map do not change.
 
 ## [0.1.30] - 2026-10-07

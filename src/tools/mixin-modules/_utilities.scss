@@ -42,13 +42,16 @@
 				}
 
 				@if meta.type-of($value) == 'map' and $deep {
+					// The nested map takes the current step alone: given every
+					// step, it walked them again under the prefix of this one,
+					// and emitted `md:` classes with no media query at its step 0
 					@include spread-map-into-utilities(
 						$map: $value,
 						$class: $class,
 						$attribute: $attribute,
 						$prop: $prop,
 						$name: $key,
-						$bps: $bps,
+						$bps: ($breakpoint: $breakpoint-value),
 						$prefix: $prefix,
 						$zero-specificity: $zero-specificity
 					);
