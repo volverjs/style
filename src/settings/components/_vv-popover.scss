@@ -25,6 +25,8 @@ $vv-popover: (
 	color: var(--color-word-2),
 	font-size: var(--text-14),
 	line-height: var(--leading-normal),
+	// The fade of a panel on the Popover API is written in the component
+	// entry, on the `popover` attribute alone.
 	element: (
 		title: (
 			margin: 0 0 var(--spacing-4),

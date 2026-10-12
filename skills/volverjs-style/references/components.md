@@ -396,7 +396,9 @@ Modifiers: `fixed` `absolute` `reverse` `stack` `full-bleed`, position `top-star
 ## vv-dialog
 
 The `<dialog>` block is the backdrop; the panel is the mandatory `<article>` child
-(`__wrapper`). The header holds the title text directly (no `__title`).
+(`__wrapper`). The header holds the title text directly (no `__title`). Opened with
+`showModal()` it fades in and closes at once; the `fade-*`, `scale` and `slide-*` modifiers
+are the classes of a Vue `<Transition>`.
 
 ```html
 <dialog class="vv-dialog vv-dialog--small" id="confirm">
@@ -469,6 +471,9 @@ Panels toggle on `:target` or the `target` class.
 | panel | panel: target |
 
 ## vv-accordion
+
+The height of the content animates where the browser has `::details-content` and
+`interpolate-size` (Chrome); elsewhere the accordion opens at once.
 
 ```html
 <details class="vv-accordion vv-accordion--bordered">
@@ -747,7 +752,7 @@ questionnaire are `vv-radio--card` / `vv-checkbox--card` or a text field.
 | component | elements | modifiers / states |
 |---|---|---|
 | vv-kbd, vv-kbd-group | | sized in `em` |
-| vv-popover | title, footer | `center`; on `[popover]`, placed by a script or anchor positioning, top left without one |
+| vv-popover | title, footer | `center`; on `[popover]`, placed by a script or anchor positioning, top left without one; fades in and out (`@starting-style`, `allow-discrete`; Safari 17 hides it at once) |
 | vv-command | search (focus-within), input, list, heading, option, shortcut, empty | option: `aria-selected="true"`, disabled; groups are `role="group"` labelled by a heading |
 | vv-input-otp | group, slot, separator | `invalid` |
 | vv-sidebar | header, content, footer, label | `collapsed` (hides `label` from sight, not from AT, and centres the icons of header, content and footer on the rail: wrap every text of the nav in `label`); `--sidebar-width`, `--sidebar-collapsed-width` |

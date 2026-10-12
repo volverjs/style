@@ -6,6 +6,8 @@ uiVue: true
 
 An accordion is a native `<details class="vv-accordion">` with a `summary` and a `vv-accordion__content`: the browser opens and closes it and tells assistive technology its state, so no `aria-expanded` is needed. A `vv-accordion-group` stacks several of them.
 
+The content opens and closes with a transition of its height where the browser can animate a height to `auto`, through `::details-content` and `interpolate-size` (Chrome); elsewhere, and under reduced motion, it opens at once.
+
 <code-editor resource-folder="accordion" resource-name="standard" class="mb-lg"></code-editor>
 
 ### Disabled
