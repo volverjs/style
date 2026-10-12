@@ -156,11 +156,18 @@
 							class="font-mono" />
 					</div>
 				</div>
+				<!-- the fields keep --input-gap under their wrapper: the swatch
+				takes the same margin and the height of the wrapper to line up -->
 				<input
 					v-model="value"
 					type="color"
 					aria-label="Pick a color"
-					class="self-end w-44 h-44 p-0 border-0 rounded cursor-pointer" />
+					class="self-end p-0 border-0 rounded cursor-pointer"
+					style="
+						inline-size: var(--input-min-height);
+						block-size: var(--input-min-height);
+						margin-block-end: var(--input-gap);
+					" />
 			</div>
 			<div class="flex flex-wrap gap-xs">
 				<button
