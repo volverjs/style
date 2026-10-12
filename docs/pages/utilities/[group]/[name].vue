@@ -109,22 +109,33 @@
 					</h2>
 				</header>
 				<div
-					v-if="breakpoints"
+					v-if="breakpoints || containerQueries"
 					class="vv-alert vv-alert--callout vv-alert--brand mb-lg"
 					role="alert">
 					<div class="vv-alert__header">
-						<div class="vv-alert__title">Breakpoints</div>
+						<div class="vv-alert__title">
+							{{
+								breakpoints
+									? 'Breakpoints'
+									: 'Container queries'
+							}}
+						</div>
 					</div>
 					<div class="vv-alert__content">
-						<p class="mb-12">
-							This set of utilities can be used with breakpoint
-							prefix.
-						</p>
-						<code class="font-mono"> .{breakpoint}:{utility} </code>
+						<template v-if="breakpoints">
+							<p class="mb-12">
+								This set of utilities can be used with
+								breakpoint prefix.
+							</p>
+							<code class="font-mono">
+								.{breakpoint}:{utility}
+							</code>
+						</template>
 						<template v-if="containerQueries">
-							<p class="mt-sm mb-12">
-								And with a container prefix, which reads the
-								width of the nearest <code>@container</code>.
+							<p class="mb-12" :class="{ 'mt-sm': breakpoints }">
+								With a container prefix, these utilities read
+								the width of the nearest <code>@container</code>
+								instead of the viewport.
 							</p>
 							<code class="font-mono">
 								.@{container-breakpoint}:{utility}
@@ -137,7 +148,9 @@
 									params: {
 										name: 'breakpoints',
 									},
-									hash: '#responsive-utilities',
+									hash: breakpoints
+										? '#responsive-utilities'
+										: '#container-queries',
 								}"
 								class="vv-button vv-button--action">
 								<IconifyIcon icon="akar-icons:info" />
