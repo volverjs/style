@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+
+* The color swatch of the readable check, on the colors page of the documentation, sat 16px below the fields next to it and was 8px shorter than them. It was aligned to the end of the row, which includes the `--input-gap` margin each field keeps under its wrapper, and it was 44px tall where a field is `--input-min-height`, 52px. The swatch now takes that margin and that height from the same tokens, so it lines up with the wrapper of the fields and stays lined up when a theme changes them.
+
 ## [0.1.31] - 2026-10-12
 
 ### Added
