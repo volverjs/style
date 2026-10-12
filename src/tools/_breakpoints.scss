@@ -179,3 +179,31 @@
 		@content;
 	}
 }
+
+// Container of at least the width of the given step. The query reads the
+// nearest ancestor that declares `container-type`, the `@container` class, and
+// matches nothing where there is none.
+//    >> container-breakpoint-up(md, (sm: 24rem, md: 28rem))
+//    @container (min-width: 28rem)
+@mixin container-breakpoint-up($name, $cqs: $container-breakpoints) {
+	@if not map.has-key($cqs, $name) {
+		@error "Unknown container breakpoint `#{$name}`, expected one of: #{map.keys($cqs)}.";
+	}
+
+	$min: map.get($cqs, $name);
+
+	// Not `== 0`: Sass tells `0rem` and `0px` apart from `0`
+	@if not ($min > 0) {
+		@error "The container breakpoint `#{$name}` is #{$min}: a container query needs a width above 0.";
+	}
+
+	@container (min-width: #{$min}) {
+		@content;
+	}
+}
+
+@mixin cq-up($name, $cqs: $container-breakpoints) {
+	@include container-breakpoint-up($name, $cqs) {
+		@content;
+	}
+}

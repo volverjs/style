@@ -58,6 +58,7 @@ These are the mistakes that recur. Each row is verified against the compiled CSS
 | `relative`, `absolute` | Same bare names, fine |
 | `md:p-16`, `lg:gap-8` | Spacing and gap have **no responsive variants**. Use the dynamic tokens `xs sm md lg xl` (`p-md`, `gap-lg`), which grow with the viewport by themselves |
 | `xxs:` prefix, `2xl:` | Prefixes are `xs: sm: md: lg: xl: xxl: xxxl:` (360, 576, 992, 1024, 1280, 1440, 1536px) and only display, position, visibility, flex/grid, sizing, text size/align, border width/style, aspect and columns accept them |
+| `@md:flex-row` with no container | Container prefixes `@xs:` `@sm:` `@md:` `@lg:` `@xl:` `@xxl:` `@xxxl:` (20, 24, 28, 32, 36, 42, 48rem) read the nearest ancestor with the `@container` class and match nothing without one. Only display, flex direction and wrap, justify/align content and items, `grid-cols-`, `col-` and text align have them |
 | `hover:bg-…`, `dark:text-…`, `focus:` | No state or theme variants at all. Use component states, tokens, or your own CSS |
 | `max-w-md`, `max-w-2xl` | `max-w-screen-md` … `max-w-screen-xxxl`, `max-w-prose`, or `container`. `max-w-md` exists, but it is the dynamic spacing step (12 to 16px) |
 | `z-10` … `z-50` | Semantic: `z-sticky` `z-fixed` `z-dropdown` `z-modal-backdrop` `z-modal` `z-popover` `z-tooltip` `z-toast` (plus `z-1`, `z-auto`) |
@@ -233,7 +234,8 @@ there is no `data-theme`. Keep custom colors as `var(--color-…)` so they follo
 
 Extend a component by deep-merging its map before the library is emitted
 (`ctx.$vv-button: map.deep-merge(ctx.$vv-button, (modifier: (success: (…))))`), create
-one with `spread-map-into-bem`, and query breakpoints with `@include ctx.bp-up(md)`.
+one with `spread-map-into-bem`, and query breakpoints with `@include ctx.bp-up(md)`, the nearest `@container` with
+`@include ctx.cq-up(md)`.
 When cherry-picking, alias modules that share a basename (`props/spacing` and
 `utilities/spacing` collide) and take `scss/props` whole with any component. Layers are
 emitted as `volver.reset`, `volver.utilities`, … Details and signatures in scss.md.
@@ -250,6 +252,7 @@ docs use `useDark({ attribute: 'class', valueDark: 'theme theme--dark', valueLig
 
 - Every class you wrote is in the references or was confirmed with grep.
 - Responsive prefixes only on groups that support them; spacing uses dynamic tokens.
+  A `@` container prefix also needs an ancestor with the `@container` class.
 - Disabled comes from the attribute, and readonly too where HTML has one; elsewhere
   readonly is the modifier. Hints are linked with `aria-describedby`, labels have `for`.
 - Dialogs have the `__wrapper` article; range inputs have `--input-range-progress`.

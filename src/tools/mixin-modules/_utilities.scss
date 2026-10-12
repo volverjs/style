@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:meta';
 @use 'sass:string';
 @use '../functions' as *;
@@ -9,6 +10,20 @@
 // Generates utility classes from maps
 // ============================================
 
+// The query of a step: a media query on the viewport, or a container query
+// on the nearest ancestor that declares `container-type`
+@mixin -query-up($query, $name, $bps) {
+	@if $query == container {
+		@include container-breakpoint-up($name, $bps) {
+			@content;
+		}
+	} @else {
+		@include media-breakpoint-up($name, $bps) {
+			@content;
+		}
+	}
+}
+
 // Transform a map into a list of utility classes
 // @param {Map|List} $map - The map or list to transform
 // @param {String} $class - Base class name
@@ -19,6 +34,13 @@
 // @param {Map} $bps - Breakpoints map
 // @param {String} $prefix - Class prefix for breakpoints
 // @param {Bool} $zero-specificity - Whether to wrap in :where()
+// @param {Map} $cqs - Container breakpoints map: the classes are emitted again
+//   behind a container query, prefixed with `@` (`@md:flex`), after the
+//   responsive ones, so that a container variant wins when both apply
+// @param {String} $query - `media` or `container`, the query of the steps of
+//   `$bps`: set by the mixin itself when it emits the container variants
+// The last two come after the others, so a call that passes them by position
+// keeps its meaning.
 @mixin spread-map-into-utilities(
 	$map: (),
 	$class: '',
@@ -28,12 +50,18 @@
 	$deep: true,
 	$bps: (xxs: 0),
 	$prefix: '',
-	$zero-specificity: false
+	$zero-specificity: false,
+	$cqs: (),
+	$query: media
 ) {
 	@if (meta.type-of($map) == 'map' or meta.type-of($map) == 'list') and $attribute != '' {
 		@each $breakpoint, $breakpoint-value in $bps {
 			@if $breakpoint-value > 0 {
 				$prefix: $breakpoint + '\\:';
+
+				@if $query == container {
+					$prefix: '\\@' + $prefix;
+				}
 			}
 
 			@each $key, $value in $map {
@@ -52,6 +80,7 @@
 						$prop: $prop,
 						$name: $key,
 						$bps: ($breakpoint: $breakpoint-value),
+						$query: $query,
 						$prefix: $prefix,
 						$zero-specificity: $zero-specificity
 					);
@@ -92,7 +121,7 @@
 					}
 
 					%#{$prefix}#{$class-name} {
-						@include media-breakpoint-up($breakpoint, $bps) {
+						@include -query-up($query, $breakpoint, $bps) {
 							@if meta.type-of($attribute) != 'list' {
 								$attribute: ($attribute);
 							}
@@ -119,6 +148,22 @@
 					}
 				}
 			}
+		}
+
+		// The container variants: a nested call walks the map again with the
+		// container steps, and passes no `$cqs` of its own
+		@if list.length($cqs) > 0 {
+			@include spread-map-into-utilities(
+				$map: $map,
+				$class: $class,
+				$attribute: $attribute,
+				$prop: $prop,
+				$name: $name,
+				$deep: $deep,
+				$bps: $cqs,
+				$query: container,
+				$zero-specificity: $zero-specificity
+			);
 		}
 	}
 }

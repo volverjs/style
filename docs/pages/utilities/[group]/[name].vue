@@ -8,6 +8,7 @@
 	const title = ref('')
 	const description = ref('')
 	const breakpoints = ref(false)
+	const containerQueries = ref(false)
 	const colors = ref(false)
 	const customProperties = ref(false)
 	const spacing = ref(false)
@@ -25,6 +26,7 @@
 		title.value = attributes.title
 		description.value = attributes.description
 		breakpoints.value = attributes.breakpoints
+		containerQueries.value = attributes.containerQueries
 		colors.value = attributes.colors
 		customProperties.value = attributes.customProperties
 		spacing.value = attributes.spacing
@@ -66,6 +68,11 @@
 									v-if="breakpoints"
 									class="vv-badge vv-badge--sm">
 									breakpoints
+								</span>
+								<span
+									v-if="containerQueries"
+									class="vv-badge vv-badge--sm">
+									container queries
 								</span>
 								<span
 									v-if="customProperties"
@@ -114,6 +121,15 @@
 							prefix.
 						</p>
 						<code class="font-mono"> .{breakpoint}:{utility} </code>
+						<template v-if="containerQueries">
+							<p class="mt-sm mb-12">
+								And with a container prefix, which reads the
+								width of the nearest <code>@container</code>.
+							</p>
+							<code class="font-mono">
+								.@{container-breakpoint}:{utility}
+							</code>
+						</template>
 						<div class="mt-sm">
 							<RouterLink
 								:to="{

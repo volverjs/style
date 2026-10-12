@@ -63,6 +63,7 @@ compile error, because the comma separates configuration entries.
 | `$color-readable-strong-factor` `$dark-color-readable-strong-factor` | `0.5`, `1.5` | luminance step from `-readable` to `-readable-strong`, per theme |
 | `$font-family-sans` `$font-family-serif` `$font-family-mono` | system stacks | one quoted string each |
 | `$font-size` `$font-size-dynamic` `$font-weight` `$spacing` `$spacing-dynamic` `$breakpoints` `$colors` | maps | override the scales themselves |
+| `$container-breakpoints` | `xs` 20rem … `xxxl` 48rem | steps of the `@` container variants, all above 0; `()` emits none |
 | `$vv-button` `$vv-card` … one per component | maps | see "Extending a component" |
 | `$components-prefix` | `vv` | class prefix for every component |
 | `$components-names` | map | rename a component, classes and `--vv-*` properties alike, except in `.preflight`, which extends and leaves out the default `vv-` names: a renamed component loses what preflight gives its bare tags, and one renamed outside the prefix is dressed by it. It cannot drop a component, `scss` emits them all, so cherry-pick the modules to leave some out |
@@ -216,12 +217,13 @@ example).
 | Name | Signature | Purpose |
 |---|---|---|
 | `spread-map-into-bem` | `($map, $block, $use-custom-props: true, $zero-specificity: true, $bps: (xxs: 0), …)` | map → BEM block, elements, modifiers, states, custom props |
-| `spread-map-into-utilities` | `($map, $class, $attribute, $deep: true, $bps: (xxs: 0), $prefix: '', $zero-specificity: false)` | map → utility classes, optional responsive variants |
+| `spread-map-into-utilities` | `($map, $class, $attribute, $deep: true, $bps: (xxs: 0), $prefix: '', $zero-specificity: false, $cqs: ())` | map → utility classes, optional responsive (`$bps`) and container (`$cqs`) variants |
 | `spread-map-into-props` | `($map, $prefix, $deep: true)` | map → `--{prefix}-{key}` custom properties |
 | `media-breakpoint-up` / `bp-up` | `($name, $bps: $breakpoints)` | `@media (min-width: …)` |
 | `media-breakpoint-down` / `bp-down` | `($name, $bps)` | `@media (max-width: …)` |
 | `media-breakpoint-between` / `bp-between` | `($lower, $upper, $bps)` | |
 | `media-breakpoint-only` / `bp-only` | `($name, $bps)` | |
+| `container-breakpoint-up` / `cq-up` | `($name, $cqs: $container-breakpoints)` | `@container (min-width: …)`; an unknown step or a step of 0 is a compile error |
 | `wrap-with-where` | `($selector, $enabled: true)` | `:where()` wrapper |
 | `layer` | `($name, $enabled, $prefix)` | emit inside a cascade layer when enabled |
 | `spread-map-into-control-states` | `($map, $block, $control: 'input', $states: ('disabled', 'readonly'), $except-modifiers: (), $zero-specificity: true)` | for a wrapper field component: re-applies its `state` rules on the control's attribute through `:has()`, so `<input disabled>` styles the whole block |

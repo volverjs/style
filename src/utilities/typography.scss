@@ -126,7 +126,8 @@
 	$class: text,
 	$attribute: text-align,
 	$zero-specificity: $zero-specificity-for-utilities,
-	$bps: $breakpoints
+	$bps: $breakpoints,
+	$cqs: $container-breakpoints
 );
 
 // text-decorator-line
