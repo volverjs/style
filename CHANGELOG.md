@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.32] - 2026-10-14
+
+### Fixed
+
+* An `<audio controls>` laid out with no size, so its controls were in the DOM and nothing showed. The first rule of the reset unsets every property of every element it reaches and reverts `display` alone, while the browser gives the audio element its size in its own stylesheet, 300x54px in Chrome. With the reset, Chrome laid it out 0px wide and 0px tall, and 0px tall under an author width: `width: 100%; max-width: 280px` came out 280x0. Safari 17.6 kept the 31px height of its controls and shrank an audio element with no author width from 250px to 44px. `audio` now sits next to `video` among the elements the reset leaves alone, as it has in The New CSS Reset, the reset this one derives from, since its version 1.7.3: this copy was taken from an earlier version and never picked up the change. `display` still comes from the browser, so an `<audio>` without `controls` stays hidden, and the controls follow the `color-scheme` of the theme, dark under `.theme--dark`. An application that worked around the bug with `all: revert` on its audio elements can drop it.
+* `<object>`, `<embed>` and `<input type="image">` ignored their `width` and `height` attributes. HTML turns those attributes into presentational hints, which lose to any author declaration, the `all: unset` of the reset included, so an `<embed width="400" height="200">` of a 120x60 SVG came out 120x60. The reset already left alone `img`, `iframe`, `canvas` and `video`, the other elements HTML gives dimension attributes to, and it now leaves these three alone as well. Without the attributes nothing changes, the element keeps its intrinsic size as before, and an image input also gets back the pointer cursor the browser gives it.
+
+  In `dist/` the first rule of `reset.css`, `base.css` and `volver.css` gains `audio`, `object`, `embed` and `input[type=image]` in its `:not()` list, and nothing else moves.
+
 ## [0.1.31] - 2026-10-12
 
 ### Added
