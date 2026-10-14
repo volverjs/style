@@ -4,6 +4,8 @@
 /*
     Remove all the styles of the "User-Agent-Stylesheet", except for the 'display' property
     - The "symbol *" part is to solve Firefox SVG sprite bug
+    - "audio" keeps the size the browser gives its controls, as in the upstream reset since 1.7.3
+    - "object", "embed" and "input[type='image']" keep the size of their width and height attributes
  */
 *:where(
 		:not(
@@ -13,6 +15,10 @@
 				img,
 				svg,
 				video,
+				audio,
+				object,
+				embed,
+				input[type='image'],
 				details,
 				summary,
 				svg *,
