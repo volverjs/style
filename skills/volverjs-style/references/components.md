@@ -161,6 +161,17 @@ Modifiers: `block` `vertical` `compact`.
 `__unit`, `__limit`, `__actions-group`/`__action` (number stepper, clear button) live
 inside the wrapper next to the input. `__inner` is only relevant with `--auto-width`.
 
+`__input-before` and `__input-after` are direct children of the wrapper, before and after
+the input, and take any content, badges included. A wrapper that has one of them gives the
+input `min(10rem, 50%)` before that content: `__input-after` wraps its content inside
+itself, and `__input-before` moves to a line of its own above the input when it does not
+fit beside it. The input gets less only when what follows it (unit, actions, counter,
+`__input-after` at its narrowest) does not fit beside that width, in a narrow field: then
+it shrinks, or with an `__input-before` takes a line of its own between that content and
+what follows it. The same holds for `vv-select`, `vv-input-file`, `vv-input-range` and the
+`__before`/`__after` of `vv-field`. In `vv-input-text` and `vv-select` a `--floating`
+label stays floated while there is an `__input-before`.
+
 ## vv-textarea
 
 Same structure as vv-input-text with a `<textarea>` in the wrapper.

@@ -22,4 +22,37 @@ $component-map: $vv-input-text;
 	$zero-specificity: $zero-specificity-for-components
 );
 
+// content before and after the input, see the mixin
+@include field-row(
+	$block: $component-name,
+	$trailing: ('unit', 'actions-group', 'action', 'input-after', 'limit'),
+	$fixed: ('actions-group', 'action', 'limit'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
+// A floating label sits where the content before the input is, so with that
+// content it stays floated, as in a dirty field, and the content takes the
+// paddings of the floated input, under the label like the text of the input.
+// The values are the ones of the dirty state, read from the map. `auto-width`
+// overrides the paddings of a dirty input, so it keeps them here as well.
+$-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
+$-floating-before-padded: '#{$-floating-before}:not(.#{$component-name}--auto-width)';
+$-dirty: map.get($component-map, 'modifier', 'floating', 'state', 'dirty', 'element');
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
+	$enabled: $zero-specificity-for-components
+) {
+	translate: map.get($-dirty, 'label', 'translate');
+	font-size: map.get($-dirty, 'label', 'font-size');
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before-padded} > .#{$component-name}__wrapper > :is(.#{$component-name}__input-before, input), #{$-floating-before-padded} > .#{$component-name}__wrapper > .#{$component-name}__inner > input',
+	$enabled: $zero-specificity-for-components
+) {
+	padding-top: map.get($-dirty, 'input', [padding-top]);
+	padding-bottom: map.get($-dirty, 'input', [padding-bottom]);
+}
+
 }

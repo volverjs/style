@@ -22,4 +22,10 @@ $component-map: $vv-input-file;
 	$zero-specificity: $zero-specificity-for-components
 );
 
+// content before and after the input, see the mixin
+@include field-row(
+	$block: $component-name,
+	$zero-specificity: $zero-specificity-for-components
+);
+
 }

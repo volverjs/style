@@ -25,4 +25,14 @@ $component-map: $vv-input-range;
 	$zero-specificity: $zero-specificity-for-components
 );
 
+// content before and after the slider, see the mixin. The row has no box to
+// line up with, so a line of its own for `input-before` is as tall as it is
+@include field-row(
+	$block: $component-name,
+	$control: (),
+	$trailing: ('value', 'input-after'),
+	$before-min-height: null,
+	$zero-specificity: $zero-specificity-for-components
+);
+
 }
