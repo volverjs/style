@@ -43,10 +43,11 @@ On these components:
   classes** on the block. `aria-invalid` is good a11y but styles nothing.
 - `disabled` propagates from the attribute on the control, through a `:has()` rule naming
   that component's own control, so no class is needed (`vv-input-text--disabled` also
-  works). The control is a child of `__wrapper` or `__inner` (of `__wrapper` for
-  `vv-input-range`) or carries the `__input` class: an `input` for `vv-input-text`,
-  `vv-input-file` and `vv-input-range`, a `textarea` for `vv-textarea`, a `select` for
-  `vv-select`. A disabled control in `__input-before` or `__input-after` does not dim the field.
+  works). The control is a child of the `__wrapper` that is a child of the block, or of the
+  `__inner` in that wrapper (`vv-input-range`: of the wrapper only): an `input` for
+  `vv-input-text`, `vv-input-file` and `vv-input-range`, a `textarea` for `vv-textarea`, a
+  `select` for `vv-select`. A disabled control in `__input-before` or `__input-after`, a
+  field of the same type included, does not dim the field.
 - `readonly` propagates the same way, but only where HTML has the attribute, which is a
   text-type input and a textarea: `vv-input-text` and `vv-textarea`.
 
@@ -323,7 +324,7 @@ percent. Without it the track renders empty.
 
 | elements | modifiers | states |
 |---|---|---|
-| label†, wrapper, input-before, input† `input[type=range]` child of the wrapper, input-after, value, unit, hint† | `valid` `invalid` `readonly` | disabled (attribute or `:has(input[disabled])`) |
+| label†, wrapper, input-before, input† `input[type=range]` child of the wrapper, input-after, value, unit, hint† | `valid` `invalid` `readonly` | disabled (attribute on the slider, a child of the wrapper of the block, read through `:has()`) |
 
 Tokens: `--input-range-accent-color`, `--input-range-track-color`,
 `--input-range-track-height`, `--input-range-thumb-size`, `--input-range-thumb-shadow`.

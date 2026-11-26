@@ -27,7 +27,10 @@ tag inside the content an application puts in the element of a slot: `&` in an `
 stands for the block, and `:where(&__wrapper, &__inner) > input` reaches the input of the
 field alone, with `:where()` keeping the specificity of a bare `input` when the library is
 compiled with `$zero-specificity-for-components: false`. `spread-map-into-control-states`
-takes `&` in its `$control` too, and a list of them. An `&` inside quotes or escaped as `\&`
+takes `&` in its `$control` too, and a list of them, relative to the block inside `:has()`:
+`> :where(&__wrapper) > input` reads the state of the control of the field, where a wrapper
+looked up anywhere in the block also finds the one of a field of the same type in a slot, and
+dims the field when that one is disabled. An `&` inside quotes or escaped as `\&`
 stays a character (`resolve-block` in `_functions.scss`). `_states`, at the root of a map,
 gives the states of its block their own suffix, with `&` for the block, where the table of
 `_states.scss` is shared by every map, those of applications included: `vv-input-text` and

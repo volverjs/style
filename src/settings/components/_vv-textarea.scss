@@ -1,11 +1,12 @@
 $vv-textarea: (
-	// `dirty` reads the placeholder of the textarea of the field alone, the
-	// one the alias of `input` reaches: the shared `:not(:has(*:placeholder-shown))`
-	// also read an input with a placeholder in the content of a slot, and kept
-	// a floating field from looking dirty. `:where()` keeps the specificity of
-	// the shared suffix under `$zero-specificity-for-components: false`.
+	// `dirty` reads the placeholder of the textarea of the field alone, a child
+	// of the wrapper of the block or of its `__inner`, where the disabled and
+	// readonly states read it: the shared `:not(:has(*:placeholder-shown))` also
+	// read an input with a placeholder in the content of a slot, and kept a
+	// floating field from looking dirty. `:where()` keeps the specificity of the
+	// shared suffix under `$zero-specificity-for-components: false`.
 	_states: (
-		dirty: ':not(:has(:where(&__wrapper, &__inner) > :placeholder-shown, :where(&__input):placeholder-shown))',
+		dirty: ':not(:has(> :where(&__wrapper) > :placeholder-shown, > :where(&__wrapper) > :where(&__inner) > :placeholder-shown))',
 	),
 	display: var(--input-display),
 	flex: var(--input-flex),

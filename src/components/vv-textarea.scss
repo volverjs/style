@@ -17,7 +17,7 @@ $component-map: $vv-textarea;
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: (':where(&__wrapper, &__inner) > textarea', ':where(&__input)'),
+	$control: ('> :where(&__wrapper) > textarea', '> :where(&__wrapper) > :where(&__inner) > textarea'),
 	$states: ('disabled', 'readonly'),
 	$zero-specificity: $zero-specificity-for-components
 );

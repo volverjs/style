@@ -89,7 +89,7 @@ $state-suffixes: (
 // resolved to the block. The table above is shared by every map, those of
 // applications included, so a suffix that only holds for one structure goes
 // there: `dirty` of `vv-input-text` reads the placeholder of its own input,
-// `:not(:has(:where(&__wrapper, &__inner) > :placeholder-shown, ...))`, where
+// `:not(:has(> :where(&__wrapper) > :placeholder-shown, ...))`, where
 // the shared `:not(:has(*:placeholder-shown))` also reads an input in a slot.
 // A state with several suffixes takes a list, as in the table: a string with a
 // comma would be one suffix glued to the block by its first selector only.
@@ -100,7 +100,8 @@ $state-suffixes: (
 	$overrides: ();
 	$states: map.get($map, '_states');
 
-	@if $states != null and meta.type-of($states) != 'map' {
+	// `()` is how an empty map is written, and Sass types it as an empty list
+	@if $states != null and $states != () and meta.type-of($states) != 'map' {
 		@error '`_states` of #{$block} is a map from a state to its suffixes, not #{meta.inspect($states)}';
 	}
 

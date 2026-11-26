@@ -181,7 +181,7 @@ state with several selectors takes a list of them:
 ```scss
 $vv-input-text: (
   _states: (
-    dirty: ':not(:has(:where(&__wrapper, &__inner) > :placeholder-shown))'
+    dirty: ':not(:has(> &__wrapper > :placeholder-shown, > &__wrapper > &__inner > :placeholder-shown))'
   ),
   modifier: (
     floating: (
@@ -197,7 +197,7 @@ $vv-input-text: (
 /* will generate */
 .vv-input-text--floating.vv-input-text--dirty,
 .vv-input-text--floating.vv-input-text.dirty,
-.vv-input-text--floating.vv-input-text:not(:has(:where(.vv-input-text__wrapper, .vv-input-text__inner) > :placeholder-shown)) {
+.vv-input-text--floating.vv-input-text:not(:has(> .vv-input-text__wrapper > :placeholder-shown, > .vv-input-text__wrapper > .vv-input-text__inner > :placeholder-shown)) {
   color: black;
 }
 ```

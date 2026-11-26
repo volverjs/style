@@ -777,11 +777,13 @@ $-state-block: null;
 // argument, so with `$zero-specificity: false` it outweighs the modifier and
 // source order alone would not settle it.
 
-// `$control` is a selector or a list of them, inside the block, with `&` for
-// the block as in an `_alias`: `(':where(&__wrapper, &__inner) > input',
-// ':where(&__input)')` reads the input the alias of the field reaches, where a
-// bare `input` also reads a disabled checkbox in the content of a slot and
-// dims the whole field.
+// `$control` is a selector relative to the block, or a list of them, with `&`
+// for the block as in an `_alias`: `('> :where(&__wrapper) > input',
+// '> :where(&__wrapper) > :where(&__inner) > input')` reads the input of the
+// field alone. A bare `input`, or a wrapper looked up anywhere in the block,
+// also reads a disabled control in the content of a slot, a field of the same
+// type included, and dims the whole field. `:where()` keeps the specificity of
+// a bare `input` under `$zero-specificity: false`.
 @mixin spread-map-into-control-states(
 	$map,
 	$block,

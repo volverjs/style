@@ -17,7 +17,7 @@ $component-map: $vv-select;
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: (':where(&__wrapper, &__inner) > select', ':where(&__input)'),
+	$control: ('> :where(&__wrapper) > select', '> :where(&__wrapper) > :where(&__inner) > select'),
 	$states: ('disabled'),
 	$zero-specificity: $zero-specificity-for-components
 );
