@@ -131,6 +131,27 @@ $vv-button: (
 }
 ```
 
+The alias is a descendant of the block. In an alias `&` stands for the block, so an
+alias can name the other elements of the component and reach a tag only where the
+component puts it, not inside the content an application places in a slot.
+
+```scss
+$vv-input-text: (
+  element: (
+    input: (
+      _alias: ':is(&__wrapper, &__inner) > input',
+      color: black
+    )
+  )
+);
+
+/* will generate */
+.vv-input-text__input,
+.vv-input-text :is(.vv-input-text__wrapper, .vv-input-text__inner) > input {
+  color: black;
+}
+```
+
 #### State
 
 States (`:hover`, `:active`, `:disabled`, etc.) can be defined with `state` keyword.

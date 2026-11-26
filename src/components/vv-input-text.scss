@@ -13,13 +13,63 @@ $component-map: $vv-input-text;
 	$bps: $breakpoints
 );
 
-// disabled and readonly
+// disabled and readonly, read from the input of the field alone
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: 'input',
+	$control: ('> &__wrapper > input', '> &__wrapper > &__inner > input'),
 	$states: ('disabled', 'readonly'),
 	$zero-specificity: $zero-specificity-for-components
 );
+
+// content before and after the input, see the mixin
+@include field-row(
+	$block: $component-name,
+	$trailing: ('unit', 'actions-group', 'action', 'input-after', 'limit'),
+	$fixed: ('actions-group', 'action', 'limit'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
+// A floating label sits where the content before the input is, so with that
+// content it stays floated, as in a dirty field, and the content takes the
+// paddings of the floated input, under the label like the text of the input.
+// The values are the ones of the dirty state, read from the map, so a preset
+// that restyles the floated label, as `outlined-fields` does, reaches this
+// one too. With `auto-width` the paddings go to `__inner`, which carries them.
+$-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
+$-auto-width: '.#{$component-name}--auto-width';
+$-dirty: map.get($component-map, 'modifier', 'floating', 'state', 'dirty', 'element');
+$-auto-width-dirty: map.get($component-map, 'modifier', 'auto-width', 'modifier', 'floating', 'state', 'dirty', 'element');
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
+	$enabled: $zero-specificity-for-components
+) {
+	// Through the custom properties of that state when the components use
+	// them, so an override of one reaches this label too
+	@include spread-map-into-attrs(
+		$map: map.get($-dirty, 'label'),
+		$prefix: $component-name,
+		$variant: 'modifier-floating-state-dirty-element-label',
+		$ignore: ('pseudo', 'state'),
+		$use-custom-props: $use-custom-props-for-components
+	);
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > .#{$component-name}__wrapper > .#{$component-name}__input-before, #{$-floating-before}:not(#{$-auto-width}) > .#{$component-name}__wrapper > input, #{$-floating-before}:not(#{$-auto-width}) > .#{$component-name}__wrapper > .#{$component-name}__inner > input',
+	$enabled: $zero-specificity-for-components
+) {
+	padding-top: map.get($-dirty, 'input', [padding-top]);
+	padding-bottom: map.get($-dirty, 'input', [padding-bottom]);
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before}#{$-auto-width} > .#{$component-name}__wrapper > .#{$component-name}__inner',
+	$enabled: $zero-specificity-for-components
+) {
+	padding-top: map.get($-auto-width-dirty, 'inner', [padding-top]);
+	padding-bottom: map.get($-auto-width-dirty, 'inner', [padding-bottom]);
+}
 
 }
