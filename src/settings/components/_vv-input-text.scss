@@ -70,8 +70,11 @@ $vv-input-text: (
 			flex: 1,
 			min-width: 0,
 		),
+		// `&` is the block: the input of the field, child of the wrapper in
+		// plain markup and of `__inner` in @volverjs/ui-vue, and not an input
+		// in the content of `input-before` or `input-after`, a checkbox for one
 		input: (
-			_alias: 'input',
+			_alias: ':is(&__wrapper, &__inner) > input',
 			display: flex,
 			flex: 1,
 			align-items: center,
@@ -142,7 +145,7 @@ $vv-input-text: (
 			padding-right: var(--input-spacing-right),
 		),
 		number: (
-			_alias: 'input[type="number"]',
+			_alias: ':is(&__wrapper, &__inner) > input[type="number"]',
 			-moz-appearance: textfield,
 		),
 		icon: (
@@ -157,7 +160,7 @@ $vv-input-text: (
 			flex-shrink: 0,
 		),
 		icon-after: (
-			_alias: 'input + :where(svg, [data-icon])',
+			_alias: ':is(&__wrapper, &__inner) > input + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			right: 0,
 			left: auto,
@@ -405,6 +408,41 @@ $vv-input-text: (
 					element: (
 						inner: (
 							cursor: not-allowed,
+						),
+					),
+				),
+			),
+			// The paddings of the input are 0 here and `__inner` carries
+			// them, so the floated label moves those of `__inner` instead,
+			// or the text stays under the label. The input is reset again:
+			// with `$zero-specificity-for-components: false` the floating
+			// paddings of the input outweigh the 0 of `auto-width`
+			modifier: (
+				floating: (
+					state: (
+						focus-within: (
+							element: (
+								inner: (
+									[padding-top]: var(--input-floating-padding-top),
+									[padding-bottom]:
+										var(--input-floating-padding-bottom),
+								),
+								input: (
+									[padding-block]: 0,
+								),
+							),
+						),
+						dirty: (
+							element: (
+								inner: (
+									[padding-top]: var(--input-floating-padding-top),
+									[padding-bottom]:
+										var(--input-floating-padding-bottom),
+								),
+								input: (
+									[padding-block]: 0,
+								),
+							),
 						),
 					),
 				),

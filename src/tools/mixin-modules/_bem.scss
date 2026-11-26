@@ -329,6 +329,12 @@
 			}
 
 			@if $alias {
+				// `&` in an alias stands for the block: `:is(&__wrapper,
+				// &__inner) > input` reaches the input of a field and not one
+				// in the content of its slots. It is replaced here, before the
+				// alias is nested under a modifier that `&` would otherwise be.
+				$alias: resolve-block($alias, $block);
+
 				@if $modifier {
 					// One entry per selector of the modifier, in the same
 					// order as `$selector` above: `spread-map-into-states`
@@ -743,6 +749,12 @@
 // hook would dim a readonly field: `:has()` carries the specificity of its
 // argument, so with `$zero-specificity: false` it outweighs the modifier and
 // source order alone would not settle it.
+
+// `$control` is a selector or a list of them, relative to the block, with
+// `&` for the block as in an `_alias`: `('> &__wrapper > input', '> &__wrapper
+// > &__inner > input')` reads the input of the field alone, where a bare
+// `input` also reads a disabled checkbox in the content of a slot and dims
+// the whole field.
 @mixin spread-map-into-control-states(
 	$map,
 	$block,
@@ -759,8 +771,18 @@
 	}
 
 	@each $state in $states {
+		$controls: ();
+
+		@each $item in $control {
+			$controls: list.append(
+				$controls,
+				'#{resolve-block($item, $component-selector)}[#{$state}]',
+				$separator: comma
+			);
+		}
+
 		$selector: (
-			'#{$component-selector}#{$exception}:has(#{$control}[#{$state}])'
+			'#{$component-selector}#{$exception}:has(#{list-to-string($controls)})'
 		);
 
 		@include wrap-with-where(
@@ -779,6 +801,10 @@
 					'#{$selector} #{$component-selector}__#{$element}'
 				);
 				$alias: map.get($map, 'element', $element, '_alias');
+
+				@if $alias {
+					$alias: resolve-block($alias, $component-selector);
+				}
 
 				// The alias is a second selector for the same element, not a
 				// descendant of the first, so the list is glued with a comma
@@ -845,6 +871,183 @@
 					}
 				}
 			}
+		}
+	}
+}
+
+// ============================================
+// The row of a field
+// ============================================
+// The wrapper of a field lays out in one flex row the control and what an
+// application puts around it: `input-before` holds a prefix, an icon or a
+// row of badges such as the addresses of a Cc field, `input-after` a unit, a
+// badge or a button. Both start from the width of all of their content and
+// the control from 0, its `flex: 1`, so content wider than the room left took
+// the whole row and squeezed the control to 0px, out of reach of the pointer.
+// The map cannot say "a wrapper that has an `input-before`", so these rules
+// are emitted by the entry of each field, after the map, and none of them
+// matches a wrapper without that content.
+
+// With content on either side, the control starts from `$control-min-width`.
+// `input-after` starts from its narrowest width, the widest of its children,
+// and grows up to all of its content before the control grows past that
+// minimum: content that fits renders as before, content that does not wraps
+// inside `input-after`. The control goes under its minimum only when the rest
+// of the row does not fit beside it even at its narrowest, as in a narrow
+// field. The elements in `$fixed`, the actions and the counter, never shrink.
+
+// With content before the control, the row also wraps, and fills from the
+// end. A line takes items in `order`, which runs the other way round from the
+// DOM here, and `row-reverse` lays them out right to left, so on screen they
+// keep the order of the DOM. The control and what follows it are taken first
+// and share the last line as long as they fit in it together. `input-before`
+// joins that line only when it leaves the control `$control-min-width`,
+// otherwise it takes a line of its own, which `wrap-reverse` puts above.
+// Filled from the start with a plain `wrap`, the row would break after the
+// control whenever the control fitted and the action after it did not, and
+// leave the action alone on a line under it. `justify-content: flex-end`
+// sends an overflow to the right, where a row that does not reverse sends it.
+// `flex-start` and `flex-end` swap sides on the cross axis under
+// `wrap-reverse`: a modifier that aligns the row with them needs the other
+// one when the wrapper has an `input-before`.
+
+// An icon placed against the wrapper is taken into the flow, so it follows
+// the line of the control and its vertical alignment. Negative margins bring
+// its share of the row to 0 and put it where the absolute position did, on
+// the padding the `icon-before` and `icon-after` modifiers reserve: like the
+// `calc(var(--spacing-sm) * 2 + 1em)` of those modifiers, they count on the
+// default `--input-icon-margin`, `--spacing-sm` on each side. The margins are
+// logical, so in a right to left row the icon lands on that padding too,
+// where `left: 0` and `right: 0` put it on the other side. The icon after the
+// control takes order 1, the end of the row in both cases, and `z-index`
+// keeps it over the control, which a reversed row paints after it: an
+// opaque input, such as the one Chrome paints on autofill, would cover it.
+
+// `$control` lists the elements that hold the control and `$control-tags`
+// the tags of the control in markup without them. `$trailing` lists the
+// elements of the map that can follow the control in the wrapper, in the
+// order of the DOM, `$after` among them. A child none of the lists names
+// keeps order 0, and lands at the end of the row when it has content before,
+// several such children in the reverse order of the DOM.
+@mixin field-row(
+	$block,
+	$before: 'input-before',
+	$after: 'input-after',
+	$control: ('inner'),
+	$control-tags: ('input'),
+	$trailing: ('input-after'),
+	$fixed: (),
+	$before-min-height: var(--input-min-height),
+	$control-min-width: min(10rem, 50%),
+	$zero-specificity: true
+) {
+	$b: '.#{$block}';
+	$with-before: '#{$b}__wrapper:has(> #{$b}__#{$before})';
+	$with-content: '#{$b}__wrapper:has(> #{$b}__#{$before}, > #{$b}__#{$after})';
+	$controls: ();
+
+	@each $element in $control {
+		$controls: list.append($controls, '#{$b}__#{$element}', $separator: comma);
+	}
+
+	$controls: ':is(#{list-to-string(list.join($controls, $control-tags, $separator: comma))})';
+	$icons: ':is(#{$b}__icon, svg, [data-icon])';
+	$icons-after: '#{$controls} ~ #{$icons}';
+	$icons-before: '#{$icons}:not(#{$controls} ~ *)';
+	$count: list.length($trailing);
+
+	// content on either side
+	@include wrap-with-where(
+		$selector: '#{$with-content} > #{$controls}',
+		$enabled: $zero-specificity
+	) {
+		flex: 1 1 $control-min-width;
+	}
+
+	// The factor lets `input-after` take the free room before the control
+	// does. The control still takes 1 part in that factor plus 1, and with
+	// 1000 that part left content that fitted exactly a fraction of a pixel
+	// short of its width, enough to wrap it, at 0.3px of field width
+	@include wrap-with-where(
+		$selector: '#{$with-content} > #{$b}__#{$after}',
+		$enabled: $zero-specificity
+	) {
+		flex: 1000000 1 0%;
+		flex-wrap: wrap;
+		max-width: max-content;
+	}
+
+	@each $element in $fixed {
+		@include wrap-with-where(
+			$selector: '#{$with-content} > #{$b}__#{$element}',
+			$enabled: $zero-specificity
+		) {
+			flex-shrink: 0;
+			white-space: nowrap;
+		}
+	}
+
+	@include wrap-with-where(
+		$selector: '#{$with-content} > #{$icons-after}',
+		$enabled: $zero-specificity
+	) {
+		order: 1;
+		position: relative;
+		inset: auto;
+		z-index: var(--z-1);
+		margin-inline-start: calc(-1 * var(--input-icon-width) - var(--spacing-sm));
+	}
+
+	@include wrap-with-where(
+		$selector: '#{$with-content} > #{$icons-before}',
+		$enabled: $zero-specificity
+	) {
+		position: relative;
+		inset: auto;
+		z-index: var(--z-1);
+		margin-inline-end: calc(-1 * var(--input-icon-width) - var(--spacing-sm));
+	}
+
+	// content before the control
+	@include wrap-with-where($selector: $with-before, $enabled: $zero-specificity) {
+		flex-flow: row-reverse wrap-reverse;
+		justify-content: flex-end;
+	}
+
+	// The content keeps the place it has in a row of the field: centred in a
+	// line at least `$before-min-height` tall, at the start of a line of its own
+	@include wrap-with-where(
+		$selector: '#{$with-before} > #{$b}__#{$before}',
+		$enabled: $zero-specificity
+	) {
+		order: $count + 4;
+		flex-wrap: wrap;
+		align-content: center;
+		max-width: 100%;
+		min-height: $before-min-height;
+		margin-inline-end: auto;
+	}
+
+	@include wrap-with-where(
+		$selector: '#{$with-before} > #{$icons-before}',
+		$enabled: $zero-specificity
+	) {
+		order: $count + 3;
+	}
+
+	@include wrap-with-where(
+		$selector: '#{$with-before} > #{$controls}',
+		$enabled: $zero-specificity
+	) {
+		order: $count + 2;
+	}
+
+	@each $element in $trailing {
+		@include wrap-with-where(
+			$selector: '#{$with-before} > #{$b}__#{$element}',
+			$enabled: $zero-specificity
+		) {
+			order: $count - list.index($trailing, $element) + 2;
 		}
 	}
 }

@@ -22,4 +22,16 @@ $component-map: $vv-field;
 	$zero-specificity: $zero-specificity-for-components
 );
 
+// content before and after the control, see the mixin. The toolbar comes
+// last, so it keeps the line under the control
+@include field-row(
+	$block: $component-name,
+	$before: 'before',
+	$after: 'after',
+	$control: ('control'),
+	$control-tags: (),
+	$trailing: ('after', 'toolbar'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
 }

@@ -22,4 +22,70 @@ $component-map: $vv-select;
 	$zero-specificity: $zero-specificity-for-components
 );
 
+// content before and after the select, see the mixin
+@include field-row(
+	$block: $component-name,
+	$control-tags: ('select'),
+	$trailing: ('action', 'input-after'),
+	$fixed: ('action'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
+// A floating label sits where the content before the select is, so with that
+// content it stays floated, as with the `dirty` modifier: the select shows,
+// and the content takes the paddings of the floated select, under the label.
+// The values are the ones of that modifier, read from the map, so a preset
+// that restyles the floated label, as `outlined-fields` does, reaches this one
+// too.
+$-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
+$-dirty: map.get($component-map, 'modifier', 'floating', 'modifier', 'dirty', 'element');
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
+	$enabled: $zero-specificity-for-components
+) {
+	// Through the custom properties of that state when the components use
+	// them, so an override of one reaches this label too
+	@include spread-map-into-attrs(
+		$map: map.get($-dirty, 'label'),
+		$prefix: $component-name,
+		$variant: 'modifier-floating-modifier-dirty-element-label',
+		$ignore: ('pseudo', 'state'),
+		$use-custom-props: $use-custom-props-for-components
+	);
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > .#{$component-name}__wrapper > :is(.#{$component-name}__input-before, select), #{$-floating-before} > .#{$component-name}__wrapper > .#{$component-name}__inner > :is(.#{$component-name}__input, select)',
+	$enabled: $zero-specificity-for-components
+) {
+	padding-top: map.get($-dirty, 'input', [padding-top]);
+	padding-bottom: map.get($-dirty, 'input', [padding-bottom]);
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before} > .#{$component-name}__wrapper > select, #{$-floating-before} > .#{$component-name}__wrapper > .#{$component-name}__inner > :is(.#{$component-name}__input, select)',
+	$enabled: $zero-specificity-for-components
+) {
+	opacity: map.get($-dirty, 'input', 'opacity');
+}
+
+// `multiple` aligns the row to its top with `flex-start`, which the reversed
+// wrap of a wrapper with an `input-before` turns into the bottom
+$-multiple-before: '.#{$component-name}--multiple .#{$component-name}__wrapper:has(> .#{$component-name}__input-before)';
+
+@include wrap-with-where(
+	$selector: $-multiple-before,
+	$enabled: $zero-specificity-for-components
+) {
+	align-items: flex-end;
+}
+
+@include wrap-with-where(
+	$selector: '#{$-multiple-before} > .#{$component-name}__input-before',
+	$enabled: $zero-specificity-for-components
+) {
+	align-content: flex-start;
+}
+
 }

@@ -13,12 +13,18 @@ $component-map: $vv-input-file;
 	$bps: $breakpoints
 );
 
-// disabled and readonly
+// disabled and readonly, read from the input of the field alone
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: 'input',
+	$control: ('> &__wrapper > input', '> &__wrapper > &__inner > input'),
 	$states: ('disabled', 'readonly'),
+	$zero-specificity: $zero-specificity-for-components
+);
+
+// content before and after the input, see the mixin
+@include field-row(
+	$block: $component-name,
 	$zero-specificity: $zero-specificity-for-components
 );
 
