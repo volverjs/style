@@ -319,7 +319,7 @@
 
 		// `&` in an alias stands for the block, as in the light walk
 		@if $alias {
-			$alias: str-replace($alias, '&', $block);
+			$alias: resolve-block($alias, $block);
 		}
 
 		$selectors: $el-selector;

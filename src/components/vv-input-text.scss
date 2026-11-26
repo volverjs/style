@@ -33,8 +33,9 @@ $component-map: $vv-input-text;
 // A floating label sits where the content before the input is, so with that
 // content it stays floated, as in a dirty field, and the content takes the
 // paddings of the floated input, under the label like the text of the input.
-// The values are the ones of the dirty state, read from the map: with
-// `auto-width` they go to `__inner`, which carries the paddings there.
+// The values are the ones of the dirty state, read from the map, so a preset
+// that restyles the floated label, as `outlined-fields` does, reaches this
+// one too. With `auto-width` the paddings go to `__inner`, which carries them.
 $-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
 $-auto-width: '.#{$component-name}--auto-width';
 $-dirty: map.get($component-map, 'modifier', 'floating', 'state', 'dirty', 'element');
@@ -44,8 +45,12 @@ $-auto-width-dirty: map.get($component-map, 'modifier', 'auto-width', 'modifier'
 	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
 	$enabled: $zero-specificity-for-components
 ) {
-	translate: map.get($-dirty, 'label', 'translate');
-	font-size: map.get($-dirty, 'label', 'font-size');
+	@include spread-map-into-attrs(
+		$map: map.get($-dirty, 'label'),
+		$prefix: $component-name,
+		$ignore: ('pseudo', 'state'),
+		$use-custom-props: false
+	);
 }
 
 @include wrap-with-where(

@@ -333,7 +333,7 @@
 				// &__inner) > input` reaches the input of a field and not one
 				// in the content of its slots. It is replaced here, before the
 				// alias is nested under a modifier that `&` would otherwise be.
-				$alias: str-replace($alias, '&', $block);
+				$alias: resolve-block($alias, $block);
 
 				@if $modifier {
 					// One entry per selector of the modifier, in the same
@@ -776,7 +776,7 @@
 		@each $item in $control {
 			$controls: list.append(
 				$controls,
-				'#{str-replace($item, '&', $component-selector)}[#{$state}]',
+				'#{resolve-block($item, $component-selector)}[#{$state}]',
 				$separator: comma
 			);
 		}
@@ -803,7 +803,7 @@
 				$alias: map.get($map, 'element', $element, '_alias');
 
 				@if $alias {
-					$alias: str-replace($alias, '&', $component-selector);
+					$alias: resolve-block($alias, $component-selector);
 				}
 
 				// The alias is a second selector for the same element, not a

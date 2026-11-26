@@ -26,6 +26,7 @@ a comma separated list. An alias is a descendant of the block, so a bare tag rea
 tag inside the content an application puts in the element of a slot: `&` in an `_alias`
 stands for the block, and `:is(&__wrapper, &__inner) > input` reaches the input of the field
 alone. `spread-map-into-control-states` takes `&` in its `$control` too, and a list of them.
+An `&` inside quotes or escaped as `\&` stays a character (`resolve-block` in `_functions.scss`).
 
 ## Definition of done
 
@@ -143,6 +144,14 @@ outputs: that is what tells you which rules moved.
   still dressed: a bare `<button>` inside an action badge comes out as a primary button, 77.1px
   wide instead of 46.7px. Give such a child its element class, or wrap the block in
   `.preflight-revert`. A new component that owns bare children should document that.
+- **A selector that looks into the block also looks into the content of its slots.** A bare
+  tag in an `_alias` or in the `$control` of `spread-map-into-control-states` reached a checkbox
+  in `__input-after` until both learned `&` for the block (see the top of this file). Still open:
+  the `dirty` state of `_states.scss`, `:not(:has(*:placeholder-shown))`, reads any input with a
+  placeholder in a slot and keeps a floating field from looking dirty, and a block-aware version
+  needs `&` in the state table that every map shares, those of applications included; the
+  aliases `select`, `textarea`, `input[type="file"]` and `input[type="range"]` of the other
+  fields still reach a control of the same type in their slots.
 
 ## Conventions
 

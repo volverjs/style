@@ -414,7 +414,9 @@ $vv-input-text: (
 			),
 			// The paddings of the input are 0 here and `__inner` carries
 			// them, so the floated label moves those of `__inner` instead,
-			// or the text stays under the label
+			// or the text stays under the label. The input is reset again:
+			// with `$zero-specificity-for-components: false` the floating
+			// paddings of the input outweigh the 0 of `auto-width`
 			modifier: (
 				floating: (
 					state: (
@@ -425,6 +427,9 @@ $vv-input-text: (
 									[padding-bottom]:
 										var(--input-floating-padding-bottom),
 								),
+								input: (
+									[padding-block]: 0,
+								),
 							),
 						),
 						dirty: (
@@ -433,6 +438,9 @@ $vv-input-text: (
 									[padding-top]: var(--input-floating-padding-top),
 									[padding-bottom]:
 										var(--input-floating-padding-bottom),
+								),
+								input: (
+									[padding-block]: 0,
 								),
 							),
 						),

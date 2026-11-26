@@ -34,7 +34,9 @@ $component-map: $vv-select;
 // A floating label sits where the content before the select is, so with that
 // content it stays floated, as with the `dirty` modifier: the select shows,
 // and the content takes the paddings of the floated select, under the label.
-// The values are the ones of that modifier, read from the map.
+// The values are the ones of that modifier, read from the map, so a preset
+// that restyles the floated label, as `outlined-fields` does, reaches this one
+// too.
 $-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
 $-dirty: map.get($component-map, 'modifier', 'floating', 'modifier', 'dirty', 'element');
 
@@ -42,8 +44,12 @@ $-dirty: map.get($component-map, 'modifier', 'floating', 'modifier', 'dirty', 'e
 	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
 	$enabled: $zero-specificity-for-components
 ) {
-	translate: map.get($-dirty, 'label', 'translate');
-	font-size: map.get($-dirty, 'label', 'font-size');
+	@include spread-map-into-attrs(
+		$map: map.get($-dirty, 'label'),
+		$prefix: $component-name,
+		$ignore: ('pseudo', 'state'),
+		$use-custom-props: false
+	);
 }
 
 @include wrap-with-where(

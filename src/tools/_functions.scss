@@ -945,6 +945,46 @@
 	@return $result;
 }
 
+// Replace the `&` of a selector written in a map, an `_alias` or the
+// `$control` of `spread-map-into-control-states`, with the block. An `&`
+// inside quotes, an attribute value such as `[href*="a&b"]`, or escaped as
+// `\&` is a character of the selector and stays.
+@function resolve-block($selector, $block) {
+	$length: string.length($selector);
+
+	// `@for` from 1 through 0 counts down
+	@if $length == 0 {
+		@return $selector;
+	}
+
+	$result: '';
+	$quote: null;
+	$previous: '';
+
+	@for $i from 1 through $length {
+		$char: string.slice($selector, $i, $i);
+
+		@if $quote {
+			@if $char == $quote and $previous != '\\' {
+				$quote: null;
+			}
+
+			$result: $result + $char;
+		} @else if $char == '"' or $char == "'" {
+			$quote: $char;
+			$result: $result + $char;
+		} @else if $char == '&' and $previous != '\\' {
+			$result: $result + $block;
+		} @else {
+			$result: $result + $char;
+		}
+
+		$previous: $char;
+	}
+
+	@return $result;
+}
+
 @function str-replace($string, $search, $replace: '') {
 	$index: string.index($string, $search);
 
