@@ -959,13 +959,22 @@
 
 	$result: '';
 	$quote: null;
-	$previous: '';
+
+	// The character after a backslash is escaped, unless that backslash was
+	// itself escaped: in `[data-path="C:\\"]` the quote ends the value
+	$escaped: false;
 
 	@for $i from 1 through $length {
 		$char: string.slice($selector, $i, $i);
 
-		@if $quote {
-			@if $char == $quote and $previous != '\\' {
+		@if $escaped {
+			$escaped: false;
+			$result: $result + $char;
+		} @else if $char == '\\' {
+			$escaped: true;
+			$result: $result + $char;
+		} @else if $quote {
+			@if $char == $quote {
 				$quote: null;
 			}
 
@@ -973,13 +982,11 @@
 		} @else if $char == '"' or $char == "'" {
 			$quote: $char;
 			$result: $result + $char;
-		} @else if $char == '&' and $previous != '\\' {
+		} @else if $char == '&' {
 			$result: $result + $block;
 		} @else {
 			$result: $result + $char;
 		}
-
-		$previous: $char;
 	}
 
 	@return $result;

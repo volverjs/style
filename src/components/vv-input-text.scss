@@ -45,11 +45,14 @@ $-auto-width-dirty: map.get($component-map, 'modifier', 'auto-width', 'modifier'
 	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
 	$enabled: $zero-specificity-for-components
 ) {
+	// Through the custom properties of that state when the components use
+	// them, so an override of one reaches this label too
 	@include spread-map-into-attrs(
 		$map: map.get($-dirty, 'label'),
 		$prefix: $component-name,
+		$variant: 'modifier-floating-state-dirty-element-label',
 		$ignore: ('pseudo', 'state'),
-		$use-custom-props: false
+		$use-custom-props: $use-custom-props-for-components
 	);
 }
 
