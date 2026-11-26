@@ -40,9 +40,22 @@
 	cursor: revert;
 }
 
-/* Remove list styles (bullets/numbers) */
+/*
+    Remove list styles (bullets/numbers), and give the list counters back. The first rule
+    unsets counter-reset, counter-increment and counter-set as well, and Firefox numbers
+    a list through them: a nested list went on counting from its parent, and start,
+    reversed and value did nothing. Safari ignored value too. revert-layer rolls the three
+    back past this reset, with or without cascade layers: to what the application declares
+    in a cascade layer below it, or else to the attributes and the browser stylesheet.
+ */
 :where(ol, ul, menu) {
 	list-style: none;
+	counter-reset: revert-layer;
+}
+
+:where(li) {
+	counter-increment: revert-layer;
+	counter-set: revert-layer;
 }
 
 /* For images to not be able to exceed their container */

@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.33] - 2026-11-26
+
+### Fixed
+
+* Numbered lists lost their numbering in Firefox, and `value` did nothing in Safari. The first rule of the reset unsets every property, `counter-reset`, `counter-increment` and `counter-set` included, and Firefox numbers a list through them: its stylesheet resets `list-item` on `ol`, `ul` and `menu`, and the `start`, `reversed` and `value` attributes reach the counter as presentational hints, which lose to any author declaration. With the reset, in Firefox 157, a list nested in another went on counting from its parent (an `<ol>` of two items inside the second item of a list showed 3 and 4, and the item after it 5), `<ol start="31">` began at 1, `<ol reversed>` counted up, and `<li value="10">` showed 2. Safari (WebKit 26.4) showed 2 for that `value` as well, while Chrome 158 numbered every case right. The ordered lists of `vv-prose`, numbered by the browser marker through `list-style-type: decimal`, were among them. The reset now gives the three properties back with `revert-layer`, `counter-reset` on `ol`, `ul` and `menu` and the other two on `li`, which rolls them back past the reset, with `$use-css-layers` on or off: to the attributes and the browser stylesheet, or to the counters an application declares in a cascade layer of its own that the reset used to outrank. In the three browsers, each with the browser marker (`list-style: decimal`) and with a marker drawn from `counter(list-item)` in a `::before`, every case now matches the same page without the reset. One difference stays, and it is Chrome's own: a `counter(list-item)` marker on a reversed list counts down from 0, with the reset or without it. A browser without `revert-layer`, before Chrome 99, Firefox 97 and Safari 15.4, drops the declarations and numbers as before. An application that put the list counters back by hand can drop its rules, unless its lists sit inside `.revert`: that class returns every property to the browser stylesheet with `all: revert`, which leaves the attributes out, so there Firefox still ignores `start`, `reversed` and `value`, while a nested list counts right.
+
+  In `dist/` the rule of the lists in `reset.css`, `base.css` and `volver.css` gains `counter-reset: revert-layer`, a `:where(li)` rule comes in with the other two properties, and nothing else moves. `design-tokens.json` and the `exports` map do not change.
+
 ## [0.1.32] - 2026-10-14
 
 ### Fixed
