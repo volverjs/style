@@ -139,7 +139,7 @@ component puts it, not inside the content an application places in a slot.
 $vv-input-text: (
   element: (
     input: (
-      _alias: ':is(&__wrapper, &__inner) > input',
+      _alias: ':where(&__wrapper, &__inner) > input',
       color: black
     )
   )
@@ -147,7 +147,7 @@ $vv-input-text: (
 
 /* will generate */
 .vv-input-text__input,
-.vv-input-text :is(.vv-input-text__wrapper, .vv-input-text__inner) > input {
+.vv-input-text :where(.vv-input-text__wrapper, .vv-input-text__inner) > input {
   color: black;
 }
 ```
@@ -170,6 +170,35 @@ $vv-button: (
 .vv-button.hover, 
 .vv-button:not([disabled]):hover { 
   text-decoration: underline;
+}
+```
+
+The selector a state reads from the DOM comes from a table every map shares. `_states`, at
+the root of a map, gives the states of its block a selector of their own, with `&` for the
+block. It reaches a state of the block under any modifier, not the state of an element, and a
+state with several selectors takes a list of them:
+
+```scss
+$vv-input-text: (
+  _states: (
+    dirty: ':not(:has(:where(&__wrapper, &__inner) > :placeholder-shown))'
+  ),
+  modifier: (
+    floating: (
+      state: (
+        dirty: (
+          color: black
+        )
+      )
+    )
+  )
+);
+
+/* will generate */
+.vv-input-text--floating.vv-input-text--dirty,
+.vv-input-text--floating.vv-input-text.dirty,
+.vv-input-text--floating.vv-input-text:not(:has(:where(.vv-input-text__wrapper, .vv-input-text__inner) > :placeholder-shown)) {
+  color: black;
 }
 ```
 

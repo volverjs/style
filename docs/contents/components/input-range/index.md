@@ -17,8 +17,8 @@ value, and a `vv-input-range__unit` inside it for the unit of measure.
 ### States
 Use `vv-input-range--invalid` to show an invalid state and
 `vv-input-range--valid` to show a valid state. The disabled state needs no
-class: `:has(input[disabled])` picks it up from the attribute, which is why the
-example below leaves the modifier out.
+class: a `:has()` rule picks it up from the attribute of the slider, the input in the
+wrapper, which is why the example below leaves the modifier out.
 
 A range input has no readonly state in HTML. Disable the input and add
 `vv-input-range--readonly`, which restores the read-only look: full opacity,

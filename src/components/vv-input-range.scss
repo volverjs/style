@@ -19,7 +19,7 @@ $component-map: $vv-input-range;
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: ('> &__wrapper > input'),
+	$control: (':where(&__wrapper) > input', ':where(&__input)'),
 	$states: ('disabled'),
 	$except-modifiers: ('readonly'),
 	$zero-specificity: $zero-specificity-for-components

@@ -13,11 +13,11 @@ $component-map: $vv-select;
 	$bps: $breakpoints
 );
 
-// disabled
+// disabled, read from the select of the field alone
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: 'select',
+	$control: (':where(&__wrapper, &__inner) > select', ':where(&__input)'),
 	$states: ('disabled'),
 	$zero-specificity: $zero-specificity-for-components
 );
