@@ -33,11 +33,12 @@ $component-map: $vv-input-text;
 // A floating label sits where the content before the input is, so with that
 // content it stays floated, as in a dirty field, and the content takes the
 // paddings of the floated input, under the label like the text of the input.
-// The values are the ones of the dirty state, read from the map. `auto-width`
-// overrides the paddings of a dirty input, so it keeps them here as well.
+// The values are the ones of the dirty state, read from the map: with
+// `auto-width` they go to `__inner`, which carries the paddings there.
 $-floating-before: '.#{$component-name}--floating:has(> .#{$component-name}__wrapper > .#{$component-name}__input-before)';
-$-floating-before-padded: '#{$-floating-before}:not(.#{$component-name}--auto-width)';
+$-auto-width: '.#{$component-name}--auto-width';
 $-dirty: map.get($component-map, 'modifier', 'floating', 'state', 'dirty', 'element');
+$-auto-width-dirty: map.get($component-map, 'modifier', 'auto-width', 'modifier', 'floating', 'state', 'dirty', 'element');
 
 @include wrap-with-where(
 	$selector: '#{$-floating-before} > :is(.#{$component-name}__label, label)',
@@ -48,11 +49,19 @@ $-dirty: map.get($component-map, 'modifier', 'floating', 'state', 'dirty', 'elem
 }
 
 @include wrap-with-where(
-	$selector: '#{$-floating-before-padded} > .#{$component-name}__wrapper > :is(.#{$component-name}__input-before, input), #{$-floating-before-padded} > .#{$component-name}__wrapper > .#{$component-name}__inner > input',
+	$selector: '#{$-floating-before} > .#{$component-name}__wrapper > .#{$component-name}__input-before, #{$-floating-before}:not(#{$-auto-width}) > .#{$component-name}__wrapper > input, #{$-floating-before}:not(#{$-auto-width}) > .#{$component-name}__wrapper > .#{$component-name}__inner > input',
 	$enabled: $zero-specificity-for-components
 ) {
 	padding-top: map.get($-dirty, 'input', [padding-top]);
 	padding-bottom: map.get($-dirty, 'input', [padding-bottom]);
+}
+
+@include wrap-with-where(
+	$selector: '#{$-floating-before}#{$-auto-width} > .#{$component-name}__wrapper > .#{$component-name}__inner',
+	$enabled: $zero-specificity-for-components
+) {
+	padding-top: map.get($-auto-width-dirty, 'inner', [padding-top]);
+	padding-bottom: map.get($-auto-width-dirty, 'inner', [padding-bottom]);
 }
 
 }
