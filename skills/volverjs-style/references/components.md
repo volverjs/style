@@ -156,7 +156,7 @@ Modifiers: `block` `vertical` `compact`.
 
 | elements | modifiers | states |
 |---|---|---|
-| label† `> label`, wrapper, inner, input† `input`, input-before, input-after, number† `input[type=number]`, icon†, icon-after†, actions-group, action, action-chevron, action-chevron-up, hint† `> small`, limit, unit | `icon-before` `icon-after` `valid` `invalid` `loading` `floating` `auto-width` | disabled, readonly, dirty; wrapper: hover, focus-within |
+| label† `> label`, wrapper, inner, input† `input` child of the wrapper or of `__inner`, input-before, input-after, number† `input[type=number]` (same), icon†, icon-after†, actions-group, action, action-chevron, action-chevron-up, hint† `> small`, limit, unit | `icon-before` `icon-after` `valid` `invalid` `loading` `floating` `auto-width` | disabled, readonly, dirty; wrapper: hover, focus-within |
 
 `__unit`, `__limit`, `__actions-group`/`__action` (number stepper, clear button) live
 inside the wrapper next to the input. `__inner` is only relevant with `--auto-width`.

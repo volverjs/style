@@ -22,7 +22,10 @@ A component map is a nested structure of `element`, `modifier`, `state`, `pseudo
 `breakpoint` and `transition` keys. Two keys are not CSS and drive the generator instead:
 `_alias` gives an element a second selector for plain markup (`_alias: '> small'` next to
 `.vv-select__hint`), and `_combinator` scopes it. An `_alias` must be a single selector, never
-a comma separated list.
+a comma separated list. An alias is a descendant of the block, so a bare tag reaches the same
+tag inside the content an application puts in the element of a slot: `&` in an `_alias`
+stands for the block, and `:is(&__wrapper, &__inner) > input` reaches the input of the field
+alone. `spread-map-into-control-states` takes `&` in its `$control` too, and a list of them.
 
 ## Definition of done
 

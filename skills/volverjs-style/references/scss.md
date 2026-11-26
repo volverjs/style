@@ -98,7 +98,8 @@ components, take `scss/props` whole.
 
 Components are SCSS maps. Root keys style the block; `element`, `modifier`, `state`
 sub-maps generate BEM selectors; `modifier` can nest `element` and `state`; `pseudo`
-targets pseudo-elements; `_alias` lets a plain child tag stand in for an element class.
+targets pseudo-elements; `_alias` lets a plain child tag stand in for an element class,
+as a descendant of the block, with `&` for the block (`:is(&__wrapper, &__inner) > input`).
 Deep-merge into the map before the library is emitted:
 
 ```scss

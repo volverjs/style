@@ -329,6 +329,12 @@
 			}
 
 			@if $alias {
+				// `&` in an alias stands for the block: `:is(&__wrapper,
+				// &__inner) > input` reaches the input of a field and not one
+				// in the content of its slots. It is replaced here, before the
+				// alias is nested under a modifier that `&` would otherwise be.
+				$alias: str-replace($alias, '&', $block);
+
 				@if $modifier {
 					// One entry per selector of the modifier, in the same
 					// order as `$selector` above: `spread-map-into-states`
@@ -743,6 +749,12 @@
 // hook would dim a readonly field: `:has()` carries the specificity of its
 // argument, so with `$zero-specificity: false` it outweighs the modifier and
 // source order alone would not settle it.
+
+// `$control` is a selector or a list of them, relative to the block, with
+// `&` for the block as in an `_alias`: `('> &__wrapper > input', '> &__wrapper
+// > &__inner > input')` reads the input of the field alone, where a bare
+// `input` also reads a disabled checkbox in the content of a slot and dims
+// the whole field.
 @mixin spread-map-into-control-states(
 	$map,
 	$block,
@@ -759,8 +771,18 @@
 	}
 
 	@each $state in $states {
+		$controls: ();
+
+		@each $item in $control {
+			$controls: list.append(
+				$controls,
+				'#{str-replace($item, '&', $component-selector)}[#{$state}]',
+				$separator: comma
+			);
+		}
+
 		$selector: (
-			'#{$component-selector}#{$exception}:has(#{$control}[#{$state}])'
+			'#{$component-selector}#{$exception}:has(#{list-to-string($controls)})'
 		);
 
 		@include wrap-with-where(
@@ -779,6 +801,10 @@
 					'#{$selector} #{$component-selector}__#{$element}'
 				);
 				$alias: map.get($map, 'element', $element, '_alias');
+
+				@if $alias {
+					$alias: str-replace($alias, '&', $component-selector);
+				}
 
 				// The alias is a second selector for the same element, not a
 				// descendant of the first, so the list is glued with a comma

@@ -2,6 +2,7 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use 'sass:selector';
+@use '../functions' as *;
 @use 'props' as *;
 @use 'attrs' as *;
 @use 'helpers' as *;
@@ -315,6 +316,12 @@
 	@each $el-name, $el-value in $map {
 		$el-selector: '#{$block}__#{$el-name}';
 		$alias: map.get($el-value, '_alias') or map.get($base-map, 'element', $el-name, '_alias');
+
+		// `&` in an alias stands for the block, as in the light walk
+		@if $alias {
+			$alias: str-replace($alias, '&', $block);
+		}
+
 		$selectors: $el-selector;
 		$alias-selectors: null;
 
