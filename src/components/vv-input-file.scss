@@ -17,7 +17,7 @@ $component-map: $vv-input-file;
 @include spread-map-into-control-states(
 	$map: $component-map,
 	$block: $component-name,
-	$control: ('> &__wrapper > input', '> &__wrapper > &__inner > input'),
+	$control: ('> :where(&__wrapper) > input', '> :where(&__wrapper) > :where(&__inner) > input'),
 	$states: ('disabled', 'readonly'),
 	$zero-specificity: $zero-specificity-for-components
 );

@@ -8,6 +8,12 @@
 @use 'helpers' as *;
 @use 'states' as *;
 
+// The suffixes the base map of the component being emitted gives its own
+// block, from its `_states` key, and that block: see `$-state-overrides` in
+// `_bem.scss`
+$-state-overrides: ();
+$-state-block: null;
+
 // ============================================
 // Theme component utilities
 // Generates CSS for theme overrides without @extend
@@ -96,6 +102,12 @@
 		// Generate CSS attributes directly for theme overrides
 		$selector: '.' + $component-name;
 
+		// The suffixes the base map gives its own block, as in the light walk
+		$outer-state-overrides: $-state-overrides;
+		$outer-state-block: $-state-block;
+		$-state-overrides: state-overrides($base-map, $selector) !global;
+		$-state-block: $selector !global;
+
 		// Block styles (base attributes, ignoring nested structures)
 		@include wrap-with-where($selector: $selector, $enabled: $zero-specificity) {
 			@include spread-map-into-attrs(
@@ -158,6 +170,9 @@
 				);
 			}
 		}
+
+		$-state-overrides: $outer-state-overrides !global;
+		$-state-block: $outer-state-block !global;
 	}
 }
 
@@ -404,13 +419,20 @@
 				);
 			}
 
+			// The suffixes the base map gives a state of its own block
+			$overrides: ();
+
+			@if $-state-block and '#{$block}' == '#{$-state-block}' {
+				$overrides: $-state-overrides;
+			}
+
 			// The selectors the state reads from the DOM, from the table the
 			// light walk uses too. One rule for all of them, so a state with a
 			// single suffix comes out exactly as it did when this walk had its own
 			// chain of branches. "current" has none and stops at the classes above.
 			$suffix-selectors: ();
 
-			@each $suffix in state-suffixes($state-name) {
+			@each $suffix in state-suffixes($state-name, $overrides) {
 				$suffix-selectors: list.join($suffix-selectors, -theme-suffix($base, $suffix), $separator: comma);
 
 				@if $alias-selector {

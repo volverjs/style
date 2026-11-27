@@ -1,4 +1,13 @@
 $vv-input-text: (
+	// `dirty` reads the placeholder of the input of the field alone, a child of
+	// the wrapper of the block or of its `__inner`, where the disabled and
+	// readonly states read it: the shared `:not(:has(*:placeholder-shown))` also
+	// read an input with a placeholder in the content of a slot, and kept a
+	// floating field from looking dirty. `:where()` keeps the specificity of the
+	// shared suffix under `$zero-specificity-for-components: false`.
+	_states: (
+		dirty: ':not(:has(> :where(&__wrapper) > :placeholder-shown, > :where(&__wrapper) > :where(&__inner) > :placeholder-shown))',
+	),
 	display: var(--input-display),
 	flex: var(--input-flex),
 	flex-direction: var(--input-flex-direction),
@@ -74,7 +83,7 @@ $vv-input-text: (
 		// plain markup and of `__inner` in @volverjs/ui-vue, and not an input
 		// in the content of `input-before` or `input-after`, a checkbox for one
 		input: (
-			_alias: ':is(&__wrapper, &__inner) > input',
+			_alias: ':where(&__wrapper, &__inner) > input',
 			display: flex,
 			flex: 1,
 			align-items: center,
@@ -145,7 +154,7 @@ $vv-input-text: (
 			padding-right: var(--input-spacing-right),
 		),
 		number: (
-			_alias: ':is(&__wrapper, &__inner) > input[type="number"]',
+			_alias: ':where(&__wrapper, &__inner) > input[type="number"]',
 			-moz-appearance: textfield,
 		),
 		icon: (
@@ -160,7 +169,7 @@ $vv-input-text: (
 			flex-shrink: 0,
 		),
 		icon-after: (
-			_alias: ':is(&__wrapper, &__inner) > input + :where(svg, [data-icon])',
+			_alias: ':where(&__wrapper, &__inner) > input + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			right: 0,
 			left: auto,

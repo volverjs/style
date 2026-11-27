@@ -29,7 +29,7 @@ real markup; the classes exist to freeze a look for docs and tests.
 | open / close | `[open]` / `:not([open])` |
 | pressed | `[aria-pressed="true"]` |
 | selected | `[aria-selected="true"]` |
-| dirty | `:not(:has(*:placeholder-shown))` |
+| dirty | `:not(:has(*:placeholder-shown))`; `vv-input-text` and `vv-textarea` read their own control only |
 | popover | `[popover]` |
 | hover, active, focus-visible, focus-within, target, empty | the pseudo-class itself |
 | current (nav, tab) | **class only**: `class="vv-nav__item-label current"` |
@@ -43,12 +43,13 @@ On these components:
   classes** on the block. `aria-invalid` is good a11y but styles nothing.
 - `disabled` propagates from the attribute on the control, through a `:has()` rule naming
   that component's own control, so no class is needed (`vv-input-text--disabled` also
-  works). The rule is `:has(input[disabled])` for `vv-input-text`, `vv-input-file` and
-  `vv-input-range`, `:has(textarea[disabled])` for `vv-textarea` and
-  `:has(select[disabled])` for `vv-select`.
+  works). The control is a child of the `__wrapper` that is a child of the block, or of the
+  `__inner` in that wrapper (`vv-input-range`: of the wrapper only): an `input` for
+  `vv-input-text`, `vv-input-file` and `vv-input-range`, a `textarea` for `vv-textarea`, a
+  `select` for `vv-select`. A disabled control in `__input-before` or `__input-after`, a
+  field of the same type included, does not dim the field.
 - `readonly` propagates the same way, but only where HTML has the attribute, which is a
-  text-type input and a textarea: `vv-input-text` and `vv-textarea`, through
-  `:has(input[readonly])` and `:has(textarea[readonly])`.
+  text-type input and a textarea: `vv-input-text` and `vv-textarea`.
 
   Everywhere else the attribute does not exist, so the read-only look is a modifier and the
   recipe is the same for all of them: disable the control, add `tabindex="-1"` and
@@ -178,7 +179,7 @@ Same structure as vv-input-text with a `<textarea>` in the wrapper.
 
 | elements | modifiers | states |
 |---|---|---|
-| label†, wrapper, inner, input† `textarea`, input-before, input-after, icon†, icon-after†, actions-group, hint†, limit | `icon-before` `icon-after` `resizable` `valid` `invalid` `loading` `floating` | disabled, readonly, dirty |
+| label†, wrapper, inner, input† `textarea` child of the wrapper or of `__inner`, input-before, input-after, icon†, icon-after†, actions-group, hint†, limit | `icon-before` `icon-after` `resizable` `valid` `invalid` `loading` `floating` | disabled, readonly, dirty |
 
 ## vv-select
 
@@ -197,7 +198,7 @@ Same structure as vv-input-text with a `<textarea>` in the wrapper.
 
 | elements | modifiers | states |
 |---|---|---|
-| label†, wrapper, inner, value, input† `select`, input-before, input-after, option†, icon†, icon-after†, action, hint† | `readonly` `dirty` `multiple` `icon-before` `icon-after` `valid` `invalid` `loading` `floating` | disabled; wrapper: hover, focus-within, open |
+| label†, wrapper, inner, value, input† `select` child of the wrapper or of `__inner`, input-before, input-after, option†, icon†, icon-after†, action, hint† | `readonly` `dirty` `multiple` `icon-before` `icon-after` `valid` `invalid` `loading` `floating` | disabled; wrapper: hover, focus-within, open |
 
 ## vv-checkbox and vv-radio
 
@@ -323,7 +324,7 @@ percent. Without it the track renders empty.
 
 | elements | modifiers | states |
 |---|---|---|
-| label†, wrapper, input-before, input† `input[type=range]`, input-after, value, unit, hint† | `valid` `invalid` `readonly` | disabled (attribute or `:has(input[disabled])`) |
+| label†, wrapper, input-before, input† `input[type=range]` child of the wrapper, input-after, value, unit, hint† | `valid` `invalid` `readonly` | disabled (attribute on the slider, a child of the wrapper of the block, read through `:has()`) |
 
 Tokens: `--input-range-accent-color`, `--input-range-track-color`,
 `--input-range-track-height`, `--input-range-thumb-size`, `--input-range-thumb-shadow`.
@@ -336,7 +337,7 @@ elements build the drop zone and the file list; read
 
 | elements | modifiers | states |
 |---|---|---|
-| label†, wrapper, inner, input† `input[type=file]`, input-before, input-after, icon†, icon-after†, hint†, drop-area, drop-area-action, preview, progress, list, item, item-name, item-info, item-link, item-icon, item-action, item-remove | `icon-before` `icon-after` `with-progress` `valid` `invalid` `loading` `hidden` `dragging` `square` `circle` | disabled, readonly |
+| label†, wrapper, inner, input† `input[type=file]` child of the wrapper or of `__inner`, input-before, input-after, icon†, icon-after†, hint†, drop-area, drop-area-action, preview, progress, list, item, item-name, item-info, item-link, item-icon, item-action, item-remove | `icon-before` `icon-after` `with-progress` `valid` `invalid` `loading` `hidden` `dragging` `square` `circle` | disabled, readonly |
 
 ## vv-card
 

@@ -18,6 +18,16 @@
 // The valid states and their selector suffixes live in `_states.scss`, shared
 // with the theme walk.
 
+// The suffixes the map being emitted gives its own block, from its `_states`
+// key, and that block: set by `spread-map-into-bem` for the whole walk of the
+// map, read by `-add-state-selectors`, so a state of the block takes them
+// under any modifier nested in the map. The state of an element keeps the
+// shared suffix, which reads the element itself. Only a map emitted through
+// `spread-map-into-bem` has them: a state emitted by an entry with
+// `spread-map-into-states` directly takes the shared suffix.
+$-state-overrides: ();
+$-state-block: null;
+
 // ============================================
 // Main BEM mixin
 // ============================================
@@ -55,6 +65,12 @@
 ) {
 	@if meta.type-of($map) == 'map' and $block != '' {
 		$selector: '.' + $block;
+
+		// Restored at the end, for a map emitted in the content of another
+		$outer-state-overrides: $-state-overrides;
+		$outer-state-block: $-state-block;
+		$-state-overrides: state-overrides($map, $selector) !global;
+		$-state-block: $selector !global;
 
 		// custom props
 		@if not $custom-props {
@@ -162,6 +178,9 @@
 				);
 			}
 		}
+
+		$-state-overrides: $outer-state-overrides !global;
+		$-state-block: $outer-state-block !global;
 	}
 }
 
@@ -329,10 +348,11 @@
 			}
 
 			@if $alias {
-				// `&` in an alias stands for the block: `:is(&__wrapper,
+				// `&` in an alias stands for the block: `:where(&__wrapper,
 				// &__inner) > input` reaches the input of a field and not one
-				// in the content of its slots. It is replaced here, before the
-				// alias is nested under a modifier that `&` would otherwise be.
+				// in the content of its slots, and `:where()` keeps the
+				// specificity of a bare `input`. It is replaced here, before
+				// the alias is nested under a modifier `&` would otherwise be.
 				$alias: resolve-block($alias, $block);
 
 				@if $modifier {
@@ -524,7 +544,14 @@
 // Helper to add state-specific selectors
 // Returns the updated selectors list
 @function -add-state-selectors($state, $block-item, $modifier, $alias, $selectors) {
-	@each $suffix in state-suffixes($state) {
+	$overrides: ();
+
+	// `$block-item` comes from `selector.parse()`, a list: compared as text
+	@if $-state-block and '#{$block-item}' == '#{$-state-block}' {
+		$overrides: $-state-overrides;
+	}
+
+	@each $suffix in state-suffixes($state, $overrides) {
 		$selectors: list.join($selectors, '#{$modifier}#{$block-item}#{$suffix}');
 
 		@if $alias {
@@ -750,11 +777,13 @@
 // argument, so with `$zero-specificity: false` it outweighs the modifier and
 // source order alone would not settle it.
 
-// `$control` is a selector or a list of them, relative to the block, with
-// `&` for the block as in an `_alias`: `('> &__wrapper > input', '> &__wrapper
-// > &__inner > input')` reads the input of the field alone, where a bare
-// `input` also reads a disabled checkbox in the content of a slot and dims
-// the whole field.
+// `$control` is a selector relative to the block, or a list of them, with `&`
+// for the block as in an `_alias`: `('> :where(&__wrapper) > input',
+// '> :where(&__wrapper) > :where(&__inner) > input')` reads the input of the
+// field alone. A bare `input`, or a wrapper looked up anywhere in the block,
+// also reads a disabled control in the content of a slot, a field of the same
+// type included, and dims the whole field. `:where()` keeps the specificity of
+// a bare `input` under `$zero-specificity: false`.
 @mixin spread-map-into-control-states(
 	$map,
 	$block,

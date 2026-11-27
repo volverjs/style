@@ -85,7 +85,9 @@ $-element-backed-pseudo-elements: (details-content);
 ) {
 	@if meta.type-of($map) == 'map' and $prefix != '' {
 		@each $key, $value in $map {
-			@if not list.index($ignore, $key) {
+			// A key starting with `_` drives the generator and is never CSS,
+			// a map one included: `_states` at the wrong level stays out
+			@if not list.index($ignore, $key) and string.slice(meta.inspect($key), 1, 1) != '_' {
 				@if meta.type-of($value) == 'map' and ($deep or $key == 'pseudo') {
 					// Sass assignment reaches the enclosing scope, so the
 					// reference map and the property name of a nested map are

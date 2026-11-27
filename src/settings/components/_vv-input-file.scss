@@ -67,8 +67,9 @@ $vv-input-file: (
 			flex: 1,
 			min-width: 0,
 		),
+		// `&` is the block: the file input of the field, not one in a slot
 		input: (
-			_alias: 'input[type="file"]',
+			_alias: ':where(&__wrapper, &__inner) > input[type="file"]',
 			flex: 1,
 			white-space: nowrap,
 			cursor: pointer,
@@ -127,7 +128,7 @@ $vv-input-file: (
 			flex-shrink: 0,
 		),
 		icon-after: (
-			_alias: 'input + :where(svg, [data-icon])',
+			_alias: ':where(&__wrapper, &__inner) > input + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			right: 0,
 			left: auto,
