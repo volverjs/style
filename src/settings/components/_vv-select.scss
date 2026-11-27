@@ -86,8 +86,9 @@ $vv-select: (
 			white-space: nowrap,
 			overflow: hidden,
 		),
+		// `&` is the block: the select of the field, not one in a slot
 		input: (
-			_alias: 'select',
+			_alias: ':where(&__wrapper, &__inner) > select',
 			display: flex,
 			align-items: center,
 			flex-grow: 1,
@@ -129,7 +130,7 @@ $vv-select: (
 			padding-right: var(--input-spacing-right),
 		),
 		option: (
-			_alias: 'select > option',
+			_alias: ':where(&__wrapper, &__inner) > select > option',
 		),
 		icon: (
 			_alias: '> div > :where(svg, [data-icon])',
@@ -143,7 +144,7 @@ $vv-select: (
 			flex-shrink: 0,
 		),
 		icon-after: (
-			_alias: 'select + :where(svg, [data-icon])',
+			_alias: ':where(&__wrapper, &__inner) > select + :where(svg, [data-icon])',
 			position: var(--input-icon-position),
 			right: 0,
 			left: auto,

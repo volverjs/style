@@ -1,4 +1,7 @@
+@use 'sass:list';
 @use 'sass:map';
+@use 'sass:meta';
+@use '../functions' as *;
 
 // ============================================
 // States shared by the BEM walk and the theme walk
@@ -64,14 +67,58 @@ $state-suffixes: (
 	sort-none: '[aria-sort="none"]',
 );
 
-// The suffixes of a state, as a list: its entry in `$state-suffixes`, the
-// pseudo-class fallback, or nothing for "current"
+// The suffixes of a state, as a list: its entry in `$overrides`, its entry in
+// `$state-suffixes`, the pseudo-class fallback, or nothing for "current"
 // @param {String} $state - State name
+// @param {Map} $overrides - The suffixes the map being emitted gives its own
+//   block, see `state-overrides`
 // @return {List} Suffixes, comma separated
-@function state-suffixes($state) {
+@function state-suffixes($state, $overrides: ()) {
+	@if map.has-key($overrides, $state) {
+		@return map.get($overrides, $state);
+	}
+
 	@if $state == 'current' {
 		@return ();
 	}
 
 	@return map.get($state-suffixes, $state) or ':not([disabled]):#{$state}';
+}
+
+// The suffixes a map gives its own block in its `_states` key, with `&`
+// resolved to the block. The table above is shared by every map, those of
+// applications included, so a suffix that only holds for one structure goes
+// there: `dirty` of `vv-input-text` reads the placeholder of its own input,
+// `:not(:has(> :where(&__wrapper) > :placeholder-shown, ...))`, where
+// the shared `:not(:has(*:placeholder-shown))` also reads an input in a slot.
+// A state with several suffixes takes a list, as in the table: a string with a
+// comma would be one suffix glued to the block by its first selector only.
+// @param {Map} $map - Component map
+// @param {String} $block - Block selector, with its dot
+// @return {Map} State name to a list of suffixes
+@function state-overrides($map, $block) {
+	$overrides: ();
+	$states: map.get($map, '_states');
+
+	// `()` is how an empty map is written, and Sass types it as an empty list
+	@if $states != null and $states != () and meta.type-of($states) != 'map' {
+		@error '`_states` of #{$block} is a map from a state to its suffixes, not #{meta.inspect($states)}';
+	}
+
+	@if $states {
+		@each $state, $suffixes in $states {
+			// `null` leaves the state to the shared suffix
+			@if $suffixes {
+				$resolved: ();
+
+				@each $suffix in $suffixes {
+					$resolved: list.append($resolved, resolve-block($suffix, $block), $separator: comma);
+				}
+
+				$overrides: map.set($overrides, $state, $resolved);
+			}
+		}
+	}
+
+	@return $overrides;
 }

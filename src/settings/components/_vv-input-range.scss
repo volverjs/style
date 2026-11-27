@@ -39,8 +39,10 @@ $vv-input-range: (
 		// that property is declared, so wrapping these in the generated
 		// --vv-input-range-* props would freeze them at the :root values and
 		// the fill, the accent overrides and the hover halo would never move.
+		// `&` is the block: the slider of the field, a child of the wrapper,
+		// not a range input in a slot
 		input: (
-			_alias: 'input[type="range"]',
+			_alias: ':where(&__wrapper) > input[type="range"]',
 			-webkit-appearance: none,
 			appearance: none,
 			flex: 1,

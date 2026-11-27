@@ -19,14 +19,24 @@ The source of truth is SCSS under `src/`, and the deliverable is the compiled CS
 | `docs/` | Source of the documentation site. `npm run styleguide` builds it with Vite SSG into `styleguide/`, which is generated and git ignored. |
 
 A component map is a nested structure of `element`, `modifier`, `state`, `pseudo`,
-`breakpoint` and `transition` keys. Two keys are not CSS and drive the generator instead:
+`breakpoint` and `transition` keys. Three keys are not CSS and drive the generator instead:
 `_alias` gives an element a second selector for plain markup (`_alias: '> small'` next to
 `.vv-select__hint`), and `_combinator` scopes it. An `_alias` must be a single selector, never
 a comma separated list. An alias is a descendant of the block, so a bare tag reaches the same
 tag inside the content an application puts in the element of a slot: `&` in an `_alias`
-stands for the block, and `:is(&__wrapper, &__inner) > input` reaches the input of the field
-alone. `spread-map-into-control-states` takes `&` in its `$control` too, and a list of them.
-An `&` inside quotes or escaped as `\&` stays a character (`resolve-block` in `_functions.scss`).
+stands for the block, and `:where(&__wrapper, &__inner) > input` reaches the input of the
+field alone, with `:where()` keeping the specificity of a bare `input` when the library is
+compiled with `$zero-specificity-for-components: false`. `spread-map-into-control-states`
+takes `&` in its `$control` too, and a list of them, relative to the block inside `:has()`:
+`> :where(&__wrapper) > input` reads the state of the control of the field, where a wrapper
+looked up anywhere in the block also finds the one of a field of the same type in a slot, and
+dims the field when that one is disabled. An `&` inside quotes or escaped as `\&`
+stays a character (`resolve-block` in `_functions.scss`). `_states`, at the root of a map,
+gives the states of its block their own suffix, with `&` for the block, where the table of
+`_states.scss` is shared by every map, those of applications included: `vv-input-text` and
+`vv-textarea` read `dirty` from the placeholder of their own control. It reaches a state of
+the block under any modifier, not the state of an element, and only through
+`spread-map-into-bem` and `spread-theme-component`; several suffixes for one state go in a list.
 
 ## Definition of done
 
@@ -145,13 +155,17 @@ outputs: that is what tells you which rules moved.
   wide instead of 46.7px. Give such a child its element class, or wrap the block in
   `.preflight-revert`. A new component that owns bare children should document that.
 - **A selector that looks into the block also looks into the content of its slots.** A bare
-  tag in an `_alias` or in the `$control` of `spread-map-into-control-states` reached a checkbox
-  in `__input-after` until both learned `&` for the block (see the top of this file). Still open:
-  the `dirty` state of `_states.scss`, `:not(:has(*:placeholder-shown))`, reads any input with a
-  placeholder in a slot and keeps a floating field from looking dirty, and a block-aware version
-  needs `&` in the state table that every map shares, those of applications included; the
-  aliases `select`, `textarea`, `input[type="file"]` and `input[type="range"]` of the other
-  fields still reach a control of the same type in their slots.
+  tag in an `_alias` or in the `$control` of `spread-map-into-control-states` reached a control
+  in `__input-after`, styled it as the field and dimmed the field when it was disabled, and the
+  shared suffix of `dirty` read an input with a placeholder there and kept the field from
+  looking dirty. The fields now name their own control through `&` (see the top of this file):
+  a new alias, control or state of a field that owns slots should do the same. Still open:
+  with `--multiple`, an option in an `optgroup` of `vv-select` takes none of the styles of the
+  options, which reach `select > option` alone, and a fix has to style the label of the group,
+  keep the indent Firefox gives grouped options and the grey of a disabled group; and the dark
+  theme compiled with `$use-custom-props-for-components: false` emits a state of the block from
+  its classes alone, so a field disabled through the attribute of its control does not take
+  the dark disabled look.
 
 ## Conventions
 
