@@ -104,7 +104,7 @@
     "vite-ssg-sitemap": "^0.11.1",
     "vue": "^3.5.46",
     "vue-live": "^2.5.4",
-    "vue-router": "~5.4.0"
+    "vue-router": "~5.5.3"
   },
   "exports": {
     ".": "./dist/volver.css",
